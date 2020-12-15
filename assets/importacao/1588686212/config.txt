@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1537","tipo":";","diretorio":"1588686212","diretorio_old":"Exempio_Dia_das_Maes_2020_csv_1.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["\ufeffAna_Carolina","5585988714374","Ibira_18_e_19"],"\ufeffAna_Carolina":"nome","5585988714374":"celular","Ibira_18_e_19":"editavel_1"}

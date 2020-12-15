@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1682","tipo":";","diretorio":"1593570939","diretorio_old":"base_BMG_01jul_6k.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["ABADIO","5567991675550"],"ABADIO":"nome","5567991675550":"celular"}

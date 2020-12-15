@@ -1,0 +1,1 @@
+{"referencia":"0","total":"1651","offset":"0","id_lote":"11","id_campanha":"15","login_envio":"naiche_login","senha_envio":"naiche_senha","nome_arquivo":"2019-06-12 11:06@15@11"}

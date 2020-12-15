@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1726","tipo":";","diretorio":"1593967603","diretorio_old":"NATASHA_CAMACHO_DE_LUCENA.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5549988466523","Schaiane","102325037968915"],"5549988466523":"celular","Schaiane":"nome","102325037968915":"editavel_1"}

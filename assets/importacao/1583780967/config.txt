@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1401","tipo":";","diretorio":"1583780967","diretorio_old":"Santo_Andre_1003.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5511975207777"],"5511975207777":"celular"}

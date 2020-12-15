@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1862","tipo":";","diretorio":"1597243231","diretorio_old":"Novo_Whatsapp_2.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["\ufeffNome","Celular"],"\ufeffNome":"nome","Celular":"celular"}

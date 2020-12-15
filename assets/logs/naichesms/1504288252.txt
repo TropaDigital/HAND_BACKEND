@@ -1,0 +1,1 @@
+http://homologacao.backend.naichesms.com.br/api/callback/tww?Seunum=123&Celular=5511940349111&Status=CL&Data=2017-08-31+16%3A37&TextoStatus=teste

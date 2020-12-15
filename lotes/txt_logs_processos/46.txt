@@ -1,0 +1,32 @@
+17/08/2018 16:57:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=27&arquivos=,1
+17/08/2018 16:58:02 - Preencher lote com limite: 1000, e offset: 0 
+17/08/2018 16:58:19 - Total de OK retornado da TWW: 0
+17/08/2018 16:58:19 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro
+17/08/2018 16:58:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=28&arquivos=,1
+17/08/2018 16:59:01 - Preencher lote com limite: 1000, e offset: 1 
+17/08/2018 16:59:17 - Total de OK retornado da TWW: 0
+17/08/2018 16:59:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro
+17/08/2018 16:59:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=29&arquivos=,1
+17/08/2018 17:00:01 - Preencher lote com limite: 1000, e offset: 2 
+17/08/2018 17:00:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:00:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro
+17/08/2018 17:00:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=30&arquivos=,1
+17/08/2018 17:01:01 - Preencher lote com limite: 1000, e offset: 3 
+17/08/2018 17:01:16 - Total de OK retornado da TWW: 0
+17/08/2018 17:01:16 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro
+17/08/2018 17:01:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=31&arquivos=,1
+17/08/2018 17:02:01 - Preencher lote com limite: 1000, e offset: 4 
+17/08/2018 17:02:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:02:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro
+17/08/2018 17:02:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=32&arquivos=,1
+17/08/2018 17:03:01 - Preencher lote com limite: 1000, e offset: 5 
+17/08/2018 17:03:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:03:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro
+17/08/2018 17:03:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=33&arquivos=,1
+17/08/2018 17:04:02 - Preencher lote com limite: 1000, e offset: 6 
+17/08/2018 17:04:18 - Total de OK retornado da TWW: 0
+17/08/2018 17:04:18 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro
+17/08/2018 17:04:32 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=46&i_l=34&arquivos=,1
+17/08/2018 17:05:01 - Preencher lote com limite: 1000, e offset: 7 
+17/08/2018 17:05:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:05:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=46&status=Campanha%20com%20erro

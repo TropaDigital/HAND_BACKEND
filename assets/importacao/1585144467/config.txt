@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1466","tipo":";","diretorio":"1585144467","diretorio_old":"base_leads_margem_3k_25mar.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["01063101603","5531987959495","MARIA","",""],"01063101603":"referencia","5531987959495":"celular","MARIA":"nome"}

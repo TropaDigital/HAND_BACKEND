@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1729","tipo":";","diretorio":"1593968116","diretorio_old":"TAYNA_CAROLINE_DE_ALMEIDA_BARROS.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5562992796986","Vanessa","102325029503115"],"5562992796986":"celular","Vanessa":"nome","102325029503115":"editavel_1"}

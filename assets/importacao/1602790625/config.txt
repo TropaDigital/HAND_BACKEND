@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1964","tipo":";","diretorio":"1602790625","diretorio_old":"mostra_restaurantes_interior_de_sp_1.csv","cabecalho":"sim","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["","","","Telefone"],"Telefone":"celular"}

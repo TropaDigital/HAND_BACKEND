@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1557","tipo":";","diretorio":"1589033206","diretorio_old":"SMS_SABADO.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["CNPJ","RAZAO_SOCIAL","TELEFONE"],"CNPJ":"campo1","RAZAO_SOCIAL":"nome","TELEFONE":"celular"}

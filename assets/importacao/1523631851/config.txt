@@ -1,0 +1,1 @@
+{"basemodule":"home\/tww","id_lista":"23","tipo":";","diretorio":"1523631851","diretorio_old":"teste_1.csv","cabecalho":"sim","topo":["nome","celular","referenca",""],"nome":"nome","celular":"celular","referenca":"referencia"}

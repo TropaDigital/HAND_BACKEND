@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1400","tipo":";","diretorio":"1583781200","diretorio_old":"Santa_Barbara_1103.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5519994224010"],"5519994224010":"celular"}

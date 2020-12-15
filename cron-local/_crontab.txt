@@ -1,0 +1,26 @@
+#####
+#SMS UNIVERSAL CRONs
+#####
+#CRON DE IMPORTACAO
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/importCron.sh > /dev/null 2>&1 
+
+#CRON DE LOTE
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/criaLoteCron.sh > /dev/null 2>&1 
+
+#CRON DE LEITURA DE LOTE
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/leituraLoteCron.sh > /dev/null 2>&1 
+
+#CRON DE PREENCHER LOTE
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/preencheLoteCron.sh > /dev/null 2>&1 
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/checkPreencheCron.sh > /dev/null 2>&1
+
+#CRON DE ENVIAR LOTE
+#* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/enviaLoteCron.sh > /dev/null 2>&1 
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/checkEnviaCron.sh > /dev/null 2>&1 
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/callEnviaCron.sh > /dev/null 2>&1 
+
+#CRON DE CALLBACK
+* * * * * /var/www/html/zigzag_universal_relatorio/cron-local/callbackCron.sh > /dev/null 2>&1 
+
+
+> /dev/null 2>&1 

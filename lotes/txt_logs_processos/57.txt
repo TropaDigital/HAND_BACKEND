@@ -1,0 +1,4 @@
+20/08/2018 12:27:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=57&i_l=91&arquivos=,1
+20/08/2018 12:28:01 - Preencher lote com limite: 1000, e offset: 8 
+20/08/2018 12:28:17 - Total de OK retornado da TWW: 0
+20/08/2018 12:28:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=57&status=Campanha%20com%20erro

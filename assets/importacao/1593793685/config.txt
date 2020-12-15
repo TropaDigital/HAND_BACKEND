@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1709","tipo":";","diretorio":"1593793685","diretorio_old":"sms_3.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["JOSE","19991688036"],"JOSE":"nome","19991688036":"celular"}

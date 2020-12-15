@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1907","tipo":";","diretorio":"1598629130","diretorio_old":"Campanha_Auto_BB_29ago.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["FONE1","CPF"],"FONE1":"celular","CPF":"referencia"}

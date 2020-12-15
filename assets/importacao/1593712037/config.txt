@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1701","tipo":";","diretorio":"1593712037","diretorio_old":"vivian.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5543999882089","Monsan","34307"],"5543999882089":"celular","Monsan":"nome","34307":"editavel_1"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1495","tipo":";","diretorio":"1586892513","diretorio_old":"Base_tomadores_14abr_5k_PAN.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["CPF","Celular","nome"],"CPF":"referencia","Celular":"celular","nome":"nome"}

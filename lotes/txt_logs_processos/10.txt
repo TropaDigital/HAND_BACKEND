@@ -1,0 +1,6 @@
+17/01/2019 18:09:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=teste366&senha=teste366&i_c=10&i_l=9&arquivos=,1
+17/01/2019 18:10:02 - Preencher lote com limite: 1000, e offset: 0 
+17/01/2019 18:11:01 - json SMS redis: ["{\"message\":\"eae Kaique \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/2vW\",\"number\":\"5511940349111\"}","{\"message\":\"eae Kaique \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/2vX\",\"number\":\"5511940349111\"}","{\"message\":\"eae Kaique \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/2vY\",\"number\":\"5511940349111\"}","{\"message\":\"eae Kaique \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/2vZ\",\"number\":\"5511940349111\"}","{\"message\":\"eae Kaique \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/2wa\",\"number\":\"5511940349111\"}"]
+17/01/2019 18:11:01 - Retorno insert SMS redis: 1
+17/01/2019 18:11:01 - Start campanha no redis: {"data":"{\"idCampaign\":\"10\",\"idLot\":\"None\",\"action\":\"start\"}","set":1}
+17/01/2019 18:11:01 - Servidor tentou acessar essa url: http://10.0.0.222:8154naiche/campanha/status?id=10&status=Campanha%20preparada

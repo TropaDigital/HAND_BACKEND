@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1692","tipo":";","diretorio":"1593635746","diretorio_old":"suseli.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511999279129","Ana","2034"],"5511999279129":"celular","Ana":"nome","2034":"editavel_1"}

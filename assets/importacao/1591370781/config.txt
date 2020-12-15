@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1591","tipo":";","diretorio":"1591370781","diretorio_old":"base_credito_ML_05jun.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["17459349879","5511959304229","GISELI"],"17459349879":"referencia","5511959304229":"celular","GISELI":"nome"}

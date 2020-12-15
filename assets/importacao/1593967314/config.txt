@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1724","tipo":";","diretorio":"1593967314","diretorio_old":"MARIA_GORETE_PEREIRA_DOS_SANTOS.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511964504871","Fernando","102325000260813"],"5511964504871":"celular","Fernando":"nome","102325000260813":"editavel_1"}

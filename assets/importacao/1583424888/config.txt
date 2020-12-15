@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1342","tipo":";","diretorio":"1583424888","diretorio_old":"Base_Pronta_2_1.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["LUIZA_COSME_DE_OLIVEIRA","25691910","5511930074589"],"LUIZA_COSME_DE_OLIVEIRA":"nome","25691910":"campo1","5511930074589":"celular"}

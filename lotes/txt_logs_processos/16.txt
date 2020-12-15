@@ -1,0 +1,2 @@
+27/09/2019 13:38:32 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=naiche_login&senha=naiche_senha&i_c=16&i_l=12&arquivos=,1
+27/09/2019 13:39:01 - Preencher lote com limite: 1000, e offset: 0 

@@ -1,0 +1,1 @@
+{"basemodule":"home\/vero_solucoes","id_lista":"1778","tipo":";","diretorio":"1594395548","diretorio_old":"boravendermais_2.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.verosolucoes.com.br\/","topo":["numero"],"numero":"celular"}

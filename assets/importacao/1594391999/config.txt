@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1777","tipo":";","diretorio":"1594391999","diretorio_old":"sms_5_1.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["STHEFANIE","11975077715"],"STHEFANIE":"nome","11975077715":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1720","tipo":";","diretorio":"1593966724","diretorio_old":"GILZA_DOS_SANTOS_RIBEIRO.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511961105587","Fabio","102325005913915"],"5511961105587":"celular","Fabio":"nome","102325005913915":"editavel_1"}

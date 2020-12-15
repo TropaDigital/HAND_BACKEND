@@ -1,0 +1,40 @@
+17/08/2018 17:13:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=43&arquivos=,1
+17/08/2018 17:14:01 - Preencher lote com limite: 1000, e offset: 0 
+17/08/2018 17:14:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:14:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:14:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=44&arquivos=,1
+17/08/2018 17:15:01 - Preencher lote com limite: 1000, e offset: 1 
+17/08/2018 17:15:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:15:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:15:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=45&arquivos=,1
+17/08/2018 17:16:01 - Preencher lote com limite: 1000, e offset: 2 
+17/08/2018 17:16:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:16:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:16:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=46&arquivos=,1
+17/08/2018 17:17:01 - Preencher lote com limite: 1000, e offset: 3 
+17/08/2018 17:17:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:17:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:17:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=47&arquivos=,1
+17/08/2018 17:18:01 - Preencher lote com limite: 1000, e offset: 4 
+17/08/2018 17:18:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:18:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:18:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=48&arquivos=,1
+17/08/2018 17:19:02 - Preencher lote com limite: 1000, e offset: 5 
+17/08/2018 17:19:18 - Total de OK retornado da TWW: 0
+17/08/2018 17:19:18 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:19:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=49&arquivos=,1
+17/08/2018 17:20:01 - Preencher lote com limite: 1000, e offset: 6 
+17/08/2018 17:20:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:20:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:20:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=50&arquivos=,1
+17/08/2018 17:21:01 - Preencher lote com limite: 1000, e offset: 7 
+17/08/2018 17:21:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:21:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:21:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=51&arquivos=,1
+17/08/2018 17:22:01 - Preencher lote com limite: 1000, e offset: 8 
+17/08/2018 17:22:17 - Total de OK retornado da TWW: 0
+17/08/2018 17:22:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro
+17/08/2018 17:22:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=52&arquivos=,1
+17/08/2018 17:23:02 - Preencher lote com limite: 1000, e offset: 9 
+17/08/2018 17:23:18 - Total de OK retornado da TWW: 0
+17/08/2018 17:23:18 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=48&status=Campanha%20com%20erro

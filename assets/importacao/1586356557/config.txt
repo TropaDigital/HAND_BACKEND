@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1493","tipo":";","diretorio":"1586356557","diretorio_old":"Base_Emerson_Margem_08abr_12k_tpt_nova.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["cpf","celular","nome"],"cpf":"referencia","celular":"celular","nome":"nome"}

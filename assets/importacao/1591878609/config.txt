@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1604","tipo":";","diretorio":"1591878609","diretorio_old":"base_Higienizada_credito_ML_11jun.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5511992253773"],"5511992253773":"celular"}

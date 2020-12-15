@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1976","tipo":";","diretorio":"1605277549","diretorio_old":"1000itapeva_1.csv","cabecalho":"sim","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["","","","","","","","Telefone"],"Telefone":"celular"}

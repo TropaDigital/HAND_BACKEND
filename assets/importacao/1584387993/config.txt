@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1424","tipo":";","diretorio":"1584387993","diretorio_old":"Rio_Claro_Feirao_On_line_1703_20k.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5519996458352"],"5519996458352":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1791","tipo":";","diretorio":"1594989930","diretorio_old":"refin_pan_16jul_1.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["CPF","Celular","Nome","_Troco_"],"CPF":"referencia","Celular":"celular","Nome":"nome","_Troco_":"editavel_1"}

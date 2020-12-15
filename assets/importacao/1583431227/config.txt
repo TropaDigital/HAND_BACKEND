@@ -1,0 +1,1 @@
+{"basemodule":"home\/vero_solucoes","id_lista":"1344","tipo":";","diretorio":"1583431227","diretorio_old":"Base_area_da_Beleza.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.verosolucoes.com.br\/","topo":["NUMERO"],"NUMERO":"celular"}

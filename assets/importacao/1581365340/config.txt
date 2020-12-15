@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1289","tipo":";","diretorio":"1581365340","diretorio_old":"Acao_Repasse_RR_Ribeirao_ABF_2019.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["\ufeffMARCIO","5516997668939"],"\ufeffMARCIO":"nome","5516997668939":"celular"}

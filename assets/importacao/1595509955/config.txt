@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1806","tipo":";","diretorio":"1595509955","diretorio_old":"base_decolar_23jul.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["18263925134","TELMA","5561981387988"],"18263925134":"referencia","TELMA":"nome","5561981387988":"celular"}

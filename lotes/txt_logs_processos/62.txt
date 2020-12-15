@@ -1,0 +1,26 @@
+04/09/2018 13:58:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=62&i_l=106&arquivos=1,10
+04/09/2018 13:58:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=62&i_l=106&arquivos=10,20
+04/09/2018 13:58:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=62&i_l=106&arquivos=10,20
+04/09/2018 13:59:02 - Preencher lote com limite: 1000, e offset: 0 
+04/09/2018 13:59:04 - Preencher lote com limite: 1000, e offset: 1000 
+04/09/2018 13:59:17 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 1
+04/09/2018 13:59:20 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 2
+04/09/2018 13:59:24 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 3
+04/09/2018 13:59:26 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 4
+04/09/2018 13:59:30 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 5
+04/09/2018 13:59:33 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 6
+04/09/2018 13:59:36 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 7
+04/09/2018 13:59:39 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 8
+04/09/2018 13:59:42 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 9
+04/09/2018 13:59:45 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 10
+04/09/2018 13:59:48 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 11
+04/09/2018 13:59:51 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 12
+04/09/2018 13:59:55 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 13
+04/09/2018 13:59:58 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 14
+04/09/2018 14:00:01 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 15
+04/09/2018 14:00:04 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 16
+04/09/2018 14:00:07 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 17
+04/09/2018 14:00:10 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 18
+04/09/2018 14:00:13 - Verificou se precisa alterar o status mas o total preenchido é: 20 e o total de enviado é: 19
+04/09/2018 14:00:16 - Total de OK retornado da TWW: 0
+04/09/2018 14:00:16 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=62&status=Campanha%20com%20erro

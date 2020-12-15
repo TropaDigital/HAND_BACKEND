@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1693","tipo":";","diretorio":"1593636007","diretorio_old":"thaina_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511956102060","Maria","7634"],"5511956102060":"celular","Maria":"nome","7634":"editavel_1"}

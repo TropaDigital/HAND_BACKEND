@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1920","tipo":";","diretorio":"1598885004","diretorio_old":"Capital_EURO_02set.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["numero_telefone1","cpf"],"numero_telefone1":"celular","cpf":"referencia"}

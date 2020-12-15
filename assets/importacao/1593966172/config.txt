@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1716","tipo":";","diretorio":"1593966172","diretorio_old":"ALEXANDRE_CARRIL.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5521975147918","Douglas","102325003763114"],"5521975147918":"celular","Douglas":"nome","102325003763114":"editavel_1"}

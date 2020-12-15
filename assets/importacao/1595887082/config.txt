@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1823","tipo":";","diretorio":"1595887082","diretorio_old":"dental_1.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["TEREZINHA","11997037906"],"TEREZINHA":"nome","11997037906":"celular"}

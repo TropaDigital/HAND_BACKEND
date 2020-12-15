@@ -1,0 +1,1 @@
+{"referencia":"0","total":"5","offset":"0","id_lote":"10","id_campanha":"12","login_envio":"teste366","senha_envio":"teste366","nome_arquivo":"2019-01-21 10:54@12@10"}

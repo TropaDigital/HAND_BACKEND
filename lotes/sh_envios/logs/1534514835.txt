@@ -1,0 +1,1 @@
+/api/lotes/enviar?local=L3Zhci93d3cvaHRtbC96aWd6YWdfcmVsYXRvcmlvL2xvdGVzL3R4dF9wcmVlbmNoaWRvLy9maWxhLzIzLzEzLzEtenpuYWljaGUtZnVua25vdm8udHh0

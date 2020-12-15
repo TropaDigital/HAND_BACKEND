@@ -1,0 +1,1 @@
+{"basemodule":"home\/tww","id_lista":"24","tipo":";","diretorio":"1504101528","diretorio_old":"Teste3_envio_click.csv","cabecalho":"nao","topo":["3197348688","1"],"3197348688":"celular","1":"editavel_1"}

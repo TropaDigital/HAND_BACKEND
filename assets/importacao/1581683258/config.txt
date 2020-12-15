@@ -1,0 +1,1 @@
+{"basemodule":"view\/12\/ops_mkt","id_lista":"1302","tipo":";","diretorio":"1581683258","diretorio_old":"Base_granleste_itnerlagos_fevereiro_4.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["LUCAS","5511982911771"],"LUCAS":"nome","5511982911771":"celular"}

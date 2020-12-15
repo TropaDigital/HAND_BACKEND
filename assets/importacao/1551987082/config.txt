@@ -1,0 +1,1 @@
+{"basemodule":"home\/naiche","id_lista":"19","tipo":";","diretorio":"1551987082","diretorio_old":"lista.csv","cabecalho":"sim","topo":["nome","telefine"],"nome":"nome","telefine":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/naiche","id_lista":"14","tipo":";","diretorio":"1551992632","diretorio_old":"Copy_of_Lista_de_Telefones_Fev_MDC_2502.csv","cabecalho":"sim","topo":["\ufeffNOME","TELEFONE"],"\ufeffNOME":"nome","TELEFONE":"celular"}

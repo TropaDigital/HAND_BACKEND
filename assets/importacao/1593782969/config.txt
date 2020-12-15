@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1688","tipo":";","diretorio":"1593782969","diretorio_old":"consignado.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["MARIA","5511943758806"],"MARIA":"nome","5511943758806":"celular"}

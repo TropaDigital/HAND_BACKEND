@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1509","tipo":";","diretorio":"1587662965","diretorio_old":"Exempio_acao_pandemia_aberturas.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["\ufeffCelular","Nome"],"\ufeffCelular":"celular","Nome":"nome"}

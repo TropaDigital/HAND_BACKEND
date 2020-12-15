@@ -1,0 +1,20 @@
+17/08/2018 16:00:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=45&i_l=22&arquivos=,1
+17/08/2018 16:01:01 - Preencher lote com limite: 1000, e offset: 0 
+17/08/2018 16:01:17 - Total de OK retornado da TWW: 0
+17/08/2018 16:01:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=45&status=Campanha%20com%20erro
+17/08/2018 16:23:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=45&i_l=23&arquivos=,1
+17/08/2018 16:24:01 - Preencher lote com limite: 1000, e offset: 1 
+17/08/2018 16:24:16 - Total de OK retornado da TWW: 0
+17/08/2018 16:24:16 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=45&status=Campanha%20com%20erro
+17/08/2018 16:24:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=45&i_l=24&arquivos=,1
+17/08/2018 16:25:02 - Preencher lote com limite: 1000, e offset: 2 
+17/08/2018 16:25:17 - Total de OK retornado da TWW: 0
+17/08/2018 16:25:17 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=45&status=Campanha%20com%20erro
+17/08/2018 16:25:32 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=45&i_l=25&arquivos=,1
+17/08/2018 16:26:01 - Preencher lote com limite: 1000, e offset: 3 
+17/08/2018 16:26:16 - Total de OK retornado da TWW: 0
+17/08/2018 16:26:16 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=45&status=Campanha%20com%20erro
+17/08/2018 16:26:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=45&i_l=26&arquivos=,1
+17/08/2018 16:27:01 - Preencher lote com limite: 1000, e offset: 9 
+17/08/2018 16:27:16 - Total de OK retornado da TWW: 0
+17/08/2018 16:27:16 - Servidor tentou acessar essa url: http://10.0.0.222:8154zigzag/campanha/status?id=45&status=Campanha%20com%20erro

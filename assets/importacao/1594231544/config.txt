@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1752","tipo":";","diretorio":"1594231544","diretorio_old":"NICOLE_SMS_PREVENTIVA_GERAL_20200708.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["Patricia","5561986782312"],"Patricia":"nome","5561986782312":"celular"}

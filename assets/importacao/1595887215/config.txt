@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1824","tipo":";","diretorio":"1595887215","diretorio_old":"dental_2.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["RICARDO","13996075051"],"RICARDO":"nome","13996075051":"celular"}

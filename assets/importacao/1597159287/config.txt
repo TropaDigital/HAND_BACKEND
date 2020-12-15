@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1844","tipo":";","diretorio":"1597159287","diretorio_old":"BB_Capital_de_Giro.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5511930034259","21617855839","DANIEL"],"5511930034259":"celular","21617855839":"referencia","DANIEL":"nome"}

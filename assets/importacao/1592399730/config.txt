@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1616","tipo":";","diretorio":"1592399730","diretorio_old":"wee100lon22.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["\ufefftelefone"],"\ufefftelefone":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1632","tipo":";","diretorio":"1592595554","diretorio_old":"teste_ipanema.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["Nome","celular"],"Nome":"nome","celular":"celular"}

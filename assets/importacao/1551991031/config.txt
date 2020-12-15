@@ -1,0 +1,1 @@
+{"basemodule":"home\/naiche","id_lista":"14","tipo":";","diretorio":"1551991031","diretorio_old":"base_geral_de_cntatos_vestibulei_pre_estreia_2202.csv","cabecalho":"sim","topo":["\ufeffNome","Telefone","","",""],"\ufeffNome":"nome","Telefone":"celular"}

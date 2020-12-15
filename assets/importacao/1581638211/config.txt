@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1178","tipo":";","diretorio":"1581638211","diretorio_old":"OUROBIKER_2019_CSV_1_2.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["\ufeffCELULAR","NOME","","","","","","","","","","","","","",""],"\ufeffCELULAR":"celular","NOME":"nome"}

@@ -1,0 +1,4 @@
+Campanha legal|337|Ola [nome], conheca nossa plataforma enviada com FTP:|2017-12-06 12:00|2017-12-06 14:00
+nome;celular
+kaique novo teste;1194034911
+deco novo teste;1194034911

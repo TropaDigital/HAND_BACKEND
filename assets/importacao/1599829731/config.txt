@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1928","tipo":";","diretorio":"1599829731","diretorio_old":"Base_Caixa_Consorcio_Silvio_11set.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["CPF","Fone"],"CPF":"referencia","Fone":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1323","tipo":",","diretorio":"1583343243","diretorio_old":"Coromandel_Builder_100cels_1.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["5534998425316"],"5534998425316":"celular"}

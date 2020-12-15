@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1816","tipo":";","diretorio":"1595859243","diretorio_old":"cvc_5.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["ADRIANA","67998847095"],"ADRIANA":"nome","67998847095":"celular"}

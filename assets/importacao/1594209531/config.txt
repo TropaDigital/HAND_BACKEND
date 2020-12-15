@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1747","tipo":";","diretorio":"1594209531","diretorio_old":"DIENIFER_FELIPE_NONATO_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5517981241694","Claudinete","102153000044016"],"5517981241694":"celular","Claudinete":"nome","102153000044016":"editavel_1"}

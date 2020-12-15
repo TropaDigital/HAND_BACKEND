@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1680","tipo":";","diretorio":"1593529528","diretorio_old":"fonehot01_30jun.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5511941110799","RUTH"],"5511941110799":"celular","RUTH":"nome"}

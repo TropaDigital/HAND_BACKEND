@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1437","tipo":";","diretorio":"1584393172","diretorio_old":"Botucatu_Feirao_on_line_1803_10k.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5514997704485"],"5514997704485":"celular"}

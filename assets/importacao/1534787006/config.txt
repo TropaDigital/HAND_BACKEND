@@ -1,0 +1,1 @@
+{"basemodule":"home\/zigzag","id_lista":"104","tipo":";","diretorio":"1534787006","diretorio_old":"hand_list_11.csv","cabecalho":"sim","topo":["nome","celular"],"nome":"nome","celular":"celular"}

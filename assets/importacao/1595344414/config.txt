@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1804","tipo":";","diretorio":"1595344414","diretorio_old":"base_decolar_21jul02.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["06113583368","ROSANGELA","5585988858343"],"06113583368":"referencia","ROSANGELA":"nome","5585988858343":"celular"}

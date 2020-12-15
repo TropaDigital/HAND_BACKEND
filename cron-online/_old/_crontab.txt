@@ -1,0 +1,20 @@
+#####
+#HAND CRONs
+#####
+#CRON DE IMPORTACAO
+* * * * * /home/handmktbk/public/cron-online/importCron.sh > /dev/null 2>&1
+
+#CRON DE LOTE
+* * * * * /home/handmktbk/public/cron-online/criaLoteCron.sh > /dev/null 2>&1
+
+#CRON DE LEITURA DE LOTE
+* * * * * /home/handmktbk/public/cron-online/leituraLoteCron.sh > /dev/null 2>&1
+
+#CRON DE PREENCHER LOTE
+* * * * * /home/handmktbk/public/cron-online/preencheLoteCron.sh > /dev/null 2>&1
+* * * * * /home/handmktbk/public/cron-online/checkPreencheCron.sh > /dev/null 2>&1
+
+#CRON DE ENVIAR LOTE
+* * * * * /home/handmktbk/public/cron-online/callEnviaCron.sh > /dev/null 2>&1
+* * * * * /home/handmktbk/public/cron-online/checkEnviaCron.sh > /dev/null 2>&1
+* * * * * /home/handmktbk/public/cron-online/enviaLoteCron.sh > /dev/null 2>&1

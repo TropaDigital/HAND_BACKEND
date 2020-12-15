@@ -1,0 +1,24 @@
+#####
+#HAND CRONs
+#####
+#CRON DE IMPORTACAO
+* * * * * /home/handmktbk/public_html/cron-online/importCron.sh > /dev/null 2>&1
+
+#CRON DE LOTE
+* * * * * /home/handmktbk/public_html/cron-online/criaLoteCron.sh > /dev/null 2>&1
+
+#CRON DE LEITURA DE LOTE
+* * * * * /home/handmktbk/public_html/cron-online/leituraLoteCron.sh > /dev/null 2>&1
+
+#CRON DE PREENCHER LOTE
+* * * * * /home/handmktbk/public_html/cron-online/preencheLoteCron.sh > /dev/null 2>&1
+* * * * * /home/handmktbk/public_html/cron-online/checkPreencheCron.sh > /dev/null 2>&1
+
+#CRON DE ENVIAR LOTE
+* * * * * /home/handmktbk/public_html/cron-online/callEnviaCron.sh > /dev/null 2>&1
+* * * * * /home/handmktbk/public_html/cron-online/checkEnviaCron.sh > /dev/null 2>&1
+* * * * * /home/handmktbk/public_html/cron-online/enviaLoteCron.sh > /dev/null 2>&1
+
+
+#SALDO
+*/15 * * * * /home/handmktbk/public_html/cron-online/checkSaldoCron.sh > /dev/null 2>&1

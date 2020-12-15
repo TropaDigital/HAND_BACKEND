@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1725","tipo":";","diretorio":"1593967479","diretorio_old":"MARIA_VIEIRA.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511964085674","Claudinice","102325018394015"],"5511964085674":"celular","Claudinice":"nome","102325018394015":"editavel_1"}

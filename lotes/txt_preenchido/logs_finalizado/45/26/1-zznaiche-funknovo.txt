@@ -1,0 +1,1 @@
+<sms><seunum>3646788</seunum><celular>5511940349120</celular><mensagem>Hello [name] kaique10! zigzag/m/4BIEl</mensagem><agendamento>2018-08-17 16:30</agendamento><idlote>45</idlote></sms></lote>

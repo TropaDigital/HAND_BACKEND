@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink_standard","id_lista":"1460","tipo":";","diretorio":"1585068231","diretorio_old":"Patrocinio_Builder_10K_1.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["34998224163"],"34998224163":"celular"}

@@ -1,0 +1,1 @@
+<lote><sms><seunum>3646752</seunum><celular>5511940349111</celular><mensagem> url-m.com/m/tgzPC</mensagem><agendamento>2018-01-17 14:25</agendamento><idlote>28</idlote></sms><sms><seunum>3646753</seunum><celular>5511940349111</celular><mensagem> url-m.com/m/tgzPD</mensagem><agendamento>2018-01-17 14:25</agendamento><idlote>28</idlote></sms></lote>

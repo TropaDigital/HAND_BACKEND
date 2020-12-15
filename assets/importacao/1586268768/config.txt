@@ -1,0 +1,1 @@
+{"basemodule":"view\/154\/acert","id_lista":"1491","tipo":";","diretorio":"1586268768","diretorio_old":"BASE_SUPER_PAGTO_CARTAO.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["553133622062"],"553133622062":"celular"}

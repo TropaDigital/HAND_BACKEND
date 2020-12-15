@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1721","tipo":";","diretorio":"1593966853","diretorio_old":"GIOVANA_BOLDRIM.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5562995044172","Edson","102325030435415"],"5562995044172":"celular","Edson":"nome","102325030435415":"editavel_1"}

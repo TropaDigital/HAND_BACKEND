@@ -1,0 +1,1 @@
+{"basemodule":"view\/137\/ops_mkt","id_lista":"1316","tipo":";","diretorio":"1582298190","diretorio_old":"teste_powervik_21fev.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["COD","CLIENTE","CPF","Celular"],"COD":"referencia","CLIENTE":"nome","CPF":"campo1","Celular":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1357","tipo":";","diretorio":"1583601739","diretorio_old":"ARARAQUARA_0703_3.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5511930140426"],"5511930140426":"celular"}

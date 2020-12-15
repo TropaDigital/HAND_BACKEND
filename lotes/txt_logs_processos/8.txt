@@ -1,0 +1,2 @@
+17/01/2019 16:10:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=teste366&senha=teste366&i_c=8&i_l=7&arquivos=,1
+17/01/2019 16:11:01 - Preencher lote com limite: 1000, e offset: 0 

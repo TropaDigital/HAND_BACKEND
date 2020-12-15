@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1730","tipo":";","diretorio":"1593968248","diretorio_old":"VERONICE_RAMOS.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5514981689956","Maria","102325033392915"],"5514981689956":"celular","Maria":"nome","102325033392915":"editavel_1"}

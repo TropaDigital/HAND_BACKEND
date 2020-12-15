@@ -1,0 +1,1 @@
+{"basemodule":"home\/vero_solucoes","id_lista":"1488","tipo":";","diretorio":"1585939683","diretorio_old":"Base_Disparo_HM_FINAL.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.verosolucoes.com.br\/","topo":["numero"],"numero":"celular"}

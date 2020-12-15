@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1586","tipo":";","diretorio":"1591065264","diretorio_old":"Exempio_Retomada_Buddha_1.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["\ufeffAdelia","5513981537030"],"\ufeffAdelia":"nome","5513981537030":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1681","tipo":";","diretorio":"1593540738","diretorio_old":"teste_SMS_M2C_Digital_20200630.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["numero","nome","cpf","cext","valor"],"numero":"celular","nome":"nome","cpf":"campo1","cext":"editavel_1","valor":"editavel_2"}

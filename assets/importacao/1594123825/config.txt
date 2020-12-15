@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1743","tipo":";","diretorio":"1594123825","diretorio_old":"7_7_20200702_000001.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511984110624","Etevaldo"],"5511984110624":"celular","Etevaldo":"nome"}

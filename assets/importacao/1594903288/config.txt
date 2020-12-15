@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1784","tipo":";","diretorio":"1594903288","diretorio_old":"Base_ML_16jul_10k.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["Celular","Nome","_Limite_","Valor_a_Liberar","Parcela"],"Celular":"celular","Nome":"nome","_Limite_":"referencia","Valor_a_Liberar":"editavel_1","Parcela":"editavel_2"}

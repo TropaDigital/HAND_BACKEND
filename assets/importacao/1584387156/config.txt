@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1419","tipo":";","diretorio":"1584387156","diretorio_old":"Araraquara_Feirao_online_1803_20k.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5516996183723"],"5516996183723":"celular"}

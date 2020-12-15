@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1810","tipo":";","diretorio":"1595857551","diretorio_old":"coop_2.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["MARIA","11967758643"],"MARIA":"nome","11967758643":"celular"}

@@ -1,0 +1,1 @@
+{"referencia":"0","total":"1980","offset":"0","id_lote":"111","id_campanha":"63","login_envio":"zznaiche","senha_envio":"funknovo","nome_arquivo":"2018-09-04 10:00@63@111"}

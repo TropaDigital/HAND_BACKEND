@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1328","tipo":";","diretorio":"1582900026","diretorio_old":"Base_Pronta.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["MARIA_DE_LURDES_MARQUES_MOREIRA","1104147807","5511930399007"],"MARIA_DE_LURDES_MARQUES_MOREIRA":"nome","1104147807":"campo1","5511930399007":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"view\/144\/cr2","id_lista":"1320","tipo":";","diretorio":"1582316830","diretorio_old":"Mosaic_1920FEV2020_BD_CSV_2.csv","cabecalho":"sim","url_old":"http:\/\/mobilemkt.cr2.studio\/","topo":["\ufeffOcupacao","Nome_Completo","","PAIS","DDD","Telefone","Numero_completo"],"\ufeffOcupacao":"editavel_1","Nome_Completo":"nome","Numero_completo":"celular"}

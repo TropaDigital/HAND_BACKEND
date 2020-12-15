@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1661","tipo":";","diretorio":"1593008506","diretorio_old":"base_Refin_Pan_24jun.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["74470060682","5534910010564","_3.457,90_","MARIA"],"74470060682":"referencia","5534910010564":"celular","_3_457,90_":"editavel_1","MARIA":"nome"}

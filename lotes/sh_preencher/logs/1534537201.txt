@@ -1,0 +1,1 @@
+/api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=48&i_l=49&arquivos=,1

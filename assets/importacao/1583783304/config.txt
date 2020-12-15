@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1390","tipo":";","diretorio":"1583783304","diretorio_old":"Botucatu_1103.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5514997086827"],"5514997086827":"celular"}

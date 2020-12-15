@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1366","tipo":";","diretorio":"1583601090","diretorio_old":"Hortolandia_0803.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5519987052981"],"5519987052981":"celular"}

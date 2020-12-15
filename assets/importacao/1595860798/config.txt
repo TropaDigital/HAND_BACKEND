@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1821","tipo":";","diretorio":"1595860798","diretorio_old":"pixole_1.csv","cabecalho":"sim","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["SANDRA","11985827593"],"SANDRA":"nome","11985827593":"celular"}

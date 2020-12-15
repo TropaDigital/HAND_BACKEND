@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1479","tipo":";","diretorio":"1585656904","diretorio_old":"Base_Margem_31mar_estrategia_quarentena.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["CPF","Celular","Nome"],"CPF":"referencia","Celular":"celular","Nome":"nome"}

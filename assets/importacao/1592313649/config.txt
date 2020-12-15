@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1614","tipo":";","diretorio":"1592313649","diretorio_old":"base_Higienizada_credito_ML_16jun.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5537999665575","42400028586443","MARIA"],"5537999665575":"celular","42400028586443":"referencia","MARIA":"nome"}

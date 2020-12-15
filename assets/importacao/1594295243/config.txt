@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1755","tipo":";","diretorio":"1594295243","diretorio_old":"DEBORA_ALMEIDA_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5588994043068","Francisco","102155002602514"],"5588994043068":"celular","Francisco":"nome","102155002602514":"editavel_1"}

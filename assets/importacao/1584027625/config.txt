@@ -1,0 +1,1 @@
+{"basemodule":"home\/ops_mkt","id_lista":"1410","tipo":";","diretorio":"1584027625","diretorio_old":"Base_festival_de_vendas_3.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["ROGERIO","5511\ufffd993020518_"],"ROGERIO":"nome","5511\ufffd993020518_":"celular"}

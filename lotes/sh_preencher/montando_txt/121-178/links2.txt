@@ -1,0 +1,6 @@
+api/lotes/preencher-lote?i_c=1211&i_l=178&arquivos=100,1
+api/lotes/preencher-lote?i_c=1211&i_l=178&arquivos=34,134
+api/lotes/preencher-lote?i_c=1211&i_l=178&arquivos=1,100
+api/lotes/preencher-lote?i_c=1211&i_l=178&arquivos=134,34
+api/lotes/preencher-lote?i_c=1211&i_l=178&arquivos=1,100
+api/lotes/preencher-lote?i_c=1211&i_l=178&arquivos=100,134

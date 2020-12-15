@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1711","tipo":";","diretorio":"1593793862","diretorio_old":"sms_5.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["MARLI","11946689533"],"MARLI":"nome","11946689533":"celular"}

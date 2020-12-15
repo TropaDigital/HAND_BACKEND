@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1500","tipo":";","diretorio":"1587595710","diretorio_old":"CLIENTES_ANTIGOS_ME_GUSTA_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5571981012476"],"5571981012476":"celular"}

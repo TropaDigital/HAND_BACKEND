@@ -1,0 +1,1 @@
+{"basemodule":"view\/160\/m2c_digital","id_lista":"1576","tipo":";","diretorio":"1589812591","diretorio_old":"meunumero_1.csv","cabecalho":"sim","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5511970230107","Iago"],"5511970230107":"celular","Iago":"nome"}

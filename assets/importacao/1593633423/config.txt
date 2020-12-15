@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1690","tipo":";","diretorio":"1593633423","diretorio_old":"raga.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511964667255","Moacyr","837250080"],"5511964667255":"celular","Moacyr":"nome","837250080":"editavel_1"}

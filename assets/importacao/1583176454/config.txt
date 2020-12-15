@@ -1,0 +1,1 @@
+{"basemodule":"home\/vero_solucoes","id_lista":"1331","tipo":";","diretorio":"1583176454","diretorio_old":"SP.csv","cabecalho":"sim","url_old":"http:\/\/vero.vc\/","topo":["email,"],"email,":"email"}

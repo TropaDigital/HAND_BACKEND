@@ -1,0 +1,1 @@
+{"basemodule":"home\/tww","id_lista":"28","tipo":";","diretorio":"1504103660","diretorio_old":"Teste2_envio_click_1.csv","cabecalho":"nao","topo":["551175861516"],"551175861516":"celular"}

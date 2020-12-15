@@ -1,0 +1,1 @@
+{"basemodule":"home\/acert","id_lista":"1341","tipo":";","diretorio":"1583350437","diretorio_old":"lagoa2csv.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5531986535871"],"5531986535871":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1333","tipo":";","diretorio":"1583243514","diretorio_old":"Base_Pronta_1.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["PEDRO_ALCANTARA_SOARES","75767589887","5,51193E+12"],"PEDRO_ALCANTARA_SOARES":"nome","75767589887":"campo1","5,51193E+12":"celular"}

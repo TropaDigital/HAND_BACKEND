@@ -1,0 +1,5 @@
+Campanha ZigZag|984|Ola [nome], conheca nossa plataforma:|2017-12-25 12:00|2017-12-25 14:00
+nome;celular
+kaique;11940349111
+leandro;1127050897
+deco;123132123

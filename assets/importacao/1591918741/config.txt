@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1608","tipo":";","diretorio":"1591918741","diretorio_old":"telefones_para_wee_43sms_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["\ufeff\\\\\\"],"\ufeff\\\\\\":"celular"}

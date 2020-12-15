@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1944","tipo":";","diretorio":"1600865475","diretorio_old":"Exempio_Funchal_Geral_SW20.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["\ufeffNome","Tel_Cel","",""],"\ufeffNome":"nome","Tel_Cel":"celular"}

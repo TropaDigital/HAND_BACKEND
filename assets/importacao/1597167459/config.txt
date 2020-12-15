@@ -1,0 +1,1 @@
+{"basemodule":"home\/reparo","id_lista":"1845","tipo":";","diretorio":"1597167459","diretorio_old":"Contatos_Helio_DEMAIS_31072020.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["Name","Phone_1_-_Value"],"Name":"nome","Phone_1_-_Value":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1781","tipo":";","diretorio":"1594728081","diretorio_old":"refin_pan_14jul.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["10439631890","5514996468757","CLAUDETE","_1.549,89_"],"10439631890":"referencia","5514996468757":"celular","CLAUDETE":"nome","_1_549,89_":"editavel_1"}

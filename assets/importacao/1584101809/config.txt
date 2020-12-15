@@ -1,0 +1,1 @@
+{"basemodule":"view\/38\/ops_mkt","id_lista":"1416","tipo":";","diretorio":"1584101809","diretorio_old":"base_5k_13marco.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["Celular","Refer\ufffdncia","CPF","Nome"],"Celular":"celular","Refer\ufffdncia":"referencia","CPF":"campo1","Nome":"nome"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1767","tipo":";","diretorio":"1594297702","diretorio_old":"VIVIAN_RODRIGUES_DE_CARVALHO_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5562999760015","Maria","102325035581315"],"5562999760015":"celular","Maria":"nome","102325035581315":"editavel_1"}

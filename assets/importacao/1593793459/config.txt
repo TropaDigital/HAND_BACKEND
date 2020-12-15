@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1706","tipo":";","diretorio":"1593793459","diretorio_old":"sms_1_2.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["LUCIANO","11980476676"],"LUCIANO":"nome","11980476676":"celular"}

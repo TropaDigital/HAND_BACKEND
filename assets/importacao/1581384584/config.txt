@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1290","tipo":";","diretorio":"1581384584","diretorio_old":"BASE_SMS_TESTE_1.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["MAYNE_PORTO","41376836890","11972249482"],"MAYNE_PORTO":"nome","41376836890":"campo1","11972249482":"celular"}

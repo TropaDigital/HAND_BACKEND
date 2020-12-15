@@ -1,0 +1,1 @@
+{"basemodule":"view\/4\/ops_mkt","id_lista":"1314","tipo":";","diretorio":"1582231595","diretorio_old":"Copia_de_20200219_DISPARO_LEONARDO_1.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["Refer\ufffdncia","CPF","NOME","Celular"],"Refer\ufffdncia":"referencia","CPF":"campo1","NOME":"nome","Celular":"celular"}

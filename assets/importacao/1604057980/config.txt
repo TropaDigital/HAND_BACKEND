@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1968","tipo":";","diretorio":"1604057980","diretorio_old":"28out.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["46431624734","5521966761434"],"46431624734":"referencia","5521966761434":"celular"}

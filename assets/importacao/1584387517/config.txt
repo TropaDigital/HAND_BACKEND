@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1421","tipo":";","diretorio":"1584387517","diretorio_old":"Votuporanga_Feirao_On_line_1703.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5517997776155"],"5517997776155":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1397","tipo":";","diretorio":"1583781790","diretorio_old":"Rio_Claro_1003.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5519991044290"],"5519991044290":"celular"}

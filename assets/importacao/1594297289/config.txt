@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1764","tipo":";","diretorio":"1594297289","diretorio_old":"SUSELI_FERREIRA_DE_ALMEIDA_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5519992058184","Rogerio","102325015346315"],"5519992058184":"celular","Rogerio":"nome","102325015346315":"editavel_1"}

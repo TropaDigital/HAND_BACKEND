@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1867","tipo":";","diretorio":"1597334656","diretorio_old":"BB_Capital_de_Giro_13ago.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["FONE","NOME"],"FONE":"celular","NOME":"nome"}

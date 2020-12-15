@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class TWWLibrary</title>
+
+	<script type="text/javascript" src="resources/combined.js?2380834242"></script>
+	<script type="text/javascript" src="elementlist.js?241094441"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1218544556" />
+
+</head>
+
+<body>
+<div id="header-tww"><img src="./resources/logo-tww.png" /></div>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li class="active"><a href="package-TWWLibrary.html">TWWLibrary</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-SMSDataSet.html">SMSDataSet</a></li>
+				<li class="active"><a href="class-TWWLibrary.html">TWWLibrary</a></li>
+				<li><a href="class-WSMethodString.html">WSMethodString</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-TWWLibrary.html" title="Summary of TWWLibrary"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class TWWLibrary</h1>
+
+
+	<div class="description">
+	
+<p>This class TWWLibrary contains the methods available for interaction</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-WSMethodString.html"><span>WSMethodString</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>TWWLibrary</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-TWWLibrary.html">TWWLibrary</a><br />
+
+				<b>Category:</b>
+				API<br />
+				<b>Copyright:</b>
+				TWW DO BRASIL S/A<br />
+				<b>Author:</b>
+				Alexandre Biondi Ermettti &lt;<a
+href="mailto:abiondi&#64;tww.com.br">abiondi&#64;<!---->tww.com.br</a>&gt;<br />
+		<b>Located at</b> <a href="source-class-TWWLibrary.html#16-687" title="Go to source code">TWWLibrary.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-TWWLibrary.html#66-93" title="Go to source code">__construct</a>( <span>array <var>$par</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>__construct - receive para array paramters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>__construct - receive para array paramters</p>
+
+<p>NumUsu: Login (ID), 10 alphanumeric characters long.: Senha: Password: url:
+URL for web service TWW: port: TCP port for web service TWW SOAPAction: URI
+Service description</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$par</var></dt>
+					<dd><code>array</code><br>$par</dd>
+				</dl></div>
+
+
+
+				<h4>Example</h4>
+				<div class="list">
+						__construct(array("numusu"=&gt;"TESTCAP","senha"=&gt;"TESTCAP","url"=&gt;"https://webservices.twwwireless.com.br/reluzcap/","port"=&gt;"443","SOAPAction"=&gt;""https://www.twwwireless.com.br/reluzcap/wsreluzcap/"))<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="AlteraSenha" id="_AlteraSenha">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_AlteraSenha">#</a>
+		<code><a href="source-class-TWWLibrary.html#95-110" title="Go to source code">AlteraSenha</a>( <span>String <var>$NovaSenha</var></span> )</code>
+
+		<div class="description short">
+			
+<p>AlteraSenha - Changes a user password. The password maximum lenght is 18
+characters. Returns a boolean that indicates transaction success.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ SenhaNova - New Password</td>
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>AlteraSenha - Changes a user password. The password maximum lenght is 18
+characters. Returns a boolean that indicates transaction success.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ SenhaNova - New Password</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$NovaSenha</var></dt>
+					<dd><code>String</code><br>$NovaSenha New Password</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="BuscaSMS" id="_BuscaSMS">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_BuscaSMS">#</a>
+		<code><a href="source-class-TWWLibrary.html#112-131" title="Go to source code">BuscaSMS</a>( <span>Datetime <var>$DataIni</var></span>, <span>Datetime <var>$DataFim</var></span> )</code>
+
+		<div class="description short">
+			
+<p>BuscaSMS - Returns a Object named OutDataSet that contains a table named
+BuscaSMS with the messages transmitted within a maximum period of 4 days and
+with a maximum of 4000 SMSs . Returns Nothing in case of error. If your traffic
+exceeds 4000 SMSs in the period, we suggest you use the StatusSMSNaoLido
+function described later.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ DataIni - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+
+		<tr>
+			<td>___ DataFim - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>BuscaSMS - Returns a Object named OutDataSet that contains a table named
+BuscaSMS with the messages transmitted within a maximum period of 4 days and
+with a maximum of 4000 SMSs . Returns Nothing in case of error. If your traffic
+exceeds 4000 SMSs in the period, we suggest you use the StatusSMSNaoLido
+function described later.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ DataIni - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+
+		<tr>
+			<td>___ DataFim - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+	</tbody>
+</table>
+
+
+				<h4>Deprecated</h4>
+				<div class="list">
+						since version 1.0.1<br />
+				</div>
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$DataIni</var></dt>
+					<dd><code>Datetime</code><br>$DataIni ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</dd>
+					<dt><var>$DataFim</var></dt>
+					<dd><code>Datetime</code><br>$DataFim ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br>Object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="BuscaSMSAgenda" id="_BuscaSMSAgenda">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_BuscaSMSAgenda">#</a>
+		<code><a href="source-class-TWWLibrary.html#133-147" title="Go to source code">BuscaSMSAgenda</a>( <span>String <var>$SeuNum</var></span> )</code>
+
+		<div class="description short">
+			
+<p>BuscaSMSAgenda - Returns a Object named OutDataSet that contains one
+scheduled message for the SeuNum informed.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user for future queries. It´s not necessary
+			to be ordered and could be repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>BuscaSMSAgenda - Returns a Object named OutDataSet that contains one
+scheduled message for the SeuNum informed.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user for future queries. It´s not necessary
+			to be ordered and could be repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user for future queries. It´s not necessary
+to be ordered and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br>Object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="BuscaSMSAgendaDataSet" id="_BuscaSMSAgendaDataSet">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_BuscaSMSAgendaDataSet">#</a>
+		<code><a href="source-class-TWWLibrary.html#149-166" title="Go to source code">BuscaSMSAgendaDataSet</a>( <span>Array <var>$SeuNum</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>BuscaSMSAgendaDataset - Returns a Object named OutDataSet that contains a
+table called BuscaSMSAgenda with the scheduled messages. Returns Nothing in case
+of errors.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>BuscaSMSAgendaDataset - Returns a Object named OutDataSet that contains a
+table called BuscaSMSAgenda with the scheduled messages. Returns Nothing in case
+of errors.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>Array</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user for future queries. It´s not necessary
+to be ordered and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br>Object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="BuscaSMSMO" id="_BuscaSMSMO">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_BuscaSMSMO">#</a>
+		<code><a href="source-class-TWWLibrary.html#168-187" title="Go to source code">BuscaSMSMO</a>( <span>Datetime <var>$DataIni</var></span>, <span>Datetime <var>$DataFim</var></span> )</code>
+
+		<div class="description short">
+			
+<p>BuscaSMSMO - Returns a Object named OutDataSet that contains a table named
+BuscaSMSMO with the messages received within a maximum period of 4 days and with
+a maximum of 4000 SMSs . Returns Nothing in case of error. If your traffic
+exceeds 4000 SMSs in the period, we suggest you use the StatusSMSNaoLido
+function described later.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ DataIni - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+
+		<tr>
+			<td>___ DataFim - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>BuscaSMSMO - Returns a Object named OutDataSet that contains a table named
+BuscaSMSMO with the messages received within a maximum period of 4 days and with
+a maximum of 4000 SMSs . Returns Nothing in case of error. If your traffic
+exceeds 4000 SMSs in the period, we suggest you use the StatusSMSNaoLido
+function described later.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ DataIni - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+
+		<tr>
+			<td>___ DataFim - ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</td>
+		</tr>
+	</tbody>
+</table>
+
+
+				<h4>Deprecated</h4>
+				<div class="list">
+						since version 1.0.1<br />
+				</div>
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$DataIni</var></dt>
+					<dd><code>Datetime</code><br>$DataIni ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</dd>
+					<dt><var>$DataFim</var></dt>
+					<dd><code>Datetime</code><br>$DataFim ANSI DATETIME format: “YYYY-MM-DD HH:MM:SS”.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br>Object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="BuscaSMSMONaoLido" id="_BuscaSMSMONaoLido">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_BuscaSMSMONaoLido">#</a>
+		<code><a href="source-class-TWWLibrary.html#189-199" title="Go to source code">BuscaSMSMONaoLido</a>( )</code>
+
+		<div class="description short">
+			
+<p>BuscaSMSMONaoLido - Returns a Object named OutDataSet that contains a table
+named SMSMO with a maximum of 400 rows, with the SMS MO still not read by this
+function, received in the last 4 days in response to SMSs MT sent before, and
+flag these MOs as read. If there are 400 rows in the table it's possible there
+are more unread MOs and these ones should be read using subsequent function
+calls. Retuns Nothing in case of error.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>BuscaSMSMONaoLido - Returns a Object named OutDataSet that contains a table
+named SMSMO with a maximum of 400 rows, with the SMS MO still not read by this
+function, received in the last 4 days in response to SMSs MT sent before, and
+flag these MOs as read. If there are 400 rows in the table it's possible there
+are more unread MOs and these ones should be read using subsequent function
+calls. Retuns Nothing in case of error.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br>Object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="DelSMSAgenda" id="_DelSMSAgenda">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_DelSMSAgenda">#</a>
+		<code><a href="source-class-TWWLibrary.html#201-217" title="Go to source code">DelSMSAgenda</a>( <span>Datetime <var>$Agendamento</var></span>, <span>String <var>$SeuNum</var></span> )</code>
+
+		<div class="description short">
+			
+<p>DelSMSAgenda - Deletes a sheduled message. Returns OK or NOK.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ Agendamento - DATETIME type, ANSI formatted: "YYYY-MM-DD HH:MM:SS"</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user and, that is recorded with the message,
+			for future queries. It's not necessary to be ordered, and could be
+			repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>DelSMSAgenda - Deletes a sheduled message. Returns OK or NOK.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ Agendamento - DATETIME type, ANSI formatted: "YYYY-MM-DD HH:MM:SS"</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user and, that is recorded with the message,
+			for future queries. It's not necessary to be ordered, and could be
+			repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Agendamento</var></dt>
+					<dd><code>Datetime</code><br>$Agendamento type, ANSI formatted: "YYYY-MM-DD HH:MM:SS"</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMS" id="_EnviaSMS">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMS">#</a>
+		<code><a href="source-class-TWWLibrary.html#219-244" title="Go to source code">EnviaSMS</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Mensagem</var></span>, <span>String <var>$SeuNum</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMS - Sends unique SMSs.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ Celular - (55DDNNNNNNNN) -Destination Cell Phone Number , where D = Area
+			Code and N = Cell Phone Number</td>
+		</tr>
+
+		<tr>
+			<td>___ Mensagem - ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+			ASCII-126 would be accepted (Characters out of this range will be changed).</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user and, that is recorded with the message,
+			for future queries. It's not necessary to be ordered, and could be
+			repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMS - Sends unique SMSs.</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ Celular - (55DDNNNNNNNN) -Destination Cell Phone Number , where D = Area
+			Code and N = Cell Phone Number</td>
+		</tr>
+
+		<tr>
+			<td>___ Mensagem - ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+			ASCII-126 would be accepted (Characters out of this range will be changed).</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user and, that is recorded with the message,
+			for future queries. It's not necessary to be ordered, and could be
+			repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Returns a string with the following values:</p>
+
+<p>OK - Message accepted for transmission NOK - Message not accepted for
+transmission Erro - Error NA - (not avaiable) = System unavaiable</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular Destination Cell Phone Number , where D = Area Code and N = Cell Phone
+Number</dd>
+					<dt><var>$Mensagem</var></dt>
+					<dd><code>String</code><br>$Mensagem ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMS2SN" id="_EnviaSMS2SN">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMS2SN">#</a>
+		<code><a href="source-class-TWWLibrary.html#246-269" title="Go to source code">EnviaSMS2SN</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Mensagem</var></span>, <span>String <var>$SeuNum1</var></span>, <span>String <var>$SeuNum2</var></span>, <span>String <var>$Agendamento</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMS2SN - Sends unique SMSs using 2 reference numeric fields ( SeuNum1
+and SeuNum2 ) with the maximum of 24 digits each.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMS2SN - Sends unique SMSs using 2 reference numeric fields ( SeuNum1
+and SeuNum2 ) with the maximum of 24 digits each.</p>
+
+<p>Returns a string with the following values:</p>
+
+<p>OK - Message accepted for transmission NOK - Message not accepted for
+transmission Erro - Error NA - (not avaiable) = System unavaiable</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular Destination Cell Phone Number , where D = Area Code and N = Cell Phone
+Number</dd>
+					<dt><var>$Mensagem</var></dt>
+					<dd><code>String</code><br>$Mensagem ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$SeuNum1</var></dt>
+					<dd><code>String</code><br>$SeuNum1 This field is a number with the maximum of 24 digits that is generated
+by the user.</dd>
+					<dt><var>$SeuNum2</var></dt>
+					<dd><code>String</code><br>$SeuNum2 This field is a number with the maximum of 24 digits that is generated
+by the user.</dd>
+					<dt><var>$Agendamento</var></dt>
+					<dd><code>String</code><br>$Agendamento ( Scheduling ) – DATETIME ANSI format: “YYYY-MM-DD HH:MM:SS”.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSAge" id="_EnviaSMSAge">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSAge">#</a>
+		<code><a href="source-class-TWWLibrary.html#271-294" title="Go to source code">EnviaSMSAge</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Mensagem</var></span>, <span>String <var>$Agendamento</var></span>, <span>String <var>$SeuNum</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviSMSAge – Shedules a message to be sent at a later time</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviSMSAge – Shedules a message to be sent at a later time</p>
+
+<p>Returns a string with the following values:</p>
+
+<p>OK - Message accepted for transmission NOK - Message not accepted for
+transmission Erro - Error NA - (not avaiable) = System unavaiable</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular Destination Cell Phone Number , where D = Area Code and N = Cell Phone
+Number</dd>
+					<dt><var>$Mensagem</var></dt>
+					<dd><code>String</code><br>$Mensagem ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$Agendamento</var></dt>
+					<dd><code>String</code><br>$Agendamento ( Scheduling ) – DATETIME ANSI format: “YYYY-MM-DD HH:MM:SS”.</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSAgeQuebra" id="_EnviaSMSAgeQuebra">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSAgeQuebra">#</a>
+		<code><a href="source-class-TWWLibrary.html#296-319" title="Go to source code">EnviaSMSAgeQuebra</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Mensagem</var></span>, <span>String <var>$Agendamento</var></span>, <span>String <var>$SeuNum</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSAgeQuebra – Schedules a message to be sent at a later time. If the
+message is more than 140 characters long, it will be split in a set of 140 or
+less characters messages with "..." in the beginning and the end of the
+subsequent messages. Whenever possible the splits will occur on blank
+spaces:</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSAgeQuebra – Schedules a message to be sent at a later time. If the
+message is more than 140 characters long, it will be split in a set of 140 or
+less characters messages with "..." in the beginning and the end of the
+subsequent messages. Whenever possible the splits will occur on blank
+spaces:</p>
+
+<p>Returns a string with the following values:</p>
+
+<p>OK - Message accepted for transmission NOK - Message not accepted for
+transmission Erro - Error NA - (not avaiable) = System unavaiable</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular (55DDNNNNNNNN) -Destination Cell Phone Number , where D = Area Code and
+N = Cell Phone Number</dd>
+					<dt><var>$Mensagem</var></dt>
+					<dd><code>String</code><br>$Mensagem String ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$Agendamento</var></dt>
+					<dd><code>String</code><br>$Agendamento ( Scheduling ) – DATETIME ANSI format: “YYYY-MM-DD HH:MM:SS”.</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSAlt" id="_EnviaSMSAlt">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSAlt">#</a>
+		<code><a href="source-class-TWWLibrary.html#321-339" title="Go to source code">EnviaSMSAlt</a>( <span>String <var>$user</var></span>, <span>String <var>$pwd</var></span>, <span>String <var>$msgid</var></span>, <span>String <var>$phone</var></span>, <span>String <var>$msgtext</var></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSAlt : Deprecated. Please use EnviaSMS.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSAlt : Deprecated. Please use EnviaSMS.</p>
+
+
+				<h4>Deprecated</h4>
+				<div class="list">
+						since version 1.0.1<br />
+				</div>
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd><code>String</code><br>$user ( Login ( ID ), 10 alphanumeric characters long.</dd>
+					<dt><var>$pwd</var></dt>
+					<dd><code>String</code><br>$pwd (Password ) – 18 alphanumeric characters long.</dd>
+					<dt><var>$msgid</var></dt>
+					<dd><code>String</code><br>$phone (55DDNNNNNNNN) -Destination Cell Phone Number , where D = Area Code and N
+= Cell Phone Number</dd>
+					<dt><var>$phone</var></dt>
+					<dd><code>String</code><br>$msgtext String ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$msgtext</var></dt>
+					<dd><code>String</code><br>$msgid This field is a number or alphanumeric character chain with 20 characters
+that is generated by the user and, that is recorded with the message, for future
+queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSConcatenadoComAcento" id="_EnviaSMSConcatenadoComAcento">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSConcatenadoComAcento">#</a>
+		<code><a href="source-class-TWWLibrary.html#341-356" title="Go to source code">EnviaSMSConcatenadoComAcento</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Mensagem</var></span>, <span>String <var>$Serie</var></span>, <span>String <var>$SeuNum</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSConcatenadoComAcento - Send a text message concatenated with accent
+to a cell. The Serie field must contain a number between 0 and 255 and must be
+unique for each concatenated SMS sent, and 1 each plus shipping, and when it
+reaches 255, start with 0 (zero) again. If this message is longer than 70
+characters, it is split into multiple messages up to 140 characters and sent so
+as to reach concatenated into a single message, the target cell, since the
+concatenation operator support. If you do not support the operator, the message
+will be sent separately with separating + posts. Maximum message size = 4096
+characters. Returns OK n (n is the number of SMS sent by the operation), NOK
+(invalid username or password, or greater than 2048 character message), error or
+NA (not available).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSConcatenadoComAcento - Send a text message concatenated with accent
+to a cell. The Serie field must contain a number between 0 and 255 and must be
+unique for each concatenated SMS sent, and 1 each plus shipping, and when it
+reaches 255, start with 0 (zero) again. If this message is longer than 70
+characters, it is split into multiple messages up to 140 characters and sent so
+as to reach concatenated into a single message, the target cell, since the
+concatenation operator support. If you do not support the operator, the message
+will be sent separately with separating + posts. Maximum message size = 4096
+characters. Returns OK n (n is the number of SMS sent by the operation), NOK
+(invalid username or password, or greater than 2048 character message), error or
+NA (not available).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular Destination Cell Phone Number , where D = Area Code and N = Cell Phone
+Number</dd>
+					<dt><var>$Mensagem</var></dt>
+					<dd><code>String</code><br>$Mensagem ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$Serie</var></dt>
+					<dd><code>String</code><br>$Serie The Serie field must contain a number between 0 and 255 and must be
+unique for each concatenated SMS sent, and 1 each plus shipping, and when it
+reaches 255, start with 0 (zero) again</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSConcatenadoSemAcento" id="_EnviaSMSConcatenadoSemAcento">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSConcatenadoSemAcento">#</a>
+		<code><a href="source-class-TWWLibrary.html#358-373" title="Go to source code">EnviaSMSConcatenadoSemAcento</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Mensagem</var></span>, <span>String <var>$Serie</var></span>, <span>String <var>$SeuNum</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSConcatenadoSemAcento - Send a text message concatenated without
+accent to a cell. The Serie field must contain a number between 0 and 255 and
+must be unique for each concatenated SMS sent, and 1 each plus shipping, and
+when it reaches 255, start with 0 (zero) again. If this message is longer than
+140 characters, it is split into multiple messages up to 140 characters and sent
+so as to reach concatenated into a single message, the target cell, since the
+concatenation operator support. If you do not support the operator, the message
+will be sent separately with separating + posts. Maximum message size = 4096
+characters. Returns OK n (n is the number of SMS sent by the operation), NOK
+(invalid username or password, or greater than 4096 character message), error or
+NA (not available).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSConcatenadoSemAcento - Send a text message concatenated without
+accent to a cell. The Serie field must contain a number between 0 and 255 and
+must be unique for each concatenated SMS sent, and 1 each plus shipping, and
+when it reaches 255, start with 0 (zero) again. If this message is longer than
+140 characters, it is split into multiple messages up to 140 characters and sent
+so as to reach concatenated into a single message, the target cell, since the
+concatenation operator support. If you do not support the operator, the message
+will be sent separately with separating + posts. Maximum message size = 4096
+characters. Returns OK n (n is the number of SMS sent by the operation), NOK
+(invalid username or password, or greater than 4096 character message), error or
+NA (not available).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular Destination Cell Phone Number , where D = Area Code and N = Cell Phone
+Number</dd>
+					<dt><var>$Mensagem</var></dt>
+					<dd><code>String</code><br>$Mensagem ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$Serie</var></dt>
+					<dd><code>String</code><br>$Serie The Serie field must contain a number between 0 and 255 and must be
+unique for each concatenated SMS sent, and 1 each plus shipping, and when it
+reaches 255, start with 0 (zero) again</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSDataSet" id="_EnviaSMSDataSet">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSDataSet">#</a>
+		<code><a href="source-class-TWWLibrary.html#375-392" title="Go to source code">EnviaSMSDataSet</a>( <span><code><a href="class-SMSDataSet.html">SMSDataSet</a></code> <var>$DS</var></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSDataSet - For batch message sending. Receives a Object SMSDataSet
+with the SMS messages to be sent</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSDataSet - For batch message sending. Receives a Object SMSDataSet
+with the SMS messages to be sent</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$DS</var></dt>
+					<dd><code><code><a href="class-SMSDataSet.html">SMSDataSet</a></code></code><br>$DS Object SMSDataSet</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSOTA8Bit" id="_EnviaSMSOTA8Bit">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSOTA8Bit">#</a>
+		<code><a href="source-class-TWWLibrary.html#394-409" title="Go to source code">EnviaSMSOTA8Bit</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Header</var></span>, <span>String <var>$Data</var></span>, <span>String <var>$SeuNum</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSOTA8Bit - Special purpose method for sending binary SMS, with DCS=F5.
+( For more information, please contact us. )</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSOTA8Bit - Special purpose method for sending binary SMS, with DCS=F5.
+( For more information, please contact us. )</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular</dd>
+					<dt><var>$Header</var></dt>
+					<dd><code>String</code><br>$Header</dd>
+					<dt><var>$Data</var></dt>
+					<dd><code>String</code><br>$Data</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSQuebra" id="_EnviaSMSQuebra">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSQuebra">#</a>
+		<code><a href="source-class-TWWLibrary.html#411-436" title="Go to source code">EnviaSMSQuebra</a>( <span>String <var>$Celular</var></span>, <span>String <var>$Mensagem</var></span>, <span>String <var>$SeuNum</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSQuebra - Sends a single SMS immediately. If the message has more than
+140 characters, it will be split in a set of 140 characters messages with "..."
+in the beginning and the end of the subsequent messages. Whenever possible the
+split will occur at a blank space</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ Celular - (55DDNNNNNNNN) -Destination Cell Phone Number , where D = Area
+			Code and N = Cell Phone Number</td>
+		</tr>
+
+		<tr>
+			<td>___ Mensagem - ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+			ASCII-126 would be accepted (Characters out of this range will be changed).</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user and, that is recorded with the message,
+			for future queries. It's not necessary to be ordered, and could be
+			repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSQuebra - Sends a single SMS immediately. If the message has more than
+140 characters, it will be split in a set of 140 characters messages with "..."
+in the beginning and the end of the subsequent messages. Whenever possible the
+split will occur at a blank space</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>PARAMTERS</td>
+		</tr>
+
+		<tr>
+			<td>___ Celular - (55DDNNNNNNNN) -Destination Cell Phone Number , where D = Area
+			Code and N = Cell Phone Number</td>
+		</tr>
+
+		<tr>
+			<td>___ Mensagem - ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+			ASCII-126 would be accepted (Characters out of this range will be changed).</td>
+		</tr>
+
+		<tr>
+			<td>___ SeuNum - This field is a number or alphanumeric character chain with 20
+			characters that is generated by the user and, that is recorded with the message,
+			for future queries. It's not necessary to be ordered, and could be
+			repeated.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Returns a string with the following values:</p>
+
+<p>OK - Message accepted for transmission NOK - Message not accepted for
+transmission Erro - Error NA - (not avaiable) = System unavaiable</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$Celular</var></dt>
+					<dd><code>String</code><br>$Celular Destination Cell Phone Number , where D = Area Code and N = Cell Phone
+Number</dd>
+					<dt><var>$Mensagem</var></dt>
+					<dd><code>String</code><br>$Mensagem ASCII Text (140 char. Maximum size). ASCII betwenn ASCII-32 e
+ASCII-126 would be accepted (Characters out of this range will be changed).</dd>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSTIM" id="_EnviaSMSTIM">
+
+		<td class="attributes"><code>
+			 public 
+			String
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSTIM">#</a>
+		<code><a href="source-class-TWWLibrary.html#438-450" title="Go to source code">EnviaSMSTIM</a>( <span>String <var>$XMLString</var></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSTIM – Deprecated, please use EnviaSMSXML.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSTIM – Deprecated, please use EnviaSMSXML.</p>
+
+
+				<h4>Deprecated</h4>
+				<div class="list">
+						since version 1.0.1<br />
+				</div>
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$XMLString</var></dt>
+					<dd><code>String</code><br>$XMLString XMLString</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>String</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="EnviaSMSXML" id="_EnviaSMSXML">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_EnviaSMSXML">#</a>
+		<code><a href="source-class-TWWLibrary.html#452-477" title="Go to source code">EnviaSMSXML</a>( <span>String <var>$XMLString</var></span> )</code>
+
+		<div class="description short">
+			
+<p>EnviaSMSXML – Receives a XML with the SMS messages to be sent, with the
+following fields:</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>EnviaSMSXML – Receives a XML with the SMS messages to be sent, with the
+following fields:</p>
+
+<p>Fields:</p>
+
+<p>Seunum - This field is a number or alphanumeric character chain with 20
+characters that is generated by the user and, that is recorded with the message,
+for future queries. It's not necessary to be ordered, and could be repeated.
+Celular - (55DDNNNNNNNN) - Destination Cell Phone Number , where D = Area Code
+and N = Cell Phone Number Mensagem - (Message Text) - ASCII Text (140 char.
+Maximum size) . ASCII betwenn ASCII-32 e ASCII-126 would be accepted (Characters
+out of this range will be changed). Agendamento - (Scheduling) - DATETIME ANSI
+format: "YYYY-MM-DD HH:MM:SS"</p>
+
+<p>Returns a string with the following values:</p>
+
+<p>OK - Message accepted for transmission NOK - Message not accepted for
+transmission Erro - Error NA - (not avaiable) = System unavaiable</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$XMLString</var></dt>
+					<dd><code>String</code><br>$XMLString Xml Messages</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ResetaMOLido" id="_ResetaMOLido">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_ResetaMOLido">#</a>
+		<code><a href="source-class-TWWLibrary.html#479-488" title="Go to source code">ResetaMOLido</a>( )</code>
+
+		<div class="description short">
+			
+<p>ResetaMOLido - Resets the READ status of the SMS MOs from 1 day before up to
+now.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>ResetaMOLido - Resets the READ status of the SMS MOs from 1 day before up to
+now.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ResetaStatusLido" id="_ResetaStatusLido">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_ResetaStatusLido">#</a>
+		<code><a href="source-class-TWWLibrary.html#490-499" title="Go to source code">ResetaStatusLido</a>( )</code>
+
+		<div class="description short">
+			
+<p>ResetaStatusLido - Resets the READ status of the SMS from 1 day before up to
+now.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>ResetaStatusLido - Resets the READ status of the SMS from 1 day before up to
+now.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>OK - Message accepted for transmission | NOK - Message not accepted for
+transmission | Erro - Error | NA - (not avaiable) = System unavaiable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="StatusSMS" id="_StatusSMS">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_StatusSMS">#</a>
+		<code><a href="source-class-TWWLibrary.html#501-511" title="Go to source code">StatusSMS</a>( <span>String <var>$SeuNum</var></span> )</code>
+
+		<div class="description short">
+			
+<p>StatusSMS - Returns a Object named OutDataSet that contains sent message for
+the SeuNum informed.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>StatusSMS - Returns a Object named OutDataSet that contains sent message for
+the SeuNum informed.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>String</code><br>$SeuNum This field is a number or alphanumeric character chain with 20
+characters that is generated by the user for future queries. It´s not necessary
+to be ordered and could be repeated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br>Object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="StatusSMS2SN" id="_StatusSMS2SN">
+
+		<td class="attributes"><code>
+			 public 
+			Array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_StatusSMS2SN">#</a>
+		<code><a href="source-class-TWWLibrary.html#513-525" title="Go to source code">StatusSMS2SN</a>( <span>String <var>$SeuNum1</var></span>, <span>String <var>$SeuNum2</var></span> )</code>
+
+		<div class="description short">
+			
+<p>StatusSMS2SN - Returns a DataSet named OutDataSet with one message status.
+The search is done using the 2 SeuNum fields. Returns Nothing in case of
+error.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>StatusSMS2SN - Returns a DataSet named OutDataSet with one message status.
+The search is done using the 2 SeuNum fields. Returns Nothing in case of
+error.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$SeuNum1</var></dt>
+					<dd><code>String</code><br>$SeuNum1 This field is a number with the maximum of 24 digits that is generated
+by the user.</dd>
+					<dt><var>$SeuNum2</var></dt>
+					<dd><code>String</code><br>$SeuNum2 This field is a number with the maximum of 24 digits that is generated
+by the user.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Array</code><br>Object<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="StatusSMSDataSet" id="_StatusSMSDataSet">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_StatusSMSDataSet">#</a>
+		<code><a href="source-class-TWWLibrary.html#527-543" title="Go to source code">StatusSMSDataSet</a>( <span>array <var>$SeuNum</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>StatusSMSDataset – ( Deprecated. Please use StatusSMSNaoLido )</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>StatusSMSDataset – ( Deprecated. Please use StatusSMSNaoLido )</p>
+
+
+				<h4>Deprecated</h4>
+				<div class="list">
+						since version 1.0.1<br />
+				</div>
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$SeuNum</var></dt>
+					<dd><code>array</code><br>$SeuNum</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="StatusSMSNaoLido" id="_StatusSMSNaoLido">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_StatusSMSNaoLido">#</a>
+		<code><a href="source-class-TWWLibrary.html#545-554" title="Go to source code">StatusSMSNaoLido</a>( )</code>
+
+		<div class="description short">
+			
+<p>StatusSMSNaoLido - Returns a Object named OutDataSet that contains a table
+named SatusSMS with the maximum of 400 rows with the SMS status for the last 4
+days that have not been read yet, and flag these messages as read. It there are
+400 rows in the table, there can be more unread status at the server. Please
+make subsequent function calls. Returns nothing in case of errors.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>StatusSMSNaoLido - Returns a Object named OutDataSet that contains a table
+named SatusSMS with the maximum of 400 rows with the SMS status for the last 4
+days that have not been read yet, and flag these messages as read. It there are
+400 rows in the table, there can be more unread status at the server. Please
+make subsequent function calls. Returns nothing in case of errors.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="VerCredito" id="_VerCredito">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_VerCredito">#</a>
+		<code><a href="source-class-TWWLibrary.html#556-565" title="Go to source code">VerCredito</a>( )</code>
+
+		<div class="description short">
+			
+<p>VerCredito - Return available credit, -1 Login invalid, -2 Not applicable</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>VerCredito - Return available credit, -1 Login invalid, -2 Not applicable</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>available credit | -1 Login invalid | -2 Not applicable<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="VerValidade" id="_VerValidade">
+
+		<td class="attributes"><code>
+			 public 
+			Datetime
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_VerValidade">#</a>
+		<code><a href="source-class-TWWLibrary.html#567-576" title="Go to source code">VerValidade</a>( )</code>
+
+		<div class="description short">
+			
+<p>VerValidade - Return credit expiration date</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>VerValidade - Return credit expiration date</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Datetime</code><br>credit expiration date<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-WSMethodString.html#methods">WSMethodString</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-WSMethodString.html#_get_XML_ALTERA_SENHA">get_XML_ALTERA_SENHA()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_BUSCA_SMS">get_XML_BUSCA_SMS()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_BUSCA_SMSMO">get_XML_BUSCA_SMSMO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_BUSCA_SMSMO_NAO_LIDO">get_XML_BUSCA_SMSMO_NAO_LIDO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_BUSCA_SMS_AGENDA">get_XML_BUSCA_SMS_AGENDA()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_BUSCA_SMS_AGENDA_DATASET">get_XML_BUSCA_SMS_AGENDA_DATASET()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_DEL_SMS_AGENDA">get_XML_DEL_SMS_AGENDA()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS">get_XML_ENVIA_SMS()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS2SN">get_XML_ENVIA_SMS2SN()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMSOTA_8BIT">get_XML_ENVIA_SMSOTA_8BIT()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_AGE">get_XML_ENVIA_SMS_AGE()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_AGE_QUEBRA">get_XML_ENVIA_SMS_AGE_QUEBRA()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_ALT">get_XML_ENVIA_SMS_ALT()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_CONCATENADO_COM_ACENTO">get_XML_ENVIA_SMS_CONCATENADO_COM_ACENTO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_CONCATENADO_SEM_ACENTO">get_XML_ENVIA_SMS_CONCATENADO_SEM_ACENTO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_DATASET">get_XML_ENVIA_SMS_DATASET()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_QUEBRA">get_XML_ENVIA_SMS_QUEBRA()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_TIM">get_XML_ENVIA_SMS_TIM()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_ENVIA_SMS_XML">get_XML_ENVIA_SMS_XML()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_RESETA_MO_LIDO">get_XML_RESETA_MO_LIDO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_RESETA_STATUS_SMS_NAO_LIDO">get_XML_RESETA_STATUS_SMS_NAO_LIDO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_SOCKET_HEADER__">get_XML_SOCKET_HEADER__()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_STATUS_SMS">get_XML_STATUS_SMS()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_STATUS_SMS2SN">get_XML_STATUS_SMS2SN()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_STATUS_SMS_DATASET">get_XML_STATUS_SMS_DATASET()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_STATUS_SMS_NAO_LIDO">get_XML_STATUS_SMS_NAO_LIDO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_VER_CREDITO">get_XML_VER_CREDITO()</a>, 
+			<a href="class-WSMethodString.html#_get_XML_VER_VALIDADE">get_XML_VER_VALIDADE()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

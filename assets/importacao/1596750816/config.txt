@@ -1,0 +1,1 @@
+{"basemodule":"home\/vero_solucoes","id_lista":"1790","tipo":";","diretorio":"1596750816","diretorio_old":"300_CELULARES_1.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.verosolucoes.com.br\/","topo":["TELEFONE"],"TELEFONE":"celular"}

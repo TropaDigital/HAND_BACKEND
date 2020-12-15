@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1450","tipo":";","diretorio":"1584478596","diretorio_old":"Catanduva_feirao_on_line_1903_15k_1.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5517997083105"],"5517997083105":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1440","tipo":";","diretorio":"1584393594","diretorio_old":"Santo_Andre_feirao_on_line_1803_20k.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5511974030967"],"5511974030967":"celular"}

@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1368","tipo":";","diretorio":"1583600985","diretorio_old":"Paulinia_0703.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5519940052814"],"5519940052814":"celular"}

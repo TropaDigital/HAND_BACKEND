@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1568","tipo":";","diretorio":"1589326321","diretorio_old":"teste_MMC.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5511989537915","Juliana"],"5511989537915":"celular","Juliana":"nome"}

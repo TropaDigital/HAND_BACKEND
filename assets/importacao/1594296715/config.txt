@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1762","tipo":";","diretorio":"1594296715","diretorio_old":"NATASHA_CAMACHO_DE_LUCENA_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5513991344945","Wanderson","102325017117815"],"5513991344945":"celular","Wanderson":"nome","102325017117815":"editavel_1"}

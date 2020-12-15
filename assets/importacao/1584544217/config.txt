@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1451","tipo":";","diretorio":"1584544217","diretorio_old":"Araraquarafeirao_on_line_nova_base_1803_30k_1.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5516997189631"],"5516997189631":"celular"}

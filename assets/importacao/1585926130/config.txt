@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1486","tipo":";","diretorio":"1585926130","diretorio_old":"MEILE_PARA_ENVIO_7.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["\ufeff","Nome","CPF"],"\ufeff":"celular","Nome":"nome","CPF":"campo1"}

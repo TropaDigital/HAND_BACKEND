@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1825","tipo":";","diretorio":"1595887304","diretorio_old":"dental_3.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["CLAUDIENE","77981021923"],"CLAUDIENE":"nome","77981021923":"celular"}

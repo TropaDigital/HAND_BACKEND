@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1771","tipo":";","diretorio":"1594319277","diretorio_old":"SMS_REATIVACaO.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["CPF","NOME","TELEFONE","limite"],"CPF":"campo1","NOME":"nome","TELEFONE":"celular","limite":"editavel_1"}

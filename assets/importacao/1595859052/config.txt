@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1813","tipo":";","diretorio":"1595859052","diretorio_old":"cvc_2.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["MAYKELL","11981368243"],"MAYKELL":"nome","11981368243":"celular"}

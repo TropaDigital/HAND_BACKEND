@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1669","tipo":";","diretorio":"1593088162","diretorio_old":"base_Refin_Bradesco_25jun_col01.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["71247491668","3909,03","5511941231265","MAURILHA"],"71247491668":"referencia","3909,03":"editavel_1","5511941231265":"celular","MAURILHA":"nome"}

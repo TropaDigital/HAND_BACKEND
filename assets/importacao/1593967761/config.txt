@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1727","tipo":";","diretorio":"1593967761","diretorio_old":"ROBERTO_PERES_MORENO_FILHO.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5522997690182","Luis","102325016083115"],"5522997690182":"celular","Luis":"nome","102325016083115":"editavel_1"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1457","tipo":";","diretorio":"1584997533","diretorio_old":"Base_3500.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["GERCIRIO_ALVES_MOREIRA","4648354885","700,62","5511930132693"],"GERCIRIO_ALVES_MOREIRA":"nome","4648354885":"campo1","700,62":"editavel_1","5511930132693":"celular"}

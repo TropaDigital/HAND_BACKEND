@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1617","tipo":";","diretorio":"1592406777","diretorio_old":"base_Higienizada_credito_ML_17jun.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["NIVALDO","40700107969627","5518997753906"],"NIVALDO":"nome","40700107969627":"referencia","5518997753906":"celular"}

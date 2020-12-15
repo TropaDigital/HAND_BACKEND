@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1732","tipo":";","diretorio":"1593968551","diretorio_old":"CLAUDIA_DA_HORA.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5513982038935","Maria","102153000146717"],"5513982038935":"celular","Maria":"nome","102153000146717":"editavel_1"}

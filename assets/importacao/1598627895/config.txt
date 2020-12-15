@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1901","tipo":";","diretorio":"1598627895","diretorio_old":"campanha_31ago.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["numero_telefone1","cpf"],"numero_telefone1":"celular","cpf":"referencia"}

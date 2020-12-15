@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1342","tipo":";","diretorio":"1601990470","diretorio_old":"Base_422_11205_PRONTA_3.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["CASSEMIRA_MARIA_DE_OLIVEIRA","9986986877","5511920095897"],"CASSEMIRA_MARIA_DE_OLIVEIRA":"nome","9986986877":"campo1","5511920095897":"celular"}

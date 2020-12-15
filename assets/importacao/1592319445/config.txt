@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1615","tipo":";","diretorio":"1592319445","diretorio_old":"weelondrina100t.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["celular"],"celular":"celular"}

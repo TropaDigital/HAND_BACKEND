@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1811","tipo":";","diretorio":"1595857606","diretorio_old":"coop_3.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["SILVIA","15988202284"],"SILVIA":"nome","15988202284":"celular"}

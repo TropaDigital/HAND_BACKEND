@@ -1,0 +1,1 @@
+/api/lotes/preencher-lote?ref=0&login=naiche_login&senha=naiche_senha&i_c=16&i_l=12&arquivos=,1

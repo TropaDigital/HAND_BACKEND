@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1957","tipo":";","diretorio":"1602082976","diretorio_old":"teste_SMS_pan_5_07out.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["CPF","TELEFONE_1"],"CPF":"referencia","TELEFONE_1":"celular"}

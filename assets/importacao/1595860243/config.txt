@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1819","tipo":";","diretorio":"1595860243","diretorio_old":"pinheiros_1.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["BRUNA","11997978474"],"BRUNA":"nome","11997978474":"celular"}

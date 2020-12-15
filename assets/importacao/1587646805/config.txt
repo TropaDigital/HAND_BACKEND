@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1508","tipo":";","diretorio":"1587646805","diretorio_old":"base_5k_23abr.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["32751656072","5554999101805","VALDIVINO"],"32751656072":"referencia","5554999101805":"celular","VALDIVINO":"nome"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/tww","id_lista":"107","tipo":";","diretorio":"1536079997","diretorio_old":"hand_menor.csv","cabecalho":"sim","topo":["name","mobilephone"],"name":"nome","mobilephone":"celular"}

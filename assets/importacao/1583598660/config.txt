@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1385","tipo":";","diretorio":"1583598660","diretorio_old":"Votuporanga_0903.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5517996011417"],"5517996011417":"celular"}

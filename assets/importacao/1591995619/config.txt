@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1608","tipo":";","diretorio":"1591995619","diretorio_old":"lond_cambe_ro.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["\ufeff","","celular"],"celular":"celular"}

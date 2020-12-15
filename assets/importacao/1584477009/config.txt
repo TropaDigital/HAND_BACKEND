@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1449","tipo":";","diretorio":"1584477009","diretorio_old":"Catanduva_Feirao_On_line_1803_15k_4.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5517996129239"],"5517996129239":"celular"}

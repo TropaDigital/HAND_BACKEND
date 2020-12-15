@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1431","tipo":";","diretorio":"1584392790","diretorio_old":"Paulinia_Feirao_on_line_1803_7k.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5519997545786"],"5519997545786":"celular"}

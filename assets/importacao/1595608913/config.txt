@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1808","tipo":";","diretorio":"1595608913","diretorio_old":"base_decolar_24jul02.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["RAIMUNDO","5561999260486"],"RAIMUNDO":"referencia","5561999260486":"celular"}

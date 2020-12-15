@@ -1,0 +1,1 @@
+{"basemodule":"view\/160\/m2c_digital","id_lista":"1575","tipo":";","diretorio":"1589814330","diretorio_old":"teste02_hand_1.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5511970703553","Timao_R$"],"5511970703553":"celular","Timao_R$":"nome"}

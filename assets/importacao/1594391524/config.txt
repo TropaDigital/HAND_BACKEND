@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1773","tipo":";","diretorio":"1594391524","diretorio_old":"sms_1_3.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["ELISEU","11997131988"],"ELISEU":"nome","11997131988":"celular"}

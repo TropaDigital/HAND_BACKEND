@@ -1,0 +1,1 @@
+{"basemodule":"view\/149\/acert","id_lista":"1364","tipo":";","diretorio":"1583601209","diretorio_old":"Catanduva_0903.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5517991909524"],"5517991909524":"celular"}

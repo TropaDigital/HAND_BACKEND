@@ -1,0 +1,1 @@
+{"basemodule":"view\/134\/up19_standard","id_lista":"1329","tipo":";","diretorio":"1582904123","diretorio_old":"LeadMargem28fev.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["Benef\ufffdcio","nome","CPF","Celular"],"Benef\ufffdcio":"referencia","nome":"nome","CPF":"campo1","Celular":"celular"}

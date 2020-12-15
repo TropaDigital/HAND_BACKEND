@@ -1,0 +1,14 @@
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=1,10
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=10,20
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=20,30
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=30,40
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=40,50
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=50,60
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=60,70
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=70,80
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=80,90
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=90,100
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=100,110
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=110,120
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=120,130
+/api/lotes/preencher-lote?login=zznaiche&senha=funknovo&i_c=121&i_l=178&arquivos=130,134

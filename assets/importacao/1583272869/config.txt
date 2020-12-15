@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1336","tipo":";","diretorio":"1583272869","diretorio_old":"MGW.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["11994792666","Leandro","CPF"],"11994792666":"celular","Leandro":"nome","CPF":"campo1"}

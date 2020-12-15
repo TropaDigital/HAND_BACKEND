@@ -1,0 +1,1 @@
+{"basemodule":"home\/vero_solucoes","id_lista":"1343","tipo":";","diretorio":"1583431101","diretorio_old":"Base_Beleza_Pro_Business_Encaminhada_pelo_Dennis.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.verosolucoes.com.br\/","topo":["numero"],"numero":"celular"}

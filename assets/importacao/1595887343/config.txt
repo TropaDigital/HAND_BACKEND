@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1826","tipo":";","diretorio":"1595887343","diretorio_old":"dental_4.csv","cabecalho":"nao","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["MARIA","11946360592"],"MARIA":"nome","11946360592":"celular"}

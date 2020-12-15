@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1659","tipo":";","diretorio":"1592950466","diretorio_old":"Thaina_CP_OMNI_DIA_D_20200623_000013.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["numero","nome","saldo","contrato"],"numero":"celular","nome":"nome","saldo":"editavel_2","contrato":"editavel_1"}

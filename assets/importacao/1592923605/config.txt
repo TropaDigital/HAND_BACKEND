@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"676","tipo":";","diretorio":"1592923605","diretorio_old":"ura_teste.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["NOME_CLIENTE","FICHA","CPF","UF","ATRASO","DIAS","CARTEIRA","DIVIDA","NUMERO"],"NOME_CLIENTE":"nome","FICHA":"referencia","CPF":"campo1","NUMERO":"celular"}

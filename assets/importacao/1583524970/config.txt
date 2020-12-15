@@ -1,0 +1,1 @@
+{"basemodule":"view\/135\/acert","id_lista":"1351","tipo":";","diretorio":"1583524970","diretorio_old":"vitoria_100k_1.csv","cabecalho":"nao","url_old":"http:\/\/builder.zinknetwork.com.br\/","topo":["5527981496687"],"5527981496687":"celular"}

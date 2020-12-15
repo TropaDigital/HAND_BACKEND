@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1611","tipo":";","diretorio":"1591991175","diretorio_old":"usuarios_wee_londrina.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["Nome","Celular"],"Nome":"nome","Celular":"celular"}

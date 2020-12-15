@@ -1,0 +1,1 @@
+{"basemodule":"home\/zink","id_lista":"1943","tipo":";","diretorio":"1600865307","diretorio_old":"Exempio_Buddha_Setembro_SW20.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["\ufeffNome","Celular"],"\ufeffNome":"nome","Celular":"celular"}

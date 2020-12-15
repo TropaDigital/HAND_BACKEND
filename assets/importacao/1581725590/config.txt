@@ -1,0 +1,1 @@
+{"basemodule":"view\/135\/acert","id_lista":"1305","tipo":";","diretorio":"1581725590","diretorio_old":"Campanha_750K_Sabado_b.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5511972215566"],"5511972215566":"celular"}

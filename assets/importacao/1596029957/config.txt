@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1828","tipo":";","diretorio":"1596029957","diretorio_old":"Base_credfacil_29jul_3k.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["FONE","CPF","NOME","Limite"],"FONE":"celular","CPF":"referencia","NOME":"nome","Limite":"editavel_1"}

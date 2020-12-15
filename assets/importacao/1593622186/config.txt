@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1684","tipo":";","diretorio":"1593622186","diretorio_old":"base_BMG_01jul02_6k.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["GERALDO","5571981652722"],"GERALDO":"nome","5571981652722":"celular"}

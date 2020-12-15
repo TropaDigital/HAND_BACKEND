@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1843","tipo":";","diretorio":"1597156471","diretorio_old":"teste_penapolis.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5518997237773"],"5518997237773":"celular"}

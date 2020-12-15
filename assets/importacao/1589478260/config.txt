@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1569","tipo":";","diretorio":"1589478260","diretorio_old":"base_credfacil_14mai.csv","cabecalho":"sim","url_old":"http:\/\/handmkt.com.br\/","topo":["5511965074760","00015566498","LEONALDO"],"5511965074760":"celular","00015566498":"referencia","LEONALDO":"nome"}

@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1827","tipo":";","diretorio":"1595944615","diretorio_old":"REATIVACaO_NaO_ATENDE_28_07.csv","cabecalho":"sim","url_old":"http:\/\/landing.m2cdigital.com.br\/","topo":["CPF","NOME","tel_certo","limite"],"CPF":"campo1","NOME":"nome","tel_certo":"celular","limite":"editavel_1"}

@@ -1,0 +1,6 @@
+17/01/2019 17:44:32 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=teste366&senha=teste366&i_c=9&i_l=8&arquivos=,1
+17/01/2019 17:45:01 - Preencher lote com limite: 1000, e offset: 0 
+17/01/2019 17:46:01 - json SMS redis: ["{\"message\":\"teste fehre fafsad ae \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/zKE\",\"number\":\"5511940349111\"}","{\"message\":\"teste fehre fafsad ae \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/zKF\",\"number\":\"5511940349111\"}","{\"message\":\"teste fehre fafsad ae \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/zKG\",\"number\":\"5511940349111\"}","{\"message\":\"teste fehre fafsad ae \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/zKH\",\"number\":\"5511940349111\"}","{\"message\":\"teste fehre fafsad ae \nhttp:\\\/\\\/naiche.com.br\\\/m\\\/zKI\",\"number\":\"5511940349111\"}"]
+17/01/2019 17:46:01 - Retorno insert SMS redis: 1
+17/01/2019 17:46:01 - Start campanha no redis: {"data":"{\"idCampaign\":\"9\",\"idLot\":\"None\",\"action\":\"start\"}","set":1}
+17/01/2019 17:46:01 - Servidor tentou acessar essa url: http://10.0.0.222:8154naiche/campanha/status?id=9&status=Campanha%20preparada

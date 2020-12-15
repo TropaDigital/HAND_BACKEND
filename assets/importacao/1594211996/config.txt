@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1749","tipo":";","diretorio":"1594211996","diretorio_old":"base_safra_refin_08jul.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["5511930008392","NELCI","_2.925,31_"],"5511930008392":"celular","NELCI":"nome","_2_925,31_":"editavel_1"}

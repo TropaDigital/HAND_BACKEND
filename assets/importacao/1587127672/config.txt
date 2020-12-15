@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1501","tipo":";","diretorio":"1587127672","diretorio_old":"Base_tomadores_17abr_10k_ITAU.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["70517304015","5551997053715","VERONICA"],"70517304015":"referencia","5551997053715":"celular","VERONICA":"nome"}

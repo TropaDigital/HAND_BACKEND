@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1758","tipo":";","diretorio":"1594295723","diretorio_old":"KATIA_SANTOS_1.csv","cabecalho":"nao","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5519999981986","Marco","102155003468211"],"5519999981986":"celular","Marco":"nome","102155003468211":"editavel_1"}

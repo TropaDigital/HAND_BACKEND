@@ -1,0 +1,1 @@
+{"basemodule":"home\/m2c_digital","id_lista":"1770","tipo":";","diretorio":"1594299064","diretorio_old":"CRISTIANE_MARIA_DE_LIMA_3.csv","cabecalho":"sim","url_old":"http:\/\/smsmkt.m2cdigital.com.br\/","topo":["5511965686345","Luciana","115900050206"],"5511965686345":"celular","Luciana":"nome","115900050206":"editavel_1"}

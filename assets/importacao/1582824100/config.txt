@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1325","tipo":";","diretorio":"1582824100","diretorio_old":"TESTE2_3.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["GUILHERME_ROMER_CARAZZI","41376836890","758,63","5,51E+12"],"GUILHERME_ROMER_CARAZZI":"nome","41376836890":"campo1","758,63":"editavel_1","5,51E+12":"celular"}

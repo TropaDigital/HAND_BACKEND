@@ -1,0 +1,1 @@
+{"basemodule":"home\/up19_standard","id_lista":"1290","tipo":";","diretorio":"1581384019","diretorio_old":"BASE_SMS_TESTE.csv","cabecalho":"nao","url_old":"http:\/\/handmkt.com.br\/","topo":["GUILHERME_ROMER_CARAZZI","41376836890","11975379933","11972249482"],"GUILHERME_ROMER_CARAZZI":"nome","41376836890":"campo1","11975379933":"celular","11972249482":"celular"}

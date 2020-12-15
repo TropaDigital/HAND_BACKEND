@@ -1,0 +1,2 @@
+13/12/2018 16:09:31 - Leitura Lote • Escreveu no arquivo sh_preencher: /api/lotes/preencher-lote?ref=0&login=zznaiche&senha=funknovo&i_c=2&i_l=2&arquivos=,1
+13/12/2018 16:10:01 - Preencher lote com limite: 1000, e offset: 0 

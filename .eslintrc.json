@@ -1,0 +1,96 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true,
+    "jest": true
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "./"
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier", "import-helpers"],
+  "rules": {
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "no-console": "error",
+    "consistent-return": "off",
+    "no-use-before-define": ["error", { "functions": false }],
+    "prettier/prettier": ["error"],
+    "arrow-body-style": "off",
+    "function-paren-newline": "off",
+    "complexity": ["warn", 8],
+    "max-statements": ["warn", { "max": 15 }],
+    "max-statements-per-line": ["warn", { "max": 1 }],
+    "max-nested-callbacks": ["warn", { "max": 2 }],
+    "max-depth": ["warn", { "max": 2 }],
+    "max-params": ["warn", 3],
+    "max-len": [
+      "warn",
+      80,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": true,
+        "ignoreStrings": true
+      }
+    ],
+    "no-param-reassign": [
+      "warn",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "acc",
+          "accumulator",
+          "item",
+          "e",
+          "module",
+          "req",
+          "request",
+          "res",
+          "response",
+          "session"
+        ]
+      }
+    ],
+    "@typescript-eslint/no-empty-interface": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "js": "never"
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "no-useless-constructor": "off",
+    "class-methods-use-this": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["module", ["parent", "sibling", "index"]],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}

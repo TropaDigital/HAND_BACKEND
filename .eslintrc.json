@@ -88,6 +88,14 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": ["**/*.spec.ts"],
+      "rules": {
+        "max-nested-callbacks": ["off"]
+      }
+    }
+  ],
   "settings": {
     "import/resolver": {
       "typescript": {}

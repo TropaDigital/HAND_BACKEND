@@ -1,4 +1,4 @@
-import { Logger, LoggerParams } from '../../interfaces/Logger';
+import { Logger, LoggerParams } from '../../interfaces/logger/Logger';
 
 export class LoggerManager implements Logger {
   private loggers: Logger[];

@@ -1,6 +1,6 @@
 import pino from 'pino';
 
-import { Logger, LoggerParams } from '../../interfaces/Logger';
+import { Logger, LoggerParams } from '../../interfaces/logger/Logger';
 
 export default class PinoAdapter implements Logger {
   private readonly pino;

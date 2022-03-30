@@ -1,4 +1,4 @@
-import { Logger } from '../Logger';
+import { Logger } from '../logger/Logger';
 
 export const makeLoggerStub = (): jest.Mocked<Logger> => ({
   info: jest.fn(),

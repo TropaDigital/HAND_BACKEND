@@ -1,0 +1,11 @@
+export interface ApiHttpRequest<
+  Body = any,
+  Headers = { [key: string]: string | string[] | undefined },
+  Params = { [key: string]: any },
+  Query = { [key: string]: any },
+> {
+  body?: Body;
+  headers?: Headers;
+  params?: Params;
+  query?: Query;
+}

@@ -1,8 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { IHttpFormatedResponse } from 'src/interfaces/http/FormatedApiHttpResponse';
 
-import { ApiHttpRequest, ApiHttpResponse } from '../../interfaces/http';
+import {
+  ApiHttpRequest,
+  ApiHttpResponse,
+  IHttpFormatedResponse,
+} from '../../interfaces/http';
 
 export class ExpressRouteAdapter {
   public static adapt<

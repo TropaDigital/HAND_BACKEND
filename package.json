@@ -17,17 +17,37 @@
     "lint:deadcode": "ts-prune -e",
     "commit": "git-cz"
   },
-  "author": "",
+  "contributors": [
+    {
+      "name": "Bruno Afonso",
+      "email": "brunohafonso@gmail.com"
+    },
+    {
+      "name": "Lucas Simão",
+      "email": "lucas64_64@hotmail.com"
+    }
+  ],
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brunohafonso95/ases-backend.git"
+    "url": "git+https://github.com/haandsolutions/haand-bib.git"
   },
   "bugs": {
-    "url": "https://github.com/brunohafonso95/ases-backend/issues"
+    "url": "https://github.com/haandsolutions/haand-bib/issues"
   },
-  "homepage": "https://github.com/brunohafonso95/ases-backend#readme",
+  "homepage": "https://github.com/haandsolutions/haand-bib#readme",
   "description": "webservice to provide the features of ases system",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-rate-limit": "^6.3.0",
+    "got": "11",
+    "http-status-code": "^2.1.0",
+    "http-status-codes": "^2.2.0",
+    "joi": "^17.6.0",
+    "openapi-comment-parser": "^1.0.0",
+    "pino": "^7.9.2",
+    "swagger-ui-express": "^4.3.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
@@ -110,15 +130,5 @@
         "title": "improvement"
       }
     }
-  },
-  "dependencies": {
-    "express": "^4.17.3",
-    "express-rate-limit": "^6.3.0",
-    "got": "11",
-    "http-status-codes": "^2.2.0",
-    "joi": "^17.6.0",
-    "openapi-comment-parser": "^1.0.0",
-    "pino": "^7.9.2",
-    "swagger-ui-express": "^4.3.0"
   }
 }

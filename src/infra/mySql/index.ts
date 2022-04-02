@@ -1,18 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 
-import AbstractDatabaseConnection from '../../abstracts/AbstractDatabaseConnection';
 import { LoggerFactory } from '../../factories/LoggerFactory';
+import { IDatabaseConnection } from '../../interfaces/infra/IDatabaseConnection';
 import { Logger } from '../../interfaces/logger/Logger';
 
-export default class MySqlDBClient extends AbstractDatabaseConnection {
+export default class MySqlDBClient implements IDatabaseConnection {
   private static instance: MySqlDBClient;
 
   private constructor(
     private readonly loggerManager: Logger,
     private prismaClient: PrismaClient,
-  ) {
-    super();
-  }
+  ) {}
 
   public static getInstance(
     loggerManager: Logger = LoggerFactory.create(),

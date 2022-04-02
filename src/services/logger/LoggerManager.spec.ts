@@ -3,7 +3,7 @@ import { LoggerManager } from './LoggerManager';
 
 const makeSut = () => {
   const loggerStub = makeLoggerStub();
-  const sut = new LoggerManager(loggerStub);
+  const sut = new LoggerManager([loggerStub]);
 
   return { sut, loggerStub };
 };
@@ -11,7 +11,7 @@ const makeSut = () => {
 describe(LoggerManager.name, () => {
   describe(LoggerManager.prototype.info.name, () => {
     it('Should have empty logger list  when no logger is ', () => {
-      const sut = new LoggerManager();
+      const sut = new LoggerManager([]);
 
       const result = sut.getLoggers();
 

@@ -11,8 +11,8 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.spec.ts',
-    '!src/**/index.ts',
-    '!src/main/Main.ts',
+    '!src/interfaces/**/*.ts',
+    '!src/index.ts',
     '!src/shared/errors/*.ts',
   ],
   coverageThreshold: {

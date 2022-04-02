@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "dist/src/index.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky install && prisma generate",
     "build": "tsc",
     "start": "node dist/src/index.js",
     "start:dev": "dotenv -e .env.development -- ts-node-dev src/index.ts",
-    "test": "jest --clearCache && jest --passWithNoTests --runInBand",
+    "test": "dotenv -e .env.test -- jest --clearCache && jest --passWithNoTests --runInBand",
     "test:unit": "npm run test -- --watch",
     "test:unit:staged": "npm run test -- --findRelatedTests",
     "test:coverage": "npm run test -- --coverage",
@@ -38,6 +38,7 @@
   "homepage": "https://github.com/haandsolutions/haand-bib#readme",
   "description": "webservice to provide the features of ases system",
   "dependencies": {
+    "@prisma/client": "^3.11.1",
     "express": "^4.17.3",
     "express-rate-limit": "^6.3.0",
     "got": "11",
@@ -46,6 +47,8 @@
     "joi": "^17.6.0",
     "openapi-comment-parser": "^1.0.0",
     "pino": "^7.9.2",
+    "pino-pretty": "^7.6.0",
+    "prisma": "^3.11.1",
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {

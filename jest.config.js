@@ -13,6 +13,7 @@ module.exports = {
     '!src/**/*.spec.ts',
     '!src/**/index.ts',
     '!src/main/Main.ts',
+    '!src/shared/errors/*.ts',
   ],
   coverageThreshold: {
     global: {

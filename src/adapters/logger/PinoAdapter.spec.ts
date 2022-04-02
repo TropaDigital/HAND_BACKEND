@@ -1,6 +1,6 @@
 import pino from 'pino';
 
-import PinoAdapter from './PinoAdapter';
+import { PinoAdapter } from './PinoAdapter';
 
 jest.mock('pino', () => {
   return jest.fn().mockReturnValue({

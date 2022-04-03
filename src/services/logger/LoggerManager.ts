@@ -1,11 +1,10 @@
+import { PinoAdapter } from '../../adapters/logger/PinoAdapter';
 import { Logger, LoggerParams } from '../../interfaces/logger/Logger';
 
 export class LoggerManager implements Logger {
-  private loggers: Logger[];
-
-  public constructor(...loggers: Logger[]) {
-    this.loggers = loggers;
-  }
+  public constructor(
+    private readonly loggers: Logger[] = [new PinoAdapter()],
+  ) {}
 
   public info(message: LoggerParams): void {
     this.loggers.forEach(logger => {

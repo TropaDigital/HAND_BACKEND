@@ -1,23 +1,29 @@
 import pino from 'pino';
 
-import { Logger, LoggerParams } from '../../interfaces/logger/Logger';
+import {
+  ILoggerInstance,
+  Logger,
+  LoggerParams,
+} from '../../interfaces/logger/Logger';
 
-export default class PinoAdapter implements Logger {
-  private readonly pino;
-
-  constructor() {
-    this.pino = pino();
-  }
+export class PinoAdapter implements Logger {
+  constructor(
+    private readonly pinoInstance: ILoggerInstance = pino({
+      enabled: true,
+      level: 'info',
+      prettyPrint: true,
+    }),
+  ) {}
 
   public info(params: LoggerParams): void {
-    this.pino.info(params);
+    this.pinoInstance.info(params);
   }
 
   public error(params: LoggerParams): void {
-    this.pino.error(params);
+    this.pinoInstance.error(params);
   }
 
   public warning(params: LoggerParams): void {
-    this.pino.warn(params);
+    this.pinoInstance.warn(params);
   }
 }

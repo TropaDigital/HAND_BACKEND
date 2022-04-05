@@ -23,7 +23,7 @@ components:
         statusCode: 200
         statusCodeAsString: OK
         data:
-          name: ases-backend
+          name: haand-bid
           version: 1.0.0
           uptime: 948 secs
           status: healthly
@@ -35,7 +35,7 @@ components:
         statusCode: 500
         statusCodeAsString: INTERNAL_SERVER_ERROR
         data:
-          name: ases-backend
+          name: haand-bid
           version: 1.0.0
           uptime: 1225 secs
           status: unhealthy

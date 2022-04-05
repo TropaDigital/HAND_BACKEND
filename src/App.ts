@@ -6,6 +6,7 @@ import { createServer, Server } from 'http';
 import { LoggerFactory } from './factories/LoggerFactory';
 import MySqlDBClient from './infra/mySql';
 import { ILogger } from './interfaces/logger/Logger';
+import { errorMiddleware, loggerMiddleware } from './middlewares';
 import { healthcheckRouter } from './modules';
 
 export default class App {
@@ -54,15 +55,15 @@ export default class App {
 
   private setupGlobalErrorMiddlewares(): void {
     this.logger.info({ msg: 'setuping global error middlewares' });
-    // this.application.use(errorMiddleware.notFoundMiddleware);
-    // this.application.use(errorMiddleware.handleErrorMiddleware);
-    // this.application.use(errorMiddleware.sendErrorMiddleware);
+    this.application.use(errorMiddleware.notFoundMiddleware);
+    this.application.use(errorMiddleware.handleErrorMiddleware);
+    this.application.use(errorMiddleware.sendErrorMiddleware);
   }
 
   private setupGlobalMiddlewares(): void {
     this.logger.info({ msg: 'setuping global middlewares' });
     this.application.use(cors());
-    // this.application.use(loggerMiddleware);
+    this.application.use(loggerMiddleware);
     this.application.use(express.json());
     this.application.use(express.urlencoded({ extended: false }));
   }

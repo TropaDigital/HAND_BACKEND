@@ -31,7 +31,7 @@ export default class HealthCheckRouter implements IRouter {
      * @response 200 - an object with the status of the resources when all is healthly.
      * @responseContent {HealthcheckResponse} 200.application/json
      * @responseExample {HealthlyResponse} 200.application/json.HealthlyResponse
-     * @response 500 - an object with the status of the resources when all is healthly.
+     * @response 500 - an object with the status when the application is not healthly.
      * @responseContent {HealthcheckResponse} 500.application/json
      * @responseExample {UnhealthlyResponse} 500.application/json.UnhealthlyResponse
      */

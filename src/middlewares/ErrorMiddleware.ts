@@ -1,21 +1,34 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import IValidationError from '../interfaces/validation/IValidationError';
 import { ErrorHandler, GenericAppError, NotFoundError } from '../shared/errors';
 
+export interface IFormatedError {
+  code: string;
+  statusCode: number;
+  statusCodeAsString: keyof typeof StatusCodes;
+  description: string;
+  validationErrors?: IValidationError[];
+}
+
 class ErrorMiddleware {
-  notFoundMiddleware(_req: Request, _res: Response, next: NextFunction) {
+  public notFoundMiddleware(
+    _req: Request,
+    _res: Response,
+    next: NextFunction,
+  ): void {
     const err = new NotFoundError();
     next(err);
   }
 
   // eslint-disable-next-line max-params
-  handleErrorMiddleware(
+  public handleErrorMiddleware(
     err: GenericAppError,
     _req: Request,
     _res: Response,
     next: NextFunction,
-  ) {
+  ): void {
     const handledError = ErrorHandler.handleError(err);
     if (ErrorHandler.isTrustedError(handledError)) {
       next(handledError);
@@ -25,29 +38,31 @@ class ErrorMiddleware {
   }
 
   // eslint-disable-next-line
-  sendErrorMiddleware(
+  public sendErrorMiddleware(
     err: GenericAppError,
     _req: Request,
     res: Response,
     _next: NextFunction,
-  ) {
-    res.locals.message = err.description || err.message;
-    res.locals.error =
-      process.env.NODE_ENV === 'development' || err.isOperational
-        ? {
-            code: err.code,
-            statusCode: StatusCodes[err.status] || 500,
-            statusCodeAsString: err.status || 'INTERNAL_SERVER_ERROR',
-            description: err.message || 'Internal Server Error',
-            validationErrors: err.validationErrors,
-          }
-        : {
-            code: err.code,
-            statusCode: 500,
-            statusCodeAsString: 'INTERNAL_SERVER_ERROR',
-            description: 'Internal Server Error',
-          };
-    res.status(err.status || 500).json(res.locals.error);
+  ): void {
+    const error = this.formatError(err);
+    res.status(error.statusCode).json(error);
+  }
+
+  private formatError(error: GenericAppError): IFormatedError {
+    return process.env.NODE_ENV === 'development' || error.isOperational
+      ? {
+          code: error.code,
+          statusCode: StatusCodes[error.status] || 500,
+          statusCodeAsString: error.status || 'INTERNAL_SERVER_ERROR',
+          description: error.message || 'Internal Server Error',
+          validationErrors: error.validationErrors,
+        }
+      : {
+          code: error.code,
+          statusCode: 500,
+          statusCodeAsString: 'INTERNAL_SERVER_ERROR',
+          description: 'Internal Server Error',
+        };
   }
 }
 

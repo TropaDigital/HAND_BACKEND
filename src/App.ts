@@ -24,33 +24,10 @@ export default class App {
     if (!(NODE_ENV === 'development')) {
       this.logger.info({ msg: 'skiping setup of swagger docs' });
     }
-
-    // this.logger.info({ msg: 'setuping swagger docs' });
-    // const apiSchema = openapi(openapiConfig);
-    // this.application.use('/docs', swaggerUI.serve, swaggerUI.setup(apiSchema));
   }
 
   private setupSwaggerStats(): void {
     this.logger.info({ msg: 'setuping swagger stats' });
-    // const apiSchema = openapi(openapiConfig);
-    // this.application.use(
-    //   swaggerStats.getMiddleware({
-    //     swaggerSpec: apiSchema,
-    //     uriPath: '/monitoring',
-    //     authentication: true,
-    //     swaggerOnly: true,
-    //     onAuthenticate(
-    //       _req: IncomingMessage,
-    //       username: string,
-    //       password: string,
-    //     ) {
-    //       return (
-    //         username === swaggerStatsConfig.SWAGGER_STATS_USER &&
-    //         password === swaggerStatsConfig.SWAGGER_STATS_PASSWORD
-    //       );
-    //     },
-    //   }),
-    // );
   }
 
   private setupGlobalErrorMiddlewares(): void {

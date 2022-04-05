@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { LoggerFactory } from '../factories/LoggerFactory';
 import IValidationError from '../interfaces/validation/IValidationError';
-import { ErrorHandler, GenericAppError, NotFoundError } from '../shared/errors';
+import { GenericAppError, NotFoundError } from '../shared/errors';
 
 export interface IFormatedError {
   code: string;
@@ -13,6 +14,8 @@ export interface IFormatedError {
 }
 
 class ErrorMiddleware {
+  constructor(private readonly logger = LoggerFactory.create()) {}
+
   public notFoundMiddleware(
     _req: Request,
     _res: Response,
@@ -29,12 +32,19 @@ class ErrorMiddleware {
     _res: Response,
     next: NextFunction,
   ): void {
-    const handledError = ErrorHandler.handleError(err);
-    if (ErrorHandler.isTrustedError(handledError)) {
-      next(handledError);
-    } else {
-      throw err;
+    if (err.isOperational) {
+      this.logger.error({
+        code: err.code,
+        msg: err.description || err.message,
+        stack: err.stack,
+      });
+
+      next(err);
+      return;
     }
+
+    this.logger.error({ msg: '', stack: err.stack });
+    throw err;
   }
 
   // eslint-disable-next-line

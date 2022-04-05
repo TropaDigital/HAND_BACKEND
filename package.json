@@ -4,7 +4,7 @@
   "main": "dist/src/index.js",
   "scripts": {
     "prepare": "husky install && prisma generate",
-    "build": "tsc",
+    "build": "tsc && cp src/api.schema.yml dist/src/api.schema.yml",
     "start": "node dist/src/index.js",
     "start:dev": "dotenv -e .env.development -- ts-node-dev src/index.ts",
     "test": "dotenv -e .env.test -- jest --clearCache && jest --passWithNoTests --runInBand",

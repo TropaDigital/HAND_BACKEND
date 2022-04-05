@@ -1,4 +1,4 @@
-import { ApiHttpResponse } from '../../interfaces/http';
+import { IApiHttpResponse } from '../../interfaces/http';
 import {
   IHealthcheckController,
   IHealthCheckResult,
@@ -12,7 +12,7 @@ export class HealthcheckController implements IHealthcheckController {
   ) {}
 
   public async getApplicationStatus(): Promise<
-    ApiHttpResponse<IHealthCheckResult>
+    IApiHttpResponse<IHealthCheckResult>
   > {
     const result = await this.healthcheckService.getApplicationStatus();
     return {

@@ -1,4 +1,4 @@
-export interface ApiHttpRequest<
+export interface IApiHttpRequest<
   Body = any,
   Headers = { [key: string]: string | string[] | undefined },
   Params = { [key: string]: any },

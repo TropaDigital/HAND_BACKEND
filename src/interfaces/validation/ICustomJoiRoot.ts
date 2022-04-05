@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
-interface CustomJoiRoot extends Joi.Root {
+interface ICustomJoiRoot extends Joi.Root {
   [key: string]: (() => Joi.Schema) | any | undefined;
 }
 
-export default CustomJoiRoot;
+export default ICustomJoiRoot;

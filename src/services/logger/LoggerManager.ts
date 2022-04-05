@@ -1,24 +1,24 @@
 import { PinoAdapter } from '../../adapters/logger/PinoAdapter';
-import { ILogger, LoggerParams } from '../../interfaces/logger/Logger';
+import { ILogger, ILoggerParams } from '../../interfaces/logger/ILogger';
 
 export class LoggerManager implements ILogger {
   public constructor(
     private readonly loggers: ILogger[] = [new PinoAdapter()],
   ) {}
 
-  public info(message: LoggerParams): void {
+  public info(message: ILoggerParams): void {
     this.loggers.forEach(logger => {
       logger.info(message);
     });
   }
 
-  public warning(message: LoggerParams): void {
+  public warning(message: ILoggerParams): void {
     this.loggers.forEach(logger => {
       logger.warning(message);
     });
   }
 
-  public error(message: LoggerParams): void {
+  public error(message: ILoggerParams): void {
     this.loggers.forEach(logger => {
       logger.error(message);
     });

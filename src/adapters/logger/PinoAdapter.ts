@@ -3,8 +3,8 @@ import pino from 'pino';
 import {
   ILoggerInstance,
   ILogger,
-  LoggerParams,
-} from '../../interfaces/logger/Logger';
+  ILoggerParams,
+} from '../../interfaces/logger/ILogger';
 
 export class PinoAdapter implements ILogger {
   constructor(
@@ -15,15 +15,15 @@ export class PinoAdapter implements ILogger {
     }),
   ) {}
 
-  public info(params: LoggerParams): void {
+  public info(params: ILoggerParams): void {
     this.pinoInstance.info(params);
   }
 
-  public error(params: LoggerParams): void {
+  public error(params: ILoggerParams): void {
     this.pinoInstance.error(params);
   }
 
-  public warning(params: LoggerParams): void {
+  public warning(params: ILoggerParams): void {
     this.pinoInstance.warn(params);
   }
 }

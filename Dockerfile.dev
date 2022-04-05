@@ -1,0 +1,12 @@
+FROM node:14-alpine as base
+
+WORKDIR /usr/src/app
+COPY package.json ./
+COPY ./prisma ./prisma
+COPY yarn* ./
+
+ENV NODE_ENV=development
+RUN yarn --frozen-lockfile
+COPY . .
+
+CMD ["npm", "run", "start:dev"]

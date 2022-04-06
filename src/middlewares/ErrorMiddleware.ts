@@ -1,20 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import ErrorCodes from '../enums/ErrorCodes';
 import { LoggerFactory } from '../factories/LoggerFactory';
-import IValidationError from '../interfaces/validation/IValidationError';
+import { IFormatedError } from '../interfaces/errors/IFormatedError';
+import { ILogger } from '../interfaces/logger/Logger';
 import { GenericAppError, NotFoundError } from '../shared/errors';
 
-export interface IFormatedError {
-  code: string;
-  statusCode: number;
-  statusCodeAsString: keyof typeof StatusCodes;
-  description: string;
-  validationErrors?: IValidationError[];
-}
-
-class ErrorMiddleware {
-  constructor(private readonly logger = LoggerFactory.create()) {}
+export class ErrorMiddleware implements ErrorMiddleware {
+  constructor(private readonly logger: ILogger = LoggerFactory.create()) {}
 
   public notFoundMiddleware(
     _req: Request,
@@ -43,8 +37,8 @@ class ErrorMiddleware {
       return;
     }
 
-    this.logger.error({ msg: '', stack: err.stack });
-    throw err;
+    this.logger.error({ msg: err.message, stack: err.stack });
+    return next(err);
   }
 
   // eslint-disable-next-line
@@ -59,16 +53,16 @@ class ErrorMiddleware {
   }
 
   private formatError(error: GenericAppError): IFormatedError {
-    return process.env.NODE_ENV === 'development' || error.isOperational
+    return error.isOperational
       ? {
           code: error.code,
-          statusCode: StatusCodes[error.status] || 500,
-          statusCodeAsString: error.status || 'INTERNAL_SERVER_ERROR',
-          description: error.message || 'Internal Server Error',
+          statusCode: StatusCodes[error.status],
+          statusCodeAsString: error.status,
+          description: error.message,
           validationErrors: error.validationErrors,
         }
       : {
-          code: error.code,
+          code: ErrorCodes.GENERIC,
           statusCode: 500,
           statusCodeAsString: 'INTERNAL_SERVER_ERROR',
           description: 'Internal Server Error',

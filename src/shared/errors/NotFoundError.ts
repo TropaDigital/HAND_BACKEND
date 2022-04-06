@@ -6,6 +6,6 @@ export default class NotFoundError extends GenericAppError {
     public description = 'Request Not Found',
     code = ErrorCodes.GENERIC,
   ) {
-    super(description, 'NOT_FOUND', code);
+    super(description || 'Request Not Found', 'NOT_FOUND', code);
   }
 }

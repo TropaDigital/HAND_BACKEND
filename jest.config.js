@@ -10,6 +10,7 @@ module.exports = {
   setupFilesAfterEnv: ['./jest.setup.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',
+    'src/openapirc.ts',
     '!src/**/*.spec.ts',
     '!src/interfaces/**/*.ts',
     '!src/enums/**/*.ts',

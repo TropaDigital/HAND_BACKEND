@@ -14,7 +14,7 @@ export default class GenericAppError extends Error {
    */
   constructor(
     public description: string,
-    public status: number = StatusCodes.BAD_REQUEST,
+    public status: keyof typeof StatusCodes = 'INTERNAL_SERVER_ERROR',
     public code: string = ErrorCodes.GENERIC,
     public validationErrors: IValidationError[] = [],
     public isOperational: boolean = true,

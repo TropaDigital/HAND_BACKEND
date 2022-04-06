@@ -28,21 +28,31 @@ export class ExpressRouteAdapter {
       next: NextFunction,
     ): Promise<Response | void> => {
       try {
-        const IHttpResponse: IApiHttpResponse = await controller[methodName]({
+        const httpResponse: IApiHttpResponse = await controller[methodName]({
           body: req.body,
           headers: req.headers,
           params: req.params,
           query: req.query,
         });
-        ExpressRouteAdapter.setResponseHeaders(IHttpResponse, res);
-        return res.status(StatusCodes[IHttpResponse.statusCodeAsString]).json({
-          statusCode: StatusCodes[IHttpResponse.statusCodeAsString],
-          statusCodeAsString: IHttpResponse.statusCodeAsString,
-          data: IHttpResponse.body,
-        } as IFormatedApiHttpResponse);
+        const formatedResponse =
+          ExpressRouteAdapter.formatHttpResponse(httpResponse);
+        ExpressRouteAdapter.setResponseHeaders(httpResponse, res);
+        return res.status(formatedResponse.statusCode).json({
+          ...formatedResponse,
+        });
       } catch (error) {
         return next(error);
       }
+    };
+  }
+
+  private static formatHttpResponse(
+    response: IApiHttpResponse,
+  ): IFormatedApiHttpResponse {
+    return {
+      statusCode: StatusCodes[response.statusCodeAsString],
+      statusCodeAsString: response.statusCodeAsString,
+      data: response.body,
     };
   }
 

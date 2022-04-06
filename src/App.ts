@@ -5,7 +5,7 @@ import { createServer, Server } from 'http';
 
 import { LoggerFactory } from './factories/LoggerFactory';
 import MySqlDBClient from './infra/mySql';
-import { ILogger } from './interfaces/logger/Logger';
+import { ILogger } from './interfaces/logger/ILogger';
 import { healthcheckRouter } from './modules';
 
 export default class App {

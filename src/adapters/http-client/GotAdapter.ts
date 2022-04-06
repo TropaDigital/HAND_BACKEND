@@ -1,13 +1,13 @@
 import got, { OptionsOfJSONResponseBody } from 'got';
 
 import {
-  HttpClient,
-  HttpOptions,
-  HttpResponse,
+  IHttpClient,
+  IHttpOptions,
+  IHttpResponse,
 } from '../../interfaces/http-client';
 
-export class GotAdapter implements HttpClient {
-  async get<T>(url: string, options?: HttpOptions): Promise<HttpResponse<T>> {
+export class GotAdapter implements IHttpClient {
+  async get<T>(url: string, options?: IHttpOptions): Promise<IHttpResponse<T>> {
     const gotOptions: OptionsOfJSONResponseBody = {
       responseType: 'json',
       ...(options as OptionsOfJSONResponseBody),
@@ -19,8 +19,8 @@ export class GotAdapter implements HttpClient {
 
   public async post<T, K>(
     url: string,
-    options?: HttpOptions,
-  ): Promise<HttpResponse<K>> {
+    options?: IHttpOptions,
+  ): Promise<IHttpResponse<K>> {
     const gotOptions: OptionsOfJSONResponseBody = {
       responseType: 'json',
       json: options?.body as Record<string, T>,

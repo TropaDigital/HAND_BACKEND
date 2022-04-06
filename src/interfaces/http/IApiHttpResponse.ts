@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 
-export interface ApiHttpResponse<
+export interface IApiHttpResponse<
   Body = unknown,
   Headers = { [key: string]: string },
 > {

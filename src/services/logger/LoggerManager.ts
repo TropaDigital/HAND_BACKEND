@@ -1,9 +1,9 @@
 import { PinoAdapter } from '../../adapters/logger/PinoAdapter';
-import { Logger, LoggerParams } from '../../interfaces/logger/Logger';
+import { ILogger, LoggerParams } from '../../interfaces/logger/Logger';
 
-export class LoggerManager implements Logger {
+export class LoggerManager implements ILogger {
   public constructor(
-    private readonly loggers: Logger[] = [new PinoAdapter()],
+    private readonly loggers: ILogger[] = [new PinoAdapter()],
   ) {}
 
   public info(message: LoggerParams): void {
@@ -24,7 +24,7 @@ export class LoggerManager implements Logger {
     });
   }
 
-  public getLoggers(): Logger[] {
+  public getLoggers(): ILogger[] {
     return [...this.loggers];
   }
 }

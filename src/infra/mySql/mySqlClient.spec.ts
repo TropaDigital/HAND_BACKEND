@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 import MySqlDBClient from '.';
-import { Logger } from '../../interfaces/logger/Logger';
+import { ILogger } from '../../interfaces/logger/Logger';
 
 jest.mock('@prisma/client');
 
@@ -13,8 +13,8 @@ export const prismaClientMockFactory = (): jest.Mocked<PrismaClient> => {
   } as unknown as jest.Mocked<PrismaClient>;
 };
 
-export const makeLoggerManagerStub = (): jest.Mocked<Logger> => {
-  const loggerManagerStub: jest.Mocked<Logger> = {
+export const makeLoggerManagerStub = (): jest.Mocked<ILogger> => {
+  const loggerManagerStub: jest.Mocked<ILogger> = {
     info: jest.fn(),
     warning: jest.fn(),
     error: jest.fn(),
@@ -25,7 +25,7 @@ export const makeLoggerManagerStub = (): jest.Mocked<Logger> => {
 
 const makeSut = (): {
   sut: MySqlDBClient;
-  loggerManagerStub: jest.Mocked<Logger>;
+  loggerManagerStub: jest.Mocked<ILogger>;
   prismaClientMock: jest.Mocked<PrismaClient>;
 } => {
   const prismaClientMock = prismaClientMockFactory();

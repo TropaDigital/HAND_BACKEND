@@ -2,11 +2,11 @@ import pino from 'pino';
 
 import {
   ILoggerInstance,
-  Logger,
+  ILogger,
   LoggerParams,
 } from '../../interfaces/logger/Logger';
 
-export class PinoAdapter implements Logger {
+export class PinoAdapter implements ILogger {
   constructor(
     private readonly pinoInstance: ILoggerInstance = pino({
       enabled: true,

@@ -8,7 +8,7 @@ import swaggerUI from 'swagger-ui-express';
 
 import { LoggerFactory } from './factories/LoggerFactory';
 import MySqlDBClient from './infra/mySql';
-import { ILogger } from './interfaces/logger/Logger';
+import { ILogger } from './interfaces/logger/ILogger';
 import { errorMiddleware, loggerMiddleware } from './middlewares';
 import { healthcheckRouter } from './modules';
 import openapiConfig from './openapirc';

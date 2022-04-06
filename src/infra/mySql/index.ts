@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 import { LoggerFactory } from '../../factories/LoggerFactory';
 import { IDatabaseConnection } from '../../interfaces/infra/IDatabaseConnection';
-import { ILogger } from '../../interfaces/logger/Logger';
+import { ILogger } from '../../interfaces/logger/ILogger';
 
 export default class MySqlDBClient implements IDatabaseConnection {
   private static instance: MySqlDBClient;

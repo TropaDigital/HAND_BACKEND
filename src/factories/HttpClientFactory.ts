@@ -1,8 +1,8 @@
 import { GotAdapter } from '../adapters/http-client/GotAdapter';
-import { HttpClient } from '../interfaces/http-client';
+import { IHttpClient } from '../interfaces/http-client';
 
 export class HttpClientFactory {
-  public static create(): HttpClient {
+  public static create(): IHttpClient {
     const result = new GotAdapter();
 
     return result;

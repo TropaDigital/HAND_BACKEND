@@ -7,7 +7,7 @@ const makeSut = () => {
   return { sut };
 };
 
-describe(`HttpClientFactory.name`, () => {
+describe(`IHttpClientFactory.name`, () => {
   describe(`When ${HttpClientFactory.create.name} is called`, () => {
     it(`Should return a ${GotAdapter.name} instance`, () => {
       const { sut } = makeSut();

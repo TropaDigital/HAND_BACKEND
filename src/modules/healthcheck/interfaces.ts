@@ -1,4 +1,4 @@
-import { ApiHttpRequest, ApiHttpResponse } from 'src/interfaces/http';
+import { IApiHttpRequest, IApiIHttpResponse } from 'src/interfaces/http';
 
 export interface IDatabaseConnectionStatus {
   status: 'healthly' | 'unhealthy';
@@ -19,6 +19,6 @@ export interface IHealthcheckService {
 
 export interface IHealthcheckController {
   getApplicationStatus: (
-    _request: ApiHttpRequest,
-  ) => Promise<ApiHttpResponse<IHealthCheckResult>>;
+    _request: IApiHttpRequest,
+  ) => Promise<IApiIHttpResponse<IHealthCheckResult>>;
 }

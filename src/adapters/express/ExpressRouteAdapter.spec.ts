@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { ApiHttpRequest, ApiHttpResponse } from 'src/interfaces/http';
+import { IApiHttpRequest, IApiHttpResponse } from 'src/interfaces/http';
 
 import { ExpressRouteAdapter } from './ExpressRouteAdapter';
 import {
@@ -10,13 +10,13 @@ import {
 
 export const makeControllerStub = (): jest.Mocked<{
   handle: (
-    httpRequest: ApiHttpRequest<
+    httpRequest: IApiHttpRequest<
       { name: string },
       { authorization?: string },
       { id?: string },
       { page?: string }
     >,
-  ) => Promise<ApiHttpResponse<{ message: string }>>;
+  ) => Promise<IApiHttpResponse<{ message: string }>>;
 }> => ({
   handle: jest.fn().mockResolvedValue({
     statusCodeAsString: 'OK',

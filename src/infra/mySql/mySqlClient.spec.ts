@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 import MySqlDBClient from '.';
-import { ILogger } from '../../interfaces/logger/Logger';
+import { ILogger } from '../../interfaces/logger/ILogger';
 
 jest.mock('@prisma/client');
 

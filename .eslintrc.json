@@ -23,6 +23,17 @@
   ],
   "plugins": ["@typescript-eslint", "prettier", "import-helpers"],
   "rules": {
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      }
+    ],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "no-console": "error",

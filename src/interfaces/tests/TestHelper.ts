@@ -1,4 +1,4 @@
-import { ILogger } from '../logger/Logger';
+import { ILogger } from '../logger/ILogger';
 
 export const makeLoggerStub = (): jest.Mocked<ILogger> => ({
   info: jest.fn(),

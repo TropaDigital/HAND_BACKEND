@@ -1,4 +1,4 @@
-export * from './ApiHttpRequest';
-export * from './ApiHttpResponse';
-export * from './FormatedApiHttpResponse';
+export * from './IApiHttpRequest';
+export * from './IApiHttpResponse';
+export * from './IFormatedApiHttpResponse';
 export * from './IRouter';

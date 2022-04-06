@@ -1,3 +1,3 @@
 import HealthCheckRouter from './routes';
 
-export const healtchRouter = HealthCheckRouter.getInstance();
+export const healthcheckRouter = HealthCheckRouter.getInstance();

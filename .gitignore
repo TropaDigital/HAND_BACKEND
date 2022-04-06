@@ -1,3 +1,6 @@
+# docker volumes
+dbsql
+
 # Logs
 logs
 *.log

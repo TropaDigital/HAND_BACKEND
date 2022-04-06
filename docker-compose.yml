@@ -1,0 +1,68 @@
+version: '3.7'
+
+services:
+  haandbib:
+    container_name: haandbib
+    hostname: haandbib
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+    ports:
+      - "3000:3000"
+    env_file: .env.development
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - app-network
+      - external-network
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - '3306:3306/tcp'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "dbsql:3306"]
+      timeout: 20s
+      retries: 10
+    environment:
+      MYSQL_DATABASE: haandbib
+      MYSQL_ROOT_PASSWORD: haandbib
+    volumes:
+      - ./dbsql/dbmysql/mysql:/var/lib/mysql
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine3.13
+    container_name: redis
+    command: redis-server
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+      - '6379:6379'
+    networks:
+      - app-network
+      - redis-network
+
+networks:
+  app-network:
+    driver: bridge
+  redis-network:
+    driver: bridge
+  external-network:
+    external: true
+
+volumes:
+  dbdata:

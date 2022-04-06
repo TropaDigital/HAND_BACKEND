@@ -2,18 +2,18 @@ import { PrismaClient } from '@prisma/client';
 
 import { LoggerFactory } from '../../factories/LoggerFactory';
 import { IDatabaseConnection } from '../../interfaces/infra/IDatabaseConnection';
-import { Logger } from '../../interfaces/logger/Logger';
+import { ILogger } from '../../interfaces/logger/Logger';
 
 export default class MySqlDBClient implements IDatabaseConnection {
   private static instance: MySqlDBClient;
 
   private constructor(
-    private readonly loggerManager: Logger,
+    private readonly loggerManager: ILogger,
     private prismaClient: PrismaClient,
   ) {}
 
   public static getInstance(
-    loggerManager: Logger = LoggerFactory.create(),
+    loggerManager: ILogger = LoggerFactory.create(),
     prismaClient: PrismaClient = new PrismaClient(),
   ): MySqlDBClient {
     if (!MySqlDBClient.instance) {

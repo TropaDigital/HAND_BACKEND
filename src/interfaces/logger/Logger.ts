@@ -7,7 +7,7 @@ export interface LoggerParams {
 
 export type ILoggerInstance = BaseLogger;
 
-export interface Logger {
+export interface ILogger {
   info(logParams: LoggerParams): void;
   warning(logParams: LoggerParams): void;
   error(logParams: LoggerParams): void;

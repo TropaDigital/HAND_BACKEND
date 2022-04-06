@@ -2,21 +2,23 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import {
-  ApiHttpRequest,
-  ApiHttpResponse,
-  IHttpFormatedResponse,
+  IApiHttpRequest,
+  IApiHttpResponse,
+  IFormatedApiHttpResponse,
 } from '../../interfaces/http';
 
 export class ExpressRouteAdapter {
   public static adapt<
     Controller = {
-      [key: string]: (httpRequest: ApiHttpRequest) => Promise<ApiHttpResponse>;
+      [key: string]: (
+        httpRequest: IApiHttpRequest,
+      ) => Promise<IApiHttpResponse>;
     },
   >(
     controller: {
       [key in keyof Controller]: (
-        httpRequest: ApiHttpRequest,
-      ) => Promise<ApiHttpResponse>;
+        httpRequest: IApiHttpRequest,
+      ) => Promise<IApiHttpResponse>;
     },
     methodName: keyof Controller,
   ) {
@@ -26,7 +28,7 @@ export class ExpressRouteAdapter {
       next: NextFunction,
     ): Promise<Response | void> => {
       try {
-        const httpResponse: ApiHttpResponse = await controller[methodName]({
+        const httpResponse: IApiHttpResponse = await controller[methodName]({
           body: req.body,
           headers: req.headers,
           params: req.params,
@@ -45,8 +47,8 @@ export class ExpressRouteAdapter {
   }
 
   private static formatHttpResponse(
-    response: ApiHttpResponse,
-  ): IHttpFormatedResponse {
+    response: IApiHttpResponse,
+  ): IFormatedApiHttpResponse {
     return {
       statusCode: StatusCodes[response.statusCodeAsString],
       statusCodeAsString: response.statusCodeAsString,
@@ -55,7 +57,7 @@ export class ExpressRouteAdapter {
   }
 
   private static setResponseHeaders(
-    response: ApiHttpResponse,
+    response: IApiHttpResponse,
     res: Response,
   ): void {
     if (response.headers) {

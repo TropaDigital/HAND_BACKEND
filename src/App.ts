@@ -1,13 +1,17 @@
 import cors from 'cors';
 import express, { Application } from 'express';
 import helmet from 'helmet';
-import { createServer, Server } from 'http';
+import { createServer, IncomingMessage, Server } from 'http';
+import openapi from 'openapi-comment-parser';
+import swaggerStats from 'swagger-stats';
+import swaggerUI from 'swagger-ui-express';
 
 import { LoggerFactory } from './factories/LoggerFactory';
 import MySqlDBClient from './infra/mySql';
-import { ILogger } from './interfaces/logger/Logger';
+import { ILogger } from './interfaces/logger/ILogger';
 import { errorMiddleware, loggerMiddleware } from './middlewares';
 import { healthcheckRouter } from './modules';
+import openapiConfig from './openapirc';
 
 export default class App {
   private application: Application;
@@ -24,10 +28,33 @@ export default class App {
     if (!(NODE_ENV === 'development')) {
       this.logger.info({ msg: 'skiping setup of swagger docs' });
     }
+
+    this.logger.info({ msg: 'setuping swagger docs' });
+    const apiSchema = openapi(openapiConfig);
+    this.application.use('/docs', swaggerUI.serve, swaggerUI.setup(apiSchema));
   }
 
   private setupSwaggerStats(): void {
     this.logger.info({ msg: 'setuping swagger stats' });
+    const apiSchema = openapi(openapiConfig);
+    this.application.use(
+      swaggerStats.getMiddleware({
+        swaggerSpec: apiSchema,
+        uriPath: '/monitoring',
+        authentication: true,
+        swaggerOnly: true,
+        onAuthenticate(
+          _req: IncomingMessage,
+          username: string,
+          password: string,
+        ) {
+          return (
+            username === 'SWAGGER_STATS_USER' &&
+            password === 'SWAGGER_STATS_PASSWORD'
+          );
+        },
+      }),
+    );
   }
 
   private setupGlobalErrorMiddlewares(): void {

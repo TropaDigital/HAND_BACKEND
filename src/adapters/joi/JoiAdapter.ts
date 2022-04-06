@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import CustomJoiRoot from '../../interfaces/validation/CustomJoiRoot';
+import ICustomJoiRoot from '../../interfaces/validation/ICustomJoiRoot';
 import IValidationResult from '../../interfaces/validation/IValidationResult';
 import IValidationResultDTO from '../../interfaces/validation/IValidationResultDTO';
 import * as errors from '../../shared/errors';
@@ -8,7 +8,7 @@ import * as errors from '../../shared/errors';
 export default class JoiAdapter {
   constructor(
     private readonly schemaDictionary: Record<string, Joi.Schema>,
-    private schemaClient: CustomJoiRoot = Joi,
+    private schemaClient: ICustomJoiRoot = Joi,
   ) {
     this.buildSchemas(schemaDictionary);
   }

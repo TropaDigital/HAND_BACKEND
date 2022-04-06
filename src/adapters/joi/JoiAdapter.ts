@@ -5,9 +5,9 @@ import IValidationResult from '../../interfaces/validation/IValidationResult';
 import IValidationResultDTO from '../../interfaces/validation/IValidationResultDTO';
 import * as errors from '../../shared/errors';
 
-export default class JoiAdapter {
+export default class JoiAdapter<S = { [key: string]: Joi.Schema }> {
   constructor(
-    private readonly schemaDictionary: Record<string, Joi.Schema>,
+    private readonly schemaDictionary: S,
     private schemaClient: ICustomJoiRoot = Joi,
   ) {
     this.buildSchemas(schemaDictionary);
@@ -17,13 +17,15 @@ export default class JoiAdapter {
     schemaName: keyof typeof this.schemaDictionary,
     data: T,
   ): T {
-    if (!this.schemaClient[schemaName]) {
+    if (!this.schemaClient[schemaName as keyof typeof this.schemaClient]) {
       throw new errors.GenericAppError('The schema provided does not exists');
     }
 
     const { hasValidationErrors, value, validationErrors } =
       this.normalizeValidationResult<T>(
-        this.schemaClient[schemaName]().validate(data, {
+        this.schemaClient[
+          schemaName as keyof typeof this.schemaClient
+        ]().validate(data, {
           abortEarly: false,
           stripUnknown: true,
           //   messages: validationMessages,
@@ -55,7 +57,7 @@ export default class JoiAdapter {
     };
   }
 
-  private buildSchemas(schemaDictionary: Record<string, Joi.Schema>): void {
+  private buildSchemas(schemaDictionary: S): void {
     const normalizedSchemas = Object.entries(schemaDictionary).map(
       ([schemaName, schema]): Joi.Extension => ({
         type: schemaName,

@@ -34,7 +34,9 @@ export default class App {
     this.logger.info({ msg: 'setuping global error middlewares' });
     this.application.use(errorMiddleware.notFoundMiddleware);
     this.application.use(errorMiddleware.handleErrorMiddleware);
-    this.application.use(errorMiddleware.sendErrorMiddleware);
+    this.application.use(
+      errorMiddleware.sendErrorMiddleware.bind(errorMiddleware),
+    );
   }
 
   private setupGlobalMiddlewares(): void {

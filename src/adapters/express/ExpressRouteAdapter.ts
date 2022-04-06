@@ -32,15 +32,25 @@ export class ExpressRouteAdapter {
           params: req.params,
           query: req.query,
         });
+        const formatedResponse =
+          ExpressRouteAdapter.formatHttpResponse(httpResponse);
         ExpressRouteAdapter.setResponseHeaders(httpResponse, res);
-        return res.status(StatusCodes[httpResponse.statusCodeAsString]).json({
-          statusCode: StatusCodes[httpResponse.statusCodeAsString],
-          statusCodeAsString: httpResponse.statusCodeAsString,
-          data: httpResponse.body,
-        } as IHttpFormatedResponse);
+        return res.status(formatedResponse.statusCode).json({
+          ...formatedResponse,
+        });
       } catch (error) {
         return next(error);
       }
+    };
+  }
+
+  private static formatHttpResponse(
+    response: ApiHttpResponse,
+  ): IHttpFormatedResponse {
+    return {
+      statusCode: StatusCodes[response.statusCodeAsString],
+      statusCodeAsString: response.statusCodeAsString,
+      data: response.body,
     };
   }
 

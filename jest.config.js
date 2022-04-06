@@ -10,10 +10,18 @@ module.exports = {
   setupFilesAfterEnv: ['./jest.setup.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',
+    '!src/openapirc.ts',
     '!src/**/*.spec.ts',
     '!src/interfaces/**/*.ts',
+    '!src/enums/**/*.ts',
+    '!src/modules/**/index.ts',
+    '!src/modules/**/routes.ts',
+    '!src/modules/**/factory.ts',
+    '!src/middlewares/*.ts',
+    '!src/App.ts',
     '!src/index.ts',
     '!src/shared/errors/*.ts',
+    'src/middlewares/ErrorMiddleware.ts',
   ],
   coverageThreshold: {
     global: {

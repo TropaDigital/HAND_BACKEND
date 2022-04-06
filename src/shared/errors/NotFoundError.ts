@@ -1,5 +1,3 @@
-import { StatusCodes } from 'http-status-codes';
-
 import ErrorCodes from '../../enums/ErrorCodes';
 import GenericAppError from './GenericAppError';
 
@@ -8,6 +6,6 @@ export default class NotFoundError extends GenericAppError {
     public description = 'Request Not Found',
     code = ErrorCodes.GENERIC,
   ) {
-    super(description, StatusCodes.NOT_FOUND, code);
+    super(description || 'Request Not Found', 'NOT_FOUND', code);
   }
 }

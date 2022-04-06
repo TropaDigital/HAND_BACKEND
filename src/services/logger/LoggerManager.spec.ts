@@ -1,3 +1,4 @@
+import { PinoAdapter } from '../../adapters/logger/PinoAdapter';
 import { makeLoggerStub } from '../../interfaces/tests/TestHelper';
 import { LoggerManager } from './LoggerManager';
 
@@ -10,6 +11,14 @@ const makeSut = () => {
 
 describe(LoggerManager.name, () => {
   describe(LoggerManager.prototype.info.name, () => {
+    it('Should call logger info with the default logger', () => {
+      const sut = new LoggerManager();
+      const infoSpyOn = jest.spyOn(PinoAdapter.prototype, 'info');
+      sut.info({ msg: 'valid message' });
+
+      expect(infoSpyOn).toHaveBeenCalledWith({ msg: 'valid message' });
+    });
+
     it('Should have empty logger list  when no logger is ', () => {
       const sut = new LoggerManager([]);
 

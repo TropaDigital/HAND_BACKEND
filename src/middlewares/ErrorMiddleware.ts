@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import ErrorCodes from '../enums/ErrorCodes';
 import { LoggerFactory } from '../factories/LoggerFactory';
 import { IFormatedError } from '../interfaces/errors/IFormatedError';
-import { ILogger } from '../interfaces/logger/Logger';
+import { ILogger } from '../interfaces/logger/ILogger';
 import { GenericAppError, NotFoundError } from '../shared/errors';
 
 export class ErrorMiddleware implements ErrorMiddleware {

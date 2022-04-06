@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { makeLoggerManagerStub } from '../../infra/mySql/mySqlClient.spec';
 import { IErrorMiddleware } from '../../interfaces/errors/IErrorMiddleware';
-import { ILogger } from '../../interfaces/logger/Logger';
+import { ILogger } from '../../interfaces/logger/ILogger';
 import {
   GenericAppError,
   MissingInvalidParamsError,

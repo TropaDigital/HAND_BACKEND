@@ -2,7 +2,7 @@ import { Prisma, Consultant } from '@prisma/client';
 
 import { IConsultantRepository } from './interfaces';
 
-type PrismaConsultantRepository = Prisma.ConsultantDelegate<
+export type PrismaConsultantRepository = Prisma.ConsultantDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
 >;
 

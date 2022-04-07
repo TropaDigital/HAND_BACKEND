@@ -7,8 +7,6 @@ import {
   makeFakeUpdateConsultantInput,
 } from './helpers/test-helper';
 
-jest.useFakeTimers().setSystemTime(new Date('1912-06-23').getTime());
-
 const makeConsultantRepositoryStub =
   (): jest.Mocked<IConsultantRepository> => ({
     findAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),

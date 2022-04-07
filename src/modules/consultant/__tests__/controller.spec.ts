@@ -10,8 +10,6 @@ import {
   makeValidatorStub,
 } from './helpers/test-helper';
 
-jest.useFakeTimers().setSystemTime(new Date('1912-06-23').getTime());
-
 const makeSut = () => {
   const consultantServiceStub = makeConsultantServiceStub();
   const validatorStub = makeValidatorStub();

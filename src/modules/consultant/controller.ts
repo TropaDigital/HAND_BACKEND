@@ -1,29 +1,29 @@
 import { Consultant, Prisma } from '@prisma/client';
 
-import JoiAdapter from '../../adapters/joi/JoiAdapter';
-import { ApiHttpRequest, ApiHttpResponse } from '../../interfaces/http';
-import { IConsultantController } from './interfaces';
+import { IApiHttpRequest } from '../../interfaces/http';
+import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
+import { IValidator } from '../../interfaces/validation/IValidator';
+import { IConsultantController, IConsultantService } from './interfaces';
 import * as schemas from './schemas';
-import { ConsultantService } from './service';
 
 export class ConsultantController implements IConsultantController {
   constructor(
-    private readonly consultantService: ConsultantService,
-    private readonly validator: JoiAdapter<typeof schemas>,
+    private readonly consultantService: IConsultantService,
+    private readonly validator: IValidator<typeof schemas>,
   ) {}
 
-  public async getAllConsultants(): Promise<ApiHttpResponse<Consultant[]>> {
+  public async getAllConsultants(): Promise<IApiHttpResponse<Consultant[]>> {
     const result = await this.consultantService.getAllConsultants();
 
     return { statusCodeAsString: 'OK', body: result };
   }
 
   public async getConsultantById(
-    httpRequest: ApiHttpRequest,
-  ): Promise<ApiHttpResponse<Consultant | null>> {
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Consultant | null>> {
     const { id } = this.validator.validateSchema<{ id: number }>(
       'GetConsultantById',
-      httpRequest.params,
+      httpRequest.params as { id: number },
     );
     const result = await this.consultantService.getConsultantById(id);
 
@@ -31,8 +31,8 @@ export class ConsultantController implements IConsultantController {
   }
 
   public async createConsultant(
-    httpRequest: ApiHttpRequest,
-  ): Promise<ApiHttpResponse<Consultant>> {
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Consultant>> {
     const consultant =
       this.validator.validateSchema<Prisma.ConsultantCreateInput>(
         'CreateConsultant',
@@ -44,8 +44,8 @@ export class ConsultantController implements IConsultantController {
   }
 
   public async updateConsultant(
-    httpRequest: ApiHttpRequest,
-  ): Promise<ApiHttpResponse<void>> {
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
     const { id, ...consultant } = this.validator.validateSchema<
       Prisma.ConsultantUpdateInput & { id: number }
     >('UpdateGetConsultant', {
@@ -61,11 +61,11 @@ export class ConsultantController implements IConsultantController {
   }
 
   public async deleteConsultant(
-    httpRequest: ApiHttpRequest,
-  ): Promise<ApiHttpResponse<void>> {
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
     const { id } = this.validator.validateSchema<{ id: number }>(
       'DeleteConsultantById',
-      httpRequest.params,
+      httpRequest.params as { id: number },
     );
     const result = await this.consultantService.deleteConsultant(id);
 

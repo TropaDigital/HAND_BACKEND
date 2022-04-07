@@ -1,10 +1,9 @@
 import { Consultant, Prisma } from '@prisma/client';
 
-import { IConsultantService } from './interfaces';
-import { ConsultantRepository } from './repository';
+import { IConsultantRepository, IConsultantService } from './interfaces';
 
 export class ConsultantService implements IConsultantService {
-  constructor(private readonly consultantRepository: ConsultantRepository) {}
+  constructor(private readonly consultantRepository: IConsultantRepository) {}
 
   public async getAllConsultants(): Promise<Consultant[]> {
     const result = await this.consultantRepository.findAll();

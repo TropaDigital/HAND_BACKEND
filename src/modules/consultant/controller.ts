@@ -48,7 +48,7 @@ export class ConsultantController implements IConsultantController {
   ): Promise<IApiHttpResponse<void>> {
     const { id, ...consultant } = this.validator.validateSchema<
       Prisma.ConsultantUpdateInput & { id: number }
-    >('UpdateGetConsultant', {
+    >('UpdateConsultant', {
       ...httpRequest.body,
       ...httpRequest.params,
     });

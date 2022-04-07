@@ -1,6 +1,6 @@
 import { Consultant, Prisma } from '@prisma/client';
 
-import { ApiHttpRequest, ApiHttpResponse } from '../../interfaces/http';
+import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 
 export interface IConsultantRepository {
   create(consultant: Prisma.ConsultantCreateInput): Promise<Consultant>;
@@ -16,18 +16,39 @@ export interface IConsultantRepository {
 
 export interface IConsultantController {
   getAllConsultants(
-    httpRequest: ApiHttpRequest,
-  ): Promise<ApiHttpResponse<Consultant[]>>;
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Consultant[]>>;
 
   getConsultantById(
-    httpRequest: ApiHttpRequest,
-  ): Promise<ApiHttpResponse<Consultant | null>>;
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Consultant | null>>;
 
   createConsultant(
-    httpRequest: ApiHttpRequest,
-  ): Promise<ApiHttpResponse<Consultant>>;
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Consultant>>;
 
-  updateConsultant(httpRequest: ApiHttpRequest): Promise<ApiHttpResponse<void>>;
+  updateConsultant(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>>;
 
-  deleteConsultant(httpRequest: ApiHttpRequest): Promise<ApiHttpResponse<void>>;
+  deleteConsultant(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>>;
+}
+
+export interface IConsultantService {
+  getAllConsultants(): Promise<Consultant[]>;
+
+  getConsultantById(id: number): Promise<Consultant | null>;
+
+  createConsultant(
+    consultant: Prisma.ConsultantCreateInput,
+  ): Promise<Consultant>;
+
+  updateConsultant(
+    id: number,
+    consultant: Prisma.ConsultantUpdateInput,
+  ): Promise<void>;
+
+  deleteConsultant(id: number): Promise<void>;
 }

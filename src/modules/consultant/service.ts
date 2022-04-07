@@ -1,8 +1,9 @@
 import { Consultant, Prisma } from '@prisma/client';
 
+import { IConsultantService } from './interfaces';
 import { ConsultantRepository } from './repository';
 
-export class ConsultantService {
+export class ConsultantService implements IConsultantService {
   constructor(private readonly consultantRepository: ConsultantRepository) {}
 
   public async getAllConsultants(): Promise<Consultant[]> {

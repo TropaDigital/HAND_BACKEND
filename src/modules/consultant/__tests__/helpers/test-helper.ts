@@ -3,7 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { IConsultantService } from '../../interfaces';
+import { IConsultantRepository, IConsultantService } from '../../interfaces';
+import { PrismaConsultantRepository } from '../../repository';
 
 export const makeFakeCreateConsultantInput =
   (): jest.Mocked<Prisma.ConsultantCreateInput> => ({
@@ -77,3 +78,24 @@ export const makeConsultantServiceStub =
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
   validateSchema: jest.fn().mockReturnValue({ id: 777 }),
 });
+
+export const makePrismaConsultantRepositoryStub =
+  (): jest.Mocked<PrismaConsultantRepository> => {
+    const result: jest.Mocked<Partial<PrismaConsultantRepository>> = {
+      findMany: jest.fn().mockResolvedValue(makeFakeConsultantList()),
+      findFirst: jest.fn().mockResolvedValue(makeFakeConsultant()),
+      create: jest.fn().mockResolvedValue(makeFakeConsultant()),
+      update: jest.fn(),
+      delete: jest.fn(),
+    };
+    return result as jest.Mocked<PrismaConsultantRepository>;
+  };
+
+export const makeConsultantRepositoryStub =
+  (): jest.Mocked<IConsultantRepository> => ({
+    findAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),
+    findById: jest.fn().mockResolvedValue(makeFakeConsultant()),
+    create: jest.fn().mockResolvedValue(makeFakeConsultant()),
+    update: jest.fn(),
+    delete: jest.fn(),
+  });

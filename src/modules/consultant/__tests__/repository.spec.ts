@@ -1,25 +1,12 @@
-import {
-  ConsultantRepository,
-  PrismaConsultantRepository,
-} from '../repository';
+import { ConsultantRepository } from '../repository';
 import {
   makeFakeConsultant,
   makeFakeConsultantList,
+  makePrismaConsultantRepositoryStub,
 } from './helpers/test-helper';
 
-const makePrismaConsultantRepositoryStub = (): jest.Mocked<
-  Partial<PrismaConsultantRepository>
-> => ({
-  findMany: jest.fn().mockResolvedValue(makeFakeConsultantList()),
-  findFirst: jest.fn().mockResolvedValue(makeFakeConsultant()),
-  create: jest.fn().mockResolvedValue(makeFakeConsultant()),
-  update: jest.fn(),
-  delete: jest.fn(),
-});
-
 const makeSut = () => {
-  const prismaRepository =
-    makePrismaConsultantRepositoryStub() as jest.Mocked<PrismaConsultantRepository>;
+  const prismaRepository = makePrismaConsultantRepositoryStub();
   const sut = new ConsultantRepository(prismaRepository);
 
   return { sut, prismaRepository };

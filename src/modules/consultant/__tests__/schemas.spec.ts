@@ -1,5 +1,3 @@
-import Joi from 'joi';
-
 import JoiAdapter from '../../../adapters/joi/JoiAdapter';
 import * as schemas from '../schemas';
 import {

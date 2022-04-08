@@ -1,20 +1,11 @@
-import { IConsultantRepository } from '../interfaces';
 import { ConsultantService } from '../service';
 import {
+  makeConsultantRepositoryStub,
   makeFakeConsultant,
   makeFakeConsultantList,
   makeFakeCreateConsultantInput,
   makeFakeUpdateConsultantInput,
 } from './helpers/test-helper';
-
-const makeConsultantRepositoryStub =
-  (): jest.Mocked<IConsultantRepository> => ({
-    findAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),
-    findById: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    create: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    update: jest.fn(),
-    delete: jest.fn(),
-  });
 
 const makeSut = () => {
   const consultantRepository = makeConsultantRepositoryStub();

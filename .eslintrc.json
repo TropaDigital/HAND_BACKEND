@@ -51,7 +51,7 @@
     "max-params": ["warn", 3],
     "max-len": [
       "warn",
-      80,
+      100,
       {
         "ignoreUrls": true,
         "ignoreComments": true,
@@ -104,7 +104,8 @@
     {
       "files": ["**/*.spec.ts"],
       "rules": {
-        "max-nested-callbacks": ["off"]
+        "max-nested-callbacks": ["off"],
+        "max-len": ["off"]
       }
     }
   ],

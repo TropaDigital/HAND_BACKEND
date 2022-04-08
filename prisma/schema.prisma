@@ -12,3 +12,17 @@ model User {
   email String  @unique
   name  String?
 }
+
+model Consultant {
+  id    Int     @id @default(autoincrement())
+  name  String
+  taxId String @db.VarChar(11) @map(name: "tax_id")
+  city String
+  state String
+  commission Int @default(0) @db.UnsignedInt
+  createdBy    String    @map(name: "created_by") @db.VarChar(75)
+  updatedBy    String?   @map(name: "updated_by") @db.VarChar(75)
+  createdAt    DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
+  deletedAt    DateTime? @map(name: "deleted_at") @db.DateTime(0)
+}

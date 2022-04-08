@@ -19,20 +19,20 @@ const makeSut = () => {
 };
 
 describe(ConsultantController.name, () => {
-  describe(`When ${ConsultantController.prototype.getAllConsultants.name} is called`, () => {
+  describe(`When ${ConsultantController.prototype.getAll.name} is called`, () => {
     it('should call service with validation return', async () => {
       const { sut, consultantServiceStub } = makeSut();
-      const getAllConsultantsSpy = consultantServiceStub.getAllConsultants;
+      const getAllSpy = consultantServiceStub.getAll;
 
-      await sut.getAllConsultants();
+      await sut.getAll();
 
-      expect(getAllConsultantsSpy).toBeCalledWith();
+      expect(getAllSpy).toBeCalledWith();
     });
 
     it('should return service response', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.getAllConsultants();
+      const result = await sut.getAll();
 
       expect(result).toEqual(
         makeFakeApiHttpResponse('OK', makeFakeConsultantList()),
@@ -41,11 +41,11 @@ describe(ConsultantController.name, () => {
 
     it('should throw when service throws', async () => {
       const { sut, consultantServiceStub } = makeSut();
-      consultantServiceStub.getAllConsultants.mockRejectedValueOnce(
+      consultantServiceStub.getAll.mockRejectedValueOnce(
         new Error('any_get_all_consultants_error'),
       );
 
-      const promise = sut.getAllConsultants();
+      const promise = sut.getAll();
 
       await expect(promise).rejects.toThrow(
         new Error('any_get_all_consultants_error'),
@@ -53,13 +53,13 @@ describe(ConsultantController.name, () => {
     });
   });
 
-  describe(`When ${ConsultantController.prototype.getConsultantById.name} is called`, () => {
+  describe(`When ${ConsultantController.prototype.getById.name} is called`, () => {
     it('should call validator with right params', async () => {
       const { sut, validatorStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
       const validateSchemaSpy = validatorStub.validateSchema;
 
-      await sut.getConsultantById(httpRequest);
+      await sut.getById(httpRequest);
 
       expect(validateSchemaSpy).toBeCalledWith('GetConsultantById', {
         id: 777,
@@ -69,18 +69,18 @@ describe(ConsultantController.name, () => {
     it('should call service with validation return', async () => {
       const { sut, consultantServiceStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
-      const getConsultantByIdSpy = consultantServiceStub.getConsultantById;
+      const getByIdSpy = consultantServiceStub.getById;
 
-      await sut.getConsultantById(httpRequest);
+      await sut.getById(httpRequest);
 
-      expect(getConsultantByIdSpy).toBeCalledWith(777);
+      expect(getByIdSpy).toBeCalledWith(777);
     });
 
     it('should return service response', async () => {
       const { sut } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
 
-      const result = await sut.getConsultantById(httpRequest);
+      const result = await sut.getById(httpRequest);
 
       expect(result).toEqual(
         makeFakeApiHttpResponse('OK', makeFakeConsultant()),
@@ -90,11 +90,11 @@ describe(ConsultantController.name, () => {
     it('should throw when service throws', async () => {
       const { sut, consultantServiceStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
-      consultantServiceStub.getConsultantById.mockRejectedValueOnce(
+      consultantServiceStub.getById.mockRejectedValueOnce(
         new Error('any_get_consultants_by_id_error'),
       );
 
-      const promise = sut.getConsultantById(httpRequest);
+      const promise = sut.getById(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_get_consultants_by_id_error'),
@@ -108,7 +108,7 @@ describe(ConsultantController.name, () => {
         throw new Error('any_validate_schema_error');
       });
 
-      const promise = sut.getConsultantById(httpRequest);
+      const promise = sut.getById(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_validate_schema_error'),
@@ -116,7 +116,7 @@ describe(ConsultantController.name, () => {
     });
   });
 
-  describe(`When ${ConsultantController.prototype.createConsultant.name} is called`, () => {
+  describe(`When ${ConsultantController.prototype.create.name} is called`, () => {
     it('should call validator with right params', async () => {
       const { sut, validatorStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({
@@ -124,7 +124,7 @@ describe(ConsultantController.name, () => {
       });
       const validateSchemaSpy = validatorStub.validateSchema;
 
-      await sut.createConsultant(httpRequest);
+      await sut.create(httpRequest);
 
       expect(validateSchemaSpy).toBeCalledWith(
         'CreateConsultant',
@@ -137,23 +137,21 @@ describe(ConsultantController.name, () => {
       const httpRequest = makeFakeApiHttpRequest({
         body: makeFakeCreateConsultantInput(),
       });
-      const createConsultantSpy = consultantServiceStub.createConsultant;
+      const createSpy = consultantServiceStub.create;
       validatorStub.validateSchema.mockReturnValueOnce(
         makeFakeCreateConsultantInput(),
       );
 
-      await sut.createConsultant(httpRequest);
+      await sut.create(httpRequest);
 
-      expect(createConsultantSpy).toBeCalledWith(
-        makeFakeCreateConsultantInput(),
-      );
+      expect(createSpy).toBeCalledWith(makeFakeCreateConsultantInput());
     });
 
     it('should return service response', async () => {
       const { sut } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
 
-      const result = await sut.createConsultant(httpRequest);
+      const result = await sut.create(httpRequest);
 
       expect(result).toEqual(
         makeFakeApiHttpResponse('CREATED', makeFakeConsultant()),
@@ -163,11 +161,11 @@ describe(ConsultantController.name, () => {
     it('should throw when service throws', async () => {
       const { sut, consultantServiceStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
-      consultantServiceStub.createConsultant.mockRejectedValueOnce(
+      consultantServiceStub.create.mockRejectedValueOnce(
         new Error('any_create_consultant_error'),
       );
 
-      const promise = sut.createConsultant(httpRequest);
+      const promise = sut.create(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_create_consultant_error'),
@@ -181,7 +179,7 @@ describe(ConsultantController.name, () => {
         throw new Error('any_validate_schema_error');
       });
 
-      const promise = sut.createConsultant(httpRequest);
+      const promise = sut.create(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_validate_schema_error'),
@@ -189,7 +187,7 @@ describe(ConsultantController.name, () => {
     });
   });
 
-  describe(`When ${ConsultantController.prototype.updateConsultant.name} is called`, () => {
+  describe(`When ${ConsultantController.prototype.updateById.name} is called`, () => {
     const httpRequest = makeFakeApiHttpRequest({
       body: makeFakeCreateConsultantInput(),
       params: { id: 777 },
@@ -199,9 +197,9 @@ describe(ConsultantController.name, () => {
       const { sut, validatorStub } = makeSut();
       const validateSchemaSpy = validatorStub.validateSchema;
 
-      await sut.updateConsultant(httpRequest);
+      await sut.updateById(httpRequest);
 
-      expect(validateSchemaSpy).toBeCalledWith('UpdateConsultant', {
+      expect(validateSchemaSpy).toBeCalledWith('UpdateConsultantById', {
         id: 777,
         ...makeFakeUpdateConsultantInput(),
       });
@@ -209,15 +207,15 @@ describe(ConsultantController.name, () => {
 
     it('should call service with validation return', async () => {
       const { sut, consultantServiceStub, validatorStub } = makeSut();
-      const updateConsultantSpy = consultantServiceStub.updateConsultant;
+      const updateByIdSpy = consultantServiceStub.updateById;
       validatorStub.validateSchema.mockReturnValueOnce({
         id: 777,
         ...makeFakeUpdateConsultantInput(),
       });
 
-      await sut.updateConsultant(httpRequest);
+      await sut.updateById(httpRequest);
 
-      expect(updateConsultantSpy).toBeCalledWith(
+      expect(updateByIdSpy).toBeCalledWith(
         777,
         makeFakeCreateConsultantInput(),
       );
@@ -226,18 +224,18 @@ describe(ConsultantController.name, () => {
     it('should return service response', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.updateConsultant(httpRequest);
+      const result = await sut.updateById(httpRequest);
 
       expect(result).toEqual(makeFakeApiHttpResponse('NO_CONTENT'));
     });
 
     it('should throw when service throws', async () => {
       const { sut, consultantServiceStub } = makeSut();
-      consultantServiceStub.updateConsultant.mockRejectedValueOnce(
+      consultantServiceStub.updateById.mockRejectedValueOnce(
         new Error('any_update_consultant_error'),
       );
 
-      const promise = sut.updateConsultant(httpRequest);
+      const promise = sut.updateById(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_update_consultant_error'),
@@ -250,7 +248,7 @@ describe(ConsultantController.name, () => {
         throw new Error('any_validate_schema_error');
       });
 
-      const promise = sut.updateConsultant(httpRequest);
+      const promise = sut.updateById(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_validate_schema_error'),
@@ -258,7 +256,7 @@ describe(ConsultantController.name, () => {
     });
   });
 
-  describe(`When ${ConsultantController.prototype.deleteConsultant.name} is called`, () => {
+  describe(`When ${ConsultantController.prototype.deleteById.name} is called`, () => {
     const httpRequest = makeFakeApiHttpRequest({
       params: { id: 777 },
     });
@@ -267,7 +265,7 @@ describe(ConsultantController.name, () => {
       const { sut, validatorStub } = makeSut();
       const validateSchemaSpy = validatorStub.validateSchema;
 
-      await sut.deleteConsultant(httpRequest);
+      await sut.deleteById(httpRequest);
 
       expect(validateSchemaSpy).toBeCalledWith('DeleteConsultantById', {
         id: 777,
@@ -276,31 +274,31 @@ describe(ConsultantController.name, () => {
 
     it('should call service with validation return', async () => {
       const { sut, consultantServiceStub, validatorStub } = makeSut();
-      const deleteConsultantSpy = consultantServiceStub.deleteConsultant;
+      const deleteByIdSpy = consultantServiceStub.deleteById;
       validatorStub.validateSchema.mockReturnValueOnce({
         id: 777,
       });
 
-      await sut.deleteConsultant(httpRequest);
+      await sut.deleteById(httpRequest);
 
-      expect(deleteConsultantSpy).toBeCalledWith(777);
+      expect(deleteByIdSpy).toBeCalledWith(777);
     });
 
     it('should return service response', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.deleteConsultant(httpRequest);
+      const result = await sut.deleteById(httpRequest);
 
       expect(result).toEqual(makeFakeApiHttpResponse('NO_CONTENT'));
     });
 
     it('should throw when service throws', async () => {
       const { sut, consultantServiceStub } = makeSut();
-      consultantServiceStub.deleteConsultant.mockRejectedValueOnce(
+      consultantServiceStub.deleteById.mockRejectedValueOnce(
         new Error('any_delete_consultant_error'),
       );
 
-      const promise = sut.deleteConsultant(httpRequest);
+      const promise = sut.deleteById(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_delete_consultant_error'),
@@ -313,7 +311,7 @@ describe(ConsultantController.name, () => {
         throw new Error('any_validate_schema_error');
       });
 
-      const promise = sut.deleteConsultant(httpRequest);
+      const promise = sut.deleteById(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_validate_schema_error'),

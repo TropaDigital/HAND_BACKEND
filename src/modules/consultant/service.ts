@@ -5,7 +5,7 @@ import { IConsultantRepository, IConsultantService } from './interfaces';
 export class ConsultantService implements IConsultantService {
   constructor(private readonly consultantRepository: IConsultantRepository) {}
 
-  public async getAllConsultants(): Promise<Consultant[]> {
+  public async getAll(): Promise<Consultant[]> {
     const result = await this.consultantRepository.findAll();
     return result.map(consultant => ({
       ...consultant,
@@ -13,7 +13,7 @@ export class ConsultantService implements IConsultantService {
     }));
   }
 
-  public async getConsultantById(id: number): Promise<Consultant | null> {
+  public async getById(id: number): Promise<Consultant | null> {
     const result = await this.consultantRepository.findById(id);
 
     return result
@@ -24,7 +24,7 @@ export class ConsultantService implements IConsultantService {
       : result;
   }
 
-  public async createConsultant(
+  public async create(
     payload: Prisma.ConsultantCreateInput,
   ): Promise<Consultant> {
     const consultant = {
@@ -36,7 +36,7 @@ export class ConsultantService implements IConsultantService {
     return result;
   }
 
-  public async updateConsultant(
+  public async updateById(
     id: number,
     payload: Partial<Omit<Consultant, 'id'>>,
   ): Promise<void> {
@@ -44,13 +44,13 @@ export class ConsultantService implements IConsultantService {
       ...payload,
       commission: this.formatCommissionToPersistence(payload.commission),
     };
-    const result = await this.consultantRepository.update(id, consultant);
+    const result = await this.consultantRepository.updateById(id, consultant);
 
     return result;
   }
 
-  public async deleteConsultant(id: number): Promise<void> {
-    const result = await this.consultantRepository.delete(id);
+  public async deleteById(id: number): Promise<void> {
+    const result = await this.consultantRepository.deleteById(id);
 
     return result;
   }

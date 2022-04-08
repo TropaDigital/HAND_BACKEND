@@ -59,12 +59,12 @@ describe('Schema', () => {
     });
   });
 
-  describe('UpdateConsultant', () => {
+  describe('UpdateConsultantById', () => {
     it('should success when receive a valid input', () => {
       const { sut } = makeSut();
       const param = { id: 777, ...makeFakeUpdateConsultantInput() };
 
-      const result = sut.validateSchema('UpdateConsultant', param);
+      const result = sut.validateSchema('UpdateConsultantById', param);
 
       expect(result).toEqual(param);
     });
@@ -80,7 +80,7 @@ describe('Schema', () => {
         createdBy: 2,
       };
 
-      expect(() => sut.validateSchema('UpdateConsultant', param)).toThrow(
+      expect(() => sut.validateSchema('UpdateConsultantById', param)).toThrow(
         new Error('Missing or invalid param'),
       );
     });

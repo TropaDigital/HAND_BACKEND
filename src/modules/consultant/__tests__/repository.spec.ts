@@ -107,7 +107,7 @@ describe(ConsultantRepository.name, () => {
     });
   });
 
-  describe(`When ${ConsultantRepository.prototype.update.name} is called`, () => {
+  describe(`When ${ConsultantRepository.prototype.updateById.name} is called`, () => {
     const fakeConsultant = makeFakeConsultant();
     const fakeId = 777;
 
@@ -115,7 +115,7 @@ describe(ConsultantRepository.name, () => {
       const { sut, prismaRepository } = makeSut();
       const updateSpy = prismaRepository.update;
 
-      await sut.update(fakeId, fakeConsultant);
+      await sut.updateById(fakeId, fakeConsultant);
 
       expect(updateSpy).toBeCalledWith({
         data: makeFakeConsultant(),
@@ -129,20 +129,20 @@ describe(ConsultantRepository.name, () => {
         new Error('any_update_error'),
       );
 
-      const promise = sut.update(fakeId, fakeConsultant);
+      const promise = sut.updateById(fakeId, fakeConsultant);
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
     });
   });
 
-  describe(`When ${ConsultantRepository.prototype.delete.name} is called`, () => {
+  describe(`When ${ConsultantRepository.prototype.deleteById.name} is called`, () => {
     const fakeId = 777;
 
     it('should call prisma with right params', async () => {
       const { sut, prismaRepository } = makeSut();
       const deleteSpy = prismaRepository.delete;
 
-      await sut.delete(fakeId);
+      await sut.deleteById(fakeId);
 
       expect(deleteSpy).toBeCalledWith({
         where: { id: 777 },
@@ -155,7 +155,7 @@ describe(ConsultantRepository.name, () => {
         new Error('any_delete_error'),
       );
 
-      const promise = sut.delete(fakeId);
+      const promise = sut.deleteById(fakeId);
 
       await expect(promise).rejects.toThrow(new Error('any_delete_error'));
     });

@@ -33,7 +33,7 @@ export class ConsultantRepository implements IConsultantRepository {
     return result;
   }
 
-  public async update(
+  public async updateById(
     id: number,
     consultant: Prisma.ConsultantUpdateInput,
   ): Promise<void> {
@@ -43,7 +43,7 @@ export class ConsultantRepository implements IConsultantRepository {
     });
   }
 
-  public async delete(id: number): Promise<void> {
+  public async deleteById(id: number): Promise<void> {
     await this.prismaRepository.delete({ where: { id } });
   }
 }

@@ -15,12 +15,12 @@ const makeSut = () => {
 };
 
 describe(ConsultantService.name, () => {
-  describe(`When ${ConsultantService.prototype.getAllConsultants.name} is called`, () => {
+  describe(`When ${ConsultantService.prototype.getAll.name} is called`, () => {
     it('should call repository with right params', async () => {
       const { sut, consultantRepository } = makeSut();
       const findAllSpy = consultantRepository.findAll;
 
-      await sut.getAllConsultants();
+      await sut.getAll();
 
       expect(findAllSpy).toBeCalledWith();
     });
@@ -28,7 +28,7 @@ describe(ConsultantService.name, () => {
     it('should return repository result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.getAllConsultants();
+      const result = await sut.getAll();
 
       expect(result).toEqual(
         makeFakeConsultantList().map(consultant => ({
@@ -44,20 +44,20 @@ describe(ConsultantService.name, () => {
         new Error('any_find_all_error'),
       );
 
-      const promise = sut.getAllConsultants();
+      const promise = sut.getAll();
 
       await expect(promise).rejects.toThrow(new Error('any_find_all_error'));
     });
   });
 
-  describe(`When ${ConsultantService.prototype.getConsultantById.name} is called`, () => {
+  describe(`When ${ConsultantService.prototype.getById.name} is called`, () => {
     const fakeId = 777;
 
     it('should call repository with right params', async () => {
       const { sut, consultantRepository } = makeSut();
       const findByIdSpy = consultantRepository.findById;
 
-      await sut.getConsultantById(fakeId);
+      await sut.getById(fakeId);
 
       expect(findByIdSpy).toBeCalledWith(777);
     });
@@ -65,7 +65,7 @@ describe(ConsultantService.name, () => {
     it('should return repository result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.getConsultantById(fakeId);
+      const result = await sut.getById(fakeId);
 
       expect(result).toEqual({ ...makeFakeConsultant(), commission: 10 });
     });
@@ -74,7 +74,7 @@ describe(ConsultantService.name, () => {
       const { sut, consultantRepository } = makeSut();
       consultantRepository.findById.mockResolvedValueOnce(null);
 
-      const result = await sut.getConsultantById(fakeId);
+      const result = await sut.getById(fakeId);
 
       expect(result).toEqual(null);
     });
@@ -85,20 +85,20 @@ describe(ConsultantService.name, () => {
         new Error('any_find_by_error'),
       );
 
-      const promise = sut.getConsultantById(fakeId);
+      const promise = sut.getById(fakeId);
 
       await expect(promise).rejects.toThrow(new Error('any_find_by_error'));
     });
   });
 
-  describe(`When ${ConsultantService.prototype.createConsultant.name} is called`, () => {
+  describe(`When ${ConsultantService.prototype.create.name} is called`, () => {
     const fakeConsultant = makeFakeCreateConsultantInput();
 
     it('should call repository with right params', async () => {
       const { sut, consultantRepository } = makeSut();
       const createSpy = consultantRepository.create;
 
-      await sut.createConsultant(fakeConsultant);
+      await sut.create(fakeConsultant);
 
       expect(createSpy).toBeCalledWith({
         ...makeFakeCreateConsultantInput(),
@@ -109,7 +109,7 @@ describe(ConsultantService.name, () => {
     it('should return repository result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.createConsultant(fakeConsultant);
+      const result = await sut.create(fakeConsultant);
 
       expect(result).toEqual(makeFakeConsultant());
     });
@@ -124,7 +124,7 @@ describe(ConsultantService.name, () => {
         createdBy: 'any_user',
       };
 
-      const result = await sut.createConsultant(consultant);
+      const result = await sut.create(consultant);
 
       expect(result).toEqual(makeFakeConsultant());
     });
@@ -135,21 +135,21 @@ describe(ConsultantService.name, () => {
         new Error('any_create_error'),
       );
 
-      const promise = sut.createConsultant(fakeConsultant);
+      const promise = sut.create(fakeConsultant);
 
       await expect(promise).rejects.toThrow(new Error('any_create_error'));
     });
   });
 
-  describe(`When ${ConsultantService.prototype.updateConsultant.name} is called`, () => {
+  describe(`When ${ConsultantService.prototype.updateById.name} is called`, () => {
     const fakeId = 777;
     const fakeConsultant = makeFakeUpdateConsultantInput();
 
     it('should call repository with right params', async () => {
       const { sut, consultantRepository } = makeSut();
-      const updateSpy = consultantRepository.update;
+      const updateSpy = consultantRepository.updateById;
 
-      await sut.updateConsultant(fakeId, fakeConsultant);
+      await sut.updateById(fakeId, fakeConsultant);
 
       expect(updateSpy).toBeCalledWith(777, {
         ...makeFakeUpdateConsultantInput(),
@@ -159,35 +159,35 @@ describe(ConsultantService.name, () => {
 
     it('should throw when repository throws', async () => {
       const { sut, consultantRepository } = makeSut();
-      consultantRepository.update.mockRejectedValueOnce(
+      consultantRepository.updateById.mockRejectedValueOnce(
         new Error('any_update_error'),
       );
 
-      const promise = sut.updateConsultant(fakeId, fakeConsultant);
+      const promise = sut.updateById(fakeId, fakeConsultant);
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
     });
   });
 
-  describe(`When ${ConsultantService.prototype.deleteConsultant.name} is called`, () => {
+  describe(`When ${ConsultantService.prototype.deleteById.name} is called`, () => {
     const fakeId = 777;
 
     it('should call repository with right params', async () => {
       const { sut, consultantRepository } = makeSut();
-      const deleteSpy = consultantRepository.delete;
+      const deleteSpy = consultantRepository.deleteById;
 
-      await sut.deleteConsultant(fakeId);
+      await sut.deleteById(fakeId);
 
       expect(deleteSpy).toBeCalledWith(777);
     });
 
     it('should throw when repository throws', async () => {
       const { sut, consultantRepository } = makeSut();
-      consultantRepository.delete.mockRejectedValueOnce(
+      consultantRepository.deleteById.mockRejectedValueOnce(
         new Error('any_delete_error'),
       );
 
-      const promise = sut.deleteConsultant(fakeId);
+      const promise = sut.deleteById(fakeId);
 
       await expect(promise).rejects.toThrow(new Error('any_delete_error'));
     });

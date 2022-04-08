@@ -68,11 +68,11 @@ export const makeFakeConsultantList = () => [
 
 export const makeConsultantServiceStub =
   (): jest.Mocked<IConsultantService> => ({
-    getAllConsultants: jest.fn().mockResolvedValue(makeFakeConsultantList()),
-    getConsultantById: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    createConsultant: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    updateConsultant: jest.fn(),
-    deleteConsultant: jest.fn(),
+    getAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),
+    getById: jest.fn().mockResolvedValue(makeFakeConsultant()),
+    create: jest.fn().mockResolvedValue(makeFakeConsultant()),
+    updateById: jest.fn(),
+    deleteById: jest.fn(),
   });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
@@ -96,6 +96,6 @@ export const makeConsultantRepositoryStub =
     findAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),
     findById: jest.fn().mockResolvedValue(makeFakeConsultant()),
     create: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    update: jest.fn(),
-    delete: jest.fn(),
+    updateById: jest.fn(),
+    deleteById: jest.fn(),
   });

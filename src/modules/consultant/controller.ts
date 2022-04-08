@@ -12,25 +12,25 @@ export class ConsultantController implements IConsultantController {
     private readonly validator: IValidator<typeof schemas>,
   ) {}
 
-  public async getAllConsultants(): Promise<IApiHttpResponse<Consultant[]>> {
-    const result = await this.consultantService.getAllConsultants();
+  public async getAll(): Promise<IApiHttpResponse<Consultant[]>> {
+    const result = await this.consultantService.getAll();
 
     return { statusCodeAsString: 'OK', body: result };
   }
 
-  public async getConsultantById(
+  public async getById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Consultant | null>> {
     const { id } = this.validator.validateSchema<{ id: number }>(
       'GetConsultantById',
       httpRequest.params as { id: number },
     );
-    const result = await this.consultantService.getConsultantById(id);
+    const result = await this.consultantService.getById(id);
 
     return { statusCodeAsString: 'OK', body: result };
   }
 
-  public async createConsultant(
+  public async create(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Consultant>> {
     const consultant =
@@ -38,36 +38,33 @@ export class ConsultantController implements IConsultantController {
         'CreateConsultant',
         httpRequest.body,
       );
-    const result = await this.consultantService.createConsultant(consultant);
+    const result = await this.consultantService.create(consultant);
 
     return { statusCodeAsString: 'CREATED', body: result };
   }
 
-  public async updateConsultant(
+  public async updateById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
     const { id, ...consultant } = this.validator.validateSchema<
       Prisma.ConsultantUpdateInput & { id: number }
-    >('UpdateConsultant', {
+    >('UpdateConsultantById', {
       ...httpRequest.body,
       ...httpRequest.params,
     });
-    const result = await this.consultantService.updateConsultant(
-      id,
-      consultant,
-    );
+    const result = await this.consultantService.updateById(id, consultant);
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
   }
 
-  public async deleteConsultant(
+  public async deleteById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
     const { id } = this.validator.validateSchema<{ id: number }>(
       'DeleteConsultantById',
       httpRequest.params as { id: number },
     );
-    const result = await this.consultantService.deleteConsultant(id);
+    const result = await this.consultantService.deleteById(id);
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
   }

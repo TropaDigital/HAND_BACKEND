@@ -21,8 +21,9 @@
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "prettier", "import-helpers"],
+  "plugins": ["@typescript-eslint", "prettier", "import-helpers", "unused-imports"],
   "rules": {
+    "unused-imports/no-unused-imports": "error",
     "@typescript-eslint/naming-convention": [
       "error",
       {

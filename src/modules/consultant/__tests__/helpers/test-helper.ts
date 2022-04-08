@@ -15,9 +15,16 @@ export const makeFakeCreateConsultantInput =
     createdBy: 'any_user',
   });
 
-export const makeFakeUpdateConsultantInput =
-  (): jest.Mocked<Prisma.ConsultantUpdateInput> =>
-    makeFakeCreateConsultantInput();
+export const makeFakeUpdateConsultantInput = (): jest.Mocked<
+  Partial<Omit<Consultant, 'id'>>
+> => ({
+  name: 'any_name',
+  taxId: '00000000000',
+  city: 'any_city',
+  state: 'any_state',
+  commission: 10,
+  createdBy: 'any_user',
+});
 
 export const makeFakeApiHttpRequest = ({
   body,
@@ -45,7 +52,7 @@ export const makeFakeConsultant = (
   taxId: '00000000000',
   city: 'any_city',
   state: 'any_state',
-  commission: 10,
+  commission: 1000,
   createdBy: 'any_user',
   updatedBy: 'any_date',
   createdAt: new Date(),

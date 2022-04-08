@@ -39,7 +39,12 @@ describe(ConsultantService.name, () => {
 
       const result = await sut.getAllConsultants();
 
-      expect(result).toEqual(makeFakeConsultantList());
+      expect(result).toEqual(
+        makeFakeConsultantList().map(consultant => ({
+          ...consultant,
+          commission: 10,
+        })),
+      );
     });
 
     it('should throw when repository throws', async () => {
@@ -71,7 +76,16 @@ describe(ConsultantService.name, () => {
 
       const result = await sut.getConsultantById(fakeId);
 
-      expect(result).toEqual(makeFakeConsultant());
+      expect(result).toEqual({ ...makeFakeConsultant(), commission: 10 });
+    });
+
+    it('should return null when repository result is null', async () => {
+      const { sut, consultantRepository } = makeSut();
+      consultantRepository.findById.mockResolvedValueOnce(null);
+
+      const result = await sut.getConsultantById(fakeId);
+
+      expect(result).toEqual(null);
     });
 
     it('should throw when repository throws', async () => {
@@ -95,13 +109,31 @@ describe(ConsultantService.name, () => {
 
       await sut.createConsultant(fakeConsultant);
 
-      expect(createSpy).toBeCalledWith(makeFakeCreateConsultantInput());
+      expect(createSpy).toBeCalledWith({
+        ...makeFakeCreateConsultantInput(),
+        commission: 1000,
+      });
     });
 
     it('should return repository result', async () => {
       const { sut } = makeSut();
 
       const result = await sut.createConsultant(fakeConsultant);
+
+      expect(result).toEqual(makeFakeConsultant());
+    });
+
+    it('should return repository result when consultant has no commission', async () => {
+      const { sut } = makeSut();
+      const consultant = {
+        name: 'any_name',
+        taxId: '00000000000',
+        city: 'any_city',
+        state: 'any_state',
+        createdBy: 'any_user',
+      };
+
+      const result = await sut.createConsultant(consultant);
 
       expect(result).toEqual(makeFakeConsultant());
     });
@@ -128,7 +160,10 @@ describe(ConsultantService.name, () => {
 
       await sut.updateConsultant(fakeId, fakeConsultant);
 
-      expect(updateSpy).toBeCalledWith(777, makeFakeUpdateConsultantInput());
+      expect(updateSpy).toBeCalledWith(777, {
+        ...makeFakeUpdateConsultantInput(),
+        commission: 1000,
+      });
     });
 
     it('should throw when repository throws', async () => {

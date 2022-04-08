@@ -7,19 +7,30 @@ export class ConsultantService implements IConsultantService {
 
   public async getAllConsultants(): Promise<Consultant[]> {
     const result = await this.consultantRepository.findAll();
-
-    return result;
+    return result.map(consultant => ({
+      ...consultant,
+      commission: this.formatCommissionFromPersistence(consultant.commission),
+    }));
   }
 
   public async getConsultantById(id: number): Promise<Consultant | null> {
     const result = await this.consultantRepository.findById(id);
 
-    return result;
+    return result
+      ? {
+          ...result,
+          commission: this.formatCommissionFromPersistence(result.commission),
+        }
+      : result;
   }
 
   public async createConsultant(
-    consultant: Prisma.ConsultantCreateInput,
+    payload: Prisma.ConsultantCreateInput,
   ): Promise<Consultant> {
+    const consultant = {
+      ...payload,
+      commission: this.formatCommissionToPersistence(payload.commission),
+    };
     const result = await this.consultantRepository.create(consultant);
 
     return result;
@@ -27,8 +38,12 @@ export class ConsultantService implements IConsultantService {
 
   public async updateConsultant(
     id: number,
-    consultant: Prisma.ConsultantUpdateInput,
+    payload: Partial<Omit<Consultant, 'id'>>,
   ): Promise<void> {
+    const consultant = {
+      ...payload,
+      commission: this.formatCommissionToPersistence(payload.commission),
+    };
     const result = await this.consultantRepository.update(id, consultant);
 
     return result;
@@ -38,5 +53,13 @@ export class ConsultantService implements IConsultantService {
     const result = await this.consultantRepository.delete(id);
 
     return result;
+  }
+
+  private formatCommissionToPersistence(commission = 0): number {
+    return commission * 100;
+  }
+
+  private formatCommissionFromPersistence(commission: number): number {
+    return commission / 100;
   }
 }

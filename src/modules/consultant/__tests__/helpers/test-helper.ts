@@ -13,10 +13,6 @@ export const makeFakeCreateConsultantInput =
     state: 'any_state',
     commission: 10,
     createdBy: 'any_user',
-    updatedBy: 'any_date',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    deletedAt: new Date(),
   });
 
 export const makeFakeUpdateConsultantInput =

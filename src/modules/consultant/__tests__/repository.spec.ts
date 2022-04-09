@@ -60,7 +60,7 @@ describe(ConsultantRepository.name, () => {
 
       const result = await sut.findById(fakeId);
 
-      expect(result).toEqual(makeFakeConsultant());
+      expect(result).toEqual(makeFakeConsultant({}));
     });
 
     it('should throw when prisma throws', async () => {
@@ -76,7 +76,7 @@ describe(ConsultantRepository.name, () => {
   });
 
   describe(`When ${ConsultantRepository.prototype.create.name} is called`, () => {
-    const fakeConsultant = makeFakeConsultant();
+    const fakeConsultant = makeFakeConsultant({});
 
     it('should call prisma with right params', async () => {
       const { sut, prismaRepository } = makeSut();
@@ -84,7 +84,7 @@ describe(ConsultantRepository.name, () => {
 
       await sut.create(fakeConsultant);
 
-      expect(createSpy).toBeCalledWith({ data: makeFakeConsultant() });
+      expect(createSpy).toBeCalledWith({ data: makeFakeConsultant({}) });
     });
 
     it('should return prisma result', async () => {
@@ -92,7 +92,7 @@ describe(ConsultantRepository.name, () => {
 
       const result = await sut.create(fakeConsultant);
 
-      expect(result).toEqual(makeFakeConsultant());
+      expect(result).toEqual(makeFakeConsultant({}));
     });
 
     it('should throw when prisma throws', async () => {
@@ -108,7 +108,7 @@ describe(ConsultantRepository.name, () => {
   });
 
   describe(`When ${ConsultantRepository.prototype.updateById.name} is called`, () => {
-    const fakeConsultant = makeFakeConsultant();
+    const fakeConsultant = makeFakeConsultant({});
     const fakeId = 777;
 
     it('should call prisma with right params', async () => {
@@ -118,7 +118,7 @@ describe(ConsultantRepository.name, () => {
       await sut.updateById(fakeId, fakeConsultant);
 
       expect(updateSpy).toBeCalledWith({
-        data: makeFakeConsultant(),
+        data: makeFakeConsultant({}),
         where: { id: 777 },
       });
     });

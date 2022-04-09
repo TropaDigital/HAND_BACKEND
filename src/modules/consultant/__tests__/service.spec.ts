@@ -68,7 +68,7 @@ describe(ConsultantService.name, () => {
 
       const result = await sut.getById(fakeId);
 
-      expect(result).toEqual({ ...makeFakeConsultant(), commission: 10 });
+      expect(result).toEqual({ ...makeFakeConsultant({}), commission: 10 });
     });
 
     it('should return null when repository result is null', async () => {
@@ -112,7 +112,7 @@ describe(ConsultantService.name, () => {
 
       const result = await sut.create(fakeConsultant);
 
-      expect(result).toEqual(makeFakeConsultant());
+      expect(result).toEqual(makeFakeConsultant({}));
     });
 
     it('should return repository result when consultant has no commission', async () => {
@@ -127,7 +127,7 @@ describe(ConsultantService.name, () => {
 
       const result = await sut.create(consultant);
 
-      expect(result).toEqual(makeFakeConsultant());
+      expect(result).toEqual(makeFakeConsultant({}));
     });
 
     it('should throw when repository throws', async () => {

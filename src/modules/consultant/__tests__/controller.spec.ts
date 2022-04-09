@@ -83,7 +83,7 @@ describe(ConsultantController.name, () => {
       const result = await sut.getById(httpRequest);
 
       expect(result).toEqual(
-        makeFakeApiHttpResponse('OK', makeFakeConsultant()),
+        makeFakeApiHttpResponse('OK', makeFakeConsultant({})),
       );
     });
 
@@ -154,7 +154,7 @@ describe(ConsultantController.name, () => {
       const result = await sut.create(httpRequest);
 
       expect(result).toEqual(
-        makeFakeApiHttpResponse('CREATED', makeFakeConsultant()),
+        makeFakeApiHttpResponse('CREATED', makeFakeConsultant({})),
       );
     });
 

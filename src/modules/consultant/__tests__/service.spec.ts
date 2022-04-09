@@ -1,3 +1,4 @@
+import { NotFoundError } from '../../../shared/errors';
 import { ConsultantService } from '../service';
 import {
   makeConsultantRepositoryStub,
@@ -74,9 +75,9 @@ describe(ConsultantService.name, () => {
       const { sut, consultantRepository } = makeSut();
       consultantRepository.findById.mockResolvedValueOnce(null);
 
-      const result = await sut.getById(fakeId);
-
-      expect(result).toEqual(null);
+      await expect(sut.getById(fakeId)).rejects.toThrow(
+        new NotFoundError('consultant not found with provided id'),
+      );
     });
 
     it('should throw when repository throws', async () => {
@@ -157,6 +158,15 @@ describe(ConsultantService.name, () => {
       });
     });
 
+    it('should throw not found error when the the resource with the provided id does not exist', async () => {
+      const { sut, consultantRepository } = makeSut();
+      consultantRepository.findById.mockResolvedValueOnce(null);
+
+      await expect(sut.updateById(fakeId, fakeConsultant)).rejects.toThrow(
+        new NotFoundError('consultant not found with provided id'),
+      );
+    });
+
     it('should throw when repository throws', async () => {
       const { sut, consultantRepository } = makeSut();
       consultantRepository.updateById.mockRejectedValueOnce(
@@ -190,6 +200,15 @@ describe(ConsultantService.name, () => {
       const promise = sut.deleteById(fakeId);
 
       await expect(promise).rejects.toThrow(new Error('any_delete_error'));
+    });
+
+    it('should throw not found error when the the resource with the provided id does not exist', async () => {
+      const { sut, consultantRepository } = makeSut();
+      consultantRepository.findById.mockResolvedValueOnce(null);
+
+      await expect(sut.deleteById(fakeId)).rejects.toThrow(
+        new NotFoundError('consultant not found with provided id'),
+      );
     });
   });
 });

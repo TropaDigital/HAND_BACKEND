@@ -1,0 +1,214 @@
+import { NotFoundError } from '../../../shared/errors';
+import { {{pascalCase name}}Service } from '../service';
+import {
+  make{{pascalCase name}}RepositoryStub,
+  makeFake{{pascalCase name}},
+  makeFake{{pascalCase name}}List,
+  makeFakeCreate{{pascalCase name}}Input,
+  makeFakeUpdate{{pascalCase name}}Input,
+} from './helpers/test-helper';
+
+const makeSut = () => {
+  const {{camelCase name}}Repository = make{{pascalCase name}}RepositoryStub();
+  const sut = new {{pascalCase name}}Service({{camelCase name}}Repository);
+
+  return { sut, {{camelCase name}}Repository };
+};
+
+describe({{pascalCase name}}Service.name, () => {
+  describe(`When ${ {{pascalCase name}}Service.prototype.getAll.name} is called`, () => {
+    it('should call repository with right params', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      const findAllSpy = {{camelCase name}}Repository.findAll;
+
+      await sut.getAll();
+
+      expect(findAllSpy).toBeCalledWith();
+    });
+
+    it('should return repository result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.getAll();
+
+      expect(result).toEqual(
+        makeFake{{pascalCase name}}List().map({{camelCase name}} => ({
+          ...{{camelCase name}},
+          commission: 10,
+        })),
+      );
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.findAll.mockRejectedValueOnce(
+        new Error('any_find_all_error'),
+      );
+
+      const promise = sut.getAll();
+
+      await expect(promise).rejects.toThrow(new Error('any_find_all_error'));
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Service.prototype.getById.name} is called`, () => {
+    const fakeId = 777;
+
+    it('should call repository with right params', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      const findByIdSpy = {{camelCase name}}Repository.findById;
+
+      await sut.getById(fakeId);
+
+      expect(findByIdSpy).toBeCalledWith(777);
+    });
+
+    it('should return repository result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.getById(fakeId);
+
+      expect(result).toEqual({ ...makeFake{{pascalCase name}}({}), commission: 10 });
+    });
+
+    it('should return null when repository result is null', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.findById.mockResolvedValueOnce(null);
+
+      await expect(sut.getById(fakeId)).rejects.toThrow(
+        new NotFoundError('{{camelCase name}} not found with provided id'),
+      );
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.findById.mockRejectedValueOnce(
+        new Error('any_find_by_error'),
+      );
+
+      const promise = sut.getById(fakeId);
+
+      await expect(promise).rejects.toThrow(new Error('any_find_by_error'));
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Service.prototype.create.name} is called`, () => {
+    const fake{{pascalCase name}} = makeFakeCreate{{pascalCase name}}Input();
+
+    it('should call repository with right params', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      const createSpy = {{camelCase name}}Repository.create;
+
+      await sut.create(fake{{pascalCase name}});
+
+      expect(createSpy).toBeCalledWith({
+        ...makeFakeCreate{{pascalCase name}}Input(),
+        commission: 1000,
+      });
+    });
+
+    it('should return repository result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.create(fake{{pascalCase name}});
+
+      expect(result).toEqual(makeFake{{pascalCase name}}({}));
+    });
+
+    it('should return repository result when {{camelCase name}} has no commission', async () => {
+      const { sut } = makeSut();
+      const {{camelCase name}} = {
+        name: 'any_name',
+        taxId: '00000000000',
+        city: 'any_city',
+        state: 'any_state',
+        createdBy: 'any_{{camelCase name}}',
+      };
+
+      const result = await sut.create({{camelCase name}});
+
+      expect(result).toEqual(makeFake{{pascalCase name}}({}));
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.create.mockRejectedValueOnce(
+        new Error('any_create_error'),
+      );
+
+      const promise = sut.create(fake{{pascalCase name}});
+
+      await expect(promise).rejects.toThrow(new Error('any_create_error'));
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Service.prototype.updateById.name} is called`, () => {
+    const fakeId = 777;
+    const fake{{pascalCase name}} = makeFakeUpdate{{pascalCase name}}Input();
+
+    it('should call repository with right params', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      const updateSpy = {{camelCase name}}Repository.updateById;
+
+      await sut.updateById(fakeId, fake{{pascalCase name}});
+
+      expect(updateSpy).toBeCalledWith(777, {
+        ...makeFakeUpdate{{pascalCase name}}Input(),
+        commission: 1000,
+      });
+    });
+
+    it('should throw not found error when the the resource with the provided id does not exist', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.findById.mockResolvedValueOnce(null);
+
+      await expect(sut.updateById(fakeId, fake{{pascalCase name}})).rejects.toThrow(
+        new NotFoundError('{{camelCase name}} not found with provided id'),
+      );
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.updateById.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.updateById(fakeId, fake{{pascalCase name}});
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Service.prototype.deleteById.name} is called`, () => {
+    const fakeId = 777;
+
+    it('should call repository with right params', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      const deleteSpy = {{camelCase name}}Repository.deleteById;
+
+      await sut.deleteById(fakeId);
+
+      expect(deleteSpy).toBeCalledWith(777);
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.deleteById.mockRejectedValueOnce(
+        new Error('any_delete_error'),
+      );
+
+      const promise = sut.deleteById(fakeId);
+
+      await expect(promise).rejects.toThrow(new Error('any_delete_error'));
+    });
+
+    it('should throw not found error when the the resource with the provided id does not exist', async () => {
+      const { sut, {{camelCase name}}Repository } = makeSut();
+      {{camelCase name}}Repository.findById.mockResolvedValueOnce(null);
+
+      await expect(sut.deleteById(fakeId)).rejects.toThrow(
+        new NotFoundError('{{camelCase name}} not found with provided id'),
+      );
+    });
+  });
+});

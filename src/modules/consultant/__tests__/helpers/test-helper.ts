@@ -6,25 +6,28 @@ import { IValidator } from '../../../../interfaces/validation/IValidator';
 import { IConsultantRepository, IConsultantService } from '../../interfaces';
 import { PrismaConsultantRepository } from '../../repository';
 
-export const makeFakeCreateConsultantInput =
-  (): jest.Mocked<Prisma.ConsultantCreateInput> => ({
-    name: 'any_name',
-    taxId: '00000000000',
-    city: 'any_city',
-    state: 'any_state',
-    commission: 10,
-    createdBy: 'any_user',
-  });
-
-export const makeFakeUpdateConsultantInput = (): jest.Mocked<
-  Partial<Omit<Consultant, 'id'>>
-> => ({
+export const makeFakeCreateConsultantInput = (
+  payload?: Partial<Prisma.ConsultantCreateInput>,
+): jest.Mocked<Prisma.ConsultantCreateInput> => ({
   name: 'any_name',
   taxId: '00000000000',
   city: 'any_city',
   state: 'any_state',
   commission: 10,
   createdBy: 'any_user',
+  ...payload,
+});
+
+export const makeFakeUpdateConsultantInput = (
+  payload?: Partial<Omit<Consultant, 'id'>>,
+): jest.Mocked<Partial<Omit<Consultant, 'id'>>> => ({
+  name: 'any_name',
+  taxId: '00000000000',
+  city: 'any_city',
+  state: 'any_state',
+  commission: 10,
+  createdBy: 'any_user',
+  ...payload,
 });
 
 export const makeFakeApiHttpRequest = ({
@@ -46,10 +49,10 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeConsultant = (
-  name = 'any_name',
+  payload: Partial<Consultant>,
 ): jest.Mocked<Consultant> => ({
   id: 777,
-  name,
+  name: 'any_name',
   taxId: '00000000000',
   city: 'any_city',
   state: 'any_state',
@@ -59,20 +62,21 @@ export const makeFakeConsultant = (
   createdAt: new Date(),
   updatedAt: new Date(),
   deletedAt: new Date(),
+  ...payload,
 });
 
 export const makeFakeConsultantList = () => [
-  makeFakeConsultant('any_name1'),
-  makeFakeConsultant('any_name2'),
+  makeFakeConsultant({ name: 'any_name1' }),
+  makeFakeConsultant({ name: 'any_name2' }),
 ];
 
 export const makeConsultantServiceStub =
   (): jest.Mocked<IConsultantService> => ({
-    getAllConsultants: jest.fn().mockResolvedValue(makeFakeConsultantList()),
-    getConsultantById: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    createConsultant: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    updateConsultant: jest.fn(),
-    deleteConsultant: jest.fn(),
+    getAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),
+    getById: jest.fn().mockResolvedValue(makeFakeConsultant({})),
+    create: jest.fn().mockResolvedValue(makeFakeConsultant({})),
+    updateById: jest.fn(),
+    deleteById: jest.fn(),
   });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
@@ -83,8 +87,8 @@ export const makePrismaConsultantRepositoryStub =
   (): jest.Mocked<PrismaConsultantRepository> => {
     const result: jest.Mocked<Partial<PrismaConsultantRepository>> = {
       findMany: jest.fn().mockResolvedValue(makeFakeConsultantList()),
-      findFirst: jest.fn().mockResolvedValue(makeFakeConsultant()),
-      create: jest.fn().mockResolvedValue(makeFakeConsultant()),
+      findFirst: jest.fn().mockResolvedValue(makeFakeConsultant({})),
+      create: jest.fn().mockResolvedValue(makeFakeConsultant({})),
       update: jest.fn(),
       delete: jest.fn(),
     };
@@ -94,8 +98,8 @@ export const makePrismaConsultantRepositoryStub =
 export const makeConsultantRepositoryStub =
   (): jest.Mocked<IConsultantRepository> => ({
     findAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),
-    findById: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    create: jest.fn().mockResolvedValue(makeFakeConsultant()),
-    update: jest.fn(),
-    delete: jest.fn(),
+    findById: jest.fn().mockResolvedValue(makeFakeConsultant({})),
+    create: jest.fn().mockResolvedValue(makeFakeConsultant({})),
+    updateById: jest.fn(),
+    deleteById: jest.fn(),
   });

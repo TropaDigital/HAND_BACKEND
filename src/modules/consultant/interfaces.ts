@@ -5,9 +5,12 @@ import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 export interface IConsultantRepository {
   create(consultant: Prisma.ConsultantCreateInput): Promise<Consultant>;
 
-  update(id: number, consultant: Prisma.ConsultantUpdateInput): Promise<void>;
+  updateById(
+    id: number,
+    consultant: Prisma.ConsultantUpdateInput,
+  ): Promise<Consultant>;
 
-  delete(id: number): Promise<void>;
+  deleteById(id: number): Promise<void>;
 
   findAll(): Promise<Consultant[]>;
 
@@ -15,40 +18,28 @@ export interface IConsultantRepository {
 }
 
 export interface IConsultantController {
-  getAllConsultants(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Consultant[]>>;
+  getAll(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant[]>>;
 
-  getConsultantById(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Consultant | null>>;
+  getById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant>>;
 
-  createConsultant(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Consultant>>;
+  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant>>;
 
-  updateConsultant(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<void>>;
+  updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
-  deleteConsultant(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<void>>;
+  deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 }
 
 export interface IConsultantService {
-  getAllConsultants(): Promise<Consultant[]>;
+  getAll(): Promise<Consultant[]>;
 
-  getConsultantById(id: number): Promise<Consultant | null>;
+  getById(id: number): Promise<Consultant>;
 
-  createConsultant(
-    consultant: Prisma.ConsultantCreateInput,
-  ): Promise<Consultant>;
+  create(consultant: Prisma.ConsultantCreateInput): Promise<Consultant>;
 
-  updateConsultant(
+  updateById(
     id: number,
     consultant: Prisma.ConsultantUpdateInput,
-  ): Promise<void>;
+  ): Promise<Consultant>;
 
-  deleteConsultant(id: number): Promise<void>;
+  deleteById(id: number): Promise<void>;
 }

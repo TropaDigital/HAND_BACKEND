@@ -49,8 +49,8 @@ export default class JoiAdapter<S = { [key: string]: Joi.Schema }> {
       value: validationResult.value,
       validationErrors: validationResult.error
         ? validationResult.error.details.map(error => ({
-            fieldName: error.context?.key as string,
-            friendlyFieldName: error.context?.label as string,
+            fieldName: (error.context as Joi.Context).key as string,
+            friendlyFieldName: (error.context as Joi.Context).label as string,
             message: error.message,
           }))
         : undefined,

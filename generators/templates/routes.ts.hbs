@@ -1,0 +1,163 @@
+import express, { Application } from 'express';
+
+import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
+import { IRouter } from '../../interfaces/http';
+import { create{{pascalCase name}}Controller } from './factories';
+import { I{{pascalCase name}}Controller } from './interfaces';
+
+export default class {{pascalCase name}}Router implements IRouter {
+  private static instance: {{pascalCase name}}Router;
+
+  private readonly router = express.Router();
+
+  private constructor(private readonly controller: I{{pascalCase name}}Controller) {}
+
+  public static getInstance(
+    controller: I{{pascalCase name}}Controller = create{{pascalCase name}}Controller(),
+  ): {{pascalCase name}}Router {
+    if (!this.instance) {
+      this.instance = new {{pascalCase name}}Router(controller);
+    }
+
+    return this.instance;
+  }
+
+  private getAll(): void {
+    /**
+     * GET /{{lowerCase name}}s
+     * @tag {{pascalCase name}}s
+     * @summary get all the {{lowerCase name}}s.
+     * @description return a list of {{lowerCase name}}s.
+     * @response 200 - an array with the all the {{lowerCase name}}s.
+     * @responseContent { {{pascalCase name}}Response[]} 200.application/json
+     * @responseExample { {{pascalCase name}}Response[]} 200.application/json.{{pascalCase name}}Response
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/{{lowerCase name}}s')
+      .get(
+        ExpressRouteAdapter.adapt<I{{pascalCase name}}Controller>(
+          this.controller,
+          'getAll',
+        ),
+      );
+  }
+
+  private getById(): void {
+    /**
+     * GET /{{lowerCase name}}s/{id}
+     * @tag {{pascalCase name}}s
+     * @summary get a {{lowerCase name}} by id.
+     * @description return a {{lowerCase name}} object.
+     * @pathParam {int32} id id of the {{lowerCase name}}
+     * @response 200 - an object of {{lowerCase name}}.
+     * @responseContent { {{pascalCase name}}Response} 200.application/json
+     * @responseExample { {{pascalCase name}}Response} 200.application/json.{{pascalCase name}}Response
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { {{pascalCase name}}BadRequestResponse} 400.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent { {{pascalCase name}}NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/{{lowerCase name}}s/:id')
+      .get(
+        ExpressRouteAdapter.adapt<I{{pascalCase name}}Controller>(
+          this.controller,
+          'getById',
+        ),
+      );
+  }
+
+  private create(): void {
+    /**
+     * POST /{{lowerCase name}}s
+     * @tag {{pascalCase name}}s
+     * @summary create a new {{lowerCase name}}.
+     * @description return the created {{lowerCase name}} object.
+     * @bodyContent {Create{{pascalCase name}}Payload} application/json
+     * @bodyRequired
+     * @response 201 - an object of {{lowerCase name}}.
+     * @responseContent {Create{{pascalCase name}}Response} 201.application/json
+     * @responseExample {Create{{pascalCase name}}Response} 200.application/json.Create{{pascalCase name}}Response
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { {{pascalCase name}}BadRequestResponse} 400.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/{{lowerCase name}}s')
+      .post(
+        ExpressRouteAdapter.adapt<I{{pascalCase name}}Controller>(
+          this.controller,
+          'create',
+        ),
+      );
+  }
+
+  private updateById(): void {
+    /**
+     * PATCH /{{lowerCase name}}s
+     * @tag {{pascalCase name}}s
+     * @summary update a {{lowerCase name}}.
+     * @description return no content when successfully update the resource.
+     * @pathParam {int32} id id of the {{lowerCase name}}
+     * @bodyContent {Update{{pascalCase name}}Payload} application/json
+     * @bodyRequired
+     * @response 204 - no content
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { {{pascalCase name}}BadRequestResponse} 400.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent { {{pascalCase name}}NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/{{lowerCase name}}s/:id')
+      .patch(
+        ExpressRouteAdapter.adapt<I{{pascalCase name}}Controller>(
+          this.controller,
+          'updateById',
+        ),
+      );
+  }
+
+  private deleteById(): void {
+    /**
+     * DELETE /{{lowerCase name}}s
+     * @tag {{pascalCase name}}s
+     * @summary create a {{lowerCase name}}.
+     * @description return no content when successfully delete the resource.
+     * @pathParam {int32} id id of the {{lowerCase name}}
+     * @bodyContent {Update{{pascalCase name}}Payload} application/json
+     * @bodyRequired
+     * @response 204 - no content
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { {{pascalCase name}}BadRequestResponse} 400.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent { {{pascalCase name}}NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/{{lowerCase name}}s/:id')
+      .delete(
+        ExpressRouteAdapter.adapt<I{{pascalCase name}}Controller>(
+          this.controller,
+          'deleteById',
+        ),
+      );
+  }
+
+  setupRoutes(app: Application): void {
+    this.create();
+    this.getAll();
+    this.getById();
+    this.updateById();
+    this.deleteById();
+
+    app.use(this.router);
+  }
+}

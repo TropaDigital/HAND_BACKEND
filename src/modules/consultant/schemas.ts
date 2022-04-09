@@ -14,7 +14,7 @@ export const CreateConsultant = Joi.object<Prisma.ConsultantCreateInput>({
   createdBy: Joi.string().required(),
 });
 
-export const UpdateConsultant = Joi.object<
+export const UpdateConsultantById = Joi.object<
   Prisma.ConsultantUpdateInput & { id: number }
 >({
   id: Joi.number().required(),

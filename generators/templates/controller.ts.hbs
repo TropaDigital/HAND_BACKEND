@@ -1,0 +1,71 @@
+import { {{pascalCase name}}, Prisma } from '@prisma/client';
+
+import { IApiHttpRequest } from '../../interfaces/http';
+import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
+import { IValidator } from '../../interfaces/validation/IValidator';
+import { I{{pascalCase name}}Controller, I{{pascalCase name}}Service } from './interfaces';
+import * as schemas from './schemas';
+
+export class {{pascalCase name}}Controller implements I{{pascalCase name}}Controller {
+  constructor(
+    private readonly {{camelCase name}}Service: I{{pascalCase name}}Service,
+    private readonly validator: IValidator<typeof schemas>,
+  ) {}
+
+  public async getAll(): Promise<IApiHttpResponse<{{pascalCase name}}[]>> {
+    const result = await this.{{camelCase name}}Service.getAll();
+
+    return { statusCodeAsString: 'OK', body: result };
+  }
+
+  public async getById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<{{pascalCase name}} | null>> {
+    const { id } = this.validator.validateSchema<{ id: number }>(
+      'Get{{pascalCase name}}ById',
+      httpRequest.params as { id: number },
+    );
+    const result = await this.{{camelCase name}}Service.getById(id);
+
+    return { statusCodeAsString: 'OK', body: result };
+  }
+
+  public async create(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<{{pascalCase name}}>> {
+    const {{camelCase name}} =
+      this.validator.validateSchema<Prisma.{{pascalCase name}}CreateInput>(
+        'Create{{pascalCase name}}',
+        httpRequest.body,
+      );
+    const result = await this.{{camelCase name}}Service.create({{camelCase name}});
+
+    return { statusCodeAsString: 'CREATED', body: result };
+  }
+
+  public async updateById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
+    const { id, ...{{camelCase name}} } = this.validator.validateSchema<
+      Prisma.{{pascalCase name}}UpdateInput & { id: number }
+    >('Update{{pascalCase name}}ById', {
+      ...httpRequest.body,
+      ...httpRequest.params,
+    });
+    const result = await this.{{camelCase name}}Service.updateById(id, {{camelCase name}});
+
+    return { statusCodeAsString: 'NO_CONTENT', body: result };
+  }
+
+  public async deleteById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
+    const { id } = this.validator.validateSchema<{ id: number }>(
+      'Delete{{pascalCase name}}ById',
+      httpRequest.params as { id: number },
+    );
+    const result = await this.{{camelCase name}}Service.deleteById(id);
+
+    return { statusCodeAsString: 'NO_CONTENT', body: result };
+  }
+}

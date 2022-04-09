@@ -1,0 +1,19 @@
+import { Prisma } from '@prisma/client';
+import Joi from 'joi';
+
+export const Get{{pascalCase name}}ById = Joi.object<{ id: number }>({
+  id: Joi.number().required(),
+});
+
+export const Create{{pascalCase name}} = Joi.object<Prisma.{{pascalCase name}}CreateInput>({
+});
+
+export const Update{{pascalCase name}}ById = Joi.object<
+  Prisma.{{pascalCase name}}UpdateInput & { id: number }
+>({
+  id: Joi.number().required(),
+});
+
+export const Delete{{pascalCase name}}ById = Joi.object<{ id: number }>({
+  id: Joi.number().required(),
+});

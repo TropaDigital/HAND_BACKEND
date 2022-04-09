@@ -1,0 +1,50 @@
+import { {{pascalCase name}}, Prisma } from '@prisma/client';
+
+import { NotFoundError } from '../../shared/errors';
+import { I{{pascalCase name}}Repository, I{{pascalCase name}}Service } from './interfaces';
+
+export class {{pascalCase name}}Service implements I{{pascalCase name}}Service {
+  constructor(private readonly {{camelCase name}}Repository: I{{pascalCase name}}Repository) {}
+
+  public async getAll(): Promise<{{pascalCase name}}[]> {
+    const result = await this.{{camelCase name}}Repository.findAll();
+    return result;
+  }
+
+  public async getById(id: number): Promise<{{pascalCase name}} | null> {
+    const result = await this.{{camelCase name}}Repository.findById(id);
+    if (!result) {
+      throw new NotFoundError('{{camelCase name}} not found with provided id');
+    }
+    const result = await this.{{camelCase name}}Repository.findById(id);
+    return result;
+  }
+
+  public async create(
+    payload: Prisma.{{pascalCase name}}CreateInput,
+  ): Promise<{{pascalCase name}}> {
+    const result = await this.{{camelCase name}}Repository.create(payload);
+    return result;
+  }
+
+  public async updateById(
+    id: number,
+    payload: Partial<Omit<{{pascalCase name}}, 'id'>>,
+  ): Promise<void> {
+    const {{camelCase name}}Exists = await this.{{camelCase name}}Repository.findById(id);
+    if (!{{camelCase name}}Exists) {
+      throw new NotFoundError('{{camelCase name}} not found with provided id');
+    }
+    const result = await this.{{camelCase name}}Repository.updateById(id, payload);
+    return result;
+  }
+
+  public async deleteById(id: number): Promise<void> {
+    const {{camelCase name}}Exists = await this.{{camelCase name}}Repository.findById(id);
+    if (!{{camelCase name}}Exists) {
+      throw new NotFoundError('{{camelCase name}} not found with provided id');
+    }
+    const result = await this.{{camelCase name}}Repository.deleteById(id);
+    return result;
+  }
+}

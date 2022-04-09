@@ -36,11 +36,13 @@ export class ConsultantRepository implements IConsultantRepository {
   public async updateById(
     id: number,
     consultant: Prisma.ConsultantUpdateInput,
-  ): Promise<void> {
-    await this.prismaRepository.update({
+  ): Promise<Consultant> {
+    const result = await this.prismaRepository.update({
       where: { id },
       data: consultant,
     });
+
+    return result;
   }
 
   public async deleteById(id: number): Promise<void> {

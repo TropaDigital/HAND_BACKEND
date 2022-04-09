@@ -8,7 +8,7 @@ export interface IConsultantRepository {
   updateById(
     id: number,
     consultant: Prisma.ConsultantUpdateInput,
-  ): Promise<void>;
+  ): Promise<Consultant>;
 
   deleteById(id: number): Promise<void>;
 
@@ -20,9 +20,7 @@ export interface IConsultantRepository {
 export interface IConsultantController {
   getAll(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant[]>>;
 
-  getById(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Consultant | null>>;
+  getById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant>>;
 
   create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant>>;
 
@@ -34,14 +32,14 @@ export interface IConsultantController {
 export interface IConsultantService {
   getAll(): Promise<Consultant[]>;
 
-  getById(id: number): Promise<Consultant | null>;
+  getById(id: number): Promise<Consultant>;
 
   create(consultant: Prisma.ConsultantCreateInput): Promise<Consultant>;
 
   updateById(
     id: number,
     consultant: Prisma.ConsultantUpdateInput,
-  ): Promise<void>;
+  ): Promise<Consultant>;
 
   deleteById(id: number): Promise<void>;
 }

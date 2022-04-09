@@ -20,7 +20,7 @@ export class ConsultantController implements IConsultantController {
 
   public async getById(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Consultant | null>> {
+  ): Promise<IApiHttpResponse<Consultant>> {
     const { id } = this.validator.validateSchema<{ id: number }>(
       'GetConsultantById',
       httpRequest.params as { id: number },
@@ -52,9 +52,9 @@ export class ConsultantController implements IConsultantController {
       ...httpRequest.body,
       ...httpRequest.params,
     });
-    const result = await this.consultantService.updateById(id, consultant);
+    await this.consultantService.updateById(id, consultant);
 
-    return { statusCodeAsString: 'NO_CONTENT', body: result };
+    return { statusCodeAsString: 'NO_CONTENT', body: undefined };
   }
 
   public async deleteById(

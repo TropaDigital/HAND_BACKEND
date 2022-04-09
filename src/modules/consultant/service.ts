@@ -1,5 +1,6 @@
 import { Consultant, Prisma } from '@prisma/client';
 
+import { NotFoundError } from '../../shared/errors';
 import { IConsultantRepository, IConsultantService } from './interfaces';
 
 export class ConsultantService implements IConsultantService {
@@ -13,15 +14,17 @@ export class ConsultantService implements IConsultantService {
     }));
   }
 
-  public async getById(id: number): Promise<Consultant | null> {
+  public async getById(id: number): Promise<Consultant> {
     const result = await this.consultantRepository.findById(id);
 
-    return result
-      ? {
-          ...result,
-          commission: this.formatCommissionFromPersistence(result.commission),
-        }
-      : result;
+    if (!result) {
+      throw new NotFoundError('consultant not found with provided id');
+    }
+
+    return {
+      ...result,
+      commission: this.formatCommissionFromPersistence(result.commission),
+    };
   }
 
   public async create(
@@ -39,19 +42,25 @@ export class ConsultantService implements IConsultantService {
   public async updateById(
     id: number,
     payload: Partial<Omit<Consultant, 'id'>>,
-  ): Promise<void> {
+  ): Promise<Consultant> {
+    const consultantExists = await this.consultantRepository.findById(id);
+    if (!consultantExists) {
+      throw new NotFoundError('consultant not found with provided id');
+    }
     const consultant = {
       ...payload,
       commission: this.formatCommissionToPersistence(payload.commission),
     };
     const result = await this.consultantRepository.updateById(id, consultant);
-
     return result;
   }
 
   public async deleteById(id: number): Promise<void> {
+    const consultantExists = await this.consultantRepository.findById(id);
+    if (!consultantExists) {
+      throw new NotFoundError('consultant not found with provided id');
+    }
     const result = await this.consultantRepository.deleteById(id);
-
     return result;
   }
 

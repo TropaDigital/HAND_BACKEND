@@ -22,7 +22,7 @@ export default class ConsultantRouter implements IRouter {
     return this.instance;
   }
 
-  private getAllConsultants(): void {
+  private getAll(): void {
     /**
      *
      */
@@ -31,12 +31,12 @@ export default class ConsultantRouter implements IRouter {
       .get(
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
-          'getAllConsultants',
+          'getAll',
         ),
       );
   }
 
-  private getConsultantById(): void {
+  private getById(): void {
     /**
      *
      */
@@ -45,12 +45,12 @@ export default class ConsultantRouter implements IRouter {
       .get(
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
-          'getConsultantById',
+          'getById',
         ),
       );
   }
 
-  private createConsultant(): void {
+  private create(): void {
     /**
      *
      */
@@ -59,12 +59,12 @@ export default class ConsultantRouter implements IRouter {
       .post(
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
-          'createConsultant',
+          'create',
         ),
       );
   }
 
-  private updateConsultant(): void {
+  private updateById(): void {
     /**
      *
      */
@@ -73,12 +73,12 @@ export default class ConsultantRouter implements IRouter {
       .patch(
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
-          'updateConsultant',
+          'updateById',
         ),
       );
   }
 
-  private deleteConsultant(): void {
+  private deleteById(): void {
     /**
      *
      */
@@ -87,17 +87,17 @@ export default class ConsultantRouter implements IRouter {
       .delete(
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
-          'deleteConsultant',
+          'deleteById',
         ),
       );
   }
 
   setupRoutes(app: Application): void {
-    this.getAllConsultants();
-    this.getConsultantById();
-    this.createConsultant();
-    this.updateConsultant();
-    this.deleteConsultant();
+    this.create();
+    this.getAll();
+    this.getById();
+    this.updateById();
+    this.deleteById();
 
     app.use(this.router);
   }

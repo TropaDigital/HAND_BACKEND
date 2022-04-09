@@ -1,0 +1,82 @@
+import { {{pascalCase name}}, Prisma } from '@prisma/client';
+import { StatusCodes } from 'http-status-codes';
+
+import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
+import { IValidator } from '../../../../interfaces/validation/IValidator';
+import { I{{pascalCase name}}Repository, IConsultantService } from '../../interfaces';
+import { Prisma{{pascalCase name}}Repository } from '../../repository';
+
+export const makeFakeCreate{{pascalCase name}}Input = (
+  payload?: Partial<Prisma.{{pascalCase name}}CreateInput>,
+): jest.Mocked<Prisma.{{pascalCase name}}CreateInput> => ({
+  ...payload,
+});
+
+export const makeFakeUpdate{{pascalCase name}}Input = (
+  payload?: Partial<Omit<{{pascalCase name}}, 'id'>>,
+): jest.Mocked<Partial<Omit<{{pascalCase name}}, 'id'>>> => ({
+  ...payload,
+});
+
+export const makeFakeApiHttpRequest = ({
+  body,
+  params,
+  headers,
+}: {
+  body?: unknown;
+  params?: { [key: string]: any };
+  headers?: { [key: string]: string | string[] | undefined };
+}): jest.Mocked<IApiHttpRequest> => ({ body, params, headers });
+
+export const makeFakeApiHttpResponse = (
+  status: keyof typeof StatusCodes,
+  body?: unknown,
+): jest.Mocked<IApiHttpResponse> => ({
+  body,
+  statusCodeAsString: status || 'OK',
+});
+
+export const makeFake{{pascalCase name}} = (
+  payload: Partial<{{pascalCase name}}>,
+): jest.Mocked<{{pascalCase name}}> => ({
+  ...payload,
+});
+
+export const makeFake{{pascalCase name}}List = () => [
+  makeFake{{pascalCase name}}({}),
+  makeFake{{pascalCase name}}({}),
+];
+
+export const make{{pascalCase name}}ServiceStub =
+  (): jest.Mocked<I{{pascalCase name}}Service> => ({
+    getAll: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}List()),
+    getById: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}({})),
+    create: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}({})),
+    updateById: jest.fn(),
+    deleteById: jest.fn(),
+  });
+
+export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
+  validateSchema: jest.fn().mockReturnValue({ id: 777 }),
+});
+
+export const makePrisma{{pascalCase name}}RepositoryStub =
+  (): jest.Mocked<Prisma{{pascalCase name}}Repository> => {
+    const result: jest.Mocked<Partial<Prisma{{pascalCase name}}Repository>> = {
+      findMany: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}List()),
+      findFirst: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}({})),
+      create: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}({})),
+      update: jest.fn(),
+      delete: jest.fn(),
+    };
+    return result as jest.Mocked<Prisma{{pascalCase name}}Repository>;
+  };
+
+export const make{{pascalCase name}}RepositoryStub =
+  (): jest.Mocked<I{{pascalCase name}}Repository> => ({
+    findAll: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}List()),
+    findById: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}({})),
+    create: jest.fn().mockResolvedValue(makeFake{{pascalCase name}}({})),
+    updateById: jest.fn(),
+    deleteById: jest.fn(),
+  });

@@ -1,0 +1,44 @@
+import { {{pascalCase name}}, Prisma } from '@prisma/client';
+
+import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
+
+export interface I{{pascalCase name}}Repository {
+  create(payload: Prisma.{{pascalCase name}}CreateInput): Promise<{{pascalCase name}}>;
+
+  updateById(id: number, payload: Prisma.{{pascalCase name}}UpdateInput): Promise<void>;
+
+  deleteById(id: number): Promise<void>;
+
+  findAll(): Promise<{{pascalCase name}}[]>;
+
+  findById(id: number): Promise<{{pascalCase name}} | null>;
+}
+
+export interface I{{pascalCase name}}Controller {
+  getAll(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<{{pascalCase name}}[]>>;
+
+  getById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<{{pascalCase name}} | null>>;
+
+  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<{{pascalCase name}}>>;
+
+  updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
+
+  deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
+}
+
+export interface I{{pascalCase name}}Service {
+  getAll(): Promise<{{pascalCase name}}[]>;
+
+  getById(id: number): Promise<{{pascalCase name}} | null>;
+
+  create(payload: Prisma.{{pascalCase name}}CreateInput): Promise<{{pascalCase name}}>;
+
+  updateById(
+    id: number,
+    payload: Prisma.{{pascalCase name}}UpdateInput,
+  ): Promise<void>;
+
+  deleteById(id: number): Promise<void>;
+}

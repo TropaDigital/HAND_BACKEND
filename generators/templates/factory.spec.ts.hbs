@@ -1,0 +1,30 @@
+import MySqlDBClient from '../../../infra/mySql';
+import { {{pascalCase name}}Controller } from '../controller';
+import * as factory from '../factories';
+
+jest.mock('../../../adapters/joi/JoiAdapter');
+jest.mock('../../../infra/mySql');
+jest.mock('../controller');
+jest.mock('../repository');
+jest.mock('../schemas');
+jest.mock('../service');
+
+MySqlDBClient.getInstance = jest.fn().mockReturnValue({
+  getPrismaClientInstance: jest.fn().mockReturnValue({ {{camelCase name}}: {} }),
+});
+
+const makeSut = () => {
+  const sut = factory;
+
+  return { sut };
+};
+
+describe('{{pascalCase name}}ControllerFactory', () => {
+  it('Should return a {{pascalCase name}}Controller instance', () => {
+    const { sut } = makeSut();
+
+    const result = sut.create{{pascalCase name}}Controller();
+
+    expect(result).toBeInstanceOf({{pascalCase name}}Controller);
+  });
+});

@@ -1,0 +1,48 @@
+import { Prisma, {{pascalCase name}} } from '@prisma/client';
+
+import { I{{pascalCase name}}Repository } from './interfaces';
+
+export type Prisma{{pascalCase name}}Repository = Prisma.{{pascalCase name}}Delegate<
+  Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
+>;
+
+export class {{pascalCase name}}Repository implements I{{pascalCase name}}Repository {
+  constructor(private readonly prismaRepository: Prisma{{pascalCase name}}Repository) {}
+
+  public async findAll(): Promise<{{pascalCase name}}[]> {
+    const result = await this.prismaRepository.findMany();
+    return result;
+  }
+
+  public async findById(id: number): Promise<{{pascalCase name}} | null> {
+    const result = await this.prismaRepository.findFirst({
+      where: { id },
+    });
+
+    return result;
+  }
+
+  public async create(
+    payload: Prisma.{{pascalCase name}}CreateInput,
+  ): Promise<{{pascalCase name}}> {
+    const result = await this.prismaRepository.create({
+      data: payload,
+    });
+
+    return result;
+  }
+
+  public async updateById(
+    id: number,
+    payload: Prisma.{{pascalCase name}}UpdateInput,
+  ): Promise<void> {
+    await this.prismaRepository.update({
+      where: { id },
+      data: payload,
+    });
+  }
+
+  public async deleteById(id: number): Promise<void> {
+    await this.prismaRepository.delete({ where: { id } });
+  }
+}

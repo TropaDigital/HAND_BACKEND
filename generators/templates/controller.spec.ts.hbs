@@ -1,0 +1,308 @@
+import { {{pascalCase name}}Controller } from '../controller';
+import {
+  make{{pascalCase name}}ServiceStub,
+  makeFakeApiHttpRequest,
+  makeFakeApiHttpResponse,
+  makeFake{{pascalCase name}},
+  makeFake{{pascalCase name}}List,
+  makeFakeCreate{{pascalCase name}}Input,
+  makeFakeUpdate{{pascalCase name}}Input,
+  makeValidatorStub,
+} from './helpers/test-helper';
+
+const makeSut = () => {
+  const {{camelCase name}}ServiceStub = make{{pascalCase name}}ServiceStub();
+  const validatorStub = makeValidatorStub();
+  const sut = new {{pascalCase name}}Controller({{camelCase name}}ServiceStub, validatorStub);
+
+  return { sut, {{camelCase name}}ServiceStub, validatorStub };
+};
+
+describe({{pascalCase name}}Controller.name, () => {
+  describe(`When ${ {{pascalCase name}}Controller.prototype.getAll.name} is called`, () => {
+    it('should call service with validation return', async () => {
+      const { sut, {{camelCase name}}ServiceStub } = makeSut();
+      const getAllSpy = {{camelCase name}}ServiceStub.getAll;
+
+      await sut.getAll();
+
+      expect(getAllSpy).toBeCalledWith();
+    });
+
+    it('should return service response', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.getAll();
+
+      expect(result).toEqual(makeFakeApiHttpResponse('OK', makeFake{{pascalCase name}}List()));
+    });
+
+    it('should throw when service throws', async () => {
+      const { sut, {{camelCase name}}ServiceStub } = makeSut();
+      {{camelCase name}}ServiceStub.getAll.mockRejectedValueOnce(
+        new Error('any_get_all_{{camelCase name}}s_error'),
+      );
+
+      const promise = sut.getAll();
+
+      await expect(promise).rejects.toThrow(
+        new Error('any_get_all_{{camelCase name}}s_error'),
+      );
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Controller.prototype.getById.name} is called`, () => {
+    it('should call validator with right params', async () => {
+      const { sut, validatorStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+      const validateSchemaSpy = validatorStub.validateSchema;
+
+      await sut.getById(httpRequest);
+
+      expect(validateSchemaSpy).toBeCalledWith('Get{{pascalCase name}}ById', {
+        id: 777,
+      });
+    });
+
+    it('should call service with validation return', async () => {
+      const { sut, {{camelCase name}}ServiceStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+      const getByIdSpy = {{camelCase name}}ServiceStub.getById;
+
+      await sut.getById(httpRequest);
+
+      expect(getByIdSpy).toBeCalledWith(777);
+    });
+
+    it('should return service response', async () => {
+      const { sut } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+
+      const result = await sut.getById(httpRequest);
+
+      expect(result).toEqual(makeFakeApiHttpResponse('OK', makeFake{{pascalCase name}}({})));
+    });
+
+    it('should throw when service throws', async () => {
+      const { sut, {{camelCase name}}ServiceStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+      {{camelCase name}}ServiceStub.getById.mockRejectedValueOnce(
+        new Error('any_get_{{camelCase name}}s_by_id_error'),
+      );
+
+      const promise = sut.getById(httpRequest);
+
+      await expect(promise).rejects.toThrow(
+        new Error('any_get_{{camelCase name}}s_by_id_error'),
+      );
+    });
+
+    it('should throw when validator throws', async () => {
+      const { sut, validatorStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+      validatorStub.validateSchema.mockImplementationOnce(() => {
+        throw new Error('any_validate_schema_error');
+      });
+
+      const promise = sut.getById(httpRequest);
+
+      await expect(promise).rejects.toThrow(
+        new Error('any_validate_schema_error'),
+      );
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Controller.prototype.create.name} is called`, () => {
+    it('should call validator with right params', async () => {
+      const { sut, validatorStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({
+        body: makeFakeCreate{{pascalCase name}}Input(),
+      });
+      const validateSchemaSpy = validatorStub.validateSchema;
+
+      await sut.create(httpRequest);
+
+      expect(validateSchemaSpy).toBeCalledWith(
+        'Create{{pascalCase name}}',
+        makeFakeCreate{{pascalCase name}}Input(),
+      );
+    });
+
+    it('should call service with validation return', async () => {
+      const { sut, {{camelCase name}}ServiceStub, validatorStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({
+        body: makeFakeCreate{{pascalCase name}}Input(),
+      });
+      const createSpy = {{camelCase name}}ServiceStub.create;
+      validatorStub.validateSchema.mockReturnValueOnce(
+        makeFakeCreate{{pascalCase name}}Input(),
+      );
+
+      await sut.create(httpRequest);
+
+      expect(createSpy).toBeCalledWith(makeFakeCreate{{pascalCase name}}Input());
+    });
+
+    it('should return service response', async () => {
+      const { sut } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+
+      const result = await sut.create(httpRequest);
+
+      expect(result).toEqual(
+        makeFakeApiHttpResponse('CREATED', makeFake{{pascalCase name}}({})),
+      );
+    });
+
+    it('should throw when service throws', async () => {
+      const { sut, {{camelCase name}}ServiceStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+      {{camelCase name}}ServiceStub.create.mockRejectedValueOnce(
+        new Error('any_create_{{camelCase name}}_error'),
+      );
+
+      const promise = sut.create(httpRequest);
+
+      await expect(promise).rejects.toThrow(new Error('any_create_{{camelCase name}}_error'));
+    });
+
+    it('should throw when validator throws', async () => {
+      const { sut, validatorStub } = makeSut();
+      const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
+      validatorStub.validateSchema.mockImplementationOnce(() => {
+        throw new Error('any_validate_schema_error');
+      });
+
+      const promise = sut.create(httpRequest);
+
+      await expect(promise).rejects.toThrow(
+        new Error('any_validate_schema_error'),
+      );
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Controller.prototype.updateById.name} is called`, () => {
+    const httpRequest = makeFakeApiHttpRequest({
+      body: makeFakeCreate{{pascalCase name}}Input(),
+      params: { id: 777 },
+    });
+
+    it('should call validator with right params', async () => {
+      const { sut, validatorStub } = makeSut();
+      const validateSchemaSpy = validatorStub.validateSchema;
+
+      await sut.updateById(httpRequest);
+
+      expect(validateSchemaSpy).toBeCalledWith('Update{{pascalCase name}}ById', {
+        id: 777,
+        ...makeFakeUpdate{{pascalCase name}}Input(),
+      });
+    });
+
+    it('should call service with validation return', async () => {
+      const { sut, {{camelCase name}}ServiceStub, validatorStub } = makeSut();
+      const updateByIdSpy = {{camelCase name}}ServiceStub.updateById;
+      validatorStub.validateSchema.mockReturnValueOnce({
+        id: 777,
+        ...makeFakeUpdate{{pascalCase name}}Input(),
+      });
+
+      await sut.updateById(httpRequest);
+
+      expect(updateByIdSpy).toBeCalledWith(777, makeFakeCreate{{pascalCase name}}Input());
+    });
+
+    it('should return service response', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.updateById(httpRequest);
+
+      expect(result).toEqual(makeFakeApiHttpResponse('NO_CONTENT'));
+    });
+
+    it('should throw when service throws', async () => {
+      const { sut, {{camelCase name}}ServiceStub } = makeSut();
+      {{camelCase name}}ServiceStub.updateById.mockRejectedValueOnce(
+        new Error('any_update_{{camelCase name}}_error'),
+      );
+
+      const promise = sut.updateById(httpRequest);
+
+      await expect(promise).rejects.toThrow(new Error('any_update_{{camelCase name}}_error'));
+    });
+
+    it('should throw when validator throws', async () => {
+      const { sut, validatorStub } = makeSut();
+      validatorStub.validateSchema.mockImplementationOnce(() => {
+        throw new Error('any_validate_schema_error');
+      });
+
+      const promise = sut.updateById(httpRequest);
+
+      await expect(promise).rejects.toThrow(
+        new Error('any_validate_schema_error'),
+      );
+    });
+  });
+
+  describe(`When ${ {{pascalCase name}}Controller.prototype.deleteById.name} is called`, () => {
+    const httpRequest = makeFakeApiHttpRequest({
+      params: { id: 777 },
+    });
+
+    it('should call validator with right params', async () => {
+      const { sut, validatorStub } = makeSut();
+      const validateSchemaSpy = validatorStub.validateSchema;
+
+      await sut.deleteById(httpRequest);
+
+      expect(validateSchemaSpy).toBeCalledWith('Delete{{pascalCase name}}ById', {
+        id: 777,
+      });
+    });
+
+    it('should call service with validation return', async () => {
+      const { sut, {{camelCase name}}ServiceStub, validatorStub } = makeSut();
+      const deleteByIdSpy = {{camelCase name}}ServiceStub.deleteById;
+      validatorStub.validateSchema.mockReturnValueOnce({
+        id: 777,
+      });
+
+      await sut.deleteById(httpRequest);
+
+      expect(deleteByIdSpy).toBeCalledWith(777);
+    });
+
+    it('should return service response', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.deleteById(httpRequest);
+
+      expect(result).toEqual(makeFakeApiHttpResponse('NO_CONTENT'));
+    });
+
+    it('should throw when service throws', async () => {
+      const { sut, {{camelCase name}}ServiceStub } = makeSut();
+      {{camelCase name}}ServiceStub.deleteById.mockRejectedValueOnce(
+        new Error('any_delete_{{camelCase name}}_error'),
+      );
+
+      const promise = sut.deleteById(httpRequest);
+
+      await expect(promise).rejects.toThrow(new Error('any_delete_{{camelCase name}}_error'));
+    });
+
+    it('should throw when validator throws', async () => {
+      const { sut, validatorStub } = makeSut();
+      validatorStub.validateSchema.mockImplementationOnce(() => {
+        throw new Error('any_validate_schema_error');
+      });
+
+      const promise = sut.deleteById(httpRequest);
+
+      await expect(promise).rejects.toThrow(
+        new Error('any_validate_schema_error'),
+      );
+    });
+  });
+});

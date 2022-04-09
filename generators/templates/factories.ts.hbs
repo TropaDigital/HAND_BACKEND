@@ -1,0 +1,20 @@
+import JoiAdapter from '../../adapters/joi/JoiAdapter';
+import MySqlDBClient from '../../infra/mySql';
+import { {{pascalCase name}}Controller } from './controller';
+import { I{{pascalCase name}}Controller } from './interfaces';
+import { {{pascalCase name}}Repository } from './repository';
+import * as schemas from './schemas';
+import { {{pascalCase name}}Service } from './service';
+
+export const create{{pascalCase name}}Controller = (): I{{pascalCase name}}Controller => {
+  const mySql = MySqlDBClient.getInstance();
+  const repository = new {{pascalCase name}}Repository(
+    mySql.getPrismaClientInstance().{{camelCase name}},
+  );
+  const {{camelCase name}}Service = new {{pascalCase name}}Service(repository);
+  const joiAdapter = new JoiAdapter(schemas);
+  const result = new {{pascalCase name}}Controller({{camelCase name}}Service, joiAdapter);
+
+  return result;
+};
+

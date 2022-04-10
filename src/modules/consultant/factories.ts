@@ -1,19 +1,31 @@
 import JoiAdapter from '../../adapters/joi/JoiAdapter';
 import MySqlDBClient from '../../infra/mySql';
 import { ConsultantController } from './controller';
-import { IConsultantController } from './interfaces';
+import {
+  IConsultantController,
+  IConsultantRepository,
+  IConsultantService,
+} from './interfaces';
 import { ConsultantRepository } from './repository';
 import * as schemas from './schemas';
 import { ConsultantService } from './service';
 
-export const createConsultantController = (): IConsultantController => {
+export const createConsultantRepository = (): IConsultantRepository => {
   const mySql = MySqlDBClient.getInstance();
-  const repository = new ConsultantRepository(
-    mySql.getPrismaClientInstance().consultant,
-  );
-  const consultantService = new ConsultantService(repository);
-  const joiAdapter = new JoiAdapter(schemas);
-  const result = new ConsultantController(consultantService, joiAdapter);
+  return new ConsultantRepository(mySql.getPrismaClientInstance().consultant);
+};
 
-  return result;
+export const createConsultantService = (): IConsultantService => {
+  const repository = createConsultantRepository();
+  return new ConsultantService(repository);
+};
+
+export const createConsultantJoiAdapter = (): JoiAdapter<typeof schemas> => {
+  return new JoiAdapter(schemas);
+};
+
+export const createConsultantController = (): IConsultantController => {
+  const joiAdapter = createConsultantJoiAdapter();
+  const consultantService = createConsultantService();
+  return new ConsultantController(consultantService, joiAdapter);
 };

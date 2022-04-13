@@ -1,4 +1,5 @@
 import JoiAdapter from '../../../adapters/joi/JoiAdapter';
+import { MissingInvalidParamsError } from '../../../shared/errors';
 import * as schemas from '../schemas';
 import {
   makeFakeCreateConsultantInput,
@@ -27,7 +28,11 @@ describe('Schema', () => {
       const param = { id: '' };
 
       expect(() => sut.validateSchema('GetConsultantById', param)).toThrow(
-        new Error('Missing or invalid param'),
+        new MissingInvalidParamsError(
+          'Missing or invalid param',
+          undefined,
+          [],
+        ),
       );
     });
   });

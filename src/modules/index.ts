@@ -1,1 +1,2 @@
-export * from './healthcheck/index';
+export * from './healthcheck';
+export * from './loanSimulation';

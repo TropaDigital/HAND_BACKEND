@@ -11,7 +11,6 @@ export class ConsultantRepository implements IConsultantRepository {
 
   public async findAll(): Promise<Consultant[]> {
     const result = await this.prismaRepository.findMany();
-
     return result;
   }
 

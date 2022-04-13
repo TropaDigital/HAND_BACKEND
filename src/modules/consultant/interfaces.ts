@@ -20,7 +20,9 @@ export interface IConsultantRepository {
 export interface IConsultantController {
   getAll(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant[]>>;
 
-  getById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant>>;
+  getById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Consultant | null>>;
 
   create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Consultant>>;
 
@@ -32,7 +34,7 @@ export interface IConsultantController {
 export interface IConsultantService {
   getAll(): Promise<Consultant[]>;
 
-  getById(id: number): Promise<Consultant>;
+  getById(id: number): Promise<Consultant | null>;
 
   create(consultant: Prisma.ConsultantCreateInput): Promise<Consultant>;
 

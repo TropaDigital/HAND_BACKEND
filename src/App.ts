@@ -11,6 +11,7 @@ import MySqlDBClient from './infra/mySql';
 import { ILogger } from './interfaces/logger/ILogger';
 import { errorMiddleware, loggerMiddleware } from './middlewares';
 import { healthcheckRouter } from './modules';
+import { consultantRouter } from './modules/consultant';
 import openapiConfig from './openapirc';
 
 export default class App {
@@ -59,8 +60,12 @@ export default class App {
 
   private setupGlobalErrorMiddlewares(): void {
     this.logger.info({ msg: 'setuping global error middlewares' });
-    this.application.use(errorMiddleware.notFoundMiddleware);
-    this.application.use(errorMiddleware.handleErrorMiddleware);
+    this.application
+      .use(errorMiddleware.notFoundMiddleware)
+      .bind(errorMiddleware);
+    this.application.use(
+      errorMiddleware.handleErrorMiddleware.bind(errorMiddleware),
+    );
     this.application.use(
       errorMiddleware.sendErrorMiddleware.bind(errorMiddleware),
     );
@@ -82,6 +87,7 @@ export default class App {
   private async setupRoutes(): Promise<void> {
     this.logger.info({ msg: 'setuping application routes' });
     [healthcheckRouter].forEach(router => router.setupRoutes(this.application));
+    [consultantRouter].forEach(router => router.setupRoutes(this.application));
   }
 
   private async setupDatabases(): Promise<void> {

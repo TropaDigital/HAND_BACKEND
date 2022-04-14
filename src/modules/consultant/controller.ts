@@ -20,7 +20,7 @@ export class ConsultantController implements IConsultantController {
 
   public async getById(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Consultant>> {
+  ): Promise<IApiHttpResponse<Consultant | null>> {
     const { id } = this.validator.validateSchema<{ id: number }>(
       'GetConsultantById',
       httpRequest.params as { id: number },

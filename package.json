@@ -12,6 +12,7 @@
     "test:unit:staged": "npm run test -- --findRelatedTests",
     "test:coverage": "npm run test -- --coverage",
     "test:mutation": "stryker run",
+    "test:functional": "npm run test -- --silent -c jest.functional.config.js --force-exit",
     "lint": "eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix",
     "lint:deadcode": "ts-prune -e",

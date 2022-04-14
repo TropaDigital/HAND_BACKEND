@@ -1,5 +1,5 @@
 node_modules
 commitling.config.js
-jest.config.js
+*.config.js
 jest.setup.ts
 generators

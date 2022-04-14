@@ -18,11 +18,11 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "rootDirs": ["./src", "./test"],
+    "rootDirs": ["./src", "./tests"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["./src/**/*.ts", "./test/**/*.ts"],
+  "include": ["./src/**/*.ts", "test/**/*.ts"],
   "exclude": ["./node_modules/*", "dist"]
 }

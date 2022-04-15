@@ -374,6 +374,37 @@ components:
           database:
             status: unhealthy
             connectionStatus: disconnected
+    CreateConsultantResponse:
+      value:
+        name: String
+        taxId: 01020312465
+        city: São Luis
+        state: Maranhão
+        commission: 10
+        createdBy: admin
+        updatedBy: admin
+        createdAt: 10-10-2020
+        updatedAt: 20-03-2021
+        deletedAt: 03-09-2022
+    ConsultantsResponse:
+      value:
+        - name: John Doe
+          taxId: 01020312465
+          city: São Luis
+          state: Maranhão
+          commission: 10
+    ConsultantResponse:
+      value: 
+        name: String
+        taxId: 01020312465
+        city: São Luis
+        state: Maranhão
+        commission: 10
+        createdBy: admin
+        updatedBy: admin
+        createdAt: 10-10-2020
+        updatedAt: 20-03-2021
+        deletedAt: 03-09-2022
   schemas:
     GetLoanSimulationBasedOnRequestedResponse:
       type: object
@@ -552,6 +583,145 @@ components:
         - numberOfInstallments
         - joinedTelemedicine
       additionalProperties: false
+    ConsultantsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: John Doe
+          taxId:
+            type: string
+            example: 01020312465
+          city:
+            type: string
+            example: São Luis
+          state:
+            type: string
+            example: Maranhão
+          commission:
+            type: integer
+            format: int32
+            example: 10
+    CreateConsultantPayload:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jane Doe
+        taxId:
+          type: string
+          example: 01020312465
+        city:
+          type: string
+          example: São Luis
+        state:
+          type: string
+          example: Maranhão
+        commission:
+          type: integer
+          format: int32
+          example: 10
+    UpdateConsultantPayload:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jane Doe
+        taxId:
+          type: string
+          example: 01020312465
+        city:
+          type: string
+          example: São Luis
+        state:
+          type: string
+          example: Maranhão
+        commission:
+          type: integer
+          format: int32
+          example: 10
+    CreateConsultantResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: String
+        taxId:
+          type: string
+          example: 01020312465
+        city:
+          type: string
+          example: São Luis
+        state:
+          type: string
+          example: Maranhão
+        commission:
+          type: integer
+          format: int32
+          example: 10
+        createdBy:
+          type: string
+          example: admin
+        updatedBy:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 10-10-2020
+        updatedAt:
+          type: string
+          example: 20-03-2021
+        deletedAt:
+          type: string
+          example: 03-09-2022
+    UpdateConsultantResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: No Content
+    ConsultantResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: String
+        taxId:
+          type: string
+          example: 01020312465
+        city:
+          type: string
+          example: São Luis
+        state:
+          type: string
+          example: Maranhão
+        commission:
+          type: integer
+          format: int32
+          example: 10
+        createdBy:
+          type: string
+          example: admin
+        updatedBy:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 10-10-2020
+        updatedAt:
+          type: string
+          example: 20-03-2021
+        deletedAt:
+          type: string
+          example: 03-09-2022
+    ConsultantBadRequestResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Invalid Params
     HealthcheckResponse:
       type: object
       properties:
@@ -559,37 +729,37 @@ components:
           type: number
           example: 200
           description: http status code
-        statusCodeAsString: 
+        statusCodeAsString:
           type: string
           description: http status code as string
-        data: 
+        data:
           type: object
           description: an object with the response
-          properties: 
-            name: 
+          properties:
+            name:
               type: string
-            version: 
+            version:
               type: string
               description: application version
-            uptime: 
+            uptime:
               type: string
               description: time that the application is running
-            status: 
+            status:
               type: string
               description: status of the application
               enum:
                 - healthly
                 - unhealthy
-            database: 
+            database:
               type: object
-              properties: 
-                status: 
+              properties:
+                status:
                   type: string
                   description: status of the database
                   enum:
                     - healthly
                     - unhealthy
-                connectionStatus: 
+                connectionStatus:
                   type: string
                   description: status of the database connection
                   enum:

@@ -10,7 +10,11 @@ import { LoggerFactory } from './factories/LoggerFactory';
 import MySqlDBClient from './infra/mySql';
 import { ILogger } from './interfaces/logger/ILogger';
 import { errorMiddleware, loggerMiddleware } from './middlewares';
-import { healthcheckRouter, loanSimulationRouter } from './modules';
+import {
+  healthcheckRouter,
+  loanSimulationRouter,
+  consultantRouter,
+} from './modules';
 import openapiConfig from './openapirc';
 
 export default class App {
@@ -85,8 +89,8 @@ export default class App {
 
   private async setupRoutes(): Promise<void> {
     this.logger.info({ msg: 'setuping application routes' });
-    [healthcheckRouter, loanSimulationRouter].forEach(router =>
-      router.setupRoutes(this.application),
+    [healthcheckRouter, loanSimulationRouter, consultantRouter].forEach(
+      router => router.setupRoutes(this.application),
     );
   }
 
@@ -104,7 +108,20 @@ export default class App {
     this.logger.info({ msg: 'stop application' });
     await this.closeDatabasesConnection();
     this.logger.info({ msg: 'closing server' });
-    this.server.close();
+    await this.stopServer();
+  }
+
+  public stopServer(): Promise<void> {
+    return new Promise(resolve => {
+      this.server.close(error => {
+        if (error) {
+          this.logger.error({ msg: error.message });
+          return resolve();
+        }
+
+        return resolve();
+      });
+    });
   }
 
   public initServer(): void {
@@ -125,7 +142,7 @@ export default class App {
     return this.application;
   }
 
-  public async initApplictation(): Promise<void> {
+  public async initApplication(): Promise<void> {
     this.logger.info({ msg: 'initializing application' });
     await this.setupDatabases();
     this.setupSwagger();

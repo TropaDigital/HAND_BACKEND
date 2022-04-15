@@ -23,6 +23,6 @@
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["./src/**/*.ts", "test/**/*.ts"],
+  "include": ["./src/**/*.ts", "__tests__/**/*.ts"],
   "exclude": ["./node_modules/*", "dist"]
 }

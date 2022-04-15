@@ -5,7 +5,7 @@ import { ILoanSimulationBasedOnRequestedValueParams } from './interfaces';
 
 export const GetLoanSimulationByRequestedValue =
   Joi.object<ILoanSimulationBasedOnRequestedValueParams>({
-    consultantId: Joi.number(),
+    consultantId: Joi.number().min(1),
     joinedTelemedicine: Joi.boolean().default(false),
     salaryReceiptDate: Joi.date(),
     numberOfInstallments: Joi.number()

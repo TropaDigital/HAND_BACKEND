@@ -257,6 +257,7 @@ export class LoanSimulationService implements ILoanSimulationService {
         await this.consultantService.getById(consultantId)
       ).commission;
     }
+
     const installments = this.getInstallmentsDetails({
       requestedValue,
       numberOfInstallments,

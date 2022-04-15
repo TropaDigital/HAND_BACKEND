@@ -102,6 +102,7 @@ export default class App {
   private async closeDatabasesConnection(): Promise<void> {
     this.logger.info({ msg: 'closing database connections' });
     await Promise.all([MySqlDBClient.getInstance().closeConnection()]);
+    this.logger.info({ msg: 'database connections closed successfully' });
   }
 
   public async stopApplication(): Promise<void> {

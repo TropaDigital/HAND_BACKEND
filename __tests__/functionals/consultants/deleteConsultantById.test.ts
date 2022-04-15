@@ -12,6 +12,10 @@ describe('DELETE /consultants/{id} - Delete consultant by id', () => {
     await populateDatabase();
   });
 
+  afterAll(async () => {
+    await global.prismaClient.consultant.deleteMany();
+  });
+
   it('Should return 204 when the consultant is deleted', async () => {
     const id = 1;
 

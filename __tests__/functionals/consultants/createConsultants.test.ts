@@ -10,6 +10,10 @@ describe('POST /consultants - Create new consultant', () => {
     await global.prismaClient.consultant.deleteMany();
   });
 
+  afterAll(async () => {
+    await global.prismaClient.consultant.deleteMany();
+  });
+
   it('Should return 201 with created consultant', async () => {
     const params = makeFakeCreateConsultantParams();
 

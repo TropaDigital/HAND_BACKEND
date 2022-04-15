@@ -12,6 +12,10 @@ describe('PATCH /consultants/{id} - Update consultant by id', () => {
     await populateDatabase();
   });
 
+  afterAll(async () => {
+    await global.prismaClient.consultant.deleteMany();
+  });
+
   it('Should return 204 with updated', async () => {
     const id = 1;
 

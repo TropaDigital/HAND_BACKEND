@@ -15,6 +15,10 @@ describe('GET /consultants/{id} - Get consultant by id', () => {
     await populateDatabase();
   });
 
+  afterAll(async () => {
+    await global.prismaClient.consultant.deleteMany();
+  });
+
   it('Should return 200 with consultant', async () => {
     const id = 1;
 

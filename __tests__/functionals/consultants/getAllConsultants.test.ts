@@ -8,6 +8,10 @@ describe('GET /consultants - Get all consultants', () => {
     await populateDatabase();
   });
 
+  afterAll(async () => {
+    await global.prismaClient.consultant.deleteMany();
+  });
+
   it('Should return 200 and all consultants', async () => {
     const response = await global.testRequest.get('/consultants');
 

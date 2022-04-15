@@ -48,11 +48,11 @@ export class ErrorMiddleware implements ErrorMiddleware {
     res: Response,
     _next: NextFunction,
   ): void {
-    const error = this.formatError(err);
+    const error = ErrorMiddleware.formatError(err);
     res.status(error.statusCode).json(error);
   }
 
-  private formatError(error: GenericAppError): IFormatedError {
+  public static formatError(error: GenericAppError): IFormatedError {
     return error.isOperational
       ? {
           code: error.code,

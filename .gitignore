@@ -1,6 +1,9 @@
 # docker volumes
 dbsql
 
+# jest reports
+html-report
+
 # Logs
 logs
 *.log

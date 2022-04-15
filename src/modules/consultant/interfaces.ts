@@ -34,7 +34,7 @@ export interface IConsultantController {
 export interface IConsultantService {
   getAll(): Promise<Consultant[]>;
 
-  getById(id: number): Promise<Consultant | null>;
+  getById(id: number): Promise<Consultant>;
 
   create(consultant: Prisma.ConsultantCreateInput): Promise<Consultant>;
 

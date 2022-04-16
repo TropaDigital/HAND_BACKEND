@@ -18,6 +18,338 @@ components:
       name: x-access-token
       in: header
   examples:
+    GetLoanSimulationWithConsultantCommissionResponse:
+      value:
+        salary: 1500
+        maxInstallmentValueBySalary: 525
+        consultantCommission: 10
+        firstPaymentDates:
+          - '2022-04-30T03:00:00.000Z'
+          - '2022-05-30T03:00:00.000Z'
+          - '2022-06-15T03:00:00.000Z'
+        consultantCommissionValue: 100
+        isRequestedValueValid: true
+        feesValue: 141.06
+        cardFees: 96
+        bankProcessingFees: 80
+        totalValue: 2109.0600000000004
+        telemedicineFees: 192
+        installments:
+          - reference: abril/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 4.62
+            feesValue: 8.66
+            finalValue: 254.66
+          - reference: maio/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 265.18
+          - reference: junho/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 9.9
+            feesValue: 18.56
+            finalValue: 264.56
+          - reference: julho/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 265.18
+          - reference: agosto/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 265.18
+          - reference: setembro/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 9.9
+            feesValue: 18.56
+            finalValue: 264.56
+          - reference: outubro/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 265.18
+          - reference: novembro/2022
+            cardFees: 12
+            telemedicineFees: 24
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 10
+            consultantCommissionValue: 12.5
+            fees: 9.9
+            feesValue: 18.56
+            finalValue: 264.56
+    GetLoanSimulationWithoutTelemedicineResponse:
+      value:
+        salary: 1500
+        maxInstallmentValueBySalary: 525
+        consultantCommission: 0
+        firstPaymentDates:
+          - '2022-04-30T03:00:00.000Z'
+          - '2022-05-30T03:00:00.000Z'
+          - '2022-06-14T03:00:00.000Z'
+        consultantCommissionValue: 0
+        isRequestedValueValid: true
+        feesValue: 141.68
+        cardFees: 96
+        bankProcessingFees: 80
+        totalValue: 1817.68
+        telemedicineFees: 0
+        installments:
+          - reference: abril/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 4.95
+            feesValue: 9.28
+            finalValue: 218.78
+          - reference: maio/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 228.68
+          - reference: junho/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 9.9
+            feesValue: 18.56
+            finalValue: 228.06
+          - reference: julho/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 228.68
+          - reference: agosto/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 228.68
+          - reference: setembro/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 9.9
+            feesValue: 18.56
+            finalValue: 228.06
+          - reference: outubro/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 10.23
+            feesValue: 19.18
+            finalValue: 228.68
+          - reference: novembro/2022
+            cardFees: 12
+            telemedicineFees: 0
+            bankProcessingFees: 10
+            installmentFactor: 187.5
+            consultantCommission: 0
+            consultantCommissionValue: 0
+            fees: 9.9
+            feesValue: 18.56
+            finalValue: 228.06
+    GetLoanSimulationWithoutConsultantCommissionResponse:
+      value:
+        statusCode: 200
+        statusCodeAsString: OK
+        data:
+          salary: 1500
+          maxInstallmentValueBySalary: 525
+          consultantCommission: 0
+          firstPaymentDates:
+            - '2022-04-30T03:00:00.000Z'
+            - '2022-05-30T03:00:00.000Z'
+            - '2022-06-12T03:00:00.000Z'
+          consultantCommissionValue: 0
+          isRequestedValueValid: true
+          feesValue: 142.92000000000002
+          cardFees: 96
+          bankProcessingFees: 80
+          totalValue: 2010.92
+          telemedicineFees: 192
+          installments:
+            - reference: abril/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 5.61
+              feesValue: 10.52
+              finalValue: 244.02
+            - reference: maio/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 10.23
+              feesValue: 19.18
+              finalValue: 252.68
+            - reference: junho/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 9.9
+              feesValue: 18.56
+              finalValue: 252.06
+            - reference: julho/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 10.23
+              feesValue: 19.18
+              finalValue: 252.68
+            - reference: agosto/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 10.23
+              feesValue: 19.18
+              finalValue: 252.68
+            - reference: setembro/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 9.9
+              feesValue: 18.56
+              finalValue: 252.06
+            - reference: outubro/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 10.23
+              feesValue: 19.18
+              finalValue: 252.68
+            - reference: novembro/2022
+              cardFees: 12
+              telemedicineFees: 24
+              bankProcessingFees: 10
+              installmentFactor: 187.5
+              consultantCommission: 0
+              consultantCommissionValue: 0
+              fees: 9.9
+              feesValue: 18.56
+              finalValue: 252.06
+    GetLoanSimulationBasedOnRequestedValuePayloadComplete:
+      value: 
+        salary: 1500
+        salaryReceiptDate: 2022-04-30T03:00:00.000Z
+        requestedValue: 1000
+        numberOfInstallments: 8
+        joinedTelemedicine: true
+        consultantId: 1
+    GetLoanSimulationBasedOnRequestedValuePayloadWithoutsalaryReceiptDate:
+      value: 
+        salary: 1500
+        requestedValue: 1000
+        numberOfInstallments: 8
+        joinedTelemedicine: true
+        consultantId: 1
+    GetLoanSimulationBasedOnRequestedValuePayloadWithoutConsultantCommission:
+      value: 
+        salary: 1500
+        salaryReceiptDate: 2022-04-30T03:00:00.000Z
+        requestedValue: 1000
+        numberOfInstallments: 8
+        joinedTelemedicine: true
+    GetLoanSimulationBadRequest:
+      value:
+        code: GENERIC_ERROR
+        statusCode: 400
+        statusCodeAsString: BAD_REQUEST
+        description: Missing or invalid param
+        validationErrors:
+          - fieldName: numberOfInstallments
+            friendlyFieldName: numberOfInstallments
+            message: '"numberOfInstallments" is required'
+          - fieldName: requestedValue
+            friendlyFieldName: requestedValue
+            message: '"requestedValue" is required'
+          - fieldName: salary
+            friendlyFieldName: salary
+            message: '"salary" is required'
     HealthlyResponse:
       value:
         statusCode: 200
@@ -43,95 +375,214 @@ components:
             status: unhealthy
             connectionStatus: disconnected
     CreateConsultantResponse:
-      type: object
-      properties:
-        name:
-          type: string
-          example: String
-        taxId:
-          type: string
-          example: 01020312465
-        city:
-          type: string
-          example: São Luis
-        state:
-          type: string
-          example: Maranhão
-        commission:
-          type: integer
-          format: int32
-          example: 10
-        createdBy:
-          type: string
-          example: admin
-        updatedBy:
-          type: string
-          example: admin
-        createdAt:
-          type: string
-          example: 10-10-2020
-        updatedAt:
-          type: string
-          example: 20-03-2021
-        deletedAt:
-          type: string
-          example: 03-09-2022
+      value:
+        name: String
+        taxId: 01020312465
+        city: São Luis
+        state: Maranhão
+        commission: 10
+        createdBy: admin
+        updatedBy: admin
+        createdAt: 10-10-2020
+        updatedAt: 20-03-2021
+        deletedAt: 03-09-2022
     ConsultantsResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          name:
-            type: string
-            example: John Doe
-          taxId:
-            type: string
-            example: 01020312465
-          city:
-            type: string
-            example: São Luis
-          state:
-            type: string
-            example: Maranhão
-          commission:
-            type: integer
-            format: int32
-            example: 10
+      value:
+        - name: John Doe
+          taxId: 01020312465
+          city: São Luis
+          state: Maranhão
+          commission: 10
     ConsultantResponse:
+      value: 
+        name: String
+        taxId: 01020312465
+        city: São Luis
+        state: Maranhão
+        commission: 10
+        createdBy: admin
+        updatedBy: admin
+        createdAt: 10-10-2020
+        updatedAt: 20-03-2021
+        deletedAt: 03-09-2022
+  schemas:
+    GetLoanSimulationBasedOnRequestedResponse:
       type: object
       properties:
-        name:
+        statusCode:
+          type: number
+          example: 200
+          description: http status code
+        statusCodeAsString: 
           type: string
-          example: String
-        taxId:
+          description: http status code as string
+        data: 
+          type: object
+          properties:
+            totalValue:
+              type: number
+              description: total value of the loan with fees
+            salary:
+              type: number
+              description: salary used in the loan simulation
+            feesValue:
+              type: number
+              description: total fees value
+            cardFees:
+              type: number
+              description: total card fees value
+            telemedicineFees:
+              type: number
+              description: total telemedicine fees value
+            bankProcessingFees:
+              type: number
+              description: total bank processing fees value
+            firstPaymentDates:
+              type: array
+              description: the initial and final date of payment based on salary receipt date
+              items:
+                type: string
+                format: date-time
+                description: total fees value
+            maxInstallmentValueBySalary:
+              type: number
+              description: max installment value based on salary provided
+            consultantCommission:
+              type: number
+              description: percentage of the consultant commission
+            consultantCommissionValue:
+              type: number
+              description: consultant commission total value
+            isRequestedValueValid:
+              type: boolean
+              description: flag that indicates if the requested value is valid (if some of the installments value is not greater than 35% of the salary)
+            installments:
+              type: array
+              description: installments details
+              items:
+                "$ref": "#/components/schemas/InstallmentDetails"
+          required:
+            - totalValue
+            - salary
+            - feesValue
+            - cardFees
+            - telemedicineFees
+            - bankProcessingFees
+            - firstPaymentDates
+            - maxInstallmentValueBySalary
+            - consultantCommission
+            - consultantCommissionValue
+            - isRequestedValueValid
+            - installments
+          additionalProperties: false
+    InstallmentDetails:
+      type: object
+      properties:
+        reference:
           type: string
-          example: 01020312465
-        city:
+          description: month and year of reference
+        installmentFactor:
+          type: number
+          description: factor value of the installment
+        consultantCommission:
+          type: number
+          description: percentage of consultant commission
+        consultantCommissionValue:
+          type: number
+          description: value of the consultant commission
+        cardFees:
+          type: number
+          description: value of card fees in current installment
+        telemedicineFees:
+          type: number
+          description: value of telemedicine fees in current installment
+        bankProcessingFees:
+          type: number
+          description: value of bank processing fees in current installment
+        fees:
+          type: number
+          description: percentage of fees in the current installment
+        feesValue:
+          type: number
+          description: value of fees in the current installment
+        finalValue:
+          type: number
+          description: installment final value with all fees
+      required:
+        - reference
+        - installmentFactor
+        - consultantCommission
+        - consultantCommissionValue
+        - cardFees
+        - telemedicineFees
+        - bankProcessingFees
+        - fees
+        - feesValue
+        - finalValue
+      additionalProperties: false
+    GetLoanSimulationBadRequestResponse:
+      type: object
+      properties:
+        code:
           type: string
-          example: São Luis
-        state:
-          type: string
-          example: Maranhão
-        commission:
+          example: GENERIC_ERROR
+          description: internal code of the error
+        statusCode:
+          example: 400
           type: integer
-          format: int32
-          example: 10
-        createdBy:
+          description: http status code
+        statusCodeAsString:
           type: string
-          example: admin
-        updatedBy:
+          example: BAD_REQUEST
+          description: status code as string of the response
+        description:
           type: string
-          example: admin
-        createdAt:
+          description: error description
+        validationErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      required:
+        - code
+        - statusCode
+        - statusCodeAsString
+        - description
+        - validationErrors
+      additionalProperties: false
+    GetLoanSimulationBasedOnRequestedValuePayload:
+      type: object
+      properties:
+        salary:
+          type: number
+          example: 1500
+          description: the salary that will be used to validate the requested loan value
+        salaryReceiptDate:
           type: string
-          example: 10-10-2020
-        updatedAt:
-          type: string
-          example: 20-03-2021
-        deletedAt:
-          type: string
-          example: 03-09-2022
-  schemas:
+          format: date-time
+          example: 2022-04-30T03:00:00.000Z
+          description: the date that the customer receives the salary
+        requestedValue:
+          type: number
+          example: 1000
+          description: the date the person receives the salary
+        numberOfInstallments:
+          type: number
+          example: 8
+          description: the number os installments
+        joinedTelemedicine:
+          type: boolean
+          description: flag that indicates if the customer joined telemedicine
+        consultantId:
+          type: number
+          example: 1
+          description: flag that indicates if the customer joined telemedicine
+      required:
+        - salary
+        - salaryReceiptDate
+        - requestedValue
+        - numberOfInstallments
+        - joinedTelemedicine
+      additionalProperties: false
     ConsultantsResponse:
       type: array
       items:
@@ -276,6 +727,7 @@ components:
       properties:
         statusCode:
           type: number
+          example: 200
           description: http status code
         statusCodeAsString:
           type: string
@@ -313,103 +765,145 @@ components:
                   enum:
                     - connected
                     - disconnected
+    ValidationError:
+      type: object
+      properties:
+        fieldName:
+          type: string
+          description: name of the field
+        friendlyFieldName:
+          type: string
+          description: friendly field name
+        message:
+          type: string
+          description: the details of validation error
+      required:
+        - fieldName
+        - friendlyFieldName
+        - message
+      additionalProperties: false
     InternalServerErrorResponse:
       type: object
       properties:
         code:
           type: string
           example: GENERIC_ERROR
+          description: internal code of the error
         statusCode:
           type: number
           example: 500
+          description: status code of the response
         statusCodeAsString:
           type: string
           example: INTERNAL_SERVER_ERROR
+          description: status code as string of the response
         description:
           type: string
           example: Internal Server Error
-    BadRequestResponse:
-      type: object
-      properties:
-        code:
-          type: string
-          example: GENERIC_ERROR
-        statusCode:
-          type: number
-          example: 400
-        statusCodeAsString:
-          type: string
-          example: BAD_REQUEST
-        description:
-          type: string
-          example: Missing or invalid param
-        validationErrors:
-          type: array
-          items:
-            properties:
-              field:
-                type: string
-                example: name
-              message:
-                type: string
-                example: name is required
+          description: error description
+      required:
+        - code
+        - statusCode
+        - statusCodeAsString
+        - description
+      additionalProperties: false
     NotFoundResponse:
       type: object
       properties:
         code:
           type: string
           example: GENERIC_ERROR
+          description: internal code of the error
         statusCode:
           type: number
           example: 404
+          description: status code of the response
         statusCodeAsString:
           type: string
           example: NOT_FOUND
+          description: status code as string of the response
         description:
           type: string
           example: Resource not found
+          description: error description
+      required:
+        - code
+        - statusCode
+        - statusCodeAsString
+        - description
+      additionalProperties: false
     UnauthorizedResponse:
       type: object
       properties:
         code:
           type: string
           example: GENERIC_ERROR
+          description: internal code of the error
         statusCode:
           type: number
           example: 401
+          description: status code of the response
         statusCodeAsString:
           type: string
           example: UNAUTHORIZED
+          description: status code as string of the response
         description:
           type: string
           example: token not provided
+          description: error description
+      required:
+        - code
+        - statusCode
+        - statusCodeAsString
+        - description
+      additionalProperties: false
     TooManyRequestsResponse:
       type: object
       properties:
         code:
           type: string
           example: GENERIC_ERROR
+          description: internal code of the error
         statusCode:
           type: number
           example: 429
+          description: status code of the response
         statusCodeAsString:
           type: string
           example: TOO_MANY_REQUESTS
+          description: status code as string of the response
         description:
           type: string
           example: you reach the limit of requests for this resource
+          description: error description
+      required:
+        - code
+        - statusCode
+        - statusCodeAsString
+        - description
+      additionalProperties: false
     ForbiddenResponse:
       type: object
       properties:
         code:
           type: string
           example: GENERIC_ERROR
+          description: internal code of the error
         statusCode:
           type: number
           example: 403
+          description: status code of the response
         statusCodeAsString:
           type: string
           example: FORBIDDEN
+          description: status code as string of the response
         description:
           type: string
           example: you dont have permission to access this resource
+          description: error description
+      required:
+        - code
+        - statusCode
+        - statusCodeAsString
+        - description
+      additionalProperties: false

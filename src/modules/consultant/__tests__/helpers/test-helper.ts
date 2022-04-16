@@ -73,7 +73,9 @@ export const makeFakeConsultantList = () => [
 export const makeConsultantServiceStub =
   (): jest.Mocked<IConsultantService> => ({
     getAll: jest.fn().mockResolvedValue(makeFakeConsultantList()),
-    getById: jest.fn().mockResolvedValue(makeFakeConsultant({})),
+    getById: jest
+      .fn()
+      .mockResolvedValue(makeFakeConsultant({ commission: 10 })),
     create: jest.fn().mockResolvedValue(makeFakeConsultant({})),
     updateById: jest.fn(),
     deleteById: jest.fn(),

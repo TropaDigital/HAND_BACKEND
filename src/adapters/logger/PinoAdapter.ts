@@ -9,7 +9,7 @@ import {
 export class PinoAdapter implements ILogger {
   constructor(
     private readonly pinoInstance: ILoggerInstance = pino({
-      enabled: true,
+      enabled: process.env.NODE_ENV !== 'test',
       level: 'info',
       prettyPrint: true,
     }),

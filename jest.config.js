@@ -8,6 +8,7 @@ module.exports = {
   clearMocks: true,
   preset: 'ts-jest',
   setupFilesAfterEnv: ['./jest.setup.ts'],
+  coverageDirectory: 'coverage/unit',
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/openapirc.ts',
@@ -26,10 +27,22 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 90,
-      functions: 100,
-      lines: 100,
-      statements: 100,
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
     },
   },
+  reporters: [
+    'default',
+    [
+      'jest-html-reporters',
+      {
+        pageTitle: 'Haand bib API',
+        publicPath: './html-report',
+        filename: 'unit.html',
+        expand: false,
+      },
+    ],
+  ],
 };

@@ -42,7 +42,7 @@ function handleExitSignal(signal: NodeJS.Signals, appInstance: App): void {
 (async () => {
   try {
     const app = new App();
-    await app.initApplictation();
+    await app.initApplication();
     app.initServer();
     const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
     exitSignals.forEach(sinal => handleExitSignal(sinal, app));

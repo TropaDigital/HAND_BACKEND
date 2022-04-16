@@ -15,7 +15,7 @@ export default class JoiAdapter<S = { [key: string]: Joi.Schema }> {
 
   public validateSchema<T>(
     schemaName: keyof typeof this.schemaDictionary,
-    data: T,
+    data: any,
   ): T {
     if (!this.schemaClient[schemaName as keyof typeof this.schemaClient]) {
       throw new errors.GenericAppError('The schema provided does not exists');

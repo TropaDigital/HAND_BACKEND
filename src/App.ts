@@ -10,8 +10,11 @@ import { LoggerFactory } from './factories/LoggerFactory';
 import MySqlDBClient from './infra/mySql';
 import { ILogger } from './interfaces/logger/ILogger';
 import { errorMiddleware, loggerMiddleware } from './middlewares';
-import { healthcheckRouter } from './modules';
-import { consultantRouter } from './modules/consultant';
+import {
+  healthcheckRouter,
+  loanSimulationRouter,
+  consultantRouter,
+} from './modules';
 import openapiConfig from './openapirc';
 
 export default class App {
@@ -60,9 +63,9 @@ export default class App {
 
   private setupGlobalErrorMiddlewares(): void {
     this.logger.info({ msg: 'setuping global error middlewares' });
-    this.application
-      .use(errorMiddleware.notFoundMiddleware)
-      .bind(errorMiddleware);
+    this.application.use(
+      errorMiddleware.notFoundMiddleware.bind(errorMiddleware),
+    );
     this.application.use(
       errorMiddleware.handleErrorMiddleware.bind(errorMiddleware),
     );
@@ -86,8 +89,9 @@ export default class App {
 
   private async setupRoutes(): Promise<void> {
     this.logger.info({ msg: 'setuping application routes' });
-    [healthcheckRouter].forEach(router => router.setupRoutes(this.application));
-    [consultantRouter].forEach(router => router.setupRoutes(this.application));
+    [healthcheckRouter, loanSimulationRouter, consultantRouter].forEach(
+      router => router.setupRoutes(this.application),
+    );
   }
 
   private async setupDatabases(): Promise<void> {
@@ -98,13 +102,27 @@ export default class App {
   private async closeDatabasesConnection(): Promise<void> {
     this.logger.info({ msg: 'closing database connections' });
     await Promise.all([MySqlDBClient.getInstance().closeConnection()]);
+    this.logger.info({ msg: 'database connections closed successfully' });
   }
 
   public async stopApplication(): Promise<void> {
     this.logger.info({ msg: 'stop application' });
     await this.closeDatabasesConnection();
     this.logger.info({ msg: 'closing server' });
-    this.server.close();
+    await this.stopServer();
+  }
+
+  public stopServer(): Promise<void> {
+    return new Promise(resolve => {
+      this.server.close(error => {
+        if (error) {
+          this.logger.error({ msg: error.message });
+          return resolve();
+        }
+
+        return resolve();
+      });
+    });
   }
 
   public initServer(): void {
@@ -125,7 +143,7 @@ export default class App {
     return this.application;
   }
 
-  public async initApplictation(): Promise<void> {
+  public async initApplication(): Promise<void> {
     this.logger.info({ msg: 'initializing application' });
     await this.setupDatabases();
     this.setupSwagger();

@@ -14,7 +14,10 @@ services:
       - /usr/src/app/dist
     ports:
       - "3000:3000"
-    env_file: .env.development
+    environment:
+      DATABASE_URL: mysql://root:haandbib@mysql:3306/haandbib
+      PORT: 3000
+      NODE_ENV: development
     depends_on:
       - mysql
       - redis

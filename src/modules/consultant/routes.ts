@@ -81,9 +81,10 @@ export default class ConsultantRouter implements IRouter {
      * @bodyRequired
      * @response 201 - an object of consultant.
      * @responseContent {CreateConsultantResponse} 201.application/json
-     * @responseExample {CreateConsultantResponse} 200.application/json.CreateConsultantResponse
+     * @responseExample {CreateConsultantResponse} 201.application/json.CreateConsultantResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent {BadRequestResponse} 400.application/json
+     * @responseContent {ConsultantBadRequestResponse} 400.application/json
+     * @responseExample {ConsultantBadRequestResponse} 400.application/json.ConsultantBadRequestResponse
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */

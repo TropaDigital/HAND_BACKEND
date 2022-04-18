@@ -16,6 +16,7 @@ import {
   consultantRouter,
 } from './modules';
 import openapiConfig from './openapirc';
+import swaggerDefinition from './swagger';
 
 export default class App {
   private application: Application;
@@ -35,7 +36,14 @@ export default class App {
 
     this.logger.info({ msg: 'setuping swagger docs' });
     const apiSchema = openapi(openapiConfig);
-    this.application.use('/docs', swaggerUI.serve, swaggerUI.setup(apiSchema));
+    this.application.use(
+      '/docs',
+      swaggerUI.serve,
+      swaggerUI.setup({
+        ...apiSchema,
+        ...swaggerDefinition,
+      }),
+    );
   }
 
   private setupSwaggerStats(): void {

@@ -23,6 +23,16 @@ export default {
       description:
         'Healthcheck endpoints that contains all the operations of the healthcheck',
     },
+    {
+      name: 'Consultants',
+      description:
+        'Consultant endpoints that contains all the operations of the consultants',
+    },
+    {
+      name: 'LoanSimulation',
+      description:
+        'Loan Simulation endpoints that contains all the operations of the loan simulations',
+    },
   ],
   components: {
     examples: {

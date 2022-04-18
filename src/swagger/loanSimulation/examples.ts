@@ -425,17 +425,6 @@ export default {
       deletedAt: '03-09-2022',
     },
   },
-  ConsultantsResponse: {
-    value: [
-      {
-        name: 'John Doe',
-        taxId: 1020312465,
-        city: 'São Luis',
-        state: 'Maranhão',
-        commission: 10,
-      },
-    ],
-  },
   ConsultantResponse: {
     value: {
       name: 'String',

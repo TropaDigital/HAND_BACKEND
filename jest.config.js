@@ -23,6 +23,7 @@ module.exports = {
     '!src/index.ts',
     '!src/shared/errors/*.ts',
     '!src/**/__tests__/**/*.ts',
+    '!src/swagger/**/*.ts',
     'src/middlewares/ErrorMiddleware.ts',
   ],
   coverageThreshold: {

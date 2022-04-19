@@ -23,6 +23,16 @@ module.exports = {
   reporters: [
     'default',
     [
+      'jest-junit', {
+        'suiteName': 'jest tests',
+        'outputDirectory': './coverage/functional',
+        'outputName': 'junit.xml',
+        'uniqueOutputName': 'false',
+        'ancestorSeparator': ' › ',
+        'usePathForSuiteName': 'true'
+      }
+    ],
+    [
       'jest-html-reporters',
       {
         pageTitle: 'Haand bib API',

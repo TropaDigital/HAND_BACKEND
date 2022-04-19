@@ -1,5 +1,5 @@
 import { ValidationResult } from 'joi';
 
-export type IValidationResult = ValidationResult;
+type IValidationResult = ValidationResult;
 
 export default IValidationResult;

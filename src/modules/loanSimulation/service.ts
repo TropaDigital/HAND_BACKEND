@@ -2,7 +2,6 @@
 import {
   getDaysInMonth,
   getDate,
-  getMonth,
   addMonths,
   format,
   addDays,
@@ -42,11 +41,7 @@ export class LoanSimulationService implements ILoanSimulationService {
   }
 
   private getFeesOfMonth(date: number | Date): number {
-    if (getMonth(date) === getMonth(new Date())) {
-      return (this.getRemainingDaysOfMonth(date) * loanConfig.fees) / 100 / 100;
-    }
-
-    return (this.getNumberOfDaysOfTheMonth(date) * loanConfig.fees) / 100 / 100;
+    return (this.getRemainingDaysOfMonth(date) * loanConfig.fees) / 100 / 100;
   }
 
   private getInstallmentsFactorValueByRequestedValue(

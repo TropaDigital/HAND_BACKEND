@@ -11,7 +11,7 @@ export class PinoAdapter implements ILogger {
   constructor(
     private readonly pinoInstance: ILoggerInstance = pino({
       enabled: loggerConfig().LOGGER_ENABLED,
-      level: loggerConfig().LOGGER_LEVEL || 'info',
+      level: loggerConfig().LOGGER_LEVEL,
       prettyPrint: loggerConfig().LOGGER_PRETTY_PRINT,
     }),
   ) {}

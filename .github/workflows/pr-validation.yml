@@ -67,26 +67,28 @@ jobs:
         run: yarn lint
 
       - name: Run Unit Tests
+        id: unit-tests
+        continue-on-error: true
         env:
           DATABASE_URL: mysql://${{ env.MYSQL_USER }}:${{ env.MYSQL_ROOT_PASSWORD }}@localhost:${{ job.services.mysql.ports[3306] }}/${{ env.MYSQL_DATABASE }}
           REDIS_HOSTNAME: localhost
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
         run: yarn test:unit:coverage
 
-      - name: Generate jest coverage comment for unit tests
-        uses: MishaKav/jest-coverage-comment@main
+      - name: Generate artifact of unit tests results
+        uses: actions/upload-artifact@v3
         with:
-          coverage-summary-path: ./coverage/unit/coverage-final.json
-          title: Unit Tests Code Coverage
-          summary-title: Unit tests Summary Title
-          badge-title: Unit Tests Code Coverage
-          hide-comment: false
-          create-new-comment: true
-          hide-summary: false
-          junitxml-title: Unit Tests Code Coverage
-          junitxml-path: ./coverage/unit/junit.xml
-          coverage-title: Unit Tests Code Coverage
-            
+          name: unit-tests-artifact
+          path: |
+            coverage
+            html-report
+            !coverage/functional
+            !html-report/functional.html
+            !html-report/jest-html-reporters-attach/functional
+      
+      - name: Check unit tests failures
+        if: steps.unit-tests.outcome != 'success'
+        run: exit 1
 
       - name: Run Integration Tests
         env:
@@ -95,17 +97,14 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
         run: yarn test:functional:coverage
 
-      - name: Generate jest coverage comment for functional tests
-        uses: MishaKav/jest-coverage-comment@main
+      - name: Generate artifact of functional tests results
+        uses: actions/upload-artifact@v3
         with:
-          coverage-summary-path: ./coverage/functional/coverage-final.json
-          title: Functional Tests Code Coverage
-          summary-title: Functional tests Summary Title
-          badge-title: Functional Tests Code Coverage
-          hide-comment: false
-          create-new-comment: true
-          hide-summary: false
-          junitxml-title: Functional Tests Code Coverage
-          junitxml-path: ./coverage/functional/junit.xml
-          coverage-title: Functional Tests Code Coverage
+          name: functional-tests-artifact
+          path: |
+            coverage
+            html-report
+            !coverage/unit
+            !html-report/unit.html
+            !html-report/jest-html-reporters-attach/unit
 

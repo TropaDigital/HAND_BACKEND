@@ -68,6 +68,10 @@ export class LoanSimulationService implements ILoanSimulationService {
     );
   }
 
+  private formatReferenceDate(date: Date): string {
+    return `${format(date, 'MMMM', { locale: ptBR })}/${format(date, 'yyyy')}`;
+  }
+
   private formatInstallmentDetails({
     currentDate,
     requestedValue,
@@ -92,10 +96,7 @@ export class LoanSimulationService implements ILoanSimulationService {
         joinedTelemedicine,
       ) + consultantCommissionValueByInstallment;
     return {
-      reference: `${format(currentDate, 'MMMM', { locale: ptBR })}/${format(
-        currentDate,
-        'yyyy',
-      )}`,
+      reference: this.formatReferenceDate(currentDate),
       cardFees: this.getCardFees(1),
       telemedicineFees: this.getTelemedicineFees(joinedTelemedicine, 1),
       bankProcessingFees: this.getbankProcessingFees(1),
@@ -115,15 +116,21 @@ export class LoanSimulationService implements ILoanSimulationService {
     consultantCommission,
   }: IFormatInstallmentParams): IInstallmentDetails[] {
     let currentDate = startOfDay(new Date());
-    const blankInstallments = new Array(numberOfInstallments).fill(0);
-    return blankInstallments.map(() => {
-      const formatedInstallment = this.formatInstallmentDetails({
-        currentDate,
-        requestedValue,
-        numberOfInstallments,
-        joinedTelemedicine,
-        consultantCommission,
-      });
+    const firstInstallment = this.formatInstallmentDetails({
+      currentDate,
+      requestedValue,
+      numberOfInstallments,
+      joinedTelemedicine,
+      consultantCommission,
+    });
+    const installments: IInstallmentDetails[] = new Array(
+      numberOfInstallments,
+    ).fill(firstInstallment);
+    return installments.map(installment => {
+      const formatedInstallment: IInstallmentDetails = {
+        ...installment,
+        reference: this.formatReferenceDate(currentDate),
+      };
       currentDate = addMonths(currentDate, 1);
       return formatedInstallment;
     });

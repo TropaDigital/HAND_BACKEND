@@ -91,6 +91,8 @@ jobs:
         run: exit 1
 
       - name: Run Integration Tests
+        id: functional-tests
+        continue-on-error: true
         env:
           DATABASE_URL: mysql://${{ env.MYSQL_USER }}:${{ env.MYSQL_ROOT_PASSWORD }}@localhost:${{ job.services.mysql.ports[3306] }}/${{ env.MYSQL_DATABASE }}
           REDIS_HOSTNAME: localhost
@@ -107,4 +109,8 @@ jobs:
             !coverage/unit
             !html-report/unit.html
             !html-report/jest-html-reporters-attach/unit
+
+      - name: Check functional tests failures
+        if: steps.functional-tests.outcome != 'success'
+        run: exit 1
 

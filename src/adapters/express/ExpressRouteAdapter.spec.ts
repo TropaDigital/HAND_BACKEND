@@ -8,7 +8,7 @@ import {
   makeFakeNextFunction,
 } from './tests/TestHelper';
 
-export const makeControllerStub = (): jest.Mocked<{
+const makeControllerStub = (): jest.Mocked<{
   handle: (
     httpRequest: IApiHttpRequest<
       { name: string },

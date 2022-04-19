@@ -1,19 +1,6 @@
 import { SchemaObject, ReferenceObject } from 'openapi-comment-parser';
 
 export default {
-  ConsultantsResponse: {
-    type: 'array',
-    items: {
-      type: 'object',
-      properties: {
-        name: { type: 'string', example: 'John Doe' },
-        taxId: { type: 'string', example: 1020312465 },
-        city: { type: 'string', example: 'São Luis' },
-        state: { type: 'string', example: 'Maranhão' },
-        commission: { type: 'integer', format: 'int32', example: 10 },
-      },
-    },
-  },
   CreateConsultantPayload: {
     type: 'object',
     properties: {

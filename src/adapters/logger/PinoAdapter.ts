@@ -1,5 +1,6 @@
 import pino from 'pino';
 
+import { loggerConfig } from '../../config/logger';
 import {
   ILoggerInstance,
   ILogger,
@@ -9,9 +10,9 @@ import {
 export class PinoAdapter implements ILogger {
   constructor(
     private readonly pinoInstance: ILoggerInstance = pino({
-      enabled: process.env.NODE_ENV !== 'test',
-      level: 'info',
-      prettyPrint: true,
+      enabled: loggerConfig().LOGGER_ENABLED,
+      level: loggerConfig().LOGGER_LEVEL || 'info',
+      prettyPrint: loggerConfig().LOGGER_PRETTY_PRINT,
     }),
   ) {}
 

@@ -6,6 +6,9 @@ import openapi from 'openapi-comment-parser';
 import swaggerStats from 'swagger-stats';
 import swaggerUI from 'swagger-ui-express';
 
+import { applicationConfig } from './config/application';
+import { databaseConfig } from './config/database';
+import { loggerConfig } from './config/logger';
 import { LoggerFactory } from './factories/LoggerFactory';
 import MySqlDBClient from './infra/mySql';
 import { ILogger } from './interfaces/logger/ILogger';
@@ -29,8 +32,8 @@ export default class App {
   }
 
   private setupSwagger(): void {
-    const { NODE_ENV } = process.env;
-    if (!(NODE_ENV === 'development')) {
+    const { NODE_ENV } = applicationConfig();
+    if (NODE_ENV === 'production') {
       this.logger.info({ msg: 'skiping setup of swagger docs' });
     }
 
@@ -113,6 +116,13 @@ export default class App {
     this.logger.info({ msg: 'database connections closed successfully' });
   }
 
+  private validateEnvironmentVariables(): void {
+    this.logger.info({ msg: 'validating environment variables' });
+    [applicationConfig, loggerConfig, databaseConfig].forEach(config =>
+      config(true),
+    );
+  }
+
   public async stopApplication(): Promise<void> {
     this.logger.info({ msg: 'stop application' });
     await this.closeDatabasesConnection();
@@ -135,7 +145,7 @@ export default class App {
 
   public initServer(): void {
     this.logger.info({ msg: 'initilializing server' });
-    const { PORT, NODE_ENV } = process.env;
+    const { PORT, NODE_ENV } = applicationConfig();
     this.server.listen(PORT, () => {
       this.logger.info({
         msg: `server listening on port ${PORT} in ${NODE_ENV} environment`,
@@ -153,6 +163,7 @@ export default class App {
 
   public async initApplication(): Promise<void> {
     this.logger.info({ msg: 'initializing application' });
+    this.validateEnvironmentVariables();
     await this.setupDatabases();
     this.setupSwagger();
     this.setupSwaggerStats();

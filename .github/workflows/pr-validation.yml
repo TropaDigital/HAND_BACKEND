@@ -67,24 +67,47 @@ jobs:
         run: yarn lint
 
       - name: Run Unit Tests
-        uses: ArtiomTr/jest-coverage-report-action@v2
         env:
           DATABASE_URL: mysql://${{ env.MYSQL_USER }}:${{ env.MYSQL_ROOT_PASSWORD }}@localhost:${{ job.services.mysql.ports[3306] }}/${{ env.MYSQL_DATABASE }}
           REDIS_HOSTNAME: localhost
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+        run: yarn test:unit:coverage
+
+      - name: Generate jest coverage comment for unit tests
+        uses: MishaKav/jest-coverage-comment@main
         with:
-          skip-step: install 
-          coverage-file: ./coverage/unit/coverage-final.json
-          test-script: yarn test:unit:coverage
+          coverage-summary-path: ./coverage/unit/coverage-final.json
+          title: Unit Tests Code Coverage
+          summary-title: Unit tests Summary Title
+          badge-title: Unit Tests Code Coverage
+          hide-comment: false
+          create-new-comment: false
+          hide-summary: false
+          junitxml-title: Unit Tests Code Coverage
+          junitxml-path: ./coverage/unit/junit.xml
+          coverage-title: Unit Tests Code Coverage
+          coverage-path: ./coverage/unit/coverage.txt
+            
 
       - name: Run Integration Tests
-        uses: ArtiomTr/jest-coverage-report-action@v2
         env:
           DATABASE_URL: mysql://${{ env.MYSQL_USER }}:${{ env.MYSQL_ROOT_PASSWORD }}@localhost:${{ job.services.mysql.ports[3306] }}/${{ env.MYSQL_DATABASE }}
           REDIS_HOSTNAME: localhost
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+        run: yarn test:functional:coverage
+
+      - name: Generate jest coverage comment for functional tests
+        uses: MishaKav/jest-coverage-comment@main
         with:
-          skip-step: install 
-          coverage-file: ./coverage/functional/coverage-final.json
-          test-script: yarn test:functional:coverage
+          coverage-summary-path: ./coverage/unit/coverage-final.json
+          title: Functional Tests Code Coverage
+          summary-title: functional tests Summary Title
+          badge-title: Functional Tests Code Coverage
+          hide-comment: false
+          create-new-comment: false
+          hide-summary: false
+          junitxml-title: Functional Tests Code Coverage
+          junitxml-path: ./coverage/functional/junit.xml
+          coverage-title: Functional Tests Code Coverage
+          coverage-path: ./coverage/functional/coverage.txt
 

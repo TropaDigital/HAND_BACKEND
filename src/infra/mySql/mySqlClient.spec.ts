@@ -5,7 +5,7 @@ import { ILogger } from '../../interfaces/logger/ILogger';
 
 jest.mock('@prisma/client');
 
-export const prismaClientMockFactory = (): jest.Mocked<PrismaClient> => {
+const prismaClientMockFactory = (): jest.Mocked<PrismaClient> => {
   return {
     $connect: jest.fn(),
     $queryRaw: jest.fn(),

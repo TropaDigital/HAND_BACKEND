@@ -12,3 +12,9 @@ export interface ILogger {
   warning(logParams: ILoggerParams): void;
   error(logParams: ILoggerParams): void;
 }
+
+export interface ILoggerConfig {
+  LOGGER_LEVEL: string;
+  LOGGER_ENABLED: boolean;
+  LOGGER_PRETTY_PRINT: boolean;
+}

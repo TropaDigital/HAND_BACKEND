@@ -2,7 +2,6 @@
 import {
   getDaysInMonth,
   getDate,
-  getMonth,
   addMonths,
   format,
   addDays,
@@ -42,11 +41,7 @@ export class LoanSimulationService implements ILoanSimulationService {
   }
 
   private getFeesOfMonth(date: number | Date): number {
-    if (getMonth(date) === getMonth(new Date())) {
-      return (this.getRemainingDaysOfMonth(date) * loanConfig.fees) / 100 / 100;
-    }
-
-    return (this.getNumberOfDaysOfTheMonth(date) * loanConfig.fees) / 100 / 100;
+    return (this.getRemainingDaysOfMonth(date) * loanConfig.fees) / 100 / 100;
   }
 
   private getInstallmentsFactorValueByRequestedValue(
@@ -66,6 +61,10 @@ export class LoanSimulationService implements ILoanSimulationService {
       loanConfig.cardValue +
       (joinedTelemedicine ? loanConfig.optionals.telemedicineValue : 0)
     );
+  }
+
+  private formatReferenceDate(date: Date): string {
+    return `${format(date, 'MMMM', { locale: ptBR })}/${format(date, 'yyyy')}`;
   }
 
   private formatInstallmentDetails({
@@ -92,10 +91,7 @@ export class LoanSimulationService implements ILoanSimulationService {
         joinedTelemedicine,
       ) + consultantCommissionValueByInstallment;
     return {
-      reference: `${format(currentDate, 'MMMM', { locale: ptBR })}/${format(
-        currentDate,
-        'yyyy',
-      )}`,
+      reference: this.formatReferenceDate(currentDate),
       cardFees: this.getCardFees(1),
       telemedicineFees: this.getTelemedicineFees(joinedTelemedicine, 1),
       bankProcessingFees: this.getbankProcessingFees(1),
@@ -115,15 +111,21 @@ export class LoanSimulationService implements ILoanSimulationService {
     consultantCommission,
   }: IFormatInstallmentParams): IInstallmentDetails[] {
     let currentDate = startOfDay(new Date());
-    const blankInstallments = new Array(numberOfInstallments).fill(0);
-    return blankInstallments.map(() => {
-      const formatedInstallment = this.formatInstallmentDetails({
-        currentDate,
-        requestedValue,
-        numberOfInstallments,
-        joinedTelemedicine,
-        consultantCommission,
-      });
+    const firstInstallment = this.formatInstallmentDetails({
+      currentDate,
+      requestedValue,
+      numberOfInstallments,
+      joinedTelemedicine,
+      consultantCommission,
+    });
+    const installments: IInstallmentDetails[] = new Array(
+      numberOfInstallments,
+    ).fill(firstInstallment);
+    return installments.map(installment => {
+      const formatedInstallment: IInstallmentDetails = {
+        ...installment,
+        reference: this.formatReferenceDate(currentDate),
+      };
       currentDate = addMonths(currentDate, 1);
       return formatedInstallment;
     });

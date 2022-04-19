@@ -16,12 +16,28 @@ export default {
     description: 'haand-bib is webservice to provide features to haand-bib.',
     contact: { email: 'brunohafonso@gmail.com' },
   },
-  servers: [{ url: 'http://localhost:3000/', description: 'Local server' }],
+  servers: [
+    {
+      url: 'https://haand-bib-backend.herokuapp.com/',
+      description: 'Homolog server',
+    },
+    { url: 'http://localhost:3000/', description: 'Local server' },
+  ],
   tags: [
     {
       name: 'Healthcheck',
       description:
         'Healthcheck endpoints that contains all the operations of the healthcheck',
+    },
+    {
+      name: 'Consultants',
+      description:
+        'Consultant endpoints that contains all the operations of the consultants',
+    },
+    {
+      name: 'LoanSimulations',
+      description:
+        'Loan Simulation endpoints that contains all the operations of the loan simulations',
     },
   ],
   components: {

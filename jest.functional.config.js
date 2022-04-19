@@ -10,7 +10,7 @@ module.exports = {
   clearMocks: true,
   preset: 'ts-jest',
   setupFilesAfterEnv: ['./__tests__/jest.setup.ts'],
-  collectCoverageFrom: ['src/**/*controller.ts', 'src/**/*service.ts', 'src/middlewares/*.ts', '!src/middlewares/RateLimit.ts', '!src/swagger/**/*.ts'],
+  collectCoverageFrom: ['src/**/*controller.ts', 'src/**/*service.ts', 'src/middlewares/*.ts', '!src/middlewares/RateLimit.ts', '!src/config/**/*.ts', '!src/swagger/**/*.ts'],
   coverageDirectory: 'coverage/functional',
   coverageThreshold: {
     global: {

@@ -29,7 +29,7 @@ export default {
         'Consultant endpoints that contains all the operations of the consultants',
     },
     {
-      name: 'LoanSimulation',
+      name: 'LoanSimulations',
       description:
         'Loan Simulation endpoints that contains all the operations of the loan simulations',
     },

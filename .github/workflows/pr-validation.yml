@@ -81,12 +81,11 @@ jobs:
           summary-title: Unit tests Summary Title
           badge-title: Unit Tests Code Coverage
           hide-comment: false
-          create-new-comment: false
+          create-new-comment: true
           hide-summary: false
           junitxml-title: Unit Tests Code Coverage
           junitxml-path: ./coverage/unit/junit.xml
           coverage-title: Unit Tests Code Coverage
-          coverage-path: ./coverage/unit/coverage.txt
             
 
       - name: Run Integration Tests
@@ -99,15 +98,14 @@ jobs:
       - name: Generate jest coverage comment for functional tests
         uses: MishaKav/jest-coverage-comment@main
         with:
-          coverage-summary-path: ./coverage/unit/coverage-final.json
+          coverage-summary-path: ./coverage/functional/coverage-final.json
           title: Functional Tests Code Coverage
-          summary-title: functional tests Summary Title
+          summary-title: Functional tests Summary Title
           badge-title: Functional Tests Code Coverage
           hide-comment: false
-          create-new-comment: false
+          create-new-comment: true
           hide-summary: false
           junitxml-title: Functional Tests Code Coverage
           junitxml-path: ./coverage/functional/junit.xml
           coverage-title: Functional Tests Code Coverage
-          coverage-path: ./coverage/functional/coverage.txt
 

@@ -7,7 +7,7 @@ import { IFormatedError } from '../interfaces/errors/IFormatedError';
 import { ILogger } from '../interfaces/logger/ILogger';
 import { GenericAppError, NotFoundError } from '../shared/errors';
 
-export class ErrorMiddleware implements ErrorMiddleware {
+export class ErrorMiddleware {
   constructor(private readonly logger: ILogger = LoggerFactory.create()) {}
 
   public notFoundMiddleware(

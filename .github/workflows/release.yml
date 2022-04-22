@@ -14,7 +14,7 @@ on:
 
 jobs:
   release:
-    name: Generate Release notes and Docker Image
+    name: Generate Release notes, Run tests and deploy to homolog environment (Heroku) 
     runs-on: ubuntu-latest
     strategy:
       matrix:

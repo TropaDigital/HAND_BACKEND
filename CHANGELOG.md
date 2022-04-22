@@ -1,3 +1,15 @@
+### [1.0.1](https://github.com/haandsolutions/haand-bib/compare/v1.0.0...v1.0.1) (2022-04-22)
+
+
+### :bug: Fixes
+
+* adjust the validation to expose swagger docs ([57e4da5](https://github.com/haandsolutions/haand-bib/commit/57e4da5a71fba3c4d7d248118d1afb4b9ef089e3))
+
+
+### :repeat: CI
+
+* adjust the labels of job in github actions workflow config ([a6c1f0c](https://github.com/haandsolutions/haand-bib/commit/a6c1f0cf72ecb7f18bd0345a4b273c8361e3998c))
+
 ## 1.0.0 (2022-04-19)
 
 

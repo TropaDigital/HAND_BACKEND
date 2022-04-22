@@ -1,0 +1,217 @@
+import { User } from '@prisma/client';
+
+import { NotFoundError } from '../../../shared/errors';
+import { UserService } from '../service';
+import {
+  makeUserRepositoryStub,
+  makeFakeUser,
+  makeFakeUserList,
+  makeFakeCreateUserInput,
+  makeFakeUpdateUserInput,
+} from './helpers/test-helper';
+
+const makeSut = () => {
+  const userRepository = makeUserRepositoryStub();
+  const sut = new UserService(userRepository);
+
+  return { sut, userRepository };
+};
+
+describe(UserService.name, () => {
+  describe(`When ${UserService.prototype.getAll.name} is called`, () => {
+    it('should call repository with right params', async () => {
+      const { sut, userRepository } = makeSut();
+      const findAllSpy = userRepository.findAll;
+
+      await sut.getAll();
+
+      expect(findAllSpy).toBeCalledWith();
+    });
+
+    it('should return repository result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.getAll();
+
+      expect(result).toEqual(
+        makeFakeUserList().map(user => ({
+          ...user,
+          commission: 10,
+        })),
+      );
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.findAll.mockRejectedValueOnce(
+        new Error('any_find_all_error'),
+      );
+
+      const promise = sut.getAll();
+
+      await expect(promise).rejects.toThrow(new Error('any_find_all_error'));
+    });
+  });
+
+  describe(`When ${UserService.prototype.getById.name} is called`, () => {
+    const fakeId = 777;
+
+    it('should call repository with right params', async () => {
+      const { sut, userRepository } = makeSut();
+      const findByIdSpy = userRepository.findByEmail;
+
+      await sut.getById(fakeId);
+
+      expect(findByIdSpy).toBeCalledWith(777);
+    });
+
+    it('should return repository result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.getById(fakeId);
+
+      expect(result).toEqual({ ...makeFakeUser({}), commission: 10 });
+    });
+
+    it('should return null when repository result is null', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.findByEmail.mockResolvedValueOnce(null);
+
+      await expect(sut.getById(fakeId)).rejects.toThrow(
+        new NotFoundError('user not found with provided id'),
+      );
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.findByEmail.mockRejectedValueOnce(
+        new Error('any_find_by_error'),
+      );
+
+      const promise = sut.getById(fakeId);
+
+      await expect(promise).rejects.toThrow(new Error('any_find_by_error'));
+    });
+  });
+
+  describe(`When ${UserService.prototype.create.name} is called`, () => {
+    const fakeUser = makeFakeCreateUserInput();
+
+    it('should call repository with right params', async () => {
+      const { sut, userRepository } = makeSut();
+      const createSpy = userRepository.create;
+
+      await sut.create(fakeUser);
+
+      expect(createSpy).toBeCalledWith({
+        ...makeFakeCreateUserInput(),
+        commission: 1000,
+      });
+    });
+
+    it('should return repository result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.create(fakeUser);
+
+      expect(result).toEqual(makeFakeUser({}));
+    });
+
+    it('should return repository result when user has no commission', async () => {
+      const { sut } = makeSut();
+      const user: User = {
+        id: 0,
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        role: 'any_role',
+        status: 'active',
+        password: 'any_password',
+      };
+
+      const result = await sut.create(user);
+
+      expect(result).toEqual(makeFakeUser({}));
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.create.mockRejectedValueOnce(
+        new Error('any_create_error'),
+      );
+
+      const promise = sut.create(fakeUser);
+
+      await expect(promise).rejects.toThrow(new Error('any_create_error'));
+    });
+  });
+
+  describe(`When ${UserService.prototype.updateById.name} is called`, () => {
+    const fakeId = 777;
+    const fakeUser = makeFakeUpdateUserInput();
+
+    it('should call repository with right params', async () => {
+      const { sut, userRepository } = makeSut();
+      const updateSpy = userRepository.updateById;
+
+      await sut.updateById(fakeId, fakeUser);
+
+      expect(updateSpy).toBeCalledWith(777, {
+        ...makeFakeUpdateUserInput(),
+        commission: 1000,
+      });
+    });
+
+    it('should throw not found error when the the resource with the provided id does not exist', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.findByEmail.mockResolvedValueOnce(null);
+
+      await expect(sut.updateById(fakeId, fakeUser)).rejects.toThrow(
+        new NotFoundError('user not found with provided id'),
+      );
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.updateById.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.updateById(fakeId, fakeUser);
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${UserService.prototype.deleteById.name} is called`, () => {
+    const fakeId = 777;
+
+    it('should call repository with right params', async () => {
+      const { sut, userRepository } = makeSut();
+      const deleteSpy = userRepository.deleteById;
+
+      await sut.deleteById(fakeId);
+
+      expect(deleteSpy).toBeCalledWith(777);
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.deleteById.mockRejectedValueOnce(
+        new Error('any_delete_error'),
+      );
+
+      const promise = sut.deleteById(fakeId);
+
+      await expect(promise).rejects.toThrow(new Error('any_delete_error'));
+    });
+
+    it('should throw not found error when the the resource with the provided id does not exist', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.findByEmail.mockResolvedValueOnce(null);
+
+      await expect(sut.deleteById(fakeId)).rejects.toThrow(
+        new NotFoundError('user not found with provided id'),
+      );
+    });
+  });
+});

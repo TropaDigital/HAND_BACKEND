@@ -35,6 +35,7 @@ export default class App {
     const { NODE_ENV } = applicationConfig();
     if (NODE_ENV === 'production') {
       this.logger.info({ msg: 'skiping setup of swagger docs' });
+      return;
     }
 
     this.logger.info({ msg: 'setuping swagger docs' });

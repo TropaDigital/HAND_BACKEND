@@ -19,7 +19,13 @@ describe('POST /users - Create new user', () => {
 
     const response = await global.testRequest.post(`/users`).send(params);
 
-    expect(response.body.data).toEqual(expect.objectContaining(params));
+    expect(response.body.data).toEqual({
+      email: 'any@mail.com',
+      id: expect.any(Number),
+      name: 'Mateus',
+      role: 'DEFAULT',
+      status: 'ACTIVE',
+    });
     expect(response.status).toBe(201);
   });
 
@@ -33,14 +39,24 @@ describe('POST /users - Create new user', () => {
     const response = await global.testRequest.post(`/users`).send(params);
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'state',
-        friendlyFieldName: 'state',
-        message: '"state" is required',
+        fieldName: 'email',
+        friendlyFieldName: 'email',
+        message: '"email" is required',
       },
       {
-        fieldName: 'createdBy',
-        friendlyFieldName: 'createdBy',
-        message: '"createdBy" is required',
+        fieldName: 'password',
+        friendlyFieldName: 'password',
+        message: '"password" is required',
+      },
+      {
+        fieldName: 'status',
+        friendlyFieldName: 'status',
+        message: '"status" is required',
+      },
+      {
+        fieldName: 'role',
+        friendlyFieldName: 'role',
+        message: '"role" is required',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);

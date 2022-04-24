@@ -92,7 +92,13 @@ describe(UserRepository.name, () => {
 
       const result = await sut.create(fakeUser);
 
-      expect(result).toEqual(makeFakeUser({}));
+      expect(result).toEqual({
+        email: 'any_email@mail.com',
+        id: 0,
+        name: 'any_name',
+        role: 'any_role',
+        status: 'active',
+      });
     });
 
     it('should throw when prisma throws', async () => {

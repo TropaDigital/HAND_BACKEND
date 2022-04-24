@@ -20,18 +20,24 @@ describe('GET /users/{email} - Get user by email', () => {
   });
 
   it('Should return 200 with user', async () => {
-    const email = 1;
+    const email = 'joao@mail.com';
 
     const response = await global.testRequest.get(`/users/${email}`);
     expect(response.body.data).toEqual(
-      expect.objectContaining(makeFakeCreateUserParams({ name: 'João' })),
+      expect.objectContaining(
+        makeFakeCreateUserParams({
+          name: 'João',
+          email: 'joao@mail.com',
+          id: 1,
+        }),
+      ),
     );
     expect(response.status).toBe(200);
   });
 
   it('Should return 404 and empty array when there is no user', async () => {
     await global.prismaClient.user.deleteMany();
-    const email = 10;
+    const email = 'invalidUser@mail.com';
     const response = await global.testRequest.get(`/users/${email}`);
     expect(response.body).toEqual(
       makeNotFoundResponse('user not found with provided email'),
@@ -40,14 +46,14 @@ describe('GET /users/{email} - Get user by email', () => {
   });
 
   it('Should return 400 when receive invalid params', async () => {
-    const email = 0;
+    const email = 'invalid email';
     const response = await global.testRequest.get(`/users/${email}`);
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
         fieldName: 'email',
         friendlyFieldName: 'email',
-        message: '"email" must be greater than or equal to 1',
+        message: '"email" must be a valid email',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
@@ -55,7 +61,7 @@ describe('GET /users/{email} - Get user by email', () => {
   });
 
   it('Should return 500 when the service throws an exception error', async () => {
-    const email = 1;
+    const email = 'joao@mail.com';
     jest
       .spyOn(UserService.prototype, 'getByEmail')
       .mockRejectedValueOnce(new Error('getByEmail unexpected error'));

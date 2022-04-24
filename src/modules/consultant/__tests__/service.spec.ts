@@ -206,7 +206,9 @@ describe(ConsultantService.name, () => {
       const { sut, consultantRepository } = makeSut();
       consultantRepository.findById.mockResolvedValueOnce(null);
 
-      await expect(sut.deleteById(fakeId)).rejects.toThrow(
+      const promise = sut.deleteById(fakeId);
+
+      await expect(promise).rejects.toThrow(
         new NotFoundError('consultant not found with provided id'),
       );
     });

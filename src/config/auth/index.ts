@@ -8,13 +8,16 @@ import * as schemas from './schemas';
 
 export const authConfig = (shouldThrowException = false): IAuthConfig => {
   try {
-    const { AUTH_SECRET, AUTH_SESSION_TTL, DEFAULT_PASSWORD } = new JoiAdapter<
-      typeof schemas
-    >(schemas).validateSchema<IAuthConfig>('authConfigSchema', process.env);
+    const { AUTH_SECRET, AUTH_SESSION_TTL, DEFAULT_PASSWORD, JWT_SALT } =
+      new JoiAdapter<typeof schemas>(schemas).validateSchema<IAuthConfig>(
+        'authConfigSchema',
+        process.env,
+      );
     return {
       AUTH_SECRET,
       AUTH_SESSION_TTL,
       DEFAULT_PASSWORD,
+      JWT_SALT,
     };
   } catch (error) {
     if (!shouldThrowException) {

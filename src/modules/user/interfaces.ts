@@ -3,7 +3,7 @@ import { User, Prisma } from '@prisma/client';
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 
 export interface IUserRepository {
-  create(payload: Prisma.UserCreateInput): Promise<User>;
+  create(payload: Prisma.UserCreateInput): Promise<Omit<User, 'password'>>;
 
   updateById(id: number, payload: Prisma.UserUpdateInput): Promise<void>;
 
@@ -23,7 +23,9 @@ export interface IUserController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<User | null>>;
 
-  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<User>>;
+  create(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Omit<User, 'password'>>>;
 
   updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
@@ -37,7 +39,7 @@ export interface IUserService {
 
   getById(id: number): Promise<User | null>;
 
-  create(payload: Prisma.UserCreateInput): Promise<User>;
+  create(payload: Prisma.UserCreateInput): Promise<Omit<User, 'password'>>;
 
   updateById(id: number, payload: Prisma.UserUpdateInput): Promise<void>;
 

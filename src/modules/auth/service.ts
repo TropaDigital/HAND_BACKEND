@@ -12,6 +12,7 @@ export class LoginService implements ILoginService {
   async authenticate(credentials: ILoginRequestParams): Promise<ILoginResult> {
     const { login: email, password } = credentials;
     const user = await this.userRepository.findByEmail(email);
+
     if (!user) {
       throw new UnauthorizedError();
     }

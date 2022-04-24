@@ -6,7 +6,7 @@ import { LoginController } from './controller';
 import * as schemas from './schemas';
 import { LoginService } from './service';
 
-export const createLoginService = () => {
+export const createLoginService = (): LoginService => {
   const mySql = MySqlDBClient.getInstance();
   const userRepository = new UserRepository(
     mySql.getPrismaClientInstance().user,
@@ -17,13 +17,13 @@ export const createLoginService = () => {
   return result;
 };
 
-export const createValidator = () => {
+export const createValidator = (): JoiAdapter => {
   const result = new JoiAdapter(schemas);
 
   return result;
 };
 
-export const createLoginController = () => {
+export const createLoginController = (): LoginController => {
   const loginService = createLoginService();
   const validator = createValidator();
   const result = new LoginController(loginService, validator);

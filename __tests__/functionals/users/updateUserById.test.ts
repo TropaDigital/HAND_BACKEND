@@ -34,11 +34,11 @@ describe('PATCH /users/{id} - Update user by id', () => {
   it('Should return 404 when user does not exists', async () => {
     const id = 10;
     const response = await global.testRequest.patch(`/users/${id}`).send({
-      name: 'Vinicius',
-      city: 'Fortaleza',
-      taxId: '784541231',
-      state: 'Ceará',
-      createdBy: 'Pedro',
+      email: 'any@mail.com',
+      name: 'Mateus',
+      password: 'any_password',
+      status: 'ACTIVE',
+      role: 'DEFAULT',
     });
     expect(response.body).toEqual(
       makeNotFoundResponse('user not found with provided id'),
@@ -59,39 +59,9 @@ describe('PATCH /users/{id} - Update user by id', () => {
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'id',
-        friendlyFieldName: 'id',
-        message: '"id" must be greater than or equal to 1',
-      },
-      {
         fieldName: 'name',
         friendlyFieldName: 'name',
         message: '"name" must be a string',
-      },
-      {
-        fieldName: 'taxId',
-        friendlyFieldName: 'taxId',
-        message: '"taxId" must be a string',
-      },
-      {
-        fieldName: 'city',
-        friendlyFieldName: 'city',
-        message: '"city" must be a string',
-      },
-      {
-        fieldName: 'state',
-        friendlyFieldName: 'state',
-        message: '"state" must be a string',
-      },
-      {
-        fieldName: 'commission',
-        friendlyFieldName: 'commission',
-        message: '"commission" must be a number',
-      },
-      {
-        fieldName: 'createdBy',
-        friendlyFieldName: 'createdBy',
-        message: '"createdBy" must be a string',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);

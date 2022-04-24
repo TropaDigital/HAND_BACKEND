@@ -19,6 +19,7 @@ import {
   consultantRouter,
   userRouter,
 } from './modules';
+import { loginRouter } from './modules/auth';
 import openapiConfig from './openapirc';
 import swaggerDefinition from './swagger';
 
@@ -106,6 +107,7 @@ export default class App {
       loanSimulationRouter,
       consultantRouter,
       userRouter,
+      loginRouter,
     ].forEach(router => router.setupRoutes(this.application));
   }
 

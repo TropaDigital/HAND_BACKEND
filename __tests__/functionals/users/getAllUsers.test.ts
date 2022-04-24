@@ -16,8 +16,12 @@ describe('GET /users - Get all users', () => {
     const response = await global.testRequest.get('/users');
 
     expect(response.body.data).toEqual([
-      expect.objectContaining(makeFakeUser({ name: 'João' })),
-      expect.objectContaining(makeFakeUser({ name: 'Pedro' })),
+      expect.objectContaining(
+        makeFakeUser({ name: 'João', email: 'joao@mail.com' }),
+      ),
+      expect.objectContaining(
+        makeFakeUser({ name: 'Pedro', email: 'pedro@mail.com' }),
+      ),
     ]);
     expect(response.status).toBe(200);
   });

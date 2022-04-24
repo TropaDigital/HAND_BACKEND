@@ -30,10 +30,14 @@ export class UserRepository implements IUserRepository {
     return result;
   }
 
-  public async create(payload: Prisma.UserCreateInput): Promise<User> {
-    const result = await this.prismaRepository.create({
+  public async create(
+    payload: Prisma.UserCreateInput,
+  ): Promise<Omit<User, 'password'>> {
+    const user = await this.prismaRepository.create({
       data: payload,
     });
+
+    const { password: _password, ...result } = user;
 
     return result;
   }

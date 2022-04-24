@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-import { IBcrypt, IEncrypter } from './interfaces';
+import { IBcrypt, IEncrypter } from '../../shared/auth/interfaces';
 
 export class BcryptAdapter implements IEncrypter {
   constructor(private readonly bcryptLib: IBcrypt = bcrypt) {}

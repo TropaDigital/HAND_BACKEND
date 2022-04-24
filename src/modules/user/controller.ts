@@ -21,18 +21,18 @@ export class UserController implements IUserController {
   public async getByEmail(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<User | null>> {
-    const { id } = this.validator.validateSchema<{ id: number }>(
+    const { email } = this.validator.validateSchema<{ email: string }>(
       'GetUserByEmail',
       httpRequest.params as { email: string },
     );
-    const result = await this.userService.getById(id);
+    const result = await this.userService.getByEmail(email);
 
     return { statusCodeAsString: 'OK', body: result };
   }
 
   public async create(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<User>> {
+  ): Promise<IApiHttpResponse<Omit<User, 'password'>>> {
     const user = this.validator.validateSchema<Prisma.UserCreateInput>(
       'CreateUser',
       httpRequest.body,

@@ -1,10 +1,15 @@
 import { User, Prisma } from '@prisma/client';
 
+import { authConfig } from '../../config/auth';
+import { IAuthService } from '../../shared/auth/interfaces';
 import { NotFoundError } from '../../shared/errors';
 import { IUserRepository, IUserService } from './interfaces';
 
 export class UserService implements IUserService {
-  constructor(private readonly userRepository: IUserRepository) {}
+  constructor(
+    private readonly userRepository: IUserRepository,
+    private readonly authService: IAuthService,
+  ) {}
 
   public async getAll(): Promise<User[]> {
     const result = await this.userRepository.findAll();
@@ -24,14 +29,21 @@ export class UserService implements IUserService {
   public async getByEmail(email: string): Promise<User | null> {
     const result = await this.userRepository.findByEmail(email);
     if (!result) {
-      throw new NotFoundError('user not found with provided id');
+      throw new NotFoundError('user not found with provided email');
     }
 
     return result;
   }
 
-  public async create(payload: Prisma.UserCreateInput): Promise<User> {
-    const result = await this.userRepository.create(payload);
+  public async create(
+    payload: Prisma.UserCreateInput,
+  ): Promise<Omit<User, 'password'>> {
+    const hashedPassword = await this.authService.hashPassword(
+      payload.password,
+      authConfig().JWT_SALT,
+    );
+    const user = { ...payload, ...{ password: hashedPassword } };
+    const result = await this.userRepository.create(user);
 
     return result;
   }

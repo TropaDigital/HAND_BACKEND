@@ -8,11 +8,13 @@ import {
   makeFakeUserList,
   makeFakeCreateUserInput,
   makeFakeUpdateUserInput,
+  makeAuthServiceStub,
 } from './helpers/test-helper';
 
 const makeSut = () => {
   const userRepository = makeUserRepositoryStub();
-  const sut = new UserService(userRepository);
+  const authService = makeAuthServiceStub();
+  const sut = new UserService(userRepository, authService);
 
   return { sut, userRepository };
 };
@@ -33,12 +35,7 @@ describe(UserService.name, () => {
 
       const result = await sut.getAll();
 
-      expect(result).toEqual(
-        makeFakeUserList().map(user => ({
-          ...user,
-          commission: 10,
-        })),
-      );
+      expect(result).toEqual(makeFakeUserList());
     });
 
     it('should throw when repository throws', async () => {
@@ -58,7 +55,7 @@ describe(UserService.name, () => {
 
     it('should call repository with right params', async () => {
       const { sut, userRepository } = makeSut();
-      const findByIdSpy = userRepository.findByEmail;
+      const findByIdSpy = userRepository.findById;
 
       await sut.getById(fakeId);
 
@@ -70,12 +67,12 @@ describe(UserService.name, () => {
 
       const result = await sut.getById(fakeId);
 
-      expect(result).toEqual({ ...makeFakeUser({}), commission: 10 });
+      expect(result).toEqual({ ...makeFakeUser({}) });
     });
 
     it('should return null when repository result is null', async () => {
       const { sut, userRepository } = makeSut();
-      userRepository.findByEmail.mockResolvedValueOnce(null);
+      userRepository.findById.mockResolvedValueOnce(null);
 
       await expect(sut.getById(fakeId)).rejects.toThrow(
         new NotFoundError('user not found with provided id'),
@@ -84,7 +81,7 @@ describe(UserService.name, () => {
 
     it('should throw when repository throws', async () => {
       const { sut, userRepository } = makeSut();
-      userRepository.findByEmail.mockRejectedValueOnce(
+      userRepository.findById.mockRejectedValueOnce(
         new Error('any_find_by_error'),
       );
 
@@ -105,7 +102,7 @@ describe(UserService.name, () => {
 
       expect(createSpy).toBeCalledWith({
         ...makeFakeCreateUserInput(),
-        commission: 1000,
+        password: 'hashed_password',
       });
     });
 
@@ -157,13 +154,12 @@ describe(UserService.name, () => {
 
       expect(updateSpy).toBeCalledWith(777, {
         ...makeFakeUpdateUserInput(),
-        commission: 1000,
       });
     });
 
     it('should throw not found error when the the resource with the provided id does not exist', async () => {
       const { sut, userRepository } = makeSut();
-      userRepository.findByEmail.mockResolvedValueOnce(null);
+      userRepository.findById.mockResolvedValueOnce(null);
 
       await expect(sut.updateById(fakeId, fakeUser)).rejects.toThrow(
         new NotFoundError('user not found with provided id'),
@@ -207,9 +203,11 @@ describe(UserService.name, () => {
 
     it('should throw not found error when the the resource with the provided id does not exist', async () => {
       const { sut, userRepository } = makeSut();
-      userRepository.findByEmail.mockResolvedValueOnce(null);
+      userRepository.findById.mockResolvedValueOnce(null);
 
-      await expect(sut.deleteById(fakeId)).rejects.toThrow(
+      const promise = sut.deleteById(fakeId);
+
+      await expect(promise).rejects.toThrow(
         new NotFoundError('user not found with provided id'),
       );
     });

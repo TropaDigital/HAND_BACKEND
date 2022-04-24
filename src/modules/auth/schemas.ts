@@ -1,9 +1,8 @@
 import Joi from 'joi';
 
-export const LoginRequestParams = Joi.object<{
-  email: string;
-  password: string;
-}>({
-  email: Joi.string().email().required(),
+import { ILoginRequestParams } from './interfaces';
+
+export const LoginRequestParams = Joi.object<ILoginRequestParams>({
+  login: Joi.string().email().required(),
   password: Joi.string().required(),
 });

@@ -37,7 +37,7 @@ export default class LoginRouter implements IRouter {
      */
     this.router
       .route('/login')
-      .get(
+      .post(
         ExpressRouteAdapter.adapt<ILoginController>(this.controller, 'login'),
       );
   }

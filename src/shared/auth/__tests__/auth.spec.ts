@@ -148,7 +148,7 @@ describe(AuthService.name, () => {
     });
   });
   describe(AuthService.prototype.generateToken.name, () => {
-    const payload = { sub: 'any_sub', role: { name: 'any_role' } };
+    const payload = { sub: 'any_sub', role: 'any_role' };
 
     it('Should call jwt when method is called', async () => {
       const { sut } = makeSut();

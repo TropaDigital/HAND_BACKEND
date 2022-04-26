@@ -9,14 +9,21 @@ import {
 import { makeLoanSimulationBasedOnRequestedValueParams } from '../../../src/modules/loanSimulation/__tests__/helpers/test-helper';
 import { ILoanSimulationBasedOnRequestedValue } from '../../../src/modules/loanSimulation/interfaces';
 import { LoanSimulationService } from '../../../src/modules/loanSimulation/service';
+import { AuthService } from '../../../src/shared/auth/auth';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
+  makeUnauthorizedResponse,
 } from '../../helpers';
 import { populateDatabase } from '../consultants/helpers/testHelper';
 
 describe('POST /loansimulations/simulate - Get an loan simulation based in the provided parameters', () => {
+  const token = new AuthService().generateToken({
+    sub: 1,
+    role: 'VALID_ROLE',
+  });
+
   beforeAll(async () => {
     await global.prismaClient.consultant.deleteMany();
     await populateDatabase();
@@ -29,6 +36,7 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
   it('should return 400 when provide invalid parameters', async () => {
     const response = await global.testRequest
       .post('/loansimulations/simulate')
+      .set('x-access-token', token)
       .send({
         consultantId: 0,
         joinedTelemedicine: 'invalid',
@@ -77,6 +85,7 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
   it('should return 404 when provided a consultant id that does not exists', async () => {
     const response = await global.testRequest
       .post('/loansimulations/simulate')
+      .set('x-access-token', token)
       .send(
         makeLoanSimulationBasedOnRequestedValueParams({ consultantId: 10 }),
       );
@@ -86,6 +95,16 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
     );
     expect(response.status).toBe(notFoundResponse.statusCode);
     expect(response.body).toEqual(notFoundResponse);
+  });
+
+  it('should return 401 when not provide the access token', async () => {
+    const response = await global.testRequest
+      .post('/loansimulations/simulate')
+      .send(makeLoanSimulationBasedOnRequestedValueParams());
+
+    const unauthorizedResponse = makeUnauthorizedResponse('token not provided');
+    expect(response.status).toBe(unauthorizedResponse.statusCode);
+    expect(response.body).toEqual(unauthorizedResponse);
   });
 
   test.each([
@@ -112,6 +131,7 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
     async ({ params, expected }) => {
       const response = await global.testRequest
         .post('/loansimulations/simulate')
+        .set('x-access-token', token)
         .send({
           ...params,
         });
@@ -146,6 +166,7 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
       .mockRejectedValueOnce(new Error('create unexpected error'));
     const response = await global.testRequest
       .post('/loansimulations/simulate')
+      .set('x-access-token', token)
       .send(params);
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();

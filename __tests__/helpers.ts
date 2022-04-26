@@ -5,10 +5,17 @@ import {
   NotFoundError,
   MissingInvalidParamsError,
   GenericAppError,
+  UnauthorizedError,
 } from '../src/shared/errors';
 
 export const makeNotFoundResponse = (description?: string): IFormatedError => {
   return ErrorMiddleware.formatError(new NotFoundError(description));
+};
+
+export const makeUnauthorizedResponse = (
+  description?: string,
+): IFormatedError => {
+  return ErrorMiddleware.formatError(new UnauthorizedError(description));
 };
 
 export const makeInvalidParamsResponse = (

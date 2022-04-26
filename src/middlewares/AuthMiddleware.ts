@@ -8,11 +8,11 @@ class AuthMiddleware {
   constructor(private readonly authService: AuthService = new AuthService()) {}
 
   public authenticationMiddleware(
-    req: Partial<Request>,
-    _res: Partial<Response>,
+    req: Request,
+    _res: Response,
     next: NextFunction,
   ): void {
-    const token = req.headers?.['x-access-token'];
+    const token = req.headers['x-access-token'];
     if (!token) {
       throw new UnauthorizedError('token not provided');
     }

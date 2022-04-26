@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
+import AuthMiddleware from '../../middlewares/AuthMiddleware';
 import { createLoanSimulationController } from './factories';
 import { ILoanSimulationController } from './interfaces';
 
@@ -48,6 +49,7 @@ export default class LoanSimulationRouter implements IRouter {
     this.router
       .route('/loansimulations/simulate')
       .post(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<ILoanSimulationController>(
           this.controller,
           'getLoanSimulationByRequestedValue',

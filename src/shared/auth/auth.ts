@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 import { BcryptAdapter } from '../../adapters/encrypter/bcrypt';
 import { authConfig } from '../../config/auth';
-import { IAuthService, IEncrypter, IJwtToken, IRole } from './interfaces';
+import { IAuthService, IEncrypter, IJwtToken } from './interfaces';
 
 export class AuthService implements IAuthService {
   constructor(private readonly encrypter: IEncrypter = new BcryptAdapter()) {}
@@ -18,7 +18,10 @@ export class AuthService implements IAuthService {
     return this.encrypter.compareHash(password, hashedPassword);
   }
 
-  public generateToken(payload: { sub: string; role: IRole }): string {
+  public generateToken(payload: {
+    sub: string | number;
+    role: string;
+  }): string {
     return jwt.sign(
       { sub: payload.sub, role: payload.role },
       authConfig().AUTH_SECRET,
@@ -33,6 +36,7 @@ export class AuthService implements IAuthService {
       token,
       authConfig().AUTH_SECRET,
     ) as IJwtToken;
+
     return { role, sub };
   }
 }

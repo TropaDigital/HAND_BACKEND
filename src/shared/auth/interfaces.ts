@@ -1,10 +1,6 @@
-export interface IRole {
-  name: string;
-}
-
 export interface IJwtToken {
   sub: string;
-  role: IRole;
+  role: string;
 }
 
 export interface IEncrypter {

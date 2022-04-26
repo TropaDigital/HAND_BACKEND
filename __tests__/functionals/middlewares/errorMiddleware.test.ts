@@ -3,7 +3,7 @@ import { HealthcheckController } from '../../../src/modules/healthcheck/controll
 import { NotFoundError } from '../../../src/shared/errors';
 import { makeNotFoundResponse } from '../../helpers';
 
-describe('test global error middleware integration', () => {
+describe('Global Error Middleware', () => {
   describe('GET /route-that-does-not-exists', () => {
     it('should return an not found object', async () => {
       const response = await global.testRequest.get(

@@ -156,7 +156,7 @@ describe(AuthService.name, () => {
       await sut.generateToken(payload);
 
       expect(signSpy).toBeCalledWith(
-        { role: { name: 'any_role' }, sub: 'any_sub' },
+        { role: 'any_role', sub: 'any_sub' },
         'any_secret',
         { expiresIn: 'any_ttl' },
       );

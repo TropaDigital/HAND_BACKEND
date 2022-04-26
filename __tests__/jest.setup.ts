@@ -10,6 +10,7 @@ beforeAll(async () => {
   global.testRequest = supertest(server.getInstance());
   const prismaClient = MySqlDBClient.getInstance().getPrismaClientInstance();
   global.prismaClient = prismaClient;
+  global.app = server;
 });
 
 afterAll(async () => {

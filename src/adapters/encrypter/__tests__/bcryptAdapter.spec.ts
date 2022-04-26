@@ -35,6 +35,13 @@ describe('BcryptAdapter unit tests', () => {
       expect(bcryptMock.hash).toHaveBeenCalledWith('value_to_be_hashed', 10);
       expect(result).toEqual('hashed_string');
     });
+
+    it('should return a hashed string when no salt is provided', async () => {
+      const { bcryptAdapter, bcryptMock } = makeSut();
+      const result = await bcryptAdapter.encrypt('value_to_be_hashed');
+      expect(bcryptMock.hash).toHaveBeenCalledWith('value_to_be_hashed', 12);
+      expect(result).toEqual('hashed_string');
+    });
   });
 
   describe('compareHash()', () => {

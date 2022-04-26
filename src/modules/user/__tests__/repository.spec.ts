@@ -75,6 +75,40 @@ describe(UserRepository.name, () => {
     });
   });
 
+  describe(`When ${UserRepository.prototype.findByEmail.name} is called`, () => {
+    const fakeEmail = 'mail@mail.com';
+
+    it('should call prisma with right params', async () => {
+      const { sut, prismaRepository } = makeSut();
+      const findFirstSpy = prismaRepository.findFirst;
+
+      await sut.findByEmail(fakeEmail);
+
+      expect(findFirstSpy).toBeCalledWith({
+        where: { email: 'mail@mail.com' },
+      });
+    });
+
+    it('should return prisma result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.findByEmail(fakeEmail);
+
+      expect(result).toEqual(makeFakeUser({}));
+    });
+
+    it('should throw when prisma throws', async () => {
+      const { sut, prismaRepository } = makeSut();
+      prismaRepository.findFirst.mockRejectedValueOnce(
+        new Error('any_find_first_error'),
+      );
+
+      const promise = sut.findByEmail(fakeEmail);
+
+      await expect(promise).rejects.toThrow(new Error('any_find_first_error'));
+    });
+  });
+
   describe(`When ${UserRepository.prototype.create.name} is called`, () => {
     const fakeUser = makeFakeUser({});
 

@@ -91,6 +91,49 @@ describe(UserService.name, () => {
     });
   });
 
+  describe(`When ${UserService.prototype.getByEmail.name} is called`, () => {
+    const fakeEmail = 'any@mail.com';
+
+    it('should call repository with right params', async () => {
+      const { sut, userRepository } = makeSut();
+      const findByEmailSpy = userRepository.findByEmail;
+
+      await sut.getByEmail(fakeEmail);
+
+      expect(findByEmailSpy).toBeCalledWith('any@mail.com');
+    });
+
+    it('should return repository result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.getByEmail(fakeEmail);
+
+      expect(result).toEqual({ ...makeFakeUser({}) });
+    });
+
+    it('should return null when repository result is null', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.findByEmail.mockResolvedValueOnce(null);
+
+      const promise = sut.getByEmail(fakeEmail);
+
+      await expect(promise).rejects.toThrow(
+        new NotFoundError('user not found with provided email'),
+      );
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, userRepository } = makeSut();
+      userRepository.findByEmail.mockRejectedValueOnce(
+        new Error('any_find_by_error'),
+      );
+
+      const promise = sut.getByEmail(fakeEmail);
+
+      await expect(promise).rejects.toThrow(new Error('any_find_by_error'));
+    });
+  });
+
   describe(`When ${UserService.prototype.create.name} is called`, () => {
     const fakeUser = makeFakeCreateUserInput();
 

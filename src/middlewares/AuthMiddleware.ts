@@ -18,7 +18,8 @@ class AuthMiddleware {
     }
 
     try {
-      this.authService.decodeToken(token as string);
+      const decodedUser = this.authService.decodeToken(token as string);
+      req.user = decodedUser;
       next();
     } catch (error) {
       if (error instanceof JsonWebTokenError) {

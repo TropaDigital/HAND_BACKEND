@@ -61,7 +61,6 @@ export const makeFakeUserList = () => [makeFakeUser({}), makeFakeUser({})];
 
 export const makeUserServiceStub = (): jest.Mocked<IUserService> => ({
   getAll: jest.fn().mockResolvedValue(makeFakeUserList()),
-  getById: jest.fn().mockResolvedValue(makeFakeUser({})),
   getByEmail: jest.fn().mockResolvedValue(makeFakeUser({})),
   create: jest.fn().mockResolvedValue(makeFakeUser({})),
   updateById: jest.fn(),

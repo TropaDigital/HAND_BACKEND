@@ -40,8 +40,6 @@ export interface IUserService {
 
   getByEmail(email: string): Promise<ResponseUser | null>;
 
-  getById(id: number): Promise<ResponseUser | null>;
-
   create(payload: Prisma.UserCreateInput): Promise<ResponseUser>;
 
   updateById(id: number, payload: Prisma.UserUpdateInput): Promise<void>;

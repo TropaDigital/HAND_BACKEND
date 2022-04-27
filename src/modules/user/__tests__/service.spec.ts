@@ -64,53 +64,6 @@ describe(UserService.name, () => {
     });
   });
 
-  describe(`When ${UserService.prototype.getById.name} is called`, () => {
-    const fakeId = 777;
-
-    it('should call repository with right params', async () => {
-      const { sut, userRepository } = makeSut();
-      const findByIdSpy = userRepository.findById;
-
-      await sut.getById(fakeId);
-
-      expect(findByIdSpy).toBeCalledWith(777);
-    });
-
-    it('should return repository result', async () => {
-      const { sut } = makeSut();
-
-      const result = await sut.getById(fakeId);
-
-      expect(result).toEqual({
-        email: 'any_email@mail.com',
-        id: 0,
-        name: 'any_name',
-        role: 'any_role',
-        status: 'active',
-      });
-    });
-
-    it('should return null when repository result is null', async () => {
-      const { sut, userRepository } = makeSut();
-      userRepository.findById.mockResolvedValueOnce(null);
-
-      await expect(sut.getById(fakeId)).rejects.toThrow(
-        new NotFoundError('user not found with provided id'),
-      );
-    });
-
-    it('should throw when repository throws', async () => {
-      const { sut, userRepository } = makeSut();
-      userRepository.findById.mockRejectedValueOnce(
-        new Error('any_find_by_error'),
-      );
-
-      const promise = sut.getById(fakeId);
-
-      await expect(promise).rejects.toThrow(new Error('any_find_by_error'));
-    });
-  });
-
   describe(`When ${UserService.prototype.getByEmail.name} is called`, () => {
     const fakeEmail = 'any@mail.com';
 

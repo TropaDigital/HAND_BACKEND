@@ -3,7 +3,7 @@ import { User, Prisma } from '@prisma/client';
 import { authConfig } from '../../config/auth';
 import { IAuthService } from '../../shared/auth/interfaces';
 import { NotFoundError } from '../../shared/errors';
-import { IUserRepository, IUserService } from './interfaces';
+import { IUserRepository, IUserService, ResponseUser } from './interfaces';
 
 export class UserService implements IUserService {
   constructor(
@@ -11,33 +11,40 @@ export class UserService implements IUserService {
     private readonly authService: IAuthService,
   ) {}
 
-  public async getAll(): Promise<User[]> {
-    const result = await this.userRepository.findAll();
+  public async getAll(): Promise<ResponseUser[]> {
+    const users = await await this.userRepository.findAll();
+    const result = users.map((user: User) => this.removePasswordFromUser(user));
 
     return result;
   }
 
-  public async getById(id: number): Promise<User | null> {
-    const result = await this.userRepository.findById(id);
-    if (!result) {
+  private removePasswordFromUser(user: User): ResponseUser {
+    const { password: _password, ...result } = user;
+
+    return result;
+  }
+
+  public async getById(id: number): Promise<ResponseUser | null> {
+    const user = await this.userRepository.findById(id);
+    if (!user) {
       throw new NotFoundError('user not found with provided id');
     }
+    const result = this.removePasswordFromUser(user);
 
     return result;
   }
 
-  public async getByEmail(email: string): Promise<User | null> {
-    const result = await this.userRepository.findByEmail(email);
-    if (!result) {
+  public async getByEmail(email: string): Promise<ResponseUser | null> {
+    const user = await this.userRepository.findByEmail(email);
+    if (!user) {
       throw new NotFoundError('user not found with provided email');
     }
+    const result = this.removePasswordFromUser(user);
 
     return result;
   }
 
-  public async create(
-    payload: Prisma.UserCreateInput,
-  ): Promise<Omit<User, 'password'>> {
+  public async create(payload: Prisma.UserCreateInput): Promise<ResponseUser> {
     const hashedPassword = await this.authService.hashPassword(
       payload.password,
       authConfig().JWT_SALT,

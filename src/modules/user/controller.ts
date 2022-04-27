@@ -1,9 +1,9 @@
-import { User, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
 import { IValidator } from '../../interfaces/validation/IValidator';
-import { IUserController, IUserService } from './interfaces';
+import { IUserController, IUserService, ResponseUser } from './interfaces';
 import * as schemas from './schemas';
 
 export class UserController implements IUserController {
@@ -12,7 +12,7 @@ export class UserController implements IUserController {
     private readonly validator: IValidator<typeof schemas>,
   ) {}
 
-  public async getAll(): Promise<IApiHttpResponse<User[]>> {
+  public async getAll(): Promise<IApiHttpResponse<ResponseUser[]>> {
     const result = await this.userService.getAll();
 
     return { statusCodeAsString: 'OK', body: result };
@@ -20,7 +20,7 @@ export class UserController implements IUserController {
 
   public async getByEmail(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<User | null>> {
+  ): Promise<IApiHttpResponse<ResponseUser | null>> {
     const { email } = this.validator.validateSchema<{ email: string }>(
       'GetUserByEmail',
       httpRequest.params as { email: string },
@@ -32,7 +32,7 @@ export class UserController implements IUserController {
 
   public async create(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Omit<User, 'password'>>> {
+  ): Promise<IApiHttpResponse<ResponseUser>> {
     const user = this.validator.validateSchema<Prisma.UserCreateInput>(
       'CreateUser',
       httpRequest.body,

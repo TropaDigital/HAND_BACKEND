@@ -5,7 +5,6 @@ import { UserService } from '../service';
 import {
   makeUserRepositoryStub,
   makeFakeUser,
-  makeFakeUserList,
   makeFakeCreateUserInput,
   makeFakeUpdateUserInput,
   makeAuthServiceStub,
@@ -35,7 +34,22 @@ describe(UserService.name, () => {
 
       const result = await sut.getAll();
 
-      expect(result).toEqual(makeFakeUserList());
+      expect(result).toEqual([
+        {
+          email: 'any_email@mail.com',
+          id: 0,
+          name: 'any_name',
+          role: 'any_role',
+          status: 'active',
+        },
+        {
+          email: 'any_email@mail.com',
+          id: 0,
+          name: 'any_name',
+          role: 'any_role',
+          status: 'active',
+        },
+      ]);
     });
 
     it('should throw when repository throws', async () => {
@@ -67,7 +81,13 @@ describe(UserService.name, () => {
 
       const result = await sut.getById(fakeId);
 
-      expect(result).toEqual({ ...makeFakeUser({}) });
+      expect(result).toEqual({
+        email: 'any_email@mail.com',
+        id: 0,
+        name: 'any_name',
+        role: 'any_role',
+        status: 'active',
+      });
     });
 
     it('should return null when repository result is null', async () => {
@@ -108,7 +128,13 @@ describe(UserService.name, () => {
 
       const result = await sut.getByEmail(fakeEmail);
 
-      expect(result).toEqual({ ...makeFakeUser({}) });
+      expect(result).toEqual({
+        email: 'any_email@mail.com',
+        id: 0,
+        name: 'any_name',
+        role: 'any_role',
+        status: 'active',
+      });
     });
 
     it('should return null when repository result is null', async () => {

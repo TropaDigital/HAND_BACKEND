@@ -1,6 +1,6 @@
 import { Prisma, User } from '@prisma/client';
 
-import { IUserRepository } from './interfaces';
+import { IUserRepository, ResponseUser } from './interfaces';
 
 export type PrismaUserRepository = Prisma.UserDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
@@ -30,9 +30,7 @@ export class UserRepository implements IUserRepository {
     return result;
   }
 
-  public async create(
-    payload: Prisma.UserCreateInput,
-  ): Promise<Omit<User, 'password'>> {
+  public async create(payload: Prisma.UserCreateInput): Promise<ResponseUser> {
     const user = await this.prismaRepository.create({
       data: payload,
     });

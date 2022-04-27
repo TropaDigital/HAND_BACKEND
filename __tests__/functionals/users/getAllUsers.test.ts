@@ -1,6 +1,6 @@
 import { UserService } from '../../../src/modules/user/service';
 import { makeInternalErrorResponse } from '../../helpers';
-import { makeFakeUser, populateDatabase } from './helpers/testHelper';
+import { populateDatabase } from './helpers/testHelper';
 
 describe('GET /users - Get all users', () => {
   beforeAll(async () => {
@@ -16,12 +16,20 @@ describe('GET /users - Get all users', () => {
     const response = await global.testRequest.get('/users');
 
     expect(response.body.data).toEqual([
-      expect.objectContaining(
-        makeFakeUser({ name: 'João', email: 'joao@mail.com' }),
-      ),
-      expect.objectContaining(
-        makeFakeUser({ name: 'Pedro', email: 'pedro@mail.com' }),
-      ),
+      {
+        email: 'joao@mail.com',
+        id: 1,
+        name: 'João',
+        role: 'DEFAULT',
+        status: 'ACTIVE',
+      },
+      {
+        email: 'pedro@mail.com',
+        id: 2,
+        name: 'Pedro',
+        role: 'DEFAULT',
+        status: 'ACTIVE',
+      },
     ]);
     expect(response.status).toBe(200);
   });

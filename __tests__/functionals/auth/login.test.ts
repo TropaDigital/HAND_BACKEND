@@ -17,7 +17,13 @@ describe('GET /login - Authenticate User', () => {
 
     expect(response.body.data).toEqual(
       expect.objectContaining({
-        email: 'joao@mail.com',
+        user: {
+          id: 1,
+          name: 'João',
+          role: 'any_role',
+          status: 'active',
+          email: 'joao@mail.com',
+        },
         token: expect.any(String),
       }),
     );

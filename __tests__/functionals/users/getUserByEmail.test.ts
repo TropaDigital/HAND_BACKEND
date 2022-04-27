@@ -4,10 +4,7 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
-import {
-  makeFakeCreateUserParams,
-  populateDatabase,
-} from './helpers/testHelper';
+import { populateDatabase } from './helpers/testHelper';
 
 describe('GET /users/{email} - Get user by email', () => {
   beforeAll(async () => {
@@ -23,15 +20,13 @@ describe('GET /users/{email} - Get user by email', () => {
     const email = 'joao@mail.com';
 
     const response = await global.testRequest.get(`/users/${email}`);
-    expect(response.body.data).toEqual(
-      expect.objectContaining(
-        makeFakeCreateUserParams({
-          name: 'João',
-          email: 'joao@mail.com',
-          id: 1,
-        }),
-      ),
-    );
+    expect(response.body.data).toEqual({
+      email: 'joao@mail.com',
+      id: 1,
+      name: 'João',
+      role: 'DEFAULT',
+      status: 'ACTIVE',
+    });
     expect(response.status).toBe(200);
   });
 

@@ -17,9 +17,11 @@ export class LoginService implements ILoginService {
       throw new UnauthorizedError();
     }
 
+    const { password: hashedPassword, ...responseUser } = user;
+
     const isPasswordValid = await this.authService.compareHash(
       password,
-      user.password,
+      hashedPassword,
     );
 
     if (!isPasswordValid) {
@@ -31,6 +33,6 @@ export class LoginService implements ILoginService {
       role: { name: user.role },
     });
 
-    return { email: user.email, token: accessToken };
+    return { user: responseUser, token: accessToken };
   }
 }

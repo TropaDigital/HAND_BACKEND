@@ -41,8 +41,14 @@ describe(LoginService.name, () => {
       const result = await sut.authenticate(credentials);
 
       expect(result).toEqual({
-        email: 'any_email@mail.com',
         token: 'any_token',
+        user: {
+          email: 'any_email@mail.com',
+          id: 0,
+          name: 'any_name',
+          role: 'any_role',
+          status: 'active',
+        },
       });
     });
 

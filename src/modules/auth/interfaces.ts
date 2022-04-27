@@ -1,12 +1,14 @@
 import { IApiHttpRequest, IApiHttpResponse } from 'src/interfaces/http';
 
+import { ResponseUser } from '../user/interfaces';
+
 export interface ILoginRequestParams {
   login: string;
   password: string;
 }
 
 export interface ILoginResult {
-  email: string;
+  user: ResponseUser;
   token: string;
 }
 

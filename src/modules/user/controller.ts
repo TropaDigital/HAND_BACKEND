@@ -18,14 +18,14 @@ export class UserController implements IUserController {
     return { statusCodeAsString: 'OK', body: result };
   }
 
-  public async getByEmail(
+  public async getByUserName(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<ResponseUser | null>> {
-    const { email } = this.validator.validateSchema<{ email: string }>(
-      'GetUserByEmail',
-      httpRequest.params as { email: string },
+    const { userName } = this.validator.validateSchema<{ userName: string }>(
+      'GetUserByUserName',
+      httpRequest.params as { userName: string },
     );
-    const result = await this.userService.getByEmail(email);
+    const result = await this.userService.getByUserName(userName);
 
     return { statusCodeAsString: 'OK', body: result };
   }

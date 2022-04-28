@@ -12,12 +12,12 @@ const makeSut = () => {
 };
 
 describe('Schema', () => {
-  describe('GetUserByEmail', () => {
+  describe('GetUserByUserName', () => {
     it('should success when receive a valid input', () => {
       const { sut } = makeSut();
-      const param = { email: 'any_mail@mail.com' };
+      const param = { userName: 'any_user_name' };
 
-      const result = sut.validateSchema('GetUserByEmail', param);
+      const result = sut.validateSchema('GetUserByUserName', param);
 
       expect(result).toEqual(param);
     });
@@ -26,7 +26,7 @@ describe('Schema', () => {
       const { sut } = makeSut();
       const param = { id: '' };
 
-      expect(() => sut.validateSchema('GetUserByEmail', param)).toThrow(
+      expect(() => sut.validateSchema('GetUserByUserName', param)).toThrow(
         new Error('Missing or invalid param'),
       );
     });

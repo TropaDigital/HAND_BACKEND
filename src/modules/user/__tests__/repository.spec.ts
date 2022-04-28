@@ -75,24 +75,24 @@ describe(UserRepository.name, () => {
     });
   });
 
-  describe(`When ${UserRepository.prototype.findByEmail.name} is called`, () => {
-    const fakeEmail = 'mail@mail.com';
+  describe(`When ${UserRepository.prototype.findByUserName.name} is called`, () => {
+    const fakeUserName = 'any_user_name';
 
     it('should call prisma with right params', async () => {
       const { sut, prismaRepository } = makeSut();
       const findFirstSpy = prismaRepository.findFirst;
 
-      await sut.findByEmail(fakeEmail);
+      await sut.findByUserName(fakeUserName);
 
       expect(findFirstSpy).toBeCalledWith({
-        where: { email: 'mail@mail.com' },
+        where: { userName: 'any_user_name' },
       });
     });
 
     it('should return prisma result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.findByEmail(fakeEmail);
+      const result = await sut.findByUserName(fakeUserName);
 
       expect(result).toEqual(makeFakeUser({}));
     });
@@ -103,7 +103,7 @@ describe(UserRepository.name, () => {
         new Error('any_find_first_error'),
       );
 
-      const promise = sut.findByEmail(fakeEmail);
+      const promise = sut.findByUserName(fakeUserName);
 
       await expect(promise).rejects.toThrow(new Error('any_find_first_error'));
     });
@@ -128,6 +128,7 @@ describe(UserRepository.name, () => {
 
       expect(result).toEqual({
         email: 'any_email@mail.com',
+        userName: 'any_user',
         id: 0,
         name: 'any_name',
         role: 'USER',

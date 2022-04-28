@@ -10,8 +10,8 @@ export class AuthService implements IAuthService {
   ) {}
 
   async authenticate(credentials: IAuthRequestParams): Promise<IAuthResult> {
-    const { login: email, password } = credentials;
-    const user = await this.userRepository.findByEmail(email);
+    const { login: userName, password } = credentials;
+    const user = await this.userRepository.findByUserName(userName);
 
     if (!user) {
       throw new UnauthorizedError();

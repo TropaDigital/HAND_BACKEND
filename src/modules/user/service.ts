@@ -24,10 +24,10 @@ export class UserService implements IUserService {
     return result;
   }
 
-  public async getByEmail(email: string): Promise<ResponseUser | null> {
-    const user = await this.userRepository.findByEmail(email);
+  public async getByUserName(userName: string): Promise<ResponseUser | null> {
+    const user = await this.userRepository.findByUserName(userName);
     if (!user) {
-      throw new NotFoundError('user not found with provided email');
+      throw new NotFoundError('user not found with provided userName');
     }
     const result = this.removePasswordFromUser(user);
 

@@ -8,7 +8,7 @@ export const makeLoginServiceStub = (
   payload?: IAuthResult,
 ): jest.Mocked<IAuthService> => ({
   authenticate: jest.fn().mockResolvedValue({
-    ...{ login: 'any_email@mail.com', token: 'any_token' },
+    ...{ login: 'any_user_name', token: 'any_token' },
     ...payload,
   }),
 });

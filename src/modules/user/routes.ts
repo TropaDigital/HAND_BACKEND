@@ -41,11 +41,11 @@ export default class UserRouter implements IRouter {
       );
   }
 
-  private getByEmail(): void {
+  private getByUserName(): void {
     /**
-     * GET /users/{email}
+     * GET /users/{userName}
      * @tag Users
-     * @summary get a user by email.
+     * @summary get a user by userName.
      * @description return a user object.
      * @pathParam {int32} id id of the user
      * @response 200 - an object of user.
@@ -59,11 +59,11 @@ export default class UserRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/users/:email')
+      .route('/users/:userName')
       .get(
         ExpressRouteAdapter.adapt<IUserController>(
           this.controller,
-          'getByEmail',
+          'getByUserName',
         ),
       );
   }
@@ -148,7 +148,7 @@ export default class UserRouter implements IRouter {
   setupRoutes(app: Application): void {
     this.create();
     this.getAll();
-    this.getByEmail();
+    this.getByUserName();
     this.updateById();
     this.deleteById();
 

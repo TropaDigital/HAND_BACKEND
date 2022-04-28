@@ -25,6 +25,7 @@ describe('POST /users - Create new user', () => {
       name: 'Mateus',
       role: 'USER',
       status: 'ACTIVE',
+      userName: 'any_user_name',
     });
     expect(response.status).toBe(201);
   });
@@ -42,6 +43,11 @@ describe('POST /users - Create new user', () => {
         fieldName: 'email',
         friendlyFieldName: 'email',
         message: '"email" is required',
+      },
+      {
+        fieldName: 'userName',
+        friendlyFieldName: 'userName',
+        message: '"userName" is required',
       },
       {
         fieldName: 'password',

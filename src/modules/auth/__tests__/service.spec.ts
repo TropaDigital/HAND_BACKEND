@@ -16,18 +16,18 @@ describe(AuthService.name, () => {
   describe(`When ${AuthService.prototype.authenticate.name} is called`, () => {
     it('Should call repository with right params', async () => {
       const { sut, userRepository } = makeSut();
-      const findByEmailSpy = userRepository.findByEmail;
-      const credentials = { login: 'any_email', password: 'any_password' };
+      const findByUserNameSpy = userRepository.findByUserName;
+      const credentials = { login: 'any_user_name', password: 'any_password' };
 
       await sut.authenticate(credentials);
 
-      expect(findByEmailSpy).toBeCalledWith('any_email');
+      expect(findByUserNameSpy).toBeCalledWith('any_user_name');
     });
 
     it('Should call auth service with right params', async () => {
       const { sut, authService } = makeSut();
       const compareHashSpy = authService.compareHash;
-      const credentials = { login: 'any_email', password: 'any_password' };
+      const credentials = { login: 'any_user_name', password: 'any_password' };
 
       await sut.authenticate(credentials);
 
@@ -36,7 +36,7 @@ describe(AuthService.name, () => {
 
     it('Should return correct value', async () => {
       const { sut } = makeSut();
-      const credentials = { login: 'any_email', password: 'any_password' };
+      const credentials = { login: 'any_user_name', password: 'any_password' };
 
       const result = await sut.authenticate(credentials);
 
@@ -44,6 +44,7 @@ describe(AuthService.name, () => {
         token: 'any_token',
         user: {
           email: 'any_email@mail.com',
+          userName: 'any_user',
           id: 0,
           name: 'any_name',
           role: 'USER',
@@ -54,8 +55,8 @@ describe(AuthService.name, () => {
 
     it('Should throw when repository return null value', async () => {
       const { sut, userRepository } = makeSut();
-      const credentials = { login: 'any_email', password: 'any_password' };
-      userRepository.findByEmail.mockResolvedValueOnce(null);
+      const credentials = { login: 'any_user_name', password: 'any_password' };
+      userRepository.findByUserName.mockResolvedValueOnce(null);
 
       const promise = sut.authenticate(credentials);
 
@@ -64,8 +65,8 @@ describe(AuthService.name, () => {
 
     it('Should throw when repository throws', async () => {
       const { sut, userRepository } = makeSut();
-      const credentials = { login: 'any_email', password: 'any_password' };
-      userRepository.findByEmail.mockRejectedValueOnce(
+      const credentials = { login: 'any_user_name', password: 'any_password' };
+      userRepository.findByUserName.mockRejectedValueOnce(
         new Error('any_repository_error'),
       );
 
@@ -76,7 +77,7 @@ describe(AuthService.name, () => {
 
     it('Should throw when auth service throws', async () => {
       const { sut, authService } = makeSut();
-      const credentials = { login: 'any_email', password: 'any_password' };
+      const credentials = { login: 'any_user_name', password: 'any_password' };
       authService.compareHash.mockRejectedValueOnce(
         new Error('any_auth_service_error'),
       );
@@ -88,7 +89,7 @@ describe(AuthService.name, () => {
 
     it('Should throw when auth service returns null', async () => {
       const { sut, authService } = makeSut();
-      const credentials = { login: 'any_email', password: 'any_password' };
+      const credentials = { login: 'any_user_name', password: 'any_password' };
       authService.compareHash.mockResolvedValueOnce(false);
 
       const promise = sut.authenticate(credentials);

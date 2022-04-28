@@ -1,6 +1,6 @@
 import { UserService } from '../../../src/modules/user/service';
 import { makeInternalErrorResponse } from '../../helpers';
-import { populateDatabase } from './helpers/testHelper';
+import { populateDatabase } from '../helpers/testHelper';
 
 describe('GET /users - Get all users', () => {
   beforeAll(async () => {
@@ -22,6 +22,7 @@ describe('GET /users - Get all users', () => {
         name: 'João',
         role: 'USER',
         status: 'ACTIVE',
+        userName: 'joao',
       },
       {
         email: 'pedro@mail.com',
@@ -29,6 +30,7 @@ describe('GET /users - Get all users', () => {
         name: 'Pedro',
         role: 'USER',
         status: 'ACTIVE',
+        userName: 'pedro',
       },
     ]);
     expect(response.status).toBe(200);

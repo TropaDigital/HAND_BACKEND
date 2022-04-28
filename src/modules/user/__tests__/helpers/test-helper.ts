@@ -11,6 +11,7 @@ export const makeFakeCreateUserInput = (
   payload?: Partial<Prisma.UserCreateInput>,
 ): jest.Mocked<Prisma.UserCreateInput> => ({
   name: 'any_name',
+  userName: 'any_user_name',
   email: 'any_email@mail.com',
   role: 'USER',
   status: 'ACTIVE',
@@ -22,6 +23,7 @@ export const makeFakeUpdateUserInput = (
   payload?: Partial<Omit<User, 'id'>>,
 ): jest.Mocked<Partial<Omit<User, 'id'>>> => ({
   name: 'any_name',
+  userName: 'any_user_name',
   email: 'any_email@mail.com',
   role: 'USER',
   status: 'ACTIVE',
@@ -49,6 +51,7 @@ export const makeFakeApiHttpResponse = (
 
 export const makeFakeUser = (payload: Partial<User>): jest.Mocked<User> => ({
   id: 0,
+  userName: 'any_user',
   name: 'any_name',
   email: 'any_email@mail.com',
   role: 'USER',
@@ -61,7 +64,7 @@ export const makeFakeUserList = () => [makeFakeUser({}), makeFakeUser({})];
 
 export const makeUserServiceStub = (): jest.Mocked<IUserService> => ({
   getAll: jest.fn().mockResolvedValue(makeFakeUserList()),
-  getByEmail: jest.fn().mockResolvedValue(makeFakeUser({})),
+  getByUserName: jest.fn().mockResolvedValue(makeFakeUser({})),
   create: jest.fn().mockResolvedValue(makeFakeUser({})),
   updateById: jest.fn(),
   deleteById: jest.fn(),
@@ -87,7 +90,7 @@ export const makePrismaUserRepositoryStub =
 
 export const makeUserRepositoryStub = (): jest.Mocked<IUserRepository> => ({
   findAll: jest.fn().mockResolvedValue(makeFakeUserList()),
-  findByEmail: jest.fn().mockResolvedValue(makeFakeUser({})),
+  findByUserName: jest.fn().mockResolvedValue(makeFakeUser({})),
   findById: jest.fn().mockResolvedValue(makeFakeUser({})),
   create: jest.fn().mockResolvedValue(makeFakeUser({})),
   updateById: jest.fn(),

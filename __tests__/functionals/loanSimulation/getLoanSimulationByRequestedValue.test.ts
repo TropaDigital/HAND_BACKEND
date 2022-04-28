@@ -16,7 +16,7 @@ import {
   makeNotFoundResponse,
   makeUnauthorizedResponse,
 } from '../../helpers';
-import { populateDatabase } from '../consultants/helpers/testHelper';
+import { populateDatabase } from '../helpers/testHelper';
 
 describe('POST /loansimulations/simulate - Get an loan simulation based in the provided parameters', () => {
   const token = new AuthenticationService().generateToken({

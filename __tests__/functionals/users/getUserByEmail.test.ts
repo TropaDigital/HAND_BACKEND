@@ -4,9 +4,9 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
-import { populateDatabase } from './helpers/testHelper';
+import { populateDatabase } from '../helpers/testHelper';
 
-describe('GET /users/{email} - Get user by email', () => {
+describe('GET /users/{userName} - Get user by email', () => {
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
@@ -17,11 +17,12 @@ describe('GET /users/{email} - Get user by email', () => {
   });
 
   it('Should return 200 with user', async () => {
-    const email = 'joao@mail.com';
+    const userName = 'joao';
 
-    const response = await global.testRequest.get(`/users/${email}`);
+    const response = await global.testRequest.get(`/users/${userName}`);
     expect(response.body.data).toEqual({
       email: 'joao@mail.com',
+      userName: 'joao',
       id: 1,
       name: 'João',
       role: 'USER',
@@ -32,23 +33,23 @@ describe('GET /users/{email} - Get user by email', () => {
 
   it('Should return 404 and empty array when there is no user', async () => {
     await global.prismaClient.user.deleteMany();
-    const email = 'invalidUser@mail.com';
-    const response = await global.testRequest.get(`/users/${email}`);
+    const userName = 'notfounduser';
+    const response = await global.testRequest.get(`/users/${userName}`);
     expect(response.body).toEqual(
-      makeNotFoundResponse('user not found with provided email'),
+      makeNotFoundResponse('user not found with provided userName'),
     );
     expect(response.status).toBe(404);
   });
 
   it('Should return 400 when receive invalid params', async () => {
-    const email = 'invalid email';
-    const response = await global.testRequest.get(`/users/${email}`);
+    const userName = 2;
+    const response = await global.testRequest.get(`/users/${userName}`);
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'email',
-        friendlyFieldName: 'email',
-        message: '"email" must be a valid email',
+        fieldName: 'userName',
+        friendlyFieldName: 'userName',
+        message: '"userName" length must be at least 3 characters long',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
@@ -56,12 +57,12 @@ describe('GET /users/{email} - Get user by email', () => {
   });
 
   it('Should return 500 when the service throws an exception error', async () => {
-    const email = 'joao@mail.com';
+    const userName = 'joao';
     jest
-      .spyOn(UserService.prototype, 'getByEmail')
-      .mockRejectedValueOnce(new Error('getByEmail unexpected error'));
+      .spyOn(UserService.prototype, 'getByUserName')
+      .mockRejectedValueOnce(new Error('getByUserName unexpected error'));
 
-    const response = await global.testRequest.get(`/users/${email}`);
+    const response = await global.testRequest.get(`/users/${userName}`);
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

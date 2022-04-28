@@ -12,7 +12,7 @@ import {
 
 const makeSut = () => {
   const userServiceStub = makeUserServiceStub();
-  const validatorStub = makeValidatorStub({ email: 'any_email' });
+  const validatorStub = makeValidatorStub({ userName: 'any_user_name' });
   const sut = new UserController(userServiceStub, validatorStub);
 
   return { sut, userServiceStub, validatorStub };
@@ -51,36 +51,38 @@ describe(UserController.name, () => {
     });
   });
 
-  describe(`When ${UserController.prototype.getByEmail.name} is called`, () => {
+  describe(`When ${UserController.prototype.getByUserName.name} is called`, () => {
     it('should call validator with right params', async () => {
       const { sut, validatorStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({
-        params: { email: 'any_email' },
+        params: { userName: 'any_user_name' },
       });
       const validateSchemaSpy = validatorStub.validateSchema;
 
-      await sut.getByEmail(httpRequest);
+      await sut.getByUserName(httpRequest);
 
-      expect(validateSchemaSpy).toBeCalledWith('GetUserByEmail', {
-        email: 'any_email',
+      expect(validateSchemaSpy).toBeCalledWith('GetUserByUserName', {
+        userName: 'any_user_name',
       });
     });
 
     it('should call service with validation return', async () => {
       const { sut, userServiceStub } = makeSut();
-      const httpRequest = makeFakeApiHttpRequest({ params: { email: 777 } });
-      const getByEmailSpy = userServiceStub.getByEmail;
+      const httpRequest = makeFakeApiHttpRequest({
+        params: { userName: 'any_user_name' },
+      });
+      const getByUserNameSpy = userServiceStub.getByUserName;
 
-      await sut.getByEmail(httpRequest);
+      await sut.getByUserName(httpRequest);
 
-      expect(getByEmailSpy).toBeCalledWith('any_email');
+      expect(getByUserNameSpy).toBeCalledWith('any_user_name');
     });
 
     it('should return service response', async () => {
       const { sut } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
 
-      const result = await sut.getByEmail(httpRequest);
+      const result = await sut.getByUserName(httpRequest);
 
       expect(result).toEqual(makeFakeApiHttpResponse('OK', makeFakeUser({})));
     });
@@ -88,11 +90,11 @@ describe(UserController.name, () => {
     it('should throw when service throws', async () => {
       const { sut, userServiceStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });
-      userServiceStub.getByEmail.mockRejectedValueOnce(
+      userServiceStub.getByUserName.mockRejectedValueOnce(
         new Error('any_get_users_by_id_error'),
       );
 
-      const promise = sut.getByEmail(httpRequest);
+      const promise = sut.getByUserName(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_get_users_by_id_error'),
@@ -106,7 +108,7 @@ describe(UserController.name, () => {
         throw new Error('any_validate_schema_error');
       });
 
-      const promise = sut.getByEmail(httpRequest);
+      const promise = sut.getByUserName(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_validate_schema_error'),

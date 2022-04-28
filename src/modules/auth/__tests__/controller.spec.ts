@@ -24,7 +24,7 @@ describe(AuthController.name, () => {
 
       expect(result).toEqual(
         makeFakeApiHttpResponse('OK', {
-          login: 'any_email@mail.com',
+          login: 'any_user_name',
           token: 'any_token',
         }),
       );

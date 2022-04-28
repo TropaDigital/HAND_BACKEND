@@ -22,9 +22,9 @@ export class UserRepository implements IUserRepository {
     return result;
   }
 
-  public async findByEmail(email: string): Promise<User | null> {
+  public async findByUserName(userName: string): Promise<User | null> {
     const result = await this.prismaRepository.findFirst({
-      where: { email },
+      where: { userName },
     });
 
     return result;

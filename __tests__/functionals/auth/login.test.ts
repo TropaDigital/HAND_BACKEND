@@ -1,4 +1,5 @@
-import { makeFakeLoginParams, populateDatabase } from './helpers/testHelper';
+import { populateDatabase } from '../helpers/testHelper';
+import { makeFakeLoginParams } from './helpers/testHelper';
 
 describe('GET /auth/token - Authenticate User', () => {
   beforeAll(async () => {
@@ -22,6 +23,7 @@ describe('GET /auth/token - Authenticate User', () => {
           name: 'João',
           role: 'USER',
           status: 'ACTIVE',
+          userName: 'joao',
           email: 'joao@mail.com',
         },
         token: expect.any(String),

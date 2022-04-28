@@ -14,7 +14,7 @@ export interface IUserRepository {
 
   findById(id: number): Promise<User | null>;
 
-  findByEmail(email: string): Promise<User | null>;
+  findByUserName(userName: string): Promise<User | null>;
 }
 
 export interface IUserController {
@@ -22,7 +22,7 @@ export interface IUserController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Omit<User, 'password'>[]>>;
 
-  getByEmail(
+  getByUserName(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<ResponseUser | null>>;
 
@@ -38,7 +38,7 @@ export interface IUserController {
 export interface IUserService {
   getAll(): Promise<ResponseUser[]>;
 
-  getByEmail(email: string): Promise<ResponseUser | null>;
+  getByUserName(userName: string): Promise<ResponseUser | null>;
 
   create(payload: Prisma.UserCreateInput): Promise<ResponseUser>;
 

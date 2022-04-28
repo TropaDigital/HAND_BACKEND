@@ -1,14 +1,14 @@
 import { User, Prisma } from '@prisma/client';
 
 import { authConfig } from '../../config/auth';
-import { IAuthService } from '../../shared/auth/interfaces';
+import { IAuthenticationService } from '../../shared/auth/interfaces';
 import { NotFoundError } from '../../shared/errors';
 import { IUserRepository, IUserService, ResponseUser } from './interfaces';
 
 export class UserService implements IUserService {
   constructor(
     private readonly userRepository: IUserRepository,
-    private readonly authService: IAuthService,
+    private readonly authService: IAuthenticationService,
   ) {}
 
   public async getAll(): Promise<ResponseUser[]> {

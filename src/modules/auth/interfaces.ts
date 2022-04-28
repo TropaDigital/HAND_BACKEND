@@ -2,22 +2,22 @@ import { IApiHttpRequest, IApiHttpResponse } from 'src/interfaces/http';
 
 import { ResponseUser } from '../user/interfaces';
 
-export interface ILoginRequestParams {
+export interface IAuthRequestParams {
   login: string;
   password: string;
 }
 
-export interface ILoginResult {
+export interface IAuthResult {
   user: ResponseUser;
   token: string;
 }
 
-export interface ILoginService {
-  authenticate(credentials: ILoginRequestParams): Promise<ILoginResult>;
+export interface IAuthService {
+  authenticate(credentials: IAuthRequestParams): Promise<IAuthResult>;
 }
 
-export interface ILoginController {
+export interface IAuthController {
   login: (
-    _request: IApiHttpRequest<ILoginRequestParams>,
-  ) => Promise<IApiHttpResponse<ILoginResult>>;
+    _request: IApiHttpRequest<IAuthRequestParams>,
+  ) => Promise<IApiHttpResponse<IAuthResult>>;
 }

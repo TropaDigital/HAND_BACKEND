@@ -3,20 +3,20 @@ import express, { Application } from 'express';
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
 import { createLoginController } from './factories';
-import { ILoginController } from './interfaces';
+import { IAuthController } from './interfaces';
 
-export default class LoginRouter implements IRouter {
-  private static instance: LoginRouter;
+export default class AuthRouter implements IRouter {
+  private static instance: AuthRouter;
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: ILoginController) {}
+  private constructor(private readonly controller: IAuthController) {}
 
   public static getInstance(
-    controller: ILoginController = createLoginController(),
-  ): LoginRouter {
+    controller: IAuthController = createLoginController(),
+  ): AuthRouter {
     if (!this.instance) {
-      this.instance = new LoginRouter(controller);
+      this.instance = new AuthRouter(controller);
     }
 
     return this.instance;
@@ -24,21 +24,21 @@ export default class LoginRouter implements IRouter {
 
   private checkApplicationStatus(): void {
     /**
-     * GET /login
+     * GET /auth/token
      * @tag Login
      * @summary get the status of the application considering the status of all the required resources.
      * @description return an object with the status of the resources.
      * @response 200 - an object with a message when user is authenticated with success.
-     * @responseContent {LoginResponse} 200.application/json
-     * @responseExample {LoginSuccessResponse} 200.application/json.LoginSuccessResponse
+     * @responseContent {AuthResponse} 200.application/json
+     * @responseExample {AuthSuccessResponse} 200.application/json.LoginSuccessResponse
      * @response 401 - an object with a message when user is not authenticated with success.
-     * @responseContent {LoginResponse} 401.application/json
-     * @responseExample {LoginUnauthorizedResponse} 401.application/json.LoginUnauthorizedResponse
+     * @responseContent {AuthResponse} 401.application/json
+     * @responseExample {AuthUnauthorizedResponse} 401.application/json.LoginUnauthorizedResponse
      */
     this.router
-      .route('/login')
+      .route('/auth/token')
       .post(
-        ExpressRouteAdapter.adapt<ILoginController>(this.controller, 'login'),
+        ExpressRouteAdapter.adapt<IAuthController>(this.controller, 'login'),
       );
   }
 

@@ -130,8 +130,8 @@ describe(UserRepository.name, () => {
         email: 'any_email@mail.com',
         id: 0,
         name: 'any_name',
-        role: 'any_role',
-        status: 'active',
+        role: 'USER',
+        status: 'ACTIVE',
       });
     });
 

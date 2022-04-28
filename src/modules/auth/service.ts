@@ -1,15 +1,15 @@
-import { IAuthService } from '../../shared/auth/interfaces';
+import { IAuthenticationService } from '../../shared/auth/interfaces';
 import UnauthorizedError from '../../shared/errors/UnauthorizedError';
 import { IUserRepository } from '../user/interfaces';
-import { ILoginRequestParams, ILoginResult, ILoginService } from './interfaces';
+import { IAuthRequestParams, IAuthResult, IAuthService } from './interfaces';
 
-export class LoginService implements ILoginService {
+export class AuthService implements IAuthService {
   constructor(
     private readonly userRepository: IUserRepository,
-    private readonly authService: IAuthService,
+    private readonly authService: IAuthenticationService,
   ) {}
 
-  async authenticate(credentials: ILoginRequestParams): Promise<ILoginResult> {
+  async authenticate(credentials: IAuthRequestParams): Promise<IAuthResult> {
     const { login: email, password } = credentials;
     const user = await this.userRepository.findByEmail(email);
 
@@ -30,7 +30,7 @@ export class LoginService implements ILoginService {
 
     const accessToken = await this.authService.generateToken({
       sub: String(user.id),
-      role: { name: user.role },
+      role: user.role,
     });
 
     return { user: responseUser, token: accessToken };

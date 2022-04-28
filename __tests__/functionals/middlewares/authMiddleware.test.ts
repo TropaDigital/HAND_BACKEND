@@ -2,11 +2,11 @@
 
 import { TokenExpiredError } from 'jsonwebtoken';
 
-import { AuthService } from '../../../src/shared/auth/auth';
+import { AuthenticationService } from '../../../src/shared/auth/auth';
 import { makeUnauthorizedResponse } from '../../helpers';
 
 describe('Auth middleware', () => {
-  const token = new AuthService().generateToken({
+  const token = new AuthenticationService().generateToken({
     sub: 1,
     role: 'VALID_ROLE',
   });
@@ -24,7 +24,7 @@ describe('Auth middleware', () => {
 
     it('should return an unauthorized error when the auth service throws an error', async () => {
       jest
-        .spyOn(AuthService.prototype, 'decodeToken')
+        .spyOn(AuthenticationService.prototype, 'decodeToken')
         .mockImplementationOnce(() => {
           throw new Error('unexpected auth service decode token error');
         });
@@ -39,7 +39,7 @@ describe('Auth middleware', () => {
 
     it('should return an unauthorized error when the auth service throws an json web token error', async () => {
       jest
-        .spyOn(AuthService.prototype, 'decodeToken')
+        .spyOn(AuthenticationService.prototype, 'decodeToken')
         .mockImplementationOnce(() => {
           throw new TokenExpiredError('jwt expired', new Date());
         });

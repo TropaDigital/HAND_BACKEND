@@ -9,7 +9,7 @@ import {
 import { makeLoanSimulationBasedOnRequestedValueParams } from '../../../src/modules/loanSimulation/__tests__/helpers/test-helper';
 import { ILoanSimulationBasedOnRequestedValue } from '../../../src/modules/loanSimulation/interfaces';
 import { LoanSimulationService } from '../../../src/modules/loanSimulation/service';
-import { AuthService } from '../../../src/shared/auth/auth';
+import { AuthenticationService } from '../../../src/shared/auth/auth';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
@@ -19,7 +19,7 @@ import {
 import { populateDatabase } from '../consultants/helpers/testHelper';
 
 describe('POST /loansimulations/simulate - Get an loan simulation based in the provided parameters', () => {
-  const token = new AuthService().generateToken({
+  const token = new AuthenticationService().generateToken({
     sub: 1,
     role: 'VALID_ROLE',
   });

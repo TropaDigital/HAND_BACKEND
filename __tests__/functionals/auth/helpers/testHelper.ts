@@ -1,9 +1,9 @@
-import { ILoginRequestParams } from '../../../../src/modules/auth/interfaces';
+import { IAuthRequestParams } from '../../../../src/modules/auth/interfaces';
 import { makeFakeUser } from '../../../../src/modules/user/__tests__/helpers/test-helper';
 
 export const makeFakeLoginParams = (
-  payload?: Partial<ILoginRequestParams>,
-): ILoginRequestParams => ({
+  payload?: Partial<IAuthRequestParams>,
+): IAuthRequestParams => ({
   login: 'joao@mail.com',
   password: 'any_password',
   ...payload,

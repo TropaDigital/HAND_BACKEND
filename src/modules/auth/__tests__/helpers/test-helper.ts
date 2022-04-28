@@ -2,11 +2,11 @@ import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { ILoginResult, ILoginService } from '../../interfaces';
+import { IAuthResult, IAuthService } from '../../interfaces';
 
 export const makeLoginServiceStub = (
-  payload?: ILoginResult,
-): jest.Mocked<ILoginService> => ({
+  payload?: IAuthResult,
+): jest.Mocked<IAuthService> => ({
   authenticate: jest.fn().mockResolvedValue({
     ...{ login: 'any_email@mail.com', token: 'any_token' },
     ...payload,

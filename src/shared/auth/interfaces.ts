@@ -13,9 +13,9 @@ export interface IBcrypt {
   compare(data: string | Buffer, encrypted: string): Promise<boolean>;
 }
 
-export interface IAuthService {
+export interface IAuthenticationService {
   hashPassword(password: string, salt: number): Promise<string>;
   compareHash(password: string, hashedPassword: string): Promise<boolean>;
-  generateToken(payload: { sub: string; role: IRole }): string;
+  generateToken(payload: { sub: string; role: string }): string;
   decodeToken(token: string): IJwtToken;
 }

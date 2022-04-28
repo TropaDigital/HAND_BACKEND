@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { JsonWebTokenError } from 'jsonwebtoken';
 
-import { AuthService } from '../shared/auth/auth';
+import { AuthenticationService } from '../shared/auth/auth';
 import UnauthorizedError from '../shared/errors/UnauthorizedError';
 
 class AuthMiddleware {
-  constructor(private readonly authService: AuthService = new AuthService()) {}
+  constructor(
+    private readonly authService: AuthenticationService = new AuthenticationService(),
+  ) {}
 
   public authenticationMiddleware(
     req: Request,

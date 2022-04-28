@@ -1,6 +1,6 @@
 import { makeFakeLoginParams, populateDatabase } from './helpers/testHelper';
 
-describe('GET /login - Authenticate User', () => {
+describe('GET /auth/token - Authenticate User', () => {
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
@@ -13,15 +13,15 @@ describe('GET /login - Authenticate User', () => {
   it('Should return 200 when login and password is correct', async () => {
     const params = makeFakeLoginParams();
 
-    const response = await global.testRequest.post(`/login`).send(params);
+    const response = await global.testRequest.post(`/auth/token`).send(params);
 
     expect(response.body.data).toEqual(
       expect.objectContaining({
         user: {
           id: 1,
           name: 'João',
-          role: 'any_role',
-          status: 'active',
+          role: 'USER',
+          status: 'ACTIVE',
           email: 'joao@mail.com',
         },
         token: expect.any(String),
@@ -33,7 +33,7 @@ describe('GET /login - Authenticate User', () => {
   it('Should return 401 when login is incorrect', async () => {
     const params = makeFakeLoginParams({ login: 'invalid@mail.com' });
 
-    const response = await global.testRequest.post(`/login`).send(params);
+    const response = await global.testRequest.post(`/auth/token`).send(params);
 
     expect(JSON.parse(response.text)).toEqual(
       expect.objectContaining({ description: 'User not authenticated' }),
@@ -44,7 +44,7 @@ describe('GET /login - Authenticate User', () => {
   it('Should return 401 when password is incorrect', async () => {
     const params = makeFakeLoginParams({ password: 'incorrect password' });
 
-    const response = await global.testRequest.post(`/login`).send(params);
+    const response = await global.testRequest.post(`/auth/token`).send(params);
 
     expect(response.body).toEqual(
       expect.objectContaining({ description: 'User not authenticated' }),

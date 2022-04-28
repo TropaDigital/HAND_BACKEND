@@ -1,5 +1,5 @@
 import MySqlDBClient from '../../../infra/mySql';
-import { LoginController } from '../controller';
+import { AuthController } from '../controller';
 import * as factory from '../factories';
 
 jest.mock('../../../adapters/joi/JoiAdapter');
@@ -18,12 +18,12 @@ const makeSut = () => {
   return { sut };
 };
 
-describe(LoginController.name, () => {
+describe(AuthController.name, () => {
   it('Should return a LoginController instance', () => {
     const { sut } = makeSut();
 
     const result = sut.createLoginController();
 
-    expect(result).toBeInstanceOf(LoginController);
+    expect(result).toBeInstanceOf(AuthController);
   });
 });

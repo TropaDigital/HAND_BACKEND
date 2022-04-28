@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { IAuthService } from '../../../../shared/auth/interfaces';
+import { IAuthenticationService } from '../../../../shared/auth/interfaces';
 import { IUserRepository, IUserService } from '../../interfaces';
 import { PrismaUserRepository } from '../../repository';
 
@@ -12,8 +12,8 @@ export const makeFakeCreateUserInput = (
 ): jest.Mocked<Prisma.UserCreateInput> => ({
   name: 'any_name',
   email: 'any_email@mail.com',
-  role: 'any_role',
-  status: 'active',
+  role: 'USER',
+  status: 'ACTIVE',
   password: 'any_password',
   ...payload,
 });
@@ -23,8 +23,8 @@ export const makeFakeUpdateUserInput = (
 ): jest.Mocked<Partial<Omit<User, 'id'>>> => ({
   name: 'any_name',
   email: 'any_email@mail.com',
-  role: 'any_role',
-  status: 'active',
+  role: 'USER',
+  status: 'ACTIVE',
   password: 'any_password',
   ...payload,
 });
@@ -51,8 +51,8 @@ export const makeFakeUser = (payload: Partial<User>): jest.Mocked<User> => ({
   id: 0,
   name: 'any_name',
   email: 'any_email@mail.com',
-  role: 'any_role',
-  status: 'active',
+  role: 'USER',
+  status: 'ACTIVE',
   password: 'any_password',
   ...payload,
 });
@@ -94,7 +94,7 @@ export const makeUserRepositoryStub = (): jest.Mocked<IUserRepository> => ({
   deleteById: jest.fn(),
 });
 
-export const makeAuthServiceStub = (): jest.Mocked<IAuthService> => ({
+export const makeAuthServiceStub = (): jest.Mocked<IAuthenticationService> => ({
   compareHash: jest.fn().mockResolvedValue(true),
   decodeToken: jest.fn(),
   generateToken: jest.fn().mockResolvedValue('any_token'),

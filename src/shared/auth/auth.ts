@@ -2,9 +2,9 @@ import jwt from 'jsonwebtoken';
 
 import { BcryptAdapter } from '../../adapters/encrypter/bcrypt';
 import { authConfig } from '../../config/auth';
-import { IAuthService, IEncrypter, IJwtToken } from './interfaces';
+import { IAuthenticationService, IEncrypter, IJwtToken } from './interfaces';
 
-export class AuthService implements IAuthService {
+export class AuthenticationService implements IAuthenticationService {
   constructor(private readonly encrypter: IEncrypter = new BcryptAdapter()) {}
 
   public async hashPassword(password: string, salt = 10): Promise<string> {

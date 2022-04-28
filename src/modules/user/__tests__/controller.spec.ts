@@ -67,7 +67,7 @@ describe(UserController.name, () => {
     });
 
     it('should call service with validation return', async () => {
-      const { sut, userServiceStub, validatorStub } = makeSut();
+      const { sut, userServiceStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { email: 777 } });
       const getByEmailSpy = userServiceStub.getByEmail;
 

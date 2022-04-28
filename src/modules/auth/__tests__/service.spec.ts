@@ -2,18 +2,18 @@ import {
   makeAuthServiceStub,
   makeUserRepositoryStub,
 } from '../../user/__tests__/helpers/test-helper';
-import { LoginService } from '../service';
+import { AuthService } from '../service';
 
 const makeSut = () => {
   const userRepository = makeUserRepositoryStub();
   const authService = makeAuthServiceStub();
-  const sut = new LoginService(userRepository, authService);
+  const sut = new AuthService(userRepository, authService);
 
   return { sut, userRepository, authService };
 };
 
-describe(LoginService.name, () => {
-  describe(`When ${LoginService.prototype.authenticate.name} is called`, () => {
+describe(AuthService.name, () => {
+  describe(`When ${AuthService.prototype.authenticate.name} is called`, () => {
     it('Should call repository with right params', async () => {
       const { sut, userRepository } = makeSut();
       const findByEmailSpy = userRepository.findByEmail;
@@ -46,8 +46,8 @@ describe(LoginService.name, () => {
           email: 'any_email@mail.com',
           id: 0,
           name: 'any_name',
-          role: 'any_role',
-          status: 'active',
+          role: 'USER',
+          status: 'ACTIVE',
         },
       });
     });

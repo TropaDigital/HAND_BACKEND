@@ -7,7 +7,7 @@ export const makeFakeCreateUserParams = (
   name: 'Mateus',
   password: 'any_password',
   status: 'ACTIVE',
-  role: 'DEFAULT',
+  role: 'USER',
   ...payload,
 });
 
@@ -18,7 +18,7 @@ export const makeFakeUser = (
   name: 'Mateus',
   password: 'any_password',
   status: 'ACTIVE',
-  role: 'DEFAULT',
+  role: 'USER',
   ...payload,
 });
 

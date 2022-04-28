@@ -1,18 +1,18 @@
 import JoiAdapter from '../../adapters/joi/JoiAdapter';
 import MySqlDBClient from '../../infra/mySql';
-import { AuthService } from '../../shared/auth/auth';
+import { AuthenticationService } from '../../shared/auth/auth';
 import { UserRepository } from '../user/repository';
-import { LoginController } from './controller';
+import { AuthController } from './controller';
 import * as schemas from './schemas';
-import { LoginService } from './service';
+import { AuthService } from './service';
 
-export const createLoginService = (): LoginService => {
+export const createLoginService = (): AuthService => {
   const mySql = MySqlDBClient.getInstance();
   const userRepository = new UserRepository(
     mySql.getPrismaClientInstance().user,
   );
-  const authService = new AuthService();
-  const result = new LoginService(userRepository, authService);
+  const authService = new AuthenticationService();
+  const result = new AuthService(userRepository, authService);
 
   return result;
 };
@@ -23,10 +23,10 @@ export const createValidator = (): JoiAdapter => {
   return result;
 };
 
-export const createLoginController = (): LoginController => {
+export const createLoginController = (): AuthController => {
   const loginService = createLoginService();
   const validator = createValidator();
-  const result = new LoginController(loginService, validator);
+  const result = new AuthController(loginService, validator);
 
   return result;
 };

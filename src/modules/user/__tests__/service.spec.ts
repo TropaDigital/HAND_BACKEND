@@ -39,15 +39,15 @@ describe(UserService.name, () => {
           email: 'any_email@mail.com',
           id: 0,
           name: 'any_name',
-          role: 'any_role',
-          status: 'active',
+          role: 'USER',
+          status: 'ACTIVE',
         },
         {
           email: 'any_email@mail.com',
           id: 0,
           name: 'any_name',
-          role: 'any_role',
-          status: 'active',
+          role: 'USER',
+          status: 'ACTIVE',
         },
       ]);
     });
@@ -85,8 +85,8 @@ describe(UserService.name, () => {
         email: 'any_email@mail.com',
         id: 0,
         name: 'any_name',
-        role: 'any_role',
-        status: 'active',
+        role: 'USER',
+        status: 'ACTIVE',
       });
     });
 
@@ -142,8 +142,8 @@ describe(UserService.name, () => {
         id: 0,
         name: 'any_name',
         email: 'any_email@mail.com',
-        role: 'any_role',
-        status: 'active',
+        role: 'USER',
+        status: 'ACTIVE',
         password: 'any_password',
       };
 

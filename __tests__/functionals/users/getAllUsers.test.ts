@@ -20,14 +20,14 @@ describe('GET /users - Get all users', () => {
         email: 'joao@mail.com',
         id: 1,
         name: 'João',
-        role: 'DEFAULT',
+        role: 'USER',
         status: 'ACTIVE',
       },
       {
         email: 'pedro@mail.com',
         id: 2,
         name: 'Pedro',
-        role: 'DEFAULT',
+        role: 'USER',
         status: 'ACTIVE',
       },
     ]);

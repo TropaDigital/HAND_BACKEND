@@ -24,7 +24,7 @@ describe('GET /users/{email} - Get user by email', () => {
       email: 'joao@mail.com',
       id: 1,
       name: 'João',
-      role: 'DEFAULT',
+      role: 'USER',
       status: 'ACTIVE',
     });
     expect(response.status).toBe(200);

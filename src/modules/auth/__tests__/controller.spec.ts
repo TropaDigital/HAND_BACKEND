@@ -1,4 +1,4 @@
-import { LoginController } from '../controller';
+import { AuthController } from '../controller';
 import {
   makeFakeApiHttpRequest,
   makeFakeApiHttpResponse,
@@ -9,13 +9,13 @@ import {
 const makeSut = () => {
   const loginServiceStub = makeLoginServiceStub();
   const validatorStub = makeValidatorStub();
-  const sut = new LoginController(loginServiceStub, validatorStub);
+  const sut = new AuthController(loginServiceStub, validatorStub);
 
   return { sut, loginServiceStub, validatorStub };
 };
 
-describe(LoginController.name, () => {
-  describe(LoginController.prototype.login.name, () => {
+describe(AuthController.name, () => {
+  describe(AuthController.prototype.login.name, () => {
     it('Should return value when method is called', async () => {
       const { sut } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({ params: { id: 777 } });

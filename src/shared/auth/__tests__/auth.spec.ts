@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { AuthService } from '../auth';
+import { AuthenticationService } from '../auth';
 import { IEncrypter } from '../interfaces';
 
 jest.mock('jsonwebtoken');
@@ -25,13 +25,13 @@ jest.mock('../../../config/auth', () => ({
 
 const makeSut = () => {
   const encrypterStub = makeEncrypterStub();
-  const sut = new AuthService(encrypterStub);
+  const sut = new AuthenticationService(encrypterStub);
 
   return { sut, encrypterStub };
 };
 
-describe(AuthService.name, () => {
-  describe(AuthService.prototype.compareHash.name, () => {
+describe(AuthenticationService.name, () => {
+  describe(AuthenticationService.prototype.compareHash.name, () => {
     const password = 'any_password';
     const hashedPassword = 'any_hashed_password';
 
@@ -76,7 +76,7 @@ describe(AuthService.name, () => {
     });
   });
 
-  describe(AuthService.prototype.hashPassword.name, () => {
+  describe(AuthenticationService.prototype.hashPassword.name, () => {
     const password = 'any_password';
     const salt = 9;
 
@@ -118,7 +118,7 @@ describe(AuthService.name, () => {
     });
   });
 
-  describe(AuthService.prototype.decodeToken.name, () => {
+  describe(AuthenticationService.prototype.decodeToken.name, () => {
     const token = 'any_token';
 
     it('Should call jwt when method is called', async () => {
@@ -147,7 +147,7 @@ describe(AuthService.name, () => {
       expect(() => sut.decodeToken(token)).toThrow(new Error('any_jwt_error'));
     });
   });
-  describe(AuthService.prototype.generateToken.name, () => {
+  describe(AuthenticationService.prototype.generateToken.name, () => {
     const payload = { sub: 'any_sub', role: 'any_role' };
 
     it('Should call jwt when method is called', async () => {

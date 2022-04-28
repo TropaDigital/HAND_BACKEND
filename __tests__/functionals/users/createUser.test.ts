@@ -23,7 +23,7 @@ describe('POST /users - Create new user', () => {
       email: 'any@mail.com',
       id: expect.any(Number),
       name: 'Mateus',
-      role: 'DEFAULT',
+      role: 'USER',
       status: 'ACTIVE',
     });
     expect(response.status).toBe(201);

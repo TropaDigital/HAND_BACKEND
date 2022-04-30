@@ -15,7 +15,7 @@ export const createUserRepository = (): IUserRepository => {
   return result;
 };
 
-export const createLoginService = (): AuthService => {
+export const createAuthService = (): AuthService => {
   const userRepository = createUserRepository();
   const authService = new AuthenticationService();
   const result = new AuthService(userRepository, authService);
@@ -43,10 +43,10 @@ export const createUserService = (): IUserService => {
 };
 
 export const createLoginController = (): AuthController => {
-  const loginService = createLoginService();
+  const authService = createAuthService();
   const validator = createValidator();
   const userService = createUserService();
-  const result = new AuthController(loginService, userService, validator);
+  const result = new AuthController(authService, userService, validator);
 
   return result;
 };

@@ -4,19 +4,14 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
-import { makeFakeLoginParams } from '../auth/helpers/testHelper';
-import { populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers/testHelper';
 
 describe('PATCH /users/{id} - Update user by id', () => {
   let token: string;
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
-    const params = makeFakeLoginParams();
-    const authResponse = await global.testRequest
-      .post(`/auth/token`)
-      .send(params);
-    token = authResponse?.body?.data?.token;
+    token = await getFakeToken();
   });
 
   afterAll(async () => {

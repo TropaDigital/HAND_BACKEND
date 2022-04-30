@@ -3,8 +3,7 @@ import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
 } from '../../helpers';
-import { makeFakeLoginParams } from '../auth/helpers/testHelper';
-import { populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers/testHelper';
 import { makeFakeCreateUserParams } from './helpers/testHelper';
 
 describe('POST /users - Create new user', () => {
@@ -12,11 +11,7 @@ describe('POST /users - Create new user', () => {
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
-    const params = makeFakeLoginParams();
-    const authResponse = await global.testRequest
-      .post(`/auth/token`)
-      .send(params);
-    token = authResponse?.body?.data?.token;
+    token = await getFakeToken();
   });
 
   afterAll(async () => {

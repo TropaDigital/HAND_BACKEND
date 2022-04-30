@@ -1,7 +1,6 @@
 import { UserService } from '../../../src/modules/user/service';
 import { makeInternalErrorResponse } from '../../helpers';
-import { makeFakeLoginParams } from '../auth/helpers/testHelper';
-import { populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers/testHelper';
 
 describe('GET /users - Get all users', () => {
   let token: string;
@@ -9,11 +8,7 @@ describe('GET /users - Get all users', () => {
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
-    const params = makeFakeLoginParams();
-    const authResponse = await global.testRequest
-      .post(`/auth/token`)
-      .send(params);
-    token = authResponse?.body?.data?.token;
+    token = await getFakeToken();
   });
 
   afterAll(async () => {

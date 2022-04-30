@@ -12,7 +12,7 @@ import * as schemas from './schemas';
 
 export class AuthController implements IAuthController {
   constructor(
-    private readonly loginService: IAuthService,
+    private readonly authService: IAuthService,
     private readonly userService: IUserService,
     private readonly validator: IValidator<typeof schemas>,
   ) {}
@@ -42,7 +42,7 @@ export class AuthController implements IAuthController {
       httpRequest.body,
     );
 
-    const authenticationModel = await this.loginService.authenticate(
+    const authenticationModel = await this.authService.authenticate(
       credentials,
     );
 

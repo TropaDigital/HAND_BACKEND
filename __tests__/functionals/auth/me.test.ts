@@ -1,16 +1,11 @@
-import { populateDatabase } from '../helpers/testHelper';
-import { makeFakeLoginParams } from './helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers/testHelper';
 
 describe('POST /users/me - Get User Info', () => {
   let token: string;
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
-    const params = makeFakeLoginParams();
-    const authResponse = await global.testRequest
-      .post(`/auth/token`)
-      .send(params);
-    token = authResponse?.body?.data?.token;
+    token = await getFakeToken();
   });
 
   it('Should return 200 with the logged user when success', async () => {

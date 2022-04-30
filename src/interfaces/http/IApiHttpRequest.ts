@@ -1,3 +1,5 @@
+import { ResponseUser } from '../../modules/user/interfaces';
+
 export interface IApiHttpRequest<
   Body = any,
   Headers = { [key: string]: string | string[] | undefined },
@@ -8,4 +10,5 @@ export interface IApiHttpRequest<
   headers?: Headers;
   params?: Params;
   query?: Query;
+  user?: ResponseUser;
 }

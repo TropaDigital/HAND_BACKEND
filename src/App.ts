@@ -17,7 +17,9 @@ import {
   healthcheckRouter,
   loanSimulationRouter,
   consultantRouter,
+  userRouter,
 } from './modules';
+import { loginRouter } from './modules/auth';
 import openapiConfig from './openapirc';
 import swaggerDefinition from './swagger';
 
@@ -101,9 +103,13 @@ export default class App {
 
   private async setupRoutes(): Promise<void> {
     this.logger.info({ msg: 'setuping application routes' });
-    [healthcheckRouter, loanSimulationRouter, consultantRouter].forEach(
-      router => router.setupRoutes(this.application),
-    );
+    [
+      loginRouter,
+      healthcheckRouter,
+      loanSimulationRouter,
+      consultantRouter,
+      userRouter,
+    ].forEach(router => router.setupRoutes(this.application));
   }
 
   private async setupDatabases(): Promise<void> {

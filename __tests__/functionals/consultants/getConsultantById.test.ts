@@ -5,8 +5,8 @@ import {
   makeNotFoundResponse,
 } from '../../helpers';
 import {
-  makeFakeCreateConsultantParams,
   populateDatabase,
+  makeFakeCreateConsultantParams,
 } from './helpers/testHelper';
 
 describe('GET /consultants/{id} - Get consultant by id', () => {

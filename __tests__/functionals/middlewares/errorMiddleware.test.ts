@@ -2,13 +2,22 @@
 import { HealthcheckController } from '../../../src/modules/healthcheck/controller';
 import { NotFoundError } from '../../../src/shared/errors';
 import { makeNotFoundResponse } from '../../helpers';
+import { makeFakeLoginParams } from '../auth/helpers/testHelper';
+import { populateDatabase } from '../helpers/testHelper';
 
-describe('test global error middleware integration', () => {
+describe('Global Error Middleware', () => {
   describe('GET /route-that-does-not-exists', () => {
     it('should return an not found object', async () => {
-      const response = await global.testRequest.get(
-        '/route-that-does-not-exists',
-      );
+      await populateDatabase();
+      const params = makeFakeLoginParams();
+      const authResponse = await global.testRequest
+        .post(`/auth/token`)
+        .send(params);
+      const token = authResponse?.body?.data?.token;
+
+      const response = await global.testRequest
+        .get('/route-that-does-not-exists')
+        .set({ 'x-access-token': token });
 
       const expectedResult = makeNotFoundResponse();
       expect(response.body).toEqual(expectedResult);

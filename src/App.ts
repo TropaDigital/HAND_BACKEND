@@ -103,11 +103,11 @@ export default class App {
   private async setupRoutes(): Promise<void> {
     this.logger.info({ msg: 'setuping application routes' });
     [
+      loginRouter,
       healthcheckRouter,
       loanSimulationRouter,
       consultantRouter,
       userRouter,
-      loginRouter,
     ].forEach(router => router.setupRoutes(this.application));
   }
 

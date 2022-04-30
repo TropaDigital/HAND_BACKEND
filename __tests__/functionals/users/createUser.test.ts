@@ -3,11 +3,20 @@ import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
 } from '../../helpers';
+import { makeFakeLoginParams } from '../auth/helpers/testHelper';
+import { populateDatabase } from '../helpers/testHelper';
 import { makeFakeCreateUserParams } from './helpers/testHelper';
 
 describe('POST /users - Create new user', () => {
+  let token: string;
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
+    await populateDatabase();
+    const params = makeFakeLoginParams();
+    const authResponse = await global.testRequest
+      .post(`/auth/token`)
+      .send(params);
+    token = authResponse?.body?.data?.token;
   });
 
   afterAll(async () => {
@@ -17,7 +26,10 @@ describe('POST /users - Create new user', () => {
   it('Should return 201 with created user', async () => {
     const params = makeFakeCreateUserParams();
 
-    const response = await global.testRequest.post(`/users`).send(params);
+    const response = await global.testRequest
+      .post(`/users`)
+      .send(params)
+      .set({ 'x-access-token': token });
 
     expect(response.body.data).toEqual({
       email: 'any@mail.com',
@@ -37,7 +49,10 @@ describe('POST /users - Create new user', () => {
       taxId: '784541231',
     };
 
-    const response = await global.testRequest.post(`/users`).send(params);
+    const response = await global.testRequest
+      .post(`/users`)
+      .send(params)
+      .set({ 'x-access-token': token });
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
         fieldName: 'email',
@@ -74,7 +89,10 @@ describe('POST /users - Create new user', () => {
     jest
       .spyOn(UserService.prototype, 'create')
       .mockRejectedValueOnce(new Error('create unexpected error'));
-    const response = await global.testRequest.post(`/users`).send(params);
+    const response = await global.testRequest
+      .post(`/users`)
+      .send(params)
+      .set({ 'x-access-token': token });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

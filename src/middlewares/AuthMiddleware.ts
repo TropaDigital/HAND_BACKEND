@@ -1,12 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import { JsonWebTokenError } from 'jsonwebtoken';
 
+import { IAuthMiddleware } from '../interfaces/auth/IAuthMiddleware';
 import { AuthenticationService } from '../shared/auth/auth';
+import { IAuthenticationService } from '../shared/auth/interfaces';
 import UnauthorizedError from '../shared/errors/UnauthorizedError';
 
-class AuthMiddleware {
+export class AuthMiddleware implements IAuthMiddleware {
   constructor(
-    private readonly authService: AuthenticationService = new AuthenticationService(),
+    private readonly authService: IAuthenticationService = new AuthenticationService(),
   ) {}
 
   public authenticationMiddleware(
@@ -14,20 +16,20 @@ class AuthMiddleware {
     _res: Response,
     next: NextFunction,
   ): void {
-    const token = req.headers['x-access-token'];
+    const token = req.headers?.['x-access-token'];
     if (!token) {
-      throw new UnauthorizedError('token not provided');
+      next(new UnauthorizedError('token not provided'));
     }
 
     try {
       const decodedUser = this.authService.decodeToken(token as string);
-      req.user = decodedUser;
+      req.user = { userName: decodedUser.sub, role: decodedUser.role };
       next();
     } catch (error) {
       if (error instanceof JsonWebTokenError) {
-        throw new UnauthorizedError(error.message);
+        next(new UnauthorizedError(error.message));
       }
-      throw new UnauthorizedError();
+      next(new UnauthorizedError());
     }
   }
 }

@@ -29,7 +29,7 @@ export class AuthService implements IAuthService {
     }
 
     const accessToken = await this.authService.generateToken({
-      sub: String(user.id),
+      sub: String(user.userName),
       role: user.role,
     });
 

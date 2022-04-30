@@ -8,6 +8,7 @@ import {
   makeFakeCreateUserInput,
   makeFakeUpdateUserInput,
   makeValidatorStub,
+  makeResponseUser,
 } from './helpers/test-helper';
 
 const makeSut = () => {
@@ -84,7 +85,9 @@ describe(UserController.name, () => {
 
       const result = await sut.getByUserName(httpRequest);
 
-      expect(result).toEqual(makeFakeApiHttpResponse('OK', makeFakeUser({})));
+      expect(result).toEqual(
+        makeFakeApiHttpResponse('OK', makeResponseUser({})),
+      );
     });
 
     it('should throw when service throws', async () => {

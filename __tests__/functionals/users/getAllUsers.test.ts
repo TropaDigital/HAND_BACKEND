@@ -1,11 +1,19 @@
 import { UserService } from '../../../src/modules/user/service';
 import { makeInternalErrorResponse } from '../../helpers';
+import { makeFakeLoginParams } from '../auth/helpers/testHelper';
 import { populateDatabase } from '../helpers/testHelper';
 
 describe('GET /users - Get all users', () => {
+  let token: string;
+
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
+    const params = makeFakeLoginParams();
+    const authResponse = await global.testRequest
+      .post(`/auth/token`)
+      .send(params);
+    token = authResponse?.body?.data?.token;
   });
 
   afterAll(async () => {
@@ -13,7 +21,9 @@ describe('GET /users - Get all users', () => {
   });
 
   it('Should return 200 and all users', async () => {
-    const response = await global.testRequest.get('/users');
+    const response = await global.testRequest
+      .get('/users')
+      .set({ 'x-access-token': token });
 
     expect(response.body.data).toEqual([
       {
@@ -39,7 +49,9 @@ describe('GET /users - Get all users', () => {
   it('Should return 200 and empty array when there is no user', async () => {
     await global.prismaClient.user.deleteMany();
 
-    const response = await global.testRequest.get('/users');
+    const response = await global.testRequest
+      .get('/users')
+      .set({ 'x-access-token': token });
 
     expect(response.body.data).toEqual([]);
     expect(response.status).toBe(200);
@@ -50,7 +62,9 @@ describe('GET /users - Get all users', () => {
       .spyOn(UserService.prototype, 'getAll')
       .mockRejectedValueOnce(new Error('getAll unexpected error'));
 
-    const response = await global.testRequest.get(`/users`);
+    const response = await global.testRequest
+      .get(`/users`)
+      .set({ 'x-access-token': token });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

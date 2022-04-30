@@ -4,12 +4,19 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
+import { makeFakeLoginParams } from '../auth/helpers/testHelper';
 import { populateDatabase } from '../helpers/testHelper';
 
 describe('DELETE /users/{id} - Delete user by id', () => {
+  let token: string;
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
+    const params = makeFakeLoginParams();
+    const authResponse = await global.testRequest
+      .post(`/auth/token`)
+      .send(params);
+    token = authResponse?.body?.data?.token;
   });
 
   afterAll(async () => {
@@ -19,7 +26,9 @@ describe('DELETE /users/{id} - Delete user by id', () => {
   it('Should return 204 when the user is deleted', async () => {
     const id = 1;
 
-    const response = await global.testRequest.delete(`/users/${id}`);
+    const response = await global.testRequest
+      .delete(`/users/${id}`)
+      .set({ 'x-access-token': token });
 
     expect(response.body).toEqual({});
     expect(response.status).toBe(204);
@@ -27,7 +36,9 @@ describe('DELETE /users/{id} - Delete user by id', () => {
 
   it('Should return 404 when user does not exists', async () => {
     const id = 10;
-    const response = await global.testRequest.delete(`/users/${id}`);
+    const response = await global.testRequest
+      .delete(`/users/${id}`)
+      .set({ 'x-access-token': token });
 
     expect(response.body).toEqual(
       makeNotFoundResponse('user not found with provided id'),
@@ -37,7 +48,9 @@ describe('DELETE /users/{id} - Delete user by id', () => {
 
   it('Should return 400 when receive invalid params', async () => {
     const id = 0;
-    const response = await global.testRequest.delete(`/users/${id}`);
+    const response = await global.testRequest
+      .delete(`/users/${id}`)
+      .set({ 'x-access-token': token });
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
@@ -56,7 +69,9 @@ describe('DELETE /users/{id} - Delete user by id', () => {
       .spyOn(UserService.prototype, 'deleteById')
       .mockRejectedValueOnce(new Error('deleteById unexpected error'));
 
-    const response = await global.testRequest.delete(`/users/${id}`);
+    const response = await global.testRequest
+      .delete(`/users/${id}`)
+      .set({ 'x-access-token': token });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

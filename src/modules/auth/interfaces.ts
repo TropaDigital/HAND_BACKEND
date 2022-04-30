@@ -17,6 +17,8 @@ export interface IAuthService {
 }
 
 export interface IAuthController {
+  me(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<ResponseUser>>;
+
   login: (
     _request: IApiHttpRequest<IAuthRequestParams>,
   ) => Promise<IApiHttpResponse<IAuthResult>>;

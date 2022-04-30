@@ -20,7 +20,7 @@ export interface IUserRepository {
 export interface IUserController {
   getAll(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Omit<User, 'password'>[]>>;
+  ): Promise<IApiHttpResponse<ResponseUser[]>>;
 
   getByUserName(
     httpRequest: IApiHttpRequest,

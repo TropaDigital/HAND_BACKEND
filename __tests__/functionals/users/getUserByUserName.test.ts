@@ -4,12 +4,19 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
+import { makeFakeLoginParams } from '../auth/helpers/testHelper';
 import { populateDatabase } from '../helpers/testHelper';
 
 describe('GET /users/{userName} - Get user by email', () => {
+  let token: string;
   beforeAll(async () => {
     await global.prismaClient.user.deleteMany();
     await populateDatabase();
+    const params = makeFakeLoginParams();
+    const authResponse = await global.testRequest
+      .post(`/auth/token`)
+      .send(params);
+    token = authResponse?.body?.data?.token;
   });
 
   afterAll(async () => {
@@ -19,7 +26,9 @@ describe('GET /users/{userName} - Get user by email', () => {
   it('Should return 200 with user', async () => {
     const userName = 'joao';
 
-    const response = await global.testRequest.get(`/users/${userName}`);
+    const response = await global.testRequest
+      .get(`/users/${userName}`)
+      .set({ 'x-access-token': token });
     expect(response.body.data).toEqual({
       email: 'joao@mail.com',
       userName: 'joao',
@@ -33,8 +42,10 @@ describe('GET /users/{userName} - Get user by email', () => {
 
   it('Should return 404 and empty array when there is no user', async () => {
     await global.prismaClient.user.deleteMany();
-    const userName = 'notfounduser';
-    const response = await global.testRequest.get(`/users/${userName}`);
+    const userName = 'not_found_user';
+    const response = await global.testRequest
+      .get(`/users/${userName}`)
+      .set({ 'x-access-token': token });
     expect(response.body).toEqual(
       makeNotFoundResponse('user not found with provided userName'),
     );
@@ -43,7 +54,9 @@ describe('GET /users/{userName} - Get user by email', () => {
 
   it('Should return 400 when receive invalid params', async () => {
     const userName = 2;
-    const response = await global.testRequest.get(`/users/${userName}`);
+    const response = await global.testRequest
+      .get(`/users/${userName}`)
+      .set({ 'x-access-token': token });
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
@@ -62,7 +75,9 @@ describe('GET /users/{userName} - Get user by email', () => {
       .spyOn(UserService.prototype, 'getByUserName')
       .mockRejectedValueOnce(new Error('getByUserName unexpected error'));
 
-    const response = await global.testRequest.get(`/users/${userName}`);
+    const response = await global.testRequest
+      .get(`/users/${userName}`)
+      .set({ 'x-access-token': token });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

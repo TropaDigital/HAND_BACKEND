@@ -2,6 +2,8 @@ import express, { Application } from 'express';
 
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
+import { authMiddleware } from '../../middlewares';
+import AuthMiddleware from '../../middlewares/AuthMiddleware';
 import { createUserController } from './factories';
 import { IUserController } from './interfaces';
 
@@ -37,6 +39,7 @@ export default class UserRouter implements IRouter {
     this.router
       .route('/users')
       .get(
+        authMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IUserController>(this.controller, 'getAll'),
       );
   }
@@ -61,6 +64,7 @@ export default class UserRouter implements IRouter {
     this.router
       .route('/users/:userName')
       .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IUserController>(
           this.controller,
           'getByUserName',
@@ -87,6 +91,7 @@ export default class UserRouter implements IRouter {
     this.router
       .route('/users')
       .post(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IUserController>(this.controller, 'create'),
       );
   }
@@ -111,6 +116,7 @@ export default class UserRouter implements IRouter {
     this.router
       .route('/users/:id')
       .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IUserController>(
           this.controller,
           'updateById',
@@ -138,6 +144,7 @@ export default class UserRouter implements IRouter {
     this.router
       .route('/users/:id')
       .delete(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IUserController>(
           this.controller,
           'deleteById',

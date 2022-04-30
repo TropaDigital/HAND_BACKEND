@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
+import AuthMiddleware from '../../middlewares/AuthMiddleware';
 import { createLoginController } from './factories';
 import { IAuthController } from './interfaces';
 
@@ -22,7 +23,28 @@ export default class AuthRouter implements IRouter {
     return this.instance;
   }
 
-  private checkApplicationStatus(): void {
+  private me(): void {
+    /**
+     * GET /users/me
+     * @tag Users
+     * @summary get user info
+     * .
+     * @description return user info.
+     * @response 200 - an array with the all the users.
+     * @responseContent { UserResponse[]} 200.application/json
+     * @responseExample { UserResponse[]} 200.application/json.UserResponse
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/auth/me')
+      .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAuthController>(this.controller, 'me'),
+      );
+  }
+
+  private auth(): void {
     /**
      * GET /auth/token
      * @tag Login
@@ -43,7 +65,8 @@ export default class AuthRouter implements IRouter {
   }
 
   setupRoutes(app: Application): void {
-    this.checkApplicationStatus();
+    this.auth();
+    this.me();
     app.use(this.router);
   }
 }

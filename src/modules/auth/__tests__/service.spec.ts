@@ -60,7 +60,9 @@ describe(AuthService.name, () => {
 
       const promise = sut.authenticate(credentials);
 
-      expect(promise).rejects.toThrowError(new Error('User not authenticated'));
+      await expect(promise).rejects.toThrowError(
+        new Error('User does not exist in database'),
+      );
     });
 
     it('Should throw when repository throws', async () => {
@@ -72,7 +74,9 @@ describe(AuthService.name, () => {
 
       const promise = sut.authenticate(credentials);
 
-      expect(promise).rejects.toThrowError(new Error('any_repository_error'));
+      await expect(promise).rejects.toThrowError(
+        new Error('any_repository_error'),
+      );
     });
 
     it('Should throw when auth service throws', async () => {
@@ -84,7 +88,9 @@ describe(AuthService.name, () => {
 
       const promise = sut.authenticate(credentials);
 
-      expect(promise).rejects.toThrowError(new Error('any_auth_service_error'));
+      await expect(promise).rejects.toThrowError(
+        new Error('any_auth_service_error'),
+      );
     });
 
     it('Should throw when auth service returns null', async () => {
@@ -94,7 +100,7 @@ describe(AuthService.name, () => {
 
       const promise = sut.authenticate(credentials);
 
-      expect(promise).rejects.toThrowError(new Error('User not authenticated'));
+      await expect(promise).rejects.toThrowError(new Error('Invalid Password'));
     });
   });
 });

@@ -14,7 +14,7 @@ export class AuthService implements IAuthService {
     const user = await this.userRepository.findByUserName(userName);
 
     if (!user) {
-      throw new UnauthorizedError();
+      throw new UnauthorizedError('User does not exist in database');
     }
 
     const { password: hashedPassword, ...responseUser } = user;
@@ -25,7 +25,7 @@ export class AuthService implements IAuthService {
     );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedError();
+      throw new UnauthorizedError('Invalid Password');
     }
 
     const accessToken = await this.authService.generateToken({

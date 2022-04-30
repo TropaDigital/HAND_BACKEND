@@ -38,7 +38,9 @@ describe('GET /auth/token - Authenticate User', () => {
     const response = await global.testRequest.post(`/auth/token`).send(params);
 
     expect(JSON.parse(response.text)).toEqual(
-      expect.objectContaining({ description: 'User not authenticated' }),
+      expect.objectContaining({
+        description: 'User does not exist in database',
+      }),
     );
     expect(response.status).toBe(401);
   });
@@ -49,7 +51,7 @@ describe('GET /auth/token - Authenticate User', () => {
     const response = await global.testRequest.post(`/auth/token`).send(params);
 
     expect(response.body).toEqual(
-      expect.objectContaining({ description: 'User not authenticated' }),
+      expect.objectContaining({ description: 'Invalid Password' }),
     );
     expect(response.status).toBe(401);
   });

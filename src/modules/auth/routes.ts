@@ -29,10 +29,13 @@ export default class AuthRouter implements IRouter {
      * @tag Users
      * @summary get user info
      * .
-     * @description return user info.
+     * @description return info from logger user.
      * @response 200 - an array with the all the users.
      * @responseContent { UserResponse[]} 200.application/json
      * @responseExample { UserResponse[]} 200.application/json.UserResponse
+     * @response 401 - an object with a message when user is not authenticated with success.
+     * @responseContent {AuthResponse} 401.application/json
+     * @responseExample {AuthUnauthorizedResponse} 401.application/json.LoginUnauthorizedResponse
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -46,9 +49,9 @@ export default class AuthRouter implements IRouter {
 
   private auth(): void {
     /**
-     * GET /auth/token
+     * POST /auth/token
      * @tag Login
-     * @summary get the status of the application considering the status of all the required resources.
+     * @summary authenticate user by userName and password
      * @description return an object with the status of the resources.
      * @response 200 - an object with a message when user is authenticated with success.
      * @responseContent {AuthResponse} 200.application/json
@@ -56,6 +59,8 @@ export default class AuthRouter implements IRouter {
      * @response 401 - an object with a message when user is not authenticated with success.
      * @responseContent {AuthResponse} 401.application/json
      * @responseExample {AuthUnauthorizedResponse} 401.application/json.LoginUnauthorizedResponse
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
       .route('/auth/token')

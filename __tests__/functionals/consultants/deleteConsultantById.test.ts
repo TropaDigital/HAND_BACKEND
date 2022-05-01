@@ -4,7 +4,7 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
-import { populateDatabase } from './helpers/testHelper';
+import { populateDatabase } from './helpers/TestHelper';
 
 describe('DELETE /consultants/{id} - Delete consultant by id', () => {
   beforeAll(async () => {

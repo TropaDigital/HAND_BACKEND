@@ -7,7 +7,7 @@ import {
 import {
   populateDatabase,
   makeFakeCreateConsultantParams,
-} from './helpers/testHelper';
+} from './helpers/TestHelper';
 
 describe('GET /consultants/{id} - Get consultant by id', () => {
   beforeAll(async () => {

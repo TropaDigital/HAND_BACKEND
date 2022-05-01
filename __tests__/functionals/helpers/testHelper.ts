@@ -1,7 +1,7 @@
 import { Prisma, User } from '@prisma/client';
 
 import { createAuthService } from '../../../src/modules/auth/factories';
-import { makeFakeLoginParams } from '../auth/helpers/testHelper';
+import { makeFakeLoginParams } from '../auth/helpers/TestHelper';
 
 export const makeFakeUser = (
   payload?: Partial<User>,

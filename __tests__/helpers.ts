@@ -1,3 +1,4 @@
+import ErrorCodes from '../src/enums/ErrorCodes';
 import { IFormatedError } from '../src/interfaces/errors/IFormatedError';
 import IValidationErrors from '../src/interfaces/validation/IValidationError';
 import { ErrorMiddleware } from '../src/middlewares/ErrorMiddleware';
@@ -14,8 +15,9 @@ export const makeNotFoundResponse = (description?: string): IFormatedError => {
 
 export const makeUnauthorizedResponse = (
   description?: string,
+  code?: ErrorCodes,
 ): IFormatedError => {
-  return ErrorMiddleware.formatError(new UnauthorizedError(description));
+  return ErrorMiddleware.formatError(new UnauthorizedError(description, code));
 };
 
 export const makeInvalidParamsResponse = (
@@ -28,5 +30,8 @@ export const makeInvalidParamsResponse = (
 
 export const makeInternalErrorResponse = (
   description = 'Internal Server Error',
+  code?: ErrorCodes,
 ): IFormatedError =>
-  ErrorMiddleware.formatError(new GenericAppError(description));
+  ErrorMiddleware.formatError(
+    new GenericAppError(description, undefined, code),
+  );

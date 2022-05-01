@@ -1,5 +1,7 @@
 import { SchemaObject, ReferenceObject } from 'openapi-comment-parser';
 
+import { MonthOfPayment } from '../../enums/MonthOfPayment';
+
 export default {
   GetLoanSimulationBasedOnRequestedResponse: {
     type: 'object',
@@ -16,6 +18,11 @@ export default {
       data: {
         type: 'object',
         properties: {
+          requestedValue: {
+            type: 'number',
+            example: 1000,
+            description: 'the date the person receives the salary',
+          },
           totalValue: {
             type: 'number',
             description: 'total value of the loan with fees',
@@ -208,13 +215,20 @@ export default {
         example: 1,
         description: 'flag that indicates if the customer joined telemedicine',
       },
+      monthOfPayment: {
+        type: 'string',
+        example: MonthOfPayment.CURRENT_MONTH,
+        enum: [Object.values(MonthOfPayment)],
+        description:
+          '> monthOfPayment: * `CURRENT_MONTH` - the current month * `NEXT_MONTH` - the next month * `LAST_MONTH` - the last month (current date plus two months)',
+      },
     },
     required: [
       'salary',
-      'salaryReceiptDate',
       'requestedValue',
       'numberOfInstallments',
       'joinedTelemedicine',
+      'monthOfPayment',
     ],
     additionalProperties: false,
   },

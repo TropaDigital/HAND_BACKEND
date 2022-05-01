@@ -136,4 +136,21 @@ export default {
     required: ['code', 'statusCode', 'statusCodeAsString', 'description'],
     additionalProperties: false,
   },
+  ValidationError: {
+    type: 'object',
+    properties: {
+      fieldName: {
+        type: 'string',
+        description: 'name of the field',
+      },
+      friendlyFieldName: {
+        type: 'string',
+        description: 'friendly name of the field',
+      },
+      message: {
+        type: 'string',
+        description: 'message with the description of validation',
+      },
+    },
+  },
 } as { [key: string]: SchemaObject | ReferenceObject };

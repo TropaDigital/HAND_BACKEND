@@ -1,8 +1,11 @@
 import { ExampleObject, ReferenceObject } from 'openapi-comment-parser';
 
+import { MonthOfPayment } from '../../enums/MonthOfPayment';
+
 export default {
   GetLoanSimulationWithConsultantCommissionResponse: {
     value: {
+      requestedValue: 1000,
       salary: 1500,
       maxInstallmentValueBySalary: 525,
       consultantCommission: 10,
@@ -120,6 +123,7 @@ export default {
   },
   GetLoanSimulationWithoutTelemedicineResponse: {
     value: {
+      requestedValue: 1000,
       salary: 1500,
       maxInstallmentValueBySalary: 525,
       consultantCommission: 0,
@@ -240,6 +244,7 @@ export default {
       statusCode: 200,
       statusCodeAsString: 'OK',
       data: {
+        requestedValue: 1000,
         salary: 1500,
         maxInstallmentValueBySalary: 525,
         consultantCommission: 0,
@@ -365,6 +370,7 @@ export default {
       numberOfInstallments: 8,
       joinedTelemedicine: true,
       consultantId: 1,
+      monthOfPayment: MonthOfPayment.CURRENT_MONTH,
     },
   },
   GetLoanSimulationBasedOnRequestedValuePayloadWithoutsalaryReceiptDate: {
@@ -409,34 +415,6 @@ export default {
           message: '"salary" is required',
         },
       ],
-    },
-  },
-  CreateConsultantResponse: {
-    value: {
-      name: 'String',
-      taxId: 1020312465,
-      city: 'São Luis',
-      state: 'Maranhão',
-      commission: 10,
-      createdBy: 'admin',
-      updatedBy: 'admin',
-      createdAt: '10-10-2020',
-      updatedAt: '20-03-2021',
-      deletedAt: '03-09-2022',
-    },
-  },
-  ConsultantResponse: {
-    value: {
-      name: 'String',
-      taxId: 1020312465,
-      city: 'São Luis',
-      state: 'Maranhão',
-      commission: 10,
-      createdBy: 'admin',
-      updatedBy: 'admin',
-      createdAt: '10-10-2020',
-      updatedAt: '20-03-2021',
-      deletedAt: '03-09-2022',
     },
   },
 } as { [key: string]: ExampleObject | ReferenceObject };

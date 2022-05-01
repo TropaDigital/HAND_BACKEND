@@ -1,3 +1,4 @@
+import { NotFoundError } from '../../../shared/errors';
 import { makeUserServiceStub } from '../../user/__tests__/helpers/test-helper';
 import { AuthController } from '../controller';
 import {
@@ -55,6 +56,22 @@ describe(AuthController.name, () => {
           role: 'USER',
           status: 'ACTIVE',
         }),
+      );
+    });
+
+    it('Should throw an unuthorized error ', async () => {
+      const { sut, userService } = makeSut();
+      userService.getByUserName.mockResolvedValueOnce(null);
+      const httpRequest = makeFakeApiHttpRequest({
+        params: { id: 777 },
+        user: {
+          sub: 'any_user',
+          role: 'USER',
+        },
+      });
+
+      await expect(sut.me(httpRequest)).rejects.toThrow(
+        new NotFoundError('User not found'),
       );
     });
   });

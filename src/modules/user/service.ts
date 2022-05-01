@@ -29,8 +29,8 @@ export class UserService implements IUserService {
     if (!user) {
       throw new NotFoundError('user not found with provided userName');
     }
-    const result = this.removePasswordFromUser(user);
 
+    const result = this.removePasswordFromUser(user);
     return result;
   }
 

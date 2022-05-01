@@ -2,7 +2,8 @@ import { User, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 
-export type IResponseUser = Omit<User, 'password'>;
+export interface IResponseUser extends Omit<User, 'password'> {}
+
 export interface IUserRepository {
   create(payload: Prisma.UserCreateInput): Promise<IResponseUser>;
 

@@ -61,7 +61,7 @@ describe(AuthService.name, () => {
       const promise = sut.authenticate(credentials);
 
       await expect(promise).rejects.toThrowError(
-        new Error('User does not exist in database'),
+        new Error('invalid credentials'),
       );
     });
 
@@ -100,7 +100,9 @@ describe(AuthService.name, () => {
 
       const promise = sut.authenticate(credentials);
 
-      await expect(promise).rejects.toThrowError(new Error('Invalid Password'));
+      await expect(promise).rejects.toThrowError(
+        new Error('invalid credentials'),
+      );
     });
   });
 });

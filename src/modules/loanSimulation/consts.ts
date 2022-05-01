@@ -10,4 +10,5 @@ export const loanConfig = {
   },
   maximumNumberOfInstallments: 8,
   factorTable: [1.1, 0.576, 0.402, 0.315, 0.264, 0.2295, 0.2055, 0.1875],
+  aditionalValueWhenTheValueIsLowerThan1000: 112,
 } as const;

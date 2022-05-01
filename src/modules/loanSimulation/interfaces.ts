@@ -1,3 +1,5 @@
+import { MonthOfPayment } from 'src/enums/MonthOfPayment';
+
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 
 export interface IFormatInstallmentParams {
@@ -5,6 +7,7 @@ export interface IFormatInstallmentParams {
   numberOfInstallments: number;
   joinedTelemedicine: boolean;
   consultantCommission: number;
+  monthOfPayment: MonthOfPayment;
 }
 
 export interface ILoanSimulationBasedOnRequestedValueParams {
@@ -14,6 +17,7 @@ export interface ILoanSimulationBasedOnRequestedValueParams {
   numberOfInstallments: number;
   joinedTelemedicine: boolean;
   consultantId?: number;
+  monthOfPayment: MonthOfPayment;
 }
 
 export interface IInstallmentDetails {
@@ -30,6 +34,7 @@ export interface IInstallmentDetails {
 }
 
 export interface ILoanSimulationBasedOnRequestedValue {
+  requestedValue: number;
   totalValue: number;
   salary: number;
   feesValue: number;

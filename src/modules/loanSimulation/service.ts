@@ -11,6 +11,7 @@ import {
 } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
+import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { IConsultantService } from '../consultant/interfaces';
 import { loanConfig } from './consts';
 import {
@@ -67,12 +68,43 @@ export class LoanSimulationService implements ILoanSimulationService {
     return `${format(date, 'MMMM', { locale: ptBR })}/${format(date, 'yyyy')}`;
   }
 
+  private getAditionalValueWhenTheRequestValueIsLowerThan1000(
+    requestedValue: number,
+    numberOfInstallments: number,
+  ): number {
+    return requestedValue < 1000
+      ? loanConfig.aditionalValueWhenTheValueIsLowerThan1000 /
+          numberOfInstallments
+      : 0;
+  }
+
+  private getFeesByMonthOfPayment(
+    currentDate: Date,
+    monthOfPayment: MonthOfPayment,
+  ) {
+    if (monthOfPayment === MonthOfPayment.CURRENT_MONTH) {
+      return 0;
+    }
+
+    if (monthOfPayment === MonthOfPayment.LAST_MONTH) {
+      // TODO: validar se a regra realmente vai ser 10% ou será com base nas dias do mês
+      // const initOfMonthBasedInCurrentDatePlusTwoMonths = startOfMonth(
+      //   addMonths(currentDate, 2),
+      // );
+      // return this.getFeesOfMonth(initOfMonthBasedInCurrentDatePlusTwoMonths);
+      return 10 / 100; // 10%
+    }
+
+    return this.getFeesOfMonth(currentDate);
+  }
+
   private formatInstallmentDetails({
     currentDate,
     requestedValue,
     numberOfInstallments,
     joinedTelemedicine,
     consultantCommission,
+    monthOfPayment,
   }: IFormatInstallmentParams & { currentDate: Date }): IInstallmentDetails {
     const installmentFactor = this.getInstallmentsFactorValueByRequestedValue(
       requestedValue,
@@ -83,13 +115,21 @@ export class LoanSimulationService implements ILoanSimulationService {
         requestedValue,
         consultantCommission,
       ) / numberOfInstallments;
-    const fees = this.getFeesOfMonth(currentDate);
+    const fees = this.getFeesByMonthOfPayment(currentDate, monthOfPayment);
+
+    const getAditionalValueWhenTheRequestValueIsLowerThan1000 =
+      this.getAditionalValueWhenTheRequestValueIsLowerThan1000(
+        requestedValue,
+        numberOfInstallments,
+      );
     const installmentValueWithFees = installmentFactor * (fees + 1);
     const installmentFinalValue =
       this.getInstallmentWithAditionalValues(
         installmentValueWithFees,
         joinedTelemedicine,
-      ) + consultantCommissionValueByInstallment;
+      ) +
+      consultantCommissionValueByInstallment +
+      getAditionalValueWhenTheRequestValueIsLowerThan1000;
     return {
       reference: this.formatReferenceDate(currentDate),
       cardFees: this.getCardFees(1),
@@ -109,6 +149,7 @@ export class LoanSimulationService implements ILoanSimulationService {
     numberOfInstallments,
     joinedTelemedicine,
     consultantCommission,
+    monthOfPayment,
   }: IFormatInstallmentParams): IInstallmentDetails[] {
     let currentDate = startOfDay(new Date());
     const firstInstallment = this.formatInstallmentDetails({
@@ -117,6 +158,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       numberOfInstallments,
       joinedTelemedicine,
       consultantCommission,
+      monthOfPayment,
     });
     const installments: IInstallmentDetails[] = new Array(
       numberOfInstallments,
@@ -227,6 +269,7 @@ export class LoanSimulationService implements ILoanSimulationService {
     const maxInstallmentValueBySalary =
       this.getMaxInstallmentValueBySalary(salary);
     return {
+      requestedValue,
       salary,
       maxInstallmentValueBySalary,
       consultantCommission,
@@ -252,6 +295,7 @@ export class LoanSimulationService implements ILoanSimulationService {
     numberOfInstallments,
     joinedTelemedicine,
     consultantId,
+    monthOfPayment,
   }: ILoanSimulationBasedOnRequestedValueParams): Promise<ILoanSimulationBasedOnRequestedValue> {
     let consultantCommission = 0;
     if (consultantId) {
@@ -265,6 +309,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       numberOfInstallments,
       joinedTelemedicine,
       consultantCommission,
+      monthOfPayment,
     });
 
     return this.formatLoanSimulationBasedOnRequestedValue({

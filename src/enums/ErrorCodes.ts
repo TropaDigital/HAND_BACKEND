@@ -1,5 +1,7 @@
-export default {
-  GENERIC: 'GENERIC_ERROR',
-  AUTH_ERROR_001: 'AUTH_ERROR_001',
-  AUTH_ERROR_002: 'AUTH_ERROR_002',
-};
+enum ErrorCodes {
+  GENERIC = 'GENERIC_ERROR',
+  AUTH_ERROR_001 = 'TOKEN_NOT_PROVIDED',
+  AUTH_ERROR_002 = 'INVALID_CREDENTIALS',
+}
+
+export default ErrorCodes;

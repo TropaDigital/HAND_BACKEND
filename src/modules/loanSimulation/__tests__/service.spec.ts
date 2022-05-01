@@ -1,11 +1,15 @@
 import { startOfDay } from 'date-fns';
 
+import { MonthOfPayment } from '../../../enums/MonthOfPayment';
 import { NotFoundError } from '../../../shared/errors';
 import { makeConsultantServiceStub } from '../../consultant/__tests__/helpers/test-helper';
 import { LoanSimulationService } from '../service';
 import {
   loanSimulationOfDay15OfTheMonthWithoutTelemedicine,
   loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay,
+  loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDayCurrentMonth,
+  loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment,
+  loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentRequestedValueLowerThan1000,
   loanSimulationOfDay15OfTheMonthWithTelemedicine,
   loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission,
   loanSimulationOfDay16OfTheMonth,
@@ -23,14 +27,43 @@ describe(LoanSimulationService.name, () => {
   describe(`When ${LoanSimulationService.prototype.simulateLoanBasedOnRequestedValue.name} is called`, () => {
     test.each([
       {
-        params: makeLoanSimulationBasedOnRequestedValueParams(),
+        params: makeLoanSimulationBasedOnRequestedValueParams({
+          monthOfPayment: MonthOfPayment.NEXT_MONTH,
+        }),
         expected: loanSimulationOfDay15OfTheMonthWithTelemedicine,
       },
       {
         params: makeLoanSimulationBasedOnRequestedValueParams({
           joinedTelemedicine: false,
+          monthOfPayment: MonthOfPayment.NEXT_MONTH,
         }),
         expected: loanSimulationOfDay15OfTheMonthWithoutTelemedicine,
+      },
+      {
+        params: makeLoanSimulationBasedOnRequestedValueParams({
+          joinedTelemedicine: false,
+          monthOfPayment: MonthOfPayment.LAST_MONTH,
+        }),
+        expected:
+          loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment,
+      },
+      {
+        params: makeLoanSimulationBasedOnRequestedValueParams({
+          joinedTelemedicine: false,
+          requestedValue: 800,
+          monthOfPayment: MonthOfPayment.LAST_MONTH,
+        }),
+        expected:
+          loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentRequestedValueLowerThan1000,
+      },
+      {
+        params: makeLoanSimulationBasedOnRequestedValueParams({
+          joinedTelemedicine: false,
+          salaryReceiptDate: undefined,
+          monthOfPayment: MonthOfPayment.NEXT_MONTH,
+        }),
+        expected:
+          loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay,
       },
       {
         params: makeLoanSimulationBasedOnRequestedValueParams({
@@ -38,11 +71,12 @@ describe(LoanSimulationService.name, () => {
           salaryReceiptDate: undefined,
         }),
         expected:
-          loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay,
+          loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDayCurrentMonth,
       },
       {
         params: makeLoanSimulationBasedOnRequestedValueParams({
           salaryReceiptDate: startOfDay(new Date('2022-04-15T12:00:00.900Z')),
+          monthOfPayment: MonthOfPayment.NEXT_MONTH,
         }),
         expected: loanSimulationOfDay16OfTheMonth,
         overrideSystemTime: () => {
@@ -80,6 +114,7 @@ describe(LoanSimulationService.name, () => {
       const result = await sut.simulateLoanBasedOnRequestedValue(
         makeLoanSimulationBasedOnRequestedValueParams({
           consultantId: 1,
+          monthOfPayment: MonthOfPayment.NEXT_MONTH,
         }),
       );
       expect(result).toEqual(
@@ -87,7 +122,7 @@ describe(LoanSimulationService.name, () => {
       );
     });
 
-    it('should return the loan simulation with consultant commission when provide consultantId that exists', async () => {
+    it('should return the loan simulation with consultant commission when provide consultantId that does not exists', async () => {
       const { sut, consultantService } = makeSut();
       const notFoundError = new NotFoundError(
         'consultant not found with provided id',

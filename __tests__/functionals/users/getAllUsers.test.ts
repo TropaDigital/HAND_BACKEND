@@ -1,6 +1,9 @@
 import { UserService } from '../../../src/modules/user/service';
-import { makeInternalErrorResponse } from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers';
+import {
+  makeInternalErrorResponse,
+  getFakeToken,
+  populateDatabase,
+} from '../helpers';
 
 describe('GET /users - Get all users', () => {
   let token: string;

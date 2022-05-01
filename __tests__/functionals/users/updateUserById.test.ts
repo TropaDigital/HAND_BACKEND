@@ -1,10 +1,11 @@
 import { UserService } from '../../../src/modules/user/service';
 import {
+  getFakeToken,
+  populateDatabase,
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
-} from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers';
+} from '../helpers';
 
 describe('PATCH /users/{id} - Update user by id', () => {
   let token: string;

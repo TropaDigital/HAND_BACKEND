@@ -5,7 +5,7 @@ import { TokenExpiredError } from 'jsonwebtoken';
 
 import ErrorCodes from '../../../src/enums/ErrorCodes';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
-import { makeUnauthorizedResponse } from '../../helpers';
+import { makeUnauthorizedResponse } from '../helpers';
 
 describe('Auth middleware', () => {
   const token = new AuthenticationService().generateToken({

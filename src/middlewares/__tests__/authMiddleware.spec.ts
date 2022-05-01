@@ -68,14 +68,15 @@ describe(AuthMiddleware.name, () => {
 
     it('should call next with unauthorized when token is provided but decode function throws generic error', async () => {
       const { sut, reqStub, resStub, nextSpy, authServiceStub } = makeSut();
+      const error = new Error('any_decode_error');
       authServiceStub.decodeToken.mockImplementationOnce(() => {
-        throw new Error('any_decode_error');
+        throw error;
       });
       reqStub.headers['x-access-token'] = 'any_token';
 
       sut.authenticationMiddleware(reqStub, resStub, nextSpy);
 
-      expect(nextSpy).toBeCalledWith(new Error('any_decode_error'));
+      expect(nextSpy).toBeCalledWith(error);
     });
 
     it('should call next without params when token is correct', async () => {

@@ -2,7 +2,7 @@ import { ConsultantService } from '../../../src/modules/consultant/service';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
-} from '../../helpers';
+} from '../helpers';
 import { makeFakeCreateConsultantParams } from './helpers/TestHelper';
 
 describe('POST /consultants - Create new consultant', () => {

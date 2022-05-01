@@ -3,7 +3,7 @@ import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
-} from '../../helpers';
+} from '../helpers';
 import { populateDatabase } from './helpers/TestHelper';
 
 describe('DELETE /consultants/{id} - Delete consultant by id', () => {

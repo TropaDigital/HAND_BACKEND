@@ -3,7 +3,7 @@ import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
-} from '../../helpers';
+} from '../helpers';
 import {
   populateDatabase,
   makeFakeCreateConsultantParams,

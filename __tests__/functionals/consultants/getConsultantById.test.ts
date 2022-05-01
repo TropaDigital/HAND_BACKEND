@@ -4,10 +4,7 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../helpers';
-import {
-  populateDatabase,
-  makeFakeCreateConsultantParams,
-} from './helpers/TestHelper';
+import { populateDatabase, makeFakeCreateConsultantParams } from './helpers';
 
 describe('GET /consultants/{id} - Get consultant by id', () => {
   beforeAll(async () => {

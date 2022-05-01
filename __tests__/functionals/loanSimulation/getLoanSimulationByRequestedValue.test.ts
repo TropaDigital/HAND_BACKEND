@@ -20,8 +20,8 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
   makeUnauthorizedResponse,
-  populateDatabase,
 } from '../helpers';
+import { populateDatabase } from '../users/helpers';
 
 describe('POST /loansimulations/simulate - Get an loan simulation based in the provided parameters', () => {
   const token = new AuthenticationService().generateToken({

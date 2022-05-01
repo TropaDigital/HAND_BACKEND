@@ -4,7 +4,7 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../helpers';
-import { populateDatabase } from './helpers/TestHelper';
+import { populateDatabase } from './helpers';
 
 describe('PATCH /consultants/{id} - Update consultant by id', () => {
   beforeAll(async () => {

@@ -3,9 +3,8 @@ import {
   getFakeToken,
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
-  populateDatabase,
 } from '../helpers';
-import { makeFakeCreateUserParams } from './helpers/TestHelper';
+import { makeFakeCreateUserParams, populateDatabase } from './helpers';
 
 describe('POST /users - Create new user', () => {
   let token: string;

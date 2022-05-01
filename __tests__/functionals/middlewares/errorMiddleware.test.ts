@@ -1,8 +1,9 @@
 /* eslint-disable max-nested-callbacks */
 import { HealthcheckController } from '../../../src/modules/healthcheck/controller';
 import { NotFoundError } from '../../../src/shared/errors';
-import { makeFakeLoginParams } from '../auth/helpers/TestHelper';
-import { populateDatabase, makeNotFoundResponse } from '../helpers';
+import { makeFakeLoginParams } from '../auth/helpers';
+import { makeNotFoundResponse } from '../helpers';
+import { populateDatabase } from '../users/helpers';
 
 describe('Global Error Middleware', () => {
   describe('GET /route-that-does-not-exists', () => {

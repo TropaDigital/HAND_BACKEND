@@ -1,11 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 
 import { UserService } from '../../../src/modules/user/service';
-import {
-  makeNotFoundResponse,
-  getFakeToken,
-  populateDatabase,
-} from '../helpers';
+import { makeNotFoundResponse, getFakeToken } from '../helpers';
+import { populateDatabase } from '../users/helpers';
 
 describe('POST /users/me - Get User Info', () => {
   let token: string;

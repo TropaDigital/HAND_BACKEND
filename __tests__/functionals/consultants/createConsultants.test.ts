@@ -3,7 +3,7 @@ import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
 } from '../helpers';
-import { makeFakeCreateConsultantParams } from './helpers/TestHelper';
+import { makeFakeCreateConsultantParams } from './helpers';
 
 describe('POST /consultants - Create new consultant', () => {
   beforeAll(async () => {

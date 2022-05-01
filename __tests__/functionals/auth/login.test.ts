@@ -1,5 +1,5 @@
-import { populateDatabase } from '../helpers';
-import { makeFakeLoginParams } from './helpers/TestHelper';
+import { populateDatabase } from '../users/helpers';
+import { makeFakeLoginParams } from './helpers';
 
 describe('GET /auth/token - Authenticate User', () => {
   beforeAll(async () => {

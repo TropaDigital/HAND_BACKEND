@@ -1,6 +1,6 @@
 import { ConsultantService } from '../../../src/modules/consultant/service';
 import { makeInternalErrorResponse } from '../helpers';
-import { populateDatabase, makeFakeConsultant } from './helpers/TestHelper';
+import { populateDatabase, makeFakeConsultant } from './helpers';
 
 describe('GET /consultants - Get all consultants', () => {
   beforeAll(async () => {

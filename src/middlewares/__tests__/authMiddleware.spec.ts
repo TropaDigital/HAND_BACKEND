@@ -75,7 +75,7 @@ describe(AuthMiddleware.name, () => {
 
       sut.authenticationMiddleware(reqStub, resStub, nextSpy);
 
-      expect(nextSpy).toBeCalledWith(new UnauthorizedError());
+      expect(nextSpy).toBeCalledWith(new Error('any_decode_error'));
     });
 
     it('should call next without params when token is correct', async () => {

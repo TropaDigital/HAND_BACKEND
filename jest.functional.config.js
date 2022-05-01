@@ -16,6 +16,7 @@ module.exports = {
     'src/middlewares/*.ts',
     '!src/middlewares/RateLimit.ts',
     '!src/config/**/*.ts',
+    '!src/seeders/**/*.ts',
     '!src/swagger/**/*.ts',
   ],
   coverageDirectory: 'coverage/functional',

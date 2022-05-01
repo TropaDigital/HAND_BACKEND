@@ -1,4 +1,4 @@
-import { getFakeToken, populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers';
 
 describe('POST /users/me - Get User Info', () => {
   let token: string;

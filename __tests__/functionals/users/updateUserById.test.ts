@@ -4,7 +4,7 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers';
 
 describe('PATCH /users/{id} - Update user by id', () => {
   let token: string;

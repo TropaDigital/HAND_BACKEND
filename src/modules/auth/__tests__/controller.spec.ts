@@ -39,12 +39,8 @@ describe(AuthController.name, () => {
       const httpRequest = makeFakeApiHttpRequest({
         params: { id: 777 },
         user: {
-          email: 'any_email@mail.com',
-          userName: 'any_user',
-          id: 1,
-          name: 'any_name',
+          sub: 'any_user',
           role: 'USER',
-          status: 'ACTIVE',
         },
       });
 

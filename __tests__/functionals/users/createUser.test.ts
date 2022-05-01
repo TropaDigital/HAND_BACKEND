@@ -3,7 +3,7 @@ import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
 } from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers';
 import { makeFakeCreateUserParams } from './helpers/testHelper';
 
 describe('POST /users - Create new user', () => {

@@ -1,8 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
+import { IJwtToken } from 'src/shared/auth/interfaces';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { IResponseUser } from '../../../user/interfaces';
 import { IAuthResult, IAuthService } from '../../interfaces';
 
 export const makeLoginServiceStub = (
@@ -27,7 +27,7 @@ export const makeFakeApiHttpRequest = ({
   body?: unknown;
   params?: { [key: string]: any };
   headers?: { [key: string]: string | string[] | undefined };
-  user?: IResponseUser;
+  user?: IJwtToken;
 }): jest.Mocked<IApiHttpRequest> => ({ body, params, headers, user });
 
 export const makeFakeApiHttpResponse = (

@@ -1,6 +1,6 @@
 import { Prisma, User } from '@prisma/client';
+import { createAuthService } from 'modules/auth/factories';
 
-import { createAuthService } from '../../../src/modules/auth/factories';
 import { makeFakeLoginParams } from '../auth/helpers/TestHelper';
 
 export const makeFakeUser = (

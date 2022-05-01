@@ -4,7 +4,7 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers';
 
 describe('GET /users/{userName} - Get user by email', () => {
   let token: string;

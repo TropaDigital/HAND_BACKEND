@@ -1,4 +1,4 @@
-import { populateDatabase } from '../helpers/testHelper';
+import { populateDatabase } from '../helpers';
 import { makeFakeLoginParams } from './helpers/testHelper';
 
 describe('GET /auth/token - Authenticate User', () => {

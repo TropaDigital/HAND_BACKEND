@@ -4,7 +4,7 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers/testHelper';
+import { getFakeToken, populateDatabase } from '../helpers';
 
 describe('DELETE /users/{id} - Delete user by id', () => {
   let token: string;

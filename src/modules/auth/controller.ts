@@ -1,7 +1,7 @@
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import { IValidator } from '../../interfaces/validation/IValidator';
 import { MissingInvalidParamsError, NotFoundError } from '../../shared/errors';
-import { IUserService, ResponseUser } from '../user/interfaces';
+import { IUserService, IResponseUser } from '../user/interfaces';
 import {
   IAuthController,
   IAuthRequestParams,
@@ -19,7 +19,7 @@ export class AuthController implements IAuthController {
 
   public async me(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<ResponseUser>> {
+  ): Promise<IApiHttpResponse<IResponseUser>> {
     const userName = httpRequest.user?.userName;
     if (!userName) {
       throw new MissingInvalidParamsError(

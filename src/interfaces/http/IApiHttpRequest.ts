@@ -1,4 +1,4 @@
-import { ResponseUser } from '../../modules/user/interfaces';
+import { IJwtToken } from '../../shared/auth/interfaces';
 
 export interface IApiHttpRequest<
   Body = any,
@@ -10,5 +10,5 @@ export interface IApiHttpRequest<
   headers?: Headers;
   params?: Params;
   query?: Query;
-  user?: ResponseUser;
+  user?: IJwtToken;
 }

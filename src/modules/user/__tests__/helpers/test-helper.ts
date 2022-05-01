@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
 import { IAuthenticationService } from '../../../../shared/auth/interfaces';
-import { IUserRepository, IUserService, ResponseUser } from '../../interfaces';
+import { IUserRepository, IUserService, IResponseUser } from '../../interfaces';
 import { PrismaUserRepository } from '../../repository';
 
 export const makeFakeCreateUserInput = (
@@ -61,8 +61,8 @@ export const makeFakeUser = (payload: Partial<User>): jest.Mocked<User> => ({
 });
 
 export const makeResponseUser = (
-  payload: Partial<ResponseUser>,
-): jest.Mocked<ResponseUser> => ({
+  payload: Partial<IResponseUser>,
+): jest.Mocked<IResponseUser> => ({
   id: 0,
   userName: 'any_user',
   name: 'any_name',
@@ -76,7 +76,7 @@ export const makeFakeUserList = () => [makeFakeUser({}), makeFakeUser({})];
 
 export const makeUserServiceStub = (): jest.Mocked<IUserService> => ({
   getAll: jest.fn().mockResolvedValue(makeFakeUserList()),
-  getByUserName: jest.fn().mockResolvedValue(makeResponseUser({})),
+  getByUserName: jest.fn().mockResolvedValue(makeIResponseUser({})),
   create: jest.fn().mockResolvedValue(makeFakeUser({})),
   updateById: jest.fn(),
   deleteById: jest.fn(),

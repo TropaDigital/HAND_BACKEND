@@ -10,6 +10,8 @@ morgan.token('body', (req: Request) => {
   return rest;
 });
 
+morgan.token('headers', (req: Request) => JSON.stringify(req.headers));
+
 export default morgan(
   (tokens: TokenIndexer<Request, Response>, req: Request, res: Response) =>
     JSON.stringify({
@@ -23,6 +25,7 @@ export default morgan(
       totalTime: `${tokens['total-time'](req, res)}ms`,
       'remote-addr': tokens['remote-addr'](req, res),
       'remote-user': tokens['remote-user'](req, res),
+      headers: tokens.headers(req, res),
       body: tokens.body(req, res),
     }),
   {

@@ -1,0 +1,5 @@
+export enum MonthOfPayment {
+  CURRENT_MONTH = 'CURRENT_MONTH',
+  NEXT_MONTH = 'NEXT_MONTH',
+  LAST_MONTH = 'LAST_MONTH',
+}

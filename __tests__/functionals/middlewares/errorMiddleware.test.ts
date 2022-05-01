@@ -2,7 +2,7 @@
 import { HealthcheckController } from '../../../src/modules/healthcheck/controller';
 import { NotFoundError } from '../../../src/shared/errors';
 import { makeNotFoundResponse } from '../../helpers';
-import { makeFakeLoginParams } from '../auth/helpers/testHelper';
+import { makeFakeLoginParams } from '../auth/helpers/TestHelper';
 import { populateDatabase } from '../helpers/testHelper';
 
 describe('Global Error Middleware', () => {

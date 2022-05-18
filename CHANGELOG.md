@@ -1,3 +1,48 @@
+## [1.1.0](https://github.com/haandsolutions/haand-bib/compare/v1.0.1...v1.1.0) (2022-05-18)
+
+
+### :repeat: CI
+
+* **ci:** update ci env ([415951b](https://github.com/haandsolutions/haand-bib/commit/415951bf02e13da8b0b283dc3cbb0711f222292b)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+
+
+### :white_check_mark: Tests
+
+* add definition of app in a global variable ([83b25bb](https://github.com/haandsolutions/haand-bib/commit/83b25bb63a08c21ec5f26d17ebe7ff33bb6ba43c))
+* add factory of unauthorized error ([185b54b](https://github.com/haandsolutions/haand-bib/commit/185b54b1b7d0d4a5b51af309ee2c07fc2de36ecb))
+* add integration tests to auth middleware ([2c860e7](https://github.com/haandsolutions/haand-bib/commit/2c860e78992f859b248737c9bcc779054827a4b8))
+* add integration tests to global error middleware ([88a8900](https://github.com/haandsolutions/haand-bib/commit/88a8900c1d383dd9472a31da07693d04de24d895))
+* adjust the functional tests of loan simulation module ([556c06c](https://github.com/haandsolutions/haand-bib/commit/556c06cf3e43cab83c2a3f564842be81f0724bd3))
+* adjust the unit tests of auth service ([6990aba](https://github.com/haandsolutions/haand-bib/commit/6990abab7a7849554ed98baca5632395a333f0f0))
+* adjust unit tests of auth service ([cde82e4](https://github.com/haandsolutions/haand-bib/commit/cde82e41a1d0bf742cdbc5773b241ff8b217eff0))
+* **tests:** improve test coverage ([4a7b1eb](https://github.com/haandsolutions/haand-bib/commit/4a7b1eb80bea3d1664ebe6c452d78ac142bb5fef)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **user:** remove getById from user service ([09d359d](https://github.com/haandsolutions/haand-bib/commit/09d359d270156d9756999c841ef2ffcc83e73933)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **test:** update functional tests ([daf7f33](https://github.com/haandsolutions/haand-bib/commit/daf7f33bb15899620a5af0e1980d9894d83bf738)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+
+
+### :sparkles: New Features
+
+* add authentication to loan simulation routes ([612de18](https://github.com/haandsolutions/haand-bib/commit/612de18ff6fc1a1bd23dcf9314fbbdedd56b0737))
+* **auth:** change login from email to username ([124525e](https://github.com/haandsolutions/haand-bib/commit/124525e1f0d4145b44c4e2efe8ecac29bebbc944)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **auth:** create auth story ([54cd6f8](https://github.com/haandsolutions/haand-bib/commit/54cd6f82ae89799f4ef18c7fd9051f82c346a28d)), closes [#42](https://github.com/haandsolutions/haand-bib/issues/42)
+* **user:** create enum for role and status ([2ff9a8e](https://github.com/haandsolutions/haand-bib/commit/2ff9a8e6bb105b023b4d808f2731fc0841e96439)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **auth:** create me route ([02c2d92](https://github.com/haandsolutions/haand-bib/commit/02c2d92ba2c4b6e535f4c0383fab9c6202d10b1b)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **user:** create user stories ([e6bfd84](https://github.com/haandsolutions/haand-bib/commit/e6bfd84572838170732841fcf3f9a8e656f8ce52)), closes [#40](https://github.com/haandsolutions/haand-bib/issues/40)
+* **auth:** make login return complete user data instead name ([e219684](https://github.com/haandsolutions/haand-bib/commit/e219684503dbea6266f2af0816e291c5ac8f2119)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **user:** pass user info to request ([c06da51](https://github.com/haandsolutions/haand-bib/commit/c06da5134277676106520a90eb16ac7f36030cec)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **user:** remove password from user response ([4f96f4c](https://github.com/haandsolutions/haand-bib/commit/4f96f4c2576a41c0535ba7807a5d6fbd55d5adaf)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+
+
+### :zap: Refactor
+
+* adjust the auth service interfaces ([86eadc5](https://github.com/haandsolutions/haand-bib/commit/86eadc5dba86c0484f8f187f6dc2dfda77b9b836))
+* adjust the exports of unautorized error ([27b76f7](https://github.com/haandsolutions/haand-bib/commit/27b76f7439f0fe7fa80adeb8f6d09466e4213370))
+* adjust the types of auth middleware parameters ([d6bed92](https://github.com/haandsolutions/haand-bib/commit/d6bed923da2aace5f92870f5f7d0d0d6a9b2a78a))
+* **test:** create login helper to generate token before tests ([bacdfb1](https://github.com/haandsolutions/haand-bib/commit/bacdfb1a0589434e43591584c33eca6dff65e855)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **auth:** update auth error messages ([8803ff8](https://github.com/haandsolutions/haand-bib/commit/8803ff848da97cb04d6232a45e583b5b8e91affc)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **auth:** update auth naming and routes ([c596ed0](https://github.com/haandsolutions/haand-bib/commit/c596ed0969c752f1a8e42acf36ad3d7a1e3f075e)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+* **user:** update tests ([2d7f8cf](https://github.com/haandsolutions/haand-bib/commit/2d7f8cfc56519cf0c2c3e8b4e0f810d19754ff82)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+
 ### [1.0.1](https://github.com/haandsolutions/haand-bib/compare/v1.0.0...v1.0.1) (2022-04-22)
 
 

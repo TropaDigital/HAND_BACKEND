@@ -9,8 +9,12 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
+  userName String @unique
   email String  @unique
-  name  String?
+  name  String  
+  password String
+  status Status
+  role Role
 }
 
 model Consultant {
@@ -25,4 +29,14 @@ model Consultant {
   createdAt    DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
   deletedAt    DateTime? @map(name: "deleted_at") @db.DateTime(0)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
 }

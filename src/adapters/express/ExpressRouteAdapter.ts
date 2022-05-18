@@ -33,6 +33,7 @@ export class ExpressRouteAdapter {
           headers: req.headers,
           params: req.params,
           query: req.query,
+          user: req.user,
         });
         const formatedResponse =
           ExpressRouteAdapter.formatHttpResponse(httpResponse);

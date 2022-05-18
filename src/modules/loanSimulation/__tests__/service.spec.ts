@@ -19,7 +19,7 @@ const makeSut = () => {
   return { sut, consultantService };
 };
 
-describe.only(LoanSimulationService.name, () => {
+describe(LoanSimulationService.name, () => {
   describe(`When ${LoanSimulationService.prototype.simulateLoanBasedOnRequestedValue.name} is called`, () => {
     test.each([
       {

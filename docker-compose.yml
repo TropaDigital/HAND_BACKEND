@@ -13,11 +13,13 @@ services:
       - /usr/src/app/node_modules
       - /usr/src/app/dist
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       DATABASE_URL: mysql://root:haandbib@mysql:3306/haandbib
       PORT: 3000
       NODE_ENV: development
+    env_file:
+      - .env.development
     depends_on:
       - mysql
       - redis
@@ -33,7 +35,7 @@ services:
     ports:
       - '3306:3306/tcp'
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "dbsql:3306"]
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'dbsql:3306']
       timeout: 20s
       retries: 10
     environment:
@@ -49,7 +51,7 @@ services:
     container_name: redis
     command: redis-server
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ['CMD', 'redis-cli', 'ping']
       interval: 30s
       timeout: 10s
       retries: 3

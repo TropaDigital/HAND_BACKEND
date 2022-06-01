@@ -1,3 +1,52 @@
+## [1.2.0](https://github.com/haandsolutions/haand-bib/compare/v1.1.0...v1.2.0) (2022-06-01)
+
+
+### :repeat: CI
+
+* update docker-compose env ([805b7ff](https://github.com/haandsolutions/haand-bib/commit/805b7ffbef25467bb1a1f324c2e9537b9c94d901))
+
+
+### :sparkles: New Features
+
+* add users seeders to populate database in application startup ([39cca21](https://github.com/haandsolutions/haand-bib/commit/39cca21a1aec6c5b7f3be0ef28ed16b802482365))
+* **associated:** create associated use case ([311c99f](https://github.com/haandsolutions/haand-bib/commit/311c99f7a51a5516ba732841b2ad68d7abd17c35)), closes [#77](https://github.com/haandsolutions/haand-bib/issues/77)
+
+
+### :bug: Fixes
+
+* add the field createby in create association route ([1b5ba3c](https://github.com/haandsolutions/haand-bib/commit/1b5ba3c512afb832f8c00acc0ae4a5e2f18fd39e))
+
+
+### :memo: Documentation
+
+* add unauthorized response details in routes of the modules ([11a3aa4](https://github.com/haandsolutions/haand-bib/commit/11a3aa44ee254da553c3bad315d2e69916dfd7fe))
+* adjust the swagger docs of loan simulation module ([38b4371](https://github.com/haandsolutions/haand-bib/commit/38b4371112aaad5a241ae123be6c1ccedc8a64eb))
+
+
+### :zap: Refactor
+
+* add authentication to associated module ([9c549b1](https://github.com/haandsolutions/haand-bib/commit/9c549b135ae80426ce4f2e432b4371a32d315a67))
+* adjust the auth middleware error returns ([b66de0b](https://github.com/haandsolutions/haand-bib/commit/b66de0bc633b5068c4fa66302c1e54fd787d0b44))
+* adjust the name of interface ([d03f7f9](https://github.com/haandsolutions/haand-bib/commit/d03f7f9c62eef07d82e83529882f2e8e8e93620d))
+* adjust the name of the interface ([263961e](https://github.com/haandsolutions/haand-bib/commit/263961e7e20c4830d325293bccf10c631f8e131f))
+* change the name of the module of auth ([a9e8ca1](https://github.com/haandsolutions/haand-bib/commit/a9e8ca1ba5412d8483cd5710a58f206c015dfa8b))
+
+
+### :white_check_mark: Tests
+
+* adjust the error response factories ([2531ab4](https://github.com/haandsolutions/haand-bib/commit/2531ab4f70b660b50b5568a4dda4bdd4e2630687))
+* adjust the imports of tests ([91cb85a](https://github.com/haandsolutions/haand-bib/commit/91cb85a5bc82f2d2936fbb739bbd223d010a462b))
+* adjust the imports of tests ([07f4191](https://github.com/haandsolutions/haand-bib/commit/07f419102382e7e8a666041dfd486b17bdd7c061))
+* adjust the imports of tests ([40a1e37](https://github.com/haandsolutions/haand-bib/commit/40a1e37115d7ce663d1035ea71746a009dab1d77))
+* adjust the jest config to ignore seeders in coverage ([b62319a](https://github.com/haandsolutions/haand-bib/commit/b62319af05b9a3ae093621fca15f7b4a99ad24f3))
+* adjust the jest threshould ([24abaf1](https://github.com/haandsolutions/haand-bib/commit/24abaf1d14da81e695f795cd2ce1da92308c103c))
+* adjust the name of the interfaces ([d2542e2](https://github.com/haandsolutions/haand-bib/commit/d2542e24cb9f4da85d4d8df3cc344bbfa5265ba6))
+* adjust the tests of auth middleware ([e7575c7](https://github.com/haandsolutions/haand-bib/commit/e7575c7b2599747805ee33f85ea9775c650ed509))
+* adjust the tests of authmiddleware ([273a409](https://github.com/haandsolutions/haand-bib/commit/273a409b49805d784e6ec81005ea9b4f8596cffa))
+* adjust the tests of error middleware ([39e7352](https://github.com/haandsolutions/haand-bib/commit/39e7352393b55fe087e082cc6d7371475c5f06b9))
+* adjust the tests to run with auth ([c3cb65c](https://github.com/haandsolutions/haand-bib/commit/c3cb65c2ebe45d9f2e88bc6eaf948a651ec7f350))
+* adjust the unit tests of associated module ([57cee40](https://github.com/haandsolutions/haand-bib/commit/57cee40d90d0aa99fa32d588ec73bb96e4d6d91f))
+
 ## [1.1.0](https://github.com/haandsolutions/haand-bib/compare/v1.0.1...v1.1.0) (2022-05-18)
 
 

@@ -1,13 +1,21 @@
 import { ConsultantService } from '../../../src/modules/consultant/service';
+import { AuthenticationService } from '../../../src/shared/auth/auth';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../helpers';
+import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { populateDatabase, makeFakeCreateConsultantParams } from './helpers';
 
 describe('GET /consultants/{id} - Get consultant by id', () => {
+  const token = new AuthenticationService().generateToken({
+    sub: 1,
+    role: 'VALID_ROLE',
+  });
+
   beforeAll(async () => {
+    await populateUsersDatabase();
     await global.prismaClient.consultant.deleteMany();
     await populateDatabase();
   });
@@ -19,7 +27,9 @@ describe('GET /consultants/{id} - Get consultant by id', () => {
   it('Should return 200 with consultant', async () => {
     const id = 1;
 
-    const response = await global.testRequest.get(`/consultants/${id}`);
+    const response = await global.testRequest
+      .get(`/consultants/${id}`)
+      .set('x-access-token', token);
     expect(response.body.data).toEqual(
       expect.objectContaining(makeFakeCreateConsultantParams({ name: 'João' })),
     );
@@ -29,7 +39,9 @@ describe('GET /consultants/{id} - Get consultant by id', () => {
   it('Should return 404 and empty array when there is no consultant', async () => {
     await global.prismaClient.consultant.deleteMany();
     const id = 10;
-    const response = await global.testRequest.get(`/consultants/${id}`);
+    const response = await global.testRequest
+      .get(`/consultants/${id}`)
+      .set('x-access-token', token);
     expect(response.body).toEqual(
       makeNotFoundResponse('consultant not found with provided id'),
     );
@@ -38,7 +50,9 @@ describe('GET /consultants/{id} - Get consultant by id', () => {
 
   it('Should return 400 when receive invalid params', async () => {
     const id = 0;
-    const response = await global.testRequest.get(`/consultants/${id}`);
+    const response = await global.testRequest
+      .get(`/consultants/${id}`)
+      .set('x-access-token', token);
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
@@ -57,7 +71,9 @@ describe('GET /consultants/{id} - Get consultant by id', () => {
       .spyOn(ConsultantService.prototype, 'getById')
       .mockRejectedValueOnce(new Error('getById unexpected error'));
 
-    const response = await global.testRequest.get(`/consultants/${id}`);
+    const response = await global.testRequest
+      .get(`/consultants/${id}`)
+      .set('x-access-token', token);
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

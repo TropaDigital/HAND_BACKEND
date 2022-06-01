@@ -3,7 +3,7 @@ import express, { Application } from 'express';
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
 import AuthMiddleware from '../../middlewares/AuthMiddleware';
-import { createLoginController } from './factories';
+import { createAuthController } from './factories';
 import { IAuthController } from './interfaces';
 
 export default class AuthRouter implements IRouter {
@@ -14,7 +14,7 @@ export default class AuthRouter implements IRouter {
   private constructor(private readonly controller: IAuthController) {}
 
   public static getInstance(
-    controller: IAuthController = createLoginController(),
+    controller: IAuthController = createAuthController(),
   ): AuthRouter {
     if (!this.instance) {
       this.instance = new AuthRouter(controller);

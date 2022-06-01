@@ -13,13 +13,15 @@ services:
       - /usr/src/app/node_modules
       - /usr/src/app/dist
     ports:
-      - '3000:3000'
+      - "3001:3001"
     environment:
       DATABASE_URL: mysql://root:haandbib@mysql:3306/haandbib
-      PORT: 3000
+      PORT: 3001
       NODE_ENV: development
-    env_file:
-      - .env.development
+      AUTH_SESSION_TTL: 3600
+      AUTH_SECRET: secret
+      DEFAULT_PASSWORD: any_pass
+      JWT_SALT: 12
     depends_on:
       - mysql
       - redis

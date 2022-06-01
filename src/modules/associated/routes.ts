@@ -3,21 +3,21 @@ import express, { Application } from 'express';
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
 import AuthMiddleware from '../../middlewares/AuthMiddleware';
-import { createConsultantController } from './factories';
-import { IConsultantController } from './interfaces';
+import { createAssociatedController } from './factories';
+import { IAssociatedController } from './interfaces';
 
-export default class ConsultantRouter implements IRouter {
-  private static instance: ConsultantRouter;
+export default class AssociatedRouter implements IRouter {
+  private static instance: AssociatedRouter;
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IConsultantController) {}
+  private constructor(private readonly controller: IAssociatedController) {}
 
   public static getInstance(
-    controller: IConsultantController = createConsultantController(),
-  ): ConsultantRouter {
+    controller: IAssociatedController = createAssociatedController(),
+  ): AssociatedRouter {
     if (!this.instance) {
-      this.instance = new ConsultantRouter(controller);
+      this.instance = new AssociatedRouter(controller);
     }
 
     return this.instance;
@@ -25,22 +25,23 @@ export default class ConsultantRouter implements IRouter {
 
   private getAll(): void {
     /**
-     * GET /consultants
-     * @tag Consultants
-     * @summary get all the consultants.
-     * @description return a list of consultants.
-     * @response 200 - an array with the all the consultants.
-     * @responseContent {ConsultantResponse[]} 200.application/json
-     * @responseExample {ConsultantResponse[]} 200.application/json.ConsultantResponse
+     * GET /associateds
+     * @tag Associateds
+     * @summary get all the associateds.
+     * @description return a list of associateds.
+     * @response 200 - an array with the all the associateds.
+     * @responseContent {AssociatedResponse[]} 200.application/json
+     * @responseExample {AssociatedResponse[]} 200.application/json.AssociatedResponse
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/consultants')
+      .route('/associateds')
       .get(
-        ExpressRouteAdapter.adapt<IConsultantController>(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'getAll',
         ),
@@ -49,28 +50,28 @@ export default class ConsultantRouter implements IRouter {
 
   private getById(): void {
     /**
-     * GET /consultants/{id}
-     * @tag Consultants
-     * @summary get a consultant by id.
-     * @description return a consultant object.
-     * @pathParam {int32} id id of the consultant
-     * @response 200 - an object of consultant.
-     * @responseContent {ConsultantResponse} 200.application/json
-     * @responseExample {ConsultantResponse} 200.application/json.ConsultantResponse
+     * GET /associateds/{id}
+     * @tag Associateds
+     * @summary get a associated by id.
+     * @description return a associated object.
+     * @pathParam {int32} id id of the associated
+     * @response 200 - an object of associated.
+     * @responseContent {AssociatedResponse} 200.application/json
+     * @responseExample {AssociatedResponse} 200.application/json.AssociatedResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent {BadRequestResponse} 400.application/json
+     * @responseContent {AssociatedBadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent {NotFoundResponse} 404.application/json
+     * @responseContent {AssociatedNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/consultants/:id')
+      .route('/associateds/:id')
       .get(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-        ExpressRouteAdapter.adapt<IConsultantController>(
+        ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'getById',
         ),
@@ -79,28 +80,27 @@ export default class ConsultantRouter implements IRouter {
 
   private create(): void {
     /**
-     * POST /consultants
-     * @tag Consultants
-     * @summary create a new consultant.
-     * @description return the created consultant object.
-     * @bodyContent {CreateConsultantPayload} application/json
+     * POST /associateds
+     * @tag Associateds
+     * @summary create a new associated.
+     * @description return the created associated object.
+     * @bodyContent {CreateAssociatedPayload} application/json
      * @bodyRequired
-     * @response 201 - an object of consultant.
-     * @responseContent {CreateConsultantResponse} 201.application/json
-     * @responseExample {CreateConsultantResponse} 201.application/json.CreateConsultantResponse
+     * @response 201 - an object of associated.
+     * @responseContent {CreateAssociatedResponse} 201.application/json
+     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent {ConsultantBadRequestResponse} 400.application/json
-     * @responseExample {ConsultantBadRequestResponse} 400.application/json.ConsultantBadRequestResponse
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/consultants')
+      .route('/associateds')
       .post(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-        ExpressRouteAdapter.adapt<IConsultantController>(
+        ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'create',
         ),
@@ -109,28 +109,28 @@ export default class ConsultantRouter implements IRouter {
 
   private updateById(): void {
     /**
-     * PATCH /consultants
-     * @tag Consultants
-     * @summary update a consultant.
+     * PATCH /associateds
+     * @tag Associateds
+     * @summary update a associated.
      * @description return no content when successfully update the resource.
-     * @pathParam {int32} id id of the consultant
-     * @bodyContent {UpdateConsultantPayload} application/json
+     * @pathParam {int32} id id of the associated
+     * @bodyContent {UpdateAssociatedPayload} application/json
      * @bodyRequired
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent {BadRequestResponse} 400.application/json
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent {NotFoundResponse} 404.application/json
+     * @responseContent { AssociatedNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/consultants/:id')
+      .route('/associateds/:id')
       .patch(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-        ExpressRouteAdapter.adapt<IConsultantController>(
+        ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'updateById',
         ),
@@ -139,28 +139,28 @@ export default class ConsultantRouter implements IRouter {
 
   private deleteById(): void {
     /**
-     * DELETE /consultants
-     * @tag Consultants
-     * @summary delete a consultant.
+     * DELETE /associateds
+     * @tag Associateds
+     * @summary create a associated.
      * @description return no content when successfully delete the resource.
-     * @pathParam {int32} id id of the consultant
-     * @bodyContent {ConsultantPayload} application/json
+     * @pathParam {int32} id id of the associated
+     * @bodyContent {UpdateAssociatedPayload} application/json
      * @bodyRequired
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent {BadRequestResponse} 400.application/json
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent {NotFoundResponse} 404.application/json
+     * @responseContent { AssociatedNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/consultants/:id')
+      .route('/associateds/:id')
       .delete(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-        ExpressRouteAdapter.adapt<IConsultantController>(
+        ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'deleteById',
         ),

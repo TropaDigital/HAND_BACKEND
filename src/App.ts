@@ -19,6 +19,7 @@ import {
   consultantRouter,
   userRouter,
 } from './modules';
+import { associatedRouter } from './modules/associated';
 import { loginRouter } from './modules/auth';
 import openapiConfig from './openapirc';
 import { executeSeeders } from './seeders';
@@ -115,6 +116,7 @@ export default class App {
       loanSimulationRouter,
       consultantRouter,
       userRouter,
+      associatedRouter,
     ].forEach(router => router.setupRoutes(this.application));
   }
 

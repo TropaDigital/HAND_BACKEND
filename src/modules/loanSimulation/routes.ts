@@ -43,6 +43,8 @@ export default class LoanSimulationRouter implements IRouter {
      * @response 400 - an object with the details of bad request.
      * @responseContent {GetLoanSimulationBadRequestResponse} 400.application/json
      * @responseExample {GetLoanSimulationBadRequest} 400.application/json.GetLoanSimulationBadRequest
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */

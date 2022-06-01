@@ -1,15 +1,16 @@
 import MySqlDBClient from '../../../infra/mySql';
-import { AuthController } from '../controller';
+import { AssociatedController } from '../controller';
 import * as factory from '../factories';
 
 jest.mock('../../../adapters/joi/JoiAdapter');
 jest.mock('../../../infra/mySql');
 jest.mock('../controller');
+jest.mock('../repository');
 jest.mock('../schemas');
 jest.mock('../service');
 
 MySqlDBClient.getInstance = jest.fn().mockReturnValue({
-  getPrismaClientInstance: jest.fn().mockReturnValue({ auth: {} }),
+  getPrismaClientInstance: jest.fn().mockReturnValue({ associated: {} }),
 });
 
 const makeSut = () => {
@@ -18,12 +19,12 @@ const makeSut = () => {
   return { sut };
 };
 
-describe(AuthController.name, () => {
-  it('Should return a LoginController instance', () => {
+describe('AssociatedControllerFactory', () => {
+  it('Should return a AssociatedController instance', () => {
     const { sut } = makeSut();
 
-    const result = sut.createAuthController();
+    const result = sut.createAssociatedController();
 
-    expect(result).toBeInstanceOf(AuthController);
+    expect(result).toBeInstanceOf(AssociatedController);
   });
 });

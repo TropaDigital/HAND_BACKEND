@@ -22,10 +22,10 @@ module.exports = {
   coverageDirectory: 'coverage/functional',
   coverageThreshold: {
     global: {
-      branches: 85,
-      functions: 95,
-      lines: 92,
-      statements: 95,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
     },
   },
   reporters: [

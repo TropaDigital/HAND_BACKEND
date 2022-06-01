@@ -126,10 +126,10 @@ describe(AssociatedController.name, () => {
 
       await sut.create(httpRequest);
 
-      expect(validateSchemaSpy).toBeCalledWith(
-        'CreateAssociated',
-        makeFakeCreateAssociatedInput(),
-      );
+      expect(validateSchemaSpy).toBeCalledWith('CreateAssociated', {
+        ...makeFakeCreateAssociatedInput(),
+        createdBy: undefined,
+      });
     });
 
     it('should call service with validation return', async () => {

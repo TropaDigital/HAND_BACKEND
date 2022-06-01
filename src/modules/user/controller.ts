@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
 import { IValidator } from '../../interfaces/validation/IValidator';
-import { IUserController, IUserService, ResponseUser } from './interfaces';
+import { IUserController, IUserService, IResponseUser } from './interfaces';
 import * as schemas from './schemas';
 
 export class UserController implements IUserController {
@@ -12,7 +12,7 @@ export class UserController implements IUserController {
     private readonly validator: IValidator<typeof schemas>,
   ) {}
 
-  public async getAll(): Promise<IApiHttpResponse<ResponseUser[]>> {
+  public async getAll(): Promise<IApiHttpResponse<IResponseUser[]>> {
     const result = await this.userService.getAll();
 
     return { statusCodeAsString: 'OK', body: result };
@@ -20,7 +20,7 @@ export class UserController implements IUserController {
 
   public async getByUserName(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<ResponseUser | null>> {
+  ): Promise<IApiHttpResponse<IResponseUser | null>> {
     const { userName } = this.validator.validateSchema<{ userName: string }>(
       'GetUserByUserName',
       httpRequest.params as { userName: string },
@@ -32,7 +32,7 @@ export class UserController implements IUserController {
 
   public async create(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<ResponseUser>> {
+  ): Promise<IApiHttpResponse<IResponseUser>> {
     const user = this.validator.validateSchema<Prisma.UserCreateInput>(
       'CreateUser',
       httpRequest.body,

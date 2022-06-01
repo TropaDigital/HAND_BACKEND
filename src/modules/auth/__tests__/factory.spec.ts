@@ -22,7 +22,7 @@ describe(AuthController.name, () => {
   it('Should return a LoginController instance', () => {
     const { sut } = makeSut();
 
-    const result = sut.createLoginController();
+    const result = sut.createAuthController();
 
     expect(result).toBeInstanceOf(AuthController);
   });

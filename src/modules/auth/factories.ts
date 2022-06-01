@@ -42,7 +42,7 @@ export const createUserService = (): IUserService => {
   return result;
 };
 
-export const createLoginController = (): AuthController => {
+export const createAuthController = (): AuthController => {
   const authService = createAuthService();
   const validator = createValidator();
   const userService = createUserService();

@@ -2,9 +2,10 @@ import { User, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 
-export type ResponseUser = Omit<User, 'password'>;
+export interface IResponseUser extends Omit<User, 'password'> {}
+
 export interface IUserRepository {
-  create(payload: Prisma.UserCreateInput): Promise<ResponseUser>;
+  create(payload: Prisma.UserCreateInput): Promise<IResponseUser>;
 
   updateById(id: number, payload: Prisma.UserUpdateInput): Promise<void>;
 
@@ -20,11 +21,11 @@ export interface IUserRepository {
 export interface IUserController {
   getAll(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<ResponseUser[]>>;
+  ): Promise<IApiHttpResponse<IResponseUser[]>>;
 
   getByUserName(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<ResponseUser | null>>;
+  ): Promise<IApiHttpResponse<IResponseUser | null>>;
 
   create(
     httpRequest: IApiHttpRequest,
@@ -36,11 +37,11 @@ export interface IUserController {
 }
 
 export interface IUserService {
-  getAll(): Promise<ResponseUser[]>;
+  getAll(): Promise<IResponseUser[]>;
 
-  getByUserName(userName: string): Promise<ResponseUser | null>;
+  getByUserName(userName: string): Promise<IResponseUser | null>;
 
-  create(payload: Prisma.UserCreateInput): Promise<ResponseUser>;
+  create(payload: Prisma.UserCreateInput): Promise<IResponseUser>;
 
   updateById(id: number, payload: Prisma.UserUpdateInput): Promise<void>;
 

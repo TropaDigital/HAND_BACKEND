@@ -1,9 +1,17 @@
 import { ConsultantService } from '../../../src/modules/consultant/service';
-import { makeInternalErrorResponse } from '../../helpers';
-import { populateDatabase, makeFakeConsultant } from './helpers/testHelper';
+import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { makeInternalErrorResponse } from '../helpers';
+import { populateDatabase as populateUsersDatabase } from '../users/helpers';
+import { populateDatabase, makeFakeConsultant } from './helpers';
 
 describe('GET /consultants - Get all consultants', () => {
+  const token = new AuthenticationService().generateToken({
+    sub: 1,
+    role: 'VALID_ROLE',
+  });
+
   beforeAll(async () => {
+    await populateUsersDatabase();
     await global.prismaClient.consultant.deleteMany();
     await populateDatabase();
   });
@@ -13,7 +21,9 @@ describe('GET /consultants - Get all consultants', () => {
   });
 
   it('Should return 200 and all consultants', async () => {
-    const response = await global.testRequest.get('/consultants');
+    const response = await global.testRequest
+      .get('/consultants')
+      .set('x-access-token', token);
 
     expect(response.body.data).toEqual([
       expect.objectContaining(makeFakeConsultant({ name: 'João' })),
@@ -25,7 +35,9 @@ describe('GET /consultants - Get all consultants', () => {
   it('Should return 200 and empty array when there is no consultant', async () => {
     await global.prismaClient.consultant.deleteMany();
 
-    const response = await global.testRequest.get('/consultants');
+    const response = await global.testRequest
+      .get('/consultants')
+      .set('x-access-token', token);
 
     expect(response.body.data).toEqual([]);
     expect(response.status).toBe(200);
@@ -36,7 +48,9 @@ describe('GET /consultants - Get all consultants', () => {
       .spyOn(ConsultantService.prototype, 'getAll')
       .mockRejectedValueOnce(new Error('getAll unexpected error'));
 
-    const response = await global.testRequest.get(`/consultants`);
+    const response = await global.testRequest
+      .get(`/consultants`)
+      .set('x-access-token', token);
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

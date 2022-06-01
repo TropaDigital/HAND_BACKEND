@@ -1,13 +1,21 @@
 import { ConsultantService } from '../../../src/modules/consultant/service';
+import { AuthenticationService } from '../../../src/shared/auth/auth';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
-} from '../../helpers';
-import { populateDatabase } from './helpers/testHelper';
+} from '../helpers';
+import { populateDatabase as populateUsersDatabase } from '../users/helpers';
+import { populateDatabase } from './helpers';
 
 describe('PATCH /consultants/{id} - Update consultant by id', () => {
+  const token = new AuthenticationService().generateToken({
+    sub: 1,
+    role: 'VALID_ROLE',
+  });
+
   beforeAll(async () => {
+    await populateUsersDatabase();
     await global.prismaClient.consultant.deleteMany();
     await populateDatabase();
   });
@@ -19,13 +27,16 @@ describe('PATCH /consultants/{id} - Update consultant by id', () => {
   it('Should return 204 with updated', async () => {
     const id = 1;
 
-    const response = await global.testRequest.patch(`/consultants/${id}`).send({
-      name: 'Vinicius',
-      city: 'Fortaleza',
-      taxId: '784541231',
-      state: 'Ceará',
-      createdBy: 'Pedro',
-    });
+    const response = await global.testRequest
+      .patch(`/consultants/${id}`)
+      .set('x-access-token', token)
+      .send({
+        name: 'Vinicius',
+        city: 'Fortaleza',
+        taxId: '784541231',
+        state: 'Ceará',
+        createdBy: 'Pedro',
+      });
 
     expect(response.body).toEqual({});
     expect(response.status).toBe(204);
@@ -33,13 +44,16 @@ describe('PATCH /consultants/{id} - Update consultant by id', () => {
 
   it('Should return 404 when consultant does not exists', async () => {
     const id = 10;
-    const response = await global.testRequest.patch(`/consultants/${id}`).send({
-      name: 'Vinicius',
-      city: 'Fortaleza',
-      taxId: '784541231',
-      state: 'Ceará',
-      createdBy: 'Pedro',
-    });
+    const response = await global.testRequest
+      .patch(`/consultants/${id}`)
+      .set('x-access-token', token)
+      .send({
+        name: 'Vinicius',
+        city: 'Fortaleza',
+        taxId: '784541231',
+        state: 'Ceará',
+        createdBy: 'Pedro',
+      });
     expect(response.body).toEqual(
       makeNotFoundResponse('consultant not found with provided id'),
     );
@@ -48,14 +62,17 @@ describe('PATCH /consultants/{id} - Update consultant by id', () => {
 
   it('Should return 400 when receive invalid params', async () => {
     const id = 0;
-    const response = await global.testRequest.patch(`/consultants/${id}`).send({
-      name: 1,
-      taxId: 1,
-      city: 1,
-      state: 1,
-      commission: 'dois',
-      createdBy: 1,
-    });
+    const response = await global.testRequest
+      .patch(`/consultants/${id}`)
+      .set('x-access-token', token)
+      .send({
+        name: 1,
+        taxId: 1,
+        city: 1,
+        state: 1,
+        commission: 'dois',
+        createdBy: 1,
+      });
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
@@ -101,9 +118,12 @@ describe('PATCH /consultants/{id} - Update consultant by id', () => {
   it('Should return 204 when receive just one param', async () => {
     const id = 1;
 
-    const response = await global.testRequest.patch(`/consultants/${id}`).send({
-      name: 'João',
-    });
+    const response = await global.testRequest
+      .patch(`/consultants/${id}`)
+      .set('x-access-token', token)
+      .send({
+        name: 'João',
+      });
     expect(response.body).toEqual({});
     expect(response.status).toBe(204);
   });
@@ -114,9 +134,12 @@ describe('PATCH /consultants/{id} - Update consultant by id', () => {
       .spyOn(ConsultantService.prototype, 'updateById')
       .mockRejectedValueOnce(new Error('updateById unexpected error'));
 
-    const response = await global.testRequest.patch(`/consultants/${id}`).send({
-      name: 'João',
-    });
+    const response = await global.testRequest
+      .patch(`/consultants/${id}`)
+      .set('x-access-token', token)
+      .send({
+        name: 'João',
+      });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

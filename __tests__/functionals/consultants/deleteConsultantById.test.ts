@@ -1,13 +1,21 @@
 import { ConsultantService } from '../../../src/modules/consultant/service';
+import { AuthenticationService } from '../../../src/shared/auth/auth';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
-} from '../../helpers';
-import { populateDatabase } from './helpers/testHelper';
+} from '../helpers';
+import { populateDatabase as populateUsersDatabase } from '../users/helpers';
+import { populateDatabase } from './helpers';
 
 describe('DELETE /consultants/{id} - Delete consultant by id', () => {
+  const token = new AuthenticationService().generateToken({
+    sub: 1,
+    role: 'VALID_ROLE',
+  });
+
   beforeAll(async () => {
+    await populateUsersDatabase();
     await global.prismaClient.consultant.deleteMany();
     await populateDatabase();
   });
@@ -19,7 +27,9 @@ describe('DELETE /consultants/{id} - Delete consultant by id', () => {
   it('Should return 204 when the consultant is deleted', async () => {
     const id = 1;
 
-    const response = await global.testRequest.delete(`/consultants/${id}`);
+    const response = await global.testRequest
+      .delete(`/consultants/${id}`)
+      .set('x-access-token', token);
 
     expect(response.body).toEqual({});
     expect(response.status).toBe(204);
@@ -27,7 +37,9 @@ describe('DELETE /consultants/{id} - Delete consultant by id', () => {
 
   it('Should return 404 when consultant does not exists', async () => {
     const id = 10;
-    const response = await global.testRequest.delete(`/consultants/${id}`);
+    const response = await global.testRequest
+      .delete(`/consultants/${id}`)
+      .set('x-access-token', token);
 
     expect(response.body).toEqual(
       makeNotFoundResponse('consultant not found with provided id'),
@@ -37,7 +49,9 @@ describe('DELETE /consultants/{id} - Delete consultant by id', () => {
 
   it('Should return 400 when receive invalid params', async () => {
     const id = 0;
-    const response = await global.testRequest.delete(`/consultants/${id}`);
+    const response = await global.testRequest
+      .delete(`/consultants/${id}`)
+      .set('x-access-token', token);
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
@@ -56,7 +70,9 @@ describe('DELETE /consultants/{id} - Delete consultant by id', () => {
       .spyOn(ConsultantService.prototype, 'deleteById')
       .mockRejectedValueOnce(new Error('deleteById unexpected error'));
 
-    const response = await global.testRequest.delete(`/consultants/${id}`);
+    const response = await global.testRequest
+      .delete(`/consultants/${id}`)
+      .set('x-access-token', token);
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

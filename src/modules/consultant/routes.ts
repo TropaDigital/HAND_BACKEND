@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
+import AuthMiddleware from '../../middlewares/AuthMiddleware';
 import { createConsultantController } from './factories';
 import { IConsultantController } from './interfaces';
 
@@ -31,6 +32,8 @@ export default class ConsultantRouter implements IRouter {
      * @response 200 - an array with the all the consultants.
      * @responseContent {ConsultantResponse[]} 200.application/json
      * @responseExample {ConsultantResponse[]} 200.application/json.ConsultantResponse
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -56,6 +59,8 @@ export default class ConsultantRouter implements IRouter {
      * @responseExample {ConsultantResponse} 200.application/json.ConsultantResponse
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
@@ -64,6 +69,7 @@ export default class ConsultantRouter implements IRouter {
     this.router
       .route('/consultants/:id')
       .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
           'getById',
@@ -85,12 +91,15 @@ export default class ConsultantRouter implements IRouter {
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent {ConsultantBadRequestResponse} 400.application/json
      * @responseExample {ConsultantBadRequestResponse} 400.application/json.ConsultantBadRequestResponse
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
       .route('/consultants')
       .post(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
           'create',
@@ -110,6 +119,8 @@ export default class ConsultantRouter implements IRouter {
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
@@ -118,6 +129,7 @@ export default class ConsultantRouter implements IRouter {
     this.router
       .route('/consultants/:id')
       .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
           'updateById',
@@ -137,6 +149,8 @@ export default class ConsultantRouter implements IRouter {
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
@@ -145,6 +159,7 @@ export default class ConsultantRouter implements IRouter {
     this.router
       .route('/consultants/:id')
       .delete(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
           'deleteById',

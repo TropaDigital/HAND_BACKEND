@@ -1,5 +1,5 @@
-import { populateDatabase } from '../helpers/testHelper';
-import { makeFakeLoginParams } from './helpers/testHelper';
+import { populateDatabase } from '../users/helpers';
+import { makeFakeLoginParams } from './helpers';
 
 describe('GET /auth/token - Authenticate User', () => {
   beforeAll(async () => {
@@ -32,27 +32,35 @@ describe('GET /auth/token - Authenticate User', () => {
     expect(response.status).toBe(200);
   });
 
-  it('Should return 401 when login is incorrect', async () => {
+  it('Should return 401 when login does not exists', async () => {
     const params = makeFakeLoginParams({ login: 'invalid@mail.com' });
 
     const response = await global.testRequest.post(`/auth/token`).send(params);
 
-    expect(JSON.parse(response.text)).toEqual(
-      expect.objectContaining({
-        description: 'User does not exist in database',
-      }),
-    );
+    expect(JSON.parse(response.text)).toEqual({
+      code: 'INVALID_CREDENTIALS',
+      description: 'invalid credentials',
+      statusCode: 401,
+      statusCodeAsString: 'UNAUTHORIZED',
+      validationErrors: [],
+    });
     expect(response.status).toBe(401);
   });
 
-  it('Should return 401 when password is incorrect', async () => {
-    const params = makeFakeLoginParams({ password: 'incorrect password' });
+  it('Should return 401 when credentials are incorrect', async () => {
+    const params = makeFakeLoginParams({
+      password: 'wrong-password',
+    });
 
     const response = await global.testRequest.post(`/auth/token`).send(params);
 
-    expect(response.body).toEqual(
-      expect.objectContaining({ description: 'Invalid Password' }),
-    );
+    expect(JSON.parse(response.text)).toEqual({
+      code: 'INVALID_CREDENTIALS',
+      description: 'invalid credentials',
+      statusCode: 401,
+      statusCodeAsString: 'UNAUTHORIZED',
+      validationErrors: [],
+    });
     expect(response.status).toBe(401);
   });
 });

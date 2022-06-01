@@ -19,8 +19,10 @@ import {
   consultantRouter,
   userRouter,
 } from './modules';
+import { associatedRouter } from './modules/associated';
 import { loginRouter } from './modules/auth';
 import openapiConfig from './openapirc';
+import { executeSeeders } from './seeders';
 import swaggerDefinition from './swagger';
 
 export default class App {
@@ -101,6 +103,11 @@ export default class App {
     this.application.use(helmet());
   }
 
+  private async executeSeeders(): Promise<void> {
+    this.logger.info({ msg: 'running the seeders to populate database' });
+    await executeSeeders();
+  }
+
   private async setupRoutes(): Promise<void> {
     this.logger.info({ msg: 'setuping application routes' });
     [
@@ -109,6 +116,7 @@ export default class App {
       loanSimulationRouter,
       consultantRouter,
       userRouter,
+      associatedRouter,
     ].forEach(router => router.setupRoutes(this.application));
   }
 
@@ -172,6 +180,7 @@ export default class App {
     this.logger.info({ msg: 'initializing application' });
     this.validateEnvironmentVariables();
     await this.setupDatabases();
+    await this.executeSeeders();
     this.setupSwagger();
     this.setupSwaggerStats();
     this.setupGlobalMiddlewares();

@@ -33,6 +33,8 @@ export default class UserRouter implements IRouter {
      * @response 200 - an array with the all the users.
      * @responseContent { UserResponse[]} 200.application/json
      * @responseExample { UserResponse[]} 200.application/json.UserResponse
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -56,6 +58,8 @@ export default class UserRouter implements IRouter {
      * @responseExample { UserResponse} 200.application/json.UserResponse
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { UserBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent { UserNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
@@ -85,6 +89,8 @@ export default class UserRouter implements IRouter {
      * @responseExample {CreateUserResponse} 200.application/json.CreateUserResponse
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { UserBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -108,6 +114,8 @@ export default class UserRouter implements IRouter {
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { UserBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent { UserNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
@@ -136,6 +144,8 @@ export default class UserRouter implements IRouter {
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { UserBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent { UserNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.

@@ -17,6 +17,59 @@ model User {
   role Role
 }
 
+
+model Associated {
+  id    Int     @id @default(autoincrement())
+
+  name String
+  lastName String @map(name: "lastName")
+  affiliation String
+  gender String 
+  birthDate DateTime   @map(name: "birth_date")
+  maritalStatus String @map(name: "martial_status")
+  nationality String
+  placeOfBirth String @map(name: "place_of_birth")
+  taxId String @unique
+  registerId String @map(name: "register_id")
+  emissionState String @map(name: "emission_state")
+  issuingAgency String @map(name: "issuing_agency")
+  emissionDate DateTime @map(name: "emission_date")
+  celPhone String @map(name: "cel_phone")
+  email String
+  father String
+  mother String
+  partner String?
+
+  bank String
+  agency String
+  accountType String @map(name: "account_type")
+  accountNumber String @map(name: "account_number")
+  pixKey String @map(name: "pix_key")
+
+  addressType String @map(name: "address_type")
+  postalCode String @map(name: "postal_code")
+  street String
+  houseNumber String @map(name: "house_number")
+  complement String
+  district String
+  city String
+  state String
+
+  occupation String
+  salary String
+  paymentDay Int @map(name: "payment_day")
+  registerNumber String @map(name: "register_number")
+  contractType String @map(name: "contract_type")
+  finalDate  DateTime?  @map(name: "final_date")
+  publicAgency String @map(name: "public_agency")
+
+  createdBy    String    @map(name: "created_by") @db.VarChar(75)
+  updatedBy    String?   @map(name: "updated_by") @db.VarChar(75)
+  createdAt    DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
+  deletedAt    DateTime? @map(name: "deleted_at") @db.DateTime(0)
+}
+
 model Consultant {
   id    Int     @id @default(autoincrement())
   name  String

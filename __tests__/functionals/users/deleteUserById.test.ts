@@ -1,10 +1,11 @@
 import { UserService } from '../../../src/modules/user/service';
 import {
+  getFakeToken,
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
-} from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers/testHelper';
+} from '../helpers';
+import { populateDatabase } from './helpers';
 
 describe('DELETE /users/{id} - Delete user by id', () => {
   let token: string;

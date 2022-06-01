@@ -1,7 +1,9 @@
+import { IJwtToken } from 'src/shared/auth/interfaces';
+
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import { IValidator } from '../../interfaces/validation/IValidator';
-import { MissingInvalidParamsError, NotFoundError } from '../../shared/errors';
-import { IUserService, ResponseUser } from '../user/interfaces';
+import { NotFoundError } from '../../shared/errors';
+import { IUserService, IResponseUser } from '../user/interfaces';
 import {
   IAuthController,
   IAuthRequestParams,
@@ -19,13 +21,8 @@ export class AuthController implements IAuthController {
 
   public async me(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<ResponseUser>> {
-    const userName = httpRequest.user?.userName;
-    if (!userName) {
-      throw new MissingInvalidParamsError(
-        'User not provided in authentication',
-      );
-    }
+  ): Promise<IApiHttpResponse<IResponseUser>> {
+    const { sub: userName } = httpRequest.user as IJwtToken;
     const result = await this.userService.getByUserName(userName);
     if (!result) {
       throw new NotFoundError('User not found');

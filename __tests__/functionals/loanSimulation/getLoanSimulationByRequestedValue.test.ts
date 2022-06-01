@@ -1,9 +1,14 @@
 import { StatusCodes } from 'http-status-codes';
 
+import ErrorCodes from '../../../src/enums/ErrorCodes';
+import { MonthOfPayment } from '../../../src/enums/MonthOfPayment';
 import { IFormatedApiHttpResponse } from '../../../src/interfaces/http';
 import {
   loanSimulationOfDay15OfTheMonthWithoutTelemedicine,
   loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay,
+  loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDayCurrentMonth,
+  loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment,
+  loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentRequestedValueLowerThan1000,
   loanSimulationOfDay15OfTheMonthWithTelemedicine,
 } from '../../../src/modules/loanSimulation/__tests__/fixtures';
 import { makeLoanSimulationBasedOnRequestedValueParams } from '../../../src/modules/loanSimulation/__tests__/helpers/test-helper';
@@ -15,8 +20,8 @@ import {
   makeInvalidParamsResponse,
   makeNotFoundResponse,
   makeUnauthorizedResponse,
-} from '../../helpers';
-import { populateDatabase } from '../helpers/testHelper';
+} from '../helpers';
+import { populateDatabase } from '../users/helpers';
 
 describe('POST /loansimulations/simulate - Get an loan simulation based in the provided parameters', () => {
   const token = new AuthenticationService().generateToken({
@@ -77,6 +82,11 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
         friendlyFieldName: 'salary',
         message: '"salary" must be a number',
       },
+      {
+        fieldName: 'monthOfPayment',
+        friendlyFieldName: 'monthOfPayment',
+        message: '"monthOfPayment" is required',
+      },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
     expect(response.body).toEqual(invalidParamsResponse);
@@ -102,21 +112,53 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
       .post('/loansimulations/simulate')
       .send(makeLoanSimulationBasedOnRequestedValueParams());
 
-    const unauthorizedResponse = makeUnauthorizedResponse('token not provided');
+    const unauthorizedResponse = makeUnauthorizedResponse(
+      'token not provided',
+      ErrorCodes.AUTH_ERROR_001,
+    );
     expect(response.status).toBe(unauthorizedResponse.statusCode);
     expect(response.body).toEqual(unauthorizedResponse);
   });
 
   test.each([
     {
-      params: makeLoanSimulationBasedOnRequestedValueParams(),
+      params: makeLoanSimulationBasedOnRequestedValueParams({
+        monthOfPayment: MonthOfPayment.NEXT_MONTH,
+      }),
       expected: loanSimulationOfDay15OfTheMonthWithTelemedicine,
     },
     {
       params: makeLoanSimulationBasedOnRequestedValueParams({
         joinedTelemedicine: false,
+        monthOfPayment: MonthOfPayment.NEXT_MONTH,
       }),
       expected: loanSimulationOfDay15OfTheMonthWithoutTelemedicine,
+    },
+    {
+      params: makeLoanSimulationBasedOnRequestedValueParams({
+        joinedTelemedicine: false,
+        monthOfPayment: MonthOfPayment.LAST_MONTH,
+      }),
+      expected:
+        loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment,
+    },
+    {
+      params: makeLoanSimulationBasedOnRequestedValueParams({
+        joinedTelemedicine: false,
+        requestedValue: 800,
+        monthOfPayment: MonthOfPayment.LAST_MONTH,
+      }),
+      expected:
+        loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentRequestedValueLowerThan1000,
+    },
+    {
+      params: makeLoanSimulationBasedOnRequestedValueParams({
+        joinedTelemedicine: false,
+        salaryReceiptDate: undefined,
+        monthOfPayment: MonthOfPayment.NEXT_MONTH,
+      }),
+      expected:
+        loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay,
     },
     {
       params: makeLoanSimulationBasedOnRequestedValueParams({
@@ -124,7 +166,7 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
         salaryReceiptDate: undefined,
       }),
       expected:
-        loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay,
+        loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDayCurrentMonth,
     },
   ])(
     'should return the details of loan simulation when provide $params as params',

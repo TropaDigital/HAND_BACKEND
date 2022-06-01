@@ -1,6 +1,7 @@
 import { startOfDay } from 'date-fns';
 import { StatusCodes } from 'http-status-codes';
 
+import { MonthOfPayment } from '../../../../enums/MonthOfPayment';
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
 import {
@@ -50,5 +51,6 @@ export const makeLoanSimulationBasedOnRequestedValueParams = (
   requestedValue: 1000,
   numberOfInstallments: 8,
   joinedTelemedicine: true,
+  monthOfPayment: MonthOfPayment.CURRENT_MONTH,
   ...payload,
 });

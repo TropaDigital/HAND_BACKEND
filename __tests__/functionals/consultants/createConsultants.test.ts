@@ -1,13 +1,21 @@
 import { ConsultantService } from '../../../src/modules/consultant/service';
+import { AuthenticationService } from '../../../src/shared/auth/auth';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
-} from '../../helpers';
-import { makeFakeCreateConsultantParams } from './helpers/testHelper';
+} from '../helpers';
+import { populateDatabase } from '../users/helpers';
+import { makeFakeCreateConsultantParams } from './helpers';
 
 describe('POST /consultants - Create new consultant', () => {
+  const token = new AuthenticationService().generateToken({
+    sub: 1,
+    role: 'VALID_ROLE',
+  });
+
   beforeAll(async () => {
     await global.prismaClient.consultant.deleteMany();
+    await populateDatabase();
   });
 
   afterAll(async () => {
@@ -17,7 +25,10 @@ describe('POST /consultants - Create new consultant', () => {
   it('Should return 201 with created consultant', async () => {
     const params = makeFakeCreateConsultantParams();
 
-    const response = await global.testRequest.post(`/consultants`).send(params);
+    const response = await global.testRequest
+      .post(`/consultants`)
+      .set('x-access-token', token)
+      .send(params);
 
     expect(response.body.data).toEqual(expect.objectContaining(params));
     expect(response.status).toBe(201);
@@ -30,7 +41,10 @@ describe('POST /consultants - Create new consultant', () => {
       taxId: '784541231',
     };
 
-    const response = await global.testRequest.post(`/consultants`).send(params);
+    const response = await global.testRequest
+      .post(`/consultants`)
+      .set('x-access-token', token)
+      .send(params);
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
         fieldName: 'state',
@@ -52,7 +66,10 @@ describe('POST /consultants - Create new consultant', () => {
     jest
       .spyOn(ConsultantService.prototype, 'create')
       .mockRejectedValueOnce(new Error('create unexpected error'));
-    const response = await global.testRequest.post(`/consultants`).send(params);
+    const response = await global.testRequest
+      .post(`/consultants`)
+      .set('x-access-token', token)
+      .send(params);
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

@@ -1,3 +1,4 @@
+import ErrorCodes from '../../enums/ErrorCodes';
 import { IAuthenticationService } from '../../shared/auth/interfaces';
 import UnauthorizedError from '../../shared/errors/UnauthorizedError';
 import { IUserRepository } from '../user/interfaces';
@@ -14,18 +15,23 @@ export class AuthService implements IAuthService {
     const user = await this.userRepository.findByUserName(userName);
 
     if (!user) {
-      throw new UnauthorizedError('User does not exist in database');
+      throw new UnauthorizedError(
+        'invalid credentials',
+        ErrorCodes.AUTH_ERROR_002,
+      );
     }
 
     const { password: hashedPassword, ...responseUser } = user;
-
     const isPasswordValid = await this.authService.compareHash(
       password,
       hashedPassword,
     );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedError('Invalid Password');
+      throw new UnauthorizedError(
+        'invalid credentials',
+        ErrorCodes.AUTH_ERROR_002,
+      );
     }
 
     const accessToken = await this.authService.generateToken({

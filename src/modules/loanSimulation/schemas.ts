@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { loanConfig } from './consts';
 import { ILoanSimulationBasedOnRequestedValueParams } from './interfaces';
 
@@ -14,4 +15,7 @@ export const GetLoanSimulationByRequestedValue =
       .required(),
     requestedValue: Joi.number().min(100).required(),
     salary: Joi.number().min(100).required(),
+    monthOfPayment: Joi.string()
+      .valid(...Object.values(MonthOfPayment))
+      .required(),
   });

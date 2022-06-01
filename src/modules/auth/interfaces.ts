@@ -1,6 +1,6 @@
 import { IApiHttpRequest, IApiHttpResponse } from 'src/interfaces/http';
 
-import { ResponseUser } from '../user/interfaces';
+import { IResponseUser } from '../user/interfaces';
 
 export interface IAuthRequestParams {
   login: string;
@@ -8,7 +8,7 @@ export interface IAuthRequestParams {
 }
 
 export interface IAuthResult {
-  user: ResponseUser;
+  user: IResponseUser;
   token: string;
 }
 
@@ -17,7 +17,7 @@ export interface IAuthService {
 }
 
 export interface IAuthController {
-  me(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<ResponseUser>>;
+  me(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<IResponseUser>>;
 
   login: (
     _request: IApiHttpRequest<IAuthRequestParams>,

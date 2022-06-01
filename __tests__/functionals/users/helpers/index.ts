@@ -1,7 +1,16 @@
-import { Prisma, User } from '@prisma/client';
+import { User, Prisma } from '@prisma/client';
 
-import { createAuthService } from '../../../src/modules/auth/factories';
-import { makeFakeLoginParams } from '../auth/helpers/testHelper';
+export const makeFakeCreateUserParams = (
+  payload?: Partial<User>,
+): Prisma.UserCreateInput => ({
+  email: 'any@mail.com',
+  userName: 'any_user_name',
+  name: 'Mateus',
+  password: 'any_password',
+  status: 'ACTIVE',
+  role: 'USER',
+  ...payload,
+});
 
 export const makeFakeUser = (
   payload?: Partial<User>,
@@ -37,13 +46,4 @@ export const populateDatabase = async (): Promise<void> => {
       }),
     ],
   });
-};
-
-export const getFakeToken = async (): Promise<string> => {
-  const params = makeFakeLoginParams();
-  const authService = createAuthService();
-  const authResult = await authService.authenticate(params);
-  const result = authResult.token;
-
-  return result;
 };

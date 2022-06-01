@@ -1,10 +1,10 @@
 import { UserService } from '../../../src/modules/user/service';
 import {
+  getFakeToken,
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
-} from '../../helpers';
-import { getFakeToken, populateDatabase } from '../helpers/testHelper';
-import { makeFakeCreateUserParams } from './helpers/testHelper';
+} from '../helpers';
+import { makeFakeCreateUserParams, populateDatabase } from './helpers';
 
 describe('POST /users - Create new user', () => {
   let token: string;

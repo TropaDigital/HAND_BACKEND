@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
+import AuthMiddleware from '../../middlewares/AuthMiddleware';
 import { createAssociatedController } from './factories';
 import { IAssociatedController } from './interfaces';
 
@@ -29,14 +30,17 @@ export default class AssociatedRouter implements IRouter {
      * @summary get all the associateds.
      * @description return a list of associateds.
      * @response 200 - an array with the all the associateds.
-     * @responseContent { AssociatedResponse[]} 200.application/json
-     * @responseExample { AssociatedResponse[]} 200.application/json.AssociatedResponse
+     * @responseContent {AssociatedResponse[]} 200.application/json
+     * @responseExample {AssociatedResponse[]} 200.application/json.AssociatedResponse
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
       .route('/associateds')
       .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'getAll',
@@ -52,18 +56,21 @@ export default class AssociatedRouter implements IRouter {
      * @description return a associated object.
      * @pathParam {int32} id id of the associated
      * @response 200 - an object of associated.
-     * @responseContent { AssociatedResponse} 200.application/json
-     * @responseExample { AssociatedResponse} 200.application/json.AssociatedResponse
+     * @responseContent {AssociatedResponse} 200.application/json
+     * @responseExample {AssociatedResponse} 200.application/json.AssociatedResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @responseContent {AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { AssociatedNotFoundResponse} 404.application/json
+     * @responseContent {AssociatedNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
       .route('/associateds/:id')
       .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'getById',
@@ -84,12 +91,15 @@ export default class AssociatedRouter implements IRouter {
      * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
       .route('/associateds')
       .post(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'create',
@@ -109,6 +119,8 @@ export default class AssociatedRouter implements IRouter {
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent { AssociatedNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
@@ -117,6 +129,7 @@ export default class AssociatedRouter implements IRouter {
     this.router
       .route('/associateds/:id')
       .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'updateById',
@@ -136,6 +149,8 @@ export default class AssociatedRouter implements IRouter {
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
      * @responseContent { AssociatedNotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
@@ -144,6 +159,7 @@ export default class AssociatedRouter implements IRouter {
     this.router
       .route('/associateds/:id')
       .delete(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
           this.controller,
           'deleteById',

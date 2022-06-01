@@ -36,7 +36,7 @@ export class AssociatedController implements IAssociatedController {
     const associated =
       this.validator.validateSchema<Prisma.AssociatedCreateInput>(
         'CreateAssociated',
-        httpRequest.body,
+        { ...httpRequest.body, createdBy: httpRequest.user?.sub },
       );
     const result = await this.associatedService.create(associated);
 

@@ -6,8 +6,11 @@ import { IAssociatedRepository, IAssociatedService } from './interfaces';
 export class AssociatedService implements IAssociatedService {
   constructor(private readonly associatedRepository: IAssociatedRepository) {}
 
-  public async getAll(): Promise<Associated[]> {
-    const result = await this.associatedRepository.findAll();
+  public async getAll(
+    payload?: Prisma.AssociatedWhereInput,
+  ): Promise<Associated[]> {
+    const result = await this.associatedRepository.findAll(payload);
+
     return result;
   }
 

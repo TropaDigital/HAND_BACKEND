@@ -12,8 +12,15 @@ export class AssociatedController implements IAssociatedController {
     private readonly validator: IValidator<typeof schemas>,
   ) {}
 
-  public async getAll(): Promise<IApiHttpResponse<Associated[]>> {
-    const result = await this.associatedService.getAll();
+  public async getAll(
+    httpRequest: IApiHttpRequest<
+      unknown,
+      unknown,
+      unknown,
+      Prisma.AssociatedWhereInput
+    >,
+  ): Promise<IApiHttpResponse<Associated[]>> {
+    const result = await this.associatedService.getAll(httpRequest.query);
 
     return { statusCodeAsString: 'OK', body: result };
   }

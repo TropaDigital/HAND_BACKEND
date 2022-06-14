@@ -9,8 +9,12 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 export class AssociatedRepository implements IAssociatedRepository {
   constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
 
-  public async findAll(): Promise<Associated[]> {
-    const result = await this.prismaRepository.findMany();
+  public async findAll(
+    payload?: Prisma.AssociatedWhereInput,
+  ): Promise<Associated[]> {
+    const result = await this.prismaRepository.findMany({
+      where: { ...payload },
+    });
     return result;
   }
 

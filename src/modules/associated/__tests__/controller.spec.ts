@@ -23,16 +23,18 @@ describe(AssociatedController.name, () => {
     it('should call service with validation return', async () => {
       const { sut, associatedServiceStub } = makeSut();
       const getAllSpy = associatedServiceStub.getAll;
+      const fakeApiHttpRequest = makeFakeApiHttpRequest({ query: { id: '2' } });
 
-      await sut.getAll();
+      await sut.getAll(fakeApiHttpRequest);
 
-      expect(getAllSpy).toBeCalledWith();
+      expect(getAllSpy).toBeCalledWith({ id: '2' });
     });
 
     it('should return service response', async () => {
       const { sut } = makeSut();
+      const fakeApiHttpRequest = makeFakeApiHttpRequest({ query: { id: '2' } });
 
-      const result = await sut.getAll();
+      const result = await sut.getAll(fakeApiHttpRequest);
 
       expect(result).toEqual(
         makeFakeApiHttpResponse('OK', makeFakeAssociatedList()),
@@ -41,11 +43,12 @@ describe(AssociatedController.name, () => {
 
     it('should throw when service throws', async () => {
       const { sut, associatedServiceStub } = makeSut();
+      const fakeApiHttpRequest = makeFakeApiHttpRequest({ query: { id: '2' } });
       associatedServiceStub.getAll.mockRejectedValueOnce(
         new Error('any_get_all_associateds_error'),
       );
 
-      const promise = sut.getAll();
+      const promise = sut.getAll(fakeApiHttpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_get_all_associateds_error'),

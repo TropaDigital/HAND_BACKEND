@@ -21,6 +21,7 @@ import {
 } from './modules';
 import { associatedRouter } from './modules/associated';
 import { loginRouter } from './modules/auth';
+import { benefitRouter } from './modules/benefit';
 import openapiConfig from './openapirc';
 import { executeSeeders } from './seeders';
 import swaggerDefinition from './swagger';
@@ -117,6 +118,7 @@ export default class App {
       consultantRouter,
       userRouter,
       associatedRouter,
+      benefitRouter,
     ].forEach(router => router.setupRoutes(this.application));
   }
 

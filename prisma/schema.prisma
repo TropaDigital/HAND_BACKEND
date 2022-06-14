@@ -84,6 +84,25 @@ model Consultant {
   deletedAt    DateTime? @map(name: "deleted_at") @db.DateTime(0)
 }
 
+model Benefit {
+  id    Int     @id @default(autoincrement())  
+  associated String
+  association String
+  bank String
+  publicAgency String @map(name: "public_agency")
+  contractModel String @map(name: "contract_model")
+  installmentNumber Int @map(name: "installment_number")
+  initialDate DateTime  @map(name: "initial_date")
+  financialAssistanceValue Int @map(name: "financial_assistance_value")
+  installmentValue Int @map(name: "installment_value")
+  consultant String
+  createdBy    String    @map(name: "created_by") @db.VarChar(75)
+  updatedBy    String?   @map(name: "updated_by") @db.VarChar(75)
+  createdAt    DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
+  deletedAt    DateTime? @map(name: "deleted_at") @db.DateTime(0)
+}
+
 enum Role {
   USER
   ADMIN

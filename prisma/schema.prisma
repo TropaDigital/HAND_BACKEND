@@ -34,7 +34,7 @@ model Associated {
   emissionState String @map(name: "emission_state")
   issuingAgency String @map(name: "issuing_agency")
   emissionDate DateTime @map(name: "emission_date")
-  celPhone String @map(name: "cel_phone")
+  cellPhone String @map(name: "cel_phone")
   email String
   father String
   mother String

@@ -115,7 +115,7 @@ describe('POST /associateds - Create new associated', () => {
         message: '"data-emissao" is required',
       },
       {
-        fieldName: 'celPhone',
+        fieldName: 'cellPhone',
         friendlyFieldName: 'celular',
         message: '"celular" is required',
       },

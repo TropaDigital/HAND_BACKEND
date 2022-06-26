@@ -17,13 +17,22 @@ const makeSut = () => {
 
 describe(BenefitService.name, () => {
   describe(`When ${BenefitService.prototype.getAll.name} is called`, () => {
-    it('should call repository with right params', async () => {
+    it('should call repository with right params when no params is provided', async () => {
       const { sut, benefitRepository } = makeSut();
       const findAllSpy = benefitRepository.findAll;
 
       await sut.getAll();
 
-      expect(findAllSpy).toBeCalledWith();
+      expect(findAllSpy).toBeCalledWith(undefined);
+    });
+
+    it('should call repository with right params', async () => {
+      const { sut, benefitRepository } = makeSut();
+      const findAllSpy = benefitRepository.findAll;
+
+      await sut.getAll({ id: 1 });
+
+      expect(findAllSpy).toBeCalledWith({ id: 1 });
     });
 
     it('should return repository result', async () => {

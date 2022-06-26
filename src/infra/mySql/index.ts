@@ -13,11 +13,16 @@ export default class MySqlDBClient implements IDatabaseConnection {
   ) {}
 
   public static getInstance(
-    loggerManager: ILogger = LoggerFactory.create(),
-    prismaClient: PrismaClient = new PrismaClient(),
+    loggerManager?: ILogger,
+    prismaClient?: PrismaClient,
   ): MySqlDBClient {
     if (!MySqlDBClient.instance) {
-      MySqlDBClient.instance = new MySqlDBClient(loggerManager, prismaClient);
+      const prismaInstance = prismaClient || new PrismaClient();
+      const loggerInstance = loggerManager || LoggerFactory.create();
+      MySqlDBClient.instance = new MySqlDBClient(
+        loggerInstance,
+        prismaInstance,
+      );
     }
 
     return MySqlDBClient.instance;

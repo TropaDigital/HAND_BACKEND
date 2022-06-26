@@ -6,8 +6,10 @@ import { IBenefitRepository, IBenefitService } from './interfaces';
 export class BenefitService implements IBenefitService {
   constructor(private readonly benefitRepository: IBenefitRepository) {}
 
-  public async getAll(): Promise<Benefit[]> {
-    const result = await this.benefitRepository.findAll();
+  public async getAll(
+    payload?: Prisma.AssociatedWhereInput,
+  ): Promise<Benefit[]> {
+    const result = await this.benefitRepository.findAll(payload);
     return result;
   }
 

@@ -14,13 +14,22 @@ const makeSut = () => {
 
 describe(AssociatedRepository.name, () => {
   describe(`When ${AssociatedRepository.prototype.findAll.name} is called`, () => {
+    it('should call prisma with right params when no params is provided', async () => {
+      const { sut, prismaRepository } = makeSut();
+      const findManySpy = prismaRepository.findMany;
+
+      await sut.findAll({});
+
+      expect(findManySpy).toBeCalledWith({ where: {} });
+    });
+
     it('should call prisma with right params', async () => {
       const { sut, prismaRepository } = makeSut();
       const findManySpy = prismaRepository.findMany;
 
-      await sut.findAll();
+      await sut.findAll({ id: 1 });
 
-      expect(findManySpy).toBeCalledWith();
+      expect(findManySpy).toBeCalledWith({ where: { id: 1 } });
     });
 
     it('should return prisma result', async () => {

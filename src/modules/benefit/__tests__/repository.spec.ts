@@ -20,7 +20,7 @@ describe(BenefitRepository.name, () => {
 
       await sut.findAll();
 
-      expect(findManySpy).toBeCalledWith();
+      expect(findManySpy).toBeCalledWith({ where: {} });
     });
 
     it('should return prisma result', async () => {

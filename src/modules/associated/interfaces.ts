@@ -9,13 +9,20 @@ export interface IAssociatedRepository {
 
   deleteById(id: number): Promise<void>;
 
-  findAll(): Promise<Associated[]>;
+  findAll(payload?: Prisma.AssociatedWhereInput): Promise<Associated[]>;
 
   findById(id: number): Promise<Associated | null>;
 }
 
 export interface IAssociatedController {
-  getAll(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Associated[]>>;
+  getAll(
+    httpRequest: IApiHttpRequest<
+      unknown,
+      unknown,
+      unknown,
+      Prisma.AssociatedWhereInput
+    >,
+  ): Promise<IApiHttpResponse<Associated[]>>;
 
   getById(
     httpRequest: IApiHttpRequest,
@@ -29,7 +36,7 @@ export interface IAssociatedController {
 }
 
 export interface IAssociatedService {
-  getAll(): Promise<Associated[]>;
+  getAll(payload?: Prisma.AssociatedWhereInput): Promise<Associated[]>;
 
   getById(id: number): Promise<Associated | null>;
 

@@ -9,8 +9,12 @@ export type PrismaBenefitRepository = Prisma.BenefitDelegate<
 export class BenefitRepository implements IBenefitRepository {
   constructor(private readonly prismaRepository: PrismaBenefitRepository) {}
 
-  public async findAll(): Promise<Benefit[]> {
-    const result = await this.prismaRepository.findMany();
+  public async findAll(
+    payload?: Prisma.AssociatedWhereInput,
+  ): Promise<Benefit[]> {
+    const result = await this.prismaRepository.findMany({
+      where: { ...payload },
+    });
     return result;
   }
 

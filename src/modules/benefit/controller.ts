@@ -12,8 +12,15 @@ export class BenefitController implements IBenefitController {
     private readonly validator: IValidator<typeof schemas>,
   ) {}
 
-  public async getAll(): Promise<IApiHttpResponse<Benefit[]>> {
-    const result = await this.benefitService.getAll();
+  public async getAll(
+    httpRequest: IApiHttpRequest<
+      unknown,
+      unknown,
+      unknown,
+      Prisma.AssociatedWhereInput
+    >,
+  ): Promise<IApiHttpResponse<Benefit[]>> {
+    const result = await this.benefitService.getAll(httpRequest.query);
 
     return { statusCodeAsString: 'OK', body: result };
   }

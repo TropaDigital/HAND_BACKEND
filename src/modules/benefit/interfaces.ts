@@ -9,7 +9,7 @@ export interface IBenefitRepository {
 
   deleteById(id: number): Promise<void>;
 
-  findAll(): Promise<Benefit[]>;
+  findAll(payload?: Prisma.AssociatedWhereInput): Promise<Benefit[]>;
 
   findById(id: number): Promise<Benefit | null>;
 }
@@ -29,7 +29,7 @@ export interface IBenefitController {
 }
 
 export interface IBenefitService {
-  getAll(): Promise<Benefit[]>;
+  getAll(payload?: Prisma.AssociatedWhereInput): Promise<Benefit[]>;
 
   getById(id: number): Promise<Benefit | null>;
 

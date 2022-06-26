@@ -23,7 +23,7 @@ describe(AssociatedService.name, () => {
 
       await sut.getAll();
 
-      expect(findAllSpy).toBeCalledWith();
+      expect(findAllSpy).toBeCalledWith(undefined);
     });
 
     it('should return repository result', async () => {

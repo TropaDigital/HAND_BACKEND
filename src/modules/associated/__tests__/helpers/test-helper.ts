@@ -100,11 +100,13 @@ export const makeFakeApiHttpRequest = ({
   body,
   params,
   headers,
+  query,
 }: {
   body?: unknown;
   params?: { [key: string]: any };
   headers?: { [key: string]: string | string[] | undefined };
-}): jest.Mocked<IApiHttpRequest> => ({ body, params, headers });
+  query?: { [key: string]: string | string[] | undefined };
+}): jest.Mocked<IApiHttpRequest> => ({ body, params, headers, query });
 
 export const makeFakeApiHttpResponse = (
   status: keyof typeof StatusCodes,

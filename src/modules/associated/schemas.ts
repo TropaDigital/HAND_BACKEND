@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client';
 import Joi from 'joi';
 
 export const GetAssociatedById = Joi.object<{ id: number }>({
-  id: Joi.number().required(),
+  id: Joi.number().min(1).required(),
 });
 
 export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
@@ -54,7 +54,7 @@ export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
 export const UpdateAssociatedById = Joi.object<
   Prisma.AssociatedUpdateInput & { id: number }
 >({
-  id: Joi.number(),
+  id: Joi.number().min(1).required(),
   name: Joi.string().label('nome'),
   lastName: Joi.string().label('sobrenome'),
   affiliation: Joi.string().label('afiliação'),
@@ -97,9 +97,9 @@ export const UpdateAssociatedById = Joi.object<
   accountNumber: Joi.string().label('número da conta'),
   pixKey: Joi.string().label('chave pix'),
 
-  createdBy: Joi.string().label('created by'),
+  createdBy: Joi.string().label('createdBy'),
 });
 
 export const DeleteAssociatedById = Joi.object<{ id: number }>({
-  id: Joi.number().required(),
+  id: Joi.number().min(1).required(),
 });

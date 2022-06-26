@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client';
 import Joi from 'joi';
 
 export const GetBenefitById = Joi.object<{ id: number }>({
-  id: Joi.number().required(),
+  id: Joi.number().min(1).required(),
 });
 
 export const CreateBenefit = Joi.object<Prisma.BenefitCreateInput>({
@@ -22,7 +22,7 @@ export const CreateBenefit = Joi.object<Prisma.BenefitCreateInput>({
 export const UpdateBenefitById = Joi.object<
   Prisma.BenefitUpdateInput & { id: number }
 >({
-  id: Joi.number().required(),
+  id: Joi.number().min(1).required(),
   associated: Joi.string(),
   association: Joi.string(),
   bank: Joi.string(),
@@ -37,5 +37,5 @@ export const UpdateBenefitById = Joi.object<
 });
 
 export const DeleteBenefitById = Joi.object<{ id: number }>({
-  id: Joi.number().required(),
+  id: Joi.number().min(1).required(),
 });

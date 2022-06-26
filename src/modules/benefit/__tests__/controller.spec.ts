@@ -123,22 +123,22 @@ describe(BenefitController.name, () => {
     it('should call validator with right params', async () => {
       const { sut, validatorStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({
-        body: makeFakeCreateBenefitInput(),
+        body: { ...makeFakeCreateBenefitInput() },
       });
       const validateSchemaSpy = validatorStub.validateSchema;
 
       await sut.create(httpRequest);
 
-      expect(validateSchemaSpy).toBeCalledWith(
-        'CreateBenefit',
-        makeFakeCreateBenefitInput(),
-      );
+      expect(validateSchemaSpy).toBeCalledWith('CreateBenefit', {
+        ...makeFakeCreateBenefitInput(),
+        createdBy: undefined,
+      });
     });
 
     it('should call service with validation return', async () => {
       const { sut, benefitServiceStub, validatorStub } = makeSut();
       const httpRequest = makeFakeApiHttpRequest({
-        body: makeFakeCreateBenefitInput(),
+        body: { ...makeFakeCreateBenefitInput() },
       });
       const createSpy = benefitServiceStub.create;
       validatorStub.validateSchema.mockReturnValueOnce(

@@ -185,11 +185,6 @@ describe('POST /associateds - Create new associated', () => {
         message: '"número" is required',
       },
       {
-        fieldName: 'complement',
-        friendlyFieldName: 'complemento',
-        message: '"complemento" is required',
-      },
-      {
         fieldName: 'district',
         friendlyFieldName: 'bairro',
         message: '"bairro" is required',

@@ -42,7 +42,7 @@ export class BenefitController implements IBenefitController {
   ): Promise<IApiHttpResponse<Benefit>> {
     const benefit = this.validator.validateSchema<Prisma.BenefitCreateInput>(
       'CreateBenefit',
-      httpRequest.body,
+      { ...httpRequest.body, createdBy: httpRequest.user?.sub },
     );
     const result = await this.benefitService.create(benefit);
 

@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 
 import { ExpressRouteAdapter } from '../../adapters/express/ExpressRouteAdapter';
 import { IRouter } from '../../interfaces/http';
+import AuthMiddleware from '../../middlewares/AuthMiddleware';
 import { createBenefitController } from './factories';
 import { IBenefitController } from './interfaces';
 
@@ -37,6 +38,7 @@ export default class BenefitRouter implements IRouter {
     this.router
       .route('/benefits')
       .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IBenefitController>(
           this.controller,
           'getAll',
@@ -64,6 +66,7 @@ export default class BenefitRouter implements IRouter {
     this.router
       .route('/benefits/:id')
       .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IBenefitController>(
           this.controller,
           'getById',
@@ -90,6 +93,7 @@ export default class BenefitRouter implements IRouter {
     this.router
       .route('/benefits')
       .post(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IBenefitController>(
           this.controller,
           'create',
@@ -117,6 +121,7 @@ export default class BenefitRouter implements IRouter {
     this.router
       .route('/benefits/:id')
       .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IBenefitController>(
           this.controller,
           'updateById',
@@ -144,6 +149,7 @@ export default class BenefitRouter implements IRouter {
     this.router
       .route('/benefits/:id')
       .delete(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IBenefitController>(
           this.controller,
           'deleteById',

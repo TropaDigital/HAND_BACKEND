@@ -23,7 +23,7 @@ export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
   email: Joi.string().email().required().label('email'),
   father: Joi.string().required().label('pai'),
   mother: Joi.string().required().label('mãe'),
-  partner: Joi.string().label('conjugue'),
+  partner: Joi.string().label('cônjuge'),
 
   occupation: Joi.string().required().label('profissão'),
   salary: Joi.string().required().label('salário'),
@@ -37,17 +37,15 @@ export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
   postalCode: Joi.string().required().label('cep'),
   street: Joi.string().required().label('logradouro'),
   houseNumber: Joi.string().required().label('número'),
-  complement: Joi.string().required().label('complemento'),
+  complement: Joi.string().allow('').label('complemento'),
   district: Joi.string().required().label('bairro'),
   city: Joi.string().required().label('cidade'),
   state: Joi.string().required().label('estado'),
-
   bank: Joi.string().required().label('banco'),
   agency: Joi.string().required().label('agencia'),
   accountType: Joi.string().required().label('tipo de conta'),
   accountNumber: Joi.string().required().label('número da conta'),
   pixKey: Joi.string().required().label('chave pix'),
-
   createdBy: Joi.string().required().label('createdBy'),
 });
 
@@ -72,7 +70,7 @@ export const UpdateAssociatedById = Joi.object<
   email: Joi.string().email().label('email'),
   father: Joi.string().label('pai'),
   mother: Joi.string().label('mãe'),
-  partner: Joi.string().label('conjugue'),
+  partner: Joi.string().label('cônjuge'),
 
   occupation: Joi.string().label('profissão'),
   salary: Joi.string().label('salário'),
@@ -86,7 +84,7 @@ export const UpdateAssociatedById = Joi.object<
   postalCode: Joi.string().label('cep'),
   street: Joi.string().label('logradouro'),
   houseNumber: Joi.string().label('número'),
-  complement: Joi.string().label('complemento'),
+  complement: Joi.string().default('').label('complemento'),
   district: Joi.string().label('bairro'),
   city: Joi.string().label('cidade'),
   state: Joi.string().label('estado'),

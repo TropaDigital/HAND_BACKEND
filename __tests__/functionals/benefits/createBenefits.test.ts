@@ -9,7 +9,7 @@ import { makeFakeCreateBenefitParams } from './helpers';
 
 describe('POST /benefits - Create new benefit', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
@@ -100,11 +100,6 @@ describe('POST /benefits - Create new benefit', () => {
         fieldName: 'consultant',
         friendlyFieldName: 'consultant',
         message: '"consultant" is required',
-      },
-      {
-        fieldName: 'createdBy',
-        friendlyFieldName: 'createdBy',
-        message: '"createdBy" is required',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);

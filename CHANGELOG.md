@@ -1,3 +1,18 @@
+## [1.4.0](https://github.com/haandsolutions/haand-bib/compare/v1.3.0...v1.4.0) (2022-06-27)
+
+
+### :sparkles: New Features
+
+* **pagination:** update pagination service ([8aa4e36](https://github.com/haandsolutions/haand-bib/commit/8aa4e36367b5215d41d07d48551a0bf7ee95aac0))
+
+
+### :white_check_mark: Tests
+
+* **associated:** add pagination to associated module ([bee2740](https://github.com/haandsolutions/haand-bib/commit/bee27408dbd3700f745b5dd2b2cda2ab48b9401d)), closes [#82](https://github.com/haandsolutions/haand-bib/issues/82)
+* **pagination:** create pagination unit tests ([88a9ec0](https://github.com/haandsolutions/haand-bib/commit/88a9ec09bde151b47867495fc199846d6205c1a2))
+* **associated:** update associated functional test ([f9448a8](https://github.com/haandsolutions/haand-bib/commit/f9448a812a80dcf73703a3cceca02c2ded797616)), closes [#83](https://github.com/haandsolutions/haand-bib/issues/83)
+* **benefit:** update benefit functional tests ([42ca05c](https://github.com/haandsolutions/haand-bib/commit/42ca05ce17eca2b70faf57e2d999cb6026c22079)), closes [#83](https://github.com/haandsolutions/haand-bib/issues/83)
+
 ## [1.3.0](https://github.com/haandsolutions/haand-bib/compare/v1.2.0...v1.3.0) (2022-06-27)
 
 

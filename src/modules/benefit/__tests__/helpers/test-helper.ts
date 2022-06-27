@@ -105,6 +105,7 @@ export const makePrismaBenefitRepositoryStub =
       create: jest.fn().mockResolvedValue(makeFakeBenefit({})),
       update: jest.fn(),
       delete: jest.fn(),
+      count: jest.fn().mockResolvedValue(11),
     };
     return result as jest.Mocked<PrismaBenefitRepository>;
   };

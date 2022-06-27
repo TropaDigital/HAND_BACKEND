@@ -39,6 +39,7 @@ export const populateDatabase = async (): Promise<void> => {
     data: [
       makeFakeBenefit({ associated: 'João', id: 1 }),
       makeFakeBenefit({ associated: 'Pedro', id: 2 }),
+      makeFakeBenefit({ associated: 'Mateus', id: 3 }),
     ],
   });
 };

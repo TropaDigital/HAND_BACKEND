@@ -3,6 +3,10 @@ import { Benefit, Prisma } from '@prisma/client';
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
 import { IValidator } from '../../interfaces/validation/IValidator';
+import {
+  IAssociatedFindAllParams,
+  IPaginatedAssociatedResult,
+} from '../../shared/pagination/interfaces';
 import { IBenefitController, IBenefitService } from './interfaces';
 import * as schemas from './schemas';
 
@@ -17,9 +21,9 @@ export class BenefitController implements IBenefitController {
       unknown,
       unknown,
       unknown,
-      Prisma.AssociatedWhereInput
+      IAssociatedFindAllParams & Prisma.BenefitWhereInput
     >,
-  ): Promise<IApiHttpResponse<Benefit[]>> {
+  ): Promise<IApiHttpResponse<IPaginatedAssociatedResult<Benefit[]>>> {
     const result = await this.benefitService.getAll(httpRequest.query);
 
     return { statusCodeAsString: 'OK', body: result };

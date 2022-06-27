@@ -18,11 +18,11 @@ export const getFindManyParams = <T>(
     return {
       take,
       skip,
-      where: where as T,
+      where: (where || {}) as T,
     };
   }
   return {
-    where: payload as T,
+    where: (payload || {}) as T,
   };
 };
 

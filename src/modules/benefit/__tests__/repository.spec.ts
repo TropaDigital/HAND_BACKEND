@@ -28,7 +28,12 @@ describe(BenefitRepository.name, () => {
 
       const result = await sut.findAll();
 
-      expect(result).toEqual(makeFakeBenefitList());
+      expect(result).toEqual({
+        currentPage: 1,
+        totalPages: 1,
+        totalResults: 11,
+        data: makeFakeBenefitList(),
+      });
     });
 
     it('should throw when prisma throws', async () => {

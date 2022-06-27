@@ -25,23 +25,83 @@ describe('GET /benefits - Get all benefits', () => {
       .get('/benefits')
       .set('x-access-token', token);
 
-    expect(response.body.data).toEqual([
-      expect.objectContaining({
-        ...makeFakeBenefit({
-          associated: 'João',
+    expect(response.body.data).toEqual({
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 3,
+      data: [
+        expect.objectContaining({
+          ...makeFakeBenefit({
+            associated: 'João',
+          }),
+          initialDate: '2022-10-10T00:00:00.000Z',
         }),
-        initialDate: '2022-10-10T00:00:00.000Z',
-      }),
-      expect.objectContaining({
-        ...makeFakeBenefit({
-          associated: 'Pedro',
+        expect.objectContaining({
+          ...makeFakeBenefit({
+            associated: 'Pedro',
+          }),
+          initialDate: '2022-10-10T00:00:00.000Z',
         }),
-        initialDate: '2022-10-10T00:00:00.000Z',
-      }),
-    ]);
+        expect.objectContaining({
+          ...makeFakeBenefit({
+            associated: 'Mateus',
+          }),
+          initialDate: '2022-10-10T00:00:00.000Z',
+        }),
+      ],
+    });
     expect(response.status).toBe(200);
   });
 
+  it('Should return 200 and paginated associates when fetch for first page', async () => {
+    const response = await global.testRequest
+      .get('/benefits')
+      .query({ page: 1, resultsPerPage: 2 })
+      .set('x-access-token', token);
+
+    expect(response.body.data).toEqual({
+      currentPage: 1,
+      totalPages: 2,
+      totalResults: 3,
+      data: [
+        expect.objectContaining({
+          ...makeFakeBenefit({
+            associated: 'João',
+          }),
+          initialDate: '2022-10-10T00:00:00.000Z',
+        }),
+        expect.objectContaining({
+          ...makeFakeBenefit({
+            associated: 'Pedro',
+          }),
+          initialDate: '2022-10-10T00:00:00.000Z',
+        }),
+      ],
+    });
+    expect(response.status).toBe(200);
+  });
+
+  it('Should return 200 and paginated associates when fetch for last page', async () => {
+    const response = await global.testRequest
+      .get('/benefits')
+      .query({ page: 2, resultsPerPage: 2 })
+      .set('x-access-token', token);
+
+    expect(response.body.data).toEqual({
+      currentPage: 2,
+      totalPages: 2,
+      totalResults: 3,
+      data: [
+        expect.objectContaining({
+          ...makeFakeBenefit({
+            associated: 'Mateus',
+          }),
+          initialDate: '2022-10-10T00:00:00.000Z',
+        }),
+      ],
+    });
+    expect(response.status).toBe(200);
+  });
   it('Should return 200 and empty array when there is no benefit', async () => {
     await global.prismaClient.benefit.deleteMany();
 
@@ -49,7 +109,12 @@ describe('GET /benefits - Get all benefits', () => {
       .get('/benefits')
       .set('x-access-token', token);
 
-    expect(response.body.data).toEqual([]);
+    expect(response.body.data).toEqual({
+      currentPage: 1,
+      data: [],
+      totalPages: 1,
+      totalResults: 0,
+    });
     expect(response.status).toBe(200);
   });
 

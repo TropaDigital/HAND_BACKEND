@@ -93,6 +93,7 @@ export const populateDatabase = async (): Promise<void> => {
     data: [
       makeFakeAssociated({ name: 'João', id: 1, taxId: '1' }),
       makeFakeAssociated({ name: 'Pedro', id: 2, taxId: '2' }),
+      makeFakeAssociated({ name: 'Mateus', id: 3, taxId: '3' }),
     ],
   });
 };

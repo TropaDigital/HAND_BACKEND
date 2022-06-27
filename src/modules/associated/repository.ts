@@ -1,5 +1,13 @@
 import { Prisma, Associated } from '@prisma/client';
 
+import {
+  IAssociatedFindAllParams,
+  IPaginatedAssociatedResult,
+} from '../../shared/pagination/interfaces';
+import {
+  getFindManyParams,
+  parsePaginatedResult,
+} from '../../shared/pagination/service';
 import { IAssociatedRepository } from './interfaces';
 
 export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
@@ -10,12 +18,18 @@ export class AssociatedRepository implements IAssociatedRepository {
   constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
 
   public async findAll(
-    payload?: Prisma.AssociatedWhereInput,
-  ): Promise<Associated[]> {
-    const result = await this.prismaRepository.findMany({
-      where: { ...payload },
-    });
-    return result;
+    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAssociatedResult<Associated[]>> {
+    const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
+
+    const result = await this.prismaRepository.findMany(params);
+    const totalResults = await this.prismaRepository.count();
+
+    return parsePaginatedResult<Associated[], Prisma.AssociatedWhereInput>(
+      result,
+      totalResults,
+      payload,
+    );
   }
 
   public async findById(id: number): Promise<Associated | null> {

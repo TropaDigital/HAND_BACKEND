@@ -1,6 +1,10 @@
 import { Associated, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
+import {
+  IAssociatedFindAllParams,
+  IPaginatedAssociatedResult,
+} from '../../shared/pagination/interfaces';
 
 export interface IAssociatedRepository {
   create(payload: Prisma.AssociatedCreateInput): Promise<Associated>;
@@ -9,7 +13,9 @@ export interface IAssociatedRepository {
 
   deleteById(id: number): Promise<void>;
 
-  findAll(payload?: Prisma.AssociatedWhereInput): Promise<Associated[]>;
+  findAll(
+    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAssociatedResult<Associated[]>>;
 
   findById(id: number): Promise<Associated | null>;
 }
@@ -20,9 +26,9 @@ export interface IAssociatedController {
       unknown,
       unknown,
       unknown,
-      Prisma.AssociatedWhereInput
+      IAssociatedFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<Associated[]>>;
+  ): Promise<IApiHttpResponse<IPaginatedAssociatedResult<Associated[]>>>;
 
   getById(
     httpRequest: IApiHttpRequest,
@@ -36,7 +42,9 @@ export interface IAssociatedController {
 }
 
 export interface IAssociatedService {
-  getAll(payload?: Prisma.AssociatedWhereInput): Promise<Associated[]>;
+  getAll(
+    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAssociatedResult<Associated[]>>;
 
   getById(id: number): Promise<Associated | null>;
 

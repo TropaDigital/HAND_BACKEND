@@ -11,12 +11,14 @@ export const getFindManyParams = <T>(
   where: T;
 } => {
   if (payload?.page && payload?.resultsPerPage) {
-    const take = payload.resultsPerPage;
-    const skip = (payload.page - 1) * payload.resultsPerPage;
+    const { page, resultsPerPage, ...where } = payload;
+    const take = Number(resultsPerPage);
+    const skip = (page - 1) * resultsPerPage;
+
     return {
       take,
       skip,
-      where: payload as T,
+      where: where as T,
     };
   }
   return {
@@ -33,7 +35,7 @@ export const parsePaginatedResult = <T, K>(
     payload?.resultsPerPage && totalResults
       ? Math.ceil(totalResults / payload.resultsPerPage)
       : 1;
-  const currentPage = payload?.page || 1;
+  const currentPage = Number(payload?.page) || 1;
 
   return { totalResults, totalPages, currentPage, data: results };
 };

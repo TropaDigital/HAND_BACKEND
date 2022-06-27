@@ -192,6 +192,7 @@ export const makePrismaAssociatedRepositoryStub =
       create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
       update: jest.fn(),
       delete: jest.fn(),
+      count: jest.fn().mockResolvedValue(10),
     };
     return result as jest.Mocked<PrismaAssociatedRepository>;
   };

@@ -37,7 +37,12 @@ describe(AssociatedRepository.name, () => {
 
       const result = await sut.findAll();
 
-      expect(result).toEqual(makeFakeAssociatedList());
+      expect(result).toEqual({
+        currentPage: 1,
+        totalPages: 1,
+        totalResults: 10,
+        data: makeFakeAssociatedList(),
+      });
     });
 
     it('should throw when prisma throws', async () => {

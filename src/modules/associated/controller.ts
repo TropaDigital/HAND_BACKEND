@@ -3,6 +3,10 @@ import { Associated, Prisma } from '@prisma/client';
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
 import { IValidator } from '../../interfaces/validation/IValidator';
+import {
+  IAssociatedFindAllParams,
+  IPaginatedAssociatedResult,
+} from '../../shared/pagination/interfaces';
 import { IAssociatedController, IAssociatedService } from './interfaces';
 import * as schemas from './schemas';
 
@@ -17,9 +21,9 @@ export class AssociatedController implements IAssociatedController {
       unknown,
       unknown,
       unknown,
-      Prisma.AssociatedWhereInput
+      IAssociatedFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<Associated[]>> {
+  ): Promise<IApiHttpResponse<IPaginatedAssociatedResult<Associated[]>>> {
     const result = await this.associatedService.getAll(httpRequest.query);
 
     return { statusCodeAsString: 'OK', body: result };

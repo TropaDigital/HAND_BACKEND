@@ -20,25 +20,84 @@ describe('GET /associateds - Get all associateds', () => {
     await global.prismaClient.associated.deleteMany();
   });
 
-  it('Should return 200 and all associateds', async () => {
+  it('Should return 200 and all associates', async () => {
     const response = await global.testRequest
       .get('/associateds')
       .set('x-access-token', token);
 
-    expect(response.body.data).toEqual([
-      expect.objectContaining({
-        ...{
-          ...makeFakeAssociated({ name: 'João', id: 1, taxId: '1' }),
+    expect(response.body.data).toEqual({
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 3,
+      data: [
+        expect.objectContaining({
+          ...{
+            ...makeFakeAssociated({ name: 'João', id: 1, taxId: '1' }),
+            emissionDate: '2022-10-10T00:00:00.000Z',
+            birthDate: '2022-10-10T00:00:00.000Z',
+          },
+        }),
+        expect.objectContaining({
+          ...makeFakeAssociated({ name: 'Pedro', id: 2, taxId: '2' }),
           emissionDate: '2022-10-10T00:00:00.000Z',
           birthDate: '2022-10-10T00:00:00.000Z',
-        },
-      }),
-      expect.objectContaining({
-        ...makeFakeAssociated({ name: 'Pedro', id: 2, taxId: '2' }),
-        emissionDate: '2022-10-10T00:00:00.000Z',
-        birthDate: '2022-10-10T00:00:00.000Z',
-      }),
-    ]);
+        }),
+        expect.objectContaining({
+          ...makeFakeAssociated({ name: 'Mateus', id: 3, taxId: '3' }),
+          emissionDate: '2022-10-10T00:00:00.000Z',
+          birthDate: '2022-10-10T00:00:00.000Z',
+        }),
+      ],
+    });
+    expect(response.status).toBe(200);
+  });
+
+  it('Should return 200 and paginated associates when fetch for first page', async () => {
+    const response = await global.testRequest
+      .get('/associateds')
+      .query({ page: 1, resultsPerPage: 2 })
+      .set('x-access-token', token);
+
+    expect(response.body.data).toEqual({
+      currentPage: 1,
+      totalPages: 2,
+      totalResults: 3,
+      data: [
+        expect.objectContaining({
+          ...{
+            ...makeFakeAssociated({ name: 'João', id: 1, taxId: '1' }),
+            emissionDate: '2022-10-10T00:00:00.000Z',
+            birthDate: '2022-10-10T00:00:00.000Z',
+          },
+        }),
+        expect.objectContaining({
+          ...makeFakeAssociated({ name: 'Pedro', id: 2, taxId: '2' }),
+          emissionDate: '2022-10-10T00:00:00.000Z',
+          birthDate: '2022-10-10T00:00:00.000Z',
+        }),
+      ],
+    });
+    expect(response.status).toBe(200);
+  });
+
+  it('Should return 200 and paginated associates when fetch for last page', async () => {
+    const response = await global.testRequest
+      .get('/associateds')
+      .query({ page: 2, resultsPerPage: 2 })
+      .set('x-access-token', token);
+
+    expect(response.body.data).toEqual({
+      currentPage: 2,
+      totalPages: 2,
+      totalResults: 3,
+      data: [
+        expect.objectContaining({
+          ...makeFakeAssociated({ name: 'Mateus', id: 3, taxId: '3' }),
+          emissionDate: '2022-10-10T00:00:00.000Z',
+          birthDate: '2022-10-10T00:00:00.000Z',
+        }),
+      ],
+    });
     expect(response.status).toBe(200);
   });
 
@@ -49,7 +108,12 @@ describe('GET /associateds - Get all associateds', () => {
       .get('/associateds')
       .set('x-access-token', token);
 
-    expect(response.body.data).toEqual([]);
+    expect(response.body.data).toEqual({
+      currentPage: 1,
+      data: [],
+      totalPages: 1,
+      totalResults: 0,
+    });
     expect(response.status).toBe(200);
   });
 

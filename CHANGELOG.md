@@ -1,3 +1,36 @@
+## [1.3.0](https://github.com/haandsolutions/haand-bib/compare/v1.2.0...v1.3.0) (2022-06-27)
+
+
+### :sparkles: New Features
+
+* **consultant:** add query params to associated module ([e5667aa](https://github.com/haandsolutions/haand-bib/commit/e5667aa9d42f01a65d6c5a4f213af4bebda8b234)), closes [#93](https://github.com/haandsolutions/haand-bib/issues/93)
+* **benefit:** add query params to benefit ([4475914](https://github.com/haandsolutions/haand-bib/commit/4475914b4fc383968c6ecd38e2df9d19589ad96f)), closes [#93](https://github.com/haandsolutions/haand-bib/issues/93)
+* **beneft:** create benefit module ([031c423](https://github.com/haandsolutions/haand-bib/commit/031c4233526091d2123612f24d0d8ea7478141c0)), closes [#93](https://github.com/haandsolutions/haand-bib/issues/93)
+
+
+### :bug: Fixes
+
+* adjust the schema of association module ([7966520](https://github.com/haandsolutions/haand-bib/commit/7966520f0c921a8b25c19d13c040701b7815d8f4))
+
+
+### :white_check_mark: Tests
+
+* adjust the unit tests of benefit module ([bbbaf22](https://github.com/haandsolutions/haand-bib/commit/bbbaf220b9821eedf88fae88c0332128a98a1715))
+* **associated:** update associated functional tests ([01764f0](https://github.com/haandsolutions/haand-bib/commit/01764f09500b29f848b02810e9cc5b4e1b8450a2)), closes [#83](https://github.com/haandsolutions/haand-bib/issues/83)
+* **benefit:** update functional tests ([dda67c4](https://github.com/haandsolutions/haand-bib/commit/dda67c4c19ef352e8d3bda798fb8636924902644)), closes [#83](https://github.com/haandsolutions/haand-bib/issues/83)
+
+
+### :zap: Refactor
+
+* add auth to benefit module ([d1faafb](https://github.com/haandsolutions/haand-bib/commit/d1faafbb4b7c594c2437e24c2153cfa1e80af2b0))
+* **general:** update cellPhone spelling ([f8c38cf](https://github.com/haandsolutions/haand-bib/commit/f8c38cfdfc5b6f8fe623e67d45e64d7883b03524)), closes [#83](https://github.com/haandsolutions/haand-bib/issues/83)
+* **database:** update prisma singleton ([0ccf173](https://github.com/haandsolutions/haand-bib/commit/0ccf17315641fac1c35826339d31f1161dad0247)), closes [#83](https://github.com/haandsolutions/haand-bib/issues/83)
+
+
+### :repeat: CI
+
+* add develop to trigger the pipeline ([2c4268c](https://github.com/haandsolutions/haand-bib/commit/2c4268c57e34234838e2962d345294f411d2e7e4))
+
 ## [1.2.0](https://github.com/haandsolutions/haand-bib/compare/v1.1.0...v1.2.0) (2022-06-01)
 
 

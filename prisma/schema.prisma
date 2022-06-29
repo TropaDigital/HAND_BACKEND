@@ -44,7 +44,8 @@ model Associated {
   agency String
   accountType String @map(name: "account_type")
   accountNumber String @map(name: "account_number")
-  pixKey String @map(name: "pix_key")
+  pixKey String? @map(name: "pix_key")
+  pixType String? @map(name: "pix_type")
 
   addressType String @map(name: "address_type")
   postalCode String @map(name: "postal_code")

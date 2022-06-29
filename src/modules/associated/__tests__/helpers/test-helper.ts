@@ -147,6 +147,7 @@ export const makeFakeAssociated = (
   occupation: 'any_occupation',
   paymentDay: 5,
   pixKey: 'any_pix_key',
+  pixType: 'any_type',
   placeOfBirth: 'any_place',
   postalCode: 'any_postal_code',
   publicAgency: 'any_agency',

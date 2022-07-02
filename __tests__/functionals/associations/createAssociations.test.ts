@@ -214,11 +214,6 @@ describe('POST /associateds - Create new associated', () => {
         friendlyFieldName: 'número da conta',
         message: '"número da conta" is required',
       },
-      {
-        fieldName: 'pixKey',
-        friendlyFieldName: 'chave pix',
-        message: '"chave pix" is required',
-      },
     ]);
 
     expect(response.status).toBe(invalidParamsResponse.statusCode);

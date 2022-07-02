@@ -45,7 +45,8 @@ export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
   agency: Joi.string().required().label('agencia'),
   accountType: Joi.string().required().label('tipo de conta'),
   accountNumber: Joi.string().required().label('número da conta'),
-  pixKey: Joi.string().required().label('chave pix'),
+  pixKey: Joi.string().label('chave pix'),
+  pixType: Joi.string().label('tipo_pix'),
   createdBy: Joi.string().required().label('createdBy'),
 });
 
@@ -94,6 +95,7 @@ export const UpdateAssociatedById = Joi.object<
   accountType: Joi.string().label('tipo de conta'),
   accountNumber: Joi.string().label('número da conta'),
   pixKey: Joi.string().label('chave pix'),
+  pixType: Joi.string().label('tipo_pix'),
 
   createdBy: Joi.string().label('createdBy'),
 });

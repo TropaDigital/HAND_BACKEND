@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/haandsolutions/haand-bib/compare/v1.4.0...v1.5.0) (2022-07-02)
+
+
+### :sparkles: New Features
+
+* add pixType to associated ([6f6870d](https://github.com/haandsolutions/haand-bib/commit/6f6870dd09ee2b05da4092ae076fb5baed80c37d))
+
 ## [1.4.0](https://github.com/haandsolutions/haand-bib/compare/v1.3.0...v1.4.0) (2022-06-27)
 
 

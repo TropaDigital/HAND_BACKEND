@@ -2,8 +2,8 @@ import { Benefit, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import {
-  IAssociatedFindAllParams,
-  IPaginatedAssociatedResult,
+  IFindAllParams,
+  IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 
 export interface IBenefitRepository {
@@ -14,8 +14,8 @@ export interface IBenefitRepository {
   deleteById(id: number): Promise<void>;
 
   findAll(
-    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAssociatedResult<Benefit[]>>;
+    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAResult<Benefit[]>>;
 
   findById(id: number): Promise<Benefit | null>;
 }
@@ -26,9 +26,9 @@ export interface IBenefitController {
       unknown,
       unknown,
       unknown,
-      IAssociatedFindAllParams & Prisma.BenefitWhereInput
+      IFindAllParams & Prisma.BenefitWhereInput
     >,
-  ): Promise<IApiHttpResponse<IPaginatedAssociatedResult<Benefit[]>>>;
+  ): Promise<IApiHttpResponse<IPaginatedAResult<Benefit[]>>>;
 
   getById(
     httpRequest: IApiHttpRequest,
@@ -43,8 +43,8 @@ export interface IBenefitController {
 
 export interface IBenefitService {
   getAll(
-    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAssociatedResult<Benefit[]>>;
+    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAResult<Benefit[]>>;
 
   getById(id: number): Promise<Benefit | null>;
 

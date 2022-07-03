@@ -2,8 +2,8 @@ import { Associated, Prisma } from '@prisma/client';
 
 import { NotFoundError } from '../../shared/errors';
 import {
-  IAssociatedFindAllParams,
-  IPaginatedAssociatedResult,
+  IFindAllParams,
+  IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import { IAssociatedRepository, IAssociatedService } from './interfaces';
 
@@ -11,8 +11,8 @@ export class AssociatedService implements IAssociatedService {
   constructor(private readonly associatedRepository: IAssociatedRepository) {}
 
   public async getAll(
-    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAssociatedResult<Associated[]>> {
+    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAResult<Associated[]>> {
     const result = await this.associatedRepository.findAll(payload);
 
     return result;

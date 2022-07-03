@@ -1,8 +1,8 @@
 import { Prisma, Associated } from '@prisma/client';
 
 import {
-  IAssociatedFindAllParams,
-  IPaginatedAssociatedResult,
+  IFindAllParams,
+  IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import {
   getFindManyParams,
@@ -18,8 +18,8 @@ export class AssociatedRepository implements IAssociatedRepository {
   constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
 
   public async findAll(
-    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAssociatedResult<Associated[]>> {
+    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAResult<Associated[]>> {
     const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
 
     const result = await this.prismaRepository.findMany(params);

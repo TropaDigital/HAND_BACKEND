@@ -1,9 +1,9 @@
-export interface IAssociatedFindAllParams {
+export interface IFindAllParams {
   page?: number;
   resultsPerPage?: number;
 }
 
-export interface IPaginatedAssociatedResult<T> {
+export interface IPaginatedAResult<T> {
   totalResults: number;
   totalPages: number;
   currentPage: number;

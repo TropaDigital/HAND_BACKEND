@@ -2,8 +2,8 @@ import { Benefit, Prisma } from '@prisma/client';
 
 import { NotFoundError } from '../../shared/errors';
 import {
-  IAssociatedFindAllParams,
-  IPaginatedAssociatedResult,
+  IFindAllParams,
+  IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import { IBenefitRepository, IBenefitService } from './interfaces';
 
@@ -11,8 +11,8 @@ export class BenefitService implements IBenefitService {
   constructor(private readonly benefitRepository: IBenefitRepository) {}
 
   public async getAll(
-    payload?: IAssociatedFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAssociatedResult<Benefit[]>> {
+    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+  ): Promise<IPaginatedAResult<Benefit[]>> {
     const result = await this.benefitRepository.findAll(payload);
 
     return result;

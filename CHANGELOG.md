@@ -1,3 +1,10 @@
+## [1.7.0](https://github.com/haandsolutions/haand-bib/compare/v1.6.0...v1.7.0) (2022-07-03)
+
+
+### :sparkles: New Features
+
+* add contains property to prisma filter ([e7c9deb](https://github.com/haandsolutions/haand-bib/commit/e7c9deba345356e0934a71590bb96621772a83ef))
+
 ## [1.6.0](https://github.com/haandsolutions/haand-bib/compare/v1.5.0...v1.6.0) (2022-07-03)
 
 

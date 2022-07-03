@@ -1,3 +1,10 @@
+## [1.6.0](https://github.com/haandsolutions/haand-bib/compare/v1.5.0...v1.6.0) (2022-07-03)
+
+
+### :sparkles: New Features
+
+* update functional tests ([56029f5](https://github.com/haandsolutions/haand-bib/commit/56029f59e03ed0f60d0c535016ea691a9b3aa414))
+
 ## [1.5.0](https://github.com/haandsolutions/haand-bib/compare/v1.4.0...v1.5.0) (2022-07-02)
 
 

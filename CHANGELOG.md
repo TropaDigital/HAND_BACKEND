@@ -1,3 +1,10 @@
+### [1.7.1](https://github.com/haandsolutions/haand-bib/compare/v1.7.0...v1.7.1) (2022-07-03)
+
+
+### :zap: Refactor
+
+* update repository count ([31f5c39](https://github.com/haandsolutions/haand-bib/commit/31f5c39fbe6158ef6851235e195bd084fd23cb07))
+
 ## [1.7.0](https://github.com/haandsolutions/haand-bib/compare/v1.6.0...v1.7.0) (2022-07-03)
 
 

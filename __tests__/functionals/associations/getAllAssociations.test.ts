@@ -88,8 +88,8 @@ describe('GET /associateds - Get all associateds', () => {
 
     expect(response.body.data).toEqual({
       currentPage: 1,
-      totalPages: 2,
-      totalResults: 3,
+      totalPages: 1,
+      totalResults: 1,
       data: [
         expect.objectContaining({
           ...makeFakeAssociated({ name: 'Pedro', id: 2, taxId: '2' }),
@@ -109,8 +109,8 @@ describe('GET /associateds - Get all associateds', () => {
 
     expect(response.body.data).toEqual({
       currentPage: 1,
-      totalPages: 2,
-      totalResults: 3,
+      totalPages: 1,
+      totalResults: 1,
       data: [
         expect.objectContaining({
           ...makeFakeAssociated({ name: 'Pedro', id: 2, taxId: '2' }),

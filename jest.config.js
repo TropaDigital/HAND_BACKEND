@@ -26,6 +26,7 @@ module.exports = {
     '!src/swagger/**/*.ts',
     '!src/config/**/*.ts',
     '!src/seeders/**/*.ts',
+    '!src/@types/**/*.ts',
     'src/middlewares/ErrorMiddleware.ts',
   ],
   coverageThreshold: {

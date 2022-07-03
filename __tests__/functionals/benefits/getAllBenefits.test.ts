@@ -89,8 +89,8 @@ describe('GET /benefits - Get all benefits', () => {
 
     expect(response.body.data).toEqual({
       currentPage: 1,
-      totalPages: 2,
-      totalResults: 3,
+      totalPages: 1,
+      totalResults: 1,
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
@@ -111,8 +111,8 @@ describe('GET /benefits - Get all benefits', () => {
 
     expect(response.body.data).toEqual({
       currentPage: 1,
-      totalPages: 2,
-      totalResults: 3,
+      totalPages: 1,
+      totalResults: 1,
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({

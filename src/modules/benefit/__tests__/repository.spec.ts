@@ -36,6 +36,19 @@ describe(BenefitRepository.name, () => {
       });
     });
 
+    it('should return prisma result when pass params', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.findAll({ association: 'string' });
+
+      expect(result).toEqual({
+        currentPage: 1,
+        totalPages: 1,
+        totalResults: 2,
+        data: makeFakeBenefitList(),
+      });
+    });
+
     it('should throw when prisma throws', async () => {
       const { sut, prismaRepository } = makeSut();
       prismaRepository.findMany.mockRejectedValueOnce(

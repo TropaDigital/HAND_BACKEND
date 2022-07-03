@@ -23,7 +23,10 @@ export class BenefitRepository implements IBenefitRepository {
     const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
 
     const result = await this.prismaRepository.findMany(params);
-    const totalResults = await this.prismaRepository.count();
+    const totalResults =
+      JSON.stringify(params?.where) !== '{}'
+        ? result.length
+        : await this.prismaRepository.count();
 
     return parsePaginatedResult<Benefit[], Prisma.AssociatedWhereInput>(
       result,

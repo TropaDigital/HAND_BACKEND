@@ -45,6 +45,19 @@ describe(AssociatedRepository.name, () => {
       });
     });
 
+    it('should return prisma result', async () => {
+      const { sut } = makeSut();
+
+      const result = await sut.findAll({ name: 'any_name' });
+
+      expect(result).toEqual({
+        currentPage: 1,
+        totalPages: 1,
+        totalResults: 2,
+        data: makeFakeAssociatedList(),
+      });
+    });
+
     it('should throw when prisma throws', async () => {
       const { sut, prismaRepository } = makeSut();
       prismaRepository.findMany.mockRejectedValueOnce(

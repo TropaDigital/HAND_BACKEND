@@ -81,6 +81,28 @@ describe('GET /benefits - Get all benefits', () => {
     expect(response.status).toBe(200);
   });
 
+  it('Should return 200 and paginated associates when filter params is provided in query params', async () => {
+    const response = await global.testRequest
+      .get('/benefits')
+      .query({ page: 1, resultsPerPage: 2, associated: 'Pedro' })
+      .set('x-access-token', token);
+
+    expect(response.body.data).toEqual({
+      currentPage: 1,
+      totalPages: 2,
+      totalResults: 3,
+      data: [
+        expect.objectContaining({
+          ...makeFakeBenefit({
+            associated: 'Pedro',
+          }),
+          initialDate: '2022-10-10T00:00:00.000Z',
+        }),
+      ],
+    });
+    expect(response.status).toBe(200);
+  });
+
   it('Should return 200 and paginated associates when fetch for last page', async () => {
     const response = await global.testRequest
       .get('/benefits')

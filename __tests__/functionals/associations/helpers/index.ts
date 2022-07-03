@@ -3,7 +3,7 @@ import { Associated, Prisma } from '@prisma/client';
 export const makeFakeCreateAssociatedParams = (
   payload?: Partial<Associated>,
 ): Prisma.AssociatedCreateInput => ({
-  name: 'Any name',
+  name: 'Any name1',
   mother: 'Any mother',
   nationality: 'Any nationality',
   occupation: 'Any occupation',
@@ -47,7 +47,7 @@ export const makeFakeCreateAssociatedParams = (
 export const makeFakeAssociated = (
   payload?: Partial<Associated>,
 ): Prisma.AssociatedCreateInput => ({
-  name: 'Any name',
+  name: 'Any name1',
   mother: 'Any mother',
   nationality: 'Any nationality',
   occupation: 'Any occupation',

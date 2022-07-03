@@ -6,6 +6,22 @@ interface IFakeType {
 const makeSut = () => ({ sut: service });
 
 describe('Pagination Tests', () => {
+  describe('parsePrismaFindManyContains', () => {
+    it('Should return parsed object when success', () => {
+      const { sut } = makeSut();
+
+      const result = sut.parsePrismaFindManyContains({
+        name: 'any_name',
+        document: 'any_document',
+      });
+
+      expect(result).toEqual({
+        name: { contains: 'any_name' },
+        document: { contains: 'any_document' },
+      });
+    });
+  });
+
   describe('getFindManyParams', () => {
     it('Should return correct value when default is provided', () => {
       const { sut } = makeSut();

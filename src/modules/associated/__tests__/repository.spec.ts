@@ -29,7 +29,7 @@ describe(AssociatedRepository.name, () => {
 
       await sut.findAll({ id: 1 });
 
-      expect(findManySpy).toBeCalledWith({ where: { id: 1 } });
+      expect(findManySpy).toBeCalledWith({ where: { id: { contains: 1 } } });
     });
 
     it('should return prisma result', async () => {

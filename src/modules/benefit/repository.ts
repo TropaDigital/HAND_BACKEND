@@ -1,8 +1,8 @@
 import { Prisma, Benefit } from '@prisma/client';
 
 import {
-  IAssociatedFindAllParams,
-  IPaginatedAssociatedResult,
+  IFindAllParams,
+  IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import {
   getFindManyParams,
@@ -18,8 +18,8 @@ export class BenefitRepository implements IBenefitRepository {
   constructor(private readonly prismaRepository: PrismaBenefitRepository) {}
 
   public async findAll(
-    payload?: IAssociatedFindAllParams & Prisma.BenefitWhereInput,
-  ): Promise<IPaginatedAssociatedResult<Benefit[]>> {
+    payload?: IFindAllParams & Prisma.BenefitWhereInput,
+  ): Promise<IPaginatedAResult<Benefit[]>> {
     const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
 
     const result = await this.prismaRepository.findMany(params);

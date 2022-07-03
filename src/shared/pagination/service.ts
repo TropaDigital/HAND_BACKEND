@@ -1,10 +1,18 @@
-import {
-  IAssociatedFindAllParams,
-  IPaginatedAssociatedResult,
-} from './interfaces';
+import { IFindAllParams, IPaginatedAResult } from './interfaces';
+
+export const parsePrismaFindManyContains = <T>(object: T): T => {
+  const entries = Object.entries(object);
+
+  const result = entries.reduce((acc: any, [key, value]) => {
+    acc[key] = { contains: value };
+    return acc;
+  }, {});
+
+  return result as T;
+};
 
 export const getFindManyParams = <T>(
-  payload?: IAssociatedFindAllParams & T,
+  payload?: IFindAllParams & T,
 ): {
   take?: number;
   skip?: number;
@@ -15,22 +23,26 @@ export const getFindManyParams = <T>(
     const take = Number(resultsPerPage);
     const skip = (page - 1) * resultsPerPage;
 
+    const params = parsePrismaFindManyContains(where);
+
     return {
       take,
       skip,
-      where: (where || {}) as T,
+      where: params as T,
     };
   }
+
+  const params = parsePrismaFindManyContains(payload || {});
   return {
-    where: (payload || {}) as T,
+    where: params as T,
   };
 };
 
 export const parsePaginatedResult = <T, K>(
   results: T,
   totalResults: number,
-  payload?: IAssociatedFindAllParams & K,
-): IPaginatedAssociatedResult<T> => {
+  payload?: IFindAllParams & K,
+): IPaginatedAResult<T> => {
   const totalPages =
     payload?.resultsPerPage && totalResults
       ? Math.ceil(totalResults / payload.resultsPerPage)

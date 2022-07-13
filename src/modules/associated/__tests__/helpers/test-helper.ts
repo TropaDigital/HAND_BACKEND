@@ -1,33 +1,45 @@
-import { Associated, Prisma } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { IAssociatedRepository, IAssociatedService } from '../../interfaces';
+import {
+  IAssociated,
+  IAssociatedRepository,
+  IAssociatedService,
+  ICreateAssociatedInput,
+  IUpdateAssociatedInput,
+} from '../../interfaces';
 import { PrismaAssociatedRepository } from '../../repository';
 
 export const makeFakeCreateAssociatedInput = (
-  payload?: Partial<Prisma.AssociatedCreateInput>,
-): jest.Mocked<Prisma.AssociatedCreateInput> => ({
+  payload?: Partial<ICreateAssociatedInput>,
+): jest.Mocked<ICreateAssociatedInput> => ({
   accountNumber: 'any_account',
   accountType: 'any_type',
-  addressType: 'any_type',
+  addresses: [
+    {
+      addressType: 'any_type',
+      postalCode: 'any_postal_code',
+      street: 'any_street',
+      houseNumber: 'any_number',
+      complement: 'any_complements',
+      district: 'any_district',
+      city: 'any_city',
+      state: 'any_state',
+    },
+  ],
   affiliation: 'any_affiliation',
   agency: '0000',
   bank: '00 - Any Bank',
   birthDate: new Date(),
   cellPhone: '00-0000000',
-  city: 'any_city',
-  complement: 'any_complements',
   contractType: 'contract_type',
   createdBy: 'any_data',
-  district: 'any_district',
   email: 'any@email.com',
   emissionDate: new Date(),
   emissionState: 'any_state',
   father: 'any_father',
   gender: 'any_gender',
-  houseNumber: 'any_number',
   issuingAgency: 'any_agency',
   lastName: 'any_last_name',
   maritalStatus: 'any_marital_status',
@@ -38,13 +50,10 @@ export const makeFakeCreateAssociatedInput = (
   paymentDay: 5,
   pixKey: 'any_pix_key',
   placeOfBirth: 'any_place',
-  postalCode: 'any_postal_code',
   publicAgency: 'any_agency',
   registerId: 'any_register_id',
   registerNumber: 'any_register_number',
   salary: '456',
-  state: 'any_state',
-  street: 'any_street',
   taxId: '000.000.000-00',
   partner: 'partner',
   finalDate: new Date(),
@@ -52,27 +61,38 @@ export const makeFakeCreateAssociatedInput = (
 });
 
 export const makeFakeUpdateAssociatedInput = (
-  payload?: Partial<Omit<Associated, 'id'>>,
-): jest.Mocked<Partial<Omit<Associated, 'id'>>> => ({
+  payload?: Partial<IUpdateAssociatedInput>,
+): jest.Mocked<IUpdateAssociatedInput> => ({
   accountNumber: 'any_account',
   accountType: 'any_type',
-  addressType: 'any_type',
+  addresses: [
+    {
+      addressType: 'any_type',
+      postalCode: 'any_postal_code',
+      street: 'any_street',
+      houseNumber: 'any_number',
+      complement: 'any_complements',
+      district: 'any_district',
+      city: 'any_city',
+      state: 'any_state',
+    },
+  ],
+
   affiliation: 'any_affiliation',
   agency: '0000',
   bank: '00 - Any Bank',
   birthDate: new Date(),
   cellPhone: '00-0000000',
-  city: 'any_city',
-  complement: 'any_complements',
+
   contractType: 'contract_type',
   createdBy: 'any_data',
-  district: 'any_district',
+
   email: 'any@email.com',
   emissionDate: new Date(),
   emissionState: 'any_state',
   father: 'any_father',
   gender: 'any_gender',
-  houseNumber: 'any_number',
+
   issuingAgency: 'any_agency',
   lastName: 'any_last_name',
   maritalStatus: 'any_marital_status',
@@ -83,13 +103,12 @@ export const makeFakeUpdateAssociatedInput = (
   paymentDay: 5,
   pixKey: 'any_pix_key',
   placeOfBirth: 'any_place',
-  postalCode: 'any_postal_code',
+
   publicAgency: 'any_agency',
   registerId: 'any_register_id',
   registerNumber: 'any_register_number',
   salary: '456',
-  state: 'any_state',
-  street: 'any_street',
+
   taxId: '000.000.000-00',
   partner: 'partner',
   finalDate: new Date(),
@@ -117,45 +136,56 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAssociated = (
-  payload: Partial<Associated>,
-): jest.Mocked<Associated> => ({
+  payload: Partial<IAssociated>,
+): jest.Mocked<IAssociated> => ({
   id: 0,
-  accountNumber: 'any_account',
-  accountType: 'any_type',
-  addressType: 'any_type',
+
+  addresses: [
+    {
+      id: 2,
+      addressType: 'any_type',
+      postalCode: 'any_postal_code',
+      street: 'any_street',
+      houseNumber: 'any_number',
+      complement: 'any_complements',
+      district: 'any_district',
+      city: 'any_city',
+      state: 'any_state',
+      associatedId: 0,
+    },
+  ],
+
   affiliation: 'any_affiliation',
-  agency: '0000',
-  bank: '00 - Any Bank',
   birthDate: new Date(),
   cellPhone: '00-0000000',
-  city: 'any_city',
-  complement: 'any_complements',
-  contractType: 'contract_type',
-  district: 'any_district',
   email: 'any@email.com',
   emissionDate: new Date(),
   emissionState: 'any_state',
   father: 'any_father',
   gender: 'any_gender',
-  houseNumber: 'any_number',
   issuingAgency: 'any_agency',
   lastName: 'any_last_name',
   maritalStatus: 'any_marital_status',
   mother: 'any_mother',
   name: 'any_name',
   nationality: 'any_nationality',
+
   occupation: 'any_occupation',
+  salary: 'any_salary',
   paymentDay: 5,
+  registerNumber: 'any_register_number',
+  contractType: 'contract_type',
+  publicAgency: 'any_agency',
+
+  bank: '00 - Any Bank',
+  agency: '0000',
   pixKey: 'any_pix_key',
   pixType: 'any_type',
+  accountNumber: 'any_account',
+  accountType: 'any_type',
+
   placeOfBirth: 'any_place',
-  postalCode: 'any_postal_code',
-  publicAgency: 'any_agency',
   registerId: 'any_register_id',
-  registerNumber: 'any_register_number',
-  salary: 'any_salary',
-  state: 'any_state',
-  street: 'any_street',
   taxId: '000.000.000-00',
   partner: 'partner',
   createdBy: 'any_user',

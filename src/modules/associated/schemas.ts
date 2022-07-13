@@ -5,7 +5,11 @@ export const GetAssociatedById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
 });
 
-export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
+export const CreateAssociated = Joi.object<
+  Omit<Prisma.AssociatedCreateInput, 'addresses'> & {
+    addresses: Prisma.AddressCreateWithoutAssociatedInput[];
+  }
+>({
   name: Joi.string().required().label('nome'),
   lastName: Joi.string().required().label('sobrenome'),
   affiliation: Joi.string().required().label('afiliação'),
@@ -33,14 +37,21 @@ export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
   finalDate: Joi.date().label('data final'),
   publicAgency: Joi.string().required().label('órgão público'),
 
-  addressType: Joi.string().required().label('tipo de endereço'),
-  postalCode: Joi.string().required().label('cep'),
-  street: Joi.string().required().label('logradouro'),
-  houseNumber: Joi.string().required().label('número'),
-  complement: Joi.string().allow('').label('complemento'),
-  district: Joi.string().required().label('bairro'),
-  city: Joi.string().required().label('cidade'),
-  state: Joi.string().required().label('estado'),
+  addresses: Joi.array()
+    .items(
+      Joi.object({
+        addressType: Joi.string().required().label('tipo de endereço'),
+        postalCode: Joi.string().required().label('cep'),
+        street: Joi.string().required().label('logradouro'),
+        houseNumber: Joi.string().required().label('número'),
+        complement: Joi.string().allow('').label('complemento'),
+        district: Joi.string().required().label('bairro'),
+        city: Joi.string().required().label('cidade'),
+        state: Joi.string().required().label('estado'),
+      }),
+    )
+    .required(),
+
   bank: Joi.string().required().label('banco'),
   agency: Joi.string().required().label('agencia'),
   accountType: Joi.string().required().label('tipo de conta'),
@@ -51,7 +62,9 @@ export const CreateAssociated = Joi.object<Prisma.AssociatedCreateInput>({
 });
 
 export const UpdateAssociatedById = Joi.object<
-  Prisma.AssociatedUpdateInput & { id: number }
+  Omit<Prisma.AssociatedUpdateInput & { id: number }, 'addresses'> & {
+    addresses?: Prisma.AddressCreateWithoutAssociatedInput[];
+  }
 >({
   id: Joi.number().min(1).required(),
   name: Joi.string().label('nome'),
@@ -81,14 +94,18 @@ export const UpdateAssociatedById = Joi.object<
   finalDate: Joi.date().label('data final'),
   publicAgency: Joi.string().label('órgão público'),
 
-  addressType: Joi.string().label('tipo de endereço'),
-  postalCode: Joi.string().label('cep'),
-  street: Joi.string().label('logradouro'),
-  houseNumber: Joi.string().label('número'),
-  complement: Joi.string().default('').label('complemento'),
-  district: Joi.string().label('bairro'),
-  city: Joi.string().label('cidade'),
-  state: Joi.string().label('estado'),
+  addresses: Joi.array().items(
+    Joi.object({
+      addressType: Joi.string().required().label('tipo de endereço'),
+      postalCode: Joi.string().required().label('cep'),
+      street: Joi.string().required().label('logradouro'),
+      houseNumber: Joi.string().required().label('número'),
+      complement: Joi.string().allow('').label('complemento'),
+      district: Joi.string().required().label('bairro'),
+      city: Joi.string().required().label('cidade'),
+      state: Joi.string().required().label('estado'),
+    }),
+  ),
 
   bank: Joi.string().label('banco'),
   agency: Joi.string().label('agencia'),

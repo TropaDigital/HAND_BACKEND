@@ -1,4 +1,4 @@
-import { Associated, Prisma } from '@prisma/client';
+import { Address, Associated, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import {
@@ -6,18 +6,33 @@ import {
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 
-export interface IAssociatedRepository {
-  create(payload: Prisma.AssociatedCreateInput): Promise<Associated>;
+export type IAssociated = Associated & { addresses: Address[] };
+export type ICreateAssociatedInput = Omit<
+  Prisma.AssociatedCreateInput,
+  'addresses'
+> & {
+  addresses: Omit<Address, 'id' | 'associatedId'>[];
+};
 
-  updateById(id: number, payload: Prisma.AssociatedUpdateInput): Promise<void>;
+export type IUpdateAssociatedInput = Omit<
+  Prisma.AssociatedUpdateInput,
+  'addresses'
+> & {
+  addresses?: Omit<Address, 'id' | 'associatedId'>[];
+};
+
+export interface IAssociatedRepository {
+  create(payload: ICreateAssociatedInput): Promise<IAssociated>;
+
+  updateById(id: number, payload: IUpdateAssociatedInput): Promise<void>;
 
   deleteById(id: number): Promise<void>;
 
   findAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAResult<Associated[]>>;
+  ): Promise<IPaginatedAResult<IAssociated[]>>;
 
-  findById(id: number): Promise<Associated | null>;
+  findById(id: number): Promise<IAssociated | null>;
 }
 
 export interface IAssociatedController {
@@ -28,13 +43,13 @@ export interface IAssociatedController {
       unknown,
       IFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<IPaginatedAResult<Associated[]>>>;
+  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]>>>;
 
   getById(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Associated | null>>;
+  ): Promise<IApiHttpResponse<IAssociated | null>>;
 
-  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Associated>>;
+  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<IAssociated>>;
 
   updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
@@ -44,13 +59,13 @@ export interface IAssociatedController {
 export interface IAssociatedService {
   getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAResult<Associated[]>>;
+  ): Promise<IPaginatedAResult<IAssociated[]>>;
 
-  getById(id: number): Promise<Associated | null>;
+  getById(id: number): Promise<IAssociated | null>;
 
-  create(payload: Prisma.AssociatedCreateInput): Promise<Associated>;
+  create(payload: ICreateAssociatedInput): Promise<IAssociated>;
 
-  updateById(id: number, payload: Prisma.AssociatedUpdateInput): Promise<void>;
+  updateById(id: number, payload: IUpdateAssociatedInput): Promise<void>;
 
   deleteById(id: number): Promise<void>;
 }

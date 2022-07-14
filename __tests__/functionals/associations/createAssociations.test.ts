@@ -31,13 +31,9 @@ describe('POST /associateds - Create new associated', () => {
       .set('user', JSON.stringify({ sub: 'Any User' }))
       .send(params);
 
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        ...params,
-        emissionDate: '2022-10-10T00:00:00.000Z',
-        birthDate: '2022-10-10T00:00:00.000Z',
-      }),
-    );
+    const result = response.body.data;
+    expect(result.name).toEqual(params.name);
+    expect(result.addresses[0].street).toEqual(params.addresses[0].street);
     expect(response.status).toBe(201);
   });
 
@@ -165,34 +161,9 @@ describe('POST /associateds - Create new associated', () => {
         message: '"órgão público" is required',
       },
       {
-        fieldName: 'addressType',
-        friendlyFieldName: 'tipo de endereço',
-        message: '"tipo de endereço" is required',
-      },
-      {
-        fieldName: 'postalCode',
-        friendlyFieldName: 'cep',
-        message: '"cep" is required',
-      },
-      {
-        fieldName: 'street',
-        friendlyFieldName: 'logradouro',
-        message: '"logradouro" is required',
-      },
-      {
-        fieldName: 'houseNumber',
-        friendlyFieldName: 'número',
-        message: '"número" is required',
-      },
-      {
-        fieldName: 'district',
-        friendlyFieldName: 'bairro',
-        message: '"bairro" is required',
-      },
-      {
-        fieldName: 'state',
-        friendlyFieldName: 'estado',
-        message: '"estado" is required',
+        fieldName: 'addresses',
+        friendlyFieldName: 'addresses',
+        message: '"addresses" is required',
       },
       {
         fieldName: 'bank',

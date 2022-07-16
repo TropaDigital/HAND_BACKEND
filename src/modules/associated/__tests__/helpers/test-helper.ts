@@ -28,12 +28,22 @@ export const makeFakeCreateAssociatedInput = (
       state: 'any_state',
     },
   ],
+  employmentRelationships: [
+    {
+      occupation: 'any_occupation',
+      salary: 'any_salary',
+      paymentDay: 5,
+      registerNumber: 'any_register_number',
+      contractType: 'contract_type',
+      publicAgency: 'any_agency',
+      finalDate: new Date(),
+    },
+  ],
   affiliation: 'any_affiliation',
   agency: '0000',
   bank: '00 - Any Bank',
   birthDate: new Date(),
   cellPhone: '00-0000000',
-  contractType: 'contract_type',
   createdBy: 'any_data',
   email: 'any@email.com',
   emissionDate: new Date(),
@@ -46,17 +56,11 @@ export const makeFakeCreateAssociatedInput = (
   mother: 'any_mother',
   name: 'any_name',
   nationality: 'any_nationality',
-  occupation: 'any_occupation',
-  paymentDay: 5,
   pixKey: 'any_pix_key',
   placeOfBirth: 'any_place',
-  publicAgency: 'any_agency',
   registerId: 'any_register_id',
-  registerNumber: 'any_register_number',
-  salary: '456',
   taxId: '000.000.000-00',
   partner: 'partner',
-  finalDate: new Date(),
   ...payload,
 });
 
@@ -78,40 +82,40 @@ export const makeFakeUpdateAssociatedInput = (
     },
   ],
 
+  employmentRelationships: [
+    {
+      occupation: 'any_occupation',
+      salary: 'any_salary',
+      paymentDay: 5,
+      registerNumber: 'any_register_number',
+      contractType: 'contract_type',
+      publicAgency: 'any_agency',
+      finalDate: new Date(),
+    },
+  ],
+
   affiliation: 'any_affiliation',
   agency: '0000',
   bank: '00 - Any Bank',
   birthDate: new Date(),
   cellPhone: '00-0000000',
-
-  contractType: 'contract_type',
   createdBy: 'any_data',
-
   email: 'any@email.com',
   emissionDate: new Date(),
   emissionState: 'any_state',
   father: 'any_father',
   gender: 'any_gender',
-
   issuingAgency: 'any_agency',
   lastName: 'any_last_name',
   maritalStatus: 'any_marital_status',
   mother: 'any_mother',
   name: 'any_name',
   nationality: 'any_nationality',
-  occupation: 'any_occupation',
-  paymentDay: 5,
   pixKey: 'any_pix_key',
   placeOfBirth: 'any_place',
-
-  publicAgency: 'any_agency',
   registerId: 'any_register_id',
-  registerNumber: 'any_register_number',
-  salary: '456',
-
   taxId: '000.000.000-00',
   partner: 'partner',
-  finalDate: new Date(),
   ...payload,
 });
 
@@ -155,6 +159,20 @@ export const makeFakeAssociated = (
     },
   ],
 
+  employmentRelationships: [
+    {
+      id: 2,
+      occupation: 'any_occupation',
+      salary: 'any_salary',
+      paymentDay: 5,
+      registerNumber: 'any_register_number',
+      contractType: 'contract_type',
+      publicAgency: 'any_agency',
+      finalDate: new Date(),
+      associatedId: 0,
+    },
+  ],
+
   affiliation: 'any_affiliation',
   birthDate: new Date(),
   cellPhone: '00-0000000',
@@ -170,13 +188,6 @@ export const makeFakeAssociated = (
   name: 'any_name',
   nationality: 'any_nationality',
 
-  occupation: 'any_occupation',
-  salary: 'any_salary',
-  paymentDay: 5,
-  registerNumber: 'any_register_number',
-  contractType: 'contract_type',
-  publicAgency: 'any_agency',
-
   bank: '00 - Any Bank',
   agency: '0000',
   pixKey: 'any_pix_key',
@@ -189,7 +200,6 @@ export const makeFakeAssociated = (
   taxId: '000.000.000-00',
   partner: 'partner',
   createdBy: 'any_user',
-  finalDate: new Date(),
   updatedBy: 'any',
   createdAt: new Date(),
   updatedAt: new Date(),

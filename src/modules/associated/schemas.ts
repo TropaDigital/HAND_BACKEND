@@ -1,15 +1,12 @@
-import { Prisma } from '@prisma/client';
 import Joi from 'joi';
+
+import { ICreateAssociatedInput, IUpdateAssociatedInput } from './interfaces';
 
 export const GetAssociatedById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
 });
 
-export const CreateAssociated = Joi.object<
-  Omit<Prisma.AssociatedCreateInput, 'addresses'> & {
-    addresses: Prisma.AddressCreateWithoutAssociatedInput[];
-  }
->({
+export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
   name: Joi.string().required().label('nome'),
   lastName: Joi.string().required().label('sobrenome'),
   affiliation: Joi.string().required().label('afiliação'),
@@ -29,14 +26,6 @@ export const CreateAssociated = Joi.object<
   mother: Joi.string().required().label('mãe'),
   partner: Joi.string().label('cônjuge'),
 
-  occupation: Joi.string().required().label('profissão'),
-  salary: Joi.string().required().label('salário'),
-  paymentDay: Joi.number().min(1).max(31).required().label('dia de pagamento'),
-  registerNumber: Joi.string().required().label('matrícula'),
-  contractType: Joi.string().required().label('tipo de contrato'),
-  finalDate: Joi.date().label('data final'),
-  publicAgency: Joi.string().required().label('órgão público'),
-
   addresses: Joi.array()
     .items(
       Joi.object({
@@ -52,6 +41,20 @@ export const CreateAssociated = Joi.object<
     )
     .required(),
 
+  employmentRelationships: Joi.array()
+    .items(
+      Joi.object({
+        occupation: Joi.string().label('profissão'),
+        salary: Joi.string().label('salário'),
+        paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
+        registerNumber: Joi.string().label('matrícula'),
+        contractType: Joi.string().label('tipo de contrato'),
+        finalDate: Joi.date().label('data final'),
+        publicAgency: Joi.string().label('órgão público'),
+      }),
+    )
+    .required(),
+
   bank: Joi.string().required().label('banco'),
   agency: Joi.string().required().label('agencia'),
   accountType: Joi.string().required().label('tipo de conta'),
@@ -62,9 +65,7 @@ export const CreateAssociated = Joi.object<
 });
 
 export const UpdateAssociatedById = Joi.object<
-  Omit<Prisma.AssociatedUpdateInput & { id: number }, 'addresses'> & {
-    addresses?: Prisma.AddressCreateWithoutAssociatedInput[];
-  }
+  IUpdateAssociatedInput & { id: number }
 >({
   id: Joi.number().min(1).required(),
   name: Joi.string().label('nome'),
@@ -86,14 +87,6 @@ export const UpdateAssociatedById = Joi.object<
   mother: Joi.string().label('mãe'),
   partner: Joi.string().label('cônjuge'),
 
-  occupation: Joi.string().label('profissão'),
-  salary: Joi.string().label('salário'),
-  paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
-  registerNumber: Joi.string().label('matrícula'),
-  contractType: Joi.string().label('tipo de contrato'),
-  finalDate: Joi.date().label('data final'),
-  publicAgency: Joi.string().label('órgão público'),
-
   addresses: Joi.array().items(
     Joi.object({
       addressType: Joi.string().required().label('tipo de endereço'),
@@ -104,6 +97,18 @@ export const UpdateAssociatedById = Joi.object<
       district: Joi.string().required().label('bairro'),
       city: Joi.string().required().label('cidade'),
       state: Joi.string().required().label('estado'),
+    }),
+  ),
+
+  employmentRelationships: Joi.array().items(
+    Joi.object({
+      occupation: Joi.string().label('profissão'),
+      salary: Joi.string().label('salário'),
+      paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
+      registerNumber: Joi.string().label('matrícula'),
+      contractType: Joi.string().label('tipo de contrato'),
+      finalDate: Joi.date().label('data final'),
+      publicAgency: Joi.string().label('órgão público'),
     }),
   ),
 

@@ -1,4 +1,9 @@
-import { Address, Associated, Prisma } from '@prisma/client';
+import {
+  Address,
+  Associated,
+  EmploymentRelationship,
+  Prisma,
+} from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import {
@@ -6,19 +11,31 @@ import {
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 
-export type IAssociated = Associated & { addresses: Address[] };
+export type IAssociated = Associated & {
+  addresses: Address[];
+  employmentRelationships: EmploymentRelationship[];
+};
+
 export type ICreateAssociatedInput = Omit<
   Prisma.AssociatedCreateInput,
-  'addresses'
+  'addresses' | 'employmentRelationships'
 > & {
   addresses: Omit<Address, 'id' | 'associatedId'>[];
+  employmentRelationships: Omit<
+    EmploymentRelationship,
+    'id' | 'associatedId'
+  >[];
 };
 
 export type IUpdateAssociatedInput = Omit<
   Prisma.AssociatedUpdateInput,
-  'addresses'
+  'addresses' | 'employmentRelationships'
 > & {
   addresses?: Omit<Address, 'id' | 'associatedId'>[];
+  employmentRelationships?: Omit<
+    EmploymentRelationship,
+    'id' | 'associatedId'
+  >[];
 };
 
 export interface IAssociatedRepository {

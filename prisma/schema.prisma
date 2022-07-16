@@ -32,6 +32,20 @@ model Address {
   associatedId Int?
 }
 
+model EmploymentRelationship {
+  id Int @id @default(autoincrement())
+
+  occupation     String
+  salary         String
+  paymentDay     Int         @map(name: "payment_day")
+  registerNumber String      @map(name: "register_number")
+  contractType   String      @map(name: "contract_type")
+  finalDate      DateTime?   @map(name: "final_date")
+  publicAgency   String      @map(name: "public_agency")
+  Associated     Associated? @relation(fields: [associatedId], references: [id])
+  associatedId   Int?
+}
+
 model Associated {
   id Int @id @default(autoincrement())
 
@@ -63,13 +77,7 @@ model Associated {
 
   addresses Address[]
 
-  occupation     String
-  salary         String
-  paymentDay     Int       @map(name: "payment_day")
-  registerNumber String    @map(name: "register_number")
-  contractType   String    @map(name: "contract_type")
-  finalDate      DateTime? @map(name: "final_date")
-  publicAgency   String    @map(name: "public_agency")
+  employmentRelationships EmploymentRelationship[]
 
   createdBy String    @map(name: "created_by") @db.VarChar(75)
   updatedBy String?   @map(name: "updated_by") @db.VarChar(75)

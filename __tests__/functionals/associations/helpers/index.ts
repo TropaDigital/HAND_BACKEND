@@ -9,8 +9,6 @@ export const makeFakeCreateAssociatedParams = (
   name: 'Any name1',
   mother: 'Any mother',
   nationality: 'Any nationality',
-  occupation: 'Any occupation',
-  paymentDay: 5,
   pixKey: 'Any key',
   placeOfBirth: 'Any place',
 
@@ -26,10 +24,19 @@ export const makeFakeCreateAssociatedParams = (
       state: 'any_state',
     },
   ],
-  publicAgency: 'Any agency',
+  employmentRelationships: [
+    {
+      occupation: 'any_occupation',
+      salary: 'any_salary',
+      paymentDay: 5,
+      registerNumber: 'any_register_number',
+      contractType: 'contract_type',
+      publicAgency: 'any_agency',
+      finalDate: new Date(),
+    },
+  ],
+
   registerId: 'Any id',
-  registerNumber: 'Any number',
-  salary: '2000',
   taxId: '000.000.000-00',
   partner: 'Any partner',
   maritalStatus: 'Any status',
@@ -40,7 +47,6 @@ export const makeFakeCreateAssociatedParams = (
   emissionState: 'Any state',
   emissionDate: new Date('2022-10-10'),
   email: 'any@mail.com',
-  contractType: 'Any contract',
   cellPhone: '00000000',
   birthDate: new Date('2022-10-10'),
   bank: 'Any bank',
@@ -59,8 +65,7 @@ export const makeFakeAssociated = (
   name: 'Any name1',
   mother: 'Any mother',
   nationality: 'Any nationality',
-  occupation: 'Any occupation',
-  paymentDay: 5,
+
   pixKey: 'Any key',
   placeOfBirth: 'Any place',
 
@@ -77,10 +82,19 @@ export const makeFakeAssociated = (
     },
   ],
 
-  publicAgency: 'Any agency',
+  employmentRelationships: [
+    {
+      occupation: 'any_occupation',
+      salary: 'any_salary',
+      paymentDay: 5,
+      registerNumber: 'any_register_number',
+      contractType: 'contract_type',
+      publicAgency: 'any_agency',
+      finalDate: new Date(),
+    },
+  ],
+
   registerId: 'Any id',
-  registerNumber: 'Any number',
-  salary: '2000',
   taxId: '000.000.000-00',
   partner: 'Any partner',
   maritalStatus: 'Any status',
@@ -91,7 +105,6 @@ export const makeFakeAssociated = (
   emissionState: 'Any state',
   emissionDate: new Date('2022-10-10'),
   email: 'any@mail.com',
-  contractType: 'Any contract',
   cellPhone: '00000000',
   birthDate: new Date('2022-10-10'),
   bank: 'Any bank',
@@ -105,9 +118,15 @@ export const makeFakeAssociated = (
 });
 
 const createAssociated = async (associated: ICreateAssociatedInput) => {
-  const { addresses, ...payload } = associated;
+  const { addresses, employmentRelationships, ...payload } = associated;
   await global.prismaClient.associated.create({
-    data: { ...payload, addresses: { createMany: { data: addresses } } },
+    data: {
+      ...payload,
+      addresses: { createMany: { data: addresses } },
+      employmentRelationships: {
+        createMany: { data: employmentRelationships },
+      },
+    },
   });
 };
 

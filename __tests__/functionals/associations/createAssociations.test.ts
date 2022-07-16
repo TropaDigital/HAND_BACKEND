@@ -131,39 +131,14 @@ describe('POST /associateds - Create new associated', () => {
         message: '"mãe" is required',
       },
       {
-        fieldName: 'occupation',
-        friendlyFieldName: 'profissão',
-        message: '"profissão" is required',
-      },
-      {
-        fieldName: 'salary',
-        friendlyFieldName: 'salário',
-        message: '"salário" is required',
-      },
-      {
-        fieldName: 'paymentDay',
-        friendlyFieldName: 'dia de pagamento',
-        message: '"dia de pagamento" is required',
-      },
-      {
-        fieldName: 'registerNumber',
-        friendlyFieldName: 'matrícula',
-        message: '"matrícula" is required',
-      },
-      {
-        fieldName: 'contractType',
-        friendlyFieldName: 'tipo de contrato',
-        message: '"tipo de contrato" is required',
-      },
-      {
-        fieldName: 'publicAgency',
-        friendlyFieldName: 'órgão público',
-        message: '"órgão público" is required',
-      },
-      {
         fieldName: 'addresses',
         friendlyFieldName: 'addresses',
         message: '"addresses" is required',
+      },
+      {
+        fieldName: 'employmentRelationships',
+        friendlyFieldName: 'employmentRelationships',
+        message: '"employmentRelationships" is required',
       },
       {
         fieldName: 'bank',

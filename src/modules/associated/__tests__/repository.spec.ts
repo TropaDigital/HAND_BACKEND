@@ -23,6 +23,7 @@ describe(AssociatedRepository.name, () => {
       expect(findManySpy).toBeCalledWith({
         include: {
           addresses: true,
+          employmentRelationships: true,
         },
         where: {},
       });
@@ -37,6 +38,7 @@ describe(AssociatedRepository.name, () => {
       expect(findManySpy).toBeCalledWith({
         include: {
           addresses: true,
+          employmentRelationships: true,
         },
         where: { id: { contains: 1 } },
       });
@@ -90,7 +92,7 @@ describe(AssociatedRepository.name, () => {
       await sut.findById(fakeId);
 
       expect(findFirstSpy).toBeCalledWith({
-        include: { addresses: true },
+        include: { addresses: true, employmentRelationships: true },
         where: { id: 777 },
       });
     });
@@ -124,11 +126,18 @@ describe(AssociatedRepository.name, () => {
 
       await sut.create(fakeAssociated);
 
-      const { addresses, ...associated } = makeFakeAssociated({});
+      const { addresses, employmentRelationships, ...associated } =
+        makeFakeAssociated({});
 
       expect(createSpy).toBeCalledWith({
-        data: { ...associated, addresses: { createMany: { data: addresses } } },
-        include: { addresses: true },
+        data: {
+          ...associated,
+          addresses: { createMany: { data: addresses } },
+          employmentRelationships: {
+            createMany: { data: employmentRelationships },
+          },
+        },
+        include: { addresses: true, employmentRelationships: true },
       });
     });
 

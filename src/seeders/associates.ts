@@ -25,12 +25,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Allana Rafaela',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Dentista',
-    publicAgency: 'Ministério Público Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602042',
-    salary: '3200.0',
+    employmentRelationships: {
+      create: {
+        occupation: 'Dentista',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '3000.20',
+      },
+    },
 
     addresses: {
       create: {
@@ -73,12 +77,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Advogado',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '8654,45',
+      },
+    },
 
     addresses: {
       create: {
@@ -121,13 +129,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
-
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '3200,11',
+      },
+    },
     addresses: {
       create: {
         addressType: 'Casa',
@@ -169,12 +180,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '4312.20',
+      },
+    },
 
     addresses: {
       create: {
@@ -217,12 +232,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '4312.20',
+      },
+    },
 
     addresses: {
       create: {
@@ -265,12 +284,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '4312.20',
+      },
+    },
 
     addresses: {
       create: {
@@ -313,12 +336,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '4312.20',
+      },
+    },
 
     addresses: {
       create: {
@@ -361,12 +388,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '4312.20',
+      },
+    },
 
     addresses: {
       create: {
@@ -409,12 +440,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '4312.20',
+      },
+    },
 
     addresses: {
       create: {
@@ -457,12 +492,16 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    occupation: 'Arquiteta',
-    publicAgency: 'MiSupremo Tribunal Federal',
-    paymentDay: 5,
-    contractType: 'Carteira Assinada',
-    registerNumber: '2108602049',
-    salary: '4312.20',
+    employmentRelationships: {
+      create: {
+        occupation: 'Arquiteta',
+        publicAgency: 'MiSupremo Tribunal Federal',
+        paymentDay: 5,
+        contractType: 'Carteira Assinada',
+        registerNumber: '2108602049',
+        salary: '4312.20',
+      },
+    },
 
     addresses: {
       create: {

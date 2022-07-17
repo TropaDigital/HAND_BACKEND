@@ -1,3 +1,12 @@
+## [1.8.0](https://github.com/haandsolutions/haand-bib/compare/v1.7.1...v1.8.0) (2022-07-17)
+
+
+### :sparkles: New Features
+
+* add address as composite of associated ([e932c09](https://github.com/haandsolutions/haand-bib/commit/e932c099f47ad5d3cae1867a7e93f21a11cd1415))
+* implement employmentRelationships table ([3696c4d](https://github.com/haandsolutions/haand-bib/commit/3696c4de88fca43237350657b41ec2f37d3dbda8))
+* update functional tests ([a2cfd3e](https://github.com/haandsolutions/haand-bib/commit/a2cfd3e1c0ac1da7a615aa0d922414cae3bad8ea))
+
 ### [1.7.1](https://github.com/haandsolutions/haand-bib/compare/v1.7.0...v1.7.1) (2022-07-03)
 
 

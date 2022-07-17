@@ -1,24 +1,30 @@
-import { Associated, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 import { NotFoundError } from '../../shared/errors';
 import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
-import { IAssociatedRepository, IAssociatedService } from './interfaces';
+import {
+  IAssociated,
+  IAssociatedRepository,
+  IAssociatedService,
+  ICreateAssociatedInput,
+  IUpdateAssociatedInput,
+} from './interfaces';
 
 export class AssociatedService implements IAssociatedService {
   constructor(private readonly associatedRepository: IAssociatedRepository) {}
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAResult<Associated[]>> {
+  ): Promise<IPaginatedAResult<IAssociated[]>> {
     const result = await this.associatedRepository.findAll(payload);
 
     return result;
   }
 
-  public async getById(id: number): Promise<Associated | null> {
+  public async getById(id: number): Promise<IAssociated | null> {
     const result = await this.associatedRepository.findById(id);
     if (!result) {
       throw new NotFoundError('associated not found with provided id');
@@ -26,9 +32,7 @@ export class AssociatedService implements IAssociatedService {
     return result;
   }
 
-  public async create(
-    payload: Prisma.AssociatedCreateInput,
-  ): Promise<Associated> {
+  public async create(payload: ICreateAssociatedInput): Promise<IAssociated> {
     const result = await this.associatedRepository.create(payload);
 
     return result;
@@ -36,7 +40,7 @@ export class AssociatedService implements IAssociatedService {
 
   public async updateById(
     id: number,
-    payload: Partial<Omit<Associated, 'id'>>,
+    payload: IUpdateAssociatedInput,
   ): Promise<void> {
     const associatedExists = await this.associatedRepository.findById(id);
     if (!associatedExists) {

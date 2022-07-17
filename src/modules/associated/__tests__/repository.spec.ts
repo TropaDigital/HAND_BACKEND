@@ -20,7 +20,13 @@ describe(AssociatedRepository.name, () => {
 
       await sut.findAll({});
 
-      expect(findManySpy).toBeCalledWith({ where: {} });
+      expect(findManySpy).toBeCalledWith({
+        include: {
+          addresses: true,
+          employmentRelationships: true,
+        },
+        where: {},
+      });
     });
 
     it('should call prisma with right params', async () => {
@@ -29,7 +35,13 @@ describe(AssociatedRepository.name, () => {
 
       await sut.findAll({ id: 1 });
 
-      expect(findManySpy).toBeCalledWith({ where: { id: { contains: 1 } } });
+      expect(findManySpy).toBeCalledWith({
+        include: {
+          addresses: true,
+          employmentRelationships: true,
+        },
+        where: { id: { contains: 1 } },
+      });
     });
 
     it('should return prisma result', async () => {
@@ -79,7 +91,10 @@ describe(AssociatedRepository.name, () => {
 
       await sut.findById(fakeId);
 
-      expect(findFirstSpy).toBeCalledWith({ where: { id: 777 } });
+      expect(findFirstSpy).toBeCalledWith({
+        include: { addresses: true, employmentRelationships: true },
+        where: { id: 777 },
+      });
     });
 
     it('should return prisma result', async () => {
@@ -111,7 +126,19 @@ describe(AssociatedRepository.name, () => {
 
       await sut.create(fakeAssociated);
 
-      expect(createSpy).toBeCalledWith({ data: makeFakeAssociated({}) });
+      const { addresses, employmentRelationships, ...associated } =
+        makeFakeAssociated({});
+
+      expect(createSpy).toBeCalledWith({
+        data: {
+          ...associated,
+          addresses: { createMany: { data: addresses } },
+          employmentRelationships: {
+            createMany: { data: employmentRelationships },
+          },
+        },
+        include: { addresses: true, employmentRelationships: true },
+      });
     });
 
     it('should return prisma result', async () => {

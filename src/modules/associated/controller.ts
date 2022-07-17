@@ -1,4 +1,4 @@
-import { Associated, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
@@ -7,7 +7,11 @@ import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
-import { IAssociatedController, IAssociatedService } from './interfaces';
+import {
+  IAssociated,
+  IAssociatedController,
+  IAssociatedService,
+} from './interfaces';
 import * as schemas from './schemas';
 
 export class AssociatedController implements IAssociatedController {
@@ -23,7 +27,7 @@ export class AssociatedController implements IAssociatedController {
       unknown,
       IFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<IPaginatedAResult<Associated[]>>> {
+  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]>>> {
     const result = await this.associatedService.getAll(httpRequest.query);
 
     return { statusCodeAsString: 'OK', body: result };
@@ -31,7 +35,7 @@ export class AssociatedController implements IAssociatedController {
 
   public async getById(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Associated | null>> {
+  ): Promise<IApiHttpResponse<IAssociated | null>> {
     const { id } = this.validator.validateSchema<{ id: number }>(
       'GetAssociatedById',
       httpRequest.params as { id: number },
@@ -43,12 +47,11 @@ export class AssociatedController implements IAssociatedController {
 
   public async create(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<Associated>> {
-    const associated =
-      this.validator.validateSchema<Prisma.AssociatedCreateInput>(
-        'CreateAssociated',
-        { ...httpRequest.body, createdBy: httpRequest.user?.sub },
-      );
+  ): Promise<IApiHttpResponse<IAssociated>> {
+    const associated = this.validator.validateSchema<IAssociated>(
+      'CreateAssociated',
+      { ...httpRequest.body, createdBy: httpRequest.user?.sub },
+    );
     const result = await this.associatedService.create(associated);
 
     return { statusCodeAsString: 'CREATED', body: result };
@@ -58,7 +61,7 @@ export class AssociatedController implements IAssociatedController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
     const { id, ...associated } = this.validator.validateSchema<
-      Prisma.AssociatedUpdateInput & { id: number }
+      Partial<IAssociated> & { id: number }
     >('UpdateAssociatedById', {
       ...httpRequest.body,
       ...httpRequest.params,

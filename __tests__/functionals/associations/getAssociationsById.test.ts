@@ -6,7 +6,7 @@ import {
   makeNotFoundResponse,
 } from '../helpers';
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
-import { populateDatabase, makeFakeCreateAssociatedParams } from './helpers';
+import { populateDatabase } from './helpers';
 
 describe('GET /associateds/{id} - Get associated by id', () => {
   const token = new AuthenticationService().generateToken({
@@ -30,13 +30,11 @@ describe('GET /associateds/{id} - Get associated by id', () => {
     const response = await global.testRequest
       .get(`/associateds/${id}`)
       .set('x-access-token', token);
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        ...makeFakeCreateAssociatedParams({ name: 'João', id: 1, taxId: '1' }),
-        emissionDate: '2022-10-10T00:00:00.000Z',
-        birthDate: '2022-10-10T00:00:00.000Z',
-      }),
-    );
+
+    const result = response.body.data;
+    expect(result.name).toEqual('João');
+    expect(result.id).toEqual(1);
+    expect(result.addresses.length).toBe(1);
     expect(response.status).toBe(200);
   });
 

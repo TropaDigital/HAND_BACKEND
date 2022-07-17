@@ -72,11 +72,6 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'publicAgency',
-        friendlyFieldName: 'órgão público',
-        message: '"órgão público" must be a string',
-      },
-      {
         fieldName: 'bank',
         friendlyFieldName: 'banco',
         message: '"banco" must be a string',

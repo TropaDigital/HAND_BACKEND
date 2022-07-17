@@ -31,13 +31,9 @@ describe('POST /associateds - Create new associated', () => {
       .set('user', JSON.stringify({ sub: 'Any User' }))
       .send(params);
 
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        ...params,
-        emissionDate: '2022-10-10T00:00:00.000Z',
-        birthDate: '2022-10-10T00:00:00.000Z',
-      }),
-    );
+    const result = response.body.data;
+    expect(result.name).toEqual(params.name);
+    expect(result.addresses[0].street).toEqual(params.addresses[0].street);
     expect(response.status).toBe(201);
   });
 
@@ -135,64 +131,14 @@ describe('POST /associateds - Create new associated', () => {
         message: '"mãe" is required',
       },
       {
-        fieldName: 'occupation',
-        friendlyFieldName: 'profissão',
-        message: '"profissão" is required',
+        fieldName: 'addresses',
+        friendlyFieldName: 'addresses',
+        message: '"addresses" is required',
       },
       {
-        fieldName: 'salary',
-        friendlyFieldName: 'salário',
-        message: '"salário" is required',
-      },
-      {
-        fieldName: 'paymentDay',
-        friendlyFieldName: 'dia de pagamento',
-        message: '"dia de pagamento" is required',
-      },
-      {
-        fieldName: 'registerNumber',
-        friendlyFieldName: 'matrícula',
-        message: '"matrícula" is required',
-      },
-      {
-        fieldName: 'contractType',
-        friendlyFieldName: 'tipo de contrato',
-        message: '"tipo de contrato" is required',
-      },
-      {
-        fieldName: 'publicAgency',
-        friendlyFieldName: 'órgão público',
-        message: '"órgão público" is required',
-      },
-      {
-        fieldName: 'addressType',
-        friendlyFieldName: 'tipo de endereço',
-        message: '"tipo de endereço" is required',
-      },
-      {
-        fieldName: 'postalCode',
-        friendlyFieldName: 'cep',
-        message: '"cep" is required',
-      },
-      {
-        fieldName: 'street',
-        friendlyFieldName: 'logradouro',
-        message: '"logradouro" is required',
-      },
-      {
-        fieldName: 'houseNumber',
-        friendlyFieldName: 'número',
-        message: '"número" is required',
-      },
-      {
-        fieldName: 'district',
-        friendlyFieldName: 'bairro',
-        message: '"bairro" is required',
-      },
-      {
-        fieldName: 'state',
-        friendlyFieldName: 'estado',
-        message: '"estado" is required',
+        fieldName: 'employmentRelationships',
+        friendlyFieldName: 'employmentRelationships',
+        message: '"employmentRelationships" is required',
       },
       {
         fieldName: 'bank',

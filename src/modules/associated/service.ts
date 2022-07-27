@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { EmploymentRelationship, Prisma } from '@prisma/client';
 
 import { NotFoundError } from '../../shared/errors';
 import {
@@ -47,6 +47,31 @@ export class AssociatedService implements IAssociatedService {
       throw new NotFoundError('associated not found with provided id');
     }
     const result = await this.associatedRepository.updateById(id, payload);
+    return result;
+  }
+
+  public async getEmploymentRelationshipsByAssociatedId(
+    associatedId: number,
+  ): Promise<EmploymentRelationship[]> {
+    return this.associatedRepository.getEmploymentRelationshipsByAssociatedId(
+      associatedId,
+    );
+  }
+
+  public async upsertEmploymentRelationshipById(
+    associatedId: number,
+    employmentRelationshipId: number,
+    payload:
+      | Prisma.EmploymentRelationshipUpdateInput
+      | Prisma.EmploymentRelationshipCreateInput,
+  ): Promise<EmploymentRelationship> {
+    const result =
+      await this.associatedRepository.upsertEmploymentRelationshipById(
+        associatedId,
+        employmentRelationshipId,
+        payload,
+      );
+
     return result;
   }
 

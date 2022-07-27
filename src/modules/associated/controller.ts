@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { EmploymentRelationship, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
@@ -81,5 +81,45 @@ export class AssociatedController implements IAssociatedController {
     const result = await this.associatedService.deleteById(id);
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
+  }
+
+  public async getEmploymentRelationshipsByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<EmploymentRelationship[]>> {
+    const { id } = this.validator.validateSchema<{ id: number }>(
+      'getEmploymentRelationshipsByAssociatedId',
+      httpRequest.params as { id: number },
+    );
+    const result =
+      await this.associatedService.getEmploymentRelationshipsByAssociatedId(id);
+
+    return { statusCodeAsString: 'OK', body: result };
+  }
+
+  public async updateEmploymentRelationshipsByAssociatedIdAndId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<EmploymentRelationship>> {
+    const {
+      id = 0,
+      associatedId,
+      ...payload
+    } = this.validator.validateSchema<
+      Prisma.EmploymentRelationshipUpdateInput & {
+        id?: number;
+        associatedId: number;
+      }
+    >('updateEmploymentRelationshipsByAssociatedIdAndId', {
+      ...(httpRequest.params as { id: number }),
+      ...httpRequest.body,
+    });
+
+    const result =
+      await this.associatedService.upsertEmploymentRelationshipById(
+        associatedId,
+        id,
+        payload,
+      );
+
+    return { statusCodeAsString: 'OK', body: result };
   }
 }

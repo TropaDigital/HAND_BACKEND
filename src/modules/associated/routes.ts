@@ -107,9 +107,65 @@ export default class AssociatedRouter implements IRouter {
       );
   }
 
+  private updateEmploymentRelationshipsByAssociatedIdAndId(): void {
+    /**
+     * PATCH /associateds/emploment-relationships/{id}
+     * @tag Associateds
+     * @summary create a new associated.
+     * @description return the created associated object.
+     * @pathParam {int32} id id of the associated
+     * @response 200 - an object of associated.
+     * @responseContent {CreateAssociatedResponse} 201.application/json
+     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/emploment-relationships/:id')
+      .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'updateEmploymentRelationshipsByAssociatedIdAndId',
+        ),
+      );
+  }
+
+  private getEmplomentRelationshipsByAssociatedId(): void {
+    /**
+     * GET /associateds/emploment-relationships/{id}
+     * @tag Associateds
+     * @summary create a new associated.
+     * @description return the created associated object.
+     * @pathParam {int32} id id of the associated
+     * @response 200 - an object of associated.
+     * @responseContent {CreateAssociatedResponse} 201.application/json
+     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/emploment-relationships/:id')
+      .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'getEmploymentRelationshipsByAssociatedId',
+        ),
+      );
+  }
+
   private updateById(): void {
     /**
-     * PATCH /associateds
+     * PATCH /associateds/{id}
      * @tag Associateds
      * @summary update a associated.
      * @description return no content when successfully update the resource.
@@ -139,7 +195,7 @@ export default class AssociatedRouter implements IRouter {
 
   private deleteById(): void {
     /**
-     * DELETE /associateds
+     * DELETE /associateds/{id}
      * @tag Associateds
      * @summary create a associated.
      * @description return no content when successfully delete the resource.
@@ -173,6 +229,8 @@ export default class AssociatedRouter implements IRouter {
     this.getById();
     this.updateById();
     this.deleteById();
+    this.getEmplomentRelationshipsByAssociatedId();
+    this.updateEmploymentRelationshipsByAssociatedIdAndId();
 
     app.use(this.router);
   }

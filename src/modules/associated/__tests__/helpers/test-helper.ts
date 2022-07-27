@@ -143,7 +143,6 @@ export const makeFakeAssociated = (
   payload: Partial<IAssociated>,
 ): jest.Mocked<IAssociated> => ({
   id: 0,
-
   addresses: [
     {
       id: 2,
@@ -219,6 +218,8 @@ export const makeAssociatedServiceStub =
     create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
     updateById: jest.fn(),
     deleteById: jest.fn(),
+    getEmploymentRelationshipsByAssociatedId: jest.fn(),
+    upsertEmploymentRelationshipById: jest.fn(),
   });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
@@ -245,4 +246,6 @@ export const makeAssociatedRepositoryStub =
     create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
     updateById: jest.fn(),
     deleteById: jest.fn(),
+    getEmploymentRelationshipsByAssociatedId: jest.fn(),
+    upsertEmploymentRelationshipById: jest.fn(),
   });

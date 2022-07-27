@@ -1,5 +1,6 @@
-import { Prisma } from '@prisma/client';
+import { EmploymentRelationship, Prisma } from '@prisma/client';
 
+import MySqlDBClient from '../../infra/mySql';
 import {
   IFindAllParams,
   IPaginatedAResult,
@@ -21,6 +22,20 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 
 export class AssociatedRepository implements IAssociatedRepository {
   constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
+
+  public async getEmploymentRelationshipsByAssociatedId(
+    associatedId: number,
+  ): Promise<EmploymentRelationship[]> {
+    const employmentRelationships = await MySqlDBClient.getInstance()
+      .getPrismaClientInstance()
+      .employmentRelationship.findMany({
+        where: {
+          associatedId,
+        },
+      });
+
+    return employmentRelationships;
+  }
 
   public async findAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -77,8 +92,35 @@ export class AssociatedRepository implements IAssociatedRepository {
 
     await this.prismaRepository.update({
       where: { id },
-      data: payload,
+      data: associated,
     });
+  }
+
+  public async upsertEmploymentRelationshipById(
+    associatedId: number,
+    employmentRelationshipId: number,
+    payload:
+      | Prisma.EmploymentRelationshipUpdateInput
+      | Prisma.EmploymentRelationshipCreateInput,
+  ): Promise<EmploymentRelationship> {
+    const result = await MySqlDBClient.getInstance()
+      .getPrismaClientInstance()
+      .employmentRelationship.upsert({
+        where: { id: employmentRelationshipId },
+        create: {
+          ...payload,
+          Associated: {
+            connect: {
+              id: associatedId,
+            },
+          },
+        } as Prisma.EmploymentRelationshipCreateInput,
+        update: {
+          ...payload,
+        } as Prisma.EmploymentRelationshipUpdateInput,
+      });
+
+    return result;
   }
 
   public async deleteById(id: number): Promise<void> {

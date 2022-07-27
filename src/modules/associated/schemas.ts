@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import Joi from 'joi';
 
 import { ICreateAssociatedInput, IUpdateAssociatedInput } from './interfaces';
@@ -102,6 +103,7 @@ export const UpdateAssociatedById = Joi.object<
 
   employmentRelationships: Joi.array().items(
     Joi.object({
+      id: Joi.number(),
       occupation: Joi.string().label('profissão'),
       salary: Joi.string().label('salário'),
       paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
@@ -124,4 +126,27 @@ export const UpdateAssociatedById = Joi.object<
 
 export const DeleteAssociatedById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
+});
+
+export const getEmploymentRelationshipsByAssociatedId = Joi.object<{
+  id: number;
+}>({
+  id: Joi.number().min(1).required(),
+});
+
+export const updateEmploymentRelationshipsByAssociatedIdAndId = Joi.object<
+  Prisma.EmploymentRelationshipUpdateInput & {
+    id?: number;
+    associatedId: number;
+  }
+>({
+  associatedId: Joi.number().required(),
+  id: Joi.number(),
+  occupation: Joi.string().label('profissão'),
+  salary: Joi.string().label('salário'),
+  paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
+  registerNumber: Joi.string().label('matrícula'),
+  contractType: Joi.string().label('tipo de contrato'),
+  finalDate: Joi.date().label('data final'),
+  publicAgency: Joi.string().label('órgão público'),
 });

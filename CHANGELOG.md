@@ -1,3 +1,10 @@
+## [1.9.0](https://github.com/haandsolutions/haand-bib/compare/v1.8.0...v1.9.0) (2022-07-27)
+
+
+### :sparkles: New Features
+
+* add update and get employment relationships separated ([995889d](https://github.com/haandsolutions/haand-bib/commit/995889d751dad5ffa9ce77d2af7f643c7064d290))
+
 ## [1.8.0](https://github.com/haandsolutions/haand-bib/compare/v1.7.1...v1.8.0) (2022-07-17)
 
 

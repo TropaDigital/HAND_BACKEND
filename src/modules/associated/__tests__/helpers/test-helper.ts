@@ -220,6 +220,8 @@ export const makeAssociatedServiceStub =
     deleteById: jest.fn(),
     getEmploymentRelationshipsByAssociatedId: jest.fn(),
     upsertEmploymentRelationshipById: jest.fn(),
+    getAddressesByAssociatedId: jest.fn(),
+    upsertAddressById: jest.fn(),
   });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
@@ -248,4 +250,6 @@ export const makeAssociatedRepositoryStub =
     deleteById: jest.fn(),
     getEmploymentRelationshipsByAssociatedId: jest.fn(),
     upsertEmploymentRelationshipById: jest.fn(),
+    getAddressesByAssociatedId: jest.fn(),
+    upsertAddressById: jest.fn(),
   });

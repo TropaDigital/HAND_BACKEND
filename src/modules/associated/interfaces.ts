@@ -44,9 +44,11 @@ export interface IAssociatedRepository {
   updateById(id: number, payload: IUpdateAssociatedInput): Promise<void>;
 
   deleteById(id: number): Promise<void>;
+
   getEmploymentRelationshipsByAssociatedId(
     associatedId: number,
   ): Promise<EmploymentRelationship[]>;
+
   upsertEmploymentRelationshipById(
     associatedId: number,
     employmentRelationshipId: number,
@@ -54,6 +56,14 @@ export interface IAssociatedRepository {
       | Prisma.EmploymentRelationshipUpdateInput
       | Prisma.EmploymentRelationshipCreateInput,
   ): Promise<EmploymentRelationship>;
+
+  getAddressesByAssociatedId(associatedId: number): Promise<Address[]>;
+
+  upsertAddressById(
+    associatedId: number,
+    employmentRelationshipId: number,
+    payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
+  ): Promise<Address>;
 
   findAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -81,10 +91,20 @@ export interface IAssociatedController {
   updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
   deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
+
   getEmploymentRelationshipsByAssociatedId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<EmploymentRelationship[]>>;
+
   updateEmploymentRelationshipsByAssociatedIdAndId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<unknown>>;
+
+  getAddressesByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Address[]>>;
+
+  updateAddressByAssociatedIdAndId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<unknown>>;
 }
@@ -103,6 +123,7 @@ export interface IAssociatedService {
   deleteById(id: number): Promise<void>;
 
   deleteById(id: number): Promise<void>;
+
   upsertEmploymentRelationshipById(
     associatedId: number,
     employmentRelationshipId: number,
@@ -110,7 +131,16 @@ export interface IAssociatedService {
       | Prisma.EmploymentRelationshipUpdateInput
       | Prisma.EmploymentRelationshipCreateInput,
   ): Promise<EmploymentRelationship>;
+
   getEmploymentRelationshipsByAssociatedId(
     associatedId: number,
   ): Promise<EmploymentRelationship[]>;
+
+  upsertAddressById(
+    associatedId: number,
+    addressId: number,
+    payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
+  ): Promise<Address>;
+
+  getAddressesByAssociatedId(associatedId: number): Promise<Address[]>;
 }

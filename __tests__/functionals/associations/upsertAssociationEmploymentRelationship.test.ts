@@ -6,7 +6,10 @@ import {
   makeNotFoundResponse,
 } from '../helpers';
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
-import { populateDatabase } from './helpers';
+import {
+  makeFakeEmploymentRelationshipParams,
+  populateDatabase,
+} from './helpers';
 
 describe('PATCH /associateds/{id} - Update associated by id', () => {
   const token = new AuthenticationService().generateToken({
@@ -26,28 +29,38 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
     await global.prismaClient.employmentRelationship.deleteMany();
   });
 
-  it('Should return 204 with updated', async () => {
+  it('Should return 200 with updated', async () => {
     const id = 1;
 
     const response = await global.testRequest
-      .patch(`/associateds/${id}`)
+      .patch(`/associateds/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send({
-        name: 'Any name',
-      });
+      .send(
+        makeFakeEmploymentRelationshipParams({
+          associatedId: id,
+        }),
+      );
 
-    expect(response.body).toEqual({});
-    expect(response.status).toBe(204);
+    expect(response.status).toBe(200);
+    expect(response.body.data).toEqual({
+      associatedId: 1,
+      contractType: 'contract_type',
+      finalDate: expect.any(String),
+      id: expect.any(Number),
+      occupation: 'any_occupation',
+      paymentDay: 5,
+      publicAgency: 'any_agency',
+      registerNumber: 'any_register_number',
+      salary: 'any_salary',
+    });
   });
 
   it('Should return 404 when associated does not exists', async () => {
-    const id = 10;
+    const id = 999999;
     const response = await global.testRequest
-      .patch(`/associateds/${id}`)
+      .patch(`/associateds/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send({
-        name: 'Vinicius',
-      });
+      .send(makeFakeEmploymentRelationshipParams({ associatedId: id }));
     expect(response.body).toEqual(
       makeNotFoundResponse('associated not found with provided id'),
     );
@@ -57,62 +70,52 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
   it('Should return 400 when receive invalid params', async () => {
     const id = 1;
     const response = await global.testRequest
-      .patch(`/associateds/${id}`)
+      .patch(`/associateds/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send({
-        associated: 1,
-        bank: 1,
-        consultant: 1,
-        contractModel: 1,
-        financialAssistanceValue: '20',
-        installmentNumber: '6',
-        installmentValue: '20',
-        publicAgency: 1,
-        initialDate: 1,
-        createdBy: 1,
-      });
+      .send('');
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'bank',
-        friendlyFieldName: 'banco',
-        message: '"banco" must be a string',
-      },
-      {
-        fieldName: 'createdBy',
-        friendlyFieldName: 'createdBy',
-        message: '"createdBy" must be a string',
+        fieldName: 'associatedId',
+        friendlyFieldName: 'associatedId',
+        message: '"associatedId" is required',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
     expect(response.body).toEqual(invalidParamsResponse);
   });
 
-  it('Should return 204 when receive just one param', async () => {
+  it('Should return 200 when receive just one param', async () => {
     const id = 1;
 
     const response = await global.testRequest
-      .patch(`/associateds/${id}`)
+      .patch(`/associateds/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send({
-        name: 'João',
-      });
-    expect(response.body).toEqual({});
-    expect(response.status).toBe(204);
+      .send(makeFakeEmploymentRelationshipParams({ associatedId: 1 }));
+    expect(response.body.data).toEqual({
+      associatedId: 1,
+      contractType: 'contract_type',
+      finalDate: expect.any(String),
+      id: expect.any(Number),
+      occupation: 'any_occupation',
+      paymentDay: 5,
+      publicAgency: 'any_agency',
+      registerNumber: 'any_register_number',
+      salary: 'any_salary',
+    });
+    expect(response.status).toBe(200);
   });
 
   it('Should return 500 when the service throws an exception error', async () => {
     const id = 1;
     jest
-      .spyOn(AssociatedService.prototype, 'updateById')
+      .spyOn(AssociatedService.prototype, 'upsertEmploymentRelationshipById')
       .mockRejectedValueOnce(new Error('updateById unexpected error'));
 
     const response = await global.testRequest
-      .patch(`/associateds/${id}`)
+      .patch(`/associateds/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send({
-        name: 'João',
-      });
+      .send(makeFakeEmploymentRelationshipParams({ associatedId: 1 }));
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

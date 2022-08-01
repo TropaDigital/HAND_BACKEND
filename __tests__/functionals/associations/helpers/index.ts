@@ -1,7 +1,36 @@
+import { Address, EmploymentRelationship, Prisma } from '@prisma/client';
+
 import {
   ICreateAssociatedInput,
   IAssociated,
 } from '../../../../src/modules/associated/interfaces';
+
+export const makeFakeEmploymentRelationshipParams = (
+  payload?: Partial<EmploymentRelationship>,
+): Prisma.EmploymentRelationshipCreateInput => ({
+  occupation: 'any_occupation',
+  salary: 'any_salary',
+  paymentDay: 5,
+  registerNumber: 'any_register_number',
+  contractType: 'contract_type',
+  publicAgency: 'any_agency',
+  finalDate: new Date(),
+  ...payload,
+});
+
+export const makeFakeAddressesParams = (
+  payload?: Partial<Address>,
+): Prisma.AddressCreateInput => ({
+  addressType: 'any_type',
+  postalCode: 'any_postal_code',
+  street: 'any_street',
+  houseNumber: 'any_number',
+  complement: 'any_complements',
+  district: 'any_district',
+  city: 'any_city',
+  state: 'any_state',
+  ...payload,
+});
 
 export const makeFakeCreateAssociatedParams = (
   payload?: Partial<IAssociated>,

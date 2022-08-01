@@ -94,12 +94,10 @@ export default class UserRouter implements IRouter {
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
-    this.router
-      .route('/users')
-      .post(
-        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-        ExpressRouteAdapter.adapt<IUserController>(this.controller, 'create'),
-      );
+    this.router.route('/users').post(
+      // AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+      ExpressRouteAdapter.adapt<IUserController>(this.controller, 'create'),
+    );
   }
 
   private updateById(): void {

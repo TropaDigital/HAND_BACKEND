@@ -6,7 +6,8 @@ import { LoggerFactory } from '../factories/LoggerFactory';
 const Logger = LoggerFactory.create();
 
 morgan.token('body', (req: Request) => {
-  const { password, newPassword, oldPassword, ...rest } = req.body;
+  const { password, newPassword, oldPassword, passwordConfirmation, ...rest } =
+    req.body;
   return rest;
 });
 

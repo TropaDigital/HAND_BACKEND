@@ -30,13 +30,9 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
     const id = 1;
 
     const response = await global.testRequest
-      .patch(`/associateds/addresses/${id}`)
+      .patch(`/associateds/${id}/addresses/${id}`)
       .set('x-access-token', token)
-      .send(
-        makeFakeAddressesParams({
-          associatedId: id,
-        }),
-      );
+      .send(makeFakeAddressesParams());
 
     expect(response.status).toBe(200);
     expect(response.body.data).toEqual({
@@ -56,9 +52,9 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
   it('Should return 404 when associated does not exists', async () => {
     const id = 999999;
     const response = await global.testRequest
-      .patch(`/associateds/addresses/${id}`)
+      .patch(`/associateds/${id}/addresses/${id}`)
       .set('x-access-token', token)
-      .send(makeFakeAddressesParams({ associatedId: id }));
+      .send(makeFakeAddressesParams());
     expect(response.body).toEqual(
       makeNotFoundResponse('associated not found with provided id'),
     );
@@ -68,10 +64,9 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
   it('Should return 400 when receive invalid params', async () => {
     const id = 1;
     const response = await global.testRequest
-      .patch(`/associateds/addresses/${id}`)
+      .patch(`/associateds/${id}/addresses/${id}`)
       .set('x-access-token', token)
       .send({
-        associated: 1,
         bank: 1,
         consultant: 1,
         contractModel: 1,
@@ -84,11 +79,6 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
       });
 
     const invalidParamsResponse = makeInvalidParamsResponse([
-      {
-        fieldName: 'associatedId',
-        friendlyFieldName: 'associatedId',
-        message: '"associatedId" is required',
-      },
       {
         fieldName: 'addressType',
         friendlyFieldName: 'tipo de endereço',
@@ -133,9 +123,9 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
     const id = 1;
 
     const response = await global.testRequest
-      .patch(`/associateds/addresses/${id}`)
+      .patch(`/associateds/${id}/addresses/${id}`)
       .set('x-access-token', token)
-      .send(makeFakeAddressesParams({ associatedId: 1 }));
+      .send(makeFakeAddressesParams());
     expect(response.body.data).toEqual({
       addressType: 'any_type',
       associatedId: 1,
@@ -158,9 +148,9 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
       .mockRejectedValueOnce(new Error('updateById unexpected error'));
 
     const response = await global.testRequest
-      .patch(`/associateds/addresses/${id}`)
+      .patch(`/associateds/${id}/addresses/${id}`)
       .set('x-access-token', token)
-      .send(makeFakeAddressesParams({ associatedId: 1 }));
+      .send(makeFakeAddressesParams());
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

@@ -121,7 +121,7 @@ export class AssociatedController implements IAssociatedController {
         associatedId: number;
       }
     >('updateEmploymentRelationshipsByAssociatedIdAndId', {
-      ...(httpRequest.params as { id: number }),
+      ...(httpRequest.params as { id: number; associatedId: number }),
       ...httpRequest.body,
     });
 
@@ -148,7 +148,7 @@ export class AssociatedController implements IAssociatedController {
         associatedId: number;
       }
     >('updateAddressByAssociatedIdAndId', {
-      ...(httpRequest.params as { id: number }),
+      ...(httpRequest.params as { id: number; associatedId: number }),
       ...httpRequest.body,
     });
 

@@ -125,7 +125,7 @@ export default class AssociatedRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/associateds/addresses/:id')
+      .route('/associateds/:associatedId/addresses/:id')
       .patch(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
@@ -153,7 +153,7 @@ export default class AssociatedRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/associateds/employment-relationships/:id')
+      .route('/associateds/:associatedId/employment-relationships/:id')
       .patch(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
@@ -181,7 +181,7 @@ export default class AssociatedRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/associateds/addresses/:id')
+      .route('/associateds/:id/addresses')
       .get(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
@@ -209,7 +209,7 @@ export default class AssociatedRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/associateds/employment-relationships/:id')
+      .route('/associateds/:id/employment-relationships')
       .get(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(

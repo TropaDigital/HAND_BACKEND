@@ -33,13 +33,9 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
     const id = 1;
 
     const response = await global.testRequest
-      .patch(`/associateds/employment-relationships/${id}`)
+      .patch(`/associateds/${id}/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send(
-        makeFakeEmploymentRelationshipParams({
-          associatedId: id,
-        }),
-      );
+      .send(makeFakeEmploymentRelationshipParams());
 
     expect(response.status).toBe(200);
     expect(response.body.data).toEqual({
@@ -58,9 +54,9 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
   it('Should return 404 when associated does not exists', async () => {
     const id = 999999;
     const response = await global.testRequest
-      .patch(`/associateds/employment-relationships/${id}`)
+      .patch(`/associateds/${id}/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send(makeFakeEmploymentRelationshipParams({ associatedId: id }));
+      .send(makeFakeEmploymentRelationshipParams());
     expect(response.body).toEqual(
       makeNotFoundResponse('associated not found with provided id'),
     );
@@ -70,15 +66,44 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
   it('Should return 400 when receive invalid params', async () => {
     const id = 1;
     const response = await global.testRequest
-      .patch(`/associateds/employment-relationships/${id}`)
+      .patch(`/associateds/${id}/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send('');
+      .send({
+        contractType: 2,
+        finalDate: '2',
+        id: '1',
+        occupation: 2,
+        paymentDay: 5,
+        publicAgency: 2,
+        registerNumber: 10,
+        salary: 2,
+      });
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'associatedId',
-        friendlyFieldName: 'associatedId',
-        message: '"associatedId" is required',
+        fieldName: 'occupation',
+        friendlyFieldName: 'profissão',
+        message: '"profissão" must be a string',
+      },
+      {
+        fieldName: 'salary',
+        friendlyFieldName: 'salário',
+        message: '"salário" must be a string',
+      },
+      {
+        fieldName: 'registerNumber',
+        friendlyFieldName: 'matrícula',
+        message: '"matrícula" must be a string',
+      },
+      {
+        fieldName: 'contractType',
+        friendlyFieldName: 'tipo de contrato',
+        message: '"tipo de contrato" must be a string',
+      },
+      {
+        fieldName: 'publicAgency',
+        friendlyFieldName: 'órgão público',
+        message: '"órgão público" must be a string',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
@@ -89,9 +114,10 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
     const id = 1;
 
     const response = await global.testRequest
-      .patch(`/associateds/employment-relationships/${id}`)
+      .patch(`/associateds/${id}/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send(makeFakeEmploymentRelationshipParams({ associatedId: 1 }));
+      .send(makeFakeEmploymentRelationshipParams());
+
     expect(response.body.data).toEqual({
       associatedId: 1,
       contractType: 'contract_type',
@@ -113,9 +139,10 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
       .mockRejectedValueOnce(new Error('updateById unexpected error'));
 
     const response = await global.testRequest
-      .patch(`/associateds/employment-relationships/${id}`)
+      .patch(`/associateds/${id}/employment-relationships/${id}`)
       .set('x-access-token', token)
-      .send(makeFakeEmploymentRelationshipParams({ associatedId: 1 }));
+      .send(makeFakeEmploymentRelationshipParams());
+
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();
     expect(response.status).toBe(500);

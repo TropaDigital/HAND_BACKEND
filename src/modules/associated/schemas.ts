@@ -163,6 +163,7 @@ export const updateAddressByAssociatedIdAndId = Joi.object<
     associatedId: number;
   }
 >({
+  id: Joi.number(),
   associatedId: Joi.number().required(),
   addressType: Joi.string().required().label('tipo de endereço'),
   postalCode: Joi.string().required().label('cep'),

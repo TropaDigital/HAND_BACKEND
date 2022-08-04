@@ -1,3 +1,22 @@
+## [1.10.0](https://github.com/haandsolutions/haand-bib/compare/v1.9.0...v1.10.0) (2022-08-04)
+
+
+### :zap: Refactor
+
+* adjust the route of create user ([fc3bcc2](https://github.com/haandsolutions/haand-bib/commit/fc3bcc251b93141f04870d0ecf90f9bd5553065b))
+
+
+### :sparkles: New Features
+
+* add update and get address separated ([6208d31](https://github.com/haandsolutions/haand-bib/commit/6208d314d8da2ee8da2d583813eea1165fd3aa7d))
+* update address and employment relationship routes ([c625b7c](https://github.com/haandsolutions/haand-bib/commit/c625b7cc6ead72f015be98f3bd64efd374c8fdd8))
+* update upsert address schema ([d436df3](https://github.com/haandsolutions/haand-bib/commit/d436df3bd8abb7d25ea43071fd3b11c0d3b21cf0))
+
+
+### :white_check_mark: Tests
+
+* update tests ([6edbfdf](https://github.com/haandsolutions/haand-bib/commit/6edbfdfbd77db774a0cf1a967be30e8b9ec85ff8))
+
 ## [1.9.0](https://github.com/haandsolutions/haand-bib/compare/v1.8.0...v1.9.0) (2022-07-27)
 
 

@@ -7,7 +7,6 @@ import { populateDatabase } from '../users/helpers';
 describe('POST /users/me - Get User Info', () => {
   let token: string;
   beforeAll(async () => {
-    await global.prismaClient.user.deleteMany();
     await populateDatabase();
     token = await getFakeToken();
   });

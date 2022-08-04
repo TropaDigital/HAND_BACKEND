@@ -17,6 +17,8 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
   beforeAll(async () => {
     await populateUsersDatabase();
     await global.prismaClient.associated.deleteMany();
+    await global.prismaClient.address.deleteMany();
+    await global.prismaClient.employmentRelationship.deleteMany();
     await populateDatabase();
   });
 

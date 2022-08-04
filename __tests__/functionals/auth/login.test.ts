@@ -3,7 +3,6 @@ import { makeFakeLoginParams } from './helpers';
 
 describe('GET /auth/token - Authenticate User', () => {
   beforeAll(async () => {
-    await global.prismaClient.user.deleteMany();
     await populateDatabase();
   });
 

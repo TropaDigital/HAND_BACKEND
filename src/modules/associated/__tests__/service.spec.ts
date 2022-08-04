@@ -1,3 +1,4 @@
+import { makeFakeAddressesParams } from '../../../../__tests__/functionals/associations/helpers';
 import { NotFoundError } from '../../../shared/errors';
 import { AssociatedService } from '../service';
 import {
@@ -165,6 +166,139 @@ describe(AssociatedService.name, () => {
       );
 
       const promise = sut.updateById(fakeId, fakeAssociated);
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${AssociatedService.prototype.upsertEmploymentRelationshipById.name} is called`, () => {
+    const fakeId = 777;
+    const fakeAddressId = 888;
+    const fakeAddress = makeFakeAddressesParams();
+
+    it('should call repository with right params', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.upsertEmploymentRelationshipById;
+
+      await sut.upsertEmploymentRelationshipById(
+        fakeId,
+        fakeAddressId,
+        fakeAddress,
+      );
+
+      expect(updateSpy).toBeCalledWith(777, 888, {
+        ...makeFakeAddressesParams(),
+      });
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.upsertEmploymentRelationshipById.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.upsertEmploymentRelationshipById(
+        fakeId,
+        fakeAddressId,
+        fakeAddress,
+      );
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${AssociatedService.prototype.upsertAddressById.name} is called`, () => {
+    const fakeId = 777;
+    const fakeAddressId = 888;
+    const fakeAddress = makeFakeAddressesParams();
+
+    it('should call repository with right params', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.upsertAddressById;
+
+      await sut.upsertAddressById(fakeId, fakeAddressId, fakeAddress);
+
+      expect(updateSpy).toBeCalledWith(777, 888, {
+        ...makeFakeAddressesParams(),
+      });
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.upsertAddressById.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.upsertAddressById(fakeId, fakeAddressId, fakeAddress);
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${AssociatedService.prototype.getEmploymentRelationshipsByAssociatedId.name} is called`, () => {
+    const fakeId = 777;
+
+    it('should call repository with right params', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy =
+        associatedRepository.getEmploymentRelationshipsByAssociatedId;
+
+      await sut.getEmploymentRelationshipsByAssociatedId(fakeId);
+
+      expect(updateSpy).toBeCalledWith(777);
+    });
+
+    it('should throw not found error when returns empty array', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.getEmploymentRelationshipsByAssociatedId.mockResolvedValueOnce(
+        [],
+      );
+
+      const result = await sut.getEmploymentRelationshipsByAssociatedId(fakeId);
+
+      expect(result).toEqual([]);
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.getEmploymentRelationshipsByAssociatedId.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.getEmploymentRelationshipsByAssociatedId(fakeId);
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${AssociatedService.prototype.getAddressesByAssociatedId.name} is called`, () => {
+    const fakeId = 777;
+
+    it('should call repository with right params', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.getAddressesByAssociatedId;
+
+      await sut.getAddressesByAssociatedId(fakeId);
+
+      expect(updateSpy).toBeCalledWith(777);
+    });
+
+    it('should throw not found error when returns empty array', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.getAddressesByAssociatedId.mockResolvedValueOnce([]);
+
+      const result = await sut.getAddressesByAssociatedId(fakeId);
+
+      expect(result).toEqual([]);
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.getAddressesByAssociatedId.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.getAddressesByAssociatedId(fakeId);
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
     });

@@ -30,7 +30,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Dentista',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '3000.20',
       },
@@ -38,7 +38,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '63720-976',
         street: 'Rua Poti',
         houseNumber: '123',
@@ -82,7 +82,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Advogado',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '8654,45',
       },
@@ -90,13 +90,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -134,20 +134,20 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '3200,11',
       },
     },
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -185,7 +185,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
       },
@@ -193,13 +193,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -237,7 +237,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
       },
@@ -245,13 +245,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -289,7 +289,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
       },
@@ -297,13 +297,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -341,7 +341,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
       },
@@ -349,13 +349,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -393,7 +393,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
       },
@@ -401,13 +401,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -445,7 +445,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
       },
@@ -453,13 +453,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },
@@ -497,7 +497,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         occupation: 'Arquiteta',
         publicAgency: 'MiSupremo Tribunal Federal',
         paymentDay: 5,
-        contractType: 'Carteira Assinada',
+        contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
       },
@@ -505,13 +505,13 @@ const associateds: Prisma.AssociatedCreateInput[] = [
 
     addresses: {
       create: {
-        addressType: 'Casa',
+        addressType: 'HOUSE',
         postalCode: '78595-970',
         street: 'Avenida Governador Dante Martins de Oliveira 115',
         houseNumber: '123',
         complement: '',
         district: 'Centro',
-        state: 'MT',
+        state: 'Mato Grosso',
         city: 'Apiacás',
       },
     },

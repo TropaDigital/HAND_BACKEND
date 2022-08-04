@@ -1,4 +1,4 @@
-import { EmploymentRelationship, Prisma } from '@prisma/client';
+import { Address, EmploymentRelationship, Prisma } from '@prisma/client';
 
 import { NotFoundError } from '../../shared/errors';
 import {
@@ -58,6 +58,12 @@ export class AssociatedService implements IAssociatedService {
     );
   }
 
+  public async getAddressesByAssociatedId(
+    associatedId: number,
+  ): Promise<Address[]> {
+    return this.associatedRepository.getAddressesByAssociatedId(associatedId);
+  }
+
   public async upsertEmploymentRelationshipById(
     associatedId: number,
     employmentRelationshipId: number,
@@ -71,6 +77,20 @@ export class AssociatedService implements IAssociatedService {
         employmentRelationshipId,
         payload,
       );
+
+    return result;
+  }
+
+  public async upsertAddressById(
+    associatedId: number,
+    addressId: number,
+    payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
+  ): Promise<Address> {
+    const result = await this.associatedRepository.upsertAddressById(
+      associatedId,
+      addressId,
+      payload,
+    );
 
     return result;
   }

@@ -1,6 +1,7 @@
-import { EmploymentRelationship, Prisma } from '@prisma/client';
+import { Address, EmploymentRelationship, Prisma } from '@prisma/client';
 
 import MySqlDBClient from '../../infra/mySql';
+import { NotFoundError } from '../../shared/errors';
 import {
   IFindAllParams,
   IPaginatedAResult,
@@ -35,6 +36,20 @@ export class AssociatedRepository implements IAssociatedRepository {
       });
 
     return employmentRelationships;
+  }
+
+  public async getAddressesByAssociatedId(
+    associatedId: number,
+  ): Promise<Address[]> {
+    const addresses = await MySqlDBClient.getInstance()
+      .getPrismaClientInstance()
+      .address.findMany({
+        where: {
+          associatedId,
+        },
+      });
+
+    return addresses;
   }
 
   public async findAll(
@@ -103,24 +118,63 @@ export class AssociatedRepository implements IAssociatedRepository {
       | Prisma.EmploymentRelationshipUpdateInput
       | Prisma.EmploymentRelationshipCreateInput,
   ): Promise<EmploymentRelationship> {
-    const result = await MySqlDBClient.getInstance()
-      .getPrismaClientInstance()
-      .employmentRelationship.upsert({
-        where: { id: employmentRelationshipId },
-        create: {
-          ...payload,
-          Associated: {
-            connect: {
-              id: associatedId,
+    try {
+      const result = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .employmentRelationship.upsert({
+          where: { id: employmentRelationshipId },
+          create: {
+            ...payload,
+            Associated: {
+              connect: {
+                id: associatedId,
+              },
             },
-          },
-        } as Prisma.EmploymentRelationshipCreateInput,
-        update: {
-          ...payload,
-        } as Prisma.EmploymentRelationshipUpdateInput,
-      });
+          } as Prisma.EmploymentRelationshipCreateInput,
+          update: {
+            ...payload,
+          } as Prisma.EmploymentRelationshipUpdateInput,
+        });
 
-    return result;
+      return result;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new NotFoundError('associated not found with provided id');
+      }
+      throw error;
+    }
+  }
+
+  public async upsertAddressById(
+    associatedId: number,
+    addressId: number,
+    payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
+  ): Promise<Address> {
+    try {
+      const result = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .address.upsert({
+          where: { id: addressId },
+          create: {
+            ...payload,
+            Associated: {
+              connect: {
+                id: associatedId,
+              },
+            },
+          } as Prisma.AddressCreateInput,
+          update: {
+            ...payload,
+          } as Prisma.AddressUpdateInput,
+        });
+
+      return result;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new NotFoundError('associated not found with provided id');
+      }
+      throw error;
+    }
   }
 
   public async deleteById(id: number): Promise<void> {

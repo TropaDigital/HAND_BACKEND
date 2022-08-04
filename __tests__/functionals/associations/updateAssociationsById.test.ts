@@ -22,6 +22,8 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
 
   afterAll(async () => {
     await global.prismaClient.associated.deleteMany();
+    await global.prismaClient.address.deleteMany();
+    await global.prismaClient.employmentRelationship.deleteMany();
   });
 
   it('Should return 204 with updated', async () => {

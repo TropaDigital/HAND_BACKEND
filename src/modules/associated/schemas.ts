@@ -134,6 +134,12 @@ export const getEmploymentRelationshipsByAssociatedId = Joi.object<{
   id: Joi.number().min(1).required(),
 });
 
+export const getAddressesByAssociatedId = Joi.object<{
+  id: number;
+}>({
+  id: Joi.number().min(1).required(),
+});
+
 export const updateEmploymentRelationshipsByAssociatedIdAndId = Joi.object<
   Prisma.EmploymentRelationshipUpdateInput & {
     id?: number;
@@ -149,4 +155,22 @@ export const updateEmploymentRelationshipsByAssociatedIdAndId = Joi.object<
   contractType: Joi.string().label('tipo de contrato'),
   finalDate: Joi.date().label('data final'),
   publicAgency: Joi.string().label('órgão público'),
+});
+
+export const updateAddressByAssociatedIdAndId = Joi.object<
+  Prisma.AddressUpdateInput & {
+    id?: number;
+    associatedId: number;
+  }
+>({
+  id: Joi.number(),
+  associatedId: Joi.number().required(),
+  addressType: Joi.string().required().label('tipo de endereço'),
+  postalCode: Joi.string().required().label('cep'),
+  street: Joi.string().required().label('logradouro'),
+  houseNumber: Joi.string().required().label('número'),
+  complement: Joi.string().allow('').label('complemento'),
+  district: Joi.string().required().label('bairro'),
+  city: Joi.string().required().label('cidade'),
+  state: Joi.string().required().label('estado'),
 });

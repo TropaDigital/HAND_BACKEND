@@ -107,9 +107,37 @@ export default class AssociatedRouter implements IRouter {
       );
   }
 
+  private updateAddressByAssociatedIdAndId(): void {
+    /**
+     * PATCH /associateds/addresses/{id}
+     * @tag Associateds
+     * @summary update an address of an associated.
+     * @description return the created associated object.
+     * @pathParam {int32} id id of the associated
+     * @response 200 - an object of associated address.
+     * @responseContent {CreateAssociatedResponse} 201.application/json
+     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/:associatedId/addresses/:id')
+      .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'updateAddressByAssociatedIdAndId',
+        ),
+      );
+  }
+
   private updateEmploymentRelationshipsByAssociatedIdAndId(): void {
     /**
-     * PATCH /associateds/emploment-relationships/{id}
+     * PATCH /associateds/employment-relationships/{id}
      * @tag Associateds
      * @summary create a new associated.
      * @description return the created associated object.
@@ -125,7 +153,7 @@ export default class AssociatedRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/associateds/emploment-relationships/:id')
+      .route('/associateds/:associatedId/employment-relationships/:id')
       .patch(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
@@ -135,9 +163,37 @@ export default class AssociatedRouter implements IRouter {
       );
   }
 
+  private getAddressesByAssociatedId(): void {
+    /**
+     * GET /associateds/addresses/{id}
+     * @tag Associateds
+     * @summary get addresses from an associated.
+     * @description return a list of addresses.
+     * @pathParam {int32} id id of the addresses
+     * @response 200 - a list of addresses.
+     * @responseContent {CreateAssociatedResponse} 201.application/json
+     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/:id/addresses')
+      .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'getAddressesByAssociatedId',
+        ),
+      );
+  }
+
   private getEmplomentRelationshipsByAssociatedId(): void {
     /**
-     * GET /associateds/emploment-relationships/{id}
+     * GET /associateds/employment-relationships/{id}
      * @tag Associateds
      * @summary create a new associated.
      * @description return the created associated object.
@@ -153,7 +209,7 @@ export default class AssociatedRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/associateds/emploment-relationships/:id')
+      .route('/associateds/:id/employment-relationships')
       .get(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IAssociatedController>(
@@ -231,6 +287,8 @@ export default class AssociatedRouter implements IRouter {
     this.deleteById();
     this.getEmplomentRelationshipsByAssociatedId();
     this.updateEmploymentRelationshipsByAssociatedIdAndId();
+    this.getAddressesByAssociatedId();
+    this.updateAddressByAssociatedIdAndId();
 
     app.use(this.router);
   }

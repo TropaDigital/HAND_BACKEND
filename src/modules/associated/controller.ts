@@ -1,4 +1,4 @@
-import { EmploymentRelationship, Prisma } from '@prisma/client';
+import { Address, EmploymentRelationship, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
@@ -96,6 +96,18 @@ export class AssociatedController implements IAssociatedController {
     return { statusCodeAsString: 'OK', body: result };
   }
 
+  public async getAddressesByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Address[]>> {
+    const { id } = this.validator.validateSchema<{ id: number }>(
+      'getAddressesByAssociatedId',
+      httpRequest.params as { id: number },
+    );
+    const result = await this.associatedService.getAddressesByAssociatedId(id);
+
+    return { statusCodeAsString: 'OK', body: result };
+  }
+
   public async updateEmploymentRelationshipsByAssociatedIdAndId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<EmploymentRelationship>> {
@@ -109,7 +121,7 @@ export class AssociatedController implements IAssociatedController {
         associatedId: number;
       }
     >('updateEmploymentRelationshipsByAssociatedIdAndId', {
-      ...(httpRequest.params as { id: number }),
+      ...(httpRequest.params as { id: number; associatedId: number }),
       ...httpRequest.body,
     });
 
@@ -119,6 +131,32 @@ export class AssociatedController implements IAssociatedController {
         id,
         payload,
       );
+
+    return { statusCodeAsString: 'OK', body: result };
+  }
+
+  public async updateAddressByAssociatedIdAndId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Address>> {
+    const {
+      id = 0,
+      associatedId,
+      ...payload
+    } = this.validator.validateSchema<
+      Prisma.AddressUpdateInput & {
+        id?: number;
+        associatedId: number;
+      }
+    >('updateAddressByAssociatedIdAndId', {
+      ...(httpRequest.params as { id: number; associatedId: number }),
+      ...httpRequest.body,
+    });
+
+    const result = await this.associatedService.upsertAddressById(
+      associatedId,
+      id,
+      payload,
+    );
 
     return { statusCodeAsString: 'OK', body: result };
   }

@@ -69,9 +69,35 @@ export default class AuthRouter implements IRouter {
       );
   }
 
+  private generateAndSendLinkOfResetPassword(): void {
+    /**
+     * GET /auth/forgot-password
+     * @tag Login
+     * @summary generate and send link to email to reset the password.
+     * @description return an user object.
+     * @queryParam {string} email - the email that belongs to the user
+     * @response 204 - no content.
+     * @response 400 - An object with the error when the email provided does not exists
+     * @responseContent {ValidationError} 400.application/json
+     * @responseExample {EmailDoesNotExists} 400.application/json.EmailDoesNotExists
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/auth/forgot-password')
+      .get(
+        ExpressRouteAdapter.adapt<IAuthController>(
+          this.controller,
+          'generateAndSendLinkOfResetPassword',
+        ),
+      );
+  }
+
   setupRoutes(app: Application): void {
     this.auth();
     this.me();
+    this.generateAndSendLinkOfResetPassword();
+
     app.use(this.router);
   }
 }

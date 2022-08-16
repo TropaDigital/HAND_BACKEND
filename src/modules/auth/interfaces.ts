@@ -22,4 +22,8 @@ export interface IAuthController {
   login: (
     _request: IApiHttpRequest<IAuthRequestParams>,
   ) => Promise<IApiHttpResponse<IAuthResult>>;
+
+  generateAndSendLinkOfResetPassword(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse>;
 }

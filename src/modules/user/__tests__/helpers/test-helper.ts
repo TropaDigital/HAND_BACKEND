@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
 import { IAuthenticationService } from '../../../../shared/auth/interfaces';
+import { IMailerService } from '../../../../shared/mailer/interfaces';
 import { IUserRepository, IUserService, IResponseUser } from '../../interfaces';
 import { PrismaUserRepository } from '../../repository';
 
@@ -80,6 +81,7 @@ export const makeUserServiceStub = (): jest.Mocked<IUserService> => ({
   create: jest.fn().mockResolvedValue(makeFakeUser({})),
   updateById: jest.fn(),
   deleteById: jest.fn(),
+  generateAndSendLinkOfResetPassword: jest.fn(),
 });
 
 export const makeValidatorStub = (payload?: {
@@ -107,6 +109,7 @@ export const makeUserRepositoryStub = (): jest.Mocked<IUserRepository> => ({
   create: jest.fn().mockResolvedValue(makeFakeUser({})),
   updateById: jest.fn(),
   deleteById: jest.fn(),
+  findByEmail: jest.fn().mockResolvedValue(makeFakeUser({})),
 });
 
 export const makeAuthServiceStub = (): jest.Mocked<IAuthenticationService> => ({
@@ -114,4 +117,8 @@ export const makeAuthServiceStub = (): jest.Mocked<IAuthenticationService> => ({
   decodeToken: jest.fn(),
   generateToken: jest.fn().mockResolvedValue('any_token'),
   hashPassword: jest.fn().mockResolvedValue('hashed_password'),
+});
+
+export const makeMailerServiceStub = (): jest.Mocked<IMailerService> => ({
+  sendResetPasswordEmail: jest.fn(),
 });

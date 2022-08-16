@@ -2,6 +2,7 @@ import JoiAdapter from '../../adapters/joi/JoiAdapter';
 import MySqlDBClient from '../../infra/mySql';
 import { AuthenticationService } from '../../shared/auth/auth';
 import { IAuthenticationService } from '../../shared/auth/interfaces';
+import { MailerService } from '../../shared/mailer';
 import { IUserRepository, IUserService } from '../user/interfaces';
 import { UserRepository } from '../user/repository';
 import { UserService } from '../user/service';
@@ -38,7 +39,8 @@ export const createAuthenticationService = (): IAuthenticationService => {
 export const createUserService = (): IUserService => {
   const repository = createUserRepository();
   const authService = createAuthenticationService();
-  const result = new UserService(repository, authService);
+  const mailerService = new MailerService();
+  const result = new UserService(repository, authService, mailerService);
   return result;
 };
 

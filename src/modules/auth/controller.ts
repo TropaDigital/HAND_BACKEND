@@ -48,4 +48,20 @@ export class AuthController implements IAuthController {
       body: authenticationModel,
     };
   }
+
+  public async generateAndSendLinkOfResetPassword(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse> {
+    const { email } = this.validator.validateSchema<{ email: string }>(
+      'ResetPassword',
+      httpRequest.query,
+    );
+
+    await this.userService.generateAndSendLinkOfResetPassword(email);
+
+    return {
+      body: '',
+      statusCodeAsString: 'NO_CONTENT',
+    };
+  }
 }

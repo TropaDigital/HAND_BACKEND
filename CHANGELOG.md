@@ -1,3 +1,26 @@
+## [1.11.0](https://github.com/haandsolutions/haand-bib/compare/v1.10.0...v1.11.0) (2022-08-16)
+
+
+### :sparkles: New Features
+
+* add route of forgot password ([cbae13f](https://github.com/haandsolutions/haand-bib/commit/cbae13fb2eafa8fd311f8c6a1e834cb2d586ee25)), closes [#44](https://github.com/haandsolutions/haand-bib/issues/44)
+* add route to reset the password ([93b6957](https://github.com/haandsolutions/haand-bib/commit/93b6957a84ccea758e2e8dbb54506d019cf4cfa9)), closes [#44](https://github.com/haandsolutions/haand-bib/issues/44) [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+
+
+### :zap: Refactor
+
+* adjust the flow of send reset password email ([c2b7c57](https://github.com/haandsolutions/haand-bib/commit/c2b7c578bb1716334cf3c5d72e1d8a8dda11d018)), closes [#45](https://github.com/haandsolutions/haand-bib/issues/45)
+
+
+### :repeat: CI
+
+* adjust the env vartiables of pipeline ([c402776](https://github.com/haandsolutions/haand-bib/commit/c4027761f37c4ffde99374180391f0a1d883c0bc))
+
+
+### :white_check_mark: Tests
+
+* adjust the minimum covarage ([64c1a0e](https://github.com/haandsolutions/haand-bib/commit/64c1a0eed1cad4b1fea85a6265f865fc494c7625))
+
 ## [1.10.0](https://github.com/haandsolutions/haand-bib/compare/v1.9.0...v1.10.0) (2022-08-04)
 
 

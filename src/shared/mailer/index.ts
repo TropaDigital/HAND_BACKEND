@@ -20,7 +20,10 @@ export class MailerService implements IMailerService {
       const transporter = nodeMailer.createTransport({
         ...emailConfig,
       });
-      const email = forgotPasswordEmailTemplate(user, token);
+      const email = forgotPasswordEmailTemplate(
+        user,
+        `${emailConfig.resetPasswordBaseUrl}/reset-password?token=${token}`,
+      );
       const info = await transporter.sendMail(email);
 
       this.logger.info({ msg: `URL: ${nodeMailer.getTestMessageUrl(info)}` });
@@ -30,8 +33,13 @@ export class MailerService implements IMailerService {
   }
 
   private createEmailConfig(): IMailerOptions {
-    const { MAILER_HOST, MAILER_PASSWORD, MAILER_PORT, MAILER_USERNAME } =
-      mailerConfig();
+    const {
+      MAILER_HOST,
+      MAILER_PASSWORD,
+      MAILER_PORT,
+      MAILER_USERNAME,
+      RESET_PASSWORD_BASE_URL,
+    } = mailerConfig();
     return {
       host: MAILER_HOST,
       port: MAILER_PORT,
@@ -39,6 +47,7 @@ export class MailerService implements IMailerService {
         user: MAILER_USERNAME,
         pass: MAILER_PASSWORD,
       },
+      resetPasswordBaseUrl: RESET_PASSWORD_BASE_URL,
     };
   }
 }

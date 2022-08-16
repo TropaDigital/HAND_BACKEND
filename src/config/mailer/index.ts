@@ -8,12 +8,18 @@ import * as schemas from './schemas';
 
 export const mailerConfig = (shouldThrowException = false): IMailerConfig => {
   try {
-    const { MAILER_HOST, MAILER_PASSWORD, MAILER_PORT, MAILER_USERNAME } =
-      new JoiAdapter<typeof schemas>(schemas).validateSchema<IMailerConfig>(
-        'mailerConfigSchema',
-        process.env,
-      );
+    const {
+      MAILER_HOST,
+      MAILER_PASSWORD,
+      MAILER_PORT,
+      MAILER_USERNAME,
+      RESET_PASSWORD_BASE_URL,
+    } = new JoiAdapter<typeof schemas>(schemas).validateSchema<IMailerConfig>(
+      'mailerConfigSchema',
+      process.env,
+    );
     return {
+      RESET_PASSWORD_BASE_URL,
       MAILER_HOST,
       MAILER_PASSWORD,
       MAILER_PORT,

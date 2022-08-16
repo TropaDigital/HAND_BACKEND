@@ -1,7 +1,7 @@
 export interface IMailerService {
   sendResetPasswordEmail(
     user: { userName: string; email: string },
-    token: string,
+    url: string,
   ): Promise<void>;
 }
 
@@ -20,4 +20,5 @@ export interface IMailerOptions {
     user: string;
     pass: string;
   };
+  resetPasswordBaseUrl: string;
 }

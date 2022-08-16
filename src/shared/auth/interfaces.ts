@@ -1,5 +1,5 @@
 export interface IJwtToken {
-  sub: string;
+  sub: string | number;
   role: string;
 }
 

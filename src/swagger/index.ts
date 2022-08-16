@@ -1,6 +1,6 @@
 import { OpenApiObject } from 'openapi-comment-parser';
 
-import { authExamples } from './auth';
+import { authExamples, authSchemas } from './auth';
 import { consultantExamples, consultantSchemas } from './consultant';
 import { healthcheckExamples, healthcheckSchemas } from './healthcheck';
 import {
@@ -53,6 +53,7 @@ export default {
       ...healthcheckSchemas,
       ...loanSimulationSchemas,
       ...consultantSchemas,
+      ...authSchemas,
     },
   },
 } as OpenApiObject;

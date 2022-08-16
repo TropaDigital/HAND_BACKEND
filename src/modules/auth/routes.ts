@@ -28,11 +28,10 @@ export default class AuthRouter implements IRouter {
      * GET /users/me
      * @tag Users
      * @summary get user info
-     * .
      * @description return info from logger user.
      * @response 200 - an array with the all the users.
-     * @responseContent { UserResponse[]} 200.application/json
-     * @responseExample { UserResponse[]} 200.application/json.UserResponse
+     * @responseContent {UserResponse} 200.application/json
+     * @responseExample {UserResponse} 200.application/json.UserResponse
      * @response 401 - an object with a message when user is not authenticated with success.
      * @responseContent {AuthResponse} 401.application/json
      * @responseExample {AuthUnauthorizedResponse} 401.application/json.LoginUnauthorizedResponse
@@ -93,10 +92,37 @@ export default class AuthRouter implements IRouter {
       );
   }
 
+  private resetPassword(): void {
+    /**
+     * PATCH /auth/reset-password
+     * @tag Login
+     * @summary reset the password.
+     * @description reset the password.
+     * @queryParam {string} token - the token that will be used to validate the link of reset password
+     * @bodyContent {UpdatePasswordPayload} application/json
+     * @bodyRequired
+     * @response 204 - no content.
+     * @response 401 - An object with the error when the email provided does not exists
+     * @responseContent {ValidationError} 401.application/json
+     * @responseExample {TokenInvalid} 400.application/json.TokenInvalid
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/auth/reset-password')
+      .patch(
+        ExpressRouteAdapter.adapt<IAuthController>(
+          this.controller,
+          'updateUserPassword',
+        ),
+      );
+  }
+
   setupRoutes(app: Application): void {
     this.auth();
     this.me();
     this.generateAndSendLinkOfResetPassword();
+    this.resetPassword();
 
     app.use(this.router);
   }

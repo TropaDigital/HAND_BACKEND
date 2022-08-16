@@ -12,6 +12,11 @@ env:
   AUTH_SECRET: 'secret'
   DEFAULT_PASSWORD: 'any_pass'
   JWT_SALT: 12
+  MAILER_HOST: smtp.mailtrap.io
+  MAILER_USERNAME: 26c63e44a4e059
+  MAILER_PASSWORD: 0775dcf33fa133
+  MAILER_PORT: 2525
+  RESET_PASSWORD_BASE_URL: http://localhost:3000
 
 on:
   pull_request:

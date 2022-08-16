@@ -8,12 +8,14 @@ import {
   makeFakeCreateUserInput,
   makeFakeUpdateUserInput,
   makeAuthServiceStub,
+  makeMailerServiceStub,
 } from './helpers/test-helper';
 
 const makeSut = () => {
   const userRepository = makeUserRepositoryStub();
   const authService = makeAuthServiceStub();
-  const sut = new UserService(userRepository, authService);
+  const mailerService = makeMailerServiceStub();
+  const sut = new UserService(userRepository, authService, mailerService);
 
   return { sut, userRepository };
 };

@@ -22,4 +22,15 @@ export interface IAuthController {
   login: (
     _request: IApiHttpRequest<IAuthRequestParams>,
   ) => Promise<IApiHttpResponse<IAuthResult>>;
+
+  generateAndSendLinkOfResetPassword(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse>;
+
+  updateUserPassword(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse>;
+}
+
+export interface IResetPasswordPayload {
+  token: string;
+  password: string;
 }

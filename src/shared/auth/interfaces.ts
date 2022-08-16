@@ -1,5 +1,5 @@
 export interface IJwtToken {
-  sub: string;
+  sub: string | number;
   role: string;
 }
 
@@ -16,6 +16,6 @@ export interface IBcrypt {
 export interface IAuthenticationService {
   hashPassword(password: string, salt: number): Promise<string>;
   compareHash(password: string, hashedPassword: string): Promise<boolean>;
-  generateToken(payload: { sub: string; role: string }): string;
+  generateToken(payload: { sub: string | number; role: string }): string;
   decodeToken(token: string): IJwtToken;
 }

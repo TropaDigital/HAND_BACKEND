@@ -1,6 +1,8 @@
 import { User, Prisma } from '@prisma/client';
+import { IMailerService } from 'src/shared/mailer/interfaces';
 
 import { authConfig } from '../../config/auth';
+import ErrorCodes from '../../enums/ErrorCodes';
 import { IAuthenticationService } from '../../shared/auth/interfaces';
 import { NotFoundError } from '../../shared/errors';
 import { IUserRepository, IUserService, IResponseUser } from './interfaces';
@@ -9,6 +11,7 @@ export class UserService implements IUserService {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly authService: IAuthenticationService,
+    private readonly mailerService: IMailerService,
   ) {}
 
   public async getAll(): Promise<IResponseUser[]> {
@@ -66,5 +69,24 @@ export class UserService implements IUserService {
     const result = await this.userRepository.deleteById(id);
 
     return result;
+  }
+
+  public async generateAndSendLinkOfResetPassword(
+    email: string,
+  ): Promise<User> {
+    const user = await this.userRepository.findByEmail(email);
+    if (!user) {
+      throw new NotFoundError(
+        'user not found with the provided email',
+        ErrorCodes.FORGOT_PASSWORD_001,
+      );
+    }
+
+    const token = await this.authService.generateToken({
+      role: user.role,
+      sub: user.id,
+    });
+    await this.mailerService.sendResetPasswordEmail(user, token);
+    return user;
   }
 }

@@ -1,5 +1,6 @@
 import { OpenApiObject } from 'openapi-comment-parser';
 
+import { authExamples, authSchemas } from './auth';
 import { consultantExamples, consultantSchemas } from './consultant';
 import { healthcheckExamples, healthcheckSchemas } from './healthcheck';
 import {
@@ -21,7 +22,7 @@ export default {
       url: 'https://haand-bib-backend.herokuapp.com/',
       description: 'Homolog server',
     },
-    { url: 'http://localhost:3000/', description: 'Local server' },
+    { url: 'http://localhost:3001/', description: 'Local server' },
   ],
   tags: [
     {
@@ -45,12 +46,14 @@ export default {
       ...healthcheckExamples,
       ...loanSimulationExamples,
       ...consultantExamples,
+      ...authExamples,
     },
     schemas: {
       ...sharedSchemas,
       ...healthcheckSchemas,
       ...loanSimulationSchemas,
       ...consultantSchemas,
+      ...authSchemas,
     },
   },
 } as OpenApiObject;

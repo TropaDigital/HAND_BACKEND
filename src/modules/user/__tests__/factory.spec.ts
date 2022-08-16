@@ -8,6 +8,7 @@ jest.mock('../controller');
 jest.mock('../repository');
 jest.mock('../schemas');
 jest.mock('../service');
+jest.mock('../../../shared/mailer');
 
 MySqlDBClient.getInstance = jest.fn().mockReturnValue({
   getPrismaClientInstance: jest.fn().mockReturnValue({ user: {} }),

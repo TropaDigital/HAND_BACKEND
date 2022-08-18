@@ -140,26 +140,6 @@ describe('POST /associateds - Create new associated', () => {
         friendlyFieldName: 'employmentRelationships',
         message: '"employmentRelationships" is required',
       },
-      {
-        fieldName: 'bank',
-        friendlyFieldName: 'banco',
-        message: '"banco" is required',
-      },
-      {
-        fieldName: 'agency',
-        friendlyFieldName: 'agencia',
-        message: '"agencia" is required',
-      },
-      {
-        fieldName: 'accountType',
-        friendlyFieldName: 'tipo de conta',
-        message: '"tipo de conta" is required',
-      },
-      {
-        fieldName: 'accountNumber',
-        friendlyFieldName: 'número da conta',
-        message: '"número da conta" is required',
-      },
     ]);
 
     expect(response.status).toBe(invalidParamsResponse.statusCode);

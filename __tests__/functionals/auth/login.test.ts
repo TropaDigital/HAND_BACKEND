@@ -41,7 +41,6 @@ describe('GET /auth/token - Authenticate User', () => {
       description: 'invalid credentials',
       statusCode: 401,
       statusCodeAsString: 'UNAUTHORIZED',
-      validationErrors: [],
     });
     expect(response.status).toBe(401);
   });
@@ -58,7 +57,6 @@ describe('GET /auth/token - Authenticate User', () => {
       description: 'invalid credentials',
       statusCode: 401,
       statusCodeAsString: 'UNAUTHORIZED',
-      validationErrors: [],
     });
     expect(response.status).toBe(401);
   });

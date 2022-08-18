@@ -47,8 +47,6 @@ export const makeFakeCreateAssociatedParams = (
       pixType: 'any_type',
       accountNumber: 'any_account',
       accountType: 'any_type',
-      id: 0,
-      associatedId: 0,
     },
   ],
   addresses: [
@@ -110,8 +108,6 @@ export const makeFakeAssociated = (
       pixType: 'any_type',
       accountNumber: 'any_account',
       accountType: 'any_type',
-      id: 0,
-      associatedId: 0,
     },
   ],
   addresses: [
@@ -159,10 +155,12 @@ export const makeFakeAssociated = (
 });
 
 const createAssociated = async (associated: ICreateAssociatedInput) => {
-  const { addresses, employmentRelationships, ...payload } = associated;
+  const { addresses, employmentRelationships, bankAccounts, ...payload } =
+    associated;
   await global.prismaClient.associated.create({
     data: {
       ...payload,
+      bankAccounts: { createMany: { data: bankAccounts } },
       addresses: { createMany: { data: addresses } },
       employmentRelationships: {
         createMany: { data: employmentRelationships },

@@ -59,7 +59,11 @@ export class AssociatedRepository implements IAssociatedRepository {
 
     const result = await this.prismaRepository.findMany({
       ...params,
-      include: { addresses: true, employmentRelationships: true },
+      include: {
+        addresses: true,
+        employmentRelationships: true,
+        bankAccounts: true,
+      },
     });
     const totalResults =
       JSON.stringify(params?.where) !== '{}'
@@ -76,24 +80,34 @@ export class AssociatedRepository implements IAssociatedRepository {
   public async findById(id: number): Promise<IAssociated | null> {
     const result = await this.prismaRepository.findFirst({
       where: { id },
-      include: { addresses: true, employmentRelationships: true },
+      include: {
+        addresses: true,
+        employmentRelationships: true,
+        bankAccounts: true,
+      },
     });
 
     return result;
   }
 
   public async create(payload: ICreateAssociatedInput): Promise<IAssociated> {
-    const { addresses, employmentRelationships, ...associated } = payload;
+    const { addresses, employmentRelationships, bankAccounts, ...associated } =
+      payload;
 
     const result = await this.prismaRepository.create({
       data: {
         ...associated,
+        bankAccounts: { createMany: { data: bankAccounts } },
         addresses: { createMany: { data: addresses } },
         employmentRelationships: {
           createMany: { data: employmentRelationships },
         },
       },
-      include: { addresses: true, employmentRelationships: true },
+      include: {
+        addresses: true,
+        employmentRelationships: true,
+        bankAccounts: true,
+      },
     });
 
     return result;

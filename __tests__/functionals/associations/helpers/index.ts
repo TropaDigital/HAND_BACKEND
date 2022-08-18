@@ -38,9 +38,19 @@ export const makeFakeCreateAssociatedParams = (
   name: 'Any name1',
   mother: 'Any mother',
   nationality: 'Any nationality',
-  pixKey: 'Any key',
   placeOfBirth: 'Any place',
-
+  bankAccounts: [
+    {
+      bank: '00 - Any Bank',
+      agency: '0000',
+      pixKey: 'any_pix_key',
+      pixType: 'any_type',
+      accountNumber: 'any_account',
+      accountType: 'any_type',
+      id: 0,
+      associatedId: 0,
+    },
+  ],
   addresses: [
     {
       addressType: 'any_type',
@@ -78,11 +88,7 @@ export const makeFakeCreateAssociatedParams = (
   email: 'any@mail.com',
   cellPhone: '00000000',
   birthDate: new Date('2022-10-10'),
-  bank: 'Any bank',
-  agency: '000',
   affiliation: 'Any affiliation',
-  accountType: 'Any type',
-  accountNumber: '23132',
   createdBy: 'Any User',
   ...payload,
 });
@@ -95,9 +101,19 @@ export const makeFakeAssociated = (
   mother: 'Any mother',
   nationality: 'Any nationality',
 
-  pixKey: 'Any key',
   placeOfBirth: 'Any place',
-
+  bankAccounts: [
+    {
+      bank: '00 - Any Bank',
+      agency: '0000',
+      pixKey: 'any_pix_key',
+      pixType: 'any_type',
+      accountNumber: 'any_account',
+      accountType: 'any_type',
+      id: 0,
+      associatedId: 0,
+    },
+  ],
   addresses: [
     {
       addressType: 'any_type',
@@ -136,11 +152,7 @@ export const makeFakeAssociated = (
   email: 'any@mail.com',
   cellPhone: '00000000',
   birthDate: new Date('2022-10-10'),
-  bank: 'Any bank',
-  agency: '000',
   affiliation: 'Any affiliation',
-  accountType: 'Any type',
-  accountNumber: '23132',
   createdBy: 'Any User',
 
   ...payload,

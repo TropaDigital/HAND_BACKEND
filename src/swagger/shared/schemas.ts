@@ -136,6 +136,48 @@ export default {
     required: ['code', 'statusCode', 'statusCodeAsString', 'description'],
     additionalProperties: false,
   },
+  BadRequestResponse: {
+    type: 'object',
+    properties: {
+      code: {
+        type: 'string',
+      },
+      statusCode: {
+        type: 'number',
+      },
+      statusCodeAsString: {
+        type: 'string',
+      },
+      description: {
+        type: 'string',
+      },
+      validationErrors: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            fieldName: {
+              type: 'string',
+            },
+            friendlyFieldName: {
+              type: 'string',
+            },
+            message: {
+              type: 'string',
+            },
+          },
+          required: ['fieldName', 'friendlyFieldName', 'message'],
+        },
+      },
+    },
+    required: [
+      'code',
+      'statusCode',
+      'statusCodeAsString',
+      'description',
+      'validationErrors',
+    ],
+  },
   ValidationError: {
     type: 'object',
     properties: {

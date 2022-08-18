@@ -48,13 +48,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         city: 'Poti',
       },
     },
-
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'marcos@mail.com',
-
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'marcos@mail.com',
+      },
+    },
     createdBy: 'João',
   },
   {
@@ -101,12 +103,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
-
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
     createdBy: 'João',
   },
   {
@@ -152,11 +157,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -204,11 +213,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -256,11 +269,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -308,11 +325,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -360,11 +381,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -412,11 +437,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -463,12 +492,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         city: 'Apiacás',
       },
     },
-
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -516,12 +548,15 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
-    bank: 'Itaú',
-    agency: '000',
-    accountType: 'Corrente',
-    accountNumber: '23132',
-    pixKey: 'eloa_freitas@superigi.com.br',
-
+    bankAccounts: {
+      create: {
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+      },
+    },
     createdBy: 'Ferreira',
   },
 ];

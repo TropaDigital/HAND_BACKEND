@@ -24,6 +24,7 @@ describe(AssociatedRepository.name, () => {
         include: {
           addresses: true,
           employmentRelationships: true,
+          bankAccounts: true,
         },
         where: {},
       });
@@ -39,6 +40,7 @@ describe(AssociatedRepository.name, () => {
         include: {
           addresses: true,
           employmentRelationships: true,
+          bankAccounts: true,
         },
         where: { id: { contains: 1 } },
       });
@@ -92,7 +94,11 @@ describe(AssociatedRepository.name, () => {
       await sut.findById(fakeId);
 
       expect(findFirstSpy).toBeCalledWith({
-        include: { addresses: true, employmentRelationships: true },
+        include: {
+          addresses: true,
+          employmentRelationships: true,
+          bankAccounts: true,
+        },
         where: { id: 777 },
       });
     });
@@ -126,18 +132,27 @@ describe(AssociatedRepository.name, () => {
 
       await sut.create(fakeAssociated);
 
-      const { addresses, employmentRelationships, ...associated } =
-        makeFakeAssociated({});
+      const {
+        addresses,
+        employmentRelationships,
+        bankAccounts,
+        ...associated
+      } = makeFakeAssociated({});
 
       expect(createSpy).toBeCalledWith({
         data: {
           ...associated,
+          bankAccounts: { createMany: { data: bankAccounts } },
           addresses: { createMany: { data: addresses } },
           employmentRelationships: {
             createMany: { data: employmentRelationships },
           },
         },
-        include: { addresses: true, employmentRelationships: true },
+        include: {
+          addresses: true,
+          employmentRelationships: true,
+          bankAccounts: true,
+        },
       });
     });
 

@@ -27,11 +27,14 @@ export default class AssociatedRouter implements IRouter {
     /**
      * GET /associateds
      * @tag Associateds
+     * @security apiKey
      * @summary get all the associateds.
      * @description return a list of associateds.
+     * @queryParam {string} [taxId] the tax id that will be used like filter
+     * @queryParam {string} [name] the name that will be used like filter
      * @response 200 - an array with the all the associateds.
-     * @responseContent {AssociatedResponse[]} 200.application/json
-     * @responseExample {AssociatedResponse[]} 200.application/json.AssociatedResponse
+     * @responseContent {AssociatedResponse} 200.application/json
+     * @responseExample {AssociatedResponse} 200.application/json.AssociatedResponse
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
@@ -52,6 +55,7 @@ export default class AssociatedRouter implements IRouter {
     /**
      * GET /associateds/{id}
      * @tag Associateds
+     * @security apiKey
      * @summary get a associated by id.
      * @description return a associated object.
      * @pathParam {int32} id id of the associated
@@ -82,15 +86,17 @@ export default class AssociatedRouter implements IRouter {
     /**
      * POST /associateds
      * @tag Associateds
+     * @security apiKey
      * @summary create a new associated.
      * @description return the created associated object.
      * @bodyContent {CreateAssociatedPayload} application/json
      * @bodyRequired
      * @response 201 - an object of associated.
      * @responseContent {CreateAssociatedResponse} 201.application/json
-     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @responseExample {CreateAssociatedResponse} 201.application/json.CreateAssociatedResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @responseExample {CreateAssociatedBadRequestResponse} 400.application/json.CreateAssociatedBadRequestResponse
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
@@ -111,6 +117,7 @@ export default class AssociatedRouter implements IRouter {
     /**
      * PATCH /associateds/addresses/{id}
      * @tag Associateds
+     * @security apiKey
      * @summary update an address of an associated.
      * @description return the created associated object.
      * @pathParam {int32} id id of the associated
@@ -139,6 +146,7 @@ export default class AssociatedRouter implements IRouter {
     /**
      * PATCH /associateds/employment-relationships/{id}
      * @tag Associateds
+     * @security apiKey
      * @summary create a new associated.
      * @description return the created associated object.
      * @pathParam {int32} id id of the associated
@@ -167,6 +175,7 @@ export default class AssociatedRouter implements IRouter {
     /**
      * GET /associateds/addresses/{id}
      * @tag Associateds
+     * @security apiKey
      * @summary get addresses from an associated.
      * @description return a list of addresses.
      * @pathParam {int32} id id of the addresses
@@ -195,6 +204,7 @@ export default class AssociatedRouter implements IRouter {
     /**
      * GET /associateds/employment-relationships/{id}
      * @tag Associateds
+     * @security apiKey
      * @summary create a new associated.
      * @description return the created associated object.
      * @pathParam {int32} id id of the associated
@@ -223,6 +233,7 @@ export default class AssociatedRouter implements IRouter {
     /**
      * PATCH /associateds/{id}
      * @tag Associateds
+     * @security apiKey
      * @summary update a associated.
      * @description return no content when successfully update the resource.
      * @pathParam {int32} id id of the associated
@@ -253,6 +264,7 @@ export default class AssociatedRouter implements IRouter {
     /**
      * DELETE /associateds/{id}
      * @tag Associateds
+     * @security apiKey
      * @summary create a associated.
      * @description return no content when successfully delete the resource.
      * @pathParam {int32} id id of the associated

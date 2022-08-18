@@ -1,6 +1,7 @@
 import {
   Address,
   Associated,
+  BankAccount,
   EmploymentRelationship,
   Prisma,
 } from '@prisma/client';
@@ -12,15 +13,17 @@ import {
 } from '../../shared/pagination/interfaces';
 
 export type IAssociated = Associated & {
+  bankAccounts: BankAccount[];
   addresses: Address[];
   employmentRelationships: EmploymentRelationship[];
 };
 
 export type ICreateAssociatedInput = Omit<
   Prisma.AssociatedCreateInput,
-  'addresses' | 'employmentRelationships'
+  'addresses' | 'employmentRelationships' | 'bankAccounts'
 > & {
   addresses: Omit<Address, 'id' | 'associatedId'>[];
+  bankAccounts: Omit<BankAccount, 'id' | 'associatedId'>[];
   employmentRelationships: Omit<
     EmploymentRelationship,
     'id' | 'associatedId'
@@ -29,8 +32,9 @@ export type ICreateAssociatedInput = Omit<
 
 export type IUpdateAssociatedInput = Omit<
   Prisma.AssociatedUpdateInput,
-  'addresses' | 'employmentRelationships'
+  'addresses' | 'employmentRelationships' | 'bankAccounts'
 > & {
+  bankAccounts?: Omit<BankAccount, 'id' | 'associatedId'>[];
   addresses?: Omit<Address, 'id' | 'associatedId'>[];
   employmentRelationships?: Omit<
     EmploymentRelationship,

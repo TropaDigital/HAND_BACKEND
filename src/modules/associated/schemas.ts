@@ -55,13 +55,16 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
       }),
     )
     .required(),
-
-  bank: Joi.string().required().label('banco'),
-  agency: Joi.string().required().label('agencia'),
-  accountType: Joi.string().required().label('tipo de conta'),
-  accountNumber: Joi.string().required().label('número da conta'),
-  pixKey: Joi.string().label('chave pix'),
-  pixType: Joi.string().label('tipo_pix'),
+  bankAccounts: Joi.array().items(
+    Joi.object({
+      bank: Joi.string().required().label('banco'),
+      agency: Joi.string().required().label('agencia'),
+      accountType: Joi.string().required().label('tipo de conta'),
+      accountNumber: Joi.string().required().label('número da conta'),
+      pixKey: Joi.string().label('chave pix'),
+      pixType: Joi.string().label('tipo_pix'),
+    }),
+  ),
   createdBy: Joi.string().required().label('createdBy'),
 });
 
@@ -114,13 +117,16 @@ export const UpdateAssociatedById = Joi.object<
     }),
   ),
 
-  bank: Joi.string().label('banco'),
-  agency: Joi.string().label('agencia'),
-  accountType: Joi.string().label('tipo de conta'),
-  accountNumber: Joi.string().label('número da conta'),
-  pixKey: Joi.string().label('chave pix'),
-  pixType: Joi.string().label('tipo_pix'),
-
+  bankAccounts: Joi.array().items(
+    Joi.object({
+      bank: Joi.string().label('banco'),
+      agency: Joi.string().label('agencia'),
+      accountType: Joi.string().label('tipo de conta'),
+      accountNumber: Joi.string().label('número da conta'),
+      pixKey: Joi.string().label('chave pix'),
+      pixType: Joi.string().label('tipo_pix'),
+    }),
+  ),
   createdBy: Joi.string().label('createdBy'),
 });
 

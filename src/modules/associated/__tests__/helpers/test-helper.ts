@@ -14,8 +14,6 @@ import { PrismaAssociatedRepository } from '../../repository';
 export const makeFakeCreateAssociatedInput = (
   payload?: Partial<ICreateAssociatedInput>,
 ): jest.Mocked<ICreateAssociatedInput> => ({
-  accountNumber: 'any_account',
-  accountType: 'any_type',
   addresses: [
     {
       addressType: 'any_type',
@@ -39,9 +37,18 @@ export const makeFakeCreateAssociatedInput = (
       finalDate: new Date(),
     },
   ],
+  bankAccounts: [
+    {
+      accountNumber: 'any_account',
+      accountType: 'any_type',
+      agency: '0000',
+      bank: '00 - Any Bank',
+      pixKey: 'any_pix_key',
+      pixType: 'any_type',
+    },
+  ],
   affiliation: 'any_affiliation',
-  agency: '0000',
-  bank: '00 - Any Bank',
+
   birthDate: new Date(),
   cellPhone: '00-0000000',
   createdBy: 'any_data',
@@ -56,7 +63,7 @@ export const makeFakeCreateAssociatedInput = (
   mother: 'any_mother',
   name: 'any_name',
   nationality: 'any_nationality',
-  pixKey: 'any_pix_key',
+
   placeOfBirth: 'any_place',
   registerId: 'any_register_id',
   taxId: '000.000.000-00',
@@ -67,8 +74,6 @@ export const makeFakeCreateAssociatedInput = (
 export const makeFakeUpdateAssociatedInput = (
   payload?: Partial<IUpdateAssociatedInput>,
 ): jest.Mocked<IUpdateAssociatedInput> => ({
-  accountNumber: 'any_account',
-  accountType: 'any_type',
   addresses: [
     {
       addressType: 'any_type',
@@ -93,10 +98,18 @@ export const makeFakeUpdateAssociatedInput = (
       finalDate: new Date(),
     },
   ],
-
+  bankAccounts: [
+    {
+      accountNumber: 'any_account',
+      accountType: 'any_type',
+      agency: '0000',
+      bank: '00 - Any Bank',
+      pixKey: 'any_pix_key',
+      pixType: 'any_type',
+    },
+  ],
   affiliation: 'any_affiliation',
-  agency: '0000',
-  bank: '00 - Any Bank',
+
   birthDate: new Date(),
   cellPhone: '00-0000000',
   createdBy: 'any_data',
@@ -111,7 +124,7 @@ export const makeFakeUpdateAssociatedInput = (
   mother: 'any_mother',
   name: 'any_name',
   nationality: 'any_nationality',
-  pixKey: 'any_pix_key',
+
   placeOfBirth: 'any_place',
   registerId: 'any_register_id',
   taxId: '000.000.000-00',
@@ -187,12 +200,18 @@ export const makeFakeAssociated = (
   name: 'any_name',
   nationality: 'any_nationality',
 
-  bank: '00 - Any Bank',
-  agency: '0000',
-  pixKey: 'any_pix_key',
-  pixType: 'any_type',
-  accountNumber: 'any_account',
-  accountType: 'any_type',
+  bankAccounts: [
+    {
+      bank: '00 - Any Bank',
+      agency: '0000',
+      pixKey: 'any_pix_key',
+      pixType: 'any_type',
+      accountNumber: 'any_account',
+      accountType: 'any_type',
+      id: 0,
+      associatedId: 0,
+    },
+  ],
 
   placeOfBirth: 'any_place',
   registerId: 'any_register_id',

@@ -1,4 +1,9 @@
-import { Address, EmploymentRelationship, Prisma } from '@prisma/client';
+import {
+  Address,
+  BankAccount,
+  EmploymentRelationship,
+  Prisma,
+} from '@prisma/client';
 
 import MySqlDBClient from '../../infra/mySql';
 import { NotFoundError } from '../../shared/errors';
@@ -23,6 +28,20 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 
 export class AssociatedRepository implements IAssociatedRepository {
   constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
+
+  public async getBankAccountsByAssociatedId(
+    associatedId: number,
+  ): Promise<BankAccount[]> {
+    const bankAccounts = await MySqlDBClient.getInstance()
+      .getPrismaClientInstance()
+      .bankAccount.findMany({
+        where: {
+          associatedId,
+        },
+      });
+
+    return bankAccounts;
+  }
 
   public async getEmploymentRelationshipsByAssociatedId(
     associatedId: number,
@@ -148,6 +167,38 @@ export class AssociatedRepository implements IAssociatedRepository {
           update: {
             ...payload,
           } as Prisma.EmploymentRelationshipUpdateInput,
+        });
+
+      return result;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new NotFoundError('associated not found with provided id');
+      }
+      throw error;
+    }
+  }
+
+  public async upsertBankAccountById(
+    associatedId: number,
+    bankId: number,
+    payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
+  ): Promise<BankAccount> {
+    try {
+      const result = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .bankAccount.upsert({
+          where: { id: bankId },
+          create: {
+            ...payload,
+            Associated: {
+              connect: {
+                id: associatedId,
+              },
+            },
+          } as Prisma.BankAccountCreateInput,
+          update: {
+            ...payload,
+          } as Prisma.BankAccountUpdateInput,
         });
 
       return result;

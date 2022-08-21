@@ -1,4 +1,9 @@
-import { Address, EmploymentRelationship, Prisma } from '@prisma/client';
+import {
+  Address,
+  BankAccount,
+  EmploymentRelationship,
+  Prisma,
+} from '@prisma/client';
 
 import { NotFoundError } from '../../shared/errors';
 import {
@@ -15,6 +20,28 @@ import {
 
 export class AssociatedService implements IAssociatedService {
   constructor(private readonly associatedRepository: IAssociatedRepository) {}
+
+  public async getBankAccountByAssociatedId(
+    associatedId: number,
+  ): Promise<BankAccount[]> {
+    return this.associatedRepository.getBankAccountsByAssociatedId(
+      associatedId,
+    );
+  }
+
+  public async upsertBankAccountById(
+    associatedId: number,
+    bankId: number,
+    payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
+  ): Promise<BankAccount> {
+    const result = await this.associatedRepository.upsertBankAccountById(
+      associatedId,
+      bankId,
+      payload,
+    );
+
+    return result;
+  }
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,

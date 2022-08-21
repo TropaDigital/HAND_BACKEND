@@ -113,9 +113,38 @@ export default class AssociatedRouter implements IRouter {
       );
   }
 
+  private updateABankAccountByAssociatedIdAndId(): void {
+    /**
+     * PATCH /associateds/{associatedId}/bank-accounts/{id}
+     * @tag Associateds
+     * @security apiKey
+     * @summary update an address of an associated.
+     * @description return the created associated object.
+     * @pathParam {int32} id id of the associated
+     * @response 200 - an object of associated address.
+     * @responseContent {CreateAssociatedResponse} 201.application/json
+     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/:associatedId/bank-accounts/:id')
+      .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'updateBankAccountByAssociatedIdAndId',
+        ),
+      );
+  }
+
   private updateAddressByAssociatedIdAndId(): void {
     /**
-     * PATCH /associateds/addresses/{id}
+     * PATCH /associateds/{associatedId}/addresses/{id}
      * @tag Associateds
      * @security apiKey
      * @summary update an address of an associated.
@@ -173,7 +202,7 @@ export default class AssociatedRouter implements IRouter {
 
   private getAddressesByAssociatedId(): void {
     /**
-     * GET /associateds/addresses/{id}
+     * GET /associateds/{id}/addresses
      * @tag Associateds
      * @security apiKey
      * @summary get addresses from an associated.
@@ -200,9 +229,38 @@ export default class AssociatedRouter implements IRouter {
       );
   }
 
+  private getBankAccountsByAssociatedId(): void {
+    /**
+     * GET /associateds/{id}/bank-accounts
+     * @tag Associateds
+     * @security apiKey
+     * @summary get addresses from an associated.
+     * @description return a list of addresses.
+     * @pathParam {int32} id id of the addresses
+     * @response 200 - a list of addresses.
+     * @responseContent {CreateAssociatedResponse} 201.application/json
+     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/:id/bank-accounts')
+      .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'getBankAccountsByAssociatedId',
+        ),
+      );
+  }
+
   private getEmplomentRelationshipsByAssociatedId(): void {
     /**
-     * GET /associateds/employment-relationships/{id}
+     * GET /associateds/{id}/employment-relationships
      * @tag Associateds
      * @security apiKey
      * @summary create a new associated.
@@ -301,6 +359,8 @@ export default class AssociatedRouter implements IRouter {
     this.updateEmploymentRelationshipsByAssociatedIdAndId();
     this.getAddressesByAssociatedId();
     this.updateAddressByAssociatedIdAndId();
+    this.getBankAccountsByAssociatedId();
+    this.updateABankAccountByAssociatedIdAndId();
 
     app.use(this.router);
   }

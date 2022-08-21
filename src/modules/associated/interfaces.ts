@@ -63,11 +63,19 @@ export interface IAssociatedRepository {
 
   getAddressesByAssociatedId(associatedId: number): Promise<Address[]>;
 
+  getBankAccountsByAssociatedId(associatedId: number): Promise<BankAccount[]>;
+
   upsertAddressById(
     associatedId: number,
     employmentRelationshipId: number,
     payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
   ): Promise<Address>;
+
+  upsertBankAccountById(
+    associatedId: number,
+    bankId: number,
+    payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
+  ): Promise<BankAccount>;
 
   findAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -96,11 +104,19 @@ export interface IAssociatedController {
 
   deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
+  getBankAccountsByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<BankAccount[]>>;
+
   getEmploymentRelationshipsByAssociatedId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<EmploymentRelationship[]>>;
 
   updateEmploymentRelationshipsByAssociatedIdAndId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<unknown>>;
+
+  updateBankAccountByAssociatedIdAndId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<unknown>>;
 
@@ -147,4 +163,12 @@ export interface IAssociatedService {
   ): Promise<Address>;
 
   getAddressesByAssociatedId(associatedId: number): Promise<Address[]>;
+
+  getBankAccountByAssociatedId(associatedId: number): Promise<BankAccount[]>;
+
+  upsertBankAccountById(
+    associatedId: number,
+    bankId: number,
+    payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
+  ): Promise<BankAccount>;
 }

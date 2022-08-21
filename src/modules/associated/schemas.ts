@@ -140,6 +140,12 @@ export const getEmploymentRelationshipsByAssociatedId = Joi.object<{
   id: Joi.number().min(1).required(),
 });
 
+export const getBankAccountsByAssociatedId = Joi.object<{
+  id: number;
+}>({
+  id: Joi.number().min(1).required(),
+});
+
 export const getAddressesByAssociatedId = Joi.object<{
   id: number;
 }>({
@@ -161,6 +167,22 @@ export const updateEmploymentRelationshipsByAssociatedIdAndId = Joi.object<
   contractType: Joi.string().label('tipo de contrato'),
   finalDate: Joi.date().label('data final'),
   publicAgency: Joi.string().label('órgão público'),
+});
+
+export const updateBankAccountByAssociatedIdAndId = Joi.object<
+  Prisma.BankAccountUpdateInput & {
+    id?: number;
+    associatedId: number;
+  }
+>({
+  associatedId: Joi.number().required(),
+  id: Joi.number(),
+  accountNumber: Joi.string().label('conta'),
+  accountType: Joi.string().label('tipo'),
+  agency: Joi.string().label('agencia'),
+  bank: Joi.string().label('banco'),
+  pixKey: Joi.string().label('chave pix'),
+  pixType: Joi.string().label('tipo de chave pix'),
 });
 
 export const updateAddressByAssociatedIdAndId = Joi.object<

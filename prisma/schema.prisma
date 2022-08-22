@@ -17,6 +17,19 @@ model User {
   status   Status @default(ACTIVE)
 }
 
+model BankAccount {
+  id Int @id @default(autoincrement())
+  bank          String
+  agency        String
+  accountType   String  @map(name: "account_type")
+  accountNumber String  @map(name: "account_number")
+  pixKey        String? @map(name: "pix_key")
+  pixType       String? @map(name: "pix_type")
+
+  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  associatedId Int?
+}
+
 model Address {
   id Int @id @default(autoincrement())
 
@@ -68,12 +81,7 @@ model Associated {
   mother        String
   partner       String?
 
-  bank          String
-  agency        String
-  accountType   String  @map(name: "account_type")
-  accountNumber String  @map(name: "account_number")
-  pixKey        String? @map(name: "pix_key")
-  pixType       String? @map(name: "pix_type")
+  bankAccounts BankAccount[]
 
   addresses Address[]
 

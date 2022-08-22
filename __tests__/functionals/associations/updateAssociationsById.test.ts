@@ -74,11 +74,6 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'bank',
-        friendlyFieldName: 'banco',
-        message: '"banco" must be a string',
-      },
-      {
         fieldName: 'createdBy',
         friendlyFieldName: 'createdBy',
         message: '"createdBy" must be a string',

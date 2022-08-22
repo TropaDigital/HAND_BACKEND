@@ -1,6 +1,7 @@
 import {
   Address,
   Associated,
+  BankAccount,
   EmploymentRelationship,
   Prisma,
 } from '@prisma/client';
@@ -12,15 +13,17 @@ import {
 } from '../../shared/pagination/interfaces';
 
 export type IAssociated = Associated & {
+  bankAccounts: BankAccount[];
   addresses: Address[];
   employmentRelationships: EmploymentRelationship[];
 };
 
 export type ICreateAssociatedInput = Omit<
   Prisma.AssociatedCreateInput,
-  'addresses' | 'employmentRelationships'
+  'addresses' | 'employmentRelationships' | 'bankAccounts'
 > & {
   addresses: Omit<Address, 'id' | 'associatedId'>[];
+  bankAccounts: Omit<BankAccount, 'id' | 'associatedId'>[];
   employmentRelationships: Omit<
     EmploymentRelationship,
     'id' | 'associatedId'
@@ -29,8 +32,9 @@ export type ICreateAssociatedInput = Omit<
 
 export type IUpdateAssociatedInput = Omit<
   Prisma.AssociatedUpdateInput,
-  'addresses' | 'employmentRelationships'
+  'addresses' | 'employmentRelationships' | 'bankAccounts'
 > & {
+  bankAccounts?: Omit<BankAccount, 'id' | 'associatedId'>[];
   addresses?: Omit<Address, 'id' | 'associatedId'>[];
   employmentRelationships?: Omit<
     EmploymentRelationship,
@@ -59,11 +63,19 @@ export interface IAssociatedRepository {
 
   getAddressesByAssociatedId(associatedId: number): Promise<Address[]>;
 
+  getBankAccountsByAssociatedId(associatedId: number): Promise<BankAccount[]>;
+
   upsertAddressById(
     associatedId: number,
     employmentRelationshipId: number,
     payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
   ): Promise<Address>;
+
+  upsertBankAccountById(
+    associatedId: number,
+    bankId: number,
+    payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
+  ): Promise<BankAccount>;
 
   findAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -92,11 +104,19 @@ export interface IAssociatedController {
 
   deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
+  getBankAccountsByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<BankAccount[]>>;
+
   getEmploymentRelationshipsByAssociatedId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<EmploymentRelationship[]>>;
 
   updateEmploymentRelationshipsByAssociatedIdAndId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<unknown>>;
+
+  updateBankAccountByAssociatedIdAndId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<unknown>>;
 
@@ -143,4 +163,12 @@ export interface IAssociatedService {
   ): Promise<Address>;
 
   getAddressesByAssociatedId(associatedId: number): Promise<Address[]>;
+
+  getBankAccountByAssociatedId(associatedId: number): Promise<BankAccount[]>;
+
+  upsertBankAccountById(
+    associatedId: number,
+    bankId: number,
+    payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
+  ): Promise<BankAccount>;
 }

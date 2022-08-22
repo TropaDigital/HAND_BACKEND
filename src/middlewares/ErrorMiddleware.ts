@@ -59,7 +59,9 @@ export class ErrorMiddleware {
           statusCode: StatusCodes[error.status],
           statusCodeAsString: error.status,
           description: error.message,
-          validationErrors: error.validationErrors,
+          validationErrors: error.validationErrors.length
+            ? error.validationErrors
+            : undefined,
         }
       : {
           code: ErrorCodes.GENERIC,

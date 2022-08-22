@@ -52,12 +52,14 @@ export default class AuthRouter implements IRouter {
      * @tag Login
      * @summary authenticate user by userName and password
      * @description return an object with the status of the resources.
+     * @bodyContent {AuthenticatePayload} application/json
+     * @bodyRequired
      * @response 200 - an object with a message when user is authenticated with success.
      * @responseContent {AuthResponse} 200.application/json
      * @responseExample {AuthSuccessResponse} 200.application/json.LoginSuccessResponse
      * @response 401 - an object with a message when user is not authenticated with success.
-     * @responseContent {AuthResponse} 401.application/json
-     * @responseExample {AuthUnauthorizedResponse} 401.application/json.LoginUnauthorizedResponse
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @responseExample {InvalidCredentialsResponse} 401.application/json.LoginUnauthorizedResponse
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */

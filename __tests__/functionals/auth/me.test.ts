@@ -58,7 +58,6 @@ describe('POST /users/me - Get User Info', () => {
       description: 'jwt malformed',
       statusCode: 401,
       statusCodeAsString: 'UNAUTHORIZED',
-      validationErrors: [],
     });
   });
 });

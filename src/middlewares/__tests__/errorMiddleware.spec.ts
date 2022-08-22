@@ -102,7 +102,7 @@ describe(ErrorMiddleware.name, () => {
         description: 'Missing or invalid param',
         statusCode: 400,
         statusCodeAsString: 'BAD_REQUEST',
-        validationErrors: [],
+        validationErrors: undefined,
       });
     });
 

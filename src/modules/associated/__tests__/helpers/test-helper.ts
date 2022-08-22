@@ -241,6 +241,8 @@ export const makeAssociatedServiceStub =
     upsertEmploymentRelationshipById: jest.fn(),
     getAddressesByAssociatedId: jest.fn(),
     upsertAddressById: jest.fn(),
+    getBankAccountByAssociatedId: jest.fn(),
+    upsertBankAccountById: jest.fn(),
   });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
@@ -271,4 +273,6 @@ export const makeAssociatedRepositoryStub =
     upsertEmploymentRelationshipById: jest.fn(),
     getAddressesByAssociatedId: jest.fn(),
     upsertAddressById: jest.fn(),
+    getBankAccountsByAssociatedId: jest.fn(),
+    upsertBankAccountById: jest.fn(),
   });

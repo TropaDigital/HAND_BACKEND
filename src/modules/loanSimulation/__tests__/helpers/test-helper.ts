@@ -44,6 +44,8 @@ export const makeValidatorStub = (
 export const makeLoanSimulationBasedOnRequestedValueParams = (
   payload?: Partial<ILoanSimulationBasedOnRequestedValueParams>,
 ): ILoanSimulationBasedOnRequestedValueParams => ({
+  hasGratification: false,
+  administrationFeeValue: 0,
   salary: 1500,
   salaryReceiptDate: startOfDay(
     new Date('Sat Apr 30 2022 19:02:39 GMT-0300 (Horário Padrão de Brasília)'),

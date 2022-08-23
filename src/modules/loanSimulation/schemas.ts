@@ -18,4 +18,6 @@ export const GetLoanSimulationByRequestedValue =
     monthOfPayment: Joi.string()
       .valid(...Object.values(MonthOfPayment))
       .required(),
+    administrationFeeValue: Joi.number().default(0),
+    hasGratification: Joi.boolean().default(false),
   });

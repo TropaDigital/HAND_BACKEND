@@ -7,7 +7,11 @@ import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
-import { IBenefitController, IBenefitService } from './interfaces';
+import {
+  IBenefitController,
+  IBenefitService,
+  ICreateBenefitParams,
+} from './interfaces';
 import * as schemas from './schemas';
 
 export class BenefitController implements IBenefitController {
@@ -44,7 +48,7 @@ export class BenefitController implements IBenefitController {
   public async create(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Benefit>> {
-    const benefit = this.validator.validateSchema<Prisma.BenefitCreateInput>(
+    const benefit = this.validator.validateSchema<ICreateBenefitParams>(
       'CreateBenefit',
       { ...httpRequest.body, createdBy: httpRequest.user?.sub },
     );

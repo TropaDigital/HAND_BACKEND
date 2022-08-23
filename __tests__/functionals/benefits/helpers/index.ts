@@ -1,12 +1,12 @@
-import { Benefit, Prisma } from '@prisma/client';
+import { ICreateBenefitParams } from '../../../../src/modules/benefit/interfaces';
 
 export const makeFakeCreateBenefitParams = (
-  payload?: Partial<Benefit>,
-): Prisma.BenefitCreateInput => ({
-  associated: 'Name',
+  payload?: Partial<ICreateBenefitParams>,
+): ICreateBenefitParams => ({
+  associatedId: 1,
+  consultantId: 1,
   association: 'ASES',
   bank: 'Any Bank',
-  consultant: 'Any Consultant',
   contractModel: 'Any model',
   financialAssistanceValue: 20,
   installmentNumber: 6,
@@ -18,12 +18,12 @@ export const makeFakeCreateBenefitParams = (
 });
 
 export const makeFakeBenefit = (
-  payload?: Partial<Benefit>,
-): Prisma.BenefitCreateInput => ({
-  associated: 'Name',
+  payload?: Partial<ICreateBenefitParams>,
+): ICreateBenefitParams => ({
+  associatedId: 1,
+  consultantId: 1,
   association: 'ASES',
   bank: 'Any Bank',
-  consultant: 'Any Consultant',
   contractModel: 'Any model',
   financialAssistanceValue: 20,
   installmentNumber: 6,
@@ -37,9 +37,9 @@ export const makeFakeBenefit = (
 export const populateDatabase = async (): Promise<void> => {
   await global.prismaClient.benefit.createMany({
     data: [
-      makeFakeBenefit({ associated: 'João', id: 1 }),
-      makeFakeBenefit({ associated: 'Pedro', id: 2 }),
-      makeFakeBenefit({ associated: 'Mateus', id: 3 }),
+      makeFakeBenefit({ associatedId: 1 }),
+      makeFakeBenefit({ associatedId: 2 }),
+      makeFakeBenefit({ associatedId: 3 }),
     ],
   });
 };

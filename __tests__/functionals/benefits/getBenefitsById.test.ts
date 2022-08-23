@@ -32,7 +32,7 @@ describe.skip('GET /benefits/{id} - Get benefit by id', () => {
       .set('x-access-token', token);
     expect(response.body.data).toEqual(
       expect.objectContaining({
-        ...makeFakeCreateBenefitParams({ associated: 'João' }),
+        ...makeFakeCreateBenefitParams({ associatedId: 1 }),
         initialDate: '2022-10-10T00:00:00.000Z',
       }),
     );

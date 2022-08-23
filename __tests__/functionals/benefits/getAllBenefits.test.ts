@@ -32,19 +32,19 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'João',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'Pedro',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'Mateus',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),
@@ -66,13 +66,13 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'João',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'Pedro',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),
@@ -94,7 +94,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'Pedro',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),
@@ -116,7 +116,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'Pedro',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),
@@ -138,7 +138,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associated: 'Mateus',
+            associatedId: 1,
           }),
           initialDate: '2022-10-10T00:00:00.000Z',
         }),

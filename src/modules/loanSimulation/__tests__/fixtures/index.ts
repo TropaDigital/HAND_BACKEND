@@ -939,9 +939,9 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
     maxInstallmentValueBySalary: 525,
     consultantCommission: 10,
     firstPaymentDates: [
-      new Date('2022-04-30T03:00:00.000Z'),
-      new Date('2022-05-30T03:00:00.000Z'),
-      new Date('2022-06-14T03:00:00.000Z'),
+      new Date('2022-04-30T00:00:00.000Z'),
+      new Date('2022-05-30T00:00:00.000Z'),
+      new Date('2022-06-14T00:00:00.000Z'),
     ],
     consultantCommissionValue: 100,
     isRequestedValueValid: true,

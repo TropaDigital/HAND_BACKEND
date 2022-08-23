@@ -4,7 +4,7 @@ import { makeInternalErrorResponse } from '../helpers';
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { makeFakeBenefit, populateDatabase } from './helpers';
 
-describe('GET /benefits - Get all benefits', () => {
+describe.skip('GET /benefits - Get all benefits', () => {
   const token = new AuthenticationService().generateToken({
     sub: 1,
     role: 'VALID_ROLE',

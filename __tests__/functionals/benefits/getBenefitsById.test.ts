@@ -8,7 +8,7 @@ import {
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { populateDatabase, makeFakeCreateBenefitParams } from './helpers';
 
-describe('GET /benefits/{id} - Get benefit by id', () => {
+describe.skip('GET /benefits/{id} - Get benefit by id', () => {
   const token = new AuthenticationService().generateToken({
     sub: 1,
     role: 'VALID_ROLE',

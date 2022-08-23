@@ -8,7 +8,7 @@ import {
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { populateDatabase } from './helpers';
 
-describe('DELETE /benefits/{id} - Delete benefit by id', () => {
+describe.skip('DELETE /benefits/{id} - Delete benefit by id', () => {
   const token = new AuthenticationService().generateToken({
     sub: 1,
     role: 'VALID_ROLE',

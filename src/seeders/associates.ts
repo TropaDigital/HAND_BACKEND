@@ -112,9 +112,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         pixKey: 'eloa_freitas@superigi.com.br',
       },
     },
-    benefits: {
-       
-    },
+    benefits: {},
     createdBy: 'João',
   },
   {
@@ -588,10 +586,10 @@ export default async (client: PrismaClient): Promise<void> => {
               installmentNumber: 6,
               installmentValue: 20,
               publicAgency: 'Public Agency',
-              initialDate: new Date('2022-10-10'), 
+              initialDate: new Date('2022-10-10'),
               createdBy: 'User',
-            }
-          }
+            },
+          },
         },
         update: {
           ...associated,

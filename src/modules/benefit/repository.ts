@@ -45,7 +45,9 @@ export class BenefitRepository implements IBenefitRepository {
 
   public async create(payload: Prisma.BenefitCreateInput): Promise<Benefit> {
     const result = await this.prismaRepository.create({
-      data: payload,
+      data: {
+        ...payload,
+      },
     });
 
     return result;

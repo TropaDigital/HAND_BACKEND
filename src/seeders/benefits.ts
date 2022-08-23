@@ -6,7 +6,11 @@ import { LoggerFactory } from '../factories/LoggerFactory';
 
 const benefits: Prisma.BenefitCreateInput[] = [
   {
-    associated: 'Pedro',
+    associated: {
+      connect: {
+        id: 1,
+      },
+    },
     association: 'ASES',
     bank: 'Any Bank',
     contractModel: 'Any model',
@@ -18,7 +22,11 @@ const benefits: Prisma.BenefitCreateInput[] = [
     createdBy: 'User',
   },
   {
-    associated: 'Joao',
+    associated: {
+      connect: {
+        id: 2,
+      },
+    },
     association: 'ASES',
     bank: 'Any Bank',
     contractModel: 'Any model',
@@ -30,7 +38,11 @@ const benefits: Prisma.BenefitCreateInput[] = [
     createdBy: 'User',
   },
   {
-    associated: 'Maria',
+    associated: {
+      connect: {
+        id: 3,
+      },
+    },
     association: 'ASES',
     bank: 'Any Bank',
     contractModel: 'Any model',
@@ -42,7 +54,11 @@ const benefits: Prisma.BenefitCreateInput[] = [
     createdBy: 'User',
   },
   {
-    associated: 'André',
+    associated: {
+      connect: {
+        id: 3,
+      },
+    },
     association: 'ASES',
     bank: 'Any Bank',
     contractModel: 'Any model',
@@ -54,7 +70,11 @@ const benefits: Prisma.BenefitCreateInput[] = [
     createdBy: 'User',
   },
   {
-    associated: 'Marta',
+    associated: {
+      connect: {
+        id: 4,
+      },
+    },
     association: 'ASES',
     bank: 'Any Bank',
     contractModel: 'Any model',
@@ -66,7 +86,11 @@ const benefits: Prisma.BenefitCreateInput[] = [
     createdBy: 'User',
   },
   {
-    associated: 'Saulo',
+    associated: {
+      connect: {
+        id: 5,
+      },
+    },
     association: 'ASES',
     bank: 'Any Bank',
     contractModel: 'Any model',
@@ -78,7 +102,11 @@ const benefits: Prisma.BenefitCreateInput[] = [
     createdBy: 'User',
   },
   {
-    associated: 'Mateus',
+    associated: {
+      connect: {
+        id: 6,
+      },
+    },
     association: 'ASES',
     bank: 'Any Bank',
     contractModel: 'Any model',

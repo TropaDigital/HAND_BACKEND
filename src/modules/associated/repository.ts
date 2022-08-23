@@ -82,6 +82,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         addresses: true,
         employmentRelationships: true,
         bankAccounts: true,
+        benefits: true,
       },
     });
     const totalResults =
@@ -103,6 +104,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         addresses: true,
         employmentRelationships: true,
         bankAccounts: true,
+        benefits: true,
       },
     });
 
@@ -136,7 +138,13 @@ export class AssociatedRepository implements IAssociatedRepository {
     id: number,
     payload: Partial<IUpdateAssociatedInput>,
   ): Promise<void> {
-    const { addresses, employmentRelationships, ...associated } = payload;
+    const {
+      addresses,
+      employmentRelationships,
+      bankAccounts,
+      benefits,
+      ...associated
+    } = payload;
 
     await this.prismaRepository.update({
       where: { id },

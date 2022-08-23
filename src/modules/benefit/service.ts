@@ -5,7 +5,11 @@ import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
-import { IBenefitRepository, IBenefitService } from './interfaces';
+import {
+  IBenefitRepository,
+  IBenefitService,
+  ICreateBenefitParams,
+} from './interfaces';
 
 export class BenefitService implements IBenefitService {
   constructor(private readonly benefitRepository: IBenefitRepository) {}
@@ -27,8 +31,21 @@ export class BenefitService implements IBenefitService {
     return result;
   }
 
-  public async create(payload: Prisma.BenefitCreateInput): Promise<Benefit> {
-    const result = await this.benefitRepository.create(payload);
+  public async create(payload: ICreateBenefitParams): Promise<Benefit> {
+    const { associatedId, consultantId, ...benefit } = payload;
+    const result = await this.benefitRepository.create({
+      ...benefit,
+      associated: {
+        connect: {
+          id: associatedId,
+        },
+      },
+      consultant: {
+        connect: {
+          id: consultantId,
+        },
+      },
+    });
 
     return result;
   }

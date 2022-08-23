@@ -105,6 +105,8 @@ export class LoanSimulationService implements ILoanSimulationService {
     joinedTelemedicine,
     consultantCommission,
     monthOfPayment,
+    hasGratification,
+    administrationFeeValue = 0,
   }: IFormatInstallmentParams & { currentDate: Date }): IInstallmentDetails {
     const installmentFactor = this.getInstallmentsFactorValueByRequestedValue(
       requestedValue,
@@ -123,14 +125,24 @@ export class LoanSimulationService implements ILoanSimulationService {
         numberOfInstallments,
       );
     const installmentValueWithFees = installmentFactor * (fees + 1);
+    const installmentAdministrationFeeValue =
+      administrationFeeValue / numberOfInstallments;
+    const gratificationFeeValue =
+      (hasGratification ? this.getGratificationValue() : 0) /
+      numberOfInstallments;
     const installmentFinalValue =
       this.getInstallmentWithAditionalValues(
         installmentValueWithFees,
         joinedTelemedicine,
       ) +
       consultantCommissionValueByInstallment +
-      getAditionalValueWhenTheRequestValueIsLowerThan1000;
+      getAditionalValueWhenTheRequestValueIsLowerThan1000 +
+      installmentAdministrationFeeValue +
+      gratificationFeeValue;
+
     return {
+      gratificationFeeValue: 0,
+      admnistrationFeeValue: installmentAdministrationFeeValue,
       reference: this.formatReferenceDate(currentDate),
       cardFees: this.getCardFees(1),
       telemedicineFees: this.getTelemedicineFees(joinedTelemedicine, 1),
@@ -144,12 +156,18 @@ export class LoanSimulationService implements ILoanSimulationService {
     };
   }
 
+  private getGratificationValue(): number {
+    return loanConfig.gratificationValue;
+  }
+
   private getInstallmentsDetails({
     requestedValue,
     numberOfInstallments,
     joinedTelemedicine,
     consultantCommission,
     monthOfPayment,
+    hasGratification,
+    administrationFeeValue,
   }: IFormatInstallmentParams): IInstallmentDetails[] {
     let currentDate = startOfDay(new Date());
     const firstInstallment = this.formatInstallmentDetails({
@@ -159,6 +177,8 @@ export class LoanSimulationService implements ILoanSimulationService {
       joinedTelemedicine,
       consultantCommission,
       monthOfPayment,
+      hasGratification,
+      administrationFeeValue,
     });
     const installments: IInstallmentDetails[] = new Array(
       numberOfInstallments,
@@ -296,6 +316,8 @@ export class LoanSimulationService implements ILoanSimulationService {
     joinedTelemedicine,
     consultantId,
     monthOfPayment,
+    hasGratification,
+    administrationFeeValue,
   }: ILoanSimulationBasedOnRequestedValueParams): Promise<ILoanSimulationBasedOnRequestedValue> {
     let consultantCommission = 0;
     if (consultantId) {
@@ -310,6 +332,8 @@ export class LoanSimulationService implements ILoanSimulationService {
       joinedTelemedicine,
       consultantCommission,
       monthOfPayment,
+      hasGratification,
+      administrationFeeValue,
     });
 
     return this.formatLoanSimulationBasedOnRequestedValue({

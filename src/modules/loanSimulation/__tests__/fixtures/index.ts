@@ -32,6 +32,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'maio/2022',
@@ -44,6 +46,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'junho/2022',
@@ -56,6 +60,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'julho/2022',
@@ -68,6 +74,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'agosto/2022',
@@ -80,6 +88,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'setembro/2022',
@@ -92,6 +102,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'outubro/2022',
@@ -104,6 +116,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'novembro/2022',
@@ -116,6 +130,8 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 242.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
     ],
   };
@@ -150,6 +166,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'maio/2022',
@@ -162,6 +180,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'junho/2022',
@@ -174,6 +194,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'julho/2022',
@@ -186,6 +208,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'agosto/2022',
@@ -198,6 +222,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'setembro/2022',
@@ -210,6 +236,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'outubro/2022',
@@ -222,6 +250,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'novembro/2022',
@@ -234,6 +264,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
     ],
   };
@@ -268,6 +300,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'maio/2022',
@@ -280,6 +314,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'junho/2022',
@@ -292,6 +328,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'julho/2022',
@@ -304,6 +342,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'agosto/2022',
@@ -316,6 +356,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'setembro/2022',
@@ -328,6 +370,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'outubro/2022',
@@ -340,6 +384,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'novembro/2022',
@@ -352,6 +398,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
         fees: 10,
         feesValue: 18.75,
         finalValue: 228.25,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
     ],
   };
@@ -386,6 +434,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'maio/2022',
@@ -398,6 +448,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'junho/2022',
@@ -410,6 +462,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'julho/2022',
@@ -422,6 +476,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'agosto/2022',
@@ -434,6 +490,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'setembro/2022',
@@ -446,6 +504,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'outubro/2022',
@@ -458,6 +518,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'novembro/2022',
@@ -470,6 +532,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
         fees: 10,
         feesValue: 15,
         finalValue: 201,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
     ],
   };
@@ -500,6 +564,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'maio/2022',
@@ -512,6 +578,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'junho/2022',
@@ -524,6 +592,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'julho/2022',
@@ -536,6 +606,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'agosto/2022',
@@ -548,6 +620,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'setembro/2022',
@@ -560,6 +634,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'outubro/2022',
@@ -572,6 +648,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'novembro/2022',
@@ -584,6 +662,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 4.95,
         feesValue: 9.28,
         finalValue: 218.78,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
     ],
   };
@@ -614,6 +694,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'maio/2022',
@@ -626,6 +708,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'junho/2022',
@@ -638,6 +722,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'julho/2022',
@@ -650,6 +736,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'agosto/2022',
@@ -662,6 +750,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'setembro/2022',
@@ -674,6 +764,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'outubro/2022',
@@ -686,6 +778,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'novembro/2022',
@@ -698,6 +792,8 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
         fees: 0,
         feesValue: 0,
         finalValue: 209.5,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
     ],
   };
@@ -732,6 +828,8 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'maio/2022',
@@ -744,6 +842,8 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'junho/2022',
@@ -756,6 +856,8 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'julho/2022',
@@ -768,6 +870,8 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'agosto/2022',
@@ -780,6 +884,8 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'setembro/2022',
@@ -792,6 +898,8 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'outubro/2022',
@@ -804,6 +912,8 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
       {
         reference: 'novembro/2022',
@@ -816,30 +926,34 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
         fees: 4.62,
         feesValue: 8.66,
         finalValue: 242.16,
+        admnistrationFeeValue: 0,
+        gratificationFeeValue: 0,
       },
     ],
   };
 
 export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSimulationBasedOnRequestedValue =
   {
-    salary: 1500,
     requestedValue: 1000,
+    salary: 1500,
     maxInstallmentValueBySalary: 525,
     consultantCommission: 10,
     firstPaymentDates: [
-      startOfDay(new Date('2022-04-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-05-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-06-15T03:00:00.000Z')),
+      new Date('2022-04-30T03:00:00.000Z'),
+      new Date('2022-05-30T03:00:00.000Z'),
+      new Date('2022-06-14T03:00:00.000Z'),
     ],
     consultantCommissionValue: 100,
     isRequestedValueValid: true,
-    feesValue: 69.27999999999999,
+    feesValue: 74.24,
     cardFees: 96,
     bankProcessingFees: 80,
-    totalValue: 2037.2800000000002,
+    totalValue: 2042.24,
     telemedicineFees: 192,
     installments: [
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'abril/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -847,11 +961,13 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'maio/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -859,11 +975,13 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'junho/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -871,11 +989,13 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'julho/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -883,11 +1003,13 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'agosto/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -895,11 +1017,13 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'setembro/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -907,11 +1031,13 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'outubro/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -919,11 +1045,13 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
       {
+        gratificationFeeValue: 0,
+        admnistrationFeeValue: 0,
         reference: 'novembro/2022',
         cardFees: 12,
         telemedicineFees: 24,
@@ -931,9 +1059,9 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         installmentFactor: 187.5,
         consultantCommission: 10,
         consultantCommissionValue: 12.5,
-        fees: 4.62,
-        feesValue: 8.66,
-        finalValue: 254.66,
+        fees: 4.95,
+        feesValue: 9.28,
+        finalValue: 255.28,
       },
     ],
   };

@@ -1,12 +1,14 @@
 import { Prisma } from '@prisma/client';
 import Joi from 'joi';
 
+import { ICreateBenefitParams } from './interfaces';
+
 export const GetBenefitById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
 });
 
-export const CreateBenefit = Joi.object<Prisma.BenefitCreateInput>({
-  associated: Joi.string().required(),
+export const CreateBenefit = Joi.object<ICreateBenefitParams>({
+  associatedId: Joi.number().min(1).required(),
   association: Joi.string().required(),
   bank: Joi.string().required(),
   publicAgency: Joi.string().required(),
@@ -15,7 +17,7 @@ export const CreateBenefit = Joi.object<Prisma.BenefitCreateInput>({
   initialDate: Joi.date().required(),
   financialAssistanceValue: Joi.number().required(),
   installmentValue: Joi.number().required(),
-  consultant: Joi.string().required(),
+  consultantId: Joi.number().min(1),
   createdBy: Joi.string().required(),
 });
 

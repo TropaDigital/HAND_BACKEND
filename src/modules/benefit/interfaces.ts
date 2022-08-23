@@ -6,6 +6,12 @@ import {
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 
+export interface ICreateBenefitParams
+  extends Omit<Prisma.BenefitCreateInput, 'associated' | 'consultant'> {
+  associatedId: number;
+  consultantId?: number;
+}
+
 export interface IBenefitRepository {
   create(payload: Prisma.BenefitCreateInput): Promise<Benefit>;
 
@@ -48,7 +54,7 @@ export interface IBenefitService {
 
   getById(id: number): Promise<Benefit | null>;
 
-  create(payload: Prisma.BenefitCreateInput): Promise<Benefit>;
+  create(payload: ICreateBenefitParams): Promise<Benefit>;
 
   updateById(id: number, payload: Prisma.BenefitUpdateInput): Promise<void>;
 

@@ -25,6 +25,14 @@ const makeSut = () => {
 
 describe(LoanSimulationService.name, () => {
   describe(`When ${LoanSimulationService.prototype.simulateLoanBasedOnRequestedValue.name} is called`, () => {
+    beforeEach(() => {
+      jest
+        .useFakeTimers()
+        .setSystemTime(
+          startOfDay(new Date('2022-04-15T12:00:00.000Z')).getTime(),
+        );
+    });
+
     test.each([
       {
         params: makeLoanSimulationBasedOnRequestedValueParams({
@@ -115,8 +123,10 @@ describe(LoanSimulationService.name, () => {
         makeLoanSimulationBasedOnRequestedValueParams({
           consultantId: 1,
           monthOfPayment: MonthOfPayment.NEXT_MONTH,
+          hasGratification: false,
         }),
       );
+
       expect(result).toEqual(
         loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission,
       );

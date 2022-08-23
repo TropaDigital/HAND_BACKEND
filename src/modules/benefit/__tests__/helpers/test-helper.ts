@@ -1,15 +1,19 @@
-import { Benefit, Prisma } from '@prisma/client';
+import { Benefit, BenefitType } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { IBenefitRepository, IBenefitService } from '../../interfaces';
+import {
+  IBenefitRepository,
+  IBenefitService,
+  ICreateBenefitParams,
+} from '../../interfaces';
 import { PrismaBenefitRepository } from '../../repository';
 
 export const makeFakeCreateBenefitInput = (
-  payload?: Partial<Prisma.BenefitCreateInput>,
-): jest.Mocked<Prisma.BenefitCreateInput> => ({
-  associated: 'João da Silva',
+  payload?: Partial<ICreateBenefitParams>,
+): jest.Mocked<ICreateBenefitParams> => ({
+  associatedId: 1,
   association: 'Vitória',
   bank: 'Caixa Econômica',
   publicAgency: 'SSP',
@@ -18,15 +22,16 @@ export const makeFakeCreateBenefitInput = (
   initialDate: new Date(),
   financialAssistanceValue: 100,
   installmentValue: 200,
-  consultant: 'João',
+  consultantId: 1,
   createdBy: 'any_user',
+  type: BenefitType.N,
   ...payload,
 });
 
 export const makeFakeUpdateBenefitInput = (
   payload?: Partial<Omit<Benefit, 'id'>>,
 ): jest.Mocked<Partial<Omit<Benefit, 'id'>>> => ({
-  associated: 'João da Silva',
+  associatedId: 1,
   association: 'Vitória',
   bank: 'Caixa Econômica',
   publicAgency: 'SSP',
@@ -35,8 +40,9 @@ export const makeFakeUpdateBenefitInput = (
   initialDate: new Date(),
   financialAssistanceValue: 100,
   installmentValue: 200,
-  consultant: 'João',
+  consultantId: 1,
   createdBy: 'any_user',
+  type: BenefitType.N,
   ...payload,
 });
 
@@ -59,10 +65,9 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeBenefit = (
-  payload: Partial<Benefit>,
-): jest.Mocked<Benefit> => ({
-  id: 1,
-  associated: 'João da Silva',
+  payload: Partial<ICreateBenefitParams>,
+): jest.Mocked<ICreateBenefitParams> => ({
+  associatedId: 1,
   association: 'Vitória',
   bank: 'Caixa Econômica',
   publicAgency: 'SSP',
@@ -71,12 +76,13 @@ export const makeFakeBenefit = (
   initialDate: new Date('2022-10-20'),
   financialAssistanceValue: 100,
   installmentValue: 200,
-  consultant: 'João',
+  consultantId: 1,
   createdBy: 'any_user',
   updatedBy: 'any_date',
   createdAt: new Date(),
   updatedAt: new Date(),
   deletedAt: new Date(),
+  type: BenefitType.N,
   ...payload,
 });
 

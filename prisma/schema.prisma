@@ -18,7 +18,7 @@ model User {
 }
 
 model BankAccount {
-  id Int @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   bank          String
   agency        String
   accountType   String  @map(name: "account_type")
@@ -87,6 +87,8 @@ model Associated {
 
   employmentRelationships EmploymentRelationship[]
 
+  benefits    Benefit[]
+
   createdBy String    @map(name: "created_by") @db.VarChar(75)
   updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
   createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
@@ -100,6 +102,9 @@ model Consultant {
   taxId      String    @map(name: "tax_id") @db.VarChar(11)
   city       String
   state      String
+  
+  benefits    Benefit[]
+
   commission Int       @default(0) @db.UnsignedInt
   createdBy  String    @map(name: "created_by") @db.VarChar(75)
   updatedBy  String?   @map(name: "updated_by") @db.VarChar(75)
@@ -109,22 +114,27 @@ model Consultant {
 }
 
 model Benefit {
-  id                       Int       @id @default(autoincrement())
-  associated               String
+  id                       Int         @id @default(autoincrement())
+  associated               Associated  @relation(fields: [associatedId], references: [id])
+  associatedId             Int
   association              String
   bank                     String
-  publicAgency             String    @map(name: "public_agency")
-  contractModel            String    @map(name: "contract_model")
-  installmentNumber        Int       @map(name: "installment_number")
-  initialDate              DateTime  @map(name: "initial_date")
-  financialAssistanceValue Int       @map(name: "financial_assistance_value")
-  installmentValue         Int       @map(name: "installment_value")
-  consultant               String
-  createdBy                String    @map(name: "created_by") @db.VarChar(75)
-  updatedBy                String?   @map(name: "updated_by") @db.VarChar(75)
-  createdAt                DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt                DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt                DateTime? @map(name: "deleted_at") @db.DateTime(0)
+  publicAgency             String      @map(name: "public_agency")
+  contractModel            String      @map(name: "contract_model")
+  installmentNumber        Int         @map(name: "installment_number")
+  initialDate              DateTime    @map(name: "initial_date")
+  financialAssistanceValue Int         @map(name: "financial_assistance_value")
+  installmentValue         Int         @map(name: "installment_value")
+  consultant               Consultant? @relation(fields: [consultantId], references: [id])
+  consultantId             Int?
+
+  type                     BenefitType @default(N) 
+  
+  createdBy                String      @map(name: "created_by") @db.VarChar(75)
+  updatedBy                String?     @map(name: "updated_by") @db.VarChar(75)
+  createdAt                DateTime    @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt                DateTime    @updatedAt @map(name: "updated_at")
+  deletedAt                DateTime?   @map(name: "deleted_at") @db.DateTime(0)
 }
 
 enum Role {
@@ -135,4 +145,10 @@ enum Role {
 enum Status {
   ACTIVE
   INACTIVE
+}
+
+enum BenefitType {
+  N
+  D
+  J
 }

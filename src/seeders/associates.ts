@@ -568,16 +568,17 @@ export default async (client: PrismaClient): Promise<void> => {
     logger.info({
       msg: `creating ${associateds.length} associateds in the database`,
     });
-    for (const associated of associateds) {
+    for (const associatedIndex in associateds) {
       await client.associated.upsert({
         where: {
-          taxId: associated.taxId,
+          taxId: associateds[associatedIndex].taxId,
         },
         create: {
-          ...associated,
+          id: associated,
+          ...associateds[associatedIndex],
         },
         update: {
-          ...associated,
+          ...associateds[associatedIndex],
         },
       });
     }

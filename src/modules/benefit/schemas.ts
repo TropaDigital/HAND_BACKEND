@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { BenefitType, Prisma } from '@prisma/client';
 import Joi from 'joi';
 
 import { ICreateBenefitParams } from './interfaces';
@@ -8,7 +8,9 @@ export const GetBenefitById = Joi.object<{ id: number }>({
 });
 
 export const CreateBenefit = Joi.object<ICreateBenefitParams>({
+  type: Joi.string().valid(...Object.keys(BenefitType)),
   associatedId: Joi.number().min(1).required(),
+  consultantId: Joi.number().min(1),
   association: Joi.string().required(),
   bank: Joi.string().required(),
   publicAgency: Joi.string().required(),
@@ -17,15 +19,20 @@ export const CreateBenefit = Joi.object<ICreateBenefitParams>({
   initialDate: Joi.date().required(),
   financialAssistanceValue: Joi.number().required(),
   installmentValue: Joi.number().required(),
-  consultantId: Joi.number().min(1),
   createdBy: Joi.string().required(),
 });
 
 export const UpdateBenefitById = Joi.object<
-  Prisma.BenefitUpdateInput & { id: number }
+  Prisma.BenefitUpdateInput & {
+    id: number;
+    associatedId: number;
+    consultantId: number;
+  }
 >({
+  type: Joi.string().valid(...Object.keys(BenefitType)),
+  associatedId: Joi.number().min(1).required(),
+  consultantId: Joi.number().min(1),
   id: Joi.number().min(1).required(),
-  associated: Joi.string(),
   association: Joi.string(),
   bank: Joi.string(),
   publicAgency: Joi.string(),
@@ -34,7 +41,6 @@ export const UpdateBenefitById = Joi.object<
   initialDate: Joi.date(),
   financialAssistanceValue: Joi.number(),
   installmentValue: Joi.number(),
-  consultant: Joi.string(),
   createdBy: Joi.string(),
 });
 

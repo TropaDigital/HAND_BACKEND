@@ -100,7 +100,7 @@ describe(BenefitRepository.name, () => {
       const { sut, prismaRepository } = makeSut();
       const createSpy = prismaRepository.create;
 
-      await sut.create(fakeBenefit);
+      await sut.create(fakeBenefit as any);
 
       expect(createSpy).toBeCalledWith({ data: makeFakeBenefit({}) });
     });
@@ -108,7 +108,7 @@ describe(BenefitRepository.name, () => {
     it('should return prisma result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.create(fakeBenefit);
+      const result = await sut.create(fakeBenefit as any);
 
       expect(result).toEqual(makeFakeBenefit({}));
     });
@@ -119,7 +119,7 @@ describe(BenefitRepository.name, () => {
         new Error('any_create_error'),
       );
 
-      const promise = sut.create(fakeBenefit);
+      const promise = sut.create(fakeBenefit as any);
 
       await expect(promise).rejects.toThrow(new Error('any_create_error'));
     });

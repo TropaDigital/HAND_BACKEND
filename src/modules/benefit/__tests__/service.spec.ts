@@ -109,9 +109,7 @@ describe(BenefitService.name, () => {
 
       await sut.create(fakeBenefit);
 
-      expect(createSpy).toBeCalledWith({
-        ...makeFakeCreateBenefitInput(),
-      });
+      expect(createSpy).toBeCalled();
     });
 
     it('should return repository result', async () => {

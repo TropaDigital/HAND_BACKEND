@@ -115,8 +115,8 @@ model Consultant {
 
 model Benefit {
   id                       Int         @id @default(autoincrement())
-  associated               Associated  @relation(fields: [associatedId], references: [id])
-  associatedId             Int
+  associated               Associated?  @relation(fields: [associatedId], references: [id])
+  associatedId             Int?
   association              String
   bank                     String
   publicAgency             String      @map(name: "public_agency")

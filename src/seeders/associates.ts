@@ -112,6 +112,9 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         pixKey: 'eloa_freitas@superigi.com.br',
       },
     },
+    benefits: {
+       
+    },
     createdBy: 'João',
   },
   {
@@ -557,6 +560,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         pixKey: 'eloa_freitas@superigi.com.br',
       },
     },
+
     createdBy: 'Ferreira',
   },
 ];
@@ -568,23 +572,35 @@ export default async (client: PrismaClient): Promise<void> => {
     logger.info({
       msg: `creating ${associateds.length} associateds in the database`,
     });
-    for (const associatedIndex in associateds) {
+    for (const associated of associateds) {
       await client.associated.upsert({
         where: {
-          taxId: associateds[associatedIndex].taxId,
+          taxId: associated.taxId,
         },
         create: {
-          id: associated,
-          ...associateds[associatedIndex],
+          ...associated,
+          benefits: {
+            create: {
+              association: 'ASES',
+              bank: 'Any Bank',
+              contractModel: 'Any model',
+              financialAssistanceValue: 20,
+              installmentNumber: 6,
+              installmentValue: 20,
+              publicAgency: 'Public Agency',
+              initialDate: new Date('2022-10-10'), 
+              createdBy: 'User',
+            }
+          }
         },
         update: {
-          ...associateds[associatedIndex],
+          ...associated,
         },
       });
     }
   } catch (error) {
     logger.error({
-      msg: `error creating ${associateds.length} in the database`,
+      msg: `error creating ${associateds.length} associateds in the database`,
       error,
     });
   }

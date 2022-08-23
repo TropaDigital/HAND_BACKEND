@@ -1,3 +1,30 @@
+## [1.12.0](https://github.com/haandsolutions/haand-bib/compare/v1.11.0...v1.12.0) (2022-08-23)
+
+
+### :sparkles: New Features
+
+* add routes to update bank accounts of an associated ([e3aa61f](https://github.com/haandsolutions/haand-bib/commit/e3aa61f6f4c82733157227393d2826d0a278bae6))
+
+
+### :zap: Refactor
+
+* add relationship between benefits and associateds ([89cd7a4](https://github.com/haandsolutions/haand-bib/commit/89cd7a4cc6ddab84439f564aa9393d402dc9952c))
+* adjust the benefits seeders ([2f02c14](https://github.com/haandsolutions/haand-bib/commit/2f02c14584589d0177930f8be1ef3d76c5a81a7b))
+* adjust the create associated route ([b5559ae](https://github.com/haandsolutions/haand-bib/commit/b5559aef75f4a9b2199723cf54457d0778995b6c))
+* adjust the create benefit route ([4206f19](https://github.com/haandsolutions/haand-bib/commit/4206f1914f48230c8b65782c96b6a7135d19baff))
+* adjust the rule of simulation ([d6da00a](https://github.com/haandsolutions/haand-bib/commit/d6da00ab5d7ab7be18f3d7832629f163fa68158c))
+
+
+### :white_check_mark: Tests
+
+* adjus te functional tests ([3d592a5](https://github.com/haandsolutions/haand-bib/commit/3d592a5f122f28b34598b5332719130b1cad6da3))
+* adjust the functional tests ([edf3d25](https://github.com/haandsolutions/haand-bib/commit/edf3d25e6957a493a4a9f4770c87f1c65ca0ea81))
+* adjust the jest unit tests threshould ([62a31ed](https://github.com/haandsolutions/haand-bib/commit/62a31edc55342a1436d4d2a7d71042fe39571363))
+* adjust the test helpers fo associated module ([97a851f](https://github.com/haandsolutions/haand-bib/commit/97a851f3b54561fe5dfdceca4cc3787e9d1262c3))
+* adjust the unit test of benefit module ([59e5fa8](https://github.com/haandsolutions/haand-bib/commit/59e5fa81e13b591071d061f0ad69eec806ce2bb4))
+* adjust the unit tests of associated module ([4c81fc6](https://github.com/haandsolutions/haand-bib/commit/4c81fc66cc8c0e58d50a65fbee1447981833dbec))
+* skip benefit tests ([d74bf22](https://github.com/haandsolutions/haand-bib/commit/d74bf22fa602ef5660b4ac725a6283ca0e5c860e))
+
 ## [1.11.0](https://github.com/haandsolutions/haand-bib/compare/v1.10.0...v1.11.0) (2022-08-16)
 
 

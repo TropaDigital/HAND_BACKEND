@@ -25,6 +25,7 @@ describe(AssociatedRepository.name, () => {
           addresses: true,
           employmentRelationships: true,
           bankAccounts: true,
+          benefits: true,
         },
         where: {},
       });
@@ -41,6 +42,7 @@ describe(AssociatedRepository.name, () => {
           addresses: true,
           employmentRelationships: true,
           bankAccounts: true,
+          benefits: true,
         },
         where: { id: { contains: 1 } },
       });

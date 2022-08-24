@@ -33,6 +33,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '3000.20',
+        isDefault: true,
       },
     },
 
@@ -46,6 +47,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Jardim Poti',
         state: 'Ceara',
         city: 'Poti',
+        isDefault: true,
       },
     },
     bankAccounts: {
@@ -55,6 +57,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'marcos@mail.com',
+        isDefault: true,
       },
     },
     createdBy: 'João',
@@ -87,6 +90,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '8654,45',
+        isDefault: true,
       },
     },
 
@@ -100,6 +104,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -110,6 +115,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
     benefits: {},
@@ -143,6 +149,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '3200,11',
+        isDefault: true,
       },
     },
     addresses: {
@@ -155,6 +162,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -165,6 +173,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 
@@ -198,6 +207,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
+        isDefault: true,
       },
     },
 
@@ -211,6 +221,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -221,6 +232,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 
@@ -254,6 +266,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
+        isDefault: true,
       },
     },
 
@@ -267,6 +280,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -277,6 +291,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 
@@ -310,6 +325,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
+        isDefault: true,
       },
     },
 
@@ -323,6 +339,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -333,6 +350,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 
@@ -366,6 +384,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
+        isDefault: true,
       },
     },
 
@@ -379,6 +398,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -389,6 +409,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 
@@ -422,6 +443,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
+        isDefault: true,
       },
     },
 
@@ -435,6 +457,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -445,6 +468,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 
@@ -478,6 +502,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
+        isDefault: true,
       },
     },
 
@@ -491,6 +516,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
     bankAccounts: {
@@ -500,6 +526,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 
@@ -533,6 +560,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         contractType: 'HIRED',
         registerNumber: '2108602049',
         salary: '4312.20',
+        isDefault: true,
       },
     },
 
@@ -546,6 +574,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         district: 'Centro',
         state: 'Mato Grosso',
         city: 'Apiacás',
+        isDefault: true,
       },
     },
 
@@ -556,6 +585,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountType: 'Corrente',
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
+        isDefault: true,
       },
     },
 

@@ -27,6 +27,8 @@ model BankAccount {
   pixKey        String? @map(name: "pix_key")
   pixType       String? @map(name: "pix_type")
 
+  isDefault Boolean @default(false)
+
   Associated   Associated? @relation(fields: [associatedId], references: [id])
   associatedId Int?
 }
@@ -34,6 +36,7 @@ model BankAccount {
 model Address {
   id Int @id @default(autoincrement())
 
+  isDefault    Boolean     @default(false)
   addressType  String      @map(name: "address_type")
   postalCode   String      @map(name: "postal_code")
   street       String
@@ -49,6 +52,7 @@ model Address {
 model EmploymentRelationship {
   id Int @id @default(autoincrement())
 
+  isDefault      Boolean     @default(false)
   occupation     String
   salary         String
   paymentDay     Int         @map(name: "payment_day")

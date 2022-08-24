@@ -34,6 +34,21 @@ export class AssociatedService implements IAssociatedService {
     bankId: number,
     payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
   ): Promise<BankAccount> {
+    if (payload.isDefault) {
+      const bankAccounts = await this.getBankAccountByAssociatedId(
+        associatedId,
+      );
+      await Promise.all(
+        bankAccounts.map(bankAccount => {
+          return this.associatedRepository.upsertBankAccountById(
+            associatedId,
+            bankAccount.id,
+            { isDefault: false },
+          );
+        }),
+      );
+    }
+
     const result = await this.associatedRepository.upsertBankAccountById(
       associatedId,
       bankId,
@@ -60,7 +75,27 @@ export class AssociatedService implements IAssociatedService {
   }
 
   public async create(payload: ICreateAssociatedInput): Promise<IAssociated> {
-    const result = await this.associatedRepository.create(payload);
+    const result = await this.associatedRepository.create({
+      ...payload,
+      addresses: [
+        {
+          ...payload.addresses[0],
+          isDefault: true,
+        },
+      ],
+      bankAccounts: [
+        {
+          ...payload.bankAccounts[0],
+          isDefault: true,
+        },
+      ],
+      employmentRelationships: [
+        {
+          ...payload.employmentRelationships[0],
+          isDefault: true,
+        },
+      ],
+    });
 
     return result;
   }
@@ -98,6 +133,20 @@ export class AssociatedService implements IAssociatedService {
       | Prisma.EmploymentRelationshipUpdateInput
       | Prisma.EmploymentRelationshipCreateInput,
   ): Promise<EmploymentRelationship> {
+    if (payload.isDefault) {
+      const employmentRelationships =
+        await this.getEmploymentRelationshipsByAssociatedId(associatedId);
+      await Promise.all(
+        employmentRelationships.map(employmentRelationship => {
+          return this.associatedRepository.upsertEmploymentRelationshipById(
+            associatedId,
+            employmentRelationship.id,
+            { isDefault: false },
+          );
+        }),
+      );
+    }
+
     const result =
       await this.associatedRepository.upsertEmploymentRelationshipById(
         associatedId,
@@ -113,6 +162,19 @@ export class AssociatedService implements IAssociatedService {
     addressId: number,
     payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
   ): Promise<Address> {
+    if (payload.isDefault) {
+      const addresses = await this.getAddressesByAssociatedId(associatedId);
+      await Promise.all(
+        addresses.map(address => {
+          return this.associatedRepository.upsertAddressById(
+            associatedId,
+            address.id,
+            { isDefault: false },
+          );
+        }),
+      );
+    }
+
     const result = await this.associatedRepository.upsertAddressById(
       associatedId,
       addressId,

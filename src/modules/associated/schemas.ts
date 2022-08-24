@@ -158,6 +158,7 @@ export const updateEmploymentRelationshipsByAssociatedIdAndId = Joi.object<
     associatedId: number;
   }
 >({
+  isDefault: Joi.boolean().label('principal'),
   associatedId: Joi.number().required(),
   id: Joi.number(),
   occupation: Joi.string().label('profissão'),
@@ -175,6 +176,7 @@ export const updateBankAccountByAssociatedIdAndId = Joi.object<
     associatedId: number;
   }
 >({
+  isDefault: Joi.boolean().label('principal'),
   associatedId: Joi.number().required(),
   id: Joi.number(),
   accountNumber: Joi.string().label('conta'),
@@ -191,6 +193,7 @@ export const updateAddressByAssociatedIdAndId = Joi.object<
     associatedId: number;
   }
 >({
+  isDefault: Joi.boolean().label('principal'),
   id: Joi.number(),
   associatedId: Joi.number().required(),
   addressType: Joi.string().required().label('tipo de endereço'),

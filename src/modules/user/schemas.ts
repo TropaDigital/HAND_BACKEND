@@ -1,4 +1,4 @@
-import { Prisma, Role, Status } from '@prisma/client';
+import { Prisma, Status } from '@prisma/client';
 import Joi from 'joi';
 
 export const GetUserByUserName = Joi.object<{ userName: string }>({
@@ -11,7 +11,6 @@ export const CreateUser = Joi.object<Prisma.UserCreateInput>({
   name: Joi.string().required(),
   password: Joi.string().required(),
   status: Joi.string().valid(...Object.values(Status)),
-  role: Joi.string().valid(...Object.values(Role)),
 });
 
 export const UpdateUserById = Joi.object<
@@ -23,7 +22,6 @@ export const UpdateUserById = Joi.object<
   name: Joi.string().required(),
   password: Joi.string(),
   status: Joi.string(),
-  role: Joi.string(),
 });
 
 export const DeleteUserById = Joi.object<{ id: number }>({

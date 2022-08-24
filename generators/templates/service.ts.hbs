@@ -16,7 +16,6 @@ export class {{pascalCase name}}Service implements I{{pascalCase name}}Service {
     if (!result) {
       throw new NotFoundError('{{camelCase name}} not found with provided id');
     }
-    const result = await this.{{camelCase name}}Repository.findById(id);
     return result;
   }
 

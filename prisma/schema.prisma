@@ -13,8 +13,9 @@ model User {
   email    String @unique
   name     String
   password String
-  role     Role   @default(USER)
   status   Status @default(ACTIVE)
+  Role     Role?  @relation(fields: [roleId], references: [id])
+  roleId   Int?
 }
 
 model BankAccount {
@@ -87,7 +88,7 @@ model Associated {
 
   employmentRelationships EmploymentRelationship[]
 
-  benefits    Benefit[]
+  benefits Benefit[]
 
   createdBy String    @map(name: "created_by") @db.VarChar(75)
   updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
@@ -97,13 +98,13 @@ model Associated {
 }
 
 model Consultant {
-  id         Int       @id @default(autoincrement())
-  name       String
-  taxId      String    @map(name: "tax_id") @db.VarChar(11)
-  city       String
-  state      String
-  
-  benefits    Benefit[]
+  id    Int    @id @default(autoincrement())
+  name  String
+  taxId String @map(name: "tax_id") @db.VarChar(11)
+  city  String
+  state String
+
+  benefits Benefit[]
 
   commission Int       @default(0) @db.UnsignedInt
   createdBy  String    @map(name: "created_by") @db.VarChar(75)
@@ -115,7 +116,7 @@ model Consultant {
 
 model Benefit {
   id                       Int         @id @default(autoincrement())
-  associated               Associated?  @relation(fields: [associatedId], references: [id])
+  associated               Associated? @relation(fields: [associatedId], references: [id])
   associatedId             Int?
   association              String
   bank                     String
@@ -128,18 +129,26 @@ model Benefit {
   consultant               Consultant? @relation(fields: [consultantId], references: [id])
   consultantId             Int?
 
-  type                     BenefitType @default(N) 
-  
-  createdBy                String      @map(name: "created_by") @db.VarChar(75)
-  updatedBy                String?     @map(name: "updated_by") @db.VarChar(75)
-  createdAt                DateTime    @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt                DateTime    @updatedAt @map(name: "updated_at")
-  deletedAt                DateTime?   @map(name: "deleted_at") @db.DateTime(0)
+  type BenefitType @default(N)
+
+  createdBy String    @map(name: "created_by") @db.VarChar(75)
+  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
+  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
 }
 
-enum Role {
-  USER
-  ADMIN
+model Role {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+
+  users User[]
+
+  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
+  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
 }
 
 enum Status {

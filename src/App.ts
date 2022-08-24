@@ -18,6 +18,7 @@ import {
   loanSimulationRouter,
   consultantRouter,
   userRouter,
+  roleRouter,
 } from './modules';
 import { associatedRouter } from './modules/associated';
 import { loginRouter } from './modules/auth';
@@ -119,6 +120,7 @@ export default class App {
       userRouter,
       associatedRouter,
       benefitRouter,
+      roleRouter,
     ].forEach(router => router.setupRoutes(this.application));
   }
 

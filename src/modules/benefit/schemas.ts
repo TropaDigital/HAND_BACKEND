@@ -8,7 +8,7 @@ export const GetBenefitById = Joi.object<{ id: number }>({
 });
 
 export const CreateBenefit = Joi.object<ICreateBenefitParams>({
-  type: Joi.string().valid(...Object.keys(BenefitType)),
+  type: Joi.string().valid(BenefitType.D, BenefitType.J, BenefitType.N),
   associatedId: Joi.number().min(1).required(),
   consultantId: Joi.number().min(1),
   association: Joi.string().required(),

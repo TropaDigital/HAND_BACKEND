@@ -8,7 +8,7 @@ export class AuthService implements IAuthService {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly authService: IAuthenticationService,
-  ) {}
+  ) { }
 
   async authenticate(credentials: IAuthRequestParams): Promise<IAuthResult> {
     const { login: userName, password } = credentials;
@@ -36,7 +36,7 @@ export class AuthService implements IAuthService {
 
     const accessToken = await this.authService.generateToken({
       sub: String(user.userName),
-      role: user.role,
+      role: user.role?.name as string,
     });
 
     return { user: responseUser, token: accessToken };

@@ -5,23 +5,30 @@ import { authConfig } from '../../config/auth';
 import ErrorCodes from '../../enums/ErrorCodes';
 import { IAuthenticationService } from '../../shared/auth/interfaces';
 import { NotFoundError } from '../../shared/errors';
-import { IUserRepository, IUserService, IResponseUser } from './interfaces';
+import {
+  IUserRepository,
+  IUserService,
+  IResponseUser,
+  IUser,
+} from './interfaces';
 
 export class UserService implements IUserService {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly authService: IAuthenticationService,
     private readonly mailerService: IMailerService,
-  ) {}
+  ) { }
 
   public async getAll(): Promise<IResponseUser[]> {
     const users = await await this.userRepository.findAll();
-    const result = users.map((user: User) => this.removePasswordFromUser(user));
+    const result = users.map((user: IUser) =>
+      this.removePasswordFromUser(user),
+    );
 
     return result;
   }
 
-  private removePasswordFromUser(user: User): IResponseUser {
+  private removePasswordFromUser(user: IUser): IResponseUser {
     const { password: _password, ...result } = user;
 
     return result;
@@ -45,7 +52,7 @@ export class UserService implements IUserService {
     const user = { ...payload, ...{ password: hashedPassword } };
     const result = await this.userRepository.create(user);
 
-    return result;
+    return this.removePasswordFromUser(result);
   }
 
   public async updateById(
@@ -83,7 +90,7 @@ export class UserService implements IUserService {
     }
 
     const token = await this.authService.generateToken({
-      role: user.role,
+      role: user.role?.name as string,
       sub: user.id,
     });
     await this.mailerService.sendResetPasswordEmail(user, token);

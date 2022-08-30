@@ -1,5 +1,6 @@
 import {
   Address,
+  Affiliation,
   Associated,
   BankAccount,
   EmploymentRelationship,
@@ -16,12 +17,14 @@ export type IAssociated = Associated & {
   bankAccounts: BankAccount[];
   addresses: Address[];
   employmentRelationships: EmploymentRelationship[];
+  affiliations: Affiliation[];
 };
 
 export type ICreateAssociatedInput = Omit<
   Prisma.AssociatedCreateInput,
-  'addresses' | 'employmentRelationships' | 'bankAccounts'
+  'addresses' | 'employmentRelationships' | 'bankAccounts' | 'affiliations'
 > & {
+  affiliations: Affiliation[];
   addresses: Omit<Address, 'id' | 'associatedId'>[];
   bankAccounts: Omit<BankAccount, 'id' | 'associatedId'>[];
   employmentRelationships: Omit<
@@ -32,8 +35,9 @@ export type ICreateAssociatedInput = Omit<
 
 export type IUpdateAssociatedInput = Omit<
   Prisma.AssociatedUpdateInput,
-  'addresses' | 'employmentRelationships' | 'bankAccounts'
+  'addresses' | 'employmentRelationships' | 'bankAccounts' | 'affiliations'
 > & {
+  affiliations?: Affiliation[];
   bankAccounts?: Omit<BankAccount, 'id' | 'associatedId'>[];
   addresses?: Omit<Address, 'id' | 'associatedId'>[];
   employmentRelationships?: Omit<

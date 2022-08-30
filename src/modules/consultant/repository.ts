@@ -7,7 +7,7 @@ export type PrismaConsultantRepository = Prisma.ConsultantDelegate<
 >;
 
 export class ConsultantRepository implements IConsultantRepository {
-  constructor(private readonly prismaRepository: PrismaConsultantRepository) {}
+  constructor(private readonly prismaRepository: PrismaConsultantRepository) { }
 
   public async findAll(): Promise<Consultant[]> {
     const result = await this.prismaRepository.findMany();

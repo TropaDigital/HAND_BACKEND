@@ -8,7 +8,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Márcio',
     lastName: 'Das Neves',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Masculino',
     birthDate: new Date('1991-06-06'),
     maritalStatus: 'Casado',
@@ -60,12 +60,17 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         isDefault: true,
       },
     },
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
     createdBy: 'João',
   },
   {
     name: 'Eloá',
     lastName: 'Rodrigues',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -119,12 +124,19 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
     benefits: {},
+    affiliations: {
+      connect: [
+        {
+          name: 'ASES Vitória',
+        },
+      ],
+    },
     createdBy: 'João',
   },
   {
     name: 'Jaqueline',
     lastName: 'Castro',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -177,12 +189,18 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
+
     createdBy: 'Ferreira',
   },
   {
     name: 'Ana',
     lastName: 'Santos',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -236,12 +254,18 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
+
     createdBy: 'Ferreira',
   },
   {
     name: 'Camila',
     lastName: 'Souza',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -295,12 +319,18 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
+
     createdBy: 'Ferreira',
   },
   {
     name: 'Alice',
     lastName: 'Soares',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -354,12 +384,18 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
+
     createdBy: 'Ferreira',
   },
   {
     name: 'Silvia',
     lastName: 'Costa',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -413,12 +449,18 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
+
     createdBy: 'Ferreira',
   },
   {
     name: 'Amanda',
     lastName: 'Freitas',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -472,12 +514,18 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
+
     createdBy: 'Ferreira',
   },
   {
     name: 'Maria',
     lastName: 'Silva',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -530,12 +578,18 @@ const associateds: Prisma.AssociatedCreateInput[] = [
       },
     },
 
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
+      },
+    },
+
     createdBy: 'Ferreira',
   },
   {
     name: 'Joana',
     lastName: 'Ferreira',
-    affiliation: 'ASES COLATINA',
+
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
     maritalStatus: 'Casado',
@@ -586,6 +640,12 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         accountNumber: '23132',
         pixKey: 'eloa_freitas@superigi.com.br',
         isDefault: true,
+      },
+    },
+
+    affiliations: {
+      connect: {
+        name: 'ASES Vitória',
       },
     },
 

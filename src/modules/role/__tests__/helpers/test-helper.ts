@@ -3,13 +3,15 @@ import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { IRoleRepository } from '../../interfaces';
+import { IRoleRepository, IRoleService } from '../../interfaces';
 import { PrismaRoleRepository } from '../../repository';
 
 export const makeFakeCreateRoleInput = (
   payload?: Partial<Prisma.RoleCreateInput>,
 ): jest.Mocked<Prisma.RoleCreateInput> => ({
   ...payload,
+  name: 'USER',
+  description: '',
 });
 
 export const makeFakeUpdateRoleInput = (
@@ -38,6 +40,13 @@ export const makeFakeApiHttpResponse = (
 
 export const makeFakeRole = (payload: Partial<Role>): jest.Mocked<Role> => ({
   ...payload,
+  id: 1,
+  createdAt: new Date(),
+  deletedAt: null,
+  description: '',
+  name: 'USER',
+  updatedAt: new Date(),
+  updatedBy: 'me',
 });
 
 export const makeFakeRoleList = () => [makeFakeRole({}), makeFakeRole({})];

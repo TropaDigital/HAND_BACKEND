@@ -1,51 +1,66 @@
-import { Prisma, User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
-import { IUserRepository, IResponseUser } from './interfaces';
+import { IUserRepository, IUser } from './interfaces';
 
 export type PrismaUserRepository = Prisma.UserDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
 >;
 
 export class UserRepository implements IUserRepository {
-  constructor(private readonly prismaRepository: PrismaUserRepository) {}
+  constructor(private readonly prismaRepository: PrismaUserRepository) { }
 
-  public async findAll(): Promise<User[]> {
-    const result = await this.prismaRepository.findMany();
+  public async findAll(): Promise<IUser[]> {
+    const result = await this.prismaRepository.findMany({
+      include: {
+        role: true,
+      },
+    });
+
     return result;
   }
 
-  public async findById(id: number): Promise<User | null> {
+  public async findById(id: number): Promise<IUser | null> {
     const result = await this.prismaRepository.findFirst({
       where: { id },
+      include: {
+        role: true,
+      },
     });
 
     return result;
   }
 
-  public async findByUserName(userName: string): Promise<User | null> {
+  public async findByUserName(userName: string): Promise<IUser | null> {
     const result = await this.prismaRepository.findFirst({
       where: { userName },
+      include: {
+        role: true,
+      },
     });
 
     return result;
   }
 
-  public async findByEmail(email: string): Promise<User | null> {
+  public async findByEmail(email: string): Promise<IUser | null> {
     const result = await this.prismaRepository.findFirst({
       where: { email },
+      include: {
+        role: true,
+      },
     });
 
     return result;
   }
 
-  public async create(payload: Prisma.UserCreateInput): Promise<IResponseUser> {
+  public async create(payload: Prisma.UserCreateInput): Promise<IUser> {
     const user = await this.prismaRepository.create({
       data: payload,
+      include: {
+        role: true,
+      },
     });
 
-    const { password: _password, ...result } = user;
-
-    return result;
+    return user;
   }
 
   public async updateById(

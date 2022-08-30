@@ -27,7 +27,7 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 >;
 
 export class AssociatedRepository implements IAssociatedRepository {
-  constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
+  constructor(private readonly prismaRepository: PrismaAssociatedRepository) { }
 
   public async getBankAccountsByAssociatedId(
     associatedId: number,
@@ -83,6 +83,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         employmentRelationships: true,
         bankAccounts: true,
         benefits: true,
+        affiliations: true,
       },
     });
     const totalResults =
@@ -105,6 +106,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         employmentRelationships: true,
         bankAccounts: true,
         benefits: true,
+        affiliations: true,
       },
     });
 
@@ -112,12 +114,24 @@ export class AssociatedRepository implements IAssociatedRepository {
   }
 
   public async create(payload: ICreateAssociatedInput): Promise<IAssociated> {
-    const { addresses, employmentRelationships, bankAccounts, ...associated } =
-      payload;
+    const {
+      addresses,
+      employmentRelationships,
+      bankAccounts,
+      affiliations,
+      ...associated
+    } = payload;
 
     const result = await this.prismaRepository.create({
       data: {
         ...associated,
+        affiliations: {
+          connect: [
+            ...affiliations.map(association => ({
+              id: association.id,
+            })),
+          ],
+        },
         bankAccounts: { createMany: { data: bankAccounts } },
         addresses: { createMany: { data: addresses } },
         employmentRelationships: {
@@ -128,6 +142,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         addresses: true,
         employmentRelationships: true,
         bankAccounts: true,
+        affiliations: true,
       },
     });
 
@@ -143,12 +158,22 @@ export class AssociatedRepository implements IAssociatedRepository {
       employmentRelationships,
       bankAccounts,
       benefits,
+      affiliations,
       ...associated
     } = payload;
 
     await this.prismaRepository.update({
       where: { id },
-      data: associated,
+      data: {
+        ...associated,
+        affiliations: {
+          connect: [
+            ...(affiliations || []).map(affiliation => ({
+              id: affiliation.id,
+            })),
+          ],
+        },
+      },
     });
   }
 

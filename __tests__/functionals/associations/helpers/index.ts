@@ -15,6 +15,7 @@ export const makeFakeEmploymentRelationshipParams = (
   contractType: 'contract_type',
   publicAgency: 'any_agency',
   finalDate: new Date(),
+  isDefault: true,
   ...payload,
 });
 
@@ -47,6 +48,7 @@ export const makeFakeCreateAssociatedParams = (
       pixType: 'any_type',
       accountNumber: 'any_account',
       accountType: 'any_type',
+      isDefault: true,
     },
   ],
   addresses: [
@@ -59,6 +61,7 @@ export const makeFakeCreateAssociatedParams = (
       district: 'any_district',
       city: 'any_city',
       state: 'any_state',
+      isDefault: true,
     },
   ],
   employmentRelationships: [
@@ -70,8 +73,10 @@ export const makeFakeCreateAssociatedParams = (
       contractType: 'contract_type',
       publicAgency: 'any_agency',
       finalDate: new Date(),
+      isDefault: true,
     },
   ],
+  affiliations: [],
 
   registerId: 'Any id',
   taxId: '000.000.000-00',
@@ -86,7 +91,7 @@ export const makeFakeCreateAssociatedParams = (
   email: 'any@mail.com',
   cellPhone: '00000000',
   birthDate: new Date('2022-10-10'),
-  affiliation: 'Any affiliation',
+
   createdBy: 'Any User',
   ...payload,
 });
@@ -108,6 +113,7 @@ export const makeFakeAssociated = (
       pixType: 'any_type',
       accountNumber: 'any_account',
       accountType: 'any_type',
+      isDefault: true,
     },
   ],
   addresses: [
@@ -120,6 +126,7 @@ export const makeFakeAssociated = (
       district: 'any_district',
       city: 'any_city',
       state: 'any_state',
+      isDefault: true,
     },
   ],
 
@@ -132,9 +139,11 @@ export const makeFakeAssociated = (
       contractType: 'contract_type',
       publicAgency: 'any_agency',
       finalDate: new Date(),
+      isDefault: true,
     },
   ],
 
+  affiliations: [],
   registerId: 'Any id',
   taxId: '000.000.000-00',
   partner: 'Any partner',
@@ -148,7 +157,7 @@ export const makeFakeAssociated = (
   email: 'any@mail.com',
   cellPhone: '00000000',
   birthDate: new Date('2022-10-10'),
-  affiliation: 'Any affiliation',
+
   createdBy: 'Any User',
 
   ...payload,

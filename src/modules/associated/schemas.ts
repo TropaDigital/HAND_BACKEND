@@ -10,7 +10,6 @@ export const GetAssociatedById = Joi.object<{ id: number }>({
 export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
   name: Joi.string().required().label('nome'),
   lastName: Joi.string().required().label('sobrenome'),
-  affiliation: Joi.string().required().label('afiliação'),
   gender: Joi.string().required().label('sexo'),
   birthDate: Joi.date().required().label('birthDate'),
   maritalStatus: Joi.string().required().label('estado-civil'),
@@ -27,6 +26,13 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
   mother: Joi.string().required().label('mãe'),
   partner: Joi.string().label('cônjuge'),
 
+  affiliations: Joi.array()
+    .items(
+      Joi.object({
+        id: Joi.number().required(),
+      }),
+    )
+    .required(),
   addresses: Joi.array()
     .items(
       Joi.object({
@@ -74,7 +80,6 @@ export const UpdateAssociatedById = Joi.object<
   id: Joi.number().min(1).required(),
   name: Joi.string().label('nome'),
   lastName: Joi.string().label('sobrenome'),
-  affiliation: Joi.string().label('afiliação'),
   gender: Joi.string().label('sexo'),
   birthDate: Joi.date().label('birthDate'),
   maritalStatus: Joi.string().label('estado-civil'),
@@ -91,6 +96,12 @@ export const UpdateAssociatedById = Joi.object<
   mother: Joi.string().label('mãe'),
   partner: Joi.string().label('cônjuge'),
 
+  affiliations: Joi.array().items(
+    Joi.object({
+      id: Joi.number(),
+      name: Joi.string(),
+    }),
+  ),
   addresses: Joi.array().items(
     Joi.object({
       addressType: Joi.string().required().label('tipo de endereço'),

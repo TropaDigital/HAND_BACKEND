@@ -24,6 +24,7 @@ export const makeFakeCreateAssociatedInput = (
       district: 'any_district',
       city: 'any_city',
       state: 'any_state',
+      isDefault: true,
     },
   ],
   employmentRelationships: [
@@ -35,6 +36,7 @@ export const makeFakeCreateAssociatedInput = (
       contractType: 'contract_type',
       publicAgency: 'any_agency',
       finalDate: new Date(),
+      isDefault: true,
     },
   ],
   bankAccounts: [
@@ -45,9 +47,18 @@ export const makeFakeCreateAssociatedInput = (
       bank: '00 - Any Bank',
       pixKey: 'any_pix_key',
       pixType: 'any_type',
+      isDefault: true,
     },
   ],
-  affiliation: 'any_affiliation',
+  affiliations: [
+    {
+      id: 1,
+      name: 'USER',
+      createdAt: new Date(),
+      deletedAt: null,
+      updatedAt: new Date(),
+    },
+  ],
 
   birthDate: new Date(),
   cellPhone: '00-0000000',
@@ -84,6 +95,7 @@ export const makeFakeUpdateAssociatedInput = (
       district: 'any_district',
       city: 'any_city',
       state: 'any_state',
+      isDefault: true,
     },
   ],
 
@@ -96,6 +108,7 @@ export const makeFakeUpdateAssociatedInput = (
       contractType: 'contract_type',
       publicAgency: 'any_agency',
       finalDate: new Date(),
+      isDefault: true,
     },
   ],
   bankAccounts: [
@@ -106,9 +119,9 @@ export const makeFakeUpdateAssociatedInput = (
       bank: '00 - Any Bank',
       pixKey: 'any_pix_key',
       pixType: 'any_type',
+      isDefault: true,
     },
   ],
-  affiliation: 'any_affiliation',
 
   birthDate: new Date(),
   cellPhone: '00-0000000',
@@ -156,6 +169,15 @@ export const makeFakeAssociated = (
   payload: Partial<IAssociated>,
 ): jest.Mocked<IAssociated> => ({
   id: 0,
+  affiliations: [
+    {
+      id: 1,
+      name: 'USER',
+      createdAt: new Date(),
+      deletedAt: null,
+      updatedAt: new Date(),
+    },
+  ],
   addresses: [
     {
       id: 2,
@@ -168,6 +190,7 @@ export const makeFakeAssociated = (
       city: 'any_city',
       state: 'any_state',
       associatedId: 0,
+      isDefault: true,
     },
   ],
 
@@ -182,10 +205,10 @@ export const makeFakeAssociated = (
       publicAgency: 'any_agency',
       finalDate: new Date(),
       associatedId: 0,
+      isDefault: true,
     },
   ],
 
-  affiliation: 'any_affiliation',
   birthDate: new Date(),
   cellPhone: '00-0000000',
   email: 'any@email.com',
@@ -210,6 +233,7 @@ export const makeFakeAssociated = (
       accountType: 'any_type',
       id: 0,
       associatedId: 0,
+      isDefault: true,
     },
   ],
 

@@ -11,7 +11,7 @@ const users: Prisma.UserCreateInput[] = [
     name: 'Bruno Afonso',
     email: 'brunohafonso@gmail.com',
     password: authConfig().DEFAULT_PASSWORD,
-    Role: {
+    role: {
       connect: {
         name: 'admin',
       },
@@ -23,7 +23,7 @@ const users: Prisma.UserCreateInput[] = [
     name: 'Lucas Simão',
     email: 'lucasimao64@gmail.com',
     password: authConfig().DEFAULT_PASSWORD,
-    Role: {
+    role: {
       connect: {
         name: 'admin',
       },
@@ -35,7 +35,7 @@ const users: Prisma.UserCreateInput[] = [
     name: 'Marcelo Barbosa',
     email: 'contato@haand.com.br',
     password: authConfig().DEFAULT_PASSWORD,
-    Role: {
+    role: {
       connect: {
         name: 'admin',
       },

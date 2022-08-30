@@ -123,6 +123,7 @@ describe(RoleService.name, () => {
         city: 'any_city',
         state: 'any_state',
         createdBy: 'any_role',
+        description: '',
       };
 
       const result = await sut.create(role);

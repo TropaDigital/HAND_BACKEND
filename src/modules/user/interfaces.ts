@@ -1,23 +1,29 @@
-import { User, Prisma } from '@prisma/client';
+import { User, Prisma, Role } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 
-export interface IResponseUser extends Omit<User, 'password'> {}
+export interface IResponseUser extends Omit<User, 'password'> {
+  role: Role | null;
+}
+
+export type IUser = User & {
+  role: Role | null;
+};
 
 export interface IUserRepository {
-  create(payload: Prisma.UserCreateInput): Promise<IResponseUser>;
+  create(payload: Prisma.UserCreateInput): Promise<IUser>;
 
   updateById(id: number, payload: Prisma.UserUpdateInput): Promise<void>;
 
   deleteById(id: number): Promise<void>;
 
-  findAll(): Promise<User[]>;
+  findAll(): Promise<IUser[]>;
 
-  findById(id: number): Promise<User | null>;
+  findById(id: number): Promise<IUser | null>;
 
-  findByUserName(userName: string): Promise<User | null>;
+  findByUserName(userName: string): Promise<IUser | null>;
 
-  findByEmail(email: string): Promise<User | null>;
+  findByEmail(email: string): Promise<IUser | null>;
 }
 
 export interface IUserController {

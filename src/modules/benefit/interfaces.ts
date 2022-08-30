@@ -5,11 +5,15 @@ import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
+import { ILoanSimulationBasedOnRequestedValueParams } from '../loanSimulation/interfaces';
 
 export interface ICreateBenefitParams
-  extends Omit<Prisma.BenefitCreateInput, 'associated' | 'consultant'> {
+  extends ILoanSimulationBasedOnRequestedValueParams {
+  // contractType: BenefitType;
   associatedId: number;
-  consultantId?: number;
+  bankAccountId: number;
+  employmentRelationshipId: number;
+  addressId: number;
 }
 
 export interface IBenefitRepository {

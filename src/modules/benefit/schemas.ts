@@ -1,6 +1,8 @@
 import { BenefitType, Prisma } from '@prisma/client';
 import Joi from 'joi';
 
+import { MonthOfPayment } from '../../enums/MonthOfPayment';
+import { loanConfig } from '../loanSimulation/consts';
 import { ICreateBenefitParams } from './interfaces';
 
 export const GetBenefitById = Joi.object<{ id: number }>({
@@ -8,18 +10,24 @@ export const GetBenefitById = Joi.object<{ id: number }>({
 });
 
 export const CreateBenefit = Joi.object<ICreateBenefitParams>({
-  type: Joi.string().valid(BenefitType.D, BenefitType.J, BenefitType.N),
+  addressId: Joi.number().min(1).required(),
+  bankAccountId: Joi.number().min(1).required(),
+  employmentRelationshipId: Joi.number().min(1).required(),
   associatedId: Joi.number().min(1).required(),
   consultantId: Joi.number().min(1),
-  association: Joi.string().required(),
-  bank: Joi.string().required(),
-  publicAgency: Joi.string().required(),
-  contractModel: Joi.string().required(),
-  installmentNumber: Joi.number().required(),
-  initialDate: Joi.date().required(),
-  financialAssistanceValue: Joi.number().required(),
-  installmentValue: Joi.number().required(),
-  createdBy: Joi.string().required(),
+  joinedTelemedicine: Joi.boolean().default(false),
+  salaryReceiptDate: Joi.date(),
+  numberOfInstallments: Joi.number()
+    .min(1)
+    .max(loanConfig.maximumNumberOfInstallments)
+    .required(),
+  requestedValue: Joi.number().min(100).required(),
+  salary: Joi.number().min(100).required(),
+  monthOfPayment: Joi.string()
+    .valid(...Object.values(MonthOfPayment))
+    .required(),
+  administrationFeeValue: Joi.number().default(0),
+  hasGratification: Joi.boolean().default(false),
 });
 
 export const UpdateBenefitById = Joi.object<
@@ -33,7 +41,6 @@ export const UpdateBenefitById = Joi.object<
   associatedId: Joi.number().min(1).required(),
   consultantId: Joi.number().min(1),
   id: Joi.number().min(1).required(),
-  association: Joi.string(),
   bank: Joi.string(),
   publicAgency: Joi.string(),
   contractModel: Joi.string(),

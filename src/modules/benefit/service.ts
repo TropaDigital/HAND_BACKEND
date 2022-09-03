@@ -217,11 +217,13 @@ export class BenefitService implements IBenefitService {
           id: associatedId,
         },
       },
-      consultant: {
-        connect: {
-          id: consultantId,
-        },
-      },
+      ...(consultantId
+        ? {
+          connect: {
+            id: consultantId,
+          },
+        }
+        : {}),
     });
 
     return result;

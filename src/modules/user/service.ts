@@ -17,7 +17,7 @@ export class UserService implements IUserService {
     private readonly userRepository: IUserRepository,
     private readonly authService: IAuthenticationService,
     private readonly mailerService: IMailerService,
-  ) { }
+  ) {}
 
   public async getAll(): Promise<IResponseUser[]> {
     const users = await await this.userRepository.findAll();

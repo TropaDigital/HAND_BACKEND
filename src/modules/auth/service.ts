@@ -8,7 +8,7 @@ export class AuthService implements IAuthService {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly authService: IAuthenticationService,
-  ) { }
+  ) {}
 
   async authenticate(credentials: IAuthRequestParams): Promise<IAuthResult> {
     const { login: userName, password } = credentials;

@@ -91,13 +91,13 @@ export class BenefitService implements IBenefitService {
     }
 
     const address = (addresses || []).find(
-      addressItem => addressItem.id === addressId,
+      (addressItem: Address) => addressItem.id === addressId,
     ) as Address;
     const bankAccount = (bankAccounts || []).find(
-      bankAccountItem => bankAccountItem.id === bankAccountId,
+      (bankAccountItem: BankAccount) => bankAccountItem.id === bankAccountId,
     ) as BankAccount;
     const employmentRelationship = (employmentRelationships || []).find(
-      employmentRelationshipItem =>
+      (employmentRelationshipItem: EmploymentRelationship) =>
         employmentRelationshipItem.id === employmentRelationshipId,
     ) as EmploymentRelationship;
 
@@ -131,6 +131,31 @@ export class BenefitService implements IBenefitService {
       );
     }
 
+    const {
+      birthDate,
+      cellPhone,
+      createdAt,
+      createdBy,
+      deletedAt,
+      email,
+      emissionDate,
+      emissionState,
+      father,
+      gender,
+      issuingAgency,
+      lastName,
+      maritalStatus,
+      mother,
+      name,
+      nationality,
+      partner,
+      placeOfBirth,
+      registerId,
+      taxId,
+      updatedAt,
+      updatedBy,
+    } = associated as Associated;
+
     const result = await this.benefitRepository.create({
       accountNumber: bankAccount.accountNumber,
       accountType: bankAccount.accountType,
@@ -146,13 +171,36 @@ export class BenefitService implements IBenefitService {
       state: address.state,
       complement: address.complement,
       postalCode: address.postalCode,
-
+      administrationFeeValue,
+      hasGratification,
+      joinedTelemedicine,
       salary: employmentRelationship.salary,
       registerNumber: employmentRelationship.registerNumber,
       initialDate: this.formatMonthOfPayment(firstPaymentDates, monthOfPayment),
       contractType: BenefitType.N,
       contractModel: '',
-      ...(associated as Associated),
+      birthDate,
+      cellPhone,
+      createdAt,
+      createdBy,
+      deletedAt,
+      email,
+      emissionDate,
+      emissionState,
+      father,
+      gender,
+      issuingAgency,
+      lastName,
+      maritalStatus,
+      mother,
+      name,
+      nationality,
+      partner,
+      placeOfBirth,
+      registerId,
+      taxId,
+      updatedAt,
+      updatedBy,
       commission: consultantCommission,
       financialAssistanceValue: totalValue,
       installmentNumber: numberOfInstallments,

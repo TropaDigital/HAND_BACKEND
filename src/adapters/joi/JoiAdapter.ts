@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+import ErrorCodes from '../../enums/ErrorCodes';
 import ICustomJoiRoot from '../../interfaces/validation/ICustomJoiRoot';
 import IValidationResult from '../../interfaces/validation/IValidationResult';
 import IValidationResultDTO from '../../interfaces/validation/IValidationResultDTO';
@@ -36,7 +37,7 @@ export default class JoiAdapter<S = { [key: string]: Joi.Schema }> {
 
     throw new errors.MissingInvalidParamsError(
       undefined,
-      undefined,
+      ErrorCodes.MISSING_OR_INVALID_PARAMETERS,
       validationErrors,
     );
   }

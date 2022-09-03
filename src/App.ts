@@ -19,6 +19,7 @@ import {
   consultantRouter,
   userRouter,
   roleRouter,
+  affiliationRouter,
 } from './modules';
 import { associatedRouter } from './modules/associated';
 import { loginRouter } from './modules/auth';
@@ -121,6 +122,7 @@ export default class App {
       associatedRouter,
       benefitRouter,
       roleRouter,
+      affiliationRouter,
     ].forEach(router => router.setupRoutes(this.application));
   }
 

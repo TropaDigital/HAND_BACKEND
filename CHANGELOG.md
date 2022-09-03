@@ -1,3 +1,27 @@
+## [1.13.0](https://github.com/haandsolutions/haand-bib/compare/v1.12.0...v1.13.0) (2022-09-03)
+
+
+### :sparkles: New Features
+
+* add affilitation module ([483420f](https://github.com/haandsolutions/haand-bib/commit/483420f6c16d292d68f338aaf3fa91acf346baf9))
+* add creation of benefit by simulation rules ([9a5bd53](https://github.com/haandsolutions/haand-bib/commit/9a5bd53415c277826957b9c14efce88925c8fd11))
+* add flag default to address, bank accounts and employment relationship ([2807135](https://github.com/haandsolutions/haand-bib/commit/2807135791ffe4107e22de83c00fff9f17524d2f))
+* add table of associations ([65a2be5](https://github.com/haandsolutions/haand-bib/commit/65a2be5e340e981bae358a4555a0116bb9cdeabd))
+* create role module ([390147b](https://github.com/haandsolutions/haand-bib/commit/390147b37258b5327770ad8bd4f27baf7dec839c))
+
+
+### :bug: Fixes
+
+* adjust consultant param in benefit creation ([a42eeb2](https://github.com/haandsolutions/haand-bib/commit/a42eeb27e1996678159031883347bd1ff0bc653f))
+* adjust the params of create benefit service ([ec7d4aa](https://github.com/haandsolutions/haand-bib/commit/ec7d4aa2e5178d6fc9087044fa4e4eeff7b45168))
+* adjust the query of update associated personal data ([fcf91d9](https://github.com/haandsolutions/haand-bib/commit/fcf91d9a6afcd6d302f712c6bff60caf3121b166))
+* adjust the type inferences ([00a9dc9](https://github.com/haandsolutions/haand-bib/commit/00a9dc9668e3ff00c95944fd710130cbc210abf7))
+
+
+### :repeat: CI
+
+* adjust the pipeline to continue on tests failure ([cc737f3](https://github.com/haandsolutions/haand-bib/commit/cc737f36c3d1861e2bf68ea129dfc98e15a9b983))
+
 ## [1.12.0](https://github.com/haandsolutions/haand-bib/compare/v1.11.0...v1.12.0) (2022-08-23)
 
 

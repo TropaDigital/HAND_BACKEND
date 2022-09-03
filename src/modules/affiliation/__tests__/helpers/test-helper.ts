@@ -3,13 +3,13 @@ import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
-import { IAffiliationRepository } from '../../interfaces';
+import { IAffiliationRepository, IAffiliationService } from '../../interfaces';
 import { PrismaAffiliationRepository } from '../../repository';
 
 export const makeFakeCreateAffiliationInput = (
   payload?: Partial<Prisma.AffiliationCreateInput>,
 ): jest.Mocked<Prisma.AffiliationCreateInput> => ({
-  ...payload,
+  ...(payload as any),
 });
 
 export const makeFakeUpdateAffiliationInput = (
@@ -39,7 +39,7 @@ export const makeFakeApiHttpResponse = (
 export const makeFakeAffiliation = (
   payload: Partial<Affiliation>,
 ): jest.Mocked<Affiliation> => ({
-  ...payload,
+  ...(payload as any),
 });
 
 export const makeFakeAffiliationList = () => [

@@ -32,6 +32,7 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
         id: Joi.number().required(),
       }),
     )
+    .min(1)
     .required(),
   addresses: Joi.array()
     .items(
@@ -96,12 +97,16 @@ export const UpdateAssociatedById = Joi.object<
   mother: Joi.string().label('mãe'),
   partner: Joi.string().label('cônjuge'),
 
-  affiliations: Joi.array().items(
-    Joi.object({
-      id: Joi.number(),
-      name: Joi.string(),
-    }),
-  ),
+  affiliations: Joi.array()
+    .items(
+      Joi.object({
+        id: Joi.number(),
+        name: Joi.string(),
+      }),
+    )
+    .min(1)
+    .required()
+    .label('afiliações'),
   addresses: Joi.array().items(
     Joi.object({
       addressType: Joi.string().required().label('tipo de endereço'),

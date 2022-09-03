@@ -27,7 +27,7 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 >;
 
 export class AssociatedRepository implements IAssociatedRepository {
-  constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
+  constructor(private readonly prismaRepository: PrismaAssociatedRepository) { }
 
   public async getBankAccountsByAssociatedId(
     associatedId: number,
@@ -162,6 +162,14 @@ export class AssociatedRepository implements IAssociatedRepository {
       ...associated
     } = payload;
 
+    await this.prismaRepository.update({
+      where: { id },
+      data: {
+        affiliations: {
+          set: [],
+        },
+      },
+    });
     await this.prismaRepository.update({
       where: { id },
       data: {

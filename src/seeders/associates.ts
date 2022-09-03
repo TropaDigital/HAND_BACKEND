@@ -667,29 +667,32 @@ export default async (client: PrismaClient): Promise<void> => {
         },
         create: {
           ...associated,
-          benefits: {
-            create: {
-              association: 'ASES',
-              bank: 'Any Bank',
-              contractModel: 'Any model',
-              financialAssistanceValue: 20,
-              installmentNumber: 6,
-              installmentValue: 20,
-              publicAgency: 'Public Agency',
-              initialDate: new Date('2022-10-10'),
-              createdBy: 'User',
-            },
-          },
+          // benefits: {
+          //   create: {
+          //     bank: 'Any Bank',
+          //     contractModel: 'Any model',
+          //     financialAssistanceValue: 20,
+          //     installmentNumber: 6,
+          //     installmentValue: 20,
+          //     publicAgency: 'Public Agency',
+          //     initialDate: new Date('2022-10-10'),
+          //     createdBy: 'User',
+
+          //   },
+          // },
         },
         update: {
           ...associated,
         },
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     logger.error({
       msg: `error creating ${associateds.length} associateds in the database`,
-      error,
+      error: {
+        message: error.message,
+        stack: error.stack,
+      },
     });
   }
 };

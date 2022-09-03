@@ -1,5 +1,4 @@
-import { MonthOfPayment } from 'src/enums/MonthOfPayment';
-
+import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 
 export interface IFormatInstallmentParams {

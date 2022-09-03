@@ -39,7 +39,7 @@ describe(BenefitRepository.name, () => {
     it('should return prisma result when pass params', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.findAll({ association: 'string' });
+      const result = await sut.findAll({ associatedId: 1 });
 
       expect(result).toEqual({
         currentPage: 1,
@@ -133,7 +133,7 @@ describe(BenefitRepository.name, () => {
       const { sut, prismaRepository } = makeSut();
       const updateSpy = prismaRepository.update;
 
-      await sut.updateById(fakeId, fakeBenefit);
+      await sut.updateById(fakeId, fakeBenefit as any);
 
       expect(updateSpy).toBeCalledWith({
         data: makeFakeBenefit({}),
@@ -147,7 +147,7 @@ describe(BenefitRepository.name, () => {
         new Error('any_update_error'),
       );
 
-      const promise = sut.updateById(fakeId, fakeBenefit);
+      const promise = sut.updateById(fakeId, fakeBenefit as any);
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
     });

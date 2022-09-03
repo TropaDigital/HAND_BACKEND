@@ -1,4 +1,4 @@
-import { Benefit, BenefitType } from '@prisma/client';
+import { Benefit } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
@@ -13,36 +13,12 @@ import { PrismaBenefitRepository } from '../../repository';
 export const makeFakeCreateBenefitInput = (
   payload?: Partial<ICreateBenefitParams>,
 ): jest.Mocked<ICreateBenefitParams> => ({
-  associatedId: 1,
-  association: 'Vitória',
-  bank: 'Caixa Econômica',
-  publicAgency: 'SSP',
-  contractModel: '22123',
-  installmentNumber: 10,
-  initialDate: new Date(),
-  financialAssistanceValue: 100,
-  installmentValue: 200,
-  consultantId: 1,
-  createdBy: 'any_user',
-  type: BenefitType.N,
-  ...payload,
+  ...(payload as any),
 });
 
 export const makeFakeUpdateBenefitInput = (
   payload?: Partial<Omit<Benefit, 'id'>>,
 ): jest.Mocked<Partial<Omit<Benefit, 'id'>>> => ({
-  associatedId: 1,
-  association: 'Vitória',
-  bank: 'Caixa Econômica',
-  publicAgency: 'SSP',
-  contractModel: '22123',
-  installmentNumber: 10,
-  initialDate: new Date(),
-  financialAssistanceValue: 100,
-  installmentValue: 200,
-  consultantId: 1,
-  createdBy: 'any_user',
-  type: BenefitType.N,
   ...payload,
 });
 
@@ -67,23 +43,7 @@ export const makeFakeApiHttpResponse = (
 export const makeFakeBenefit = (
   payload: Partial<ICreateBenefitParams>,
 ): jest.Mocked<ICreateBenefitParams> => ({
-  associatedId: 1,
-  association: 'Vitória',
-  bank: 'Caixa Econômica',
-  publicAgency: 'SSP',
-  contractModel: '22123',
-  installmentNumber: 10,
-  initialDate: new Date('2022-10-20'),
-  financialAssistanceValue: 100,
-  installmentValue: 200,
-  consultantId: 1,
-  createdBy: 'any_user',
-  updatedBy: 'any_date',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deletedAt: new Date(),
-  type: BenefitType.N,
-  ...payload,
+  ...(payload as any),
 });
 
 export const makeFakeBenefitList = () => [

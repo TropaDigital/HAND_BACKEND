@@ -65,10 +65,13 @@ export default async (client: PrismaClient): Promise<void> => {
         },
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     logger.error({
       msg: `error creating ${users.length} users in the database`,
-      error,
+      error: {
+        message: error.message,
+        stack: error.stack,
+      },
     });
   }
 };

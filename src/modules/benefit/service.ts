@@ -8,15 +8,15 @@ import {
   EmploymentRelationship,
   Prisma,
 } from '@prisma/client';
-import { MonthOfPayment } from 'src/enums/MonthOfPayment';
 
+import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { MissingInvalidParamsError, NotFoundError } from '../../shared/errors';
 import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import { IAssociatedRepository } from '../associated/interfaces';
-import { LoanSimulationService } from '../loanSimulation/service';
+import { ILoanSimulationService } from '../loanSimulation/interfaces';
 import {
   IBenefitRepository,
   IBenefitService,
@@ -27,7 +27,7 @@ export class BenefitService implements IBenefitService {
   constructor(
     private readonly benefitRepository: IBenefitRepository,
     private readonly associatedRepository: IAssociatedRepository,
-    private readonly loanSimulationService: LoanSimulationService,
+    private readonly loanSimulationService: ILoanSimulationService,
   ) { }
 
   public async getAll(

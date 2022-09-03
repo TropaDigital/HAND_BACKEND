@@ -8,9 +8,7 @@ import { PrismaAffiliationRepository } from '../../repository';
 
 export const makeFakeCreateAffiliationInput = (
   payload?: Partial<Prisma.AffiliationCreateInput>,
-): jest.Mocked<Prisma.AffiliationCreateInput> => ({
-  ...(payload as any),
-});
+): jest.Mocked<Prisma.AffiliationCreateInput> => ({ ...(payload as any) });
 
 export const makeFakeUpdateAffiliationInput = (
   payload?: Partial<Omit<Affiliation, 'id'>>,

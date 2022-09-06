@@ -79,9 +79,21 @@ export class AssociatedRepository implements IAssociatedRepository {
     const result = await this.prismaRepository.findMany({
       ...params,
       include: {
-        addresses: true,
-        employmentRelationships: true,
-        bankAccounts: true,
+        addresses: {
+          orderBy: {
+            isDefault: 'desc',
+          },
+        },
+        employmentRelationships: {
+          orderBy: {
+            isDefault: 'desc',
+          },
+        },
+        bankAccounts: {
+          orderBy: {
+            isDefault: 'desc',
+          },
+        },
         benefits: true,
         affiliations: true,
       },
@@ -102,9 +114,21 @@ export class AssociatedRepository implements IAssociatedRepository {
     const result = await this.prismaRepository.findFirst({
       where: { id },
       include: {
-        addresses: true,
-        employmentRelationships: true,
-        bankAccounts: true,
+        addresses: {
+          orderBy: {
+            isDefault: 'desc',
+          },
+        },
+        employmentRelationships: {
+          orderBy: {
+            isDefault: 'desc',
+          },
+        },
+        bankAccounts: {
+          orderBy: {
+            isDefault: 'desc',
+          },
+        },
         benefits: true,
         affiliations: true,
       },

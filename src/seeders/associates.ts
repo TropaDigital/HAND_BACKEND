@@ -25,41 +25,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Allana Rafaela',
     partner: 'Joana Maria das Neves',
 
-    employmentRelationships: {
-      create: {
-        occupation: 'Dentista',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '3000.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '63720-976',
-        street: 'Rua Poti',
-        houseNumber: '123',
-        complement: '',
-        district: 'Jardim Poti',
-        state: 'Ceara',
-        city: 'Poti',
-        isDefault: true,
-      },
-    },
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'marcos@mail.com',
-        isDefault: true,
-      },
-    },
     affiliations: {
       connect: {
         name: 'ASES Vitória',
@@ -87,43 +52,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    employmentRelationships: {
-      create: {
-        occupation: 'Advogado',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '8654,45',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
-    benefits: {},
     affiliations: {
       connect: [
         {
@@ -153,42 +81,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '3200,11',
-        isDefault: true,
-      },
-    },
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
-
     affiliations: {
       connect: {
         name: 'ASES Vitória',
@@ -216,43 +108,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
-
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '4312.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
 
     affiliations: {
       connect: {
@@ -282,43 +137,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '4312.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
-
     affiliations: {
       connect: {
         name: 'ASES Vitória',
@@ -346,43 +164,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
-
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '4312.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
 
     affiliations: {
       connect: {
@@ -412,43 +193,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '4312.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
-
     affiliations: {
       connect: {
         name: 'ASES Vitória',
@@ -476,43 +220,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
-
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '4312.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
 
     affiliations: {
       connect: {
@@ -542,42 +249,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '4312.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
-
     affiliations: {
       connect: {
         name: 'ASES Vitória',
@@ -606,43 +277,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     mother: 'Milena Louise',
     partner: 'Joana Maria das Neves',
 
-    employmentRelationships: {
-      create: {
-        occupation: 'Arquiteta',
-        publicAgency: 'MiSupremo Tribunal Federal',
-        paymentDay: 5,
-        contractType: 'HIRED',
-        registerNumber: '2108602049',
-        salary: '4312.20',
-        isDefault: true,
-      },
-    },
-
-    addresses: {
-      create: {
-        addressType: 'HOUSE',
-        postalCode: '78595-970',
-        street: 'Avenida Governador Dante Martins de Oliveira 115',
-        houseNumber: '123',
-        complement: '',
-        district: 'Centro',
-        state: 'Mato Grosso',
-        city: 'Apiacás',
-        isDefault: true,
-      },
-    },
-
-    bankAccounts: {
-      create: {
-        bank: 'Itaú',
-        agency: '000',
-        accountType: 'Corrente',
-        accountNumber: '23132',
-        pixKey: 'eloa_freitas@superigi.com.br',
-        isDefault: true,
-      },
-    },
-
     affiliations: {
       connect: {
         name: 'ASES Vitória',
@@ -667,19 +301,42 @@ export default async (client: PrismaClient): Promise<void> => {
         },
         create: {
           ...associated,
-          // benefits: {
-          //   create: {
-          //     bank: 'Any Bank',
-          //     contractModel: 'Any model',
-          //     financialAssistanceValue: 20,
-          //     installmentNumber: 6,
-          //     installmentValue: 20,
-          //     publicAgency: 'Public Agency',
-          //     initialDate: new Date('2022-10-10'),
-          //     createdBy: 'User',
+          employmentRelationships: {
+            create: {
+              occupation: 'Arquiteta',
+              publicAgency: 'MiSupremo Tribunal Federal',
+              paymentDay: 5,
+              contractType: 'HIRED',
+              registerNumber: '2108602049',
+              salary: '4312.20',
+              isDefault: true,
+            },
+          },
 
-          //   },
-          // },
+          addresses: {
+            create: {
+              addressType: 'HOUSE',
+              postalCode: '78595-970',
+              street: 'Avenida Governador Dante Martins de Oliveira 115',
+              houseNumber: '123',
+              complement: '',
+              district: 'Centro',
+              state: 'Mato Grosso',
+              city: 'Apiacás',
+              isDefault: true,
+            },
+          },
+
+          bankAccounts: {
+            create: {
+              bank: 'Itaú',
+              agency: '000',
+              accountType: 'Corrente',
+              accountNumber: '23132',
+              pixKey: 'eloa_freitas@superigi.com.br',
+              isDefault: true,
+            },
+          },
         },
         update: {
           ...associated,

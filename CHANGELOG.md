@@ -1,3 +1,10 @@
+## [1.14.0](https://github.com/haandsolutions/haand-bib/compare/v1.13.2...v1.14.0) (2022-09-06)
+
+
+### :sparkles: New Features
+
+* add affiliation field to the benefit ([f737983](https://github.com/haandsolutions/haand-bib/commit/f737983fa6afe9e018a9397f19205522cc7b81f3))
+
 ### [1.13.2](https://github.com/haandsolutions/haand-bib/compare/v1.13.1...v1.13.2) (2022-09-06)
 
 

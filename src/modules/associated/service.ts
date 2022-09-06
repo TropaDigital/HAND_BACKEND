@@ -19,7 +19,7 @@ import {
 } from './interfaces';
 
 export class AssociatedService implements IAssociatedService {
-  constructor(private readonly associatedRepository: IAssociatedRepository) {}
+  constructor(private readonly associatedRepository: IAssociatedRepository) { }
 
   public async getBankAccountByAssociatedId(
     associatedId: number,

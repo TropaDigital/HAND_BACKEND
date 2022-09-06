@@ -217,19 +217,35 @@ export class AssociatedRepository implements IAssociatedRepository {
       | Prisma.EmploymentRelationshipCreateInput,
   ): Promise<EmploymentRelationship> {
     try {
+      const employmentRelationshipAlreadyExists =
+        await MySqlDBClient.getInstance()
+          .getPrismaClientInstance()
+          .employmentRelationship.findFirst({
+            where: { id: employmentRelationshipId },
+          });
+
+      if (!employmentRelationshipAlreadyExists) {
+        const result = await MySqlDBClient.getInstance()
+          .getPrismaClientInstance()
+          .employmentRelationship.create({
+            data: {
+              ...payload,
+              Associated: {
+                connect: {
+                  id: associatedId,
+                },
+              },
+            } as Prisma.EmploymentRelationshipCreateInput,
+          });
+
+        return result;
+      }
+
       const result = await MySqlDBClient.getInstance()
         .getPrismaClientInstance()
-        .employmentRelationship.upsert({
+        .employmentRelationship.update({
           where: { id: employmentRelationshipId },
-          create: {
-            ...payload,
-            Associated: {
-              connect: {
-                id: associatedId,
-              },
-            },
-          } as Prisma.EmploymentRelationshipCreateInput,
-          update: {
+          data: {
             ...payload,
           } as Prisma.EmploymentRelationshipUpdateInput,
         });
@@ -249,19 +265,31 @@ export class AssociatedRepository implements IAssociatedRepository {
     payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
   ): Promise<BankAccount> {
     try {
+      const bankAlreadyExists = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .bankAccount.findFirst({ where: { id: bankId } });
+
+      if (!bankAlreadyExists) {
+        const result = await MySqlDBClient.getInstance()
+          .getPrismaClientInstance()
+          .bankAccount.create({
+            data: {
+              ...payload,
+              Associated: {
+                connect: {
+                  id: associatedId,
+                },
+              },
+            } as Prisma.BankAccountCreateInput,
+          });
+
+        return result;
+      }
       const result = await MySqlDBClient.getInstance()
         .getPrismaClientInstance()
-        .bankAccount.upsert({
+        .bankAccount.update({
           where: { id: bankId },
-          create: {
-            ...payload,
-            Associated: {
-              connect: {
-                id: associatedId,
-              },
-            },
-          } as Prisma.BankAccountCreateInput,
-          update: {
+          data: {
             ...payload,
           } as Prisma.BankAccountUpdateInput,
         });
@@ -281,21 +309,34 @@ export class AssociatedRepository implements IAssociatedRepository {
     payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
   ): Promise<Address> {
     try {
+      const addressAlreadyExists = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .address.findFirst({ where: { id: addressId } });
+
+      if (!addressAlreadyExists) {
+        const result = await MySqlDBClient.getInstance()
+          .getPrismaClientInstance()
+          .address.create({
+            data: {
+              ...payload,
+              Associated: {
+                connect: {
+                  id: associatedId,
+                },
+              },
+            } as Prisma.AddressCreateInput,
+          });
+
+        return result;
+      }
+
       const result = await MySqlDBClient.getInstance()
         .getPrismaClientInstance()
-        .address.upsert({
+        .address.update({
           where: { id: addressId },
-          create: {
+          data: {
             ...payload,
-            Associated: {
-              connect: {
-                id: associatedId,
-              },
-            },
-          } as Prisma.AddressCreateInput,
-          update: {
-            ...payload,
-          } as Prisma.AddressUpdateInput,
+          },
         });
 
       return result;

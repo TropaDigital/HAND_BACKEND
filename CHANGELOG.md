@@ -1,3 +1,10 @@
+### [1.14.2](https://github.com/haandsolutions/haand-bib/compare/v1.14.1...v1.14.2) (2022-09-06)
+
+
+### :bug: Fixes
+
+* adjust the flow that set the address, employment and banka as default ([0d19a08](https://github.com/haandsolutions/haand-bib/commit/0d19a083839dbad9689a18f931af60c99f3c62ba))
+
 ### [1.14.1](https://github.com/haandsolutions/haand-bib/compare/v1.14.0...v1.14.1) (2022-09-06)
 
 

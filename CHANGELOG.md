@@ -1,3 +1,10 @@
+### [1.14.1](https://github.com/haandsolutions/haand-bib/compare/v1.14.0...v1.14.1) (2022-09-06)
+
+
+### :bug: Fixes
+
+* adjust the route that creates the benefit ([4bffe47](https://github.com/haandsolutions/haand-bib/commit/4bffe47fca9d09a590b3a68a75b43ea0924b54ed))
+
 ## [1.14.0](https://github.com/haandsolutions/haand-bib/compare/v1.13.2...v1.14.0) (2022-09-06)
 
 

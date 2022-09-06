@@ -1,3 +1,15 @@
+### [1.13.1](https://github.com/haandsolutions/haand-bib/compare/v1.13.0...v1.13.1) (2022-09-03)
+
+
+### :repeat: CI
+
+* adjust the pipeline to continue on tests failure ([2e56497](https://github.com/haandsolutions/haand-bib/commit/2e56497fe136d8eaa2ab6edb55344a02e623c310))
+
+
+### :bug: Fixes
+
+* adjust the types ([5ab95ae](https://github.com/haandsolutions/haand-bib/commit/5ab95ae361e4caf7e7e9fdd7d9d324c8aa792bee))
+
 ## [1.13.0](https://github.com/haandsolutions/haand-bib/compare/v1.12.0...v1.13.0) (2022-09-03)
 
 

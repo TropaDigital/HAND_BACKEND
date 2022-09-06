@@ -4,7 +4,6 @@ import {
   BankAccount,
   Benefit,
   BenefitStatus,
-  BenefitType,
   EmploymentRelationship,
   Prisma,
 } from '@prisma/client';
@@ -28,7 +27,7 @@ export class BenefitService implements IBenefitService {
     private readonly benefitRepository: IBenefitRepository,
     private readonly associatedRepository: IAssociatedRepository,
     private readonly loanSimulationService: ILoanSimulationService,
-  ) {}
+  ) { }
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -64,6 +63,7 @@ export class BenefitService implements IBenefitService {
 
   public async create(payload: ICreateBenefitParams): Promise<Benefit> {
     const {
+      type,
       associatedId,
       consultantId,
       addressId,
@@ -77,6 +77,7 @@ export class BenefitService implements IBenefitService {
       salary,
       salaryReceiptDate,
       administrationFeeValue,
+      affiliation,
     } = payload;
 
     const {
@@ -157,6 +158,11 @@ export class BenefitService implements IBenefitService {
     } = associated as Associated;
 
     const result = await this.benefitRepository.create({
+      affiliation: {
+        connect: {
+          name: affiliation,
+        },
+      },
       accountNumber: bankAccount.accountNumber,
       accountType: bankAccount.accountType,
       bank: bankAccount.bank,
@@ -177,7 +183,7 @@ export class BenefitService implements IBenefitService {
       salary: employmentRelationship.salary,
       registerNumber: employmentRelationship.registerNumber,
       initialDate: this.formatMonthOfPayment(firstPaymentDates, monthOfPayment),
-      contractType: BenefitType.N,
+      contractType: type,
       contractModel: '',
       birthDate,
       cellPhone,
@@ -219,10 +225,10 @@ export class BenefitService implements IBenefitService {
       },
       ...(consultantId
         ? {
-            connect: {
-              id: consultantId,
-            },
-          }
+          connect: {
+            id: consultantId,
+          },
+        }
         : {}),
     });
 

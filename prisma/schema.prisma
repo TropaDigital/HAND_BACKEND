@@ -108,6 +108,8 @@ model Affiliation {
 
   associateds Associated[]
 
+  benefits Benefit[]
+
   createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
   updatedAt DateTime  @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
@@ -194,6 +196,9 @@ model Benefit {
 
   type   BenefitType   @default(N)
   status BenefitStatus @default(UNDER_ANALYSIS)
+
+  affiliation   Affiliation @relation(fields: [affiliationId], references: [id])
+  affiliationId Int
 
   createdBy String    @map(name: "created_by") @db.VarChar(75)
   updatedBy String?   @map(name: "updated_by") @db.VarChar(75)

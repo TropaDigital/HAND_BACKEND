@@ -1,4 +1,4 @@
-import { Benefit, Prisma } from '@prisma/client';
+import { Benefit, BenefitType, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import {
@@ -9,7 +9,8 @@ import { ILoanSimulationBasedOnRequestedValueParams } from '../loanSimulation/in
 
 export interface ICreateBenefitParams
   extends ILoanSimulationBasedOnRequestedValueParams {
-  // contractType: BenefitType;
+  type: BenefitType;
+  affiliation: string;
   associatedId: number;
   bankAccountId: number;
   employmentRelationshipId: number;

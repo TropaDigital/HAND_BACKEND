@@ -1,3 +1,10 @@
+### [1.13.2](https://github.com/haandsolutions/haand-bib/compare/v1.13.1...v1.13.2) (2022-09-06)
+
+
+### :zap: Refactor
+
+* add order by to relationships in associated model ([ffc96a0](https://github.com/haandsolutions/haand-bib/commit/ffc96a0dfce38e0031cbfad665e33d22859fdadf))
+
 ### [1.13.1](https://github.com/haandsolutions/haand-bib/compare/v1.13.0...v1.13.1) (2022-09-03)
 
 

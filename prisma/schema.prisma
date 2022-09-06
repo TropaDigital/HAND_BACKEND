@@ -158,7 +158,7 @@ model Benefit {
   maritalStatus String   @map(name: "martial_status")
   nationality   String
   placeOfBirth  String   @map(name: "place_of_birth")
-  taxId         String   @unique
+  taxId         String
   registerId    String   @map(name: "register_id")
   emissionState String   @map(name: "emission_state")
   issuingAgency String   @map(name: "issuing_agency")

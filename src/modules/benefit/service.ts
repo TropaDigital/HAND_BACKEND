@@ -75,7 +75,6 @@ export class BenefitService implements IBenefitService {
       numberOfInstallments,
       requestedValue,
       salary,
-      salaryReceiptDate,
       administrationFeeValue,
       affiliation,
     } = payload;
@@ -121,7 +120,9 @@ export class BenefitService implements IBenefitService {
       numberOfInstallments,
       requestedValue,
       salary,
-      salaryReceiptDate,
+      salaryReceiptDate: new Date(
+        new Date().setDate(employmentRelationship.paymentDay),
+      ),
       administrationFeeValue,
       consultantId,
     });

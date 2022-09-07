@@ -201,7 +201,7 @@ describe(AffiliationController.name, () => {
 
       expect(validateSchemaSpy).toBeCalledWith('UpdateAffiliationById', {
         id: 777,
-        ...makeFakeUpdateAffiliationInput(),
+        ...makeFakeCreateAffiliationInput(),
       });
     });
 
@@ -215,10 +215,9 @@ describe(AffiliationController.name, () => {
 
       await sut.updateById(httpRequest);
 
-      expect(updateByIdSpy).toBeCalledWith(
-        777,
-        makeFakeCreateAffiliationInput(),
-      );
+      const { id: _, ...affiliation } = makeFakeUpdateAffiliationInput();
+
+      expect(updateByIdSpy).toBeCalledWith(777, affiliation);
     });
 
     it('should return service response', async () => {

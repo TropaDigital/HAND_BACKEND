@@ -34,7 +34,6 @@ describe(RoleService.name, () => {
       expect(result).toEqual(
         makeFakeRoleList().map(role => ({
           ...role,
-          commission: 10,
         })),
       );
     });
@@ -68,7 +67,7 @@ describe(RoleService.name, () => {
 
       const result = await sut.getById(fakeId);
 
-      expect(result).toEqual({ ...makeFakeRole({}), commission: 10 });
+      expect(result).toEqual({ ...makeFakeRole({}) });
     });
 
     it('should return null when repository result is null', async () => {
@@ -103,7 +102,6 @@ describe(RoleService.name, () => {
 
       expect(createSpy).toBeCalledWith({
         ...makeFakeCreateRoleInput(),
-        commission: 1000,
       });
     });
 
@@ -155,7 +153,6 @@ describe(RoleService.name, () => {
 
       expect(updateSpy).toBeCalledWith(777, {
         ...makeFakeUpdateRoleInput(),
-        commission: 1000,
       });
     });
 

@@ -20,7 +20,11 @@ describe(UserRepository.name, () => {
 
       await sut.findAll();
 
-      expect(findManySpy).toBeCalledWith();
+      expect(findManySpy).toBeCalledWith({
+        include: {
+          role: true,
+        },
+      });
     });
 
     it('should return prisma result', async () => {
@@ -52,7 +56,12 @@ describe(UserRepository.name, () => {
 
       await sut.findById(fakeId);
 
-      expect(findFirstSpy).toBeCalledWith({ where: { id: 777 } });
+      expect(findFirstSpy).toBeCalledWith({
+        where: { id: 777 },
+        include: {
+          role: true,
+        },
+      });
     });
 
     it('should return prisma result', async () => {
@@ -86,6 +95,9 @@ describe(UserRepository.name, () => {
 
       expect(findFirstSpy).toBeCalledWith({
         where: { userName: 'any_user_name' },
+        include: {
+          role: true,
+        },
       });
     });
 
@@ -118,7 +130,12 @@ describe(UserRepository.name, () => {
 
       await sut.create(fakeUser);
 
-      expect(createSpy).toBeCalledWith({ data: makeFakeUser({}) });
+      expect(createSpy).toBeCalledWith({
+        data: makeFakeUser({}),
+        include: {
+          role: true,
+        },
+      });
     });
 
     it('should return prisma result', async () => {
@@ -126,14 +143,7 @@ describe(UserRepository.name, () => {
 
       const result = await sut.create(fakeUser);
 
-      expect(result).toEqual({
-        email: 'any_email@mail.com',
-        userName: 'any_user',
-        id: 0,
-        name: 'any_name',
-        role: 'USER',
-        status: 'ACTIVE',
-      });
+      expect(result).toEqual(fakeUser);
     });
 
     it('should throw when prisma throws', async () => {

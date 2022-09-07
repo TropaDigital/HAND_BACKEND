@@ -53,7 +53,8 @@ describe(AuthController.name, () => {
           userName: 'any_user',
           id: 0,
           name: 'any_name',
-          role: 'USER',
+          role: null,
+          roleId: 1,
           status: 'ACTIVE',
         }),
       );

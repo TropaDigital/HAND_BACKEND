@@ -23,7 +23,7 @@ export class AssociatedController implements IAssociatedController {
   constructor(
     private readonly associatedService: IAssociatedService,
     private readonly validator: IValidator<typeof schemas>,
-  ) { }
+  ) {}
 
   public async updateBankAccountByAssociatedIdAndId(
     httpRequest: IApiHttpRequest,
@@ -197,7 +197,6 @@ export class AssociatedController implements IAssociatedController {
       ...httpRequest.body,
     });
 
-    console.table({ payload });
     const result = await this.associatedService.upsertAddressById(
       associatedId,
       id,

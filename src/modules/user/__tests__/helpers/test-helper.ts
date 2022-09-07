@@ -14,7 +14,6 @@ export const makeFakeCreateUserInput = (
   name: 'any_name',
   userName: 'any_user_name',
   email: 'any_email@mail.com',
-  role: {},
   status: 'ACTIVE',
   password: 'any_password',
   ...payload,

@@ -22,10 +22,23 @@ describe(AssociatedRepository.name, () => {
 
       expect(findManySpy).toBeCalledWith({
         include: {
-          addresses: true,
-          employmentRelationships: true,
-          bankAccounts: true,
+          addresses: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
+          employmentRelationships: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
+          bankAccounts: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
           benefits: true,
+          affiliations: true,
         },
         where: {},
       });
@@ -39,10 +52,23 @@ describe(AssociatedRepository.name, () => {
 
       expect(findManySpy).toBeCalledWith({
         include: {
-          addresses: true,
-          employmentRelationships: true,
-          bankAccounts: true,
+          addresses: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
+          employmentRelationships: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
+          bankAccounts: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
           benefits: true,
+          affiliations: true,
         },
         where: { id: { contains: 1 } },
       });
@@ -97,10 +123,23 @@ describe(AssociatedRepository.name, () => {
 
       expect(findFirstSpy).toBeCalledWith({
         include: {
-          addresses: true,
-          employmentRelationships: true,
-          bankAccounts: true,
+          addresses: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
+          employmentRelationships: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
+          bankAccounts: {
+            orderBy: {
+              isDefault: 'desc',
+            },
+          },
           benefits: true,
+          affiliations: true,
         },
         where: { id: 777 },
       });
@@ -139,12 +178,14 @@ describe(AssociatedRepository.name, () => {
         addresses,
         employmentRelationships,
         bankAccounts,
+        affiliations,
         ...associated
       } = makeFakeAssociated({});
 
       expect(createSpy).toBeCalledWith({
         data: {
           ...associated,
+          affiliations: { connect: [{ id: affiliations[0].id }] },
           bankAccounts: { createMany: { data: bankAccounts } },
           addresses: { createMany: { data: addresses } },
           employmentRelationships: {
@@ -155,6 +196,7 @@ describe(AssociatedRepository.name, () => {
           addresses: true,
           employmentRelationships: true,
           bankAccounts: true,
+          affiliations: true,
         },
       });
     });

@@ -47,7 +47,7 @@ describe(AuthService.name, () => {
           userName: 'any_user',
           id: 0,
           name: 'any_name',
-          role: 'USER',
+          roleId: 1,
           status: 'ACTIVE',
         },
       });

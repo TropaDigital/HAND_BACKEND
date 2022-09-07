@@ -42,7 +42,7 @@ describe(UserService.name, () => {
           userName: 'any_user',
           id: 0,
           name: 'any_name',
-          role: 'USER',
+          roleId: 1,
           status: 'ACTIVE',
         },
         {
@@ -50,7 +50,7 @@ describe(UserService.name, () => {
           userName: 'any_user',
           id: 0,
           name: 'any_name',
-          role: 'USER',
+          roleId: 1,
           status: 'ACTIVE',
         },
       ]);
@@ -85,14 +85,8 @@ describe(UserService.name, () => {
 
       const result = await sut.getByUserName(fakeUserName);
 
-      expect(result).toEqual({
-        email: 'any_email@mail.com',
-        userName: 'any_user',
-        id: 0,
-        name: 'any_name',
-        role: 'USER',
-        status: 'ACTIVE',
-      });
+      const { password: _, ...user } = makeFakeUser({});
+      expect(result).toEqual(user);
     });
 
     it('should return null when repository result is null', async () => {
@@ -138,7 +132,8 @@ describe(UserService.name, () => {
 
       const result = await sut.create(fakeUser);
 
-      expect(result).toEqual(makeFakeUser({}));
+      const { password: _, ...user } = makeFakeUser({});
+      expect(result).toEqual(user);
     });
 
     it('should return repository result when user has no commission', async () => {
@@ -147,7 +142,8 @@ describe(UserService.name, () => {
 
       const result = await sut.create(user);
 
-      expect(result).toEqual(makeFakeUser({}));
+      const { password: _, ...expectedUser } = makeFakeUser({});
+      expect(result).toEqual(expectedUser);
     });
 
     it('should throw when repository throws', async () => {

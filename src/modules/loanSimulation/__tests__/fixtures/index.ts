@@ -1,5 +1,3 @@
-import { startOfDay } from 'date-fns';
-
 import { ILoanSimulationBasedOnRequestedValue } from '../../interfaces';
 
 export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBasedOnRequestedValue =
@@ -9,9 +7,9 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
     maxInstallmentValueBySalary: 525,
     consultantCommission: 0,
     firstPaymentDates: [
-      startOfDay(new Date('2022-04-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-05-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-06-14T03:00:00.000Z')),
+      new Date('2022-04-30'),
+      new Date('2022-05-30'),
+      new Date('2022-06-14'),
     ],
     consultantCommissionValue: 0,
     isRequestedValueValid: true,
@@ -143,9 +141,9 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
     maxInstallmentValueBySalary: 525,
     consultantCommission: 0,
     firstPaymentDates: [
-      startOfDay(new Date('2022-04-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-05-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-06-14T03:00:00.000Z')),
+      new Date('2022-04-30'),
+      new Date('2022-05-30'),
+      new Date('2022-06-14'),
     ],
     consultantCommissionValue: 0,
     isRequestedValueValid: true,
@@ -277,9 +275,9 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
     maxInstallmentValueBySalary: 525,
     consultantCommission: 0,
     firstPaymentDates: [
-      startOfDay(new Date('2022-04-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-05-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-06-14T03:00:00.000Z')),
+      new Date('2022-04-30'),
+      new Date('2022-05-30'),
+      new Date('2022-06-14'),
     ],
     consultantCommissionValue: 0,
     isRequestedValueValid: true,
@@ -411,9 +409,9 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
     maxInstallmentValueBySalary: 525,
     consultantCommission: 0,
     firstPaymentDates: [
-      startOfDay(new Date('2022-04-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-05-30T03:00:00.000Z')),
-      startOfDay(new Date('2022-06-14T03:00:00.000Z')),
+      new Date('2022-04-30'),
+      new Date('2022-05-30'),
+      new Date('2022-06-14'),
     ],
     consultantCommissionValue: 0,
     isRequestedValueValid: true,
@@ -805,9 +803,9 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
     maxInstallmentValueBySalary: 525,
     consultantCommission: 0,
     firstPaymentDates: [
-      startOfDay(new Date('2022-05-15T03:00:00.000Z')),
-      startOfDay(new Date('2022-06-15T03:00:00.000Z')),
-      startOfDay(new Date('2022-06-15T03:00:00.000Z')),
+      new Date('2022-05-15'),
+      new Date('2022-06-15'),
+      new Date('2022-06-15'),
     ],
     consultantCommissionValue: 0,
     isRequestedValueValid: true,
@@ -939,9 +937,9 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
     maxInstallmentValueBySalary: 525,
     consultantCommission: 10,
     firstPaymentDates: [
-      new Date('2022-04-30T00:00:00.000Z'),
-      new Date('2022-05-30T00:00:00.000Z'),
-      new Date('2022-06-14T00:00:00.000Z'),
+      new Date('2022-04-30'),
+      new Date('2022-05-30'),
+      new Date('2022-06-14'),
     ],
     consultantCommissionValue: 100,
     isRequestedValueValid: true,

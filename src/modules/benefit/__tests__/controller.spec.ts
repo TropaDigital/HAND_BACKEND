@@ -204,7 +204,7 @@ describe(BenefitController.name, () => {
 
       expect(validateSchemaSpy).toBeCalledWith('UpdateBenefitById', {
         id: 777,
-        ...makeFakeUpdateBenefitInput(),
+        ...makeFakeCreateBenefitInput(),
       });
     });
 
@@ -218,7 +218,8 @@ describe(BenefitController.name, () => {
 
       await sut.updateById(httpRequest);
 
-      expect(updateByIdSpy).toBeCalledWith(777, makeFakeCreateBenefitInput());
+      const { id: _, ...benefit } = makeFakeUpdateBenefitInput();
+      expect(updateByIdSpy).toBeCalledWith(777, benefit);
     });
 
     it('should return service response', async () => {

@@ -195,7 +195,7 @@ describe(RoleController.name, () => {
 
       expect(validateSchemaSpy).toBeCalledWith('UpdateRoleById', {
         id: 777,
-        ...makeFakeUpdateRoleInput(),
+        ...makeFakeCreateRoleInput(),
       });
     });
 
@@ -209,7 +209,8 @@ describe(RoleController.name, () => {
 
       await sut.updateById(httpRequest);
 
-      expect(updateByIdSpy).toBeCalledWith(777, makeFakeCreateRoleInput());
+      const { id: _, ...role } = makeFakeUpdateRoleInput();
+      expect(updateByIdSpy).toBeCalledWith(777, role);
     });
 
     it('should return service response', async () => {

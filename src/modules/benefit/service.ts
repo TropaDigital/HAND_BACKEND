@@ -27,7 +27,7 @@ export class BenefitService implements IBenefitService {
     private readonly benefitRepository: IBenefitRepository,
     private readonly associatedRepository: IAssociatedRepository,
     private readonly loanSimulationService: ILoanSimulationService,
-  ) { }
+  ) {}
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -226,10 +226,10 @@ export class BenefitService implements IBenefitService {
       },
       ...(consultantId
         ? {
-          connect: {
-            id: consultantId,
-          },
-        }
+            connect: {
+              id: consultantId,
+            },
+          }
         : {}),
     });
 

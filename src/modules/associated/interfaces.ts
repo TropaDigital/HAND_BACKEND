@@ -24,7 +24,7 @@ export type ICreateAssociatedInput = Omit<
   Prisma.AssociatedCreateInput,
   'addresses' | 'employmentRelationships' | 'bankAccounts' | 'affiliations'
 > & {
-  affiliations: Affiliation[];
+  affiliations: Omit<Affiliation, 'associatedId'>[];
   addresses: Omit<Address, 'id' | 'associatedId'>[];
   bankAccounts: Omit<BankAccount, 'id' | 'associatedId'>[];
   employmentRelationships: Omit<

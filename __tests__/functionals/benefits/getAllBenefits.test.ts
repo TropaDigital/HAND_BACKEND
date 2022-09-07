@@ -1,8 +1,13 @@
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
 import { makeInternalErrorResponse } from '../helpers';
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { makeFakeBenefit, populateDatabase } from './helpers';
+
+jest
+  .useFakeTimers()
+  .setSystemTime(new Date('2022-04-15T12:00:00.000Z').getTime());
 
 describe.skip('GET /benefits - Get all benefits', () => {
   const token = new AuthenticationService().generateToken({
@@ -12,6 +17,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
 
   beforeAll(async () => {
     await populateUsersDatabase();
+    await populateAssociatedDatabase();
     await global.prismaClient.benefit.deleteMany();
     await populateDatabase();
   });
@@ -34,19 +40,38 @@ describe.skip('GET /benefits - Get all benefits', () => {
           ...makeFakeBenefit({
             associatedId: 1,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
         expect.objectContaining({
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
         expect.objectContaining({
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 3,
+            id: 3,
+            affiliationId: 3,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
       ],
     });
@@ -67,14 +92,28 @@ describe.skip('GET /benefits - Get all benefits', () => {
         expect.objectContaining({
           ...makeFakeBenefit({
             associatedId: 1,
+            id: 1,
+            affiliationId: 1,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
         expect.objectContaining({
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
       ],
     });
@@ -95,8 +134,14 @@ describe.skip('GET /benefits - Get all benefits', () => {
         expect.objectContaining({
           ...makeFakeBenefit({
             associatedId: 1,
+            id: 1,
+            affiliationId: 1,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
         }),
       ],
     });
@@ -117,8 +162,14 @@ describe.skip('GET /benefits - Get all benefits', () => {
         expect.objectContaining({
           ...makeFakeBenefit({
             associatedId: 1,
+            id: 1,
+            affiliationId: 1,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
         }),
       ],
     });
@@ -138,9 +189,16 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associatedId: 1,
+            id: 3,
+            associatedId: 3,
+            affiliationId: 3,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
+          updatedAt: '2022-04-15T12:00:00.000Z',
+          birthDate: '2022-04-15T12:00:00.000Z',
+          createdAt: '2022-04-15T12:00:00.000Z',
+          emissionDate: '2022-04-15T12:00:00.000Z',
+          initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
       ],
     });

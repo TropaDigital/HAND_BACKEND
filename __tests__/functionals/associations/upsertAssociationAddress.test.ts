@@ -48,6 +48,7 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
       postalCode: 'any_postal_code',
       state: 'any_state',
       street: 'any_street',
+      isDefault: false,
     });
   });
 
@@ -69,56 +70,62 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
       .patch(`/associateds/${id}/addresses/${id}`)
       .set('x-access-token', token)
       .send({
-        bank: 1,
-        consultant: 1,
-        contractModel: 1,
-        financialAssistanceValue: '20',
-        installmentNumber: '6',
-        installmentValue: '20',
-        publicAgency: 1,
-        initialDate: 1,
-        createdBy: 1,
+        addressType: 0,
+        city: 0,
+        complement: 0,
+        district: 0,
+        houseNumber: 0,
+        postalCode: 0,
+        state: 0,
+        street: 0,
+        isDefault: false,
       });
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
         fieldName: 'addressType',
         friendlyFieldName: 'tipo de endereço',
-        message: '"tipo de endereço" is required',
+        message: '"tipo de endereço" must be a string',
       },
       {
         fieldName: 'postalCode',
         friendlyFieldName: 'cep',
-        message: '"cep" is required',
+        message: '"cep" must be a string',
       },
       {
         fieldName: 'street',
         friendlyFieldName: 'logradouro',
-        message: '"logradouro" is required',
+        message: '"logradouro" must be a string',
       },
       {
         fieldName: 'houseNumber',
         friendlyFieldName: 'número',
-        message: '"número" is required',
+        message: '"número" must be a string',
+      },
+      {
+        fieldName: 'complement',
+        friendlyFieldName: 'complemento',
+        message: '"complemento" must be a string',
       },
       {
         fieldName: 'district',
         friendlyFieldName: 'bairro',
-        message: '"bairro" is required',
+        message: '"bairro" must be a string',
       },
       {
         fieldName: 'city',
         friendlyFieldName: 'cidade',
-        message: '"cidade" is required',
+        message: '"cidade" must be a string',
       },
       {
         fieldName: 'state',
         friendlyFieldName: 'estado',
-        message: '"estado" is required',
+        message: '"estado" must be a string',
       },
     ]);
-    expect(response.status).toBe(invalidParamsResponse.statusCode);
+
     expect(response.body).toEqual(invalidParamsResponse);
+    expect(response.status).toBe(invalidParamsResponse.statusCode);
   });
 
   it('Should return 200 when receive just one param', async () => {
@@ -139,6 +146,7 @@ describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
       postalCode: 'any_postal_code',
       state: 'any_state',
       street: 'any_street',
+      isDefault: false,
     });
     expect(response.status).toBe(200);
   });

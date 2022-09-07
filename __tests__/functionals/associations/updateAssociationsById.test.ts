@@ -6,7 +6,10 @@ import {
   makeNotFoundResponse,
 } from '../helpers';
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
-import { populateDatabase } from './helpers';
+import {
+  populateDatabase as populateAssociatedDatabase,
+  populateDatabase,
+} from './helpers';
 
 describe('PATCH /associateds/{id} - Update associated by id', () => {
   const token = new AuthenticationService().generateToken({
@@ -16,6 +19,7 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
 
   beforeAll(async () => {
     await populateUsersDatabase();
+    await populateAssociatedDatabase();
     await global.prismaClient.associated.deleteMany();
     await populateDatabase();
   });
@@ -34,6 +38,7 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
       .set('x-access-token', token)
       .send({
         name: 'Any name',
+        affiliations: [{ id: 1 }],
       });
 
     expect(response.body).toEqual({});
@@ -47,6 +52,7 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
       .set('x-access-token', token)
       .send({
         name: 'Vinicius',
+        affiliations: [{ id: 1 }],
       });
     expect(response.body).toEqual(
       makeNotFoundResponse('associated not found with provided id'),
@@ -74,6 +80,11 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
+        fieldName: 'affiliations',
+        friendlyFieldName: 'afiliações',
+        message: '"afiliações" is required',
+      },
+      {
         fieldName: 'createdBy',
         friendlyFieldName: 'createdBy',
         message: '"createdBy" must be a string',
@@ -91,6 +102,7 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
       .set('x-access-token', token)
       .send({
         name: 'João',
+        affiliations: [{ id: 1 }],
       });
     expect(response.body).toEqual({});
     expect(response.status).toBe(204);
@@ -107,6 +119,7 @@ describe('PATCH /associateds/{id} - Update associated by id', () => {
       .set('x-access-token', token)
       .send({
         name: 'João',
+        affiliations: [{ id: 1 }],
       });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();

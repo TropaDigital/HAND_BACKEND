@@ -37,18 +37,30 @@ export const makeFakeCreateAssociatedParams = (
   payload?: Partial<IAssociated>,
 ): ICreateAssociatedInput => ({
   name: 'Any name1',
-  mother: 'Any mother',
+  lastName: 'Any name',
+  gender: 'Any gender',
+  birthDate: new Date('2022-10-10'),
+  maritalStatus: 'Any status',
   nationality: 'Any nationality',
   placeOfBirth: 'Any place',
-  bankAccounts: [
+  taxId: '000.000.000-00',
+  registerId: 'Any id',
+  emissionState: 'Any state',
+  issuingAgency: 'Any agency',
+  emissionDate: new Date('2022-10-10'),
+  cellPhone: '00000000',
+  email: 'any@mail.com',
+  createdBy: 'Any User',
+  father: 'Any father',
+  mother: 'Any mother',
+  partner: 'Any partner',
+  affiliations: [
     {
-      bank: '00 - Any Bank',
-      agency: '0000',
-      pixKey: 'any_pix_key',
-      pixType: 'any_type',
-      accountNumber: 'any_account',
-      accountType: 'any_type',
-      isDefault: true,
+      id: payload?.id || 1,
+      name: String(payload?.id) || 'ASES',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      deletedAt: null,
     },
   ],
   addresses: [
@@ -64,6 +76,17 @@ export const makeFakeCreateAssociatedParams = (
       isDefault: true,
     },
   ],
+  bankAccounts: [
+    {
+      bank: '00 - Any Bank',
+      agency: '0000',
+      pixKey: 'any_pix_key',
+      pixType: 'any_type',
+      accountNumber: 'any_account',
+      accountType: 'any_type',
+      isDefault: true,
+    },
+  ],
   employmentRelationships: [
     {
       occupation: 'any_occupation',
@@ -76,23 +99,7 @@ export const makeFakeCreateAssociatedParams = (
       isDefault: true,
     },
   ],
-  affiliations: [],
 
-  registerId: 'Any id',
-  taxId: '000.000.000-00',
-  partner: 'Any partner',
-  maritalStatus: 'Any status',
-  lastName: 'Any name',
-  issuingAgency: 'Any agency',
-  gender: 'Any gender',
-  father: 'Any father',
-  emissionState: 'Any state',
-  emissionDate: new Date('2022-10-10'),
-  email: 'any@mail.com',
-  cellPhone: '00000000',
-  birthDate: new Date('2022-10-10'),
-
-  createdBy: 'Any User',
   ...payload,
 });
 
@@ -143,7 +150,15 @@ export const makeFakeAssociated = (
     },
   ],
 
-  affiliations: [],
+  affiliations: [
+    {
+      id: payload?.id || 0,
+      name: 'some affiliation',
+      createdAt: new Date(),
+      deletedAt: null,
+      updatedAt: new Date(),
+    },
+  ],
   registerId: 'Any id',
   taxId: '000.000.000-00',
   partner: 'Any partner',
@@ -164,8 +179,13 @@ export const makeFakeAssociated = (
 });
 
 const createAssociated = async (associated: ICreateAssociatedInput) => {
-  const { addresses, employmentRelationships, bankAccounts, ...payload } =
-    associated;
+  const {
+    addresses,
+    employmentRelationships,
+    bankAccounts,
+    affiliations,
+    ...payload
+  } = associated;
   await global.prismaClient.associated.create({
     data: {
       ...payload,
@@ -174,11 +194,17 @@ const createAssociated = async (associated: ICreateAssociatedInput) => {
       employmentRelationships: {
         createMany: { data: employmentRelationships },
       },
+      affiliations: {
+        create: affiliations,
+      },
     },
   });
 };
 
 export const populateDatabase = async (): Promise<void> => {
+  await global.prismaClient.associated.deleteMany({});
+  await global.prismaClient.affiliation.deleteMany({});
+  await global.prismaClient.employmentRelationship.deleteMany({});
   await Promise.all([
     createAssociated(
       makeFakeCreateAssociatedParams({ name: 'João', id: 1, taxId: '1' }),

@@ -30,10 +30,11 @@ describe.skip('POST /benefits - Create new benefit', () => {
       .set('x-access-token', token)
       .send(params);
 
+    expect(response.body).toEqual('');
     expect(response.body.data).toEqual(
       expect.objectContaining({
         ...params,
-        initialDate: '2022-10-10T00:00:00.000Z',
+        initialDate: expect.any(String),
       }),
     );
     expect(response.status).toBe(201);
@@ -52,54 +53,49 @@ describe.skip('POST /benefits - Create new benefit', () => {
       .send(params);
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'associated',
-        friendlyFieldName: 'associated',
-        message: '"associated" is required',
+        fieldName: 'affiliation',
+        friendlyFieldName: 'affiliation',
+        message: '"affiliation" is required',
       },
       {
-        fieldName: 'association',
-        friendlyFieldName: 'association',
-        message: '"association" is required',
+        fieldName: 'addressId',
+        friendlyFieldName: 'addressId',
+        message: '"addressId" is required',
       },
       {
-        fieldName: 'bank',
-        friendlyFieldName: 'bank',
-        message: '"bank" is required',
+        fieldName: 'bankAccountId',
+        friendlyFieldName: 'bankAccountId',
+        message: '"bankAccountId" is required',
       },
       {
-        fieldName: 'publicAgency',
-        friendlyFieldName: 'publicAgency',
-        message: '"publicAgency" is required',
+        fieldName: 'employmentRelationshipId',
+        friendlyFieldName: 'employmentRelationshipId',
+        message: '"employmentRelationshipId" is required',
       },
       {
-        fieldName: 'contractModel',
-        friendlyFieldName: 'contractModel',
-        message: '"contractModel" is required',
+        fieldName: 'associatedId',
+        friendlyFieldName: 'associatedId',
+        message: '"associatedId" is required',
       },
       {
-        fieldName: 'installmentNumber',
-        friendlyFieldName: 'installmentNumber',
-        message: '"installmentNumber" is required',
+        fieldName: 'numberOfInstallments',
+        friendlyFieldName: 'numberOfInstallments',
+        message: '"numberOfInstallments" is required',
       },
       {
-        fieldName: 'initialDate',
-        friendlyFieldName: 'initialDate',
-        message: '"initialDate" is required',
+        fieldName: 'requestedValue',
+        friendlyFieldName: 'requestedValue',
+        message: '"requestedValue" is required',
       },
       {
-        fieldName: 'financialAssistanceValue',
-        friendlyFieldName: 'financialAssistanceValue',
-        message: '"financialAssistanceValue" is required',
+        fieldName: 'salary',
+        friendlyFieldName: 'salary',
+        message: '"salary" is required',
       },
       {
-        fieldName: 'installmentValue',
-        friendlyFieldName: 'installmentValue',
-        message: '"installmentValue" is required',
-      },
-      {
-        fieldName: 'consultant',
-        friendlyFieldName: 'consultant',
-        message: '"consultant" is required',
+        fieldName: 'monthOfPayment',
+        friendlyFieldName: 'monthOfPayment',
+        message: '"monthOfPayment" is required',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);

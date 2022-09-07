@@ -31,8 +31,15 @@ describe('GET /consultants/{id} - Get consultant by id', () => {
       .get(`/consultants/${id}`)
       .set('x-access-token', token);
     expect(response.body.data).toEqual(
-      expect.objectContaining(makeFakeCreateConsultantParams({ name: 'João' })),
+      expect.objectContaining({
+        ...makeFakeCreateConsultantParams({ name: 'João', id: 1 }),
+        commission: 0,
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+        deletedAt: null,
+      }),
     );
+
     expect(response.status).toBe(200);
   });
 

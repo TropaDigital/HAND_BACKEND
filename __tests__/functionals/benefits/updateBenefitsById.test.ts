@@ -1,5 +1,6 @@
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
@@ -16,6 +17,7 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
 
   beforeAll(async () => {
     await populateUsersDatabase();
+    await populateAssociatedDatabase();
     await global.prismaClient.benefit.deleteMany();
     await populateDatabase();
   });
@@ -81,14 +83,14 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'associated',
-        friendlyFieldName: 'associated',
-        message: '"associated" must be a string',
+        fieldName: 'affiliation',
+        friendlyFieldName: 'affiliation',
+        message: '"affiliation" is required',
       },
       {
-        fieldName: 'association',
-        friendlyFieldName: 'association',
-        message: '"association" must be a string',
+        fieldName: 'associatedId',
+        friendlyFieldName: 'associatedId',
+        message: '"associatedId" is required',
       },
       {
         fieldName: 'bank',
@@ -104,11 +106,6 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
         fieldName: 'contractModel',
         friendlyFieldName: 'contractModel',
         message: '"contractModel" must be a string',
-      },
-      {
-        fieldName: 'consultant',
-        friendlyFieldName: 'consultant',
-        message: '"consultant" must be a string',
       },
       {
         fieldName: 'createdBy',
@@ -128,6 +125,7 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
       .set('x-access-token', token)
       .send({
         name: 'João',
+        affiliations: [{ id: 1 }],
       });
     expect(response.body).toEqual({});
     expect(response.status).toBe(204);
@@ -144,6 +142,7 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
       .set('x-access-token', token)
       .send({
         name: 'João',
+        affiliations: [{ id: 1 }],
       });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();

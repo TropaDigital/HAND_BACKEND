@@ -56,11 +56,6 @@ describe('POST /associateds - Create new associated', () => {
         message: '"sobrenome" is required',
       },
       {
-        fieldName: 'affiliation',
-        friendlyFieldName: 'afiliação',
-        message: '"afiliação" is required',
-      },
-      {
         fieldName: 'gender',
         friendlyFieldName: 'sexo',
         message: '"sexo" is required',
@@ -129,6 +124,11 @@ describe('POST /associateds - Create new associated', () => {
         fieldName: 'mother',
         friendlyFieldName: 'mãe',
         message: '"mãe" is required',
+      },
+      {
+        fieldName: 'affiliations',
+        friendlyFieldName: 'affiliations',
+        message: '"affiliations" is required',
       },
       {
         fieldName: 'addresses',

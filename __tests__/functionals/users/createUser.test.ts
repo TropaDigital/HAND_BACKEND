@@ -25,7 +25,8 @@ describe('POST /users - Create new user', () => {
       email: 'any@mail.com',
       id: expect.any(Number),
       name: 'Mateus',
-      role: 'USER',
+      role: null,
+      roleId: null,
       status: 'ACTIVE',
       userName: 'any_user_name',
     });

@@ -1,3 +1,10 @@
+### [1.14.4](https://github.com/haandsolutions/haand-bib/compare/v1.14.3...v1.14.4) (2022-09-09)
+
+
+### :bug: Fixes
+
+* adjust the complement column to be not required ([7f964ae](https://github.com/haandsolutions/haand-bib/commit/7f964aeb2540fa7cb10a780791d922a0ffab1e1c))
+
 ### [1.14.3](https://github.com/haandsolutions/haand-bib/compare/v1.14.2...v1.14.3) (2022-09-06)
 
 

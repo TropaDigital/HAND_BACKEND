@@ -1,3 +1,11 @@
+### [1.14.3](https://github.com/haandsolutions/haand-bib/compare/v1.14.2...v1.14.3) (2022-09-06)
+
+
+### :bug: Fixes
+
+* adjust the seeders ([3922831](https://github.com/haandsolutions/haand-bib/commit/392283175961e0ff5473828c9f1b60d502d39680))
+* adjust the seeders ([8329ec7](https://github.com/haandsolutions/haand-bib/commit/8329ec70dfa65735df8fe9043a86c10d33d962a8))
+
 ### [1.14.2](https://github.com/haandsolutions/haand-bib/compare/v1.14.1...v1.14.2) (2022-09-06)
 
 

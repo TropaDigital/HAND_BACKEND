@@ -1,6 +1,6 @@
 {
   "name": "haand-bid",
-  "version": "1.14.2",
+  "version": "1.14.3",
   "main": "dist/src/index.js",
   "scripts": {
     "prepare": "husky install && prisma generate",

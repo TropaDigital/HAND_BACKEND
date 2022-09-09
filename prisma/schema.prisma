@@ -41,7 +41,7 @@ model Address {
   postalCode   String      @map(name: "postal_code")
   street       String
   houseNumber  String      @map(name: "house_number")
-  complement   String
+  complement   String?
   district     String
   city         String
   state        String

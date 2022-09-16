@@ -4,7 +4,11 @@ export const parsePrismaFindManyContains = <T>(object: T): T => {
   const entries = Object.entries(object);
 
   const result = entries.reduce((acc: any, [key, value]) => {
-    acc[key] = { contains: value };
+    acc[key] =
+      typeof value === 'object'
+        ? (acc[key] = parsePrismaFindManyContains(value))
+        : (acc[key] = { contains: value });
+
     return acc;
   }, {});
 

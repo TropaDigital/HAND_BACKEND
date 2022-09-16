@@ -9,9 +9,9 @@ jest
   .useFakeTimers()
   .setSystemTime(new Date('2022-04-15T12:00:00.000Z').getTime());
 
-describe.skip('GET /benefits - Get all benefits', () => {
+describe('GET /benefits - Get all benefits', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
@@ -123,7 +123,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
   it('Should return 200 and paginated associates when filter params is provided in query params', async () => {
     const response = await global.testRequest
       .get('/benefits')
-      .query({ page: 1, resultsPerPage: 2, associated: 'Pedro' })
+      .query({ page: 1, resultsPerPage: 2, associated: { name: 'Pedro' } })
       .set('x-access-token', token);
 
     expect(response.body.data).toEqual({
@@ -133,15 +133,16 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associatedId: 1,
-            id: 1,
-            affiliationId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
           updatedAt: '2022-04-15T12:00:00.000Z',
           birthDate: '2022-04-15T12:00:00.000Z',
           createdAt: '2022-04-15T12:00:00.000Z',
           emissionDate: '2022-04-15T12:00:00.000Z',
           initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
       ],
     });
@@ -151,7 +152,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
   it('Should return 200 and paginated associates when filter params with partial value', async () => {
     const response = await global.testRequest
       .get('/benefits')
-      .query({ page: 1, resultsPerPage: 2, associated: 'Ped' })
+      .query({ page: 1, resultsPerPage: 2, associated: { name: 'Ped' } })
       .set('x-access-token', token);
 
     expect(response.body.data).toEqual({
@@ -161,15 +162,16 @@ describe.skip('GET /benefits - Get all benefits', () => {
       data: [
         expect.objectContaining({
           ...makeFakeBenefit({
-            associatedId: 1,
-            id: 1,
-            affiliationId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
           updatedAt: '2022-04-15T12:00:00.000Z',
           birthDate: '2022-04-15T12:00:00.000Z',
           createdAt: '2022-04-15T12:00:00.000Z',
           emissionDate: '2022-04-15T12:00:00.000Z',
           initialDate: '2022-04-15T12:00:00.000Z',
+          finalDate: '2022-04-15T12:00:00.000Z',
         }),
       ],
     });

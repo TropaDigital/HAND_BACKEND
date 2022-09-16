@@ -1,5 +1,7 @@
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
+import { populateDatabase as populateConsultantDatabase } from '../consultants/helpers';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
@@ -7,7 +9,7 @@ import {
 import { populateDatabase } from '../users/helpers';
 import { makeFakeCreateBenefitParams } from './helpers';
 
-describe.skip('POST /benefits - Create new benefit', () => {
+describe('POST /benefits - Create new benefit', () => {
   const token = new AuthenticationService().generateToken({
     sub: 'User',
     role: 'VALID_ROLE',
@@ -15,22 +17,24 @@ describe.skip('POST /benefits - Create new benefit', () => {
 
   beforeAll(async () => {
     await global.prismaClient.benefit.deleteMany();
+    await populateConsultantDatabase();
+    await populateAssociatedDatabase();
     await populateDatabase();
   });
 
   afterAll(async () => {
-    await global.prismaClient.benefit.deleteMany();
+    await global.prismaClient?.benefit.deleteMany();
   });
 
-  it('Should return 201 with created benefit', async () => {
-    const params = makeFakeCreateBenefitParams();
+  it.skip('Should return 201 with created benefit', async () => {
+    const params = await makeFakeCreateBenefitParams();
 
     const response = await global.testRequest
       .post(`/benefits`)
       .set('x-access-token', token)
       .send(params);
 
-    expect(response.body).toEqual('');
+    expect(response.body).toBe('');
     expect(response.body.data).toEqual(
       expect.objectContaining({
         ...params,
@@ -103,7 +107,7 @@ describe.skip('POST /benefits - Create new benefit', () => {
   });
 
   it('Should return 500 when the service throws an exception error', async () => {
-    const params = makeFakeCreateBenefitParams();
+    const params = await makeFakeCreateBenefitParams();
     jest
       .spyOn(BenefitService.prototype, 'create')
       .mockRejectedValueOnce(new Error('create unexpected error'));

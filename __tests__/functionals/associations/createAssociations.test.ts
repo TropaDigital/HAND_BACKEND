@@ -9,7 +9,7 @@ import { makeFakeCreateAssociatedParams } from './helpers';
 
 describe('POST /associateds - Create new associated', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 'Any User',
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
@@ -28,7 +28,7 @@ describe('POST /associateds - Create new associated', () => {
     const response = await global.testRequest
       .post(`/associateds`)
       .set('x-access-token', token)
-      .set('user', JSON.stringify({ sub: 'Any User' }))
+      .set('user', JSON.stringify({ sub: 'User' }))
       .send(params);
 
     const result = response.body.data;
@@ -47,7 +47,7 @@ describe('POST /associateds - Create new associated', () => {
     const response = await global.testRequest
       .post(`/associateds`)
       .set('x-access-token', token)
-      .set('user', JSON.stringify({ sub: 'Any User' }))
+      .set('user', JSON.stringify({ sub: 'User' }))
       .send(params);
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
@@ -155,7 +155,7 @@ describe('POST /associateds - Create new associated', () => {
     const response = await global.testRequest
       .post(`/associateds`)
       .set('x-access-token', token)
-      .set('user', JSON.stringify({ sub: 'Any User' }))
+      .set('user', JSON.stringify({ sub: 'User' }))
       .send(params);
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();

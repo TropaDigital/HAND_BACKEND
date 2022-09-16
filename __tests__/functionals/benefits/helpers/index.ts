@@ -1,21 +1,52 @@
 import { Benefit, BenefitStatus, BenefitType } from '@prisma/client';
 
+import { MonthOfPayment } from '../../../../src/enums/MonthOfPayment';
 import { ICreateBenefitParams } from '../../../../src/modules/benefit/interfaces';
 
-export const makeFakeCreateBenefitParams = (
+export const makeFakeCreateBenefitParams = async (
   payload?: Partial<ICreateBenefitParams>,
-): ICreateBenefitParams => ({
-  affiliation: 'Any Affiliation',
-  addressId: 1,
-  associatedId: 1,
-  bankAccountId: 1,
-  employmentRelationshipId: 1,
-  numberOfInstallments: 1,
-  requestedValue: 200,
-  salary: 500,
-  monthOfPayment: 'CURRENT_MONTH',
-  ...(payload as any),
-});
+): Promise<ICreateBenefitParams> => {
+  const associated = await global.prismaClient.associated.findFirst({
+    where: { id: payload?.associatedId || 1 },
+    include: {
+      addresses: {
+        orderBy: {
+          isDefault: 'desc',
+        },
+      },
+      employmentRelationships: {
+        orderBy: {
+          isDefault: 'desc',
+        },
+      },
+      bankAccounts: {
+        orderBy: {
+          isDefault: 'desc',
+        },
+      },
+      benefits: true,
+      affiliations: true,
+    },
+  });
+  return {
+    type: BenefitType.D,
+    affiliation: 'any affiliation',
+    addressId: associated?.addresses[0].id,
+    bankAccountId: associated?.bankAccounts[0].id,
+    employmentRelationshipId: associated?.employmentRelationships[0].id,
+    associatedId: 1,
+    consultantId: 1,
+    joinedTelemedicine: true,
+    salaryReceiptDate: new Date(),
+    numberOfInstallments: 4,
+    requestedValue: 1000,
+    salary: 1500,
+    monthOfPayment: MonthOfPayment.CURRENT_MONTH,
+    administrationFeeValue: 0,
+    hasGratification: true,
+    ...(payload as any),
+  };
+};
 
 export const makeFakeBenefit = (
   payload: Partial<Benefit>,

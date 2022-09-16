@@ -11,9 +11,9 @@ import {
   populateDatabase,
 } from './helpers';
 
-describe.skip('PATCH /associateds/{id} - Update associated by id', () => {
+describe('PATCH /associateds/{id} - Update associated by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 'Any User',
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

@@ -9,7 +9,7 @@ import { makeUnauthorizedResponse } from '../helpers';
 
 describe('Auth middleware', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

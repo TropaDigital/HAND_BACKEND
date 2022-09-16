@@ -10,7 +10,7 @@ import { populateDatabase, makeFakeCreateConsultantParams } from './helpers';
 
 describe('GET /consultants/{id} - Get consultant by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

@@ -11,7 +11,7 @@ import { makeFakeBenefit, populateDatabase } from './helpers';
 
 describe('GET /benefits/{id} - Get benefit by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

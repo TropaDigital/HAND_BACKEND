@@ -10,7 +10,7 @@ import { makeFakeAddressesParams, populateDatabase } from './helpers';
 
 describe('PATCH /associateds/addresses/{id} - Update associated by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 'Any User',
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

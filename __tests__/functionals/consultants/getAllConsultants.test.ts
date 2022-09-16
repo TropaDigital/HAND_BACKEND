@@ -6,7 +6,7 @@ import { populateDatabase, makeFakeConsultant } from './helpers';
 
 describe('GET /consultants - Get all consultants', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

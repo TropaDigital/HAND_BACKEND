@@ -6,7 +6,7 @@ import { IEncrypter } from '../interfaces';
 jest.mock('jsonwebtoken');
 jest
   .spyOn(jwt, 'verify')
-  .mockImplementation(() => ({ role: 'any_value', sub: 'any_sub' }));
+  .mockImplementation(() => ({ role: 'any_value', sub: 'User' }));
 jest.spyOn(jwt, 'sign').mockImplementation(() => 'any_value');
 
 const makeEncrypterStub = (): jest.Mocked<IEncrypter> => ({
@@ -148,7 +148,7 @@ describe(AuthenticationService.name, () => {
     });
   });
   describe(AuthenticationService.prototype.generateToken.name, () => {
-    const payload = { sub: 'any_sub', role: 'any_role' };
+    const payload = { sub: 'User', role: 'any_role' };
 
     it('Should call jwt when method is called', async () => {
       const { sut } = makeSut();
@@ -156,7 +156,7 @@ describe(AuthenticationService.name, () => {
       await sut.generateToken(payload);
 
       expect(signSpy).toBeCalledWith(
-        { role: 'any_role', sub: 'any_sub' },
+        { role: 'any_role', sub: 'User' },
         'any_secret',
         { expiresIn: 'any_ttl' },
       );

@@ -8,9 +8,7 @@ import { AuthMiddleware } from '../AuthMiddleware';
 const makeFakeAuthenticationService =
   (): jest.Mocked<IAuthenticationService> => ({
     compareHash: jest.fn(),
-    decodeToken: jest
-      .fn()
-      .mockReturnValue({ sub: 'any_sub', role: 'any_role' }),
+    decodeToken: jest.fn().mockReturnValue({ sub: 'User', role: 'any_role' }),
     generateToken: jest.fn(),
     hashPassword: jest.fn(),
   });

@@ -25,12 +25,7 @@ export const makeFakeUser = (
   name: 'Mateus',
   password: 'any_password',
   status: 'ACTIVE',
-  role: {
-    create: {
-      name: 'USER',
-      description: '',
-    },
-  },
+  roleId: 1,
   ...payload,
 });
 

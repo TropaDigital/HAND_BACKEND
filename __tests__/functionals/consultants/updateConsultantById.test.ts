@@ -10,7 +10,7 @@ import { populateDatabase } from './helpers';
 
 describe('PATCH /consultants/{id} - Update consultant by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

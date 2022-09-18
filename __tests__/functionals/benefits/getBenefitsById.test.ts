@@ -1,21 +1,23 @@
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
   makeNotFoundResponse,
 } from '../helpers';
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
-import { populateDatabase, makeFakeCreateBenefitParams } from './helpers';
+import { makeFakeBenefit, populateDatabase } from './helpers';
 
-describe.skip('GET /benefits/{id} - Get benefit by id', () => {
+describe('GET /benefits/{id} - Get benefit by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
   beforeAll(async () => {
     await populateUsersDatabase();
+    await populateAssociatedDatabase();
     await global.prismaClient.benefit.deleteMany();
     await populateDatabase();
   });
@@ -30,12 +32,15 @@ describe.skip('GET /benefits/{id} - Get benefit by id', () => {
     const response = await global.testRequest
       .get(`/benefits/${id}`)
       .set('x-access-token', token);
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        ...makeFakeCreateBenefitParams({ associatedId: 1 }),
-        initialDate: '2022-10-10T00:00:00.000Z',
-      }),
-    );
+    expect(response.body.data).toEqual({
+      ...makeFakeBenefit({ id: 1, associatedId: 1 }),
+      birthDate: expect.any(String),
+      createdAt: expect.any(String),
+      emissionDate: expect.any(String),
+      finalDate: null,
+      initialDate: expect.any(String),
+      updatedAt: expect.any(String),
+    });
     expect(response.status).toBe(200);
   });
 

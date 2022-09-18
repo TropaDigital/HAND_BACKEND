@@ -66,7 +66,8 @@ describe('Schema', () => {
 
       const result = sut.validateSchema('UpdateBenefitById', param);
 
-      expect(result).toEqual(param);
+      const { addressId: _, ...benefit } = param;
+      expect(result).toEqual(benefit);
     });
 
     it('should throw when an invalid input is provided', () => {

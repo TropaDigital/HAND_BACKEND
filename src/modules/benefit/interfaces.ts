@@ -10,7 +10,7 @@ import { ILoanSimulationBasedOnRequestedValueParams } from '../loanSimulation/in
 export interface ICreateBenefitParams
   extends ILoanSimulationBasedOnRequestedValueParams {
   type: BenefitType;
-  affiliation: string;
+  affiliationId: number;
   associatedId: number;
   bankAccountId: number;
   employmentRelationshipId: number;

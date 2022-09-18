@@ -8,11 +8,16 @@ import { PrismaAffiliationRepository } from '../../repository';
 
 export const makeFakeCreateAffiliationInput = (
   payload?: Partial<Prisma.AffiliationCreateInput>,
-): jest.Mocked<Prisma.AffiliationCreateInput> => ({ ...(payload as any) });
+): jest.Mocked<Prisma.AffiliationCreateInput> => ({
+  name: 'Any Affiliation',
+  ...(payload as any),
+});
 
 export const makeFakeUpdateAffiliationInput = (
-  payload?: Partial<Omit<Affiliation, 'id'>>,
-): jest.Mocked<Partial<Omit<Affiliation, 'id'>>> => ({
+  payload?: Partial<Affiliation>,
+): jest.Mocked<Partial<Affiliation>> => ({
+  name: 'Some Affilation',
+  deletedAt: new Date(),
   ...payload,
 });
 
@@ -35,9 +40,14 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAffiliation = (
-  payload: Partial<Affiliation>,
+  payload: Partial<jest.Mocked<Affiliation>>,
 ): jest.Mocked<Affiliation> => ({
-  ...(payload as any),
+  id: 1,
+  name: 'Some Affiliation',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  deletedAt: new Date(),
+  ...payload,
 });
 
 export const makeFakeAffiliationList = () => [

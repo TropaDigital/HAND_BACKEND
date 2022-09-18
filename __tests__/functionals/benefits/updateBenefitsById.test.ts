@@ -1,5 +1,6 @@
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
@@ -8,14 +9,15 @@ import {
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { populateDatabase } from './helpers';
 
-describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
+describe('PATCH /benefits/{id} - Update benefit by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
   beforeAll(async () => {
     await populateUsersDatabase();
+    await populateAssociatedDatabase();
     await global.prismaClient.benefit.deleteMany();
     await populateDatabase();
   });
@@ -36,6 +38,8 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
         taxId: '784541231',
         state: 'Ceará',
         createdBy: 'Pedro',
+        affiliationId: 1,
+        associatedId: 1,
       });
 
     expect(response.body).toEqual({});
@@ -53,6 +57,8 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
         taxId: '784541231',
         state: 'Ceará',
         createdBy: 'Pedro',
+        affiliationId: 1,
+        associatedId: 1,
       });
     expect(response.body).toEqual(
       makeNotFoundResponse('benefit not found with provided id'),
@@ -77,18 +83,15 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
         publicAgency: 1,
         initialDate: 1,
         createdBy: 1,
+        associatedId: 1,
+        affiliation: 'Some Affiliation',
       });
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'associated',
-        friendlyFieldName: 'associated',
-        message: '"associated" must be a string',
-      },
-      {
-        fieldName: 'association',
-        friendlyFieldName: 'association',
-        message: '"association" must be a string',
+        fieldName: 'affiliationId',
+        friendlyFieldName: 'affiliationId',
+        message: '"affiliationId" is required',
       },
       {
         fieldName: 'bank',
@@ -104,11 +107,6 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
         fieldName: 'contractModel',
         friendlyFieldName: 'contractModel',
         message: '"contractModel" must be a string',
-      },
-      {
-        fieldName: 'consultant',
-        friendlyFieldName: 'consultant',
-        message: '"consultant" must be a string',
       },
       {
         fieldName: 'createdBy',
@@ -127,7 +125,9 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
       .patch(`/benefits/${id}`)
       .set('x-access-token', token)
       .send({
-        name: 'João',
+        salary: '2000',
+        affiliationId: 1,
+        associatedId: 1,
       });
     expect(response.body).toEqual({});
     expect(response.status).toBe(204);
@@ -143,7 +143,9 @@ describe.skip('PATCH /benefits/{id} - Update benefit by id', () => {
       .patch(`/benefits/${id}`)
       .set('x-access-token', token)
       .send({
-        name: 'João',
+        salary: '2000',
+        affiliationId: 1,
+        associatedId: 1,
       });
     const { validationErrors, ...internalServerError } =
       makeInternalErrorResponse();

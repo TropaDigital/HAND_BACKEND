@@ -6,7 +6,7 @@ import { populateDatabase, makeFakeConsultant } from './helpers';
 
 describe('GET /consultants - Get all consultants', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
@@ -17,7 +17,7 @@ describe('GET /consultants - Get all consultants', () => {
   });
 
   afterAll(async () => {
-    await global.prismaClient.consultant.deleteMany();
+    await global.prismaClient?.consultant.deleteMany();
   });
 
   it('Should return 200 and all consultants', async () => {
@@ -26,8 +26,22 @@ describe('GET /consultants - Get all consultants', () => {
       .set('x-access-token', token);
 
     expect(response.body.data).toEqual([
-      expect.objectContaining(makeFakeConsultant({ name: 'João' })),
-      expect.objectContaining(makeFakeConsultant({ name: 'Pedro' })),
+      expect.objectContaining({
+        ...makeFakeConsultant({ name: 'João', id: 1 }),
+        id: 1,
+        deletedAt: null,
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+        updatedBy: null,
+      }),
+      expect.objectContaining({
+        ...makeFakeConsultant({ name: 'Pedro', id: 2 }),
+
+        deletedAt: null,
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+        updatedBy: null,
+      }),
     ]);
     expect(response.status).toBe(200);
   });

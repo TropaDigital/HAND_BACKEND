@@ -25,7 +25,7 @@ import { populateDatabase } from '../users/helpers';
 
 describe('POST /loansimulations/simulate - Get an loan simulation based in the provided parameters', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

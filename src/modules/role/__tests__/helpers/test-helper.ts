@@ -9,14 +9,16 @@ import { PrismaRoleRepository } from '../../repository';
 export const makeFakeCreateRoleInput = (
   payload?: Partial<Prisma.RoleCreateInput>,
 ): jest.Mocked<Prisma.RoleCreateInput> => ({
-  ...payload,
   name: 'USER',
-  description: '',
+  description: 'Some Description',
+  ...payload,
 });
 
 export const makeFakeUpdateRoleInput = (
-  payload?: Partial<Omit<Role, 'id'>>,
-): jest.Mocked<Partial<Omit<Role, 'id'>>> => ({
+  payload?: Partial<Role>,
+): jest.Mocked<Partial<Role>> => ({
+  name: 'USER',
+  description: 'Any description',
   ...payload,
 });
 

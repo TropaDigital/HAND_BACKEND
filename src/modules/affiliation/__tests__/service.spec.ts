@@ -34,7 +34,6 @@ describe(AffiliationService.name, () => {
       expect(result).toEqual(
         makeFakeAffiliationList().map(affiliation => ({
           ...affiliation,
-          commission: 10,
         })),
       );
     });
@@ -68,7 +67,7 @@ describe(AffiliationService.name, () => {
 
       const result = await sut.getById(fakeId);
 
-      expect(result).toEqual({ ...makeFakeAffiliation({}), commission: 10 });
+      expect(result).toEqual({ ...makeFakeAffiliation({}) });
     });
 
     it('should return null when repository result is null', async () => {
@@ -103,7 +102,6 @@ describe(AffiliationService.name, () => {
 
       expect(createSpy).toBeCalledWith({
         ...makeFakeCreateAffiliationInput(),
-        commission: 1000,
       });
     });
 
@@ -154,7 +152,6 @@ describe(AffiliationService.name, () => {
 
       expect(updateSpy).toBeCalledWith(777, {
         ...makeFakeUpdateAffiliationInput(),
-        commission: 1000,
       });
     });
 

@@ -6,7 +6,7 @@ import { populateDatabase } from './helpers';
 
 describe('GET /associateds - Get all associateds', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 'Any User',
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

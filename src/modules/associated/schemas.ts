@@ -59,6 +59,7 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
         contractType: Joi.string().label('tipo de contrato'),
         finalDate: Joi.date().label('data final'),
         publicAgency: Joi.string().label('órgão público'),
+        isDefault: Joi.boolean().label('principal'),
       }),
     )
     .required(),
@@ -130,6 +131,7 @@ export const UpdateAssociatedById = Joi.object<
       contractType: Joi.string().label('tipo de contrato'),
       finalDate: Joi.date().label('data final'),
       publicAgency: Joi.string().label('órgão público'),
+      isDefault: Joi.boolean().label('principal'),
     }),
   ),
 

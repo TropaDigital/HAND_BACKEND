@@ -30,7 +30,16 @@ describe('GET /users/{userName} - Get user by email', () => {
       userName: 'joao',
       id: 1,
       name: 'João',
-      role: 'USER',
+      role: {
+        createdAt: expect.any(String),
+        deletedAt: null,
+        description: 'nível de acesso total',
+        id: 1,
+        name: 'admin',
+        updatedAt: expect.any(String),
+        updatedBy: null,
+      },
+      roleId: 1,
       status: 'ACTIVE',
     });
     expect(response.status).toBe(200);

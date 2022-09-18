@@ -10,7 +10,7 @@ import { populateDatabase } from './helpers';
 
 describe('GET /associateds/{id} - Get associated by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 'Any User',
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

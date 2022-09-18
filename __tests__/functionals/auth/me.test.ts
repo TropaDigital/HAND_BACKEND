@@ -25,7 +25,16 @@ describe('POST /users/me - Get User Info', () => {
       email: 'joao@mail.com',
       id: expect.any(Number),
       name: 'João',
-      role: 'USER',
+      role: {
+        createdAt: expect.any(String),
+        deletedAt: null,
+        description: 'nível de acesso total',
+        id: 1,
+        name: 'admin',
+        updatedAt: expect.any(String),
+        updatedBy: null,
+      },
+      roleId: 1,
       status: 'ACTIVE',
       userName: 'joao',
     });

@@ -35,7 +35,11 @@ export const makeInvalidParamsResponse = (
   validationErrors: IValidationErrors[],
 ): IFormatedError => {
   return ErrorMiddleware.formatError(
-    new MissingInvalidParamsError(undefined, undefined, validationErrors),
+    new MissingInvalidParamsError(
+      undefined,
+      ErrorCodes.MISSING_OR_INVALID_PARAMETERS,
+      validationErrors,
+    ),
   );
 };
 

@@ -1,4 +1,7 @@
-import { NotFoundError } from '../../../shared/errors';
+import {
+  MissingInvalidParamsError,
+  NotFoundError,
+} from '../../../shared/errors';
 import { makeAssociatedRepositoryStub } from '../../associated/__tests__/helpers/test-helper';
 import { makeLoanSimulationServiceStub } from '../../loanSimulation/__tests__/helpers/test-helper';
 import { BenefitService } from '../service';
@@ -145,7 +148,9 @@ describe(BenefitService.name, () => {
 
       const promise = sut.create(fakeBenefit);
 
-      await expect(promise).rejects.toThrow(new Error('any_create_error'));
+      await expect(promise).rejects.toThrow(
+        new MissingInvalidParamsError('any_create_error'),
+      );
     });
   });
 

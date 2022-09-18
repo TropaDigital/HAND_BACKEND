@@ -10,7 +10,7 @@ import { populateDatabase } from './helpers';
 
 describe('DELETE /associateds/{id} - Delete associated by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 'Any User',
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

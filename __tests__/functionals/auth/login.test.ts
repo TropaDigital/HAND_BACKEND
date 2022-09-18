@@ -7,7 +7,7 @@ describe('GET /auth/token - Authenticate User', () => {
   });
 
   afterAll(async () => {
-    await global.prismaClient.user.deleteMany();
+    await global.prismaClient?.user.deleteMany();
   });
 
   it('Should return 200 when login and password is correct', async () => {
@@ -20,7 +20,16 @@ describe('GET /auth/token - Authenticate User', () => {
         user: {
           id: 1,
           name: 'João',
-          role: 'USER',
+          role: {
+            createdAt: expect.any(String),
+            deletedAt: null,
+            description: 'nível de acesso total',
+            id: 1,
+            name: 'admin',
+            updatedAt: expect.any(String),
+            updatedBy: null,
+          },
+          roleId: 1,
           status: 'ACTIVE',
           userName: 'joao',
           email: 'joao@mail.com',

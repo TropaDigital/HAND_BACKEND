@@ -1,17 +1,19 @@
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
 import { makeInternalErrorResponse } from '../helpers';
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { makeFakeBenefit, populateDatabase } from './helpers';
 
-describe.skip('GET /benefits - Get all benefits', () => {
+describe('GET /benefits - Get all benefits', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
   beforeAll(async () => {
     await populateUsersDatabase();
+    await populateAssociatedDatabase();
     await global.prismaClient.benefit.deleteMany();
     await populateDatabase();
   });
@@ -30,24 +32,44 @@ describe.skip('GET /benefits - Get all benefits', () => {
       totalPages: 1,
       totalResults: 3,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
             associatedId: 1,
+            id: 1,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
-        expect.objectContaining({
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
+        {
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
-        expect.objectContaining({
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
+        {
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 3,
+            id: 3,
+            affiliationId: 3,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -64,18 +86,32 @@ describe.skip('GET /benefits - Get all benefits', () => {
       totalPages: 2,
       totalResults: 3,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
             associatedId: 1,
+            id: 1,
+            affiliationId: 1,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
-        expect.objectContaining({
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
+        {
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -84,7 +120,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
   it('Should return 200 and paginated associates when filter params is provided in query params', async () => {
     const response = await global.testRequest
       .get('/benefits')
-      .query({ page: 1, resultsPerPage: 2, associated: 'Pedro' })
+      .query({ page: 1, resultsPerPage: 2, associated: { name: 'Pedro' } })
       .set('x-access-token', token);
 
     expect(response.body.data).toEqual({
@@ -92,12 +128,19 @@ describe.skip('GET /benefits - Get all benefits', () => {
       totalPages: 1,
       totalResults: 1,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -106,7 +149,7 @@ describe.skip('GET /benefits - Get all benefits', () => {
   it('Should return 200 and paginated associates when filter params with partial value', async () => {
     const response = await global.testRequest
       .get('/benefits')
-      .query({ page: 1, resultsPerPage: 2, associated: 'Ped' })
+      .query({ page: 1, resultsPerPage: 2, associated: { name: 'Ped' } })
       .set('x-access-token', token);
 
     expect(response.body.data).toEqual({
@@ -114,12 +157,19 @@ describe.skip('GET /benefits - Get all benefits', () => {
       totalPages: 1,
       totalResults: 1,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
-            associatedId: 1,
+            associatedId: 2,
+            id: 2,
+            affiliationId: 2,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -136,12 +186,19 @@ describe.skip('GET /benefits - Get all benefits', () => {
       totalPages: 2,
       totalResults: 3,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
-            associatedId: 1,
+            id: 3,
+            associatedId: 3,
+            affiliationId: 3,
           }),
-          initialDate: '2022-10-10T00:00:00.000Z',
-        }),
+          updatedAt: expect.any(String),
+          birthDate: expect.any(String),
+          createdAt: expect.any(String),
+          emissionDate: expect.any(String),
+          initialDate: expect.any(String),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);

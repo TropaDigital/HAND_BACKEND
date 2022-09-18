@@ -40,7 +40,7 @@ describe(AuthController.name, () => {
       const httpRequest = makeFakeApiHttpRequest({
         params: { id: 777 },
         user: {
-          sub: 'any_user',
+          sub: 'User',
           role: 'USER',
         },
       });
@@ -53,7 +53,8 @@ describe(AuthController.name, () => {
           userName: 'any_user',
           id: 0,
           name: 'any_name',
-          role: 'USER',
+          role: null,
+          roleId: 1,
           status: 'ACTIVE',
         }),
       );
@@ -65,7 +66,7 @@ describe(AuthController.name, () => {
       const httpRequest = makeFakeApiHttpRequest({
         params: { id: 777 },
         user: {
-          sub: 'any_user',
+          sub: 'User',
           role: 'USER',
         },
       });

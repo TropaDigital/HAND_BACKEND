@@ -1,5 +1,6 @@
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
@@ -8,14 +9,15 @@ import {
 import { populateDatabase as populateUsersDatabase } from '../users/helpers';
 import { populateDatabase } from './helpers';
 
-describe.skip('DELETE /benefits/{id} - Delete benefit by id', () => {
+describe('DELETE /benefits/{id} - Delete benefit by id', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 
   beforeAll(async () => {
     await populateUsersDatabase();
+    await populateAssociatedDatabase();
     await global.prismaClient.benefit.deleteMany();
     await populateDatabase();
   });

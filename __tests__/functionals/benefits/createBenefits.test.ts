@@ -1,13 +1,17 @@
+import { BenefitType } from '@prisma/client';
+
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
+import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
+import { populateDatabase as populateConsultantDatabase } from '../consultants/helpers';
 import {
   makeInternalErrorResponse,
   makeInvalidParamsResponse,
 } from '../helpers';
 import { populateDatabase } from '../users/helpers';
-import { makeFakeCreateBenefitParams } from './helpers';
+import { makeFakeBenefit, makeFakeCreateBenefitParams } from './helpers';
 
-describe.skip('POST /benefits - Create new benefit', () => {
+describe('POST /benefits - Create new benefit', () => {
   const token = new AuthenticationService().generateToken({
     sub: 'User',
     role: 'VALID_ROLE',
@@ -15,27 +19,39 @@ describe.skip('POST /benefits - Create new benefit', () => {
 
   beforeAll(async () => {
     await global.prismaClient.benefit.deleteMany();
+    await populateConsultantDatabase();
+    await populateAssociatedDatabase();
     await populateDatabase();
   });
 
   afterAll(async () => {
-    await global.prismaClient.benefit.deleteMany();
+    await global.prismaClient?.benefit.deleteMany();
   });
 
   it('Should return 201 with created benefit', async () => {
-    const params = makeFakeCreateBenefitParams();
+    const params = await makeFakeCreateBenefitParams();
 
     const response = await global.testRequest
       .post(`/benefits`)
       .set('x-access-token', token)
       .send(params);
 
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        ...params,
-        initialDate: '2022-10-10T00:00:00.000Z',
+    expect(response.body.data).toEqual({
+      ...makeFakeBenefit({
+        id: expect.any(Number),
+        affiliationId: 1,
+        consultantId: 1,
+        name: 'João',
+        lastName: 'Any name',
+        type: 'N',
+        contractType: BenefitType.D,
+        birthDate: expect.any(String),
+        createdAt: expect.any(String),
+        emissionDate: expect.any(String),
+        initialDate: expect.any(String),
+        updatedAt: expect.any(String),
       }),
-    );
+    });
     expect(response.status).toBe(201);
   });
 
@@ -52,54 +68,49 @@ describe.skip('POST /benefits - Create new benefit', () => {
       .send(params);
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'associated',
-        friendlyFieldName: 'associated',
-        message: '"associated" is required',
+        fieldName: 'affiliationId',
+        friendlyFieldName: 'affiliationId',
+        message: '"affiliationId" is required',
       },
       {
-        fieldName: 'association',
-        friendlyFieldName: 'association',
-        message: '"association" is required',
+        fieldName: 'addressId',
+        friendlyFieldName: 'addressId',
+        message: '"addressId" is required',
       },
       {
-        fieldName: 'bank',
-        friendlyFieldName: 'bank',
-        message: '"bank" is required',
+        fieldName: 'bankAccountId',
+        friendlyFieldName: 'bankAccountId',
+        message: '"bankAccountId" is required',
       },
       {
-        fieldName: 'publicAgency',
-        friendlyFieldName: 'publicAgency',
-        message: '"publicAgency" is required',
+        fieldName: 'employmentRelationshipId',
+        friendlyFieldName: 'employmentRelationshipId',
+        message: '"employmentRelationshipId" is required',
       },
       {
-        fieldName: 'contractModel',
-        friendlyFieldName: 'contractModel',
-        message: '"contractModel" is required',
+        fieldName: 'associatedId',
+        friendlyFieldName: 'associatedId',
+        message: '"associatedId" is required',
       },
       {
-        fieldName: 'installmentNumber',
-        friendlyFieldName: 'installmentNumber',
-        message: '"installmentNumber" is required',
+        fieldName: 'numberOfInstallments',
+        friendlyFieldName: 'numberOfInstallments',
+        message: '"numberOfInstallments" is required',
       },
       {
-        fieldName: 'initialDate',
-        friendlyFieldName: 'initialDate',
-        message: '"initialDate" is required',
+        fieldName: 'requestedValue',
+        friendlyFieldName: 'requestedValue',
+        message: '"requestedValue" is required',
       },
       {
-        fieldName: 'financialAssistanceValue',
-        friendlyFieldName: 'financialAssistanceValue',
-        message: '"financialAssistanceValue" is required',
+        fieldName: 'salary',
+        friendlyFieldName: 'salary',
+        message: '"salary" is required',
       },
       {
-        fieldName: 'installmentValue',
-        friendlyFieldName: 'installmentValue',
-        message: '"installmentValue" is required',
-      },
-      {
-        fieldName: 'consultant',
-        friendlyFieldName: 'consultant',
-        message: '"consultant" is required',
+        fieldName: 'monthOfPayment',
+        friendlyFieldName: 'monthOfPayment',
+        message: '"monthOfPayment" is required',
       },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
@@ -107,7 +118,7 @@ describe.skip('POST /benefits - Create new benefit', () => {
   });
 
   it('Should return 500 when the service throws an exception error', async () => {
-    const params = makeFakeCreateBenefitParams();
+    const params = await makeFakeCreateBenefitParams();
     jest
       .spyOn(BenefitService.prototype, 'create')
       .mockRejectedValueOnce(new Error('create unexpected error'));

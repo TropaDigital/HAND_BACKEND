@@ -9,7 +9,7 @@ import { makeFakeCreateConsultantParams } from './helpers';
 
 describe('POST /consultants - Create new consultant', () => {
   const token = new AuthenticationService().generateToken({
-    sub: 1,
+    sub: 'User',
     role: 'VALID_ROLE',
   });
 

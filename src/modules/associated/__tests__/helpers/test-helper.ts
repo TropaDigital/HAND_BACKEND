@@ -85,6 +85,15 @@ export const makeFakeCreateAssociatedInput = (
 export const makeFakeUpdateAssociatedInput = (
   payload?: Partial<IUpdateAssociatedInput>,
 ): jest.Mocked<IUpdateAssociatedInput> => ({
+  affiliations: [
+    {
+      createdAt: new Date('2022-04-15T00:00:00.000Z'),
+      deletedAt: null,
+      id: 1,
+      name: 'USER',
+      updatedAt: new Date('2022-04-15T00:00:00.000Z'),
+    },
+  ],
   addresses: [
     {
       addressType: 'any_type',
@@ -189,7 +198,7 @@ export const makeFakeAssociated = (
       district: 'any_district',
       city: 'any_city',
       state: 'any_state',
-      associatedId: 0,
+      associatedId: 777,
       isDefault: true,
     },
   ],
@@ -204,7 +213,7 @@ export const makeFakeAssociated = (
       contractType: 'contract_type',
       publicAgency: 'any_agency',
       finalDate: new Date(),
-      associatedId: 0,
+      associatedId: 777,
       isDefault: true,
     },
   ],
@@ -231,8 +240,8 @@ export const makeFakeAssociated = (
       pixType: 'any_type',
       accountNumber: 'any_account',
       accountType: 'any_type',
-      id: 0,
-      associatedId: 0,
+      id: 1,
+      associatedId: 1,
       isDefault: true,
     },
   ],

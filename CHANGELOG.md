@@ -1,3 +1,24 @@
+## [1.15.0](https://github.com/haandsolutions/haand-bib/compare/v1.14.4...v1.15.0) (2022-09-18)
+
+
+### :sparkles: New Features
+
+* update test functional ([5040fa2](https://github.com/haandsolutions/haand-bib/commit/5040fa231e101b9e215fc16f4e6c4d08f933e224))
+
+
+### :zap: Refactor
+
+* update pagination params ([bdc211e](https://github.com/haandsolutions/haand-bib/commit/bdc211eea4a7008f8500b26852b8dd407a9a99df))
+* update unit tests ([7353ab9](https://github.com/haandsolutions/haand-bib/commit/7353ab9c5b749460a9b8743f9c935bddc26c38fb))
+
+
+### :white_check_mark: Tests
+
+* update benefit tests ([7316d18](https://github.com/haandsolutions/haand-bib/commit/7316d18e52748ac00304efb9d6bbccf978d5fb49))
+* update functional tests ([a70f2c6](https://github.com/haandsolutions/haand-bib/commit/a70f2c6596ab650b0a9a84b9b93b7790af23e121))
+* update get all benefits tests ([687bcc8](https://github.com/haandsolutions/haand-bib/commit/687bcc818f59cc030168031c1d58b02677f7cc2c))
+* update unit tests ([f05dbb0](https://github.com/haandsolutions/haand-bib/commit/f05dbb0e63c72cf95dab45aafafc0b17e4fbf213))
+
 ### [1.14.4](https://github.com/haandsolutions/haand-bib/compare/v1.14.3...v1.14.4) (2022-09-09)
 
 

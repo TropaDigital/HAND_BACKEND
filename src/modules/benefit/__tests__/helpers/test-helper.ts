@@ -15,7 +15,7 @@ export const makeFakeCreateBenefitInput = (
   payload?: Partial<ICreateBenefitParams>,
 ): jest.Mocked<ICreateBenefitParams> => ({
   type: BenefitType.D,
-  affiliation: 'any affiliation',
+  affiliationId: 1,
   associatedId: 2,
   bankAccountId: 1,
   employmentRelationshipId: 2,
@@ -35,7 +35,7 @@ export const makeFakeUpdateBenefitInput = (
 ): jest.Mocked<Partial<Benefit & ICreateBenefitParams>> => ({
   id: 777,
   type: BenefitType.D,
-  affiliation: 'any affiliation',
+  affiliationId: 1,
   associatedId: 1,
   addressId: 2,
   ...payload,

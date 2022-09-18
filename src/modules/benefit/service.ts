@@ -76,7 +76,7 @@ export class BenefitService implements IBenefitService {
       requestedValue,
       salary,
       administrationFeeValue,
-      affiliation,
+      affiliationId,
     } = payload;
 
     const {
@@ -161,7 +161,7 @@ export class BenefitService implements IBenefitService {
     const result = await this.benefitRepository.create({
       affiliation: {
         connect: {
-          name: affiliation,
+          id: affiliationId,
         },
       },
       accountNumber: bankAccount.accountNumber,
@@ -226,8 +226,10 @@ export class BenefitService implements IBenefitService {
       },
       ...(consultantId
         ? {
-            connect: {
-              id: consultantId,
+            consultant: {
+              connect: {
+                id: consultantId,
+              },
             },
           }
         : {}),

@@ -1,3 +1,5 @@
+import { BenefitType } from '@prisma/client';
+
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
 import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
@@ -7,7 +9,7 @@ import {
   makeInvalidParamsResponse,
 } from '../helpers';
 import { populateDatabase } from '../users/helpers';
-import { makeFakeCreateBenefitParams } from './helpers';
+import { makeFakeBenefit, makeFakeCreateBenefitParams } from './helpers';
 
 describe('POST /benefits - Create new benefit', () => {
   const token = new AuthenticationService().generateToken({
@@ -26,7 +28,7 @@ describe('POST /benefits - Create new benefit', () => {
     await global.prismaClient?.benefit.deleteMany();
   });
 
-  it.skip('Should return 201 with created benefit', async () => {
+  it('Should return 201 with created benefit', async () => {
     const params = await makeFakeCreateBenefitParams();
 
     const response = await global.testRequest
@@ -34,13 +36,22 @@ describe('POST /benefits - Create new benefit', () => {
       .set('x-access-token', token)
       .send(params);
 
-    expect(response.body).toBe('');
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        ...params,
+    expect(response.body.data).toEqual({
+      ...makeFakeBenefit({
+        id: expect.any(Number),
+        affiliationId: 1,
+        consultantId: 1,
+        name: 'João',
+        lastName: 'Any name',
+        type: 'N',
+        contractType: BenefitType.D,
+        birthDate: expect.any(String),
+        createdAt: expect.any(String),
+        emissionDate: expect.any(String),
         initialDate: expect.any(String),
+        updatedAt: expect.any(String),
       }),
-    );
+    });
     expect(response.status).toBe(201);
   });
 
@@ -57,9 +68,9 @@ describe('POST /benefits - Create new benefit', () => {
       .send(params);
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
-        fieldName: 'affiliation',
-        friendlyFieldName: 'affiliation',
-        message: '"affiliation" is required',
+        fieldName: 'affiliationId',
+        friendlyFieldName: 'affiliationId',
+        message: '"affiliationId" is required',
       },
       {
         fieldName: 'addressId',

@@ -32,17 +32,15 @@ describe('GET /benefits/{id} - Get benefit by id', () => {
     const response = await global.testRequest
       .get(`/benefits/${id}`)
       .set('x-access-token', token);
-    expect(response.body.data).toEqual(
-      expect.objectContaining({
-        ...makeFakeBenefit({ id: 1, associatedId: 1 }),
-        birthDate: expect.any(String),
-        createdAt: expect.any(String),
-        emissionDate: expect.any(String),
-        finalDate: expect.any(String),
-        initialDate: expect.any(String),
-        updatedAt: expect.any(String),
-      }),
-    );
+    expect(response.body.data).toEqual({
+      ...makeFakeBenefit({ id: 1, associatedId: 1 }),
+      birthDate: expect.any(String),
+      createdAt: expect.any(String),
+      emissionDate: expect.any(String),
+      finalDate: null,
+      initialDate: expect.any(String),
+      updatedAt: expect.any(String),
+    });
     expect(response.status).toBe(200);
   });
 

@@ -11,7 +11,7 @@ export const GetBenefitById = Joi.object<{ id: number }>({
 
 export const CreateBenefit = Joi.object<ICreateBenefitParams>({
   type: Joi.string().valid(...Object.keys(BenefitType)),
-  affiliation: Joi.string().required(),
+  affiliationId: Joi.number().required(),
   addressId: Joi.number().min(1).required(),
   bankAccountId: Joi.number().min(1).required(),
   employmentRelationshipId: Joi.number().min(1).required(),
@@ -35,12 +35,13 @@ export const CreateBenefit = Joi.object<ICreateBenefitParams>({
 export const UpdateBenefitById = Joi.object<
   Prisma.BenefitUpdateInput & {
     id: number;
+    affiliationId: number;
     associatedId: number;
     consultantId: number;
   }
 >({
   type: Joi.string().valid(...Object.keys(BenefitType)),
-  affiliation: Joi.string().required(),
+  affiliationId: Joi.number().required(),
   associatedId: Joi.number().min(1).required(),
   consultantId: Joi.number().min(1),
   id: Joi.number().min(1).required(),

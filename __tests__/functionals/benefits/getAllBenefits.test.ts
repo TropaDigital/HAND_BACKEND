@@ -32,18 +32,19 @@ describe('GET /benefits - Get all benefits', () => {
       totalPages: 1,
       totalResults: 3,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
             associatedId: 1,
+            id: 1,
           }),
           updatedAt: expect.any(String),
           birthDate: expect.any(String),
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
-        expect.objectContaining({
+          finalDate: null,
+        },
+        {
           ...makeFakeBenefit({
             associatedId: 2,
             id: 2,
@@ -54,9 +55,9 @@ describe('GET /benefits - Get all benefits', () => {
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
-        expect.objectContaining({
+          finalDate: null,
+        },
+        {
           ...makeFakeBenefit({
             associatedId: 3,
             id: 3,
@@ -67,8 +68,8 @@ describe('GET /benefits - Get all benefits', () => {
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -85,7 +86,7 @@ describe('GET /benefits - Get all benefits', () => {
       totalPages: 2,
       totalResults: 3,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
             associatedId: 1,
             id: 1,
@@ -96,9 +97,9 @@ describe('GET /benefits - Get all benefits', () => {
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
-        expect.objectContaining({
+          finalDate: null,
+        },
+        {
           ...makeFakeBenefit({
             associatedId: 2,
             id: 2,
@@ -109,8 +110,8 @@ describe('GET /benefits - Get all benefits', () => {
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -127,7 +128,7 @@ describe('GET /benefits - Get all benefits', () => {
       totalPages: 1,
       totalResults: 1,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
             associatedId: 2,
             id: 2,
@@ -138,8 +139,8 @@ describe('GET /benefits - Get all benefits', () => {
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -156,7 +157,7 @@ describe('GET /benefits - Get all benefits', () => {
       totalPages: 1,
       totalResults: 1,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
             associatedId: 2,
             id: 2,
@@ -167,8 +168,8 @@ describe('GET /benefits - Get all benefits', () => {
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);
@@ -185,7 +186,7 @@ describe('GET /benefits - Get all benefits', () => {
       totalPages: 2,
       totalResults: 3,
       data: [
-        expect.objectContaining({
+        {
           ...makeFakeBenefit({
             id: 3,
             associatedId: 3,
@@ -196,8 +197,8 @@ describe('GET /benefits - Get all benefits', () => {
           createdAt: expect.any(String),
           emissionDate: expect.any(String),
           initialDate: expect.any(String),
-          finalDate: expect.any(String),
-        }),
+          finalDate: null,
+        },
       ],
     });
     expect(response.status).toBe(200);

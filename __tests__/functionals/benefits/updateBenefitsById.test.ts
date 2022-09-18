@@ -26,7 +26,7 @@ describe('PATCH /benefits/{id} - Update benefit by id', () => {
     await global.prismaClient.benefit.deleteMany();
   });
 
-  it.skip('Should return 204 with updated', async () => {
+  it('Should return 204 with updated', async () => {
     const id = 1;
 
     const response = await global.testRequest
@@ -38,7 +38,7 @@ describe('PATCH /benefits/{id} - Update benefit by id', () => {
         taxId: '784541231',
         state: 'Ceará',
         createdBy: 'Pedro',
-        affiliation: 'any affiliation',
+        affiliationId: 1,
         associatedId: 1,
       });
 
@@ -57,7 +57,7 @@ describe('PATCH /benefits/{id} - Update benefit by id', () => {
         taxId: '784541231',
         state: 'Ceará',
         createdBy: 'Pedro',
-        affiliation: 'any affiliation',
+        affiliationId: 1,
         associatedId: 1,
       });
     expect(response.body).toEqual(
@@ -89,6 +89,11 @@ describe('PATCH /benefits/{id} - Update benefit by id', () => {
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
+        fieldName: 'affiliationId',
+        friendlyFieldName: 'affiliationId',
+        message: '"affiliationId" is required',
+      },
+      {
         fieldName: 'bank',
         friendlyFieldName: 'bank',
         message: '"bank" must be a string',
@@ -113,7 +118,7 @@ describe('PATCH /benefits/{id} - Update benefit by id', () => {
     expect(response.body).toEqual(invalidParamsResponse);
   });
 
-  it.skip('Should return 204 when receive just one param', async () => {
+  it('Should return 204 when receive just one param', async () => {
     const id = 1;
 
     const response = await global.testRequest
@@ -121,7 +126,7 @@ describe('PATCH /benefits/{id} - Update benefit by id', () => {
       .set('x-access-token', token)
       .send({
         salary: '2000',
-        affiliation: 'any affiliation',
+        affiliationId: 1,
         associatedId: 1,
       });
     expect(response.body).toEqual({});
@@ -139,7 +144,7 @@ describe('PATCH /benefits/{id} - Update benefit by id', () => {
       .set('x-access-token', token)
       .send({
         salary: '2000',
-        affiliation: 'any affiliation',
+        affiliationId: 1,
         associatedId: 1,
       });
     const { validationErrors, ...internalServerError } =

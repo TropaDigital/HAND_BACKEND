@@ -135,7 +135,7 @@ describe(AuthenticationService.name, () => {
 
       const result = await sut.decodeToken(token);
 
-      expect(result).toEqual({ role: 'any_value', sub: 'any_sub' });
+      expect(result).toEqual({ role: 'any_value', sub: 'User' });
     });
 
     it('Should throw when jwt throws', async () => {

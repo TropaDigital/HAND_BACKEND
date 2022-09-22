@@ -99,7 +99,7 @@ export default class {{pascalCase name}}Router implements IRouter {
 
   private updateById(): void {
     /**
-     * PATCH /{{lowerCase name}}s
+     * PATCH /{{lowerCase name}}s/{id}
      * @tag {{pascalCase name}}s
      * @summary update a {{lowerCase name}}.
      * @description return no content when successfully update the resource.
@@ -126,13 +126,11 @@ export default class {{pascalCase name}}Router implements IRouter {
 
   private deleteById(): void {
     /**
-     * DELETE /{{lowerCase name}}s
+     * DELETE /{{lowerCase name}}s/{id}
      * @tag {{pascalCase name}}s
-     * @summary create a {{lowerCase name}}.
+     * @summary delete a {{lowerCase name}}.
      * @description return no content when successfully delete the resource.
      * @pathParam {int32} id id of the {{lowerCase name}}
-     * @bodyContent {Update{{pascalCase name}}Payload} application/json
-     * @bodyRequired
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { {{pascalCase name}}BadRequestResponse} 400.application/json

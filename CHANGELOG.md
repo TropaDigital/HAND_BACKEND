@@ -1,3 +1,16 @@
+### [1.15.1](https://github.com/haandsolutions/haand-bib/compare/v1.15.0...v1.15.1) (2022-09-22)
+
+
+### :zap: Refactor
+
+* adjust the queries of associateds ([e99a31d](https://github.com/haandsolutions/haand-bib/commit/e99a31df74158c284407704125624990b87b095e))
+* adjust the return of benefits data ([3f12d7e](https://github.com/haandsolutions/haand-bib/commit/3f12d7e7534d8a48fa6ebea5dcf871388b7e6fa0))
+
+
+### :memo: Documentation
+
+* adjust the swagger docs of consultant module ([dfd492e](https://github.com/haandsolutions/haand-bib/commit/dfd492ef156d84a548fe4853dabc425c076c4559))
+
 ## [1.15.0](https://github.com/haandsolutions/haand-bib/compare/v1.14.4...v1.15.0) (2022-09-18)
 
 

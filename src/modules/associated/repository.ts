@@ -27,7 +27,7 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 >;
 
 export class AssociatedRepository implements IAssociatedRepository {
-  constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
+  constructor(private readonly prismaRepository: PrismaAssociatedRepository) { }
 
   public async getBankAccountsByAssociatedId(
     associatedId: number,
@@ -94,7 +94,12 @@ export class AssociatedRepository implements IAssociatedRepository {
             isDefault: 'desc',
           },
         },
-        benefits: true,
+        benefits: {
+          include: {
+            affiliation: true,
+            consultant: true,
+          },
+        },
         affiliations: true,
       },
     });
@@ -129,7 +134,12 @@ export class AssociatedRepository implements IAssociatedRepository {
             isDefault: 'desc',
           },
         },
-        benefits: true,
+        benefits: {
+          include: {
+            affiliation: true,
+            consultant: true,
+          },
+        },
         affiliations: true,
       },
     });

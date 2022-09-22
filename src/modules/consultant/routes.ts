@@ -11,7 +11,7 @@ export default class ConsultantRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IConsultantController) { }
+  private constructor(private readonly controller: IConsultantController) {}
 
   public static getInstance(
     controller: IConsultantController = createConsultantController(),

@@ -16,6 +16,7 @@ export const UpdateRoleById = Joi.object<
   id: Joi.number().required(),
   name: Joi.string(),
   description: Joi.string(),
+  updatedBy: Joi.string().required(),
 });
 
 export const DeleteRoleById = Joi.object<{ id: number }>({

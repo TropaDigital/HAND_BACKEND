@@ -11,7 +11,7 @@ export default class AuthRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IAuthController) {}
+  private constructor(private readonly controller: IAuthController) { }
 
   public static getInstance(
     controller: IAuthController = createAuthController(),
@@ -49,7 +49,7 @@ export default class AuthRouter implements IRouter {
   private auth(): void {
     /**
      * POST /auth/token
-     * @tag Login
+     * @tag Auth
      * @summary authenticate user by userName and password
      * @description return an object with the status of the resources.
      * @bodyContent {AuthenticatePayload} application/json
@@ -73,7 +73,7 @@ export default class AuthRouter implements IRouter {
   private generateAndSendLinkOfResetPassword(): void {
     /**
      * GET /auth/forgot-password
-     * @tag Login
+     * @tag Auth
      * @summary generate and send link to email to reset the password.
      * @description return an user object.
      * @queryParam {string} email - the email that belongs to the user
@@ -97,7 +97,7 @@ export default class AuthRouter implements IRouter {
   private resetPassword(): void {
     /**
      * PATCH /auth/reset-password
-     * @tag Login
+     * @tag Auth
      * @summary reset the password.
      * @description reset the password.
      * @queryParam {string} token - the token that will be used to validate the link of reset password

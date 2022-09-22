@@ -10,7 +10,7 @@ export class ConsultantController implements IConsultantController {
   constructor(
     private readonly consultantService: IConsultantService,
     private readonly validator: IValidator<typeof schemas>,
-  ) { }
+  ) {}
 
   public async getAll(): Promise<IApiHttpResponse<Consultant[]>> {
     const result = await this.consultantService.getAll();

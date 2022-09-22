@@ -8,6 +8,7 @@ import {
   loanSimulationExamples,
   loanSimulationSchemas,
 } from './loanSimulation';
+import { roleExamples, roleSchemas } from './role';
 import { securitySchemas, sharedSchemas } from './shared';
 
 export default {
@@ -27,6 +28,11 @@ export default {
   ],
   tags: [
     {
+      name: 'Auth',
+      description:
+        'Auth endpoints that contains all the operations of the auth',
+    },
+    {
       name: 'Healthcheck',
       description:
         'Healthcheck endpoints that contains all the operations of the healthcheck',
@@ -41,6 +47,11 @@ export default {
       description:
         'Loan Simulation endpoints that contains all the operations of the loan simulations',
     },
+    {
+      name: 'Roles',
+      description:
+        'Roles endpoints that contains all the operations of the roles',
+    },
   ],
   components: {
     securitySchemes: {
@@ -52,6 +63,7 @@ export default {
       ...consultantExamples,
       ...authExamples,
       ...associatedExamples,
+      ...roleExamples,
     },
     schemas: {
       ...sharedSchemas,
@@ -60,6 +72,7 @@ export default {
       ...consultantSchemas,
       ...authSchemas,
       ...associatedSchemas,
+      ...roleSchemas,
     },
   },
 } as OpenApiObject;

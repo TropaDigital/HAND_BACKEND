@@ -10,7 +10,7 @@ export class RoleController implements IRoleController {
   constructor(
     private readonly roleService: IRoleService,
     private readonly validator: IValidator<typeof schemas>,
-  ) {}
+  ) { }
 
   public async getAll(): Promise<IApiHttpResponse<Role[]>> {
     const result = await this.roleService.getAll();
@@ -50,6 +50,7 @@ export class RoleController implements IRoleController {
     >('UpdateRoleById', {
       ...httpRequest.body,
       ...httpRequest.params,
+      updatedBy: httpRequest.user?.sub,
     });
     const result = await this.roleService.updateById(id, role);
 

@@ -15,7 +15,7 @@ export type PrismaBenefitRepository = Prisma.BenefitDelegate<
 >;
 
 export class BenefitRepository implements IBenefitRepository {
-  constructor(private readonly prismaRepository: PrismaBenefitRepository) { }
+  constructor(private readonly prismaRepository: PrismaBenefitRepository) {}
 
   public async findAll(
     payload?: IFindAllParams & Prisma.BenefitWhereInput,

@@ -10,7 +10,7 @@ export class ConsultantController implements IConsultantController {
   constructor(
     private readonly consultantService: IConsultantService,
     private readonly validator: IValidator<typeof schemas>,
-  ) {}
+  ) { }
 
   public async getAll(): Promise<IApiHttpResponse<Consultant[]>> {
     const result = await this.consultantService.getAll();
@@ -36,7 +36,10 @@ export class ConsultantController implements IConsultantController {
     const consultant =
       this.validator.validateSchema<Prisma.ConsultantCreateInput>(
         'CreateConsultant',
-        httpRequest.body,
+        {
+          ...httpRequest.body,
+          createdBy: httpRequest.user?.sub,
+        },
       );
     const result = await this.consultantService.create(consultant);
 
@@ -51,6 +54,7 @@ export class ConsultantController implements IConsultantController {
     >('UpdateConsultantById', {
       ...httpRequest.body,
       ...httpRequest.params,
+      updatedBy: httpRequest.user?.sub,
     });
     await this.consultantService.updateById(id, consultant);
 

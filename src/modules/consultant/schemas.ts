@@ -23,7 +23,7 @@ export const UpdateConsultantById = Joi.object<
   city: Joi.string(),
   state: Joi.string(),
   commission: Joi.number(),
-  createdBy: Joi.string(),
+  updatedBy: Joi.string().required(),
 });
 
 export const DeleteConsultantById = Joi.object<{ id: number }>({

@@ -11,7 +11,7 @@ export default class ConsultantRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IConsultantController) {}
+  private constructor(private readonly controller: IConsultantController) { }
 
   public static getInstance(
     controller: IConsultantController = createConsultantController(),
@@ -27,11 +27,12 @@ export default class ConsultantRouter implements IRouter {
     /**
      * GET /consultants
      * @tag Consultants
+     * @security apiKey
      * @summary get all the consultants.
      * @description return a list of consultants.
      * @response 200 - an array with the all the consultants.
-     * @responseContent {ConsultantResponse[]} 200.application/json
-     * @responseExample {ConsultantResponse[]} 200.application/json.ConsultantResponse
+     * @responseContent {GetAllConsultantsResponse} 200.application/json
+     * @responseExample {GetAllConsultantsResponse} 200.application/json.GetAllConsultantsResponse
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
@@ -40,6 +41,7 @@ export default class ConsultantRouter implements IRouter {
     this.router
       .route('/consultants')
       .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IConsultantController>(
           this.controller,
           'getAll',
@@ -51,12 +53,13 @@ export default class ConsultantRouter implements IRouter {
     /**
      * GET /consultants/{id}
      * @tag Consultants
+     * @security apiKey
      * @summary get a consultant by id.
      * @description return a consultant object.
      * @pathParam {int32} id id of the consultant
      * @response 200 - an object of consultant.
-     * @responseContent {ConsultantResponse} 200.application/json
-     * @responseExample {ConsultantResponse} 200.application/json.ConsultantResponse
+     * @responseContent {GetConsultantByIdResponse} 200.application/json
+     * @responseExample {GetConsultantByIdResponse} 200.application/json.GetConsultantByIdResponse
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
@@ -81,6 +84,7 @@ export default class ConsultantRouter implements IRouter {
     /**
      * POST /consultants
      * @tag Consultants
+     * @security apiKey
      * @summary create a new consultant.
      * @description return the created consultant object.
      * @bodyContent {CreateConsultantPayload} application/json
@@ -90,7 +94,7 @@ export default class ConsultantRouter implements IRouter {
      * @responseExample {CreateConsultantResponse} 201.application/json.CreateConsultantResponse
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent {ConsultantBadRequestResponse} 400.application/json
-     * @responseExample {ConsultantBadRequestResponse} 400.application/json.ConsultantBadRequestResponse
+     * @responseExample {CreateConsultantBadRequestResponse} 400.application/json.CreateConsultantBadRequestResponse
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
@@ -109,8 +113,9 @@ export default class ConsultantRouter implements IRouter {
 
   private updateById(): void {
     /**
-     * PATCH /consultants
+     * PATCH /consultants/{id}
      * @tag Consultants
+     * @security apiKey
      * @summary update a consultant.
      * @description return no content when successfully update the resource.
      * @pathParam {int32} id id of the consultant
@@ -139,13 +144,12 @@ export default class ConsultantRouter implements IRouter {
 
   private deleteById(): void {
     /**
-     * DELETE /consultants
+     * DELETE /consultants/{id}
      * @tag Consultants
+     * @security apiKey
      * @summary delete a consultant.
      * @description return no content when successfully delete the resource.
      * @pathParam {int32} id id of the consultant
-     * @bodyContent {ConsultantPayload} application/json
-     * @bodyRequired
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent {BadRequestResponse} 400.application/json

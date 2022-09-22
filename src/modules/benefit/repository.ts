@@ -15,14 +15,21 @@ export type PrismaBenefitRepository = Prisma.BenefitDelegate<
 >;
 
 export class BenefitRepository implements IBenefitRepository {
-  constructor(private readonly prismaRepository: PrismaBenefitRepository) {}
+  constructor(private readonly prismaRepository: PrismaBenefitRepository) { }
 
   public async findAll(
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<Benefit[]>> {
     const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
 
-    const result = await this.prismaRepository.findMany(params);
+    const result = await this.prismaRepository.findMany({
+      ...params,
+      include: {
+        affiliation: true,
+        associated: true,
+        consultant: true,
+      },
+    });
     const totalResults =
       JSON.stringify(params?.where) !== '{}'
         ? result.length
@@ -38,6 +45,11 @@ export class BenefitRepository implements IBenefitRepository {
   public async findById(id: number): Promise<Benefit | null> {
     const result = await this.prismaRepository.findFirst({
       where: { id },
+      include: {
+        affiliation: true,
+        associated: true,
+        consultant: true,
+      },
     });
 
     return result;

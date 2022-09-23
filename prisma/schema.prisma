@@ -95,11 +95,12 @@ model Associated {
 
   affiliations Affiliation[]
 
-  createdBy String    @map(name: "created_by") @db.VarChar(75)
-  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
+  createdBy   String        @map(name: "created_by") @db.VarChar(75)
+  updatedBy   String?       @map(name: "updated_by") @db.VarChar(75)
+  createdAt   DateTime      @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt   DateTime      @updatedAt @map(name: "updated_at")
+  deletedAt   DateTime?     @map(name: "deleted_at") @db.DateTime(0)
+  Installment Installment[]
 }
 
 model Affiliation {
@@ -199,6 +200,31 @@ model Benefit {
 
   affiliation   Affiliation @relation(fields: [affiliationId], references: [id])
   affiliationId Int
+
+  createdBy String    @map(name: "created_by") @db.VarChar(75)
+  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
+  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
+}
+
+model Installment {
+  id Int @id @default(autoincrement())
+
+  reference                 String
+  installmentFactor         Int         @default(0) @map(name: "installment_factor") @db.UnsignedInt
+  consultantCommission      Int         @default(0) @map(name: "consultant_commission") @db.UnsignedInt
+  consultantCommissionValue Int         @default(0) @map(name: "consultant_commission_value") @db.UnsignedInt
+  cardFees                  Int         @default(0) @map(name: "card_fees") @db.UnsignedInt
+  telemedicineFees          Int         @default(0) @map(name: "telemedicine_fees") @db.UnsignedInt
+  bankProcessingFees        Int         @default(0) @map(name: "bank_processing_fees") @db.UnsignedInt
+  fees                      Int         @default(0) @map(name: "fees") @db.UnsignedInt
+  feesValue                 Int         @default(0) @map(name: "fees_value") @db.UnsignedInt
+  finalValue                Int         @default(0) @map(name: "final_value") @db.UnsignedInt
+  gratificationFeeValue     Int?        @map(name: "gratification_fee_value") @db.UnsignedInt
+  admnistrationFeeValue     Int?        @map(name: "administration_fee_value") @db.UnsignedInt
+  Associated                Associated? @relation(fields: [associatedId], references: [id])
+  associatedId              Int?
 
   createdBy String    @map(name: "created_by") @db.VarChar(75)
   updatedBy String?   @map(name: "updated_by") @db.VarChar(75)

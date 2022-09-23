@@ -226,11 +226,13 @@ model Installment {
   Associated                Associated? @relation(fields: [associatedId], references: [id])
   associatedId              Int?
 
-  createdBy String    @map(name: "created_by") @db.VarChar(75)
-  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
+  createdBy  String    @map(name: "created_by") @db.VarChar(75)
+  updatedBy  String?   @map(name: "updated_by") @db.VarChar(75)
+  disabledBy String?   @map(name: "disabled_by") @db.VarChar(75)
+  createdAt  DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt  DateTime  @updatedAt @map(name: "updated_at")
+  disabledAt DateTime? @map(name: "disabled_at") @db.DateTime(0)
+  deletedAt  DateTime? @map(name: "deleted_at") @db.DateTime(0)
 }
 
 model Role {

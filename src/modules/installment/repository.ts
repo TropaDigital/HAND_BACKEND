@@ -45,10 +45,12 @@ export class InstallmentRepository implements IInstallmentRepository {
     return result;
   }
 
-  public async disableById(id: number, user: string): Promise<void> {
-    await this.prismaRepository.update({
+  public async disableById(id: number, user: string): Promise<Installment> {
+    const result = await this.prismaRepository.update({
       where: { id },
       data: { disabledAt: new Date(), disabledBy: user },
     });
+
+    return result;
   }
 }

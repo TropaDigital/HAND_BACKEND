@@ -20,7 +20,14 @@ describe(BenefitRepository.name, () => {
 
       await sut.findAll();
 
-      expect(findManySpy).toBeCalledWith({ where: {} });
+      expect(findManySpy).toBeCalledWith({
+        where: {},
+        include: {
+          affiliation: true,
+          associated: true,
+          consultant: true,
+        },
+      });
     });
 
     it('should return prisma result', async () => {
@@ -70,7 +77,14 @@ describe(BenefitRepository.name, () => {
 
       await sut.findById(fakeId);
 
-      expect(findFirstSpy).toBeCalledWith({ where: { id: 777 } });
+      expect(findFirstSpy).toBeCalledWith({
+        where: { id: 777 },
+        include: {
+          affiliation: true,
+          associated: true,
+          consultant: true,
+        },
+      });
     });
 
     it('should return prisma result', async () => {

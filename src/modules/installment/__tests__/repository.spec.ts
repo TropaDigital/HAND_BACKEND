@@ -27,16 +27,17 @@ describe(InstallmentRepository.name, () => {
           consultantCommission: 2,
           createdBy: 'user',
           reference: 'abril/2022',
+          referenceDate: new Date('2022-10-10'),
         },
       });
     });
   });
 
-  describe(`When ${InstallmentRepository.prototype.findById} is called`, () => {
+  describe(`When ${InstallmentRepository.prototype.findByBenefitIdAndReferenceDate} is called`, () => {
     it('Should call prisma with right params', async () => {
       const { sut, prismaInstallmentRepository } = makeSut();
 
-      await sut.findById(1);
+      await sut.findByBenefitIdAndReferenceDate(1, new Date('2022-10-10'));
 
       expect(prismaInstallmentRepository.findFirst).toBeCalledWith({
         where: { disabledAt: null, disabledBy: null, id: 1 },
@@ -44,11 +45,11 @@ describe(InstallmentRepository.name, () => {
     });
   });
 
-  describe(`When ${InstallmentRepository.prototype.findById} is called`, () => {
+  describe(`When ${InstallmentRepository.prototype.findByBenefitIdAndReferenceDate} is called`, () => {
     it('Should call prisma with right params', async () => {
       const { sut, prismaInstallmentRepository } = makeSut();
 
-      await sut.findById(1);
+      await sut.findByBenefitIdAndReferenceDate(1, new Date('2022-10-10'));
 
       expect(prismaInstallmentRepository.findFirst).toBeCalledWith({
         where: { disabledAt: null, disabledBy: null, id: 1 },

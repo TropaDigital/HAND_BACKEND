@@ -28,6 +28,7 @@ describe(InstallmentRepository.name, () => {
         consultantCommission: 2,
         createdBy: 'user',
         reference: 'abril/2022',
+        referenceDate: new Date('2022-10-10'),
       });
     });
 
@@ -57,6 +58,7 @@ describe(InstallmentRepository.name, () => {
         createdBy: 'user',
         reference: 'abril/2022',
         user: 'user',
+        referenceDate: new Date('2022-10-10'),
       });
     });
 

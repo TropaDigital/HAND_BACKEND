@@ -35,7 +35,7 @@ export const makeInstallmentRepositoryStub =
   (): jest.Mocked<IInstallmentRepository> => ({
     create: jest.fn(),
     findAll: jest.fn(),
-    findById: jest.fn(),
+    findByBenefitIdAndReferenceDate: jest.fn(),
     softUpdate: jest.fn(),
   });
 
@@ -48,5 +48,6 @@ export const makeFakeCreateInstallmentParams = (
   bankProcessingFees: 10,
   cardFees: 10,
   consultantCommission: 2,
+  referenceDate: new Date('2022-10-10'),
   ...payload,
 });

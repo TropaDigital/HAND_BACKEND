@@ -2,14 +2,15 @@ import { BenefitRepository } from '../repository';
 import {
   makeFakeBenefit,
   makeFakeBenefitList,
-  makePrismaBenefitRepositoryStub,
+  makePrismaClient,
 } from './helpers/test-helper';
 
 const makeSut = () => {
-  const prismaRepository = makePrismaBenefitRepositoryStub();
-  const sut = new BenefitRepository(prismaRepository);
+  const { prismaClient, prismaBenefitRepository } = makePrismaClient();
 
-  return { sut, prismaRepository };
+  const sut = new BenefitRepository(prismaClient);
+
+  return { sut, prismaRepository: prismaBenefitRepository };
 };
 
 describe(BenefitRepository.name, () => {
@@ -92,7 +93,9 @@ describe(BenefitRepository.name, () => {
 
       const result = await sut.findById(fakeId);
 
-      expect(result).toEqual(makeFakeBenefit({}));
+      expect(result).toEqual({
+        ...makeFakeBenefit({}),
+      });
     });
 
     it('should throw when prisma throws', async () => {
@@ -116,7 +119,13 @@ describe(BenefitRepository.name, () => {
 
       await sut.create(fakeBenefit as any);
 
-      expect(createSpy).toBeCalledWith({ data: makeFakeBenefit({}) });
+      expect(createSpy).toBeCalledWith({
+        data: {
+          ...makeFakeBenefit({}),
+          BenefitHistory: { create: expect.anything() },
+        },
+        include: { BenefitHistory: true },
+      });
     });
 
     it('should return prisma result', async () => {

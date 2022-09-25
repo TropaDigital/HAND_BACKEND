@@ -29,9 +29,17 @@ export class InstallmentRepository implements IInstallmentRepository {
     return result;
   }
 
-  public async findById(id: number): Promise<Installment | null> {
+  public async findByBenefitIdAndReferenceDate(
+    benefitId: number,
+    referenceDate: Date,
+  ): Promise<Installment | null> {
     const result = await this.prismaRepository.findFirst({
-      where: { id, disabledAt: null, disabledBy: null },
+      where: {
+        benefitId,
+        referenceDate,
+        disabledAt: null,
+        disabledBy: null,
+      },
     });
 
     return result;

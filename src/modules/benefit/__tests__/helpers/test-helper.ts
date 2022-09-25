@@ -1,9 +1,10 @@
-import { Benefit, BenefitType } from '@prisma/client';
+import { Benefit, BenefitType, PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { MonthOfPayment } from '../../../../enums/MonthOfPayment';
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
+import { PrismaInstallmentRepository } from '../../../installment/repository';
 import {
   IBenefitRepository,
   IBenefitService,
@@ -101,6 +102,38 @@ export const makePrismaBenefitRepositoryStub =
     return result as jest.Mocked<PrismaBenefitRepository>;
   };
 
+export const makePrismaInstallmentRepositoryStub =
+  (): jest.Mocked<PrismaInstallmentRepository> => {
+    const result: jest.Mocked<Partial<PrismaInstallmentRepository>> = {
+      findMany: jest.fn().mockResolvedValue(makeFakeBenefitList()),
+      findFirst: jest.fn().mockResolvedValue(makeFakeBenefit({})),
+      create: jest.fn().mockResolvedValue(makeFakeBenefit({})),
+      update: jest.fn(),
+      delete: jest.fn(),
+      count: jest.fn().mockResolvedValue(11),
+    };
+    return result as jest.Mocked<PrismaInstallmentRepository>;
+  };
+
+export const makePrismaClient = (): {
+  prismaClient: jest.Mocked<PrismaClient>;
+  prismaBenefitRepository: jest.Mocked<PrismaBenefitRepository>;
+  prismaInstallmentRepository: jest.Mocked<PrismaInstallmentRepository>;
+} => {
+  const prismaBenefitRepository = makePrismaBenefitRepositoryStub();
+  const prismaInstallmentRepository = makePrismaInstallmentRepositoryStub();
+
+  const result: jest.Mocked<Partial<PrismaClient>> = {
+    benefit: prismaBenefitRepository,
+    installment: prismaInstallmentRepository,
+  };
+  return {
+    prismaClient: result as jest.Mocked<PrismaClient>,
+    prismaBenefitRepository,
+    prismaInstallmentRepository,
+  };
+};
+
 export const makeBenefitRepositoryStub =
   (): jest.Mocked<IBenefitRepository> => ({
     findAll: jest.fn().mockResolvedValue(makeFakeBenefitList()),
@@ -108,4 +141,5 @@ export const makeBenefitRepositoryStub =
     create: jest.fn().mockResolvedValue(makeFakeBenefit({})),
     updateById: jest.fn(),
     deleteById: jest.fn(),
+    countEditTimes: jest.fn(),
   });

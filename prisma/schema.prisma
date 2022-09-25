@@ -215,17 +215,18 @@ model Installment {
   benefitId Int?
 
   reference                 String
-  installmentFactor         Int    @default(0) @map(name: "installment_factor") @db.UnsignedInt
-  consultantCommission      Int    @default(0) @map(name: "consultant_commission") @db.UnsignedInt
-  consultantCommissionValue Int    @default(0) @map(name: "consultant_commission_value") @db.UnsignedInt
-  cardFees                  Int    @default(0) @map(name: "card_fees") @db.UnsignedInt
-  telemedicineFees          Int    @default(0) @map(name: "telemedicine_fees") @db.UnsignedInt
-  bankProcessingFees        Int    @default(0) @map(name: "bank_processing_fees") @db.UnsignedInt
-  fees                      Int    @default(0) @map(name: "fees") @db.UnsignedInt
-  feesValue                 Int    @default(0) @map(name: "fees_value") @db.UnsignedInt
-  finalValue                Int    @default(0) @map(name: "final_value") @db.UnsignedInt
-  gratificationFeeValue     Int?   @map(name: "gratification_fee_value") @db.UnsignedInt
-  admnistrationFeeValue     Int?   @map(name: "administration_fee_value") @db.UnsignedInt
+  referenceDate             DateTime @map("reference_date")
+  installmentFactor         Int      @default(0) @map(name: "installment_factor") @db.UnsignedInt
+  consultantCommission      Int      @default(0) @map(name: "consultant_commission") @db.UnsignedInt
+  consultantCommissionValue Int      @default(0) @map(name: "consultant_commission_value") @db.UnsignedInt
+  cardFees                  Int      @default(0) @map(name: "card_fees") @db.UnsignedInt
+  telemedicineFees          Int      @default(0) @map(name: "telemedicine_fees") @db.UnsignedInt
+  bankProcessingFees        Int      @default(0) @map(name: "bank_processing_fees") @db.UnsignedInt
+  fees                      Int      @default(0) @map(name: "fees") @db.UnsignedInt
+  feesValue                 Int      @default(0) @map(name: "fees_value") @db.UnsignedInt
+  finalValue                Int      @default(0) @map(name: "final_value") @db.UnsignedInt
+  gratificationFeeValue     Int?     @map(name: "gratification_fee_value") @db.UnsignedInt
+  admnistrationFeeValue     Int?     @map(name: "administration_fee_value") @db.UnsignedInt
 
   createdBy  String    @map(name: "created_by") @db.VarChar(75)
   updatedBy  String?   @map(name: "updated_by") @db.VarChar(75)

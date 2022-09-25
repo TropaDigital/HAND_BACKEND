@@ -29,6 +29,8 @@ export interface IBenefitRepository {
   ): Promise<IPaginatedAResult<Benefit[]>>;
 
   findById(id: number): Promise<Benefit | null>;
+
+  countEditTimes(id: number): Promise<number>;
 }
 
 export interface IBenefitController {
@@ -60,6 +62,8 @@ export interface IBenefitService {
   getById(id: number): Promise<Benefit | null>;
 
   create(payload: ICreateBenefitParams): Promise<Benefit>;
+
+  singlePostponementInstallment(id: number, reference: Date): Promise<void>;
 
   updateById(id: number, payload: Prisma.BenefitUpdateInput): Promise<void>;
 

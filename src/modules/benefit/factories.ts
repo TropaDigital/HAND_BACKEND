@@ -12,9 +12,7 @@ import { BenefitService } from './service';
 
 export const createBenefitController = (): IBenefitController => {
   const mySql = MySqlDBClient.getInstance();
-  const repository = new BenefitRepository(
-    mySql.getPrismaClientInstance().benefit,
-  );
+  const repository = new BenefitRepository(mySql.getPrismaClientInstance());
   const associatedRepository = new AssociatedRepository(
     mySql.getPrismaClientInstance().associated,
   );

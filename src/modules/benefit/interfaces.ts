@@ -65,3 +65,13 @@ export interface IBenefitService {
 
   deleteById(id: number): Promise<void>;
 }
+
+export interface IBenefitFiltersPayload {
+  associated?: string;
+  affiliation?: string;
+  publicAgency?: string;
+  contractModel?: string;
+  contractType?: string;
+  installmentNumber?: number;
+  consultant?: string;
+}

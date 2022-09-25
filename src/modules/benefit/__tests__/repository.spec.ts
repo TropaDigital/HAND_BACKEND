@@ -116,7 +116,13 @@ describe(BenefitRepository.name, () => {
 
       await sut.create(fakeBenefit as any);
 
-      expect(createSpy).toBeCalledWith({ data: makeFakeBenefit({}) });
+      expect(createSpy).toBeCalledWith({
+        data: {
+          ...makeFakeBenefit({}),
+          benefitHistory: { create: expect.anything() },
+        },
+        include: { benefitHistory: true },
+      });
     });
 
     it('should return prisma result', async () => {

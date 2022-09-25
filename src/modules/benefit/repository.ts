@@ -8,7 +8,7 @@ import {
   getFindManyParams,
   parsePaginatedResult,
 } from '../../shared/pagination/service';
-import { IBenefitRepository } from './interfaces';
+import { IBenefitFiltersPayload, IBenefitRepository } from './interfaces';
 
 export type PrismaBenefitRepository = Prisma.BenefitDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
@@ -17,10 +17,43 @@ export type PrismaBenefitRepository = Prisma.BenefitDelegate<
 export class BenefitRepository implements IBenefitRepository {
   constructor(private readonly prismaRepository: PrismaBenefitRepository) {}
 
+  private formatFindAllBenefitsFilters({
+    affiliation,
+    associated,
+    consultant,
+    contractModel,
+    contractType,
+    installmentNumber,
+    publicAgency,
+  }: IBenefitFiltersPayload): Prisma.BenefitWhereInput {
+    return {
+      ...(associated ? { associated: { name: { contains: associated } } } : {}),
+      ...(affiliation
+        ? { affiliation: { name: { contains: affiliation } } }
+        : {}),
+      ...(consultant ? { consultant: { name: { contains: consultant } } } : {}),
+      ...(contractModel ? { contractModel: { equals: contractModel } } : {}),
+      ...(contractType ? { contractType: { equals: contractType } } : {}),
+      ...(installmentNumber
+        ? { installmentNumber: { equals: Number(installmentNumber) } }
+        : {}),
+      ...(publicAgency ? { publicAgency: { contains: publicAgency } } : {}),
+    };
+  }
+
   public async findAll(
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<Benefit[]>> {
-    const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
+    const { page, resultsPerPage, ...filters } = payload || {};
+    const params = {
+      ...getFindManyParams<Prisma.BenefitWhereInput>({
+        page,
+        resultsPerPage,
+      }),
+      where: {
+        ...this.formatFindAllBenefitsFilters(filters as IBenefitFiltersPayload),
+      },
+    };
 
     const result = await this.prismaRepository.findMany({
       ...params,

@@ -4,13 +4,13 @@ export interface IInstallmentRepository {
   findAll(payload?: Prisma.InstallmentWhereInput): Promise<Installment[]>;
   findById(id: number): Promise<Installment | null>;
   create(payload: Prisma.InstallmentCreateInput): Promise<Installment>;
-  disableById(id: number, user: string): Promise<Installment>;
+  softUpdate(
+    id: number,
+    payload: Prisma.InstallmentCreateInput & { user: string },
+  ): Promise<void>;
 }
 
 export interface IInstallmentService {
-  createInstallment(payload: Prisma.InstallmentCreateInput): Promise<void>;
-  updateInstallment(
-    id: number,
-    payload: Prisma.InstallmentUpdateInput,
-  ): Promise<void>;
+  create(payload: Prisma.InstallmentCreateInput): Promise<void>;
+  update(id: number, payload: Prisma.InstallmentUpdateInput): Promise<void>;
 }

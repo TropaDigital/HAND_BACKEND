@@ -9,7 +9,7 @@
     "start:dev": "dotenv -e .env.development -- ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
     "test": "dotenv -e .env.test -- jest --clearCache && dotenv -e .env.test -- jest --passWithNoTests --runInBand",
     "test:unit": "dotenv -e .env.test -- jest --clearCache && dotenv -e .env.test -- jest --maxWorkers=50%",
-    "test:unit:watch": "dotenv -e .env.test -- jest --clearCache && jest --passWithNoTests --maxWorkers=50% --watch",
+    "test:unit:watch": "dotenv -e .env.test -- jest --clearCache && dotenv -e .env.test -- jest --passWithNoTests --maxWorkers=50% --watch",
     "test:unit:staged": "npm run test -- --findRelatedTests",
     "test:unit:coverage": "npm run test:unit -- --coverage",
     "test:coverage": "npm run test -- --coverage",

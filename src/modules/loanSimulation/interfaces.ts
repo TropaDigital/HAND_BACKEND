@@ -25,6 +25,7 @@ export interface ILoanSimulationBasedOnRequestedValueParams {
 
 export interface IInstallmentDetails {
   reference: string;
+  referenceDate: Date;
   installmentFactor: number;
   consultantCommission: number;
   consultantCommissionValue: number;

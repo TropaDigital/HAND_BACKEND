@@ -7,7 +7,12 @@ import {
   EmploymentRelationship,
   Prisma,
 } from '@prisma/client';
+import {
+  differenceInMonths as getDifferenceInMonths,
+  endOfMonth,
+} from 'date-fns';
 
+import ErrorCodes from '../../enums/ErrorCodes';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { MissingInvalidParamsError, NotFoundError } from '../../shared/errors';
 import {
@@ -27,7 +32,7 @@ export class BenefitService implements IBenefitService {
     private readonly benefitRepository: IBenefitRepository,
     private readonly associatedRepository: IAssociatedRepository,
     private readonly loanSimulationService: ILoanSimulationService,
-  ) {}
+  ) { }
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -59,6 +64,26 @@ export class BenefitService implements IBenefitService {
     }
 
     return disposiblePaymentDates[2];
+  }
+
+  private validateBenefitPeriodWhenEmploymentRelationshipIsTemporary(
+    lastInstallmentReferenceDate?: Date,
+    employmentRelationshipFinalDate?: Date | null,
+  ): void {
+    if (!lastInstallmentReferenceDate || !employmentRelationshipFinalDate) {
+      return;
+    }
+    const differenceInMonths = getDifferenceInMonths(
+      lastInstallmentReferenceDate,
+      endOfMonth(employmentRelationshipFinalDate),
+    );
+
+    if (differenceInMonths < 2) {
+      throw new MissingInvalidParamsError(
+        'the benefit must finish at least two months before the end of the temporary contract',
+        ErrorCodes.CREATE_BENEFIT_ERROR_001,
+      );
+    }
   }
 
   public async create(payload: ICreateBenefitParams): Promise<Benefit> {
@@ -130,6 +155,14 @@ export class BenefitService implements IBenefitService {
     if (!isRequestedValueValid) {
       throw new MissingInvalidParamsError(
         'the conditions of the benefit does not match with the rules, plase check the parameters',
+      );
+    }
+
+    if (employmentRelationship.contractType === 'TEMPORARY') {
+      const lastInstallment = [...installments].pop();
+      this.validateBenefitPeriodWhenEmploymentRelationshipIsTemporary(
+        lastInstallment?.referenceDate,
+        employmentRelationship.finalDate,
       );
     }
 
@@ -226,12 +259,12 @@ export class BenefitService implements IBenefitService {
       },
       ...(consultantId
         ? {
-            consultant: {
-              connect: {
-                id: consultantId,
-              },
+          consultant: {
+            connect: {
+              id: consultantId,
             },
-          }
+          },
+        }
         : {}),
     });
 

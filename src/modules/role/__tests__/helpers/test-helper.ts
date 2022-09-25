@@ -19,6 +19,7 @@ export const makeFakeUpdateRoleInput = (
 ): jest.Mocked<Partial<Role>> => ({
   name: 'USER',
   description: 'Any description',
+  updatedBy: 'user',
   ...payload,
 });
 

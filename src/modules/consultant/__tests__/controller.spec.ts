@@ -119,9 +119,12 @@ describe(ConsultantController.name, () => {
   describe(`When ${ConsultantController.prototype.create.name} is called`, () => {
     it('should call validator with right params', async () => {
       const { sut, validatorStub } = makeSut();
-      const httpRequest = makeFakeApiHttpRequest({
-        body: makeFakeCreateConsultantInput(),
-      });
+      const httpRequest = {
+        ...makeFakeApiHttpRequest({
+          body: makeFakeCreateConsultantInput(),
+        }),
+        user: { role: '1', sub: 'any_user' },
+      };
       const validateSchemaSpy = validatorStub.validateSchema;
 
       await sut.create(httpRequest);
@@ -188,10 +191,13 @@ describe(ConsultantController.name, () => {
   });
 
   describe(`When ${ConsultantController.prototype.updateById.name} is called`, () => {
-    const httpRequest = makeFakeApiHttpRequest({
-      body: makeFakeCreateConsultantInput(),
-      params: { id: 777 },
-    });
+    const httpRequest = {
+      ...makeFakeApiHttpRequest({
+        body: makeFakeCreateConsultantInput(),
+        params: { id: 777 },
+      }),
+      user: { sub: 'other_user', role: '1' },
+    };
 
     it('should call validator with right params', async () => {
       const { sut, validatorStub } = makeSut();
@@ -202,6 +208,7 @@ describe(ConsultantController.name, () => {
       expect(validateSchemaSpy).toBeCalledWith('UpdateConsultantById', {
         id: 777,
         ...makeFakeUpdateConsultantInput(),
+        createdBy: 'any_user',
       });
     });
 
@@ -217,7 +224,7 @@ describe(ConsultantController.name, () => {
 
       expect(updateByIdSpy).toBeCalledWith(
         777,
-        makeFakeCreateConsultantInput(),
+        makeFakeUpdateConsultantInput(),
       );
     });
 

@@ -11,7 +11,7 @@ export default class RoleRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IRoleController) { }
+  private constructor(private readonly controller: IRoleController) {}
 
   public static getInstance(
     controller: IRoleController = createRoleController(),

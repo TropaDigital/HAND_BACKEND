@@ -26,7 +26,7 @@ export const makeFakeUpdateConsultantInput = (
   city: 'any_city',
   state: 'any_state',
   commission: 10,
-  createdBy: 'any_user',
+  updatedBy: 'other_user',
   ...payload,
 });
 

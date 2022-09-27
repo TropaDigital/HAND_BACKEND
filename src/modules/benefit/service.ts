@@ -10,6 +10,7 @@ import {
 import {
   differenceInMonths as getDifferenceInMonths,
   endOfMonth,
+  addMonths,
 } from 'date-fns';
 
 import ErrorCodes from '../../enums/ErrorCodes';
@@ -20,6 +21,7 @@ import {
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import { IAssociatedRepository } from '../associated/interfaces';
+import { IInstallmentRepository } from '../installment/interfaces';
 import { ILoanSimulationService } from '../loanSimulation/interfaces';
 import {
   IBenefitRepository,
@@ -32,6 +34,7 @@ export class BenefitService implements IBenefitService {
     private readonly benefitRepository: IBenefitRepository,
     private readonly associatedRepository: IAssociatedRepository,
     private readonly loanSimulationService: ILoanSimulationService,
+    private readonly installmentRepository: IInstallmentRepository,
   ) { }
 
   public async getAll(
@@ -269,6 +272,60 @@ export class BenefitService implements IBenefitService {
     });
 
     return result;
+  }
+
+  public async postponementInstallment(id: number): Promise<void> {
+    const times = await this.benefitRepository.countEditTimes(id);
+
+    if (times > 3) {
+      throw new Error('cannot update installment more than 3 times');
+    }
+    if (times === 3) {
+      const installments = await this.installmentRepository.findAll({
+        benefitId: id,
+      });
+
+      await Promise.all(
+        installments.map(installment =>
+          this.installmentRepository.softUpdate(installment.id, {
+            ...installment,
+            referenceDate: addMonths(installment.referenceDate, 1),
+            user: '',
+          }),
+        ),
+      );
+    }
+
+    const installments = await this.installmentRepository.findAll({
+      benefitId: id,
+    });
+
+    await this.installmentRepository.softUpdate(installments[0].id, {
+      ...installments[0],
+      referenceDate: addMonths(installments[0].referenceDate, 1),
+      user: '',
+    });
+  }
+
+  public async singlePostponementInstallment(
+    id: number,
+    reference: Date,
+  ): Promise<void> {
+    const installment =
+      await this.installmentRepository.findByBenefitIdAndReferenceDate(
+        id,
+        reference,
+      );
+
+    if (!installment) {
+      throw new NotFoundError();
+    }
+
+    this.installmentRepository.softUpdate(installment.id, {
+      ...installment,
+      referenceDate: addMonths(installment.referenceDate, 1),
+      user: '',
+    });
   }
 
   public async updateById(

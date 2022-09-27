@@ -74,6 +74,33 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
+  private adjustment(): void {
+    /**
+     * POST /benefits
+     * @tag Benefits
+     * @summary adjusts benefit installments.
+     * @description adjusts benefit installments.
+     * @bodyContent {AdjustBenefitPayload} application/json
+     * @bodyRequired
+     * @response 201 - an object of benefit.
+     * @responseContent {AdjustBenefitResponse} 201.application/json
+     * @responseExample {AdjustBenefitResponse} 200.application/json.AdjustBenefitResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent { BenefitBadRequestResponse} 400.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/benefits/:id/adjustment')
+      .put(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IBenefitController>(
+          this.controller,
+          'create',
+        ),
+      );
+  }
+
   private create(): void {
     /**
      * POST /benefits
@@ -161,6 +188,7 @@ export default class BenefitRouter implements IRouter {
     this.create();
     this.getAll();
     this.getById();
+    this.adjustment();
     this.updateById();
     this.deleteById();
 

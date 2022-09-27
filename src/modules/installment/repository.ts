@@ -1,4 +1,4 @@
-import { Prisma, Installment } from '@prisma/client';
+import { Prisma, Installment, PrismaClient } from '@prisma/client';
 
 import { getFindManyParams } from '../../shared/pagination/service';
 import { IInstallmentRepository } from './interfaces';
@@ -8,12 +8,16 @@ export type PrismaInstallmentRepository = Prisma.InstallmentDelegate<
 >;
 
 export class InstallmentRepository implements IInstallmentRepository {
-  constructor(private readonly prismaRepository: PrismaInstallmentRepository) {}
+  private readonly prismaRepository: PrismaInstallmentRepository;
+
+  constructor(private readonly prismaClient: PrismaClient) {
+    this.prismaRepository = prismaClient.installment;
+  }
 
   public async findAll(
     payload?: Prisma.InstallmentWhereInput | undefined,
   ): Promise<Installment[]> {
-    const params = getFindManyParams<Prisma.InstallmentWhereInput>({
+    const params = await getFindManyParams<Prisma.InstallmentWhereInput>({
       ...payload,
       disabledAt: null,
       disabledBy: null,
@@ -25,9 +29,17 @@ export class InstallmentRepository implements IInstallmentRepository {
     return result;
   }
 
-  public async findById(id: number): Promise<Installment | null> {
+  public async findByBenefitIdAndReferenceDate(
+    benefitId: number,
+    referenceDate: Date,
+  ): Promise<Installment | null> {
     const result = await this.prismaRepository.findFirst({
-      where: { id, disabledAt: null, disabledBy: null },
+      where: {
+        benefitId,
+        referenceDate,
+        disabledAt: null,
+        disabledBy: null,
+      },
     });
 
     return result;
@@ -45,12 +57,20 @@ export class InstallmentRepository implements IInstallmentRepository {
     return result;
   }
 
-  public async disableById(id: number, user: string): Promise<Installment> {
-    const result = await this.prismaRepository.update({
-      where: { id },
-      data: { disabledAt: new Date(), disabledBy: user },
-    });
-
-    return result;
+  public async softUpdate(
+    id: number,
+    payload: Prisma.InstallmentCreateInput & { user: string },
+  ): Promise<void> {
+    await this.prismaClient.$transaction([
+      this.prismaRepository.update({
+        where: { id },
+        data: { disabledAt: new Date(), disabledBy: payload.user },
+      }),
+      this.prismaRepository.create({
+        data: {
+          ...payload,
+        },
+      }),
+    ]);
   }
 }

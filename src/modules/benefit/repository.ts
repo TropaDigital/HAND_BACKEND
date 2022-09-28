@@ -92,6 +92,15 @@ export class BenefitRepository implements IBenefitRepository {
     const result = await this.prismaRepository.create({
       data: {
         ...payload,
+        benefitHistory: {
+          create: {
+            createdBy: payload.createdBy,
+            adjustment: payload as JsonObject,
+          },
+        },
+      },
+      include: {
+        benefitHistory: true,
       },
     });
 

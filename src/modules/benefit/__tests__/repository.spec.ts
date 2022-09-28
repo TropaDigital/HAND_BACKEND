@@ -122,9 +122,9 @@ describe(BenefitRepository.name, () => {
       expect(createSpy).toBeCalledWith({
         data: {
           ...makeFakeBenefit({}),
-          BenefitHistory: { create: expect.anything() },
+          benefitHistory: { create: expect.anything() },
         },
-        include: { BenefitHistory: true },
+        include: { benefitHistory: true },
       });
     });
 

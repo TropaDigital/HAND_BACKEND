@@ -23,7 +23,7 @@ const makeSut = () => {
   return { sut, consultantService };
 };
 
-describe(LoanSimulationService.name, () => {
+describe.skip(LoanSimulationService.name, () => {
   describe(`When ${LoanSimulationService.prototype.simulateLoanBasedOnRequestedValue.name} is called`, () => {
     beforeEach(() => {
       jest

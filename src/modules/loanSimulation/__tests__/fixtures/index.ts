@@ -21,6 +21,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
     installments: [
       {
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -35,6 +36,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
       },
       {
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -49,6 +51,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
       },
       {
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -63,6 +66,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
       },
       {
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -77,6 +81,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
       },
       {
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -91,6 +96,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
       },
       {
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -105,6 +111,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
       },
       {
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -119,6 +126,7 @@ export const loanSimulationOfDay15OfTheMonthWithTelemedicine: ILoanSimulationBas
       },
       {
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -155,6 +163,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
     installments: [
       {
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -169,6 +178,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
       },
       {
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -183,6 +193,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
       },
       {
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -197,6 +208,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
       },
       {
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -211,6 +223,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
       },
       {
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -225,6 +238,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
       },
       {
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -239,6 +253,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
       },
       {
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -253,6 +268,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicine: ILoanSimulation
       },
       {
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -289,6 +305,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
     installments: [
       {
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -303,6 +320,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
       },
       {
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -317,6 +335,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
       },
       {
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -331,6 +350,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
       },
       {
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -345,6 +365,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
       },
       {
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -359,6 +380,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
       },
       {
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -373,6 +395,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
       },
       {
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -387,6 +410,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment:
       },
       {
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -423,6 +447,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
     installments: [
       {
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -437,6 +462,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
       },
       {
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -451,6 +477,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
       },
       {
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -465,6 +492,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
       },
       {
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -479,6 +507,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
       },
       {
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -493,6 +522,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
       },
       {
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -507,6 +537,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
       },
       {
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -521,6 +552,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentR
       },
       {
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -553,6 +585,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
     installments: [
       {
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -567,6 +600,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -581,6 +615,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -595,6 +630,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -609,6 +645,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -623,6 +660,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -637,6 +675,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -651,6 +690,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -683,6 +723,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
     installments: [
       {
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -697,6 +738,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -711,6 +753,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -725,6 +768,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -739,6 +783,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -753,6 +798,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -767,6 +813,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -781,6 +828,7 @@ export const loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptS
       },
       {
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 0,
         bankProcessingFees: 10,
@@ -817,6 +865,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
     installments: [
       {
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -831,6 +880,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
       },
       {
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -845,6 +895,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
       },
       {
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -859,6 +910,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
       },
       {
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -873,6 +925,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
       },
       {
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -887,6 +940,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
       },
       {
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -901,6 +955,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
       },
       {
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -915,6 +970,7 @@ export const loanSimulationOfDay16OfTheMonth: ILoanSimulationBasedOnRequestedVal
       },
       {
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -953,6 +1009,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'abril/2022',
+        referenceDate: new Date('2022-04-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -967,6 +1024,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'maio/2022',
+        referenceDate: new Date('2022-05-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -981,6 +1039,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'junho/2022',
+        referenceDate: new Date('2022-06-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -995,6 +1054,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'julho/2022',
+        referenceDate: new Date('2022-07-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -1009,6 +1069,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'agosto/2022',
+        referenceDate: new Date('2022-08-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -1023,6 +1084,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'setembro/2022',
+        referenceDate: new Date('2022-09-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -1037,6 +1099,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'outubro/2022',
+        referenceDate: new Date('2022-10-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,
@@ -1051,6 +1114,7 @@ export const loanSimulationOfDay15OfTheMonthWithTenPercentOfCommission: ILoanSim
         gratificationFeeValue: 0,
         admnistrationFeeValue: 0,
         reference: 'novembro/2022',
+        referenceDate: new Date('2022-11-15'),
         cardFees: 12,
         telemedicineFees: 24,
         bankProcessingFees: 10,

@@ -29,24 +29,35 @@ export class InstallmentRepository implements IInstallmentRepository {
     return result;
   }
 
-  public async findById(id: number): Promise<Installment | null> {
+  public async findByBenefitIdAndReferenceDate(
+    benefitId: number,
+    referenceDate: Date,
+  ): Promise<Installment | null> {
     const result = await this.prismaRepository.findFirst({
-      where: { id, disabledAt: null, disabledBy: null },
+      where: {
+        benefitId,
+        referenceDate,
+        disabledAt: null,
+        disabledBy: null,
+      },
     });
 
     return result;
   }
 
-  public async create(
-    payload: Prisma.InstallmentCreateInput,
-  ): Promise<Installment> {
-    const result = await this.prismaRepository.create({
-      data: {
-        ...payload,
-      },
+  public async createMany(
+    payload: Prisma.InstallmentCreateManyInput[],
+  ): Promise<void> {
+    await this.prismaRepository.createMany({
+      data: payload,
     });
+  }
 
-    return result;
+  public async disable(id: number, user: string): Promise<void> {
+    await this.prismaRepository.update({
+      where: { id },
+      data: { disabledAt: new Date(), disabledBy: user },
+    });
   }
 
   public async softUpdate(

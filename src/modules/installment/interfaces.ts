@@ -2,15 +2,19 @@ import { Prisma, Installment } from '@prisma/client';
 
 export interface IInstallmentRepository {
   findAll(payload?: Prisma.InstallmentWhereInput): Promise<Installment[]>;
-  findById(id: number): Promise<Installment | null>;
-  create(payload: Prisma.InstallmentCreateInput): Promise<Installment>;
+  findByBenefitIdAndReferenceDate(
+    id: number,
+    referenceDate: Date,
+  ): Promise<Installment | null>;
+  createMany(payload: Prisma.InstallmentCreateManyInput[]): Promise<void>;
   softUpdate(
     id: number,
     payload: Prisma.InstallmentCreateInput & { user: string },
   ): Promise<void>;
+  disable(id: number, user: string): Promise<void>;
 }
 
 export interface IInstallmentService {
-  create(payload: Prisma.InstallmentCreateInput): Promise<void>;
+  createMany(payload: Prisma.InstallmentCreateManyInput[]): Promise<void>;
   update(id: number, payload: Prisma.InstallmentUpdateInput): Promise<void>;
 }

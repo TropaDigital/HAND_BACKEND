@@ -1,4 +1,10 @@
-import { Prisma, Benefit } from '@prisma/client';
+import {
+  Prisma,
+  Benefit,
+  PrismaClient,
+  BenefitAdjustmentType,
+} from '@prisma/client';
+import { JsonObject } from 'swagger-ui-express';
 
 import {
   IFindAllParams,
@@ -14,8 +20,18 @@ export type PrismaBenefitRepository = Prisma.BenefitDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
 >;
 
+export type PrismaBenefitHistoryRepository = Prisma.BenefitHistoryDelegate<
+  Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
+>;
 export class BenefitRepository implements IBenefitRepository {
-  constructor(private readonly prismaRepository: PrismaBenefitRepository) {}
+  private readonly prismaBenefitRepository: PrismaBenefitRepository;
+
+  private readonly prismaBenefitHistoryRepository: PrismaBenefitHistoryRepository;
+
+  constructor(prismaClient: PrismaClient) {
+    this.prismaBenefitRepository = prismaClient.benefit;
+    this.prismaBenefitHistoryRepository = prismaClient.benefitHistory;
+  }
 
   private formatFindAllBenefitsFilters({
     affiliation,
@@ -55,7 +71,7 @@ export class BenefitRepository implements IBenefitRepository {
       },
     };
 
-    const result = await this.prismaRepository.findMany({
+    const result = await this.prismaBenefitRepository.findMany({
       ...params,
       include: {
         affiliation: true,
@@ -66,7 +82,7 @@ export class BenefitRepository implements IBenefitRepository {
     const totalResults =
       JSON.stringify(params?.where) !== '{}'
         ? result.length
-        : await this.prismaRepository.count();
+        : await this.prismaBenefitRepository.count();
 
     return parsePaginatedResult<Benefit[], Prisma.AssociatedWhereInput>(
       result,
@@ -76,7 +92,7 @@ export class BenefitRepository implements IBenefitRepository {
   }
 
   public async findById(id: number): Promise<Benefit | null> {
-    const result = await this.prismaRepository.findFirst({
+    const result = await this.prismaBenefitRepository.findFirst({
       where: { id },
       include: {
         affiliation: true,
@@ -89,7 +105,7 @@ export class BenefitRepository implements IBenefitRepository {
   }
 
   public async create(payload: Prisma.BenefitCreateInput): Promise<Benefit> {
-    const result = await this.prismaRepository.create({
+    const result = await this.prismaBenefitRepository.create({
       data: {
         ...payload,
         benefitHistory: {
@@ -111,13 +127,21 @@ export class BenefitRepository implements IBenefitRepository {
     id: number,
     payload: Prisma.BenefitUpdateInput,
   ): Promise<void> {
-    await this.prismaRepository.update({
+    await this.prismaBenefitRepository.update({
       where: { id },
       data: payload,
     });
   }
 
   public async deleteById(id: number): Promise<void> {
-    await this.prismaRepository.delete({ where: { id } });
+    await this.prismaBenefitRepository.delete({ where: { id } });
+  }
+
+  public async countEditTimes(id: number): Promise<number> {
+    const result = await this.prismaBenefitHistoryRepository.count({
+      where: { id, adjustmentType: BenefitAdjustmentType.POSTPONEMENT },
+    });
+
+    return result;
   }
 }

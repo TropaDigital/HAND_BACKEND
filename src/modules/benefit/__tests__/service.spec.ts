@@ -3,6 +3,7 @@ import {
   NotFoundError,
 } from '../../../shared/errors';
 import { makeAssociatedRepositoryStub } from '../../associated/__tests__/helpers/test-helper';
+import { makeInstallmentRepositoryStub } from '../../installment/__tests__/helpers/test-helper';
 import { makeLoanSimulationServiceStub } from '../../loanSimulation/__tests__/helpers/test-helper';
 import { BenefitService } from '../service';
 import {
@@ -17,10 +18,13 @@ const makeSut = () => {
   const benefitRepository = makeBenefitRepositoryStub();
   const associatedRepository = makeAssociatedRepositoryStub();
   const loanService = makeLoanSimulationServiceStub();
+  const installmentRepository = makeInstallmentRepositoryStub();
+
   const sut = new BenefitService(
     benefitRepository,
     associatedRepository,
     loanService,
+    installmentRepository,
   );
 
   return { sut, benefitRepository };

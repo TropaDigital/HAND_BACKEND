@@ -57,6 +57,30 @@ export class BenefitController implements IBenefitController {
     return { statusCodeAsString: 'CREATED', body: result };
   }
 
+  public async adjustContractById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
+    const { id, single } = this.validator.validateSchema<
+      Prisma.BenefitUpdateInput & { id: number; single: boolean }
+    >('UpdateBenefitById', {
+      ...httpRequest.params,
+      ...httpRequest.query,
+    });
+
+    const result = single
+      ? await this.benefitService.singlePostponementInstallment({
+          id,
+          reference: new Date(),
+          user: String(httpRequest.user?.sub) || '',
+        })
+      : await this.benefitService.postponementInstallment({
+          id,
+          user: String(httpRequest.user?.sub) || '',
+        });
+
+    return { statusCodeAsString: 'NO_CONTENT', body: result };
+  }
+
   public async updateById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {

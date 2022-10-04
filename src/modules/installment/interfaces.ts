@@ -6,14 +6,15 @@ export interface IInstallmentRepository {
     id: number,
     referenceDate: Date,
   ): Promise<Installment | null>;
-  create(payload: Prisma.InstallmentCreateInput): Promise<Installment>;
+  createMany(payload: Prisma.InstallmentCreateManyInput[]): Promise<void>;
   softUpdate(
     id: number,
     payload: Prisma.InstallmentCreateInput & { user: string },
   ): Promise<void>;
+  disable(id: number, user: string): Promise<void>;
 }
 
 export interface IInstallmentService {
-  create(payload: Prisma.InstallmentCreateInput): Promise<void>;
+  createMany(payload: Prisma.InstallmentCreateManyInput[]): Promise<void>;
   update(id: number, payload: Prisma.InstallmentUpdateInput): Promise<void>;
 }

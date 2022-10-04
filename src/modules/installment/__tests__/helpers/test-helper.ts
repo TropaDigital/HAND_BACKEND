@@ -8,7 +8,7 @@ export const makePrismaInstallmentRepositoryStub =
     const result: jest.Mocked<Partial<PrismaInstallmentRepository>> = {
       findMany: jest.fn().mockResolvedValue(''),
       findFirst: jest.fn().mockResolvedValue(''),
-      create: jest.fn().mockResolvedValue(''),
+      createMany: jest.fn().mockResolvedValue(''),
       update: jest.fn(),
       delete: jest.fn(),
       count: jest.fn().mockResolvedValue(11),
@@ -33,10 +33,11 @@ export const makePrismaClient = (): {
 
 export const makeInstallmentRepositoryStub =
   (): jest.Mocked<IInstallmentRepository> => ({
-    create: jest.fn(),
+    createMany: jest.fn(),
     findAll: jest.fn(),
     findByBenefitIdAndReferenceDate: jest.fn(),
     softUpdate: jest.fn(),
+    disable: jest.fn(),
   });
 
 export const makeFakeCreateInstallmentParams = (

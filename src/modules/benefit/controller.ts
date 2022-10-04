@@ -68,8 +68,15 @@ export class BenefitController implements IBenefitController {
     });
 
     const result = single
-      ? await this.benefitService.singlePostponementInstallment(id, new Date())
-      : await this.benefitService.postponementInstallment(id);
+      ? await this.benefitService.singlePostponementInstallment({
+          id,
+          reference: new Date(),
+          user: String(httpRequest.user?.sub) || '',
+        })
+      : await this.benefitService.postponementInstallment({
+          id,
+          user: String(httpRequest.user?.sub) || '',
+        });
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
   }

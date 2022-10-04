@@ -63,9 +63,13 @@ export interface IBenefitService {
 
   create(payload: ICreateBenefitParams): Promise<Benefit>;
 
-  postponementInstallment(id: number): Promise<void>;
+  postponementInstallment(payload: { id: number; user: string }): Promise<void>;
 
-  singlePostponementInstallment(id: number, reference: Date): Promise<void>;
+  singlePostponementInstallment(payload: {
+    id: number;
+    reference: Date;
+    user: string;
+  }): Promise<void>;
 
   updateById(id: number, payload: Prisma.BenefitUpdateInput): Promise<void>;
 

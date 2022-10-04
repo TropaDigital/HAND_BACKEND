@@ -45,16 +45,19 @@ export class InstallmentRepository implements IInstallmentRepository {
     return result;
   }
 
-  public async create(
-    payload: Prisma.InstallmentCreateInput,
-  ): Promise<Installment> {
-    const result = await this.prismaRepository.create({
-      data: {
-        ...payload,
-      },
+  public async createMany(
+    payload: Prisma.InstallmentCreateManyInput[],
+  ): Promise<void> {
+    await this.prismaRepository.createMany({
+      data: payload,
     });
+  }
 
-    return result;
+  public async disable(id: number, user: string): Promise<void> {
+    await this.prismaRepository.update({
+      where: { id },
+      data: { disabledAt: new Date(), disabledBy: user },
+    });
   }
 
   public async softUpdate(

@@ -3,6 +3,7 @@ import MySqlDBClient from '../../infra/mySql';
 import { AssociatedRepository } from '../associated/repository';
 import { ConsultantRepository } from '../consultant/repository';
 import { ConsultantService } from '../consultant/service';
+import { InstallmentRepository } from '../installment/repository';
 import { LoanSimulationService } from '../loanSimulation/service';
 import { BenefitController } from './controller';
 import { IBenefitController } from './interfaces';
@@ -21,10 +22,14 @@ export const createBenefitController = (): IBenefitController => {
   );
   const consultantService = new ConsultantService(consultantRepository);
   const loanSimulationService = new LoanSimulationService(consultantService);
+  const installmentRepository = new InstallmentRepository(
+    mySql.getPrismaClientInstance(),
+  );
   const benefitService = new BenefitService(
     repository,
     associatedRepository,
     loanSimulationService,
+    installmentRepository,
   );
   const joiAdapter = new JoiAdapter(schemas);
   const result = new BenefitController(benefitService, joiAdapter);

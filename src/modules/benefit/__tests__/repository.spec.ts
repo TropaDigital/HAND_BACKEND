@@ -52,7 +52,7 @@ describe(BenefitRepository.name, () => {
       expect(result).toEqual({
         currentPage: 1,
         totalPages: 1,
-        totalResults: 2,
+        totalResults: 11,
         data: makeFakeBenefitList(),
       });
     });

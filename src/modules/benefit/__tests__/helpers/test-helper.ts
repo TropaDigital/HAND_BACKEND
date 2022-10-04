@@ -83,6 +83,8 @@ export const makeBenefitServiceStub = (): jest.Mocked<IBenefitService> => ({
   create: jest.fn().mockResolvedValue(makeFakeBenefit({})),
   updateById: jest.fn(),
   deleteById: jest.fn(),
+  postponementInstallment: jest.fn(),
+  singlePostponementInstallment: jest.fn(),
 });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({

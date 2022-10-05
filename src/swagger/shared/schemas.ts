@@ -1,6 +1,28 @@
 import { SchemaObject, ReferenceObject } from 'openapi-comment-parser';
 
 export default {
+  ConflictResponse: {
+    type: 'object',
+    properties: {
+      code: {
+        type: 'string',
+        example: 'GENERIC_ERROR',
+        description: 'internal code of the error',
+      },
+      statusCode: {
+        type: 'number',
+        example: 409,
+        description: 'status code of the response',
+      },
+      statusCodeAsString: {
+        type: 'string',
+        example: 'CONFLICT',
+        description: 'username already in use',
+      },
+    },
+    required: ['code', 'statusCode', 'statusCodeAsString', 'description'],
+    additionalProperties: false,
+  },
   UnauthorizedResponse: {
     type: 'object',
     properties: {

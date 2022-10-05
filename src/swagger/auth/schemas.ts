@@ -1,6 +1,22 @@
 import { SchemaObject, ReferenceObject } from 'openapi-comment-parser';
 
 export default {
+  AuthenticatedUserResponse: {
+    type: 'object',
+    properties: {
+      statusCode: {
+        type: 'number',
+        example: '200',
+      },
+      statusCodeAsString: {
+        type: 'string',
+        example: 'OK',
+      },
+      data: {
+        $ref: '#/components/schemas/User',
+      },
+    },
+  },
   AuthResponse: {
     type: 'object',
     properties: {

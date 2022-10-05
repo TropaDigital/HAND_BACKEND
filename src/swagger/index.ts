@@ -10,6 +10,7 @@ import {
 } from './loanSimulation';
 import { roleExamples, roleSchemas } from './role';
 import { securitySchemas, sharedSchemas } from './shared';
+import { userExamples, userSchemas } from './user';
 
 export default {
   openapi: '3.0.1',
@@ -28,14 +29,19 @@ export default {
   ],
   tags: [
     {
+      name: 'Healthcheck',
+      description:
+        'Healthcheck endpoints that contains all the operations of the healthcheck',
+    },
+    {
       name: 'Auth',
       description:
         'Auth endpoints that contains all the operations of the auth',
     },
     {
-      name: 'Healthcheck',
+      name: 'Users',
       description:
-        'Healthcheck endpoints that contains all the operations of the healthcheck',
+        'Users endpoints that contains all the operations of the users',
     },
     {
       name: 'Consultants',
@@ -64,6 +70,7 @@ export default {
       ...authExamples,
       ...associatedExamples,
       ...roleExamples,
+      ...userExamples,
     },
     schemas: {
       ...sharedSchemas,
@@ -73,6 +80,7 @@ export default {
       ...authSchemas,
       ...associatedSchemas,
       ...roleSchemas,
+      ...userSchemas,
     },
   },
 } as OpenApiObject;

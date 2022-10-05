@@ -12,7 +12,7 @@ export default class UserRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IUserController) {}
+  private constructor(private readonly controller: IUserController) { }
 
   public static getInstance(
     controller: IUserController = createUserController(),
@@ -29,10 +29,11 @@ export default class UserRouter implements IRouter {
      * GET /users
      * @tag Users
      * @summary get all the users.
+     * @security apiKey
      * @description return a list of users.
      * @response 200 - an array with the all the users.
-     * @responseContent { UserResponse[]} 200.application/json
-     * @responseExample { UserResponse[]} 200.application/json.UserResponse
+     * @responseContent {GetAllUsersResponse} 200.application/json
+     * @responseExample {GetAllUsersResponse} 200.application/json.GetAllUsersResponse
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
@@ -51,17 +52,18 @@ export default class UserRouter implements IRouter {
      * GET /users/{userName}
      * @tag Users
      * @summary get a user by userName.
+     * @security apiKey
      * @description return a user object.
-     * @pathParam {int32} id id of the user
+     * @pathParam {string} userName the name of the user
      * @response 200 - an object of user.
-     * @responseContent { UserResponse} 200.application/json
-     * @responseExample { UserResponse} 200.application/json.UserResponse
+     * @responseContent {GetUserByUsernameResponse} 200.application/json
+     * @responseExample {GetUserByUsernameResponse} 200.application/json.GetUserByUsernameResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { UserBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { UserNotFoundResponse} 404.application/json
+     * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -80,42 +82,50 @@ export default class UserRouter implements IRouter {
     /**
      * POST /users
      * @tag Users
-     * @summary create a new user.
+     * @summary creates a new user.
+     * @security apiKey
      * @description return the created user object.
      * @bodyContent {CreateUserPayload} application/json
      * @bodyRequired
      * @response 201 - an object of user.
      * @responseContent {CreateUserResponse} 201.application/json
-     * @responseExample {CreateUserResponse} 200.application/json.CreateUserResponse
+     * @responseExample {CreateUserResponse} 201.application/json.CreateUserResponse
      * @response 400 - An object with the error when the payload provided is invalid
      * @responseContent { UserBadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 409 - an object with conflict error details.
+     * @responseContent {ConflictResponse} 409.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
-    this.router.route('/users').post(
-      // AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-      ExpressRouteAdapter.adapt<IUserController>(this.controller, 'create'),
-    );
+    this.router
+      .route('/users')
+      .post(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IUserController>(this.controller, 'create'),
+      );
   }
 
   private updateById(): void {
     /**
-     * PATCH /users
+     * PATCH /users/{id}
      * @tag Users
-     * @summary update a user.
+     * @summary update an user.
+     * @security apiKey
      * @description return no content when successfully update the resource.
      * @pathParam {int32} id id of the user
-     * @bodyContent {UpdateUserPayload} application/json
+     * @bodyContent {UpdateUserByIdPayload} application/json
      * @bodyRequired
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { UserBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { UserNotFoundResponse} 404.application/json
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 409 - an object with conflict error details.
+     * @responseContent {ConflictResponse} 409.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -132,20 +142,19 @@ export default class UserRouter implements IRouter {
 
   private deleteById(): void {
     /**
-     * DELETE /users
+     * DELETE /users/{id}
      * @tag Users
-     * @summary create a user.
+     * @summary deletes an user.
+     * @security apiKey
      * @description return no content when successfully delete the resource.
      * @pathParam {int32} id id of the user
-     * @bodyContent {UpdateUserPayload} application/json
-     * @bodyRequired
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { UserBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { UserNotFoundResponse} 404.application/json
+     * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */

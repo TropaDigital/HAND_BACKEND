@@ -7,7 +7,7 @@ export type PrismaUserRepository = Prisma.UserDelegate<
 >;
 
 export class UserRepository implements IUserRepository {
-  constructor(private readonly prismaRepository: PrismaUserRepository) {}
+  constructor(private readonly prismaRepository: PrismaUserRepository) { }
 
   public async findAll(): Promise<IUser[]> {
     const result = await this.prismaRepository.findMany({
@@ -54,7 +54,14 @@ export class UserRepository implements IUserRepository {
 
   public async create(payload: Prisma.UserCreateInput): Promise<IUser> {
     const user = await this.prismaRepository.create({
-      data: payload,
+      data: {
+        ...payload,
+        role: {
+          connect: {
+            name: 'operational',
+          },
+        },
+      },
       include: {
         role: true,
       },

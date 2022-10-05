@@ -11,7 +11,7 @@ export default class LoanSimulationRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: ILoanSimulationController) {}
+  private constructor(private readonly controller: ILoanSimulationController) { }
 
   public static getInstance(
     controller: ILoanSimulationController = createLoanSimulationController(),
@@ -28,6 +28,7 @@ export default class LoanSimulationRouter implements IRouter {
      * POST /loansimulations/simulate
      * @tag LoanSimulations
      * @summary generate a loan simulation based on parameters provided.
+     * @security apiKey
      * @description return an object with the load simulation details.
      * @bodyContent {GetLoanSimulationBasedOnRequestedValuePayload} application/json
      * @bodyDescription payload with the options to generate loan simulation

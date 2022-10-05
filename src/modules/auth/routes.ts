@@ -11,7 +11,7 @@ export default class AuthRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IAuthController) {}
+  private constructor(private readonly controller: IAuthController) { }
 
   public static getInstance(
     controller: IAuthController = createAuthController(),
@@ -25,16 +25,16 @@ export default class AuthRouter implements IRouter {
 
   private me(): void {
     /**
-     * GET /users/me
-     * @tag Users
+     * GET /auth/me
+     * @tag Auth
      * @summary get user info
+     * @security apiKey
      * @description return info from logger user.
      * @response 200 - an array with the all the users.
-     * @responseContent {UserResponse} 200.application/json
-     * @responseExample {UserResponse} 200.application/json.UserResponse
+     * @responseContent {AuthenticatedUserResponse} 200.application/json
+     * @responseExample {AuthenticatedUserResponse} 200.application/json.AuthenticatedUserResponse
      * @response 401 - an object with a message when user is not authenticated with success.
-     * @responseContent {AuthResponse} 401.application/json
-     * @responseExample {AuthUnauthorizedResponse} 401.application/json.LoginUnauthorizedResponse
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -56,7 +56,7 @@ export default class AuthRouter implements IRouter {
      * @bodyRequired
      * @response 200 - an object with a message when user is authenticated with success.
      * @responseContent {AuthResponse} 200.application/json
-     * @responseExample {AuthSuccessResponse} 200.application/json.LoginSuccessResponse
+     * @responseExample {AuthSuccessResponse} 200.application/json.AuthSuccessResponse
      * @response 401 - an object with a message when user is not authenticated with success.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @responseExample {InvalidCredentialsResponse} 401.application/json.LoginUnauthorizedResponse

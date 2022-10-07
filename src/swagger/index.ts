@@ -1,5 +1,6 @@
 import { OpenApiObject } from 'openapi-comment-parser';
 
+import { affiliationExamples, affiliationSchemas } from './affiliation';
 import { associatedExamples, associatedSchemas } from './associated';
 import { authExamples, authSchemas } from './auth';
 import { consultantExamples, consultantSchemas } from './consultant';
@@ -58,6 +59,11 @@ export default {
       description:
         'Roles endpoints that contains all the operations of the roles',
     },
+    {
+      name: 'Affiliations',
+      description:
+        'Affiliations endpoints that contains all the operations of the affiliations',
+    },
   ],
   components: {
     securitySchemes: {
@@ -71,6 +77,7 @@ export default {
       ...associatedExamples,
       ...roleExamples,
       ...userExamples,
+      ...affiliationExamples,
     },
     schemas: {
       ...sharedSchemas,
@@ -81,6 +88,7 @@ export default {
       ...associatedSchemas,
       ...roleSchemas,
       ...userSchemas,
+      ...affiliationSchemas,
     },
   },
 } as OpenApiObject;

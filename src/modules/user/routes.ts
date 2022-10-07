@@ -91,7 +91,7 @@ export default class UserRouter implements IRouter {
      * @responseContent {CreateUserResponse} 201.application/json
      * @responseExample {CreateUserResponse} 201.application/json.CreateUserResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { UserBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 409 - an object with conflict error details.

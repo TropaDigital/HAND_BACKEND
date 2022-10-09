@@ -71,6 +71,11 @@ describe('PATCH /users/{id} - Update user by id', () => {
 
     const invalidParamsResponse = makeInvalidParamsResponse([
       {
+        fieldName: 'id',
+        friendlyFieldName: 'id',
+        message: '"id" must be greater than or equal to 1',
+      },
+      {
         fieldName: 'name',
         friendlyFieldName: 'name',
         message: '"name" must be a string',

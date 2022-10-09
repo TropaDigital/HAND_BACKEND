@@ -12,6 +12,7 @@ export const makePrismaInstallmentRepositoryStub =
       update: jest.fn(),
       delete: jest.fn(),
       count: jest.fn().mockResolvedValue(11),
+      create: jest.fn(),
     };
     return result as jest.Mocked<PrismaInstallmentRepository>;
   };
@@ -24,6 +25,7 @@ export const makePrismaClient = (): {
 
   const result: jest.Mocked<Partial<PrismaClient>> = {
     installment: prismaInstallmentRepository,
+    $transaction: jest.fn(),
   };
   return {
     prismaClient: result as jest.Mocked<PrismaClient>,

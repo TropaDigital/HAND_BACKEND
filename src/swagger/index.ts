@@ -3,6 +3,7 @@ import { OpenApiObject } from 'openapi-comment-parser';
 import { affiliationExamples, affiliationSchemas } from './affiliation';
 import { associatedExamples, associatedSchemas } from './associated';
 import { authExamples, authSchemas } from './auth';
+import { benefitExamples, benefitSchemas } from './benefit';
 import { consultantExamples, consultantSchemas } from './consultant';
 import { healthcheckExamples, healthcheckSchemas } from './healthcheck';
 import {
@@ -64,6 +65,11 @@ export default {
       description:
         'Affiliations endpoints that contains all the operations of the affiliations',
     },
+    {
+      name: 'Benefits',
+      description:
+        'Benefits endpoints that contains all the operations of the benefits',
+    },
   ],
   components: {
     securitySchemes: {
@@ -78,6 +84,7 @@ export default {
       ...roleExamples,
       ...userExamples,
       ...affiliationExamples,
+      ...benefitExamples,
     },
     schemas: {
       ...sharedSchemas,
@@ -89,6 +96,7 @@ export default {
       ...roleSchemas,
       ...userSchemas,
       ...affiliationSchemas,
+      ...benefitSchemas,
     },
   },
 } as OpenApiObject;

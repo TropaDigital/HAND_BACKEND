@@ -15,6 +15,7 @@ export interface ICreateBenefitParams
   bankAccountId: number;
   employmentRelationshipId: number;
   addressId: number;
+  createdBy: string;
 }
 
 export interface IBenefitRepository {
@@ -52,6 +53,10 @@ export interface IBenefitController {
   updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
   deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
+
+  adjustContractById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>>;
 }
 
 export interface IBenefitService {

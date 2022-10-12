@@ -36,7 +36,7 @@ export class BenefitService implements IBenefitService {
     private readonly associatedRepository: IAssociatedRepository,
     private readonly loanSimulationService: ILoanSimulationService,
     private readonly installmentRepository: IInstallmentRepository,
-  ) {}
+  ) { }
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -106,6 +106,7 @@ export class BenefitService implements IBenefitService {
       salary,
       administrationFeeValue,
       affiliationId,
+      createdBy,
     } = payload;
 
     const {
@@ -160,7 +161,6 @@ export class BenefitService implements IBenefitService {
       birthDate,
       cellPhone,
       createdAt,
-      createdBy,
       deletedAt,
       email,
       emissionDate,
@@ -249,15 +249,17 @@ export class BenefitService implements IBenefitService {
       },
       ...(consultantId
         ? {
-            consultant: {
-              connect: {
-                id: consultantId,
-              },
+          consultant: {
+            connect: {
+              id: consultantId,
             },
-          }
+          },
+        }
         : {}),
     });
-    await this.installmentRepository.createMany(installments);
+    await this.installmentRepository.createMany(
+      [...installments].map(installment => ({ ...installment, createdBy })),
+    );
 
     return result;
   }
@@ -308,30 +310,30 @@ export class BenefitService implements IBenefitService {
   private validateAssociated(
     associated:
       | {
-          id: number;
-          name: string;
-          lastName: string;
-          gender: string;
-          birthDate: Date;
-          maritalStatus: string;
-          nationality: string;
-          placeOfBirth: string;
-          taxId: string;
-          registerId: string;
-          emissionState: string;
-          issuingAgency: string;
-          emissionDate: Date;
-          cellPhone: string;
-          email: string;
-          father: string;
-          mother: string;
-          partner: string | null;
-          createdBy: string;
-          updatedBy: string | null;
-          createdAt: Date;
-          updatedAt: Date;
-          deletedAt: Date | null;
-        }
+        id: number;
+        name: string;
+        lastName: string;
+        gender: string;
+        birthDate: Date;
+        maritalStatus: string;
+        nationality: string;
+        placeOfBirth: string;
+        taxId: string;
+        registerId: string;
+        emissionState: string;
+        issuingAgency: string;
+        emissionDate: Date;
+        cellPhone: string;
+        email: string;
+        father: string;
+        mother: string;
+        partner: string | null;
+        createdBy: string;
+        updatedBy: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
+      }
       | { [key: string]: any },
   ) {
     if (!associated) {

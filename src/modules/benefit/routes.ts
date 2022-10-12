@@ -11,7 +11,7 @@ export default class BenefitRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IBenefitController) {}
+  private constructor(private readonly controller: IBenefitController) { }
 
   public static getInstance(
     controller: IBenefitController = createBenefitController(),
@@ -27,11 +27,25 @@ export default class BenefitRouter implements IRouter {
     /**
      * GET /benefits
      * @tag Benefits
+     * @security apiKey
      * @summary get all the benefits.
-     * @description return a list of benefits.
+     * @description return a list of benefits
+     * @queryParam {int32} [resultsPerPage]
+     * @queryParam {int32} [page]
+     * @queryParam {string} [association]
+     * @queryParam {string} [bank]
+     * @queryParam {string} [publicAgency]
+     * @queryParam {string} [contractModel]
+     * @queryParam {int32} [installmentNumber]
+     * @queryParam {date} [initialDate]
+     * @queryParam {int32} [financialAssistanceValue]
+     * @queryParam {int32} [installmentValue]
+     * @queryParam {string} [consultant]
      * @response 200 - an array with the all the benefits.
-     * @responseContent { BenefitResponse[]} 200.application/json
-     * @responseExample { BenefitResponse[]} 200.application/json.BenefitResponse
+     * @responseContent {GetAllBenefitsResponse} 200.application/json
+     * @responseExample {GetAllBenefitsResponse} 200.application/json.GetAllBenefitsResponse
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -50,16 +64,19 @@ export default class BenefitRouter implements IRouter {
     /**
      * GET /benefits/{id}
      * @tag Benefits
+     * @security apiKey
      * @summary get a benefit by id.
      * @description return a benefit object.
      * @pathParam {int32} id id of the benefit
      * @response 200 - an object of benefit.
-     * @responseContent { BenefitResponse} 200.application/json
-     * @responseExample { BenefitResponse} 200.application/json.BenefitResponse
+     * @responseContent {GetBenefitByIdResponse} 200.application/json
+     * @responseExample {GetBenefitByIdResponse} 200.application/json.GetBenefitByIdResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { BenefitBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { BenefitNotFoundResponse} 404.application/json
+     * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -76,17 +93,18 @@ export default class BenefitRouter implements IRouter {
 
   private adjustment(): void {
     /**
-     * POST /benefits
+     * PUT /benefits/{benefitId}/adjustment
      * @tag Benefits
      * @summary adjusts benefit installments.
+     * @security apiKey
      * @description adjusts benefit installments.
-     * @bodyContent {AdjustBenefitPayload} application/json
-     * @bodyRequired
-     * @response 201 - an object of benefit.
-     * @responseContent {AdjustBenefitResponse} 201.application/json
-     * @responseExample {AdjustBenefitResponse} 200.application/json.AdjustBenefitResponse
+     * @pathParam {number} benefitId the benefit id
+     * @queryParam {boolean} [single=false] if is to update a single installment or all the installments
+     * @response 204 - no content.
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { BenefitBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -96,7 +114,7 @@ export default class BenefitRouter implements IRouter {
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IBenefitController>(
           this.controller,
-          'create',
+          'adjustContractById',
         ),
       );
   }
@@ -105,15 +123,18 @@ export default class BenefitRouter implements IRouter {
     /**
      * POST /benefits
      * @tag Benefits
+     * @security apiKey
      * @summary create a new benefit.
      * @description return the created benefit object.
      * @bodyContent {CreateBenefitPayload} application/json
      * @bodyRequired
      * @response 201 - an object of benefit.
      * @responseContent {CreateBenefitResponse} 201.application/json
-     * @responseExample {CreateBenefitResponse} 200.application/json.CreateBenefitResponse
+     * @responseExample {CreateBenefitResponse} 201.application/json.CreateBenefitResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { BenefitBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -128,69 +149,11 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
-  private updateById(): void {
-    /**
-     * PATCH /benefits
-     * @tag Benefits
-     * @summary update a benefit.
-     * @description return no content when successfully update the resource.
-     * @pathParam {int32} id id of the benefit
-     * @bodyContent {UpdateBenefitPayload} application/json
-     * @bodyRequired
-     * @response 204 - no content
-     * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { BenefitBadRequestResponse} 400.application/json
-     * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { BenefitNotFoundResponse} 404.application/json
-     * @response 500 - an object with internal server error details.
-     * @responseContent {InternalServerErrorResponse} 500.application/json
-     */
-    this.router
-      .route('/benefits/:id')
-      .patch(
-        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-        ExpressRouteAdapter.adapt<IBenefitController>(
-          this.controller,
-          'updateById',
-        ),
-      );
-  }
-
-  private deleteById(): void {
-    /**
-     * DELETE /benefits
-     * @tag Benefits
-     * @summary create a benefit.
-     * @description return no content when successfully delete the resource.
-     * @pathParam {int32} id id of the benefit
-     * @bodyContent {UpdateBenefitPayload} application/json
-     * @bodyRequired
-     * @response 204 - no content
-     * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { BenefitBadRequestResponse} 400.application/json
-     * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { BenefitNotFoundResponse} 404.application/json
-     * @response 500 - an object with internal server error details.
-     * @responseContent {InternalServerErrorResponse} 500.application/json
-     */
-    this.router
-      .route('/benefits/:id')
-      .delete(
-        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
-        ExpressRouteAdapter.adapt<IBenefitController>(
-          this.controller,
-          'deleteById',
-        ),
-      );
-  }
-
   setupRoutes(app: Application): void {
     this.create();
     this.getAll();
     this.getById();
     this.adjustment();
-    this.updateById();
-    this.deleteById();
 
     app.use(this.router);
   }

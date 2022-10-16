@@ -1,6 +1,210 @@
 import { ReferenceObject, SchemaObject } from 'openapi-comment-parser';
 
 export default {
+  UpdateAssociatedByIdPayload: {
+    type: 'object',
+    properties: {
+      name: {
+        type: 'string',
+      },
+      lastName: {
+        type: 'string',
+      },
+      gender: {
+        type: 'string',
+      },
+      birthDate: {
+        type: 'string',
+        format: 'datetime',
+      },
+      maritalStatus: {
+        type: 'string',
+      },
+      nationality: {
+        type: 'string',
+      },
+      placeOfBirth: {
+        type: 'string',
+      },
+      taxId: {
+        type: 'string',
+      },
+      registerId: {
+        type: 'string',
+      },
+      emissionState: {
+        type: 'string',
+      },
+      issuingAgency: {
+        type: 'string',
+      },
+      emissionDate: {
+        type: 'string',
+      },
+      cellPhone: {
+        type: 'string',
+      },
+      email: {
+        type: 'string',
+      },
+      father: {
+        type: 'string',
+      },
+      mother: {
+        type: 'string',
+      },
+      partner: {
+        type: 'string',
+      },
+
+      affiliations: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'number',
+            },
+            name: {
+              type: 'string',
+            },
+          },
+        },
+      },
+    },
+  },
+  UpsertEmploymentRelationshipByAssociatedIdAndIdPayload: {
+    type: 'object',
+    properties: {
+      isDefault: {
+        type: 'boolean',
+      },
+      occupation: {
+        type: 'string',
+      },
+      salary: {
+        type: 'string',
+      },
+      paymentDay: {
+        type: 'string',
+      },
+      registerNumber: {
+        type: 'string',
+      },
+      contractType: {
+        type: 'string',
+      },
+      finalDate: {
+        type: 'string',
+      },
+      publicAgency: {
+        type: 'string',
+      },
+    },
+  },
+  UpsertEmploymentRelationshipByAssociatedIdAndIdResponse: {
+    type: 'object',
+    properties: {
+      statusCode: {
+        type: 'number',
+      },
+      statusCodeAsString: {
+        type: 'string',
+      },
+      data: {
+        $ref: '#/components/schemas/EmploymentRelationship',
+      },
+    },
+    required: ['statusCode', 'statusCodeAsString', 'data'],
+  },
+  UpsertAddressByAssociatedIdAndIdPayload: {
+    type: 'object',
+    properties: {
+      isDefault: {
+        type: 'boolean',
+      },
+      addressType: {
+        type: 'string',
+      },
+      postalCode: {
+        type: 'string',
+      },
+      street: {
+        type: 'string',
+      },
+      houseNumber: {
+        type: 'string',
+      },
+      complement: {
+        type: 'string',
+      },
+      district: {
+        type: 'string',
+      },
+      city: {
+        type: 'string',
+      },
+      state: {
+        type: 'string',
+      },
+    },
+  },
+  UpsertAddressByAssociatedIdAndIdResponse: {
+    type: 'object',
+    properties: {
+      statusCode: {
+        type: 'number',
+      },
+      statusCodeAsString: {
+        type: 'string',
+      },
+      data: {
+        $ref: '#/components/schemas/Address',
+      },
+    },
+    required: ['statusCode', 'statusCodeAsString', 'data'],
+  },
+  UpsertBankAccountByAssociatedIdAndIdPayload: {
+    type: 'object',
+    properties: {
+      isDefault: {
+        type: 'boolean',
+      },
+      accountNumber: {
+        type: 'string',
+      },
+      accountType: {
+        type: 'string',
+      },
+      agency: {
+        type: 'string',
+      },
+      bank: {
+        type: 'string',
+      },
+      pixKey: {
+        type: 'string',
+      },
+      pixType: {
+        type: 'string',
+      },
+    },
+  },
+  UpsertBankAccountByAssociatedIdAndIdResponse: {
+    type: 'object',
+    properties: {
+      statusCode: {
+        type: 'number',
+      },
+      statusCodeAsString: {
+        type: 'string',
+      },
+      data: {
+        $ref: '#/components/schemas/BankAccount',
+      },
+    },
+    required: ['statusCode', 'statusCodeAsString', 'data'],
+  },
   CreateAssociatedResponse: {
     type: 'object',
     properties: {

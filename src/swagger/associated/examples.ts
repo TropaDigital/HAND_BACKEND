@@ -1,6 +1,60 @@
 import { ExampleObject, ReferenceObject } from 'openapi-comment-parser';
 
 export default {
+  UpsertEmploymentRelationshipByAssociatedIdAndIdResponse: {
+    value: {
+      statusCode: 200,
+      statusCodeAsString: 'OK',
+      data: {
+        id: 1,
+        isDefault: true,
+        occupation: 'Arquiteta',
+        salary: '4312.20',
+        paymentDay: 5,
+        registerNumber: '2108602049',
+        contractType: 'HIRED',
+        finalDate: null,
+        publicAgency: 'MiSupremo Tribunal Federal',
+        associatedId: 1,
+      },
+    },
+  },
+  UpsertAddressByAssociatedIdAndIdResponse: {
+    value: {
+      statusCode: 200,
+      statusCodeAsString: 'OK',
+      data: {
+        id: 1,
+        isDefault: true,
+        addressType: 'HOUSE',
+        postalCode: '78595-970',
+        street: 'Avenida Governador Dante Martins de Oliveira 115',
+        houseNumber: '123',
+        complement: '',
+        district: 'Centro',
+        city: 'Apiacás',
+        state: 'Mato Grosso',
+        associatedId: 1,
+      },
+    },
+  },
+  UpsertBankAccountByAssociatedIdAndIdPayload: {
+    value: {
+      statusCode: 200,
+      statusCodeAsString: 'OK',
+      data: {
+        id: 1,
+        bank: 'Itaú',
+        agency: '000',
+        accountType: 'Corrente',
+        accountNumber: '23132',
+        pixKey: 'eloa_freitas@superigi.com.br',
+        pixType: null,
+        isDefault: true,
+        associatedId: 1,
+      },
+    },
+  },
   GetAddressesByAssociatedIdResponse: {
     value: {
       statusCode: 200,

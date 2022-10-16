@@ -106,46 +106,7 @@ export const UpdateAssociatedById = Joi.object<
       }),
     )
     .min(1)
-    .required()
     .label('afiliações'),
-  addresses: Joi.array().items(
-    Joi.object({
-      addressType: Joi.string().required().label('tipo de endereço'),
-      postalCode: Joi.string().required().label('cep'),
-      street: Joi.string().required().label('logradouro'),
-      houseNumber: Joi.string().required().label('número'),
-      complement: Joi.string().allow('').label('complemento'),
-      district: Joi.string().required().label('bairro'),
-      city: Joi.string().required().label('cidade'),
-      state: Joi.string().required().label('estado'),
-    }),
-  ),
-
-  employmentRelationships: Joi.array().items(
-    Joi.object({
-      id: Joi.number(),
-      occupation: Joi.string().label('profissão'),
-      salary: Joi.string().label('salário'),
-      paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
-      registerNumber: Joi.string().label('matrícula'),
-      contractType: Joi.string().label('tipo de contrato'),
-      finalDate: Joi.date().label('data final'),
-      publicAgency: Joi.string().label('órgão público'),
-      isDefault: Joi.boolean().label('principal'),
-    }),
-  ),
-
-  bankAccounts: Joi.array().items(
-    Joi.object({
-      bank: Joi.string().label('banco'),
-      agency: Joi.string().label('agencia'),
-      accountType: Joi.string().label('tipo de conta'),
-      accountNumber: Joi.string().label('número da conta'),
-      pixKey: Joi.string().label('chave pix'),
-      pixType: Joi.string().label('tipo_pix'),
-    }),
-  ),
-  createdBy: Joi.string().label('createdBy'),
 });
 
 export const DeleteAssociatedById = Joi.object<{ id: number }>({

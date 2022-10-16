@@ -113,7 +113,7 @@ export default class AssociatedRouter implements IRouter {
       );
   }
 
-  private updateABankAccountByAssociatedIdAndId(): void {
+  private upsertBankAccountByAssociatedIdAndId(): void {
     /**
      * PATCH /associateds/{associatedId}/bank-accounts/{bankAccountId}
      * @tag Associateds
@@ -122,13 +122,17 @@ export default class AssociatedRouter implements IRouter {
      * @description return the created associated object.
      * @pathParam {int32} associatedId
      * @pathParam {int32} bankAccountId
+     * @bodyContent {UpsertBankAccountByAssociatedIdAndIdPayload} application/json
+     * @bodyRequired
      * @response 200 - an object of associated address.
-     * @responseContent {CreateAssociatedResponse} 201.application/json
-     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @responseContent {UpsertBankAccountByAssociatedIdAndIdResponse} 200.application/json
+     * @responseExample {UpsertBankAccountByAssociatedIdAndIdResponse} 200.application/json.UpsertBankAccountByAssociatedIdAndIdResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -152,13 +156,17 @@ export default class AssociatedRouter implements IRouter {
      * @description return the created associated object.
      * @pathParam {int32} associatedId
      * @pathParam {int32} addressId
+     * @bodyContent {UpsertAddressByAssociatedIdAndIdPayload} application/json
+     * @bodyRequired
      * @response 200 - an object of associated address.
-     * @responseContent {CreateAssociatedResponse} 201.application/json
-     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @responseContent {UpsertAddressByAssociatedIdAndIdResponse} 200.application/json
+     * @responseExample {UpsertAddressByAssociatedIdAndIdResponse} 200.application/json.UpsertAddressByAssociatedIdAndIdResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -182,13 +190,17 @@ export default class AssociatedRouter implements IRouter {
      * @description return the created associated object.
      * @pathParam {int32} associatedId
      * @pathParam {int32} employmentRelationshipId
+     * @bodyContent {UpsertEmploymentRelationshipByAssociatedIdAndIdPayload} application/json
+     * @bodyRequired
      * @response 200 - an object of associated.
-     * @responseContent {CreateAssociatedResponse} 201.application/json
-     * @responseExample {CreateAssociatedResponse} 200.application/json.CreateAssociatedResponse
+     * @responseContent {UpsertEmploymentRelationshipByAssociatedIdAndIdResponse} 200.application/json
+     * @responseExample {UpsertEmploymentRelationshipByAssociatedIdAndIdResponse} 200.application/json.UpsertEmploymentRelationshipByAssociatedIdAndIdResponse
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -304,15 +316,15 @@ export default class AssociatedRouter implements IRouter {
      * @summary update a associated.
      * @description return no content when successfully update the resource.
      * @pathParam {int32} id id of the associated
-     * @bodyContent {UpdateAssociatedPayload} application/json
+     * @bodyContent {UpdateAssociatedByIdPayload} application/json
      * @bodyRequired
      * @response 204 - no content
      * @response 400 - An object with the error when the payload provided is invalid
-     * @responseContent { AssociatedBadRequestResponse} 400.application/json
+     * @responseContent {BadRequestResponse} 400.application/json
      * @response 401 - an object with unauthorized error details.
      * @responseContent {UnauthorizedResponse} 401.application/json
      * @response 404 - An object with the error when the the resource is not found
-     * @responseContent { AssociatedNotFoundResponse} 404.application/json
+     * @responseContent {NotFoundResponse} 404.application/json
      * @response 500 - an object with internal server error details.
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
@@ -367,7 +379,7 @@ export default class AssociatedRouter implements IRouter {
     this.getAddressesByAssociatedId();
     this.updateAddressByAssociatedIdAndId();
     this.getBankAccountsByAssociatedId();
-    this.updateABankAccountByAssociatedIdAndId();
+    this.upsertBankAccountByAssociatedIdAndId();
 
     app.use(this.router);
   }

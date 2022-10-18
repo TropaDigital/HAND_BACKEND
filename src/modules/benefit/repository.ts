@@ -77,6 +77,12 @@ export class BenefitRepository implements IBenefitRepository {
         affiliation: true,
         associated: true,
         consultant: true,
+        installments: {
+          where: {
+            disabledAt: null,
+            disabledBy: null,
+          },
+        },
       },
     });
     const totalResults =
@@ -98,6 +104,12 @@ export class BenefitRepository implements IBenefitRepository {
         affiliation: true,
         associated: true,
         consultant: true,
+        installments: {
+          where: {
+            disabledAt: null,
+            disabledBy: null,
+          },
+        },
       },
     });
 

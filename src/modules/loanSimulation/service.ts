@@ -24,7 +24,7 @@ import {
 } from './interfaces';
 
 export class LoanSimulationService implements ILoanSimulationService {
-  constructor(private readonly consultantService: IConsultantService) {}
+  constructor(private readonly consultantService: IConsultantService) { }
 
   private getNumberOfDaysOfTheMonth(date: number | Date): number {
     return getDaysInMonth(date);
@@ -64,7 +64,7 @@ export class LoanSimulationService implements ILoanSimulationService {
     );
   }
 
-  private formatReferenceDate(date: Date): string {
+  public formatReferenceDate(date: Date): string {
     return `${format(date, 'MMMM', { locale: ptBR })}/${format(date, 'yyyy')}`;
   }
 
@@ -74,7 +74,7 @@ export class LoanSimulationService implements ILoanSimulationService {
   ): number {
     return requestedValue < 1000
       ? loanConfig.aditionalValueWhenTheValueIsLowerThan1000 /
-          numberOfInstallments
+      numberOfInstallments
       : 0;
   }
 

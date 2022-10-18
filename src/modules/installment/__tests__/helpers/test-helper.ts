@@ -37,7 +37,7 @@ export const makeInstallmentRepositoryStub =
   (): jest.Mocked<IInstallmentRepository> => ({
     createMany: jest.fn(),
     findAll: jest.fn(),
-    findByBenefitIdAndReferenceDate: jest.fn(),
+    findByBenefitIdAndReference: jest.fn(),
     softUpdate: jest.fn(),
     disable: jest.fn(),
   });

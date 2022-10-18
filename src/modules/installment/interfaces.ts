@@ -1,10 +1,13 @@
 import { Prisma, Installment } from '@prisma/client';
 
 export interface IInstallmentRepository {
-  findAll(payload?: Prisma.InstallmentWhereInput): Promise<Installment[]>;
-  findByBenefitIdAndReferenceDate(
+  findAll(payload?: {
+    benefitId: number;
+    justActiveInstallments: boolean;
+  }): Promise<Installment[]>;
+  findByBenefitIdAndReference(
     id: number,
-    referenceDate: Date,
+    reference: string,
   ): Promise<Installment | null>;
   createMany(payload: Prisma.InstallmentCreateManyInput[]): Promise<void>;
   softUpdate(

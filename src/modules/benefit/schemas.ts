@@ -1,4 +1,4 @@
-import { BenefitType, Prisma } from '@prisma/client';
+import { BenefitType } from '@prisma/client';
 import Joi from 'joi';
 
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
@@ -33,27 +33,20 @@ export const CreateBenefit = Joi.object<ICreateBenefitParams>({
   hasGratification: Joi.boolean().default(false),
 });
 
-export const UpdateBenefitById = Joi.object<
-  Prisma.BenefitUpdateInput & {
-    id: number;
-    affiliationId: number;
-    associatedId: number;
-    consultantId: number;
-  }
->({
-  type: Joi.string().valid(...Object.keys(BenefitType)),
-  affiliationId: Joi.number().required(),
-  associatedId: Joi.number().min(1).required(),
-  consultantId: Joi.number().min(1),
+export const GetPostponementSimulation = Joi.object<{
+  id: number;
+  single: boolean;
+}>({
   id: Joi.number().min(1).required(),
-  bank: Joi.string(),
-  publicAgency: Joi.string(),
-  contractModel: Joi.string(),
-  installmentNumber: Joi.number(),
-  initialDate: Joi.date(),
-  financialAssistanceValue: Joi.number(),
-  installmentValue: Joi.number(),
-  createdBy: Joi.string(),
+  single: Joi.boolean().default(false),
+});
+
+export const AdjustContractById = Joi.object<{
+  id: number;
+  single: boolean;
+}>({
+  id: Joi.number().min(1).required(),
+  single: Joi.boolean().default(false),
 });
 
 export const DeleteBenefitById = Joi.object<{ id: number }>({

@@ -258,7 +258,11 @@ export class BenefitService implements IBenefitService {
         : {}),
     });
     await this.installmentRepository.createMany(
-      [...installments].map(installment => ({ ...installment, createdBy })),
+      [...installments].map(installment => ({
+        ...installment,
+        benefitId: result.id,
+        createdBy,
+      })),
     );
 
     return result;
@@ -341,6 +345,47 @@ export class BenefitService implements IBenefitService {
     }
   }
 
+  public async getPostponementSimulation(
+    benefitId: number,
+    single: boolean,
+  ): Promise<Installment[]> {
+    const benefitExists = await this.benefitRepository.findById(benefitId);
+
+    if (!benefitExists) {
+      throw new NotFoundError('does not exists a benefit with the provided id');
+    }
+
+    const installments = await this.installmentRepository.findAll({
+      benefitId,
+      justActiveInstallments: true,
+    });
+
+    if (single) {
+      const [firstInstallment, ...restOfTheInstallments] = installments;
+      return [
+        {
+          ...firstInstallment,
+          finalValue:
+            firstInstallment.finalValue * (1 + loanConfig.adjustmentFee / 100),
+          referenceDate: addMonths(firstInstallment.referenceDate, 1),
+          reference: this.loanSimulationService.formatReferenceDate(
+            addMonths(firstInstallment.referenceDate, 1),
+          ),
+        },
+        ...restOfTheInstallments,
+      ];
+    }
+
+    return installments.map(installment => ({
+      ...installment,
+      finalValue: installment.finalValue * (1 + loanConfig.adjustmentFee / 100),
+      referenceDate: addMonths(installment.referenceDate, 1),
+      reference: this.loanSimulationService.formatReferenceDate(
+        addMonths(installment.referenceDate, 1),
+      ),
+    }));
+  }
+
   public async postponementInstallment(payload: {
     id: number;
     user: string;
@@ -350,27 +395,39 @@ export class BenefitService implements IBenefitService {
     if (times > 3) {
       throw new Error('cannot update installment more than 3 times');
     }
+
     if (times === 3) {
       const installments = await this.installmentRepository.findAll({
         benefitId: payload.id,
+        justActiveInstallments: true,
       });
 
       return this.singlePostponementInstallment({
         id: payload.id,
         user: payload.user,
-        reference: new Date(installments[0].reference),
+        reference: installments[0].referenceDate,
       });
     }
 
     const installments = await this.installmentRepository.findAll({
       benefitId: payload.id,
+      justActiveInstallments: true,
     });
 
     await Promise.all(
-      installments.map(installment =>
-        this.installmentRepository.softUpdate(installment.id, {
+      installments.map(({ id, benefitId, ...installment }) =>
+        this.installmentRepository.softUpdate(id, {
           ...installment,
-          finalValue: installment.finalValue * (loanConfig.adjustmentFee / 100),
+          Benefit: {
+            connect: {
+              id: payload.id,
+            },
+          },
+          finalValue:
+            installment.finalValue * (1 + loanConfig.adjustmentFee / 100),
+          reference: this.loanSimulationService.formatReferenceDate(
+            addMonths(installment.referenceDate, 1),
+          ),
           referenceDate: addMonths(installment.referenceDate, 1),
           user: payload.user,
         }),
@@ -384,18 +441,22 @@ export class BenefitService implements IBenefitService {
     user: string;
   }): Promise<void> {
     const installment =
-      await this.installmentRepository.findByBenefitIdAndReferenceDate(
+      await this.installmentRepository.findByBenefitIdAndReference(
         payload.id,
-        payload.reference,
+        this.loanSimulationService.formatReferenceDate(payload.reference),
       );
     const nextInstallment =
-      await this.installmentRepository.findByBenefitIdAndReferenceDate(
+      await this.installmentRepository.findByBenefitIdAndReference(
         payload.id,
-        addMonths(payload.reference, 1),
+        this.loanSimulationService.formatReferenceDate(
+          addMonths(payload.reference, 1),
+        ),
       );
 
     if (!installment || !nextInstallment) {
-      throw new NotFoundError();
+      throw new NotFoundError(
+        'installment not found with the provided id and reference date',
+      );
     }
 
     const recalculatedFinalValue = this.recalculateFinalValue(
@@ -403,14 +464,29 @@ export class BenefitService implements IBenefitService {
       nextInstallment,
     );
 
-    await this.installmentRepository.softUpdate(installment.id, {
-      ...installment,
+    const {
+      id: installmentId,
+      benefitId,
+      ...installmentFormated
+    } = installment;
+
+    await this.installmentRepository.softUpdate(installmentId, {
+      ...installmentFormated,
+      Benefit: {
+        connect: {
+          id: payload.id,
+        },
+      },
       finalValue: recalculatedFinalValue,
-      referenceDate: addMonths(installment.referenceDate, 1),
+      referenceDate: addMonths(installmentFormated.referenceDate, 1),
+      reference: this.loanSimulationService.formatReferenceDate(
+        addMonths(installmentFormated.referenceDate, 1),
+      ),
       user: payload.user,
     });
 
-    await this.installmentRepository.disable(nextInstallment.id, payload.user);
+    const { id: nextInstallmentId } = nextInstallment;
+    await this.installmentRepository.disable(nextInstallmentId, payload.user);
   }
 
   private recalculateFinalValue(
@@ -419,7 +495,7 @@ export class BenefitService implements IBenefitService {
   ) {
     const sumOfInstallmentValue =
       installment.finalValue + nextInstallment.finalValue;
-    const result = sumOfInstallmentValue * (loanConfig.adjustmentFee / 100);
+    const result = sumOfInstallmentValue * (1 + loanConfig.adjustmentFee / 100);
 
     return result;
   }

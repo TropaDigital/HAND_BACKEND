@@ -16,7 +16,7 @@ describe(InstallmentRepository.name, () => {
     it('Should call prisma with right params', async () => {
       const { sut, prismaInstallmentRepository } = makeSut();
 
-      await sut.findAll({});
+      await sut.findAll();
 
       expect(prismaInstallmentRepository.findMany).toBeCalledWith({
         where: { disabledAt: {}, disabledBy: {} },
@@ -29,7 +29,7 @@ describe(InstallmentRepository.name, () => {
         new Error('any prisma error'),
       );
 
-      const promise = sut.findAll({});
+      const promise = sut.findAll();
 
       await expect(promise).rejects.toThrow(new Error('any prisma error'));
     });
@@ -69,11 +69,11 @@ describe(InstallmentRepository.name, () => {
     });
   });
 
-  describe(`When ${InstallmentRepository.prototype.findByBenefitIdAndReferenceDate} is called`, () => {
+  describe(`When ${InstallmentRepository.prototype.findByBenefitIdAndReference} is called`, () => {
     it('Should call prisma with right params', async () => {
       const { sut, prismaInstallmentRepository } = makeSut();
 
-      await sut.findByBenefitIdAndReferenceDate(1, new Date('2022-10-10'));
+      await sut.findByBenefitIdAndReference(1, new Date('2022-10-10'));
 
       expect(prismaInstallmentRepository.findFirst).toBeCalledWith({
         where: {
@@ -91,7 +91,7 @@ describe(InstallmentRepository.name, () => {
         new Error('any prisma error'),
       );
 
-      const promise = sut.findByBenefitIdAndReferenceDate(
+      const promise = sut.findByBenefitIdAndReference(
         1,
         new Date('2022-10-10'),
       );

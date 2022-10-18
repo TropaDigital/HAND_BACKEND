@@ -1,6 +1,5 @@
 import { Prisma, Installment, PrismaClient } from '@prisma/client';
 
-import { getFindManyParams } from '../../shared/pagination/service';
 import { IInstallmentRepository } from './interfaces';
 
 export type PrismaInstallmentRepository = Prisma.InstallmentDelegate<
@@ -14,29 +13,40 @@ export class InstallmentRepository implements IInstallmentRepository {
     this.prismaRepository = prismaClient.installment;
   }
 
-  public async findAll(
-    payload?: Prisma.InstallmentWhereInput | undefined,
-  ): Promise<Installment[]> {
-    const params = await getFindManyParams<Prisma.InstallmentWhereInput>({
-      ...payload,
-      disabledAt: null,
-      disabledBy: null,
-    });
+  public async findAll(payload?: {
+    benefitId: number;
+    justActiveInstallments: boolean;
+  }): Promise<Installment[]> {
+    const query = payload?.justActiveInstallments
+      ? {
+        where: {
+          benefitId: payload?.benefitId,
+          disabledAt: null,
+          disabledBy: null,
+        },
+      }
+      : {
+        where: {
+          benefitId: payload?.benefitId,
+        },
+      };
     const result = await this.prismaRepository.findMany({
-      ...params,
+      where: {
+        ...query.where,
+      },
     });
 
     return result;
   }
 
-  public async findByBenefitIdAndReferenceDate(
+  public async findByBenefitIdAndReference(
     benefitId: number,
-    referenceDate: Date,
+    reference: string,
   ): Promise<Installment | null> {
     const result = await this.prismaRepository.findFirst({
       where: {
         benefitId,
-        referenceDate,
+        reference,
         disabledAt: null,
         disabledBy: null,
       },
@@ -62,16 +72,17 @@ export class InstallmentRepository implements IInstallmentRepository {
 
   public async softUpdate(
     id: number,
-    payload: Prisma.InstallmentCreateInput & { user: string },
+    { user, ...payload }: Prisma.InstallmentCreateInput & { user: string },
   ): Promise<void> {
     await this.prismaClient.$transaction([
       this.prismaRepository.update({
         where: { id },
-        data: { disabledAt: new Date(), disabledBy: payload.user },
+        data: { disabledAt: new Date(), disabledBy: user },
       }),
       this.prismaRepository.create({
         data: {
           ...payload,
+          createdBy: user,
         },
       }),
     ]);

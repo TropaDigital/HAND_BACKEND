@@ -1,4 +1,4 @@
-import { Benefit, BenefitType, Prisma } from '@prisma/client';
+import { Benefit, BenefitType, Installment, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import {
@@ -48,9 +48,11 @@ export interface IBenefitController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Benefit | null>>;
 
-  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Benefit>>;
+  getPostponementSimulation(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse>;
 
-  updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
+  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Benefit>>;
 
   deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
@@ -67,6 +69,11 @@ export interface IBenefitService {
   getById(id: number): Promise<Benefit | null>;
 
   create(payload: ICreateBenefitParams): Promise<Benefit>;
+
+  getPostponementSimulation(
+    benefitId: number,
+    single: boolean,
+  ): Promise<Installment[]>;
 
   postponementInstallment(payload: { id: number; user: string }): Promise<void>;
 

@@ -30,6 +30,7 @@ export const makeFakeApiHttpResponse = (
 
 export const makeLoanSimulationServiceStub =
   (): jest.Mocked<ILoanSimulationService> => ({
+    formatReferenceDate: jest.fn(),
     simulateLoanBasedOnRequestedValue: jest
       .fn()
       .mockResolvedValue(loanSimulationOfDay15OfTheMonthWithTelemedicine),

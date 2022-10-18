@@ -4,6 +4,110 @@ import { ReferenceObject, SchemaObject } from 'openapi-comment-parser';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
 
 export default {
+  GetSimulationOfPostponentResponse: {
+    type: 'object',
+    properties: {
+      statusCode: {
+        type: 'number',
+      },
+      statusCodeAsString: {
+        type: 'string',
+      },
+      data: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'number',
+            },
+            benefitId: {
+              type: 'number',
+            },
+            reference: {
+              type: 'string',
+            },
+            referenceDate: {
+              type: 'string',
+            },
+            installmentFactor: {
+              type: 'number',
+            },
+            consultantCommission: {
+              type: 'number',
+            },
+            consultantCommissionValue: {
+              type: 'number',
+            },
+            cardFees: {
+              type: 'number',
+            },
+            telemedicineFees: {
+              type: 'number',
+            },
+            bankProcessingFees: {
+              type: 'number',
+            },
+            fees: {
+              type: 'number',
+            },
+            feesValue: {
+              type: 'number',
+            },
+            finalValue: {
+              type: 'number',
+            },
+            gratificationFeeValue: {
+              type: 'number',
+            },
+            admnistrationFeeValue: {
+              type: 'number',
+            },
+            createdBy: {
+              type: 'string',
+            },
+            updatedBy: {},
+            disabledBy: {},
+            createdAt: {
+              type: 'string',
+            },
+            updatedAt: {
+              type: 'string',
+            },
+            disabledAt: {},
+            deletedAt: {},
+            associatedId: {},
+          },
+          required: [
+            'id',
+            'benefitId',
+            'reference',
+            'referenceDate',
+            'installmentFactor',
+            'consultantCommission',
+            'consultantCommissionValue',
+            'cardFees',
+            'telemedicineFees',
+            'bankProcessingFees',
+            'fees',
+            'feesValue',
+            'finalValue',
+            'gratificationFeeValue',
+            'admnistrationFeeValue',
+            'createdBy',
+            'updatedBy',
+            'disabledBy',
+            'createdAt',
+            'updatedAt',
+            'disabledAt',
+            'deletedAt',
+            'associatedId',
+          ],
+        },
+      },
+    },
+    required: ['statusCode', 'statusCodeAsString', 'data'],
+  },
   CreateBenefitPayload: {
     type: 'object',
     properties: {

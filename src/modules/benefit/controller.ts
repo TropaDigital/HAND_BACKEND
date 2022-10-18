@@ -58,12 +58,33 @@ export class BenefitController implements IBenefitController {
     return { statusCodeAsString: 'CREATED', body: result };
   }
 
+  public async getPostponementSimulation(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse> {
+    const { id, single } = this.validator.validateSchema<
+      Prisma.BenefitUpdateInput & { id: number; single: boolean }
+    >('GetPostponementSimulation', {
+      ...httpRequest.params,
+      ...httpRequest.query,
+    });
+
+    const installments = await this.benefitService.getPostponementSimulation(
+      id,
+      single,
+    );
+    return {
+      statusCodeAsString: 'OK',
+      body: installments,
+    };
+  }
+
   public async adjustContractById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
-    const { id, single } = this.validator.validateSchema<
-      Prisma.BenefitUpdateInput & { id: number; single: boolean }
-    >('UpdateBenefitById', {
+    const { id, single } = this.validator.validateSchema<{
+      id: number;
+      single: boolean;
+    }>('AdjustContractById', {
       ...httpRequest.params,
       ...httpRequest.query,
     });
@@ -78,20 +99,6 @@ export class BenefitController implements IBenefitController {
         id,
         user: String(httpRequest.user?.sub) || '',
       });
-
-    return { statusCodeAsString: 'NO_CONTENT', body: result };
-  }
-
-  public async updateById(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<void>> {
-    const { id, ...benefit } = this.validator.validateSchema<
-      Prisma.BenefitUpdateInput & { id: number }
-    >('UpdateBenefitById', {
-      ...httpRequest.body,
-      ...httpRequest.params,
-    });
-    const result = await this.benefitService.updateById(id, benefit);
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
   }

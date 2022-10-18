@@ -70,6 +70,7 @@ export interface ILoanSimulationController {
 }
 
 export interface ILoanSimulationService {
+  formatReferenceDate(date: Date): string;
   simulateLoanBasedOnRequestedValue: ({
     salary,
     salaryReceiptDate,

@@ -119,6 +119,38 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
+  public simulateAdjustment(): void {
+    /**
+     * GET /benefits/{benefitId}/adjustment/simulate
+     * @tag Benefits
+     * @summary simulate the adjusts benefit installments.
+     * @security apiKey
+     * @description adjusts benefit installments.
+     * @pathParam {number} benefitId the benefit id
+     * @queryParam {boolean} [single=false] if is to update a single installment or all the installments
+     * @response 200 {GetSimulationOfPostponentResponse} - an object with postponent simulation
+     * @responseContent {GetSimulationOfPostponentResponse} 200.application/json
+     * @responseExample {GetSimulationOfPostponentResponse} 200.application/json.GetBenefitByIdResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/benefits/:id/adjustment/simulate')
+      .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IBenefitController>(
+          this.controller,
+          'getPostponementSimulation',
+        ),
+      );
+  }
+
   private create(): void {
     /**
      * POST /benefits
@@ -154,6 +186,7 @@ export default class BenefitRouter implements IRouter {
     this.getAll();
     this.getById();
     this.adjustment();
+    this.simulateAdjustment();
 
     app.use(this.router);
   }

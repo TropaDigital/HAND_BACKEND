@@ -18,7 +18,7 @@ services:
       DATABASE_URL: mysql://root:haandbib@mysql:3306/haandbib
       PORT: 3001
       NODE_ENV: development
-      AUTH_SESSION_TTL: 3600
+      AUTH_SESSION_TTL: 36000
       AUTH_SECRET: secret
       DEFAULT_PASSWORD: any_pass
       JWT_SALT: 12
@@ -37,7 +37,7 @@ services:
     ports:
       - '3306:3306/tcp'
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'dbsql:3306']
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'dbsql:3306' ]
       timeout: 20s
       retries: 10
     environment:
@@ -53,7 +53,7 @@ services:
     container_name: redis
     command: redis-server
     healthcheck:
-      test: ['CMD', 'redis-cli', 'ping']
+      test: [ 'CMD', 'redis-cli', 'ping' ]
       interval: 30s
       timeout: 10s
       retries: 3

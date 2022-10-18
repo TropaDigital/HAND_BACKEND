@@ -87,4 +87,5 @@ export const makeAffiliationRepositoryStub =
     create: jest.fn().mockResolvedValue(makeFakeAffiliation({})),
     updateById: jest.fn(),
     deleteById: jest.fn(),
+    findByName: jest.fn(),
   });

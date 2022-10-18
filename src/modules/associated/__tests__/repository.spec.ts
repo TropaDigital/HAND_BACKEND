@@ -37,7 +37,12 @@ describe(AssociatedRepository.name, () => {
               isDefault: 'desc',
             },
           },
-          benefits: true,
+          benefits: {
+            include: {
+              affiliation: true,
+              consultant: true,
+            },
+          },
           affiliations: true,
         },
         where: {},
@@ -67,7 +72,12 @@ describe(AssociatedRepository.name, () => {
               isDefault: 'desc',
             },
           },
-          benefits: true,
+          benefits: {
+            include: {
+              affiliation: true,
+              consultant: true,
+            },
+          },
           affiliations: true,
         },
         where: { id: { contains: 1 } },
@@ -138,7 +148,12 @@ describe(AssociatedRepository.name, () => {
               isDefault: 'desc',
             },
           },
-          benefits: true,
+          benefits: {
+            include: {
+              affiliation: true,
+              consultant: true,
+            },
+          },
           affiliations: true,
         },
         where: { id: 777 },

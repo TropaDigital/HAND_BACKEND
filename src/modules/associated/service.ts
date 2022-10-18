@@ -19,11 +19,12 @@ import {
 } from './interfaces';
 
 export class AssociatedService implements IAssociatedService {
-  constructor(private readonly associatedRepository: IAssociatedRepository) {}
+  constructor(private readonly associatedRepository: IAssociatedRepository) { }
 
   public async getBankAccountByAssociatedId(
     associatedId: number,
   ): Promise<BankAccount[]> {
+    await this.getById(associatedId);
     return this.associatedRepository.getBankAccountsByAssociatedId(
       associatedId,
     );
@@ -34,6 +35,7 @@ export class AssociatedService implements IAssociatedService {
     bankId: number,
     payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
   ): Promise<BankAccount> {
+    await this.getById(associatedId);
     if (payload.isDefault) {
       const bankAccounts = await this.getBankAccountByAssociatedId(
         associatedId,
@@ -104,10 +106,7 @@ export class AssociatedService implements IAssociatedService {
     id: number,
     payload: IUpdateAssociatedInput,
   ): Promise<void> {
-    const associatedExists = await this.associatedRepository.findById(id);
-    if (!associatedExists) {
-      throw new NotFoundError('associated not found with provided id');
-    }
+    await this.getById(id);
     const result = await this.associatedRepository.updateById(id, payload);
     return result;
   }
@@ -115,6 +114,7 @@ export class AssociatedService implements IAssociatedService {
   public async getEmploymentRelationshipsByAssociatedId(
     associatedId: number,
   ): Promise<EmploymentRelationship[]> {
+    await this.getById(associatedId);
     return this.associatedRepository.getEmploymentRelationshipsByAssociatedId(
       associatedId,
     );
@@ -123,6 +123,7 @@ export class AssociatedService implements IAssociatedService {
   public async getAddressesByAssociatedId(
     associatedId: number,
   ): Promise<Address[]> {
+    await this.getById(associatedId);
     return this.associatedRepository.getAddressesByAssociatedId(associatedId);
   }
 
@@ -133,6 +134,7 @@ export class AssociatedService implements IAssociatedService {
       | Prisma.EmploymentRelationshipUpdateInput
       | Prisma.EmploymentRelationshipCreateInput,
   ): Promise<EmploymentRelationship> {
+    await this.getById(associatedId);
     if (payload.isDefault) {
       const employmentRelationships =
         await this.getEmploymentRelationshipsByAssociatedId(associatedId);
@@ -162,6 +164,7 @@ export class AssociatedService implements IAssociatedService {
     addressId: number,
     payload: Prisma.AddressUpdateInput | Prisma.AddressCreateInput,
   ): Promise<Address> {
+    await this.getById(associatedId);
     if (payload.isDefault) {
       const addresses = await this.getAddressesByAssociatedId(associatedId);
       await Promise.all(
@@ -185,10 +188,7 @@ export class AssociatedService implements IAssociatedService {
   }
 
   public async deleteById(id: number): Promise<void> {
-    const associatedExists = await this.associatedRepository.findById(id);
-    if (!associatedExists) {
-      throw new NotFoundError('associated not found with provided id');
-    }
+    await this.getById(id);
     const result = await this.associatedRepository.deleteById(id);
     return result;
   }

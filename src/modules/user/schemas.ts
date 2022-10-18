@@ -10,20 +10,22 @@ export const CreateUser = Joi.object<Prisma.UserCreateInput>({
   userName: Joi.string().min(3).required(),
   name: Joi.string().required(),
   password: Joi.string().required(),
-  status: Joi.string().valid(...Object.values(Status)),
+  status: Joi.string()
+    .valid(...Object.values(Status))
+    .default(Status.ACTIVE),
 });
 
 export const UpdateUserById = Joi.object<
-  Prisma.UserUpdateInput & { id: number }
+  Prisma.UserUpdateInput & { id: number; roleId?: number }
 >({
-  id: Joi.number().required(),
+  id: Joi.number().min(1).required(),
   userName: Joi.string().min(3),
   email: Joi.string().email(),
   name: Joi.string().required(),
-  password: Joi.string(),
-  status: Joi.string(),
+  status: Joi.string().valid(...Object.values(Status)),
+  roleId: Joi.number().min(1),
 });
 
 export const DeleteUserById = Joi.object<{ id: number }>({
-  id: Joi.number().required().min(1),
+  id: Joi.number().min(1).required(),
 });

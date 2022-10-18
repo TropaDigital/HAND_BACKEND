@@ -5,9 +5,12 @@ import {
   Benefit,
   BenefitStatus,
   EmploymentRelationship,
+  Installment,
   Prisma,
 } from '@prisma/client';
+import { addMonths, differenceInMonths, endOfMonth } from 'date-fns';
 
+import ErrorCodes from '../../enums/ErrorCodes';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { MissingInvalidParamsError, NotFoundError } from '../../shared/errors';
 import {
@@ -15,7 +18,12 @@ import {
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import { IAssociatedRepository } from '../associated/interfaces';
-import { ILoanSimulationService } from '../loanSimulation/interfaces';
+import { IInstallmentRepository } from '../installment/interfaces';
+import { loanConfig } from '../loanSimulation/consts';
+import {
+  ILoanSimulationBasedOnRequestedValueParams,
+  ILoanSimulationService,
+} from '../loanSimulation/interfaces';
 import {
   IBenefitRepository,
   IBenefitService,
@@ -27,7 +35,8 @@ export class BenefitService implements IBenefitService {
     private readonly benefitRepository: IBenefitRepository,
     private readonly associatedRepository: IAssociatedRepository,
     private readonly loanSimulationService: ILoanSimulationService,
-  ) {}
+    private readonly installmentRepository: IInstallmentRepository,
+  ) { }
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -61,6 +70,26 @@ export class BenefitService implements IBenefitService {
     return disposiblePaymentDates[2];
   }
 
+  private validateBenefitPeriodWhenEmploymentRelationshipIsTemporary(
+    lastInstallmentReferenceDate?: Date,
+    employmentRelationshipFinalDate?: Date | null,
+  ): void {
+    if (!lastInstallmentReferenceDate || !employmentRelationshipFinalDate) {
+      return;
+    }
+    const installmentDifferenceInMonths = differenceInMonths(
+      lastInstallmentReferenceDate,
+      endOfMonth(employmentRelationshipFinalDate),
+    );
+
+    if (installmentDifferenceInMonths < 2) {
+      throw new MissingInvalidParamsError(
+        'the benefit must finish at least two months before the end of the temporary contract',
+        ErrorCodes.CREATE_BENEFIT_ERROR_001,
+      );
+    }
+  }
+
   public async create(payload: ICreateBenefitParams): Promise<Benefit> {
     const {
       type,
@@ -77,6 +106,7 @@ export class BenefitService implements IBenefitService {
       salary,
       administrationFeeValue,
       affiliationId,
+      createdBy,
     } = payload;
 
     const {
@@ -86,9 +116,8 @@ export class BenefitService implements IBenefitService {
       affiliations,
       ...associated
     } = (await this.associatedRepository.findById(associatedId)) || {};
-    if (!associated) {
-      throw new NotFoundError('Associated not found with the provided id');
-    }
+
+    this.validateAssociated(associated);
 
     const address = (addresses || []).find(
       (addressItem: Address) => addressItem.id === addressId,
@@ -101,35 +130,30 @@ export class BenefitService implements IBenefitService {
         employmentRelationshipItem.id === employmentRelationshipId,
     ) as EmploymentRelationship;
 
-    if (![address, bankAccount, employmentRelationship].every(item => !!item)) {
-      throw new MissingInvalidParamsError(
-        'the provided data is invalid, please check if the associated was created correctly',
-      );
-    }
+    this.validateAssociatedData(address, bankAccount, employmentRelationship);
 
     const {
       consultantCommission,
-      isRequestedValueValid,
       totalValue,
       installments,
       firstPaymentDates,
-    } = await this.loanSimulationService.simulateLoanBasedOnRequestedValue({
+    } = await this.getLoanSimulation({
       hasGratification,
       joinedTelemedicine,
       monthOfPayment,
       numberOfInstallments,
       requestedValue,
       salary,
-      salaryReceiptDate: new Date(
-        new Date().setDate(employmentRelationship.paymentDay),
-      ),
+      employmentRelationship,
       administrationFeeValue,
       consultantId,
     });
 
-    if (!isRequestedValueValid) {
-      throw new MissingInvalidParamsError(
-        'the conditions of the benefit does not match with the rules, plase check the parameters',
+    if (employmentRelationship.contractType === 'TEMPORARY') {
+      const lastInstallment = [...installments].pop();
+      this.validateBenefitPeriodWhenEmploymentRelationshipIsTemporary(
+        lastInstallment?.referenceDate,
+        employmentRelationship.finalDate,
       );
     }
 
@@ -137,7 +161,6 @@ export class BenefitService implements IBenefitService {
       birthDate,
       cellPhone,
       createdAt,
-      createdBy,
       deletedAt,
       email,
       emissionDate,
@@ -226,14 +249,177 @@ export class BenefitService implements IBenefitService {
       },
       ...(consultantId
         ? {
-            consultant: {
-              connect: {
-                id: consultantId,
-              },
+          consultant: {
+            connect: {
+              id: consultantId,
             },
-          }
+          },
+        }
         : {}),
     });
+    await this.installmentRepository.createMany(
+      [...installments].map(installment => ({ ...installment, createdBy })),
+    );
+
+    return result;
+  }
+
+  private async getLoanSimulation(
+    payload: Omit<
+      ILoanSimulationBasedOnRequestedValueParams,
+      'salaryReceiptDate'
+    > & {
+      employmentRelationship: EmploymentRelationship;
+    },
+  ): Promise<{
+    consultantCommission: any;
+    isRequestedValueValid: any;
+    totalValue: any;
+    installments: any;
+    firstPaymentDates: any;
+  }> {
+    const result =
+      await this.loanSimulationService.simulateLoanBasedOnRequestedValue({
+        ...payload,
+        salaryReceiptDate: new Date(
+          new Date().setDate(payload.employmentRelationship.paymentDay),
+        ),
+      });
+
+    if (!result.isRequestedValueValid) {
+      throw new MissingInvalidParamsError(
+        'the conditions of the benefit does not match with the rules, plase check the parameters',
+      );
+    }
+
+    return result;
+  }
+
+  private validateAssociatedData(
+    address: Address,
+    bankAccount: BankAccount,
+    employmentRelationship: EmploymentRelationship,
+  ) {
+    if (![address, bankAccount, employmentRelationship].every(item => !!item)) {
+      throw new MissingInvalidParamsError(
+        'the provided data is invalid, please check if the associated was created correctly',
+      );
+    }
+  }
+
+  private validateAssociated(
+    associated:
+      | {
+        id: number;
+        name: string;
+        lastName: string;
+        gender: string;
+        birthDate: Date;
+        maritalStatus: string;
+        nationality: string;
+        placeOfBirth: string;
+        taxId: string;
+        registerId: string;
+        emissionState: string;
+        issuingAgency: string;
+        emissionDate: Date;
+        cellPhone: string;
+        email: string;
+        father: string;
+        mother: string;
+        partner: string | null;
+        createdBy: string;
+        updatedBy: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
+      }
+      | { [key: string]: any },
+  ) {
+    if (!associated) {
+      throw new NotFoundError('Associated not found with the provided id');
+    }
+  }
+
+  public async postponementInstallment(payload: {
+    id: number;
+    user: string;
+  }): Promise<void> {
+    const times = await this.benefitRepository.countEditTimes(payload.id);
+
+    if (times > 3) {
+      throw new Error('cannot update installment more than 3 times');
+    }
+    if (times === 3) {
+      const installments = await this.installmentRepository.findAll({
+        benefitId: payload.id,
+      });
+
+      return this.singlePostponementInstallment({
+        id: payload.id,
+        user: payload.user,
+        reference: new Date(installments[0].reference),
+      });
+    }
+
+    const installments = await this.installmentRepository.findAll({
+      benefitId: payload.id,
+    });
+
+    await Promise.all(
+      installments.map(installment =>
+        this.installmentRepository.softUpdate(installment.id, {
+          ...installment,
+          finalValue: installment.finalValue * (loanConfig.adjustmentFee / 100),
+          referenceDate: addMonths(installment.referenceDate, 1),
+          user: payload.user,
+        }),
+      ),
+    );
+  }
+
+  public async singlePostponementInstallment(payload: {
+    id: number;
+    reference: Date;
+    user: string;
+  }): Promise<void> {
+    const installment =
+      await this.installmentRepository.findByBenefitIdAndReferenceDate(
+        payload.id,
+        payload.reference,
+      );
+    const nextInstallment =
+      await this.installmentRepository.findByBenefitIdAndReferenceDate(
+        payload.id,
+        addMonths(payload.reference, 1),
+      );
+
+    if (!installment || !nextInstallment) {
+      throw new NotFoundError();
+    }
+
+    const recalculatedFinalValue = this.recalculateFinalValue(
+      installment,
+      nextInstallment,
+    );
+
+    await this.installmentRepository.softUpdate(installment.id, {
+      ...installment,
+      finalValue: recalculatedFinalValue,
+      referenceDate: addMonths(installment.referenceDate, 1),
+      user: payload.user,
+    });
+
+    await this.installmentRepository.disable(nextInstallment.id, payload.user);
+  }
+
+  private recalculateFinalValue(
+    installment: Installment,
+    nextInstallment: Installment,
+  ) {
+    const sumOfInstallmentValue =
+      installment.finalValue + nextInstallment.finalValue;
+    const result = sumOfInstallmentValue * (loanConfig.adjustmentFee / 100);
 
     return result;
   }

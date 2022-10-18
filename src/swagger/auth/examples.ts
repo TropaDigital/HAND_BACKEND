@@ -9,6 +9,29 @@ export default {
       description: 'invalid credentials',
     },
   },
+  AuthenticatedUserResponse: {
+    value: {
+      statusCode: 200,
+      statusCodeAsString: 'OK',
+      data: {
+        id: 1,
+        userName: 'afonsobr',
+        email: 'brunohafonso@gmail.com',
+        name: 'Bruno Afonso',
+        status: 'ACTIVE',
+        roleId: 1,
+        role: {
+          id: 1,
+          name: 'admin',
+          description: 'nível de acesso total',
+          updatedBy: null,
+          createdAt: '2022-09-06T03:15:13.000Z',
+          updatedAt: '2022-10-04T23:46:09.301Z',
+          deletedAt: null,
+        },
+      },
+    },
+  },
   AuthSuccessResponse: {
     value: {
       statusCode: 200,
@@ -19,11 +42,20 @@ export default {
           userName: 'afonsobr',
           email: 'brunohafonso@gmail.com',
           name: 'Bruno Afonso',
-          role: 'ADMIN',
           status: 'ACTIVE',
+          roleId: 1,
+          role: {
+            id: 1,
+            name: 'admin',
+            description: 'nível de acesso total',
+            updatedBy: null,
+            createdAt: '2022-09-06T03:15:13.000Z',
+            updatedAt: '2022-10-04T22:39:29.222Z',
+            deletedAt: null,
+          },
         },
         token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZm9uc29iciIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDc3ODcxMCwiZXhwIjoxNjYwNzgyMzEwfQ.IsDZvyZnzVPh7ztYTTC0T6UWI3kmNfnASzfiJFHoImc',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZm9uc29iciIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY2NDkyNTc5MCwiZXhwIjoxNjY0OTYxNzkwfQ.20uQF0ODIBz9Mj3ymCwhq7NNGis16IO_1CuPf-jtCkA',
       },
     },
   },

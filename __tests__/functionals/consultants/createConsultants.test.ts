@@ -51,11 +51,6 @@ describe('POST /consultants - Create new consultant', () => {
         friendlyFieldName: 'state',
         message: '"state" is required',
       },
-      {
-        fieldName: 'createdBy',
-        friendlyFieldName: 'createdBy',
-        message: '"createdBy" is required',
-      },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
     expect(response.body).toEqual(invalidParamsResponse);

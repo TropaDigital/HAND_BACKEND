@@ -1,7 +1,7 @@
 import { IFindAllParams, IPaginatedAResult } from './interfaces';
 
 export const parsePrismaFindManyContains = <T>(object: T): T => {
-  const entries = Object.entries(object);
+  const entries = Object.entries(object || {});
 
   const result = entries.reduce((acc: any, [key, value]) => {
     acc[key] =

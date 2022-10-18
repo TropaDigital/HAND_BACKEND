@@ -12,6 +12,8 @@ export interface IAffiliationRepository {
   findAll(): Promise<Affiliation[]>;
 
   findById(id: number): Promise<Affiliation | null>;
+
+  findByName(name: string): Promise<Affiliation | null>;
 }
 
 export interface IAffiliationController {

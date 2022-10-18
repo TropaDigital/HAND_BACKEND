@@ -18,7 +18,7 @@ export class BenefitController implements IBenefitController {
   constructor(
     private readonly benefitService: IBenefitService,
     private readonly validator: IValidator<typeof schemas>,
-  ) {}
+  ) { }
 
   public async getAll(
     httpRequest: IApiHttpRequest<
@@ -52,9 +52,34 @@ export class BenefitController implements IBenefitController {
       'CreateBenefit',
       { ...httpRequest.body, createdBy: httpRequest.user?.sub },
     );
+
     const result = await this.benefitService.create(benefit);
 
     return { statusCodeAsString: 'CREATED', body: result };
+  }
+
+  public async adjustContractById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
+    const { id, single } = this.validator.validateSchema<
+      Prisma.BenefitUpdateInput & { id: number; single: boolean }
+    >('UpdateBenefitById', {
+      ...httpRequest.params,
+      ...httpRequest.query,
+    });
+
+    const result = single
+      ? await this.benefitService.singlePostponementInstallment({
+        id,
+        reference: new Date(),
+        user: String(httpRequest.user?.sub) || '',
+      })
+      : await this.benefitService.postponementInstallment({
+        id,
+        user: String(httpRequest.user?.sub) || '',
+      });
+
+    return { statusCodeAsString: 'NO_CONTENT', body: result };
   }
 
   public async updateById(

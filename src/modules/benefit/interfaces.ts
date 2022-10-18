@@ -15,6 +15,7 @@ export interface ICreateBenefitParams
   bankAccountId: number;
   employmentRelationshipId: number;
   addressId: number;
+  createdBy: string;
 }
 
 export interface IBenefitRepository {
@@ -29,6 +30,8 @@ export interface IBenefitRepository {
   ): Promise<IPaginatedAResult<Benefit[]>>;
 
   findById(id: number): Promise<Benefit | null>;
+
+  countEditTimes(id: number): Promise<number>;
 }
 
 export interface IBenefitController {
@@ -50,6 +53,10 @@ export interface IBenefitController {
   updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
   deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
+
+  adjustContractById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>>;
 }
 
 export interface IBenefitService {
@@ -61,7 +68,25 @@ export interface IBenefitService {
 
   create(payload: ICreateBenefitParams): Promise<Benefit>;
 
+  postponementInstallment(payload: { id: number; user: string }): Promise<void>;
+
+  singlePostponementInstallment(payload: {
+    id: number;
+    reference: Date;
+    user: string;
+  }): Promise<void>;
+
   updateById(id: number, payload: Prisma.BenefitUpdateInput): Promise<void>;
 
   deleteById(id: number): Promise<void>;
+}
+
+export interface IBenefitFiltersPayload {
+  associated?: string;
+  affiliation?: string;
+  publicAgency?: string;
+  contractModel?: string;
+  contractType?: string;
+  installmentNumber?: number;
+  consultant?: string;
 }

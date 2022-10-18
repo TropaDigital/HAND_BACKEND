@@ -25,8 +25,16 @@ describe('POST /users - Create new user', () => {
       email: 'any@mail.com',
       id: expect.any(Number),
       name: 'Mateus',
-      role: null,
-      roleId: null,
+      role: {
+        createdAt: expect.anything(),
+        deletedAt: null,
+        description: 'nível de acesso limitado',
+        id: 2,
+        name: 'operational',
+        updatedAt: expect.anything(),
+        updatedBy: null,
+      },
+      roleId: 2,
       status: 'ACTIVE',
       userName: 'any_user_name',
     });

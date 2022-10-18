@@ -1,10 +1,10 @@
 import { Affiliation, Prisma } from '@prisma/client';
 
-import { NotFoundError } from '../../shared/errors';
+import { ConflictError, NotFoundError } from '../../shared/errors';
 import { IAffiliationRepository, IAffiliationService } from './interfaces';
 
 export class AffiliationService implements IAffiliationService {
-  constructor(private readonly affiliationRepository: IAffiliationRepository) {}
+  constructor(private readonly affiliationRepository: IAffiliationRepository) { }
 
   public async getAll(): Promise<Affiliation[]> {
     const result = await this.affiliationRepository.findAll();
@@ -22,6 +22,13 @@ export class AffiliationService implements IAffiliationService {
   public async create(
     payload: Prisma.AffiliationCreateInput,
   ): Promise<Affiliation> {
+    const affiliationNameAlreadyInUse =
+      await this.affiliationRepository.findByName(payload.name);
+
+    if (affiliationNameAlreadyInUse) {
+      throw new ConflictError('affiliation name already in use');
+    }
+
     const result = await this.affiliationRepository.create(payload);
     return result;
   }
@@ -30,6 +37,18 @@ export class AffiliationService implements IAffiliationService {
     id: number,
     payload: Partial<Omit<Affiliation, 'id'>>,
   ): Promise<void> {
+    if (payload.name) {
+      const affiliationNameAlreadyInUse =
+        await this.affiliationRepository.findByName(payload.name);
+
+      if (
+        affiliationNameAlreadyInUse &&
+        affiliationNameAlreadyInUse.id !== id
+      ) {
+        throw new ConflictError('affiliation name already in use');
+      }
+    }
+
     const affiliationExists = await this.affiliationRepository.findById(id);
     if (!affiliationExists) {
       throw new NotFoundError('affiliation not found with provided id');

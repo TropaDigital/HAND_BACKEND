@@ -144,6 +144,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       gratificationFeeValue: 0,
       admnistrationFeeValue: installmentAdministrationFeeValue,
       reference: this.formatReferenceDate(currentDate),
+      referenceDate: currentDate,
       cardFees: this.getCardFees(1),
       telemedicineFees: this.getTelemedicineFees(joinedTelemedicine, 1),
       bankProcessingFees: this.getbankProcessingFees(1),
@@ -170,6 +171,11 @@ export class LoanSimulationService implements ILoanSimulationService {
     administrationFeeValue,
   }: IFormatInstallmentParams): IInstallmentDetails[] {
     let currentDate = startOfDay(new Date());
+    if (monthOfPayment === MonthOfPayment.NEXT_MONTH) {
+      currentDate = addMonths(currentDate, 1);
+    } else if (monthOfPayment === MonthOfPayment.LAST_MONTH) {
+      currentDate = addMonths(currentDate, 2);
+    }
     const firstInstallment = this.formatInstallmentDetails({
       currentDate,
       requestedValue,
@@ -187,6 +193,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       const formatedInstallment: IInstallmentDetails = {
         ...installment,
         reference: this.formatReferenceDate(currentDate),
+        referenceDate: currentDate,
       };
       currentDate = addMonths(currentDate, 1);
       return formatedInstallment;

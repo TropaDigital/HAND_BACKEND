@@ -105,11 +105,6 @@ describe('PATCH /consultants/{id} - Update consultant by id', () => {
         friendlyFieldName: 'commission',
         message: '"commission" must be a number',
       },
-      {
-        fieldName: 'createdBy',
-        friendlyFieldName: 'createdBy',
-        message: '"createdBy" must be a string',
-      },
     ]);
     expect(response.status).toBe(invalidParamsResponse.statusCode);
     expect(response.body).toEqual(invalidParamsResponse);

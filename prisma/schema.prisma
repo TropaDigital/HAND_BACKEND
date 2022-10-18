@@ -95,11 +95,13 @@ model Associated {
 
   affiliations Affiliation[]
 
-  createdBy String    @map(name: "created_by") @db.VarChar(75)
-  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
+  createdBy      String           @map(name: "created_by") @db.VarChar(75)
+  updatedBy      String?          @map(name: "updated_by") @db.VarChar(75)
+  createdAt      DateTime         @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt      DateTime         @updatedAt @map(name: "updated_at")
+  deletedAt      DateTime?        @map(name: "deleted_at") @db.DateTime(0)
+  Installment    Installment[]
+  benefitHistory BenefitHistory[]
 }
 
 model Affiliation {
@@ -200,11 +202,56 @@ model Benefit {
   affiliation   Affiliation @relation(fields: [affiliationId], references: [id])
   affiliationId Int
 
-  createdBy String    @map(name: "created_by") @db.VarChar(75)
-  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
+  createdBy      String           @map(name: "created_by") @db.VarChar(75)
+  updatedBy      String?          @map(name: "updated_by") @db.VarChar(75)
+  createdAt      DateTime         @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt      DateTime         @updatedAt @map(name: "updated_at")
+  deletedAt      DateTime?        @map(name: "deleted_at") @db.DateTime(0)
+  benefitHistory BenefitHistory[]
+  Installment    Installment[]
+}
+
+model Installment {
+  id        Int      @id @default(autoincrement())
+  Benefit   Benefit? @relation(fields: [benefitId], references: [id])
+  benefitId Int?
+
+  reference                 String
+  referenceDate             DateTime @map("reference_date")
+  installmentFactor         Float    @default(0) @map(name: "installment_factor")
+  consultantCommission      Float    @default(0) @map(name: "consultant_commission")
+  consultantCommissionValue Float    @default(0) @map(name: "consultant_commission_value")
+  cardFees                  Float    @default(0) @map(name: "card_fees")
+  telemedicineFees          Float    @default(0) @map(name: "telemedicine_fees")
+  bankProcessingFees        Float    @default(0) @map(name: "bank_processing_fees")
+  fees                      Float    @default(0) @map(name: "fees")
+  feesValue                 Float    @default(0) @map(name: "fees_value")
+  finalValue                Float    @default(0) @map(name: "final_value")
+  gratificationFeeValue     Float?   @map(name: "gratification_fee_value")
+  admnistrationFeeValue     Float?   @map(name: "administration_fee_value")
+
+  createdBy    String      @map(name: "created_by") @db.VarChar(75)
+  updatedBy    String?     @map(name: "updated_by") @db.VarChar(75)
+  disabledBy   String?     @map(name: "disabled_by") @db.VarChar(75)
+  createdAt    DateTime    @default(now()) @map(name: "created_at") @db.DateTime(0)
+  updatedAt    DateTime    @updatedAt @map(name: "updated_at")
+  disabledAt   DateTime?   @map(name: "disabled_at") @db.DateTime(0)
+  deletedAt    DateTime?   @map(name: "deleted_at") @db.DateTime(0)
+  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  associatedId Int?
+}
+
+model BenefitHistory {
+  id             Int                    @id @default(autoincrement())
+  adjustmentType BenefitAdjustmentType? @map(name: "adjustment_type")
+  Benefit        Benefit?               @relation(fields: [benefitId], references: [id])
+  benefitId      Int?
+  adjustment     Json
+
+  createdBy    String      @map(name: "created_by") @db.VarChar(75)
+  createdAt    DateTime    @default(now()) @map(name: "created_at") @db.DateTime(0)
+  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  associatedId Int?
 }
 
 model Role {
@@ -218,6 +265,11 @@ model Role {
   createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
   updatedAt DateTime  @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
+}
+
+enum BenefitAdjustmentType {
+  POSTPONEMENT
+  SINGLE_POSTPONEMENT
 }
 
 enum BenefitStatus {

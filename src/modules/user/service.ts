@@ -4,7 +4,7 @@ import { IMailerService } from 'src/shared/mailer/interfaces';
 import { authConfig } from '../../config/auth';
 import ErrorCodes from '../../enums/ErrorCodes';
 import { IAuthenticationService } from '../../shared/auth/interfaces';
-import { NotFoundError } from '../../shared/errors';
+import { ConflictError, NotFoundError } from '../../shared/errors';
 import {
   IUserRepository,
   IUserService,
@@ -17,7 +17,7 @@ export class UserService implements IUserService {
     private readonly userRepository: IUserRepository,
     private readonly authService: IAuthenticationService,
     private readonly mailerService: IMailerService,
-  ) {}
+  ) { }
 
   public async getAll(): Promise<IResponseUser[]> {
     const users = await await this.userRepository.findAll();
@@ -44,7 +44,57 @@ export class UserService implements IUserService {
     return result;
   }
 
+  private async validateUserBeforeCreate(
+    payload: Prisma.UserCreateInput,
+  ): Promise<void> {
+    if (payload.userName) {
+      const usernameAlreadyInUse = await this.userRepository.findByUserName(
+        payload.userName,
+      );
+      if (usernameAlreadyInUse) {
+        throw new ConflictError('username already in use');
+      }
+    }
+
+    if (payload.email) {
+      const emailAlreadyInUse = await this.userRepository.findByEmail(
+        payload.email,
+      );
+
+      if (emailAlreadyInUse) {
+        throw new ConflictError('email already in use');
+      }
+    }
+  }
+
+  private async validateUserBeforeUpdate(
+    payload: {
+      id: number;
+    } & Partial<Omit<User, 'id'>>,
+  ): Promise<void> {
+    if (payload.userName) {
+      const usernameAlreadyInUse = await this.userRepository.findByUserName(
+        payload.userName,
+      );
+      if (usernameAlreadyInUse && usernameAlreadyInUse.id !== payload.id) {
+        throw new ConflictError('username already in use');
+      }
+    }
+
+    if (payload.email) {
+      const emailAlreadyInUse = await this.userRepository.findByEmail(
+        payload.email,
+      );
+
+      if (emailAlreadyInUse && emailAlreadyInUse.id !== payload.id) {
+        throw new ConflictError('email already in use');
+      }
+    }
+  }
+
   public async create(payload: Prisma.UserCreateInput): Promise<IResponseUser> {
+    await this.validateUserBeforeCreate(payload);
+
     const hashedPassword = await this.authService.hashPassword(
       payload.password,
       authConfig().JWT_SALT,
@@ -63,6 +113,8 @@ export class UserService implements IUserService {
     if (!userExists) {
       throw new NotFoundError('user not found with provided id');
     }
+    await this.validateUserBeforeUpdate({ id, ...payload });
+
     const result = await this.userRepository.updateById(id, payload);
 
     return result;

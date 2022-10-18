@@ -28,7 +28,7 @@ describe('POST /benefits - Create new benefit', () => {
     await global.prismaClient?.benefit.deleteMany();
   });
 
-  it('Should return 201 with created benefit', async () => {
+  it.only('Should return 201 with created benefit', async () => {
     const params = await makeFakeCreateBenefitParams();
 
     const response = await global.testRequest

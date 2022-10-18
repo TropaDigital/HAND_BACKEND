@@ -1,3 +1,56 @@
+## [1.16.0](https://github.com/haandsolutions/haand-bib/compare/v1.15.1...v1.16.0) (2022-10-18)
+
+
+### :bug: Fixes
+
+* adjust the filters of benefits ([c032376](https://github.com/haandsolutions/haand-bib/commit/c032376eb61638c82cdf29bc466de47b0793d747))
+* adjust the filters of benefits ([30e402c](https://github.com/haandsolutions/haand-bib/commit/30e402ca499d740682bf2df88fcb021b225a70d5))
+
+
+### :sparkles: New Features
+
+* add disabled field to installment model ([49f221f](https://github.com/haandsolutions/haand-bib/commit/49f221fa78457dfb1ae72877ac420229d514237f))
+* add rule to validate the final date of benefit to temporary emp relationship ([52e3b6d](https://github.com/haandsolutions/haand-bib/commit/52e3b6d2c55c2e3f1c3e2f97851b104afd44caf1))
+* create benefit history model ([770d6d6](https://github.com/haandsolutions/haand-bib/commit/770d6d6ce90cd531a5381a4147d27f7e1cc00e9d))
+* create installment model ([48073ab](https://github.com/haandsolutions/haand-bib/commit/48073abdb7ca095ef18a3eb702b201e6e6cb4f4d))
+* create installment module ([dc3e677](https://github.com/haandsolutions/haand-bib/commit/dc3e67753ca0ac1607e739323abaf33c895f53db))
+* create installment module ([f4a3324](https://github.com/haandsolutions/haand-bib/commit/f4a33245a1ac158681d47445464fa861175dc498))
+* create installment repository ([6e6f857](https://github.com/haandsolutions/haand-bib/commit/6e6f857b7039b97cac553dd83441ba4cdffdebe4))
+* create installment service ([f7f98fd](https://github.com/haandsolutions/haand-bib/commit/f7f98fdc44d6637533eb76a060d1d680e4af669a))
+* create models ([a9bf320](https://github.com/haandsolutions/haand-bib/commit/a9bf3207275d86b99b2881c2ee0bca82df8ed91d))
+* create models ([e3252a8](https://github.com/haandsolutions/haand-bib/commit/e3252a8fde136a9bf42d04ceba46a34a8fdd17c9))
+* update benefit module ([512bb0b](https://github.com/haandsolutions/haand-bib/commit/512bb0bb5591c76c16e4c0dd093e7109f53d8ad1))
+* update benefit test ([f675b3f](https://github.com/haandsolutions/haand-bib/commit/f675b3ffb8334e049801d571f22fafeeddc3d259))
+* update benefit test ([a0afd8d](https://github.com/haandsolutions/haand-bib/commit/a0afd8d3ca9e0a4d14ebc1758479ebf95aa09597))
+* update installment module ([0bd0461](https://github.com/haandsolutions/haand-bib/commit/0bd04618c78c3e68723c7fe4e20a1daaa4cc091c))
+* update installment schema ([61be440](https://github.com/haandsolutions/haand-bib/commit/61be4404975e4332278e64f0fa8ed98a6f4c572b))
+* update loan simulation module ([af36a26](https://github.com/haandsolutions/haand-bib/commit/af36a2629fcac7ba939dd978a6975603a304db27))
+
+
+### :zap: Refactor
+
+* adjust the users module including conflict validation ([ec79c6a](https://github.com/haandsolutions/haand-bib/commit/ec79c6a97bce641d18e810e047c4863b64ec605d))
+
+
+### :barber: Style
+
+* add editorconfig file to keep the code style ([bca464e](https://github.com/haandsolutions/haand-bib/commit/bca464e7c88746a8f7913ae4d81845356ddaeccb))
+
+
+### :white_check_mark: Tests
+
+* update tests ([e1d2f1a](https://github.com/haandsolutions/haand-bib/commit/e1d2f1ae1dc4a7a761e48de5f93350711d20f382))
+* update tests ([da4cc42](https://github.com/haandsolutions/haand-bib/commit/da4cc425e901eab1bb7fc19b1d3ef1b82cf8f408))
+
+
+### :memo: Documentation
+
+* adjust the docs of affiliation module ([cb2028d](https://github.com/haandsolutions/haand-bib/commit/cb2028df50b4a3fb69519ca8ac4af97c84a2e1dd))
+* adjust the docs of associateds module ([abc90eb](https://github.com/haandsolutions/haand-bib/commit/abc90eb8b50eed4badd8832fd05924544722f579))
+* adjust the docs of modules ([4b57721](https://github.com/haandsolutions/haand-bib/commit/4b577214a1bee0d103c9fb98f0ed82dea91e47e8))
+* adjust the docs of role module ([0ecfc68](https://github.com/haandsolutions/haand-bib/commit/0ecfc68267f38788c0a717883989c5a8fb70f1c3))
+* adjust the users module swagger docs ([0e07497](https://github.com/haandsolutions/haand-bib/commit/0e07497082859df809c4e7b09cdbbb760d734e5d))
+
 ### [1.15.1](https://github.com/haandsolutions/haand-bib/compare/v1.15.0...v1.15.1) (2022-09-22)
 
 

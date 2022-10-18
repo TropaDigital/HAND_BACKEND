@@ -1,3 +1,15 @@
+### [1.16.1](https://github.com/haandsolutions/haand-bib/compare/v1.16.0...v1.16.1) (2022-10-18)
+
+
+### :white_check_mark: Tests
+
+* adjust the mocks ([ec3bde2](https://github.com/haandsolutions/haand-bib/commit/ec3bde24c38652ebda34569e551aa2774196fd41))
+
+
+### :bug: Fixes
+
+* adjust the postponement flow ([1b1f32b](https://github.com/haandsolutions/haand-bib/commit/1b1f32b8158b2971b48d6181c142bda9811fc239))
+
 ## [1.16.0](https://github.com/haandsolutions/haand-bib/compare/v1.15.1...v1.16.0) (2022-10-18)
 
 

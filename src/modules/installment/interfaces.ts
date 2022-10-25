@@ -1,9 +1,19 @@
-import { Prisma, Installment } from '@prisma/client';
+import { Prisma, Installment, InstallmentStatus } from '@prisma/client';
 
 export interface IInstallmentRepository {
+  updateInstallmentByBenefitIdAndInstallmentId(
+    benefitId: number,
+    installmentId: number,
+    payload: Prisma.InstallmentUncheckedUpdateManyInput,
+  ): Promise<void>;
+  findInstallmentByBenefitIdAndInstallmentIdAndStatus(
+    benefitId: number,
+    installmentId: number,
+    status: InstallmentStatus,
+  ): Promise<Installment | null>;
   findAll(payload?: {
     benefitId: number;
-    justActiveInstallments: boolean;
+    justPendingInstallments: boolean;
   }): Promise<Installment[]>;
   findByBenefitIdAndReference(
     id: number,

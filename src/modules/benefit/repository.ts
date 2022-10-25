@@ -3,6 +3,7 @@ import {
   Benefit,
   PrismaClient,
   BenefitAdjustmentType,
+  InstallmentStatus,
 } from '@prisma/client';
 import { JsonObject } from 'swagger-ui-express';
 
@@ -79,8 +80,9 @@ export class BenefitRepository implements IBenefitRepository {
         consultant: true,
         installments: {
           where: {
-            disabledAt: null,
-            disabledBy: null,
+            status: {
+              not: InstallmentStatus.CANCELED,
+            },
           },
         },
       },
@@ -106,8 +108,9 @@ export class BenefitRepository implements IBenefitRepository {
         consultant: true,
         installments: {
           where: {
-            disabledAt: null,
-            disabledBy: null,
+            status: {
+              not: InstallmentStatus.CANCELED,
+            },
           },
         },
       },

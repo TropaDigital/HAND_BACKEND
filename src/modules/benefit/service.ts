@@ -6,6 +6,7 @@ import {
   BenefitStatus,
   EmploymentRelationship,
   Installment,
+  InstallmentStatus,
   Prisma,
 } from '@prisma/client';
 import { addMonths, differenceInMonths, endOfMonth } from 'date-fns';
@@ -357,7 +358,7 @@ export class BenefitService implements IBenefitService {
 
     const installments = await this.installmentRepository.findAll({
       benefitId,
-      justActiveInstallments: true,
+      justPendingInstallments: true,
     });
 
     if (single) {
@@ -396,10 +397,10 @@ export class BenefitService implements IBenefitService {
       throw new Error('cannot update installment more than 3 times');
     }
 
-    if (times === 3) {
+    if (times === 2) {
       const installments = await this.installmentRepository.findAll({
         benefitId: payload.id,
-        justActiveInstallments: true,
+        justPendingInstallments: true,
       });
 
       return this.singlePostponementInstallment({
@@ -411,7 +412,7 @@ export class BenefitService implements IBenefitService {
 
     const installments = await this.installmentRepository.findAll({
       benefitId: payload.id,
-      justActiveInstallments: true,
+      justPendingInstallments: true,
     });
 
     await Promise.all(
@@ -521,5 +522,33 @@ export class BenefitService implements IBenefitService {
     const result = await this.benefitRepository.deleteById(id);
 
     return result;
+  }
+
+  public async dimissInstallmentByBenefitIdAndInstallmentId(
+    benefitId: number,
+    installmentId: number,
+    user: string,
+  ): Promise<void> {
+    const installment =
+      await this.installmentRepository.findInstallmentByBenefitIdAndInstallmentIdAndStatus(
+        benefitId,
+        installmentId,
+        InstallmentStatus.PENDING,
+      );
+
+    if (!installment) {
+      throw new NotFoundError(
+        'pending installment not found with the provided benefit id and installment id',
+      );
+    }
+    await this.installmentRepository.updateInstallmentByBenefitIdAndInstallmentId(
+      benefitId,
+      installmentId,
+      {
+        status: InstallmentStatus.PAID,
+        updatedAt: new Date(),
+        updatedBy: user,
+      },
+    );
   }
 }

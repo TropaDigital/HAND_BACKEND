@@ -1,4 +1,9 @@
-import { Prisma, Installment, PrismaClient } from '@prisma/client';
+import {
+  Prisma,
+  Installment,
+  PrismaClient,
+  InstallmentStatus,
+} from '@prisma/client';
 
 import { IInstallmentRepository } from './interfaces';
 
@@ -15,14 +20,13 @@ export class InstallmentRepository implements IInstallmentRepository {
 
   public async findAll(payload?: {
     benefitId: number;
-    justActiveInstallments: boolean;
+    justPendingInstallments: boolean;
   }): Promise<Installment[]> {
-    const query = payload?.justActiveInstallments
+    const query = payload?.justPendingInstallments
       ? {
         where: {
           benefitId: payload?.benefitId,
-          disabledAt: null,
-          disabledBy: null,
+          status: InstallmentStatus.PENDING,
         },
       }
       : {
@@ -47,8 +51,9 @@ export class InstallmentRepository implements IInstallmentRepository {
       where: {
         benefitId,
         reference,
-        disabledAt: null,
-        disabledBy: null,
+        status: {
+          not: InstallmentStatus.CANCELED,
+        },
       },
     });
 
@@ -63,10 +68,46 @@ export class InstallmentRepository implements IInstallmentRepository {
     });
   }
 
+  public async findInstallmentByBenefitIdAndInstallmentIdAndStatus(
+    benefitId: number,
+    installmentId: number,
+    installmentStatus: InstallmentStatus,
+  ): Promise<Installment | null> {
+    const installment = await this.prismaRepository.findFirst({
+      where: {
+        benefitId,
+        id: installmentId,
+        status: installmentStatus,
+      },
+    });
+
+    return installment;
+  }
+
+  public async updateInstallmentByBenefitIdAndInstallmentId(
+    benefitId: number,
+    installmentId: number,
+    payload: Prisma.InstallmentUncheckedUpdateManyInput,
+  ): Promise<void> {
+    await this.prismaRepository.updateMany({
+      where: {
+        benefitId,
+        id: installmentId,
+      },
+      data: {
+        ...payload,
+      },
+    });
+  }
+
   public async disable(id: number, user: string): Promise<void> {
     await this.prismaRepository.update({
       where: { id },
-      data: { disabledAt: new Date(), disabledBy: user },
+      data: {
+        status: InstallmentStatus.CANCELED,
+        updatedAt: new Date(),
+        updatedBy: user,
+      },
     });
   }
 
@@ -77,7 +118,11 @@ export class InstallmentRepository implements IInstallmentRepository {
     await this.prismaClient.$transaction([
       this.prismaRepository.update({
         where: { id },
-        data: { disabledAt: new Date(), disabledBy: user },
+        data: {
+          status: InstallmentStatus.CANCELED,
+          updatedAt: new Date(),
+          updatedBy: user,
+        },
       }),
       this.prismaRepository.create({
         data: {

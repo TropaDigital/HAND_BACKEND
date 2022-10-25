@@ -52,3 +52,13 @@ export const AdjustContractById = Joi.object<{
 export const DeleteBenefitById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
 });
+
+export const DimississInstallmentByBenefitIdAndInstallmentId = Joi.object<{
+  benefitId: number;
+  installmentId: number;
+  user: string;
+}>({
+  benefitId: Joi.number().min(1).required(),
+  installmentId: Joi.number().min(1).required(),
+  user: Joi.string().required(),
+});

@@ -181,12 +181,43 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
+  private dimissInstallmentByBenefitIdAndInstallmentId(): void {
+    /**
+     * PATCH /benefits/dimiss/{benefitId}/{installmentId}
+     * @tag Benefits
+     * @security apiKey
+     * @summary dimiss an installment.
+     * @description return the created benefit object.
+     * @pathParam {number} benefitId
+     * @pathParam {number} installmentId
+     * @response 204 - no content.
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/benefits/dimiss/:benefitId/:installmentId')
+      .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IBenefitController>(
+          this.controller,
+          'dimissInstallMentByBenefitIdAndInstallmentId',
+        ),
+      );
+  }
+
   setupRoutes(app: Application): void {
     this.create();
     this.getAll();
     this.getById();
     this.adjustment();
     this.simulateAdjustment();
+    this.dimissInstallmentByBenefitIdAndInstallmentId();
 
     app.use(this.router);
   }

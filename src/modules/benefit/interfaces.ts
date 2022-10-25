@@ -48,6 +48,10 @@ export interface IBenefitController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Benefit | null>>;
 
+  dimissInstallMentByBenefitIdAndInstallmentId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>>;
+
   getPostponementSimulation(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse>;
@@ -86,6 +90,12 @@ export interface IBenefitService {
   updateById(id: number, payload: Prisma.BenefitUpdateInput): Promise<void>;
 
   deleteById(id: number): Promise<void>;
+
+  dimissInstallmentByBenefitIdAndInstallmentId(
+    benefitId: number,
+    installmentId: number,
+    user: string,
+  ): Promise<void>;
 }
 
 export interface IBenefitFiltersPayload {

@@ -1,3 +1,10 @@
+### [1.16.2](https://github.com/haandsolutions/haand-bib/compare/v1.16.1...v1.16.2) (2022-10-25)
+
+
+### :bug: Fixes
+
+* adjust the flow of adjust benefit ([355d808](https://github.com/haandsolutions/haand-bib/commit/355d808569d17e5a00636ad4f6a30eab7b98df22))
+
 ### [1.16.1](https://github.com/haandsolutions/haand-bib/compare/v1.16.0...v1.16.1) (2022-10-18)
 
 

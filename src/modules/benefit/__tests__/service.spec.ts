@@ -1,3 +1,5 @@
+import MySqlDBClient from 'src/infra/mySql';
+
 import {
   MissingInvalidParamsError,
   NotFoundError,
@@ -25,6 +27,7 @@ const makeSut = () => {
     associatedRepository,
     loanService,
     installmentRepository,
+    MySqlDBClient.getInstance().getPrismaClientInstance(),
   );
 
   return { sut, benefitRepository };

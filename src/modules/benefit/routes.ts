@@ -181,13 +181,15 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
-  private dimissInstallmentByBenefitIdAndInstallmentId(): void {
+  private updateInstallmentByBenefitIdAndInstallmentId(): void {
     /**
-     * PATCH /benefits/dimiss/{benefitId}/{installmentId}
+     * PATCH /benefits/{benefitId}/{installmentId}
      * @tag Benefits
      * @security apiKey
-     * @summary dimiss an installment.
+     * @summary update the status of an installment.
      * @description return the created benefit object.
+     * @bodyContent {UpdateInstallmentByBenefitIdAndInstallmentIdPayload} application/json
+     * @bodyRequired
      * @pathParam {number} benefitId
      * @pathParam {number} installmentId
      * @response 204 - no content.
@@ -201,7 +203,7 @@ export default class BenefitRouter implements IRouter {
      * @responseContent {InternalServerErrorResponse} 500.application/json
      */
     this.router
-      .route('/benefits/dimiss/:benefitId/:installmentId')
+      .route('/benefits/:benefitId/:installmentId')
       .patch(
         AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
         ExpressRouteAdapter.adapt<IBenefitController>(
@@ -217,7 +219,7 @@ export default class BenefitRouter implements IRouter {
     this.getById();
     this.adjustment();
     this.simulateAdjustment();
-    this.dimissInstallmentByBenefitIdAndInstallmentId();
+    this.updateInstallmentByBenefitIdAndInstallmentId();
 
     app.use(this.router);
   }

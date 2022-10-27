@@ -4,6 +4,15 @@ import { ReferenceObject, SchemaObject } from 'openapi-comment-parser';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
 
 export default {
+  UpdateInstallmentByBenefitIdAndInstallmentIdPayload: {
+    type: 'object',
+    properties: {
+      status: {
+        type: 'string',
+        enum: ['PAID', 'PENDING', 'CANCELED'],
+      },
+    },
+  },
   GetSimulationOfPostponentResponse: {
     type: 'object',
     properties: {

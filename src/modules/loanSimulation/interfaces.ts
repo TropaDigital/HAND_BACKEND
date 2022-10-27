@@ -9,6 +9,7 @@ export interface IFormatInstallmentParams {
   joinedTelemedicine: boolean;
   consultantCommission: number;
   monthOfPayment: MonthOfPayment;
+  paymentDay?: number;
 }
 
 export interface ILoanSimulationBasedOnRequestedValueParams {
@@ -26,6 +27,7 @@ export interface ILoanSimulationBasedOnRequestedValueParams {
 export interface IInstallmentDetails {
   reference: string;
   referenceDate: Date;
+  dueDate: Date;
   installmentFactor: number;
   consultantCommission: number;
   consultantCommissionValue: number;

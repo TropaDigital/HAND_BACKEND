@@ -86,6 +86,7 @@ export const makeBenefitServiceStub = (): jest.Mocked<IBenefitService> => ({
   postponementInstallment: jest.fn(),
   singlePostponementInstallment: jest.fn(),
   getPostponementSimulation: jest.fn(),
+  updateInstallmentByBenefitIdAndInstallmentId: jest.fn(),
 });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
@@ -145,4 +146,5 @@ export const makeBenefitRepositoryStub =
     updateById: jest.fn(),
     deleteById: jest.fn(),
     countEditTimes: jest.fn(),
+    addItemToBenefitHistory: jest.fn(),
   });

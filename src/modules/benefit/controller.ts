@@ -118,19 +118,22 @@ export class BenefitController implements IBenefitController {
   public async dimissInstallMentByBenefitIdAndInstallmentId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
-    const { benefitId, installmentId, user } = this.validator.validateSchema<{
-      benefitId: number;
-      installmentId: number;
-      user: string;
-    }>('DimississInstallmentByBenefitIdAndInstallmentId', {
-      ...httpRequest.params,
-      user: httpRequest.user?.sub,
-    });
-    await this.benefitService.dimissInstallmentByBenefitIdAndInstallmentId(
+    const { benefitId, installmentId, user, ...payload } =
+      this.validator.validateSchema<{
+        benefitId: number;
+        installmentId: number;
+        user: string;
+      }>('DimississInstallmentByBenefitIdAndInstallmentId', {
+        ...httpRequest.params,
+        ...httpRequest.body,
+        user: httpRequest.user?.sub,
+      });
+    await this.benefitService.updateInstallmentByBenefitIdAndInstallmentId({
       benefitId,
       installmentId,
       user,
-    );
+      payload,
+    });
 
     return {
       statusCodeAsString: 'NO_CONTENT',

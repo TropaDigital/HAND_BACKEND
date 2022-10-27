@@ -1,4 +1,5 @@
 import { Prisma, Installment, InstallmentStatus } from '@prisma/client';
+import { IPrismaTransactionClient } from 'src/interfaces/infra/IPrismaTranscationClient';
 
 export interface IInstallmentRepository {
   updateInstallmentByBenefitIdAndInstallmentId(
@@ -6,6 +7,10 @@ export interface IInstallmentRepository {
     installmentId: number,
     payload: Prisma.InstallmentUncheckedUpdateManyInput,
   ): Promise<void>;
+  findInstallmentByBenefitIdAndInstallmentId(
+    benefitId: number,
+    installmentId: number,
+  ): Promise<Installment | null>;
   findInstallmentByBenefitIdAndInstallmentIdAndStatus(
     benefitId: number,
     installmentId: number,
@@ -19,7 +24,10 @@ export interface IInstallmentRepository {
     id: number,
     reference: string,
   ): Promise<Installment | null>;
-  createMany(payload: Prisma.InstallmentCreateManyInput[]): Promise<void>;
+  createMany(
+    payload: Prisma.InstallmentCreateManyInput[],
+    prisma?: IPrismaTransactionClient,
+  ): Promise<void>;
   softUpdate(
     id: number,
     payload: Prisma.InstallmentCreateInput & { user: string },

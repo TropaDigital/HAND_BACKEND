@@ -6,7 +6,6 @@ import {
   makeFakeBenefit,
   makeFakeBenefitList,
   makeFakeCreateBenefitInput,
-  makeFakeUpdateBenefitInput,
   makeValidatorStub,
 } from './helpers/test-helper';
 
@@ -183,73 +182,6 @@ describe(BenefitController.name, () => {
       });
 
       const promise = sut.create(httpRequest);
-
-      await expect(promise).rejects.toThrow(
-        new Error('any_validate_schema_error'),
-      );
-    });
-  });
-
-  describe(`When ${BenefitController.prototype.updateById.name} is called`, () => {
-    const httpRequest = makeFakeApiHttpRequest({
-      body: makeFakeCreateBenefitInput(),
-      params: { id: 777 },
-    });
-
-    it('should call validator with right params', async () => {
-      const { sut, validatorStub } = makeSut();
-      const validateSchemaSpy = validatorStub.validateSchema;
-
-      await sut.updateById(httpRequest);
-
-      expect(validateSchemaSpy).toBeCalledWith('UpdateBenefitById', {
-        id: 777,
-        ...makeFakeCreateBenefitInput(),
-      });
-    });
-
-    it('should call service with validation return', async () => {
-      const { sut, benefitServiceStub, validatorStub } = makeSut();
-      const updateByIdSpy = benefitServiceStub.updateById;
-      validatorStub.validateSchema.mockReturnValueOnce({
-        id: 777,
-        ...makeFakeUpdateBenefitInput(),
-      });
-
-      await sut.updateById(httpRequest);
-
-      const { id: _, ...benefit } = makeFakeUpdateBenefitInput();
-      expect(updateByIdSpy).toBeCalledWith(777, benefit);
-    });
-
-    it('should return service response', async () => {
-      const { sut } = makeSut();
-
-      const result = await sut.updateById(httpRequest);
-
-      expect(result).toEqual(makeFakeApiHttpResponse('NO_CONTENT'));
-    });
-
-    it('should throw when service throws', async () => {
-      const { sut, benefitServiceStub } = makeSut();
-      benefitServiceStub.updateById.mockRejectedValueOnce(
-        new Error('any_update_benefit_error'),
-      );
-
-      const promise = sut.updateById(httpRequest);
-
-      await expect(promise).rejects.toThrow(
-        new Error('any_update_benefit_error'),
-      );
-    });
-
-    it('should throw when validator throws', async () => {
-      const { sut, validatorStub } = makeSut();
-      validatorStub.validateSchema.mockImplementationOnce(() => {
-        throw new Error('any_validate_schema_error');
-      });
-
-      const promise = sut.updateById(httpRequest);
 
       await expect(promise).rejects.toThrow(
         new Error('any_validate_schema_error'),

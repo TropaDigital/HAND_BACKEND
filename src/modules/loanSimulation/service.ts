@@ -8,6 +8,7 @@ import {
   isAfter,
   setMonth,
   startOfDay,
+  setDate,
 } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -106,6 +107,7 @@ export class LoanSimulationService implements ILoanSimulationService {
     consultantCommission,
     monthOfPayment,
     hasGratification,
+    paymentDay,
     administrationFeeValue = 0,
   }: IFormatInstallmentParams & { currentDate: Date }): IInstallmentDetails {
     const installmentFactor = this.getInstallmentsFactorValueByRequestedValue(
@@ -141,10 +143,11 @@ export class LoanSimulationService implements ILoanSimulationService {
       gratificationFeeValue;
 
     return {
-      gratificationFeeValue: 0,
+      gratificationFeeValue,
       admnistrationFeeValue: installmentAdministrationFeeValue,
       reference: this.formatReferenceDate(currentDate),
       referenceDate: currentDate,
+      dueDate: paymentDay ? setDate(currentDate, paymentDay) : currentDate,
       cardFees: this.getCardFees(1),
       telemedicineFees: this.getTelemedicineFees(joinedTelemedicine, 1),
       bankProcessingFees: this.getbankProcessingFees(1),
@@ -169,6 +172,7 @@ export class LoanSimulationService implements ILoanSimulationService {
     monthOfPayment,
     hasGratification,
     administrationFeeValue,
+    paymentDay = 0,
   }: IFormatInstallmentParams): IInstallmentDetails[] {
     let currentDate = startOfDay(new Date());
     if (monthOfPayment === MonthOfPayment.NEXT_MONTH) {
@@ -185,6 +189,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       monthOfPayment,
       hasGratification,
       administrationFeeValue,
+      paymentDay,
     });
     const installments: IInstallmentDetails[] = new Array(
       numberOfInstallments,
@@ -194,6 +199,7 @@ export class LoanSimulationService implements ILoanSimulationService {
         ...installment,
         reference: this.formatReferenceDate(currentDate),
         referenceDate: currentDate,
+        dueDate: setDate(currentDate, paymentDay),
       };
       currentDate = addMonths(currentDate, 1);
       return formatedInstallment;
@@ -341,6 +347,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       monthOfPayment,
       hasGratification,
       administrationFeeValue,
+      paymentDay: getDate(salaryReceiptDate),
     });
 
     return this.formatLoanSimulationBasedOnRequestedValue({

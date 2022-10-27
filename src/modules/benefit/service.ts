@@ -3,13 +3,15 @@ import {
   Associated,
   BankAccount,
   Benefit,
+  BenefitAdjustmentType,
   BenefitStatus,
   EmploymentRelationship,
   Installment,
-  InstallmentStatus,
   Prisma,
+  PrismaClient,
 } from '@prisma/client';
 import { addMonths, differenceInMonths, endOfMonth } from 'date-fns';
+import { IPrismaTransactionClient } from 'src/interfaces/infra/IPrismaTranscationClient';
 
 import ErrorCodes from '../../enums/ErrorCodes';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
@@ -37,6 +39,7 @@ export class BenefitService implements IBenefitService {
     private readonly associatedRepository: IAssociatedRepository,
     private readonly loanSimulationService: ILoanSimulationService,
     private readonly installmentRepository: IInstallmentRepository,
+    private readonly prisma: PrismaClient,
   ) { }
 
   public async getAll(
@@ -182,91 +185,102 @@ export class BenefitService implements IBenefitService {
       updatedBy,
     } = associated as Associated;
 
-    const result = await this.benefitRepository.create({
-      affiliation: {
-        connect: {
-          id: affiliationId,
-        },
-      },
-      accountNumber: bankAccount.accountNumber,
-      accountType: bankAccount.accountType,
-      bank: bankAccount.bank,
-      pixKey: bankAccount.pixKey,
-      pixType: bankAccount.pixType,
-      agency: bankAccount.agency,
-      addressType: address.addressType,
-      street: address.street,
-      houseNumber: address.houseNumber,
-      district: address.district,
-      city: address.city,
-      state: address.state,
-      complement: address.complement,
-      postalCode: address.postalCode,
-      administrationFeeValue,
-      hasGratification,
-      joinedTelemedicine,
-      salary: employmentRelationship.salary,
-      registerNumber: employmentRelationship.registerNumber,
-      initialDate: this.formatMonthOfPayment(firstPaymentDates, monthOfPayment),
-      contractType: type,
-      contractModel: '',
-      birthDate,
-      cellPhone,
-      createdAt,
-      createdBy,
-      deletedAt,
-      email,
-      emissionDate,
-      emissionState,
-      father,
-      gender,
-      issuingAgency,
-      lastName,
-      maritalStatus,
-      mother,
-      name,
-      nationality,
-      partner,
-      placeOfBirth,
-      registerId,
-      taxId,
-      updatedAt,
-      updatedBy,
-      commission: consultantCommission,
-      financialAssistanceValue: totalValue,
-      installmentNumber: numberOfInstallments,
-
-      publicAgency: employmentRelationship.publicAgency,
-
-      installmentValue: installments[0].finalValue,
-      occupation: employmentRelationship.occupation,
-      paymentDay: employmentRelationship.paymentDay,
-
-      status: BenefitStatus.UNDER_ANALYSIS,
-      associated: {
-        connect: {
-          id: associatedId,
-        },
-      },
-      ...(consultantId
-        ? {
-          consultant: {
-            connect: {
-              id: consultantId,
+    return this.prisma.$transaction(
+      async (prisma: IPrismaTransactionClient) => {
+        const result = await this.benefitRepository.create(
+          {
+            affiliation: {
+              connect: {
+                id: affiliationId,
+              },
             },
-          },
-        }
-        : {}),
-    });
-    await this.installmentRepository.createMany(
-      [...installments].map(installment => ({
-        ...installment,
-        benefitId: result.id,
-        createdBy,
-      })),
-    );
+            accountNumber: bankAccount.accountNumber,
+            accountType: bankAccount.accountType,
+            bank: bankAccount.bank,
+            pixKey: bankAccount.pixKey,
+            pixType: bankAccount.pixType,
+            agency: bankAccount.agency,
+            addressType: address.addressType,
+            street: address.street,
+            houseNumber: address.houseNumber,
+            district: address.district,
+            city: address.city,
+            state: address.state,
+            complement: address.complement,
+            postalCode: address.postalCode,
+            administrationFeeValue,
+            hasGratification,
+            joinedTelemedicine,
+            salary: employmentRelationship.salary,
+            registerNumber: employmentRelationship.registerNumber,
+            initialDate: this.formatMonthOfPayment(
+              firstPaymentDates,
+              monthOfPayment,
+            ),
+            contractType: type,
+            contractModel: '',
+            birthDate,
+            cellPhone,
+            createdAt,
+            createdBy,
+            deletedAt,
+            email,
+            emissionDate,
+            emissionState,
+            father,
+            gender,
+            issuingAgency,
+            lastName,
+            maritalStatus,
+            mother,
+            name,
+            nationality,
+            partner,
+            placeOfBirth,
+            registerId,
+            taxId,
+            updatedAt,
+            updatedBy,
+            commission: consultantCommission,
+            financialAssistanceValue: totalValue,
+            installmentNumber: numberOfInstallments,
 
-    return result;
+            publicAgency: employmentRelationship.publicAgency,
+
+            installmentValue: installments[0].finalValue,
+            occupation: employmentRelationship.occupation,
+            paymentDay: employmentRelationship.paymentDay,
+
+            status: BenefitStatus.UNDER_ANALYSIS,
+            associated: {
+              connect: {
+                id: associatedId,
+              },
+            },
+            ...(consultantId
+              ? {
+                consultant: {
+                  connect: {
+                    id: consultantId,
+                  },
+                },
+              }
+              : {}),
+          },
+          prisma,
+        );
+        await this.installmentRepository.createMany(
+          [...installments].map(installment => ({
+            ...installment,
+            benefitId: result.id,
+            createdBy,
+          })),
+          prisma,
+        );
+
+        return result;
+      },
+    );
   }
 
   private async getLoanSimulation(
@@ -393,8 +407,11 @@ export class BenefitService implements IBenefitService {
   }): Promise<void> {
     const times = await this.benefitRepository.countEditTimes(payload.id);
 
-    if (times > 3) {
-      throw new Error('cannot update installment more than 3 times');
+    if (times >= 3) {
+      throw new MissingInvalidParamsError(
+        'cannot update installment more than 3 times',
+        ErrorCodes.POSTPONEMENT_INSTALLMENTS_ERROR_001,
+      );
     }
 
     if (times === 2) {
@@ -430,10 +447,17 @@ export class BenefitService implements IBenefitService {
             addMonths(installment.referenceDate, 1),
           ),
           referenceDate: addMonths(installment.referenceDate, 1),
+          dueDate: addMonths(installment.dueDate, 1),
           user: payload.user,
         }),
       ),
     );
+    await this.benefitRepository.addItemToBenefitHistory({
+      createdBy: payload.user,
+      adjustment: {},
+      adjustmentType: BenefitAdjustmentType.POSTPONEMENT,
+      benefitId: payload.id,
+    });
   }
 
   public async singlePostponementInstallment(payload: {
@@ -479,6 +503,7 @@ export class BenefitService implements IBenefitService {
         },
       },
       finalValue: recalculatedFinalValue,
+      dueDate: addMonths(installmentFormated.dueDate, 1),
       referenceDate: addMonths(installmentFormated.referenceDate, 1),
       reference: this.loanSimulationService.formatReferenceDate(
         addMonths(installmentFormated.referenceDate, 1),
@@ -488,6 +513,12 @@ export class BenefitService implements IBenefitService {
 
     const { id: nextInstallmentId } = nextInstallment;
     await this.installmentRepository.disable(nextInstallmentId, payload.user);
+    await this.benefitRepository.addItemToBenefitHistory({
+      createdBy: payload.user,
+      adjustment: {},
+      adjustmentType: BenefitAdjustmentType.SINGLE_POSTPONEMENT,
+      benefitId: payload.id,
+    });
   }
 
   private recalculateFinalValue(
@@ -524,16 +555,21 @@ export class BenefitService implements IBenefitService {
     return result;
   }
 
-  public async dimissInstallmentByBenefitIdAndInstallmentId(
-    benefitId: number,
-    installmentId: number,
-    user: string,
-  ): Promise<void> {
+  public async updateInstallmentByBenefitIdAndInstallmentId({
+    benefitId,
+    installmentId,
+    user,
+    payload,
+  }: {
+    payload: Prisma.InstallmentUncheckedUpdateManyInput;
+    benefitId: number;
+    installmentId: number;
+    user: string;
+  }): Promise<void> {
     const installment =
-      await this.installmentRepository.findInstallmentByBenefitIdAndInstallmentIdAndStatus(
+      await this.installmentRepository.findInstallmentByBenefitIdAndInstallmentId(
         benefitId,
         installmentId,
-        InstallmentStatus.PENDING,
       );
 
     if (!installment) {
@@ -545,7 +581,7 @@ export class BenefitService implements IBenefitService {
       benefitId,
       installmentId,
       {
-        status: InstallmentStatus.PAID,
+        ...payload,
         updatedAt: new Date(),
         updatedBy: user,
       },

@@ -1,4 +1,12 @@
-import { Benefit, BenefitType, Installment, Prisma } from '@prisma/client';
+import {
+  Benefit,
+  BenefitAdjustmentType,
+  BenefitType,
+  Installment,
+  Prisma,
+} from '@prisma/client';
+import { IPrismaTransactionClient } from 'src/interfaces/infra/IPrismaTranscationClient';
+import { JsonObject } from 'swagger-ui-express';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
 import {
@@ -19,7 +27,10 @@ export interface ICreateBenefitParams
 }
 
 export interface IBenefitRepository {
-  create(payload: Prisma.BenefitCreateInput): Promise<Benefit>;
+  create(
+    payload: Prisma.BenefitCreateInput,
+    prisma?: IPrismaTransactionClient,
+  ): Promise<Benefit>;
 
   updateById(id: number, payload: Prisma.BenefitUpdateInput): Promise<void>;
 
@@ -32,6 +43,18 @@ export interface IBenefitRepository {
   findById(id: number): Promise<Benefit | null>;
 
   countEditTimes(id: number): Promise<number>;
+
+  addItemToBenefitHistory({
+    adjustment,
+    adjustmentType,
+    benefitId,
+    createdBy,
+  }: {
+    benefitId: number;
+    createdBy: string;
+    adjustmentType: BenefitAdjustmentType;
+    adjustment: JsonObject;
+  }): Promise<void>;
 }
 
 export interface IBenefitController {
@@ -91,11 +114,12 @@ export interface IBenefitService {
 
   deleteById(id: number): Promise<void>;
 
-  dimissInstallmentByBenefitIdAndInstallmentId(
-    benefitId: number,
-    installmentId: number,
-    user: string,
-  ): Promise<void>;
+  updateInstallmentByBenefitIdAndInstallmentId(payload: {
+    payload: Prisma.InstallmentUncheckedUpdateManyInput;
+    benefitId: number;
+    installmentId: number;
+    user: string;
+  }): Promise<void>;
 }
 
 export interface IBenefitFiltersPayload {

@@ -1,4 +1,4 @@
-import { BenefitType } from '@prisma/client';
+import { BenefitType, InstallmentStatus, Prisma } from '@prisma/client';
 import Joi from 'joi';
 
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
@@ -53,12 +53,17 @@ export const DeleteBenefitById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
 });
 
-export const DimississInstallmentByBenefitIdAndInstallmentId = Joi.object<{
-  benefitId: number;
-  installmentId: number;
-  user: string;
-}>({
+export const DimississInstallmentByBenefitIdAndInstallmentId = Joi.object<
+  {
+    benefitId: number;
+    installmentId: number;
+    user: string;
+  } & Prisma.InstallmentUncheckedUpdateManyInput
+>({
   benefitId: Joi.number().min(1).required(),
   installmentId: Joi.number().min(1).required(),
   user: Joi.string().required(),
+  status: Joi.string()
+    .valid(...Object.values(InstallmentStatus))
+    .required(),
 });

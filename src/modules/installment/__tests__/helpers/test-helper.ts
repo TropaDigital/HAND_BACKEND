@@ -40,6 +40,9 @@ export const makeInstallmentRepositoryStub =
     findByBenefitIdAndReference: jest.fn(),
     softUpdate: jest.fn(),
     disable: jest.fn(),
+    findInstallmentByBenefitIdAndInstallmentId: jest.fn(),
+    findInstallmentByBenefitIdAndInstallmentIdAndStatus: jest.fn(),
+    updateInstallmentByBenefitIdAndInstallmentId: jest.fn(),
   });
 
 export const makeFakeCreateInstallmentParams = (
@@ -51,6 +54,7 @@ export const makeFakeCreateInstallmentParams = (
   bankProcessingFees: 10,
   cardFees: 10,
   consultantCommission: 2,
+  dueDate: new Date('2022-10-10'),
   referenceDate: new Date('2022-10-10'),
   ...payload,
 });

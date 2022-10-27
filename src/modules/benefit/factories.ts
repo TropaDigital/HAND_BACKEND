@@ -30,6 +30,7 @@ export const createBenefitController = (): IBenefitController => {
     associatedRepository,
     loanSimulationService,
     installmentRepository,
+    mySql.getPrismaClientInstance(),
   );
   const joiAdapter = new JoiAdapter(schemas);
   const result = new BenefitController(benefitService, joiAdapter);

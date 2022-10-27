@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -14,253 +15,234 @@ model User {
   name     String
   password String
   status   Status @default(ACTIVE)
-  role     Role?  @relation(fields: [roleId], references: [id])
   roleId   Int?
+  role     Role?  @relation(fields: [roleId], references: [id])
+
+  @@index([roleId], map: "User_roleId_fkey")
 }
 
 model BankAccount {
-  id            Int     @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   bank          String
   agency        String
-  accountType   String  @map(name: "account_type")
-  accountNumber String  @map(name: "account_number")
-  pixKey        String? @map(name: "pix_key")
-  pixType       String? @map(name: "pix_type")
+  accountType   String      @map("account_type")
+  accountNumber String      @map("account_number")
+  pixKey        String?     @map("pix_key")
+  pixType       String?     @map("pix_type")
+  isDefault     Boolean     @default(false)
+  associatedId  Int?
+  Associated    Associated? @relation(fields: [associatedId], references: [id])
 
-  isDefault Boolean @default(false)
-
-  Associated   Associated? @relation(fields: [associatedId], references: [id])
-  associatedId Int?
+  @@index([associatedId], map: "BankAccount_associatedId_fkey")
 }
 
 model Address {
-  id Int @id @default(autoincrement())
-
+  id           Int         @id @default(autoincrement())
   isDefault    Boolean     @default(false)
-  addressType  String      @map(name: "address_type")
-  postalCode   String      @map(name: "postal_code")
+  addressType  String      @map("address_type")
+  postalCode   String      @map("postal_code")
   street       String
-  houseNumber  String      @map(name: "house_number")
+  houseNumber  String      @map("house_number")
   complement   String?
   district     String
   city         String
   state        String
-  Associated   Associated? @relation(fields: [associatedId], references: [id])
   associatedId Int?
+  Associated   Associated? @relation(fields: [associatedId], references: [id])
+
+  @@index([associatedId], map: "Address_associatedId_fkey")
 }
 
 model EmploymentRelationship {
-  id Int @id @default(autoincrement())
-
+  id             Int         @id @default(autoincrement())
   isDefault      Boolean     @default(false)
   occupation     String
   salary         String
-  paymentDay     Int         @map(name: "payment_day")
-  registerNumber String      @map(name: "register_number")
-  contractType   String      @map(name: "contract_type")
-  finalDate      DateTime?   @map(name: "final_date")
-  publicAgency   String      @map(name: "public_agency")
-  Associated     Associated? @relation(fields: [associatedId], references: [id])
+  paymentDay     Int         @map("payment_day")
+  registerNumber String      @map("register_number")
+  contractType   String      @map("contract_type")
+  finalDate      DateTime?   @map("final_date")
+  publicAgency   String      @map("public_agency")
   associatedId   Int?
+  Associated     Associated? @relation(fields: [associatedId], references: [id])
+
+  @@index([associatedId], map: "EmploymentRelationship_associatedId_fkey")
 }
 
 model Associated {
-  id Int @id @default(autoincrement())
-
-  name          String
-  lastName      String   @map(name: "lastName")
-  gender        String
-  birthDate     DateTime @map(name: "birth_date")
-  maritalStatus String   @map(name: "martial_status")
-  nationality   String
-  placeOfBirth  String   @map(name: "place_of_birth")
-  taxId         String   @unique
-  registerId    String   @map(name: "register_id")
-  emissionState String   @map(name: "emission_state")
-  issuingAgency String   @map(name: "issuing_agency")
-  emissionDate  DateTime @map(name: "emission_date")
-  cellPhone     String   @map(name: "cell_phone")
-  email         String
-  father        String
-  mother        String
-  partner       String?
-
-  bankAccounts BankAccount[]
-
-  addresses Address[]
-
+  id                      Int                      @id @default(autoincrement())
+  name                    String
+  lastName                String
+  gender                  String
+  birthDate               DateTime                 @map("birth_date")
+  maritalStatus           String                   @map("martial_status")
+  nationality             String
+  placeOfBirth            String                   @map("place_of_birth")
+  taxId                   String                   @unique
+  registerId              String                   @map("register_id")
+  emissionState           String                   @map("emission_state")
+  issuingAgency           String                   @map("issuing_agency")
+  emissionDate            DateTime                 @map("emission_date")
+  cellPhone               String                   @map("cell_phone")
+  email                   String
+  father                  String
+  mother                  String
+  partner                 String?
+  createdBy               String                   @map("created_by") @db.VarChar(75)
+  updatedBy               String?                  @map("updated_by") @db.VarChar(75)
+  createdAt               DateTime                 @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt               DateTime                 @updatedAt @map("updated_at")
+  deletedAt               DateTime?                @map("deleted_at") @db.DateTime(0)
+  addresses               Address[]
+  bankAccounts            BankAccount[]
+  benefits                Benefit[]
   employmentRelationships EmploymentRelationship[]
-
-  benefits Benefit[]
-
-  affiliations Affiliation[]
-
-  createdBy      String           @map(name: "created_by") @db.VarChar(75)
-  updatedBy      String?          @map(name: "updated_by") @db.VarChar(75)
-  createdAt      DateTime         @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt      DateTime         @updatedAt @map(name: "updated_at")
-  deletedAt      DateTime?        @map(name: "deleted_at") @db.DateTime(0)
-  benefitHistory BenefitHistory[]
+  affiliations            Affiliation[]
 }
 
 model Affiliation {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  createdAt   DateTime     @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+  deletedAt   DateTime?    @map("deleted_at") @db.DateTime(0)
+  benefits    Benefit[]
   associateds Associated[]
-
-  benefits Benefit[]
-
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
 }
 
 model Consultant {
-  id    Int    @id @default(autoincrement())
-  name  String
-  taxId String @unique @map(name: "tax_id") @db.VarChar(11)
-  city  String
-  state String
-
-  benefits Benefit[]
-
+  id         Int       @id @default(autoincrement())
+  name       String
+  taxId      String    @unique @map("tax_id") @db.VarChar(11)
+  city       String
+  state      String
   commission Int       @default(0) @db.UnsignedInt
-  createdBy  String    @map(name: "created_by") @db.VarChar(75)
-  updatedBy  String?   @map(name: "updated_by") @db.VarChar(75)
-  createdAt  DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt  DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt  DateTime? @map(name: "deleted_at") @db.DateTime(0)
+  createdBy  String    @map("created_by") @db.VarChar(75)
+  updatedBy  String?   @map("updated_by") @db.VarChar(75)
+  createdAt  DateTime  @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at") @db.DateTime(0)
+  benefits   Benefit[]
 }
 
 model Benefit {
-  id           Int         @id @default(autoincrement())
-  associated   Associated? @relation(fields: [associatedId], references: [id])
-  associatedId Int?
-
-  commission             Int @default(0) @db.UnsignedInt
-  administrationFeeValue Int @default(0) @db.UnsignedInt
-
-  hasGratification   Boolean @default(true)
-  joinedTelemedicine Boolean @default(false)
-
+  id                       Int              @id @default(autoincrement())
+  associatedId             Int?
+  commission               Int              @default(0) @db.UnsignedInt
+  administrationFeeValue   Int              @default(0) @db.UnsignedInt
+  hasGratification         Boolean          @default(true)
+  joinedTelemedicine       Boolean          @default(false)
   bank                     String
-  publicAgency             String   @map(name: "public_agency")
-  contractModel            String   @map(name: "contract_model")
-  installmentNumber        Int      @map(name: "installment_number")
-  initialDate              DateTime @map(name: "initial_date")
-  financialAssistanceValue Float    @map(name: "financial_assistance_value")
-  installmentValue         Float    @map(name: "installment_value")
+  publicAgency             String           @map("public_agency")
+  contractModel            String           @map("contract_model")
+  installmentNumber        Int              @map("installment_number")
+  initialDate              DateTime         @map("initial_date")
+  financialAssistanceValue Float            @map("financial_assistance_value")
+  installmentValue         Float            @map("installment_value")
+  name                     String
+  lastName                 String
+  gender                   String
+  birthDate                DateTime         @map("birth_date")
+  maritalStatus            String           @map("martial_status")
+  nationality              String
+  placeOfBirth             String           @map("place_of_birth")
+  taxId                    String
+  registerId               String           @map("register_id")
+  emissionState            String           @map("emission_state")
+  issuingAgency            String           @map("issuing_agency")
+  emissionDate             DateTime         @map("emission_date")
+  cellPhone                String           @map("cell_phone")
+  email                    String
+  father                   String
+  mother                   String
+  partner                  String?
+  occupation               String
+  salary                   String
+  paymentDay               Int              @map("payment_day")
+  registerNumber           String           @map("register_number")
+  contractType             String           @map("contract_type")
+  finalDate                DateTime?        @map("final_date")
+  agency                   String
+  accountType              String           @map("account_type")
+  accountNumber            String           @map("account_number")
+  pixKey                   String?          @map("pix_key")
+  pixType                  String?          @map("pix_type")
+  addressType              String           @map("address_type")
+  postalCode               String           @map("postal_code")
+  street                   String
+  houseNumber              String           @map("house_number")
+  complement               String?
+  district                 String
+  city                     String
+  state                    String
+  consultantId             Int?
+  type                     BenefitType      @default(N)
+  status                   BenefitStatus    @default(UNDER_ANALYSIS)
+  affiliationId            Int
+  createdBy                String           @map("created_by") @db.VarChar(75)
+  updatedBy                String?          @map("updated_by") @db.VarChar(75)
+  createdAt                DateTime         @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt                DateTime         @updatedAt @map("updated_at")
+  deletedAt                DateTime?        @map("deleted_at") @db.DateTime(0)
+  affiliation              Affiliation      @relation(fields: [affiliationId], references: [id])
+  associated               Associated?      @relation(fields: [associatedId], references: [id])
+  consultant               Consultant?      @relation(fields: [consultantId], references: [id])
+  benefitHistory           BenefitHistory[]
+  installments             Installment[]
 
-  name          String
-  lastName      String   @map(name: "lastName")
-  gender        String
-  birthDate     DateTime @map(name: "birth_date")
-  maritalStatus String   @map(name: "martial_status")
-  nationality   String
-  placeOfBirth  String   @map(name: "place_of_birth")
-  taxId         String
-  registerId    String   @map(name: "register_id")
-  emissionState String   @map(name: "emission_state")
-  issuingAgency String   @map(name: "issuing_agency")
-  emissionDate  DateTime @map(name: "emission_date")
-  cellPhone     String   @map(name: "cell_phone")
-  email         String
-  father        String
-  mother        String
-  partner       String?
-
-  occupation     String
-  salary         String
-  paymentDay     Int       @map(name: "payment_day")
-  registerNumber String    @map(name: "register_number")
-  contractType   String    @map(name: "contract_type")
-  finalDate      DateTime? @map(name: "final_date")
-
-  agency        String
-  accountType   String  @map(name: "account_type")
-  accountNumber String  @map(name: "account_number")
-  pixKey        String? @map(name: "pix_key")
-  pixType       String? @map(name: "pix_type")
-
-  addressType String  @map(name: "address_type")
-  postalCode  String  @map(name: "postal_code")
-  street      String
-  houseNumber String  @map(name: "house_number")
-  complement  String?
-  district    String
-  city        String
-  state       String
-
-  consultant   Consultant? @relation(fields: [consultantId], references: [id])
-  consultantId Int?
-
-  type   BenefitType   @default(N)
-  status BenefitStatus @default(UNDER_ANALYSIS)
-
-  affiliation   Affiliation @relation(fields: [affiliationId], references: [id])
-  affiliationId Int
-
-  createdBy      String           @map(name: "created_by") @db.VarChar(75)
-  updatedBy      String?          @map(name: "updated_by") @db.VarChar(75)
-  createdAt      DateTime         @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt      DateTime         @updatedAt @map(name: "updated_at")
-  deletedAt      DateTime?        @map(name: "deleted_at") @db.DateTime(0)
-  benefitHistory BenefitHistory[]
-  installments   Installment[]
+  @@index([affiliationId], map: "Benefit_affiliationId_fkey")
+  @@index([associatedId], map: "Benefit_associatedId_fkey")
+  @@index([consultantId], map: "Benefit_consultantId_fkey")
 }
 
 model Installment {
-  id        Int      @id @default(autoincrement())
-  Benefit   Benefit? @relation(fields: [benefitId], references: [id])
-  benefitId Int?
-
+  id                        Int               @id @default(autoincrement())
+  benefitId                 Int?
   reference                 String
-  referenceDate             DateTime @map("reference_date")
-  installmentFactor         Float    @default(0) @map(name: "installment_factor")
-  consultantCommission      Float    @default(0) @map(name: "consultant_commission")
-  consultantCommissionValue Float    @default(0) @map(name: "consultant_commission_value")
-  cardFees                  Float    @default(0) @map(name: "card_fees")
-  telemedicineFees          Float    @default(0) @map(name: "telemedicine_fees")
-  bankProcessingFees        Float    @default(0) @map(name: "bank_processing_fees")
-  fees                      Float    @default(0) @map(name: "fees")
-  feesValue                 Float    @default(0) @map(name: "fees_value")
-  finalValue                Float    @default(0) @map(name: "final_value")
-  gratificationFeeValue     Float?   @map(name: "gratification_fee_value")
-  admnistrationFeeValue     Float?   @map(name: "administration_fee_value")
+  referenceDate             DateTime          @map("reference_date")
+  dueDate                   DateTime          @map("due_date")
+  installmentFactor         Float             @default(0) @map("installment_factor")
+  consultantCommission      Float             @default(0) @map("consultant_commission")
+  consultantCommissionValue Float             @default(0) @map("consultant_commission_value")
+  cardFees                  Float             @default(0) @map("card_fees")
+  telemedicineFees          Float             @default(0) @map("telemedicine_fees")
+  bankProcessingFees        Float             @default(0) @map("bank_processing_fees")
+  fees                      Float             @default(0)
+  feesValue                 Float             @default(0) @map("fees_value")
+  finalValue                Float             @default(0) @map("final_value")
+  gratificationFeeValue     Float?            @map("gratification_fee_value")
+  admnistrationFeeValue     Float?            @map("administration_fee_value")
+  status                    InstallmentStatus @default(PENDING)
+  createdBy                 String            @map("created_by") @db.VarChar(75)
+  updatedBy                 String?           @map("updated_by") @db.VarChar(75)
+  createdAt                 DateTime          @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt                 DateTime          @updatedAt @map("updated_at")
+  Benefit                   Benefit?          @relation(fields: [benefitId], references: [id])
 
-  status InstallmentStatus @default(PENDING)
-
-  createdBy String   @map(name: "created_by") @db.VarChar(75)
-  updatedBy String?  @map(name: "updated_by") @db.VarChar(75)
-  createdAt DateTime @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  @@index([benefitId], map: "Installment_benefitId_fkey")
 }
 
 model BenefitHistory {
   id             Int                    @id @default(autoincrement())
-  adjustmentType BenefitAdjustmentType? @map(name: "adjustment_type")
-  Benefit        Benefit?               @relation(fields: [benefitId], references: [id])
+  adjustmentType BenefitAdjustmentType? @map("adjustment_type")
   benefitId      Int?
   adjustment     Json
+  createdBy      String                 @map("created_by") @db.VarChar(75)
+  createdAt      DateTime               @default(now()) @map("created_at") @db.DateTime(0)
+  Benefit        Benefit?               @relation(fields: [benefitId], references: [id])
 
-  createdBy    String      @map(name: "created_by") @db.VarChar(75)
-  createdAt    DateTime    @default(now()) @map(name: "created_at") @db.DateTime(0)
-  Associated   Associated? @relation(fields: [associatedId], references: [id])
-  associatedId Int?
+  @@index([benefitId], map: "BenefitHistory_benefitId_fkey")
 }
 
 model Role {
-  id          Int    @id @default(autoincrement())
-  name        String @unique
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
   description String
-
-  users User[]
-
-  updatedBy String?   @map(name: "updated_by") @db.VarChar(75)
-  createdAt DateTime  @default(now()) @map(name: "created_at") @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  deletedAt DateTime? @map(name: "deleted_at") @db.DateTime(0)
+  updatedBy   String?   @map("updated_by") @db.VarChar(75)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at") @db.DateTime(0)
+  users       User[]
 }
 
 enum InstallmentStatus {

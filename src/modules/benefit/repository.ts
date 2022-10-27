@@ -5,6 +5,7 @@ import {
   BenefitAdjustmentType,
   InstallmentStatus,
 } from '@prisma/client';
+import { IPrismaTransactionClient } from 'src/interfaces/infra/IPrismaTranscationClient';
 import { JsonObject } from 'swagger-ui-express';
 
 import {
@@ -107,6 +108,9 @@ export class BenefitRepository implements IBenefitRepository {
         associated: true,
         consultant: true,
         installments: {
+          orderBy: {
+            referenceDate: 'asc',
+          },
           where: {
             status: {
               not: InstallmentStatus.CANCELED,
@@ -119,8 +123,13 @@ export class BenefitRepository implements IBenefitRepository {
     return result;
   }
 
-  public async create(payload: Prisma.BenefitCreateInput): Promise<Benefit> {
-    const result = await this.prismaBenefitRepository.create({
+  public async create(
+    payload: Prisma.BenefitCreateInput,
+    prisma?: IPrismaTransactionClient,
+  ): Promise<Benefit> {
+    const result = await (
+      prisma?.benefit || this.prismaBenefitRepository
+    ).create({
       data: {
         ...payload,
         benefitHistory: {
@@ -152,9 +161,30 @@ export class BenefitRepository implements IBenefitRepository {
     await this.prismaBenefitRepository.delete({ where: { id } });
   }
 
-  public async countEditTimes(id: number): Promise<number> {
+  public async addItemToBenefitHistory({
+    adjustment,
+    adjustmentType,
+    benefitId,
+    createdBy,
+  }: {
+    benefitId: number;
+    createdBy: string;
+    adjustmentType: BenefitAdjustmentType;
+    adjustment: JsonObject;
+  }): Promise<void> {
+    await this.prismaBenefitHistoryRepository.create({
+      data: {
+        adjustment,
+        adjustmentType,
+        benefitId,
+        createdBy,
+      },
+    });
+  }
+
+  public async countEditTimes(benefitId: number): Promise<number> {
     const result = await this.prismaBenefitHistoryRepository.count({
-      where: { id, adjustmentType: BenefitAdjustmentType.POSTPONEMENT },
+      where: { benefitId, adjustmentType: BenefitAdjustmentType.POSTPONEMENT },
     });
 
     return result;

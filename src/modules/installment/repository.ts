@@ -5,6 +5,7 @@ import {
   InstallmentStatus,
 } from '@prisma/client';
 
+import { IPrismaTransactionClient } from '../../interfaces/infra/IPrismaTranscationClient';
 import { IInstallmentRepository } from './interfaces';
 
 export type PrismaInstallmentRepository = Prisma.InstallmentDelegate<
@@ -38,6 +39,9 @@ export class InstallmentRepository implements IInstallmentRepository {
       where: {
         ...query.where,
       },
+      orderBy: {
+        referenceDate: 'asc',
+      },
     });
 
     return result;
@@ -62,10 +66,25 @@ export class InstallmentRepository implements IInstallmentRepository {
 
   public async createMany(
     payload: Prisma.InstallmentCreateManyInput[],
+    prisma?: IPrismaTransactionClient,
   ): Promise<void> {
-    await this.prismaRepository.createMany({
+    await (prisma?.installment || this.prismaRepository).createMany({
       data: payload,
     });
+  }
+
+  public async findInstallmentByBenefitIdAndInstallmentId(
+    benefitId: number,
+    installmentId: number,
+  ): Promise<Installment | null> {
+    const installment = await this.prismaRepository.findFirst({
+      where: {
+        benefitId,
+        id: installmentId,
+      },
+    });
+
+    return installment;
   }
 
   public async findInstallmentByBenefitIdAndInstallmentIdAndStatus(
@@ -114,9 +133,10 @@ export class InstallmentRepository implements IInstallmentRepository {
   public async softUpdate(
     id: number,
     { user, ...payload }: Prisma.InstallmentCreateInput & { user: string },
+    prisma?: IPrismaTransactionClient,
   ): Promise<void> {
     await this.prismaClient.$transaction([
-      this.prismaRepository.update({
+      (prisma?.installment || this.prismaRepository).update({
         where: { id },
         data: {
           status: InstallmentStatus.CANCELED,
@@ -124,7 +144,7 @@ export class InstallmentRepository implements IInstallmentRepository {
           updatedBy: user,
         },
       }),
-      this.prismaRepository.create({
+      (prisma?.installment || this.prismaRepository).create({
         data: {
           ...payload,
           createdBy: user,

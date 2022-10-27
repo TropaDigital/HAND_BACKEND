@@ -179,11 +179,11 @@ describe('POST /loansimulations/simulate - Get an loan simulation based in the p
         });
 
       const expectedResponse: IFormatedApiHttpResponse<ILoanSimulationBasedOnRequestedValue> =
-        {
-          statusCode: StatusCodes.OK,
-          statusCodeAsString: 'OK',
-          data: expected,
-        };
+      {
+        statusCode: StatusCodes.OK,
+        statusCodeAsString: 'OK',
+        data: expected as any,
+      };
       expect(response.status).toBe(expectedResponse.statusCode);
       // TODO: ajustar quando bug do prisma de usar faker timers for corrigido
       // expect(response.body).toEqual({

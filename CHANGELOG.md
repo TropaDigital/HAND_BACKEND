@@ -1,3 +1,10 @@
+## [1.17.0](https://github.com/haandsolutions/haand-bib/compare/v1.16.3...v1.17.0) (2022-11-22)
+
+
+### :sparkles: New Features
+
+* add route to download the files ([e2009aa](https://github.com/haandsolutions/haand-bib/commit/e2009aa6e1e0e162634c52a0e1c4c2aa70163454))
+
 ### [1.16.3](https://github.com/haandsolutions/haand-bib/compare/v1.16.2...v1.16.3) (2022-10-27)
 
 

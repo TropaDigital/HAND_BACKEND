@@ -82,7 +82,7 @@ export class BenefitRepository implements IBenefitRepository {
         installments: {
           where: {
             status: {
-              not: InstallmentStatus.CANCELED,
+              notIn: [InstallmentStatus.CANCELED],
             },
           },
         },
@@ -113,7 +113,7 @@ export class BenefitRepository implements IBenefitRepository {
           },
           where: {
             status: {
-              not: InstallmentStatus.CANCELED,
+              NOT: InstallmentStatus.CANCELED,
             },
           },
         },

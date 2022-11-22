@@ -1,4 +1,9 @@
-import { Benefit, Prisma } from '@prisma/client';
+import {
+  Benefit,
+  Installment,
+  InstallmentStatus,
+  Prisma,
+} from '@prisma/client';
 
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
@@ -138,6 +143,45 @@ export class BenefitController implements IBenefitController {
     return {
       statusCodeAsString: 'NO_CONTENT',
       body: undefined,
+    };
+  }
+
+  public async getInstallmentBankInterfaceFile(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<any>> {
+    return {
+      statusCodeAsString: 'OK',
+      body: '',
+      attachmentFileName: 'test.txt',
+      attachmentFileContent: 'arquivo de interface bancária.',
+      headers: {
+        'content-type': 'text/plain',
+      },
+    };
+  }
+
+  public async getInstallmentsByReferenceDates(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Installment[]>> {
+    const { from, to, associated, status } = this.validator.validateSchema<{
+      from: Date;
+      to: Date;
+      associated?: string;
+      status?: InstallmentStatus;
+    }>('GetInstallmentsByReferenceDates', {
+      ...httpRequest.query,
+    });
+    const installments =
+      await this.benefitService.getInstallmentsByReferenceDates({
+        from,
+        to,
+        associated,
+        status,
+      });
+
+    return {
+      statusCodeAsString: 'OK',
+      body: installments,
     };
   }
 }

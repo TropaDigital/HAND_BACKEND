@@ -13,6 +13,7 @@ import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
+import { IInstallmentFiltersPayload } from '../installment/interfaces';
 import { ILoanSimulationBasedOnRequestedValueParams } from '../loanSimulation/interfaces';
 
 export interface ICreateBenefitParams
@@ -86,9 +87,23 @@ export interface IBenefitController {
   adjustContractById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>>;
+
+  getInstallmentsByReferenceDates(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Installment[]>>;
+
+  getInstallmentBankInterfaceFile(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<any>>;
 }
 
 export interface IBenefitService {
+  getInstallmentsByReferenceDates({
+    from,
+    to,
+    associated,
+    status,
+  }: IInstallmentFiltersPayload): Promise<Installment[]>;
   getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
   ): Promise<IPaginatedAResult<Benefit[]>>;

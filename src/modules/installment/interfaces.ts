@@ -1,7 +1,20 @@
 import { Prisma, Installment, InstallmentStatus } from '@prisma/client';
 import { IPrismaTransactionClient } from 'src/interfaces/infra/IPrismaTranscationClient';
 
+export interface IInstallmentFiltersPayload {
+  from: Date;
+  to: Date;
+  associated?: string;
+  status?: InstallmentStatus;
+}
+
 export interface IInstallmentRepository {
+  getInstallmentsByReferenceDate({
+    from,
+    to,
+    associated,
+    status,
+  }: IInstallmentFiltersPayload): Promise<Installment[]>;
   updateInstallmentByBenefitIdAndInstallmentId(
     benefitId: number,
     installmentId: number,

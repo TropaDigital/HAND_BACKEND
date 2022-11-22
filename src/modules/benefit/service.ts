@@ -21,7 +21,10 @@ import {
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
 import { IAssociatedRepository } from '../associated/interfaces';
-import { IInstallmentRepository } from '../installment/interfaces';
+import {
+  IInstallmentFiltersPayload,
+  IInstallmentRepository,
+} from '../installment/interfaces';
 import { loanConfig } from '../loanSimulation/consts';
 import {
   ILoanSimulationBasedOnRequestedValueParams,
@@ -586,5 +589,22 @@ export class BenefitService implements IBenefitService {
         updatedBy: user,
       },
     );
+  }
+
+  public async getInstallmentsByReferenceDates({
+    from,
+    to,
+    associated,
+    status,
+  }: IInstallmentFiltersPayload): Promise<Installment[]> {
+    const installments =
+      await this.installmentRepository.getInstallmentsByReferenceDate({
+        from,
+        to,
+        associated,
+        status,
+      });
+
+    return installments;
   }
 }

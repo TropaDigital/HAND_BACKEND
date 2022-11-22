@@ -38,6 +38,16 @@ export class ExpressRouteAdapter {
         const formatedResponse =
           ExpressRouteAdapter.formatHttpResponse(httpResponse);
         ExpressRouteAdapter.setResponseHeaders(httpResponse, res);
+        if (
+          httpResponse.attachmentFileName &&
+          httpResponse.attachmentFileContent
+        ) {
+          return res
+            .status(formatedResponse.statusCode)
+            .attachment(httpResponse.attachmentFileName)
+            .send(httpResponse.attachmentFileContent);
+        }
+
         return res.status(formatedResponse.statusCode).json({
           ...formatedResponse,
         });

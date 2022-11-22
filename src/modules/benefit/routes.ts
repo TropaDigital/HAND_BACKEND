@@ -119,7 +119,7 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
-  public simulateAdjustment(): void {
+  private simulateAdjustment(): void {
     /**
      * GET /benefits/{benefitId}/adjustment/simulate
      * @tag Benefits
@@ -213,6 +213,100 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
+  private getInstallmentsByReferenceDates(): void {
+    /**
+     * GET /installments
+     * @tag Benefits
+     * @security apiKey
+     * @summary update the status of an installment.
+     * @description return the created benefit object.
+     * @queryParam {string} from
+     * @queryParam {string} to
+     * @queryParam {string} [associated]
+     * @queryParam {string} [status]
+     * @response 200 - an object with the installments
+     * @responseContent {GetInstallmentByReferenceDateResponse} 200.application/json
+     * @responseExample {GetInstallmentByReferenceDateResponse} 200.application/json.GetInstallmentByReferenceDateResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/installments')
+      .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IBenefitController>(
+          this.controller,
+          'getInstallmentsByReferenceDates',
+        ),
+      );
+  }
+
+  private getInstallmentBankInterfaceFile(): void {
+    /**
+     * GET /installments/{installmentId}/file
+     * @tag Benefits
+     * @security apiKey
+     * @summary generate the bank interface file of an installment.
+     * @description return the interface bank file of the installment.
+     * @pathParam {number} installmentId
+     * @response 200 - an object with the installments
+     * @responseContent {GetInstallmentByReferenceDateResponse} 200.application/json
+     * @responseExample {GetInstallmentByReferenceDateResponse} 200.application/json.GetInstallmentByReferenceDateResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/installments/:installmentId/file')
+      .get(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IBenefitController>(
+          this.controller,
+          'getInstallmentBankInterfaceFile',
+        ),
+      );
+  }
+
+  private getInstallmentBankInterfaceFileInBatch(): void {
+    /**
+     * POST /installments/{installmentId}/file/batch
+     * @tag Benefits
+     * @security apiKey
+     * @summary generate the bank interface file of an installment.
+     * @description return the interface bank file of the installment.
+     * @pathParam {number} installmentId
+     * @response 200 - an object with the installments
+     * @responseContent {GetInstallmentByReferenceDateResponse} 200.application/json
+     * @responseExample {GetInstallmentByReferenceDateResponse} 200.application/json.GetInstallmentByReferenceDateResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/installments/:installmentId/file/batch')
+      .post(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IBenefitController>(
+          this.controller,
+          'getInstallmentBankInterfaceFile',
+        ),
+      );
+  }
+
   setupRoutes(app: Application): void {
     this.create();
     this.getAll();
@@ -220,6 +314,9 @@ export default class BenefitRouter implements IRouter {
     this.adjustment();
     this.simulateAdjustment();
     this.updateInstallmentByBenefitIdAndInstallmentId();
+    this.getInstallmentsByReferenceDates();
+    this.getInstallmentBankInterfaceFile();
+    this.getInstallmentBankInterfaceFileInBatch();
 
     app.use(this.router);
   }

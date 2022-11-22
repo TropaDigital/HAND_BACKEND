@@ -2,6 +2,7 @@ import { BenefitType, InstallmentStatus, Prisma } from '@prisma/client';
 import Joi from 'joi';
 
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
+import { IInstallmentFiltersPayload } from '../installment/interfaces';
 import { loanConfig } from '../loanSimulation/consts';
 import { ICreateBenefitParams } from './interfaces';
 
@@ -67,3 +68,11 @@ export const DimississInstallmentByBenefitIdAndInstallmentId = Joi.object<
     .valid(...Object.values(InstallmentStatus))
     .required(),
 });
+
+export const GetInstallmentsByReferenceDates =
+  Joi.object<IInstallmentFiltersPayload>({
+    from: Joi.date(),
+    to: Joi.date(),
+    associated: Joi.string(),
+    status: Joi.string().valid(...Object.values(InstallmentStatus)),
+  });

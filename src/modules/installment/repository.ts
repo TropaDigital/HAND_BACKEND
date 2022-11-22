@@ -6,7 +6,10 @@ import {
 } from '@prisma/client';
 
 import { IPrismaTransactionClient } from '../../interfaces/infra/IPrismaTranscationClient';
-import { IInstallmentRepository } from './interfaces';
+import {
+  IInstallmentFiltersPayload,
+  IInstallmentRepository,
+} from './interfaces';
 
 export type PrismaInstallmentRepository = Prisma.InstallmentDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
@@ -151,5 +154,127 @@ export class InstallmentRepository implements IInstallmentRepository {
         },
       }),
     ]);
+  }
+
+  private formatGetInstallmentsByReferenceDateFilters({
+    from,
+    to,
+    associated,
+    status,
+  }: IInstallmentFiltersPayload): Prisma.InstallmentWhereInput {
+    return {
+      referenceDate: {
+        gte: from,
+        lte: to,
+      },
+      ...(status
+        ? { status }
+        : { status: { not: InstallmentStatus.CANCELED } }),
+      ...(associated
+        ? {
+          benefit: {
+            associated: {
+              name: {
+                contains: associated,
+              },
+            },
+          },
+        }
+        : {}),
+    };
+  }
+
+  public async getInstallmentsByReferenceDate({
+    from,
+    to,
+    associated,
+    status,
+  }: IInstallmentFiltersPayload): Promise<Installment[]> {
+    const installments = await this.prismaRepository.findMany({
+      where: {
+        ...this.formatGetInstallmentsByReferenceDateFilters({
+          from,
+          to,
+          associated,
+          status,
+        }),
+      },
+      include: {
+        benefit: {
+          include: {
+            associated: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                lastName: true,
+                taxId: true,
+                registerId: true,
+                birthDate: true,
+                maritalStatus: true,
+                cellPhone: true,
+                nationality: true,
+                gender: true,
+                placeOfBirth: true,
+                employmentRelationships: {
+                  select: {
+                    id: true,
+                    occupation: true,
+                    contractType: true,
+                    salary: true,
+                    publicAgency: true,
+                    isDefault: true,
+                    finalDate: true,
+                    registerNumber: true,
+                    paymentDay: true,
+                  },
+                },
+                affiliations: {
+                  select: {
+                    id: true,
+                    name: true,
+                  },
+                },
+                addresses: {
+                  select: {
+                    id: true,
+                    street: true,
+                    addressType: true,
+                    city: true,
+                    state: true,
+                    district: true,
+                    houseNumber: true,
+                    isDefault: true,
+                    complement: true,
+                    postalCode: true,
+                  },
+                },
+                bankAccounts: {
+                  select: {
+                    id: true,
+                    accountNumber: true,
+                    accountType: true,
+                    agency: true,
+                    bank: true,
+                    isDefault: true,
+                    pixKey: true,
+                    pixType: true,
+                  },
+                },
+              },
+            },
+            consultant: true,
+            affiliation: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return installments;
   }
 }

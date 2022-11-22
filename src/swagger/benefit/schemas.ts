@@ -4,6 +4,566 @@ import { ReferenceObject, SchemaObject } from 'openapi-comment-parser';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
 
 export default {
+  GetInstallmentByReferenceDateResponse: {
+    type: 'object',
+    properties: {
+      statusCode: {
+        type: 'number',
+        example: 200,
+      },
+      statusCodeAsString: {
+        type: 'string',
+        example: 'OK',
+      },
+      data: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'number',
+            },
+            benefitId: {
+              type: 'number',
+            },
+            reference: {
+              type: 'string',
+            },
+            referenceDate: {
+              type: 'string',
+            },
+            dueDate: {
+              type: 'string',
+            },
+            installmentFactor: {
+              type: 'number',
+            },
+            consultantCommission: {
+              type: 'number',
+            },
+            consultantCommissionValue: {
+              type: 'number',
+            },
+            cardFees: {
+              type: 'number',
+            },
+            telemedicineFees: {
+              type: 'number',
+            },
+            bankProcessingFees: {
+              type: 'number',
+            },
+            fees: {
+              type: 'number',
+            },
+            feesValue: {
+              type: 'number',
+            },
+            finalValue: {
+              type: 'number',
+            },
+            gratificationFeeValue: {
+              type: 'number',
+            },
+            admnistrationFeeValue: {
+              type: 'number',
+            },
+            status: {
+              type: 'string',
+            },
+            createdBy: {
+              type: 'string',
+            },
+            updatedBy: {},
+            createdAt: {
+              type: 'string',
+            },
+            updatedAt: {
+              type: 'string',
+            },
+            benefit: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'number',
+                },
+                associatedId: {
+                  type: 'number',
+                },
+                commission: {
+                  type: 'number',
+                },
+                administrationFeeValue: {
+                  type: 'number',
+                },
+                hasGratification: {
+                  type: 'boolean',
+                },
+                joinedTelemedicine: {
+                  type: 'boolean',
+                },
+                bank: {
+                  type: 'string',
+                },
+                publicAgency: {
+                  type: 'string',
+                },
+                contractModel: {
+                  type: 'string',
+                },
+                installmentNumber: {
+                  type: 'number',
+                },
+                initialDate: {
+                  type: 'string',
+                },
+                financialAssistanceValue: {
+                  type: 'number',
+                },
+                installmentValue: {
+                  type: 'number',
+                },
+                name: {
+                  type: 'string',
+                },
+                lastName: {
+                  type: 'string',
+                },
+                gender: {
+                  type: 'string',
+                },
+                birthDate: {
+                  type: 'string',
+                },
+                maritalStatus: {
+                  type: 'string',
+                },
+                nationality: {
+                  type: 'string',
+                },
+                placeOfBirth: {
+                  type: 'string',
+                },
+                taxId: {
+                  type: 'string',
+                },
+                registerId: {
+                  type: 'string',
+                },
+                emissionState: {
+                  type: 'string',
+                },
+                issuingAgency: {
+                  type: 'string',
+                },
+                emissionDate: {
+                  type: 'string',
+                },
+                cellPhone: {
+                  type: 'string',
+                },
+                email: {
+                  type: 'string',
+                },
+                father: {
+                  type: 'string',
+                },
+                mother: {
+                  type: 'string',
+                },
+                partner: {
+                  type: 'string',
+                },
+                occupation: {
+                  type: 'string',
+                },
+                salary: {
+                  type: 'string',
+                },
+                paymentDay: {
+                  type: 'number',
+                },
+                registerNumber: {
+                  type: 'string',
+                },
+                contractType: {
+                  type: 'string',
+                },
+                finalDate: {},
+                agency: {
+                  type: 'string',
+                },
+                accountType: {
+                  type: 'string',
+                },
+                accountNumber: {
+                  type: 'string',
+                },
+                pixKey: {
+                  type: 'string',
+                },
+                pixType: {},
+                addressType: {
+                  type: 'string',
+                },
+                postalCode: {
+                  type: 'string',
+                },
+                street: {
+                  type: 'string',
+                },
+                houseNumber: {
+                  type: 'string',
+                },
+                complement: {
+                  type: 'string',
+                },
+                district: {
+                  type: 'string',
+                },
+                city: {
+                  type: 'string',
+                },
+                state: {
+                  type: 'string',
+                },
+                consultantId: {},
+                type: {
+                  type: 'string',
+                },
+                status: {
+                  type: 'string',
+                },
+                affiliationId: {
+                  type: 'number',
+                },
+                createdBy: {
+                  type: 'string',
+                },
+                updatedBy: {},
+                createdAt: {
+                  type: 'string',
+                },
+                updatedAt: {
+                  type: 'string',
+                },
+                deletedAt: {},
+                associated: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'number',
+                    },
+                    name: {
+                      type: 'string',
+                    },
+                    email: {
+                      type: 'string',
+                    },
+                    lastName: {
+                      type: 'string',
+                    },
+                    taxId: {
+                      type: 'string',
+                    },
+                    registerId: {
+                      type: 'string',
+                    },
+                    birthDate: {
+                      type: 'string',
+                    },
+                    maritalStatus: {
+                      type: 'string',
+                    },
+                    cellPhone: {
+                      type: 'string',
+                    },
+                    nationality: {
+                      type: 'string',
+                    },
+                    gender: {
+                      type: 'string',
+                    },
+                    placeOfBirth: {
+                      type: 'string',
+                    },
+                    employmentRelationships: {
+                      type: 'array',
+                      items: {
+                        type: 'object',
+                        properties: {
+                          id: {
+                            type: 'number',
+                          },
+                          occupation: {
+                            type: 'string',
+                          },
+                          contractType: {
+                            type: 'string',
+                          },
+                          salary: {
+                            type: 'string',
+                          },
+                          publicAgency: {
+                            type: 'string',
+                          },
+                          isDefault: {
+                            type: 'boolean',
+                          },
+                          finalDate: {},
+                          registerNumber: {
+                            type: 'string',
+                          },
+                          paymentDay: {
+                            type: 'number',
+                          },
+                        },
+                        required: [
+                          'id',
+                          'occupation',
+                          'contractType',
+                          'salary',
+                          'publicAgency',
+                          'isDefault',
+                          'finalDate',
+                          'registerNumber',
+                          'paymentDay',
+                        ],
+                      },
+                    },
+                    affiliations: {
+                      type: 'array',
+                      items: {
+                        type: 'object',
+                        properties: {
+                          id: {
+                            type: 'number',
+                          },
+                          name: {
+                            type: 'string',
+                          },
+                        },
+                        required: ['id', 'name'],
+                      },
+                    },
+                    addresses: {
+                      type: 'array',
+                      items: {
+                        type: 'object',
+                        properties: {
+                          id: {
+                            type: 'number',
+                          },
+                          street: {
+                            type: 'string',
+                          },
+                          addressType: {
+                            type: 'string',
+                          },
+                          city: {
+                            type: 'string',
+                          },
+                          state: {
+                            type: 'string',
+                          },
+                          district: {
+                            type: 'string',
+                          },
+                          houseNumber: {
+                            type: 'string',
+                          },
+                          isDefault: {
+                            type: 'boolean',
+                          },
+                          complement: {
+                            type: 'string',
+                          },
+                          postalCode: {
+                            type: 'string',
+                          },
+                        },
+                        required: [
+                          'id',
+                          'street',
+                          'addressType',
+                          'city',
+                          'state',
+                          'district',
+                          'houseNumber',
+                          'isDefault',
+                          'complement',
+                          'postalCode',
+                        ],
+                      },
+                    },
+                    bankAccounts: {
+                      type: 'array',
+                      items: {
+                        type: 'object',
+                        properties: {
+                          id: {
+                            type: 'number',
+                          },
+                          accountNumber: {
+                            type: 'string',
+                          },
+                          accountType: {
+                            type: 'string',
+                          },
+                          agency: {
+                            type: 'string',
+                          },
+                          bank: {
+                            type: 'string',
+                          },
+                          isDefault: {
+                            type: 'boolean',
+                          },
+                          pixKey: {
+                            type: 'string',
+                          },
+                          pixType: {},
+                        },
+                        required: [
+                          'id',
+                          'accountNumber',
+                          'accountType',
+                          'agency',
+                          'bank',
+                          'isDefault',
+                          'pixKey',
+                          'pixType',
+                        ],
+                      },
+                    },
+                  },
+                  required: [
+                    'id',
+                    'name',
+                    'email',
+                    'lastName',
+                    'taxId',
+                    'registerId',
+                    'birthDate',
+                    'maritalStatus',
+                    'cellPhone',
+                    'nationality',
+                    'gender',
+                    'placeOfBirth',
+                    'employmentRelationships',
+                    'affiliations',
+                    'addresses',
+                    'bankAccounts',
+                  ],
+                },
+                consultant: {},
+                affiliation: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'number',
+                    },
+                    name: {
+                      type: 'string',
+                    },
+                  },
+                  required: ['id', 'name'],
+                },
+              },
+              required: [
+                'id',
+                'associatedId',
+                'commission',
+                'administrationFeeValue',
+                'hasGratification',
+                'joinedTelemedicine',
+                'bank',
+                'publicAgency',
+                'contractModel',
+                'installmentNumber',
+                'initialDate',
+                'financialAssistanceValue',
+                'installmentValue',
+                'name',
+                'lastName',
+                'gender',
+                'birthDate',
+                'maritalStatus',
+                'nationality',
+                'placeOfBirth',
+                'taxId',
+                'registerId',
+                'emissionState',
+                'issuingAgency',
+                'emissionDate',
+                'cellPhone',
+                'email',
+                'father',
+                'mother',
+                'partner',
+                'occupation',
+                'salary',
+                'paymentDay',
+                'registerNumber',
+                'contractType',
+                'finalDate',
+                'agency',
+                'accountType',
+                'accountNumber',
+                'pixKey',
+                'pixType',
+                'addressType',
+                'postalCode',
+                'street',
+                'houseNumber',
+                'complement',
+                'district',
+                'city',
+                'state',
+                'consultantId',
+                'type',
+                'status',
+                'affiliationId',
+                'createdBy',
+                'updatedBy',
+                'createdAt',
+                'updatedAt',
+                'deletedAt',
+                'associated',
+                'consultant',
+                'affiliation',
+              ],
+            },
+          },
+          required: [
+            'id',
+            'benefitId',
+            'reference',
+            'referenceDate',
+            'dueDate',
+            'installmentFactor',
+            'consultantCommission',
+            'consultantCommissionValue',
+            'cardFees',
+            'telemedicineFees',
+            'bankProcessingFees',
+            'fees',
+            'feesValue',
+            'finalValue',
+            'gratificationFeeValue',
+            'admnistrationFeeValue',
+            'status',
+            'createdBy',
+            'updatedBy',
+            'createdAt',
+            'updatedAt',
+            'benefit',
+          ],
+        },
+      },
+    },
+    required: ['statusCode', 'statusCodeAsString', 'data'],
+  },
   UpdateInstallmentByBenefitIdAndInstallmentIdPayload: {
     type: 'object',
     properties: {

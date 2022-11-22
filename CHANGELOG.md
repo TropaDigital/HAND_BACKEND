@@ -1,3 +1,10 @@
+### [1.16.3](https://github.com/haandsolutions/haand-bib/compare/v1.16.2...v1.16.3) (2022-10-27)
+
+
+### :zap: Refactor
+
+* adjust the flow of postponement installments ([50ed693](https://github.com/haandsolutions/haand-bib/commit/50ed693e5a91b08634563fe931e48755f1004d49))
+
 ### [1.16.2](https://github.com/haandsolutions/haand-bib/compare/v1.16.1...v1.16.2) (2022-10-25)
 
 

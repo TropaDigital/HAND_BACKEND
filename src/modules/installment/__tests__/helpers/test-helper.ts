@@ -43,6 +43,7 @@ export const makeInstallmentRepositoryStub =
     findInstallmentByBenefitIdAndInstallmentId: jest.fn(),
     findInstallmentByBenefitIdAndInstallmentIdAndStatus: jest.fn(),
     updateInstallmentByBenefitIdAndInstallmentId: jest.fn(),
+    getInstallmentsByReferenceDate: jest.fn(),
   });
 
 export const makeFakeCreateInstallmentParams = (

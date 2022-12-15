@@ -1,3 +1,15 @@
+### [1.17.1](https://github.com/haandsolutions/haand-bib/compare/v1.17.0...v1.17.1) (2022-12-15)
+
+
+### :bug: Fixes
+
+* adjust the parameters properties ([34a1c72](https://github.com/haandsolutions/haand-bib/commit/34a1c72a97eed0cd578cc3c628a036770f16d733))
+
+
+### :white_check_mark: Tests
+
+* adjust the mock factories to implements the interfaces correctly ([331fb5c](https://github.com/haandsolutions/haand-bib/commit/331fb5cb0b14e9d5801ecf0858952c6d4c151c16))
+
 ## [1.17.0](https://github.com/haandsolutions/haand-bib/compare/v1.16.3...v1.17.0) (2022-11-22)
 
 

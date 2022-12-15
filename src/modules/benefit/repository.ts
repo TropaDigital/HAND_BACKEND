@@ -113,7 +113,7 @@ export class BenefitRepository implements IBenefitRepository {
           },
           where: {
             status: {
-              NOT: InstallmentStatus.CANCELED,
+              not: InstallmentStatus.CANCELED,
             },
           },
         },

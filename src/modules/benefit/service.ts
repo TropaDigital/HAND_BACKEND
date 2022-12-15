@@ -43,7 +43,7 @@ export class BenefitService implements IBenefitService {
     private readonly loanSimulationService: ILoanSimulationService,
     private readonly installmentRepository: IInstallmentRepository,
     private readonly prisma: PrismaClient,
-  ) { }
+  ) {}
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
@@ -439,7 +439,7 @@ export class BenefitService implements IBenefitService {
       installments.map(({ id, benefitId, ...installment }) =>
         this.installmentRepository.softUpdate(id, {
           ...installment,
-          Benefit: {
+          benefit: {
             connect: {
               id: payload.id,
             },
@@ -500,7 +500,7 @@ export class BenefitService implements IBenefitService {
 
     await this.installmentRepository.softUpdate(installmentId, {
       ...installmentFormated,
-      Benefit: {
+      benefit: {
         connect: {
           id: payload.id,
         },

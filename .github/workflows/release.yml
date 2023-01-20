@@ -5,7 +5,7 @@ env:
   MYSQL_DATABASE: haandbib
   MYSQL_PASSWORD: haandbib
   MYSQL_PORT: 3306
-  MYSQL_USER: root
+  MYSQL_USER: haandbib
   DATABASE_URL: mysql://root:haandbib@localhost:3306/haandbib
   PORT: 3001
   AUTH_SESSION_TTL: 10

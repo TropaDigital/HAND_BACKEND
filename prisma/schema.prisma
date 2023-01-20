@@ -84,8 +84,8 @@ model Associated {
   issuingAgency           String                   @map("issuing_agency")
   emissionDate            DateTime                 @map("emission_date")
   cellPhone               String                   @map("cell_phone")
-  email                   String
-  father                  String
+  email                   String?
+  father                  String?
   mother                  String
   partner                 String?
   createdBy               String                   @map("created_by") @db.VarChar(75)
@@ -152,8 +152,8 @@ model Benefit {
   issuingAgency            String           @map("issuing_agency")
   emissionDate             DateTime         @map("emission_date")
   cellPhone                String           @map("cell_phone")
-  email                    String
-  father                   String
+  email                    String?
+  father                   String?
   mother                   String
   partner                  String?
   occupation               String

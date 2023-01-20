@@ -29,7 +29,6 @@ export default class JoiAdapter<S = { [key: string]: Joi.Schema }> {
         ]().validate(data, {
           abortEarly: false,
           stripUnknown: true,
-          //   messages: validationMessages,
         }),
       );
 

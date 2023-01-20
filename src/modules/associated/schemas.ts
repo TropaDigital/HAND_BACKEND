@@ -21,8 +21,8 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
   issuingAgency: Joi.string().required().label('orgao-emissor'),
   emissionDate: Joi.date().required().label('data-emissao'),
   cellPhone: Joi.string().required().label('celular'),
-  email: Joi.string().email().required().label('email'),
-  father: Joi.string().required().label('pai'),
+  email: Joi.string().email().label('email'),
+  father: Joi.string().label('pai'),
   mother: Joi.string().required().label('mãe'),
   partner: Joi.string().label('cônjuge'),
 

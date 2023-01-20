@@ -19,7 +19,10 @@ describe(InstallmentRepository.name, () => {
       await sut.findAll();
 
       expect(prismaInstallmentRepository.findMany).toBeCalledWith({
-        where: { disabledAt: {}, disabledBy: {} },
+        orderBy: {
+          referenceDate: 'asc',
+        },
+        where: { benefitId: undefined },
       });
     });
 
@@ -49,6 +52,7 @@ describe(InstallmentRepository.name, () => {
             cardFees: 10,
             consultantCommission: 2,
             createdBy: 'user',
+            dueDate: expect.anything(),
             reference: 'abril/2022',
             referenceDate: new Date('2022-10-10'),
           },
@@ -77,10 +81,9 @@ describe(InstallmentRepository.name, () => {
 
       expect(prismaInstallmentRepository.findFirst).toBeCalledWith({
         where: {
-          disabledAt: null,
-          disabledBy: null,
-          referenceDate: new Date('2022-10-10'),
+          reference: new Date('2022-10-10'),
           benefitId: 1,
+          status: { not: 'CANCELED' },
         },
       });
     });
@@ -107,7 +110,11 @@ describe(InstallmentRepository.name, () => {
       await sut.disable(1, 'user');
 
       expect(prismaInstallmentRepository.update).toBeCalledWith({
-        data: { disabledAt: expect.anything(), disabledBy: 'user' },
+        data: {
+          updatedAt: expect.anything(),
+          updatedBy: 'user',
+          status: 'CANCELED',
+        },
         where: { id: 1 },
       });
     });
@@ -132,39 +139,18 @@ describe(InstallmentRepository.name, () => {
       await sut.softUpdate(1, { ...fakeParams, user: 'user' });
 
       expect(prismaInstallmentRepository.update).toBeCalledWith({
-        data: { disabledAt: expect.anything(), disabledBy: 'user' },
+        data: {
+          updatedAt: expect.anything(),
+          updatedBy: 'user',
+          status: 'CANCELED',
+        },
         where: { id: 1 },
       });
       expect(prismaInstallmentRepository.create).toBeCalledWith({
         data: {
           ...fakeParams,
-          user: 'user',
         },
       });
     });
-
-    // it('Should throw when prisma throws', async () => {
-    //   const { sut, prismaInstallmentRepository } = makeSut();
-    //   const fakeParams = makeFakeCreateInstallmentParams();
-    //   prismaInstallmentRepository.update.mockRejectedValueOnce(
-    //     new Error('any prisma error'),
-    //   );
-
-    //   const promise = sut.softUpdate(1, { ...fakeParams, user: 'user' });
-
-    //   await expect(promise).rejects.toThrow(new Error('any prisma error'));
-    // });
-
-    // it('Should throw when prisma throws', async () => {
-    //   const { sut, prismaInstallmentRepository } = makeSut();
-    //   const fakeParams = makeFakeCreateInstallmentParams();
-    //   prismaInstallmentRepository.create.mockRejectedValueOnce(
-    //     new Error('any prisma error'),
-    //   );
-
-    //   const promise = sut.softUpdate(1, { ...fakeParams, user: 'user' });
-
-    //   await expect(promise).rejects.toThrow(new Error('any prisma error'));
-    // });
   });
 });

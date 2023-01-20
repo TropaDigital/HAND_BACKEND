@@ -62,7 +62,11 @@ describe('Schema', () => {
   describe('UpdateAffiliationById', () => {
     it('should success when receive a valid input', () => {
       const { sut } = makeSut();
-      const param = { id: 777, ...makeFakeUpdateAffiliationInput() };
+      const param = {
+        id: 777,
+        ...makeFakeUpdateAffiliationInput(),
+        deletedAt: undefined,
+      };
 
       const result = sut.validateSchema('UpdateAffiliationById', param);
 

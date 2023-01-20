@@ -131,7 +131,14 @@ describe(UserRepository.name, () => {
       await sut.create(fakeUser);
 
       expect(createSpy).toBeCalledWith({
-        data: makeFakeUser({}),
+        data: {
+          ...makeFakeUser({}),
+          role: {
+            connect: {
+              name: 'operational',
+            },
+          },
+        },
         include: {
           role: true,
         },

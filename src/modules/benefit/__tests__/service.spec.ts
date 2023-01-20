@@ -1,5 +1,3 @@
-import MySqlDBClient from 'src/infra/mySql';
-
 import {
   MissingInvalidParamsError,
   NotFoundError,
@@ -14,6 +12,7 @@ import {
   makeFakeBenefitList,
   makeFakeCreateBenefitInput,
   makeFakeUpdateBenefitInput,
+  makePrismaClient,
 } from './helpers/test-helper';
 
 const makeSut = () => {
@@ -21,16 +20,17 @@ const makeSut = () => {
   const associatedRepository = makeAssociatedRepositoryStub();
   const loanService = makeLoanSimulationServiceStub();
   const installmentRepository = makeInstallmentRepositoryStub();
+  const { prismaClient } = makePrismaClient();
 
   const sut = new BenefitService(
     benefitRepository,
     associatedRepository,
     loanService,
     installmentRepository,
-    MySqlDBClient.getInstance().getPrismaClientInstance(),
+    prismaClient,
   );
 
-  return { sut, benefitRepository };
+  return { sut, benefitRepository, prismaClient };
 };
 
 describe(BenefitService.name, () => {
@@ -122,16 +122,17 @@ describe(BenefitService.name, () => {
     const fakeBenefit = makeFakeCreateBenefitInput();
 
     it('should call repository with right params', async () => {
-      const { sut, benefitRepository } = makeSut();
-      const createSpy = benefitRepository.create;
+      const { sut, prismaClient } = makeSut();
+      const transactionSpy = prismaClient.$transaction;
 
       await sut.create(fakeBenefit);
 
-      expect(createSpy).toBeCalled();
+      expect(transactionSpy).toBeCalled();
     });
 
     it('should return repository result', async () => {
-      const { sut } = makeSut();
+      const { sut, prismaClient } = makeSut();
+      prismaClient.$transaction.mockResolvedValueOnce(makeFakeBenefit());
 
       const result = await sut.create(fakeBenefit);
 
@@ -139,17 +140,18 @@ describe(BenefitService.name, () => {
     });
 
     it('should return repository result when benefit has no commission', async () => {
-      const { sut } = makeSut();
+      const { sut, prismaClient } = makeSut();
       const benefit = makeFakeBenefit({});
+      prismaClient.$transaction.mockResolvedValueOnce(makeFakeBenefit());
 
       const result = await sut.create(benefit);
 
-      expect(result).toEqual(makeFakeBenefit({}));
+      expect(result).toEqual(makeFakeBenefit());
     });
 
     it('should throw when repository throws', async () => {
-      const { sut, benefitRepository } = makeSut();
-      benefitRepository.create.mockRejectedValueOnce(
+      const { sut, prismaClient } = makeSut();
+      prismaClient.$transaction.mockRejectedValueOnce(
         new Error('any_create_error'),
       );
 

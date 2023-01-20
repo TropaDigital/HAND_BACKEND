@@ -28,6 +28,7 @@ export const makeFakeCreateBenefitInput = (
   hasGratification: false,
   joinedTelemedicine: false,
   administrationFeeValue: 0,
+  createdBy: 'user',
   ...(payload as any),
 });
 
@@ -61,7 +62,7 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeBenefit = (
-  payload: Partial<ICreateBenefitParams>,
+  payload?: Partial<ICreateBenefitParams>,
 ): jest.Mocked<ICreateBenefitParams> => ({
   type: BenefitType.D,
   affiliation: 'any affiliation',
@@ -131,6 +132,7 @@ export const makePrismaClient = (): {
   const result: jest.Mocked<Partial<PrismaClient>> = {
     benefit: prismaBenefitRepository,
     installment: prismaInstallmentRepository,
+    $transaction: jest.fn().mockResolvedValue(null),
   };
   return {
     prismaClient: result as jest.Mocked<PrismaClient>,

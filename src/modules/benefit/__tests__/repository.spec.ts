@@ -27,6 +27,13 @@ describe(BenefitRepository.name, () => {
           affiliation: true,
           associated: true,
           consultant: true,
+          installments: {
+            where: {
+              status: {
+                notIn: ['CANCELED'],
+              },
+            },
+          },
         },
       });
     });
@@ -84,6 +91,16 @@ describe(BenefitRepository.name, () => {
           affiliation: true,
           associated: true,
           consultant: true,
+          installments: {
+            orderBy: {
+              referenceDate: 'asc',
+            },
+            where: {
+              status: {
+                not: 'CANCELED',
+              },
+            },
+          },
         },
       });
     });

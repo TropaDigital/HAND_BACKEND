@@ -11,7 +11,7 @@ export default class LoanSimulationRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: ILoanSimulationController) { }
+  private constructor(private readonly controller: ILoanSimulationController) {}
 
   public static getInstance(
     controller: ILoanSimulationController = createLoanSimulationController(),

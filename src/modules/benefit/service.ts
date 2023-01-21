@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Address,
   Associated,
@@ -27,6 +29,7 @@ import {
 } from '../installment/interfaces';
 import { loanConfig } from '../loanSimulation/consts';
 import {
+  ILoanSimulationBasedOnRequestedValue,
   ILoanSimulationBasedOnRequestedValueParams,
   ILoanSimulationService,
 } from '../loanSimulation/interfaces';
@@ -293,13 +296,7 @@ export class BenefitService implements IBenefitService {
     > & {
       employmentRelationship: EmploymentRelationship;
     },
-  ): Promise<{
-    consultantCommission: any;
-    isRequestedValueValid: any;
-    totalValue: any;
-    installments: any;
-    firstPaymentDates: any;
-  }> {
+  ): Promise<ILoanSimulationBasedOnRequestedValue> {
     const result =
       await this.loanSimulationService.simulateLoanBasedOnRequestedValue({
         ...payload,

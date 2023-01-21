@@ -28,16 +28,16 @@ export class InstallmentRepository implements IInstallmentRepository {
   }): Promise<Installment[]> {
     const query = payload?.justPendingInstallments
       ? {
-        where: {
-          benefitId: payload?.benefitId,
-          status: InstallmentStatus.PENDING,
-        },
-      }
+          where: {
+            benefitId: payload?.benefitId,
+            status: InstallmentStatus.PENDING,
+          },
+        }
       : {
-        where: {
-          benefitId: payload?.benefitId,
-        },
-      };
+          where: {
+            benefitId: payload?.benefitId,
+          },
+        };
     const result = await this.prismaRepository.findMany({
       where: {
         ...query.where,
@@ -172,14 +172,14 @@ export class InstallmentRepository implements IInstallmentRepository {
         : { status: { not: InstallmentStatus.CANCELED } }),
       ...(associated
         ? {
-          benefit: {
-            associated: {
-              name: {
-                contains: associated,
+            benefit: {
+              associated: {
+                name: {
+                  contains: associated,
+                },
               },
             },
-          },
-        }
+          }
         : {}),
     };
   }

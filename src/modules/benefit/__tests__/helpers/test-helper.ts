@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Benefit, BenefitType, PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
@@ -49,7 +50,7 @@ export const makeFakeApiHttpRequest = ({
   headers,
 }: {
   body?: unknown;
-  params?: { [key: string]: any };
+  params?: { [key: string]: unknown };
   headers?: { [key: string]: string | string[] | undefined };
 }): jest.Mocked<IApiHttpRequest> => ({ body, params, headers });
 
@@ -73,7 +74,7 @@ export const makeFakeBenefit = (
   ...(payload as any),
 });
 
-export const makeFakeBenefitList = () => [
+export const makeFakeBenefitList = (): ICreateBenefitParams[] => [
   makeFakeBenefit({}),
   makeFakeBenefit({}),
 ];

@@ -4,7 +4,7 @@ import { ConflictError, NotFoundError } from '../../shared/errors';
 import { IAffiliationRepository, IAffiliationService } from './interfaces';
 
 export class AffiliationService implements IAffiliationService {
-  constructor(private readonly affiliationRepository: IAffiliationRepository) { }
+  constructor(private readonly affiliationRepository: IAffiliationRepository) {}
 
   public async getAll(): Promise<Affiliation[]> {
     const result = await this.affiliationRepository.findAll();

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { User } from '@prisma/client';
 
 import { NotFoundError } from '../../../shared/errors';

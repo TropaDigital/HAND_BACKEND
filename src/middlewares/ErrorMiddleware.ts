@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
@@ -41,7 +42,6 @@ export class ErrorMiddleware {
     return next(err);
   }
 
-  // eslint-disable-next-line
   public sendErrorMiddleware(
     err: GenericAppError,
     _req: Request,

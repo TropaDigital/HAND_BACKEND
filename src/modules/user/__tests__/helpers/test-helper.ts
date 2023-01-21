@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { User, Prisma } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
@@ -72,7 +73,10 @@ export const makeResponseUser = (
   ...payload,
 });
 
-export const makeFakeUserList = () => [makeFakeUser({}), makeFakeUser({})];
+export const makeFakeUserList = (): unknown => [
+  makeFakeUser({}),
+  makeFakeUser({}),
+];
 
 export const makeUserServiceStub = (): jest.Mocked<IUserService> => ({
   getAll: jest.fn().mockResolvedValue(makeFakeUserList()),

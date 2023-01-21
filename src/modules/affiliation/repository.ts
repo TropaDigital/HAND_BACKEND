@@ -7,7 +7,7 @@ export type PrismaAffiliationRepository = Prisma.AffiliationDelegate<
 >;
 
 export class AffiliationRepository implements IAffiliationRepository {
-  constructor(private readonly prismaRepository: PrismaAffiliationRepository) { }
+  constructor(private readonly prismaRepository: PrismaAffiliationRepository) {}
 
   public async findByName(name: string): Promise<Affiliation | null> {
     const result = await this.prismaRepository.findFirst({

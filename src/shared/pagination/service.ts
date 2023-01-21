@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IFindAllParams, IPaginatedAResult } from './interfaces';
 
 export const parsePrismaFindManyContains = <T>(object: T): T => {

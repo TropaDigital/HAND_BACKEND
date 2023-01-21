@@ -11,7 +11,7 @@ export default class AffiliationRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IAffiliationController) { }
+  private constructor(private readonly controller: IAffiliationController) {}
 
   public static getInstance(
     controller: IAffiliationController = createAffiliationController(),

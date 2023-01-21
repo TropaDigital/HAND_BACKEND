@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AssociatedRepository } from '../repository';
 import {
   makeFakeAssociated,
@@ -246,10 +247,19 @@ describe(AssociatedRepository.name, () => {
 
       await sut.updateById(fakeId, fakeAssociated);
 
-      // expect(updateSpy).toBeCalledWith({
-      //   data: makeFakeAssociated({}),
-      //   where: { id: 777 },
-      // });
+      const {
+        addresses: _addresses,
+        bankAccounts: _bankAccounts,
+        employmentRelationships: _employmentRelationships,
+        ...expectedAssociated
+      } = {
+        ...makeFakeAssociated({}),
+        affiliations: { connect: [{ id: 1 }] },
+      };
+      expect(updateSpy).toBeCalledWith({
+        data: expectedAssociated,
+        where: { id: 777 },
+      });
     });
 
     it('should throw when prisma throws', async () => {

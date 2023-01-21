@@ -21,7 +21,12 @@
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "prettier", "import-helpers", "unused-imports"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "import-helpers",
+    "unused-imports"
+  ],
   "rules": {
     "unused-imports/no-unused-imports": "error",
     "@typescript-eslint/naming-convention": [
@@ -48,7 +53,7 @@
     "max-statements-per-line": ["warn", { "max": 1 }],
     "max-nested-callbacks": ["warn", { "max": 2 }],
     "max-depth": ["warn", { "max": 2 }],
-    "max-params": ["warn", 3],
+    "max-params": ["warn", 5],
     "max-len": [
       "warn",
       100,

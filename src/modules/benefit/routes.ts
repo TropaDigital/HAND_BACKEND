@@ -11,7 +11,7 @@ export default class BenefitRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IBenefitController) { }
+  private constructor(private readonly controller: IBenefitController) {}
 
   public static getInstance(
     controller: IBenefitController = createBenefitController(),

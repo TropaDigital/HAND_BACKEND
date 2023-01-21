@@ -77,11 +77,14 @@ describe(InstallmentRepository.name, () => {
     it('Should call prisma with right params', async () => {
       const { sut, prismaInstallmentRepository } = makeSut();
 
-      await sut.findByBenefitIdAndReference(1, new Date('2022-10-10') as any);
+      await sut.findByBenefitIdAndReference(
+        1,
+        new Date('2022-10-10').toString(),
+      );
 
       expect(prismaInstallmentRepository.findFirst).toBeCalledWith({
         where: {
-          reference: new Date('2022-10-10'),
+          reference: new Date('2022-10-10').toString(),
           benefitId: 1,
           status: { not: 'CANCELED' },
         },
@@ -96,7 +99,7 @@ describe(InstallmentRepository.name, () => {
 
       const promise = sut.findByBenefitIdAndReference(
         1,
-        new Date('2022-10-10') as any,
+        new Date('2022-10-10').toString(),
       );
 
       await expect(promise).rejects.toThrow(new Error('any prisma error'));

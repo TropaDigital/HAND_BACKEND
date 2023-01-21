@@ -29,7 +29,7 @@ export const makeFakeApiHttpRequest = ({
   headers,
 }: {
   body?: unknown;
-  params?: { [key: string]: any };
+  params?: { [key: string]: unknown };
   headers?: { [key: string]: string | string[] | undefined };
 }): jest.Mocked<IApiHttpRequest> => ({ body, params, headers });
 
@@ -52,7 +52,10 @@ export const makeFakeRole = (payload: Partial<Role>): jest.Mocked<Role> => ({
   updatedBy: 'me',
 });
 
-export const makeFakeRoleList = () => [makeFakeRole({}), makeFakeRole({})];
+export const makeFakeRoleList = (): Role[] => [
+  makeFakeRole({}),
+  makeFakeRole({}),
+];
 
 export const makeRoleServiceStub = (): jest.Mocked<IRoleService> => ({
   getAll: jest.fn().mockResolvedValue(makeFakeRoleList()),

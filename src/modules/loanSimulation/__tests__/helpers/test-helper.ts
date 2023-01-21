@@ -16,7 +16,7 @@ export const makeFakeApiHttpRequest = ({
   headers,
 }: {
   body?: unknown;
-  params?: { [key: string]: any };
+  params?: { [key: string]: unknown };
   headers?: { [key: string]: string | string[] | undefined };
 }): jest.Mocked<IApiHttpRequest> => ({ body, params, headers });
 

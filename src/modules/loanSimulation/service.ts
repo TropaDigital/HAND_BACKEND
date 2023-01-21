@@ -347,7 +347,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       monthOfPayment,
       hasGratification,
       administrationFeeValue,
-      paymentDay: getDate(salaryReceiptDate),
+      paymentDay: getDate(salaryReceiptDate || new Date()),
     });
 
     return this.formatLoanSimulationBasedOnRequestedValue({

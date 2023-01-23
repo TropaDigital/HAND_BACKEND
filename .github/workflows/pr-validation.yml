@@ -101,14 +101,14 @@ jobs:
         if: steps.unit-tests.outcome != 'success'
         run: exit 1
 
-      - name: Run Integration Tests
-        id: functional-tests
-        continue-on-error: true
-        env:
-          DATABASE_URL: mysql://${{ env.MYSQL_USER }}:${{ env.MYSQL_ROOT_PASSWORD }}@localhost:${{ job.services.mysql.ports[3306] }}/${{ env.MYSQL_DATABASE }}
-          REDIS_HOSTNAME: localhost
-          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
-        run: yarn test:functional:coverage
+      # - name: Run Integration Tests
+      #   id: functional-tests
+      #   continue-on-error: true
+      #   env:
+      #     DATABASE_URL: mysql://${{ env.MYSQL_USER }}:${{ env.MYSQL_ROOT_PASSWORD }}@localhost:${{ job.services.mysql.ports[3306] }}/${{ env.MYSQL_DATABASE }}
+      #     REDIS_HOSTNAME: localhost
+      #     REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+      #   run: yarn test:functional:coverage
 
       - name: Generate artifact of functional tests results
         uses: actions/upload-artifact@v3

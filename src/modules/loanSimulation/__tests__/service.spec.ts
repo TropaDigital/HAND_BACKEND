@@ -23,7 +23,7 @@ const makeSut = () => {
   return { sut, consultantService };
 };
 
-describe.skip(LoanSimulationService.name, () => {
+describe(LoanSimulationService.name, () => {
   describe(`When ${LoanSimulationService.prototype.simulateLoanBasedOnRequestedValue.name} is called`, () => {
     beforeEach(() => {
       jest
@@ -35,12 +35,14 @@ describe.skip(LoanSimulationService.name, () => {
 
     test.each([
       {
+        name: 'loanSimulationOfDay15OfTheMonthWithTelemedicine',
         params: makeLoanSimulationBasedOnRequestedValueParams({
           monthOfPayment: MonthOfPayment.NEXT_MONTH,
         }),
         expected: loanSimulationOfDay15OfTheMonthWithTelemedicine,
       },
       {
+        name: 'loanSimulationOfDay15OfTheMonthWithoutTelemedicine',
         params: makeLoanSimulationBasedOnRequestedValueParams({
           joinedTelemedicine: false,
           monthOfPayment: MonthOfPayment.NEXT_MONTH,
@@ -48,6 +50,7 @@ describe.skip(LoanSimulationService.name, () => {
         expected: loanSimulationOfDay15OfTheMonthWithoutTelemedicine,
       },
       {
+        name: 'loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment',
         params: makeLoanSimulationBasedOnRequestedValueParams({
           joinedTelemedicine: false,
           monthOfPayment: MonthOfPayment.LAST_MONTH,
@@ -56,6 +59,7 @@ describe.skip(LoanSimulationService.name, () => {
           loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPayment,
       },
       {
+        name: 'loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentRequestedValueLowerThan1000',
         params: makeLoanSimulationBasedOnRequestedValueParams({
           joinedTelemedicine: false,
           requestedValue: 800,
@@ -65,6 +69,7 @@ describe.skip(LoanSimulationService.name, () => {
           loanSimulationOfDay15OfTheMonthWithoutTelemedicineLastMonthPaymentRequestedValueLowerThan1000,
       },
       {
+        name: 'loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay',
         params: makeLoanSimulationBasedOnRequestedValueParams({
           joinedTelemedicine: false,
           salaryReceiptDate: undefined,
@@ -74,6 +79,7 @@ describe.skip(LoanSimulationService.name, () => {
           loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDay,
       },
       {
+        name: 'loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDayCurrentMonth',
         params: makeLoanSimulationBasedOnRequestedValueParams({
           joinedTelemedicine: false,
           salaryReceiptDate: undefined,
@@ -82,6 +88,7 @@ describe.skip(LoanSimulationService.name, () => {
           loanSimulationOfDay15OfTheMonthWithoutTelemedicineAndWithoutReceptSalaryDayCurrentMonth,
       },
       {
+        name: 'loanSimulationOfDay16OfTheMonth',
         params: makeLoanSimulationBasedOnRequestedValueParams({
           salaryReceiptDate: startOfDay(new Date('2022-04-15T12:00:00.900Z')),
           monthOfPayment: MonthOfPayment.NEXT_MONTH,
@@ -96,7 +103,7 @@ describe.skip(LoanSimulationService.name, () => {
         },
       },
     ])(
-      'should return the details of loan simulation when provide $params as params',
+      'should return $name when provide $params as params',
       async ({ params, expected, overrideSystemTime }) => {
         if (overrideSystemTime) {
           overrideSystemTime();

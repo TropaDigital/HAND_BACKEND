@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IJwtToken } from '../../shared/auth/interfaces';
 
 export interface IApiHttpRequest<

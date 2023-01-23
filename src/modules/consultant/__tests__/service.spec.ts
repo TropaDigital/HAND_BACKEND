@@ -1,3 +1,5 @@
+import { Consultant } from '@prisma/client';
+
 import { NotFoundError } from '../../../shared/errors';
 import { ConsultantService } from '../service';
 import {
@@ -32,7 +34,7 @@ describe(ConsultantService.name, () => {
       const result = await sut.getAll();
 
       expect(result).toEqual(
-        makeFakeConsultantList().map(consultant => ({
+        makeFakeConsultantList().map((consultant: Consultant) => ({
           ...consultant,
           commission: 10,
         })),

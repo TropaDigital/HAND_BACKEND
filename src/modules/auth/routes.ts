@@ -11,7 +11,7 @@ export default class AuthRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IAuthController) { }
+  private constructor(private readonly controller: IAuthController) {}
 
   public static getInstance(
     controller: IAuthController = createAuthController(),

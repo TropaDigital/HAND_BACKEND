@@ -62,7 +62,11 @@ describe('Schema', () => {
   describe('UpdateUserById', () => {
     it('should success when receive a valid input', () => {
       const { sut } = makeSut();
-      const param = { id: 777, ...makeFakeUpdateUserInput() };
+      const param = {
+        id: 777,
+        ...makeFakeUpdateUserInput(),
+        password: undefined,
+      };
 
       const result = sut.validateSchema('UpdateUserById', param);
 

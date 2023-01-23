@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Address,
   Associated,
@@ -27,6 +29,7 @@ import {
 } from '../installment/interfaces';
 import { loanConfig } from '../loanSimulation/consts';
 import {
+  ILoanSimulationBasedOnRequestedValue,
   ILoanSimulationBasedOnRequestedValueParams,
   ILoanSimulationService,
 } from '../loanSimulation/interfaces';
@@ -262,12 +265,12 @@ export class BenefitService implements IBenefitService {
             },
             ...(consultantId
               ? {
-                consultant: {
-                  connect: {
-                    id: consultantId,
+                  consultant: {
+                    connect: {
+                      id: consultantId,
+                    },
                   },
-                },
-              }
+                }
               : {}),
           },
           prisma,
@@ -293,13 +296,7 @@ export class BenefitService implements IBenefitService {
     > & {
       employmentRelationship: EmploymentRelationship;
     },
-  ): Promise<{
-    consultantCommission: any;
-    isRequestedValueValid: any;
-    totalValue: any;
-    installments: any;
-    firstPaymentDates: any;
-  }> {
+  ): Promise<ILoanSimulationBasedOnRequestedValue> {
     const result =
       await this.loanSimulationService.simulateLoanBasedOnRequestedValue({
         ...payload,
@@ -332,30 +329,30 @@ export class BenefitService implements IBenefitService {
   private validateAssociated(
     associated:
       | {
-        id: number;
-        name: string;
-        lastName: string;
-        gender: string;
-        birthDate: Date;
-        maritalStatus: string;
-        nationality: string;
-        placeOfBirth: string;
-        taxId: string;
-        registerId: string;
-        emissionState: string;
-        issuingAgency: string;
-        emissionDate: Date;
-        cellPhone: string;
-        email: string;
-        father: string;
-        mother: string;
-        partner: string | null;
-        createdBy: string;
-        updatedBy: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
-      }
+          id: number;
+          name: string;
+          lastName: string;
+          gender: string;
+          birthDate: Date;
+          maritalStatus: string;
+          nationality: string;
+          placeOfBirth: string;
+          taxId: string;
+          registerId: string;
+          emissionState: string;
+          issuingAgency: string;
+          emissionDate: Date;
+          cellPhone: string;
+          email: string;
+          father: string;
+          mother: string;
+          partner: string | null;
+          createdBy: string;
+          updatedBy: string | null;
+          createdAt: Date;
+          updatedAt: Date;
+          deletedAt: Date | null;
+        }
       | { [key: string]: any },
   ) {
     if (!associated) {

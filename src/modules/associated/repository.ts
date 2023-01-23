@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Address,
   BankAccount,
@@ -27,7 +28,7 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 >;
 
 export class AssociatedRepository implements IAssociatedRepository {
-  constructor(private readonly prismaRepository: PrismaAssociatedRepository) { }
+  constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
 
   public async getBankAccountsByAssociatedId(
     associatedId: number,

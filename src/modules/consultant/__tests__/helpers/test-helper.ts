@@ -36,7 +36,7 @@ export const makeFakeApiHttpRequest = ({
   headers,
 }: {
   body?: unknown;
-  params?: { [key: string]: any };
+  params?: { [key: string]: unknown };
   headers?: { [key: string]: string | string[] | undefined };
 }): jest.Mocked<IApiHttpRequest> => ({ body, params, headers });
 
@@ -65,7 +65,7 @@ export const makeFakeConsultant = (
   ...payload,
 });
 
-export const makeFakeConsultantList = () => [
+export const makeFakeConsultantList = (): Consultant[] => [
   makeFakeConsultant({ name: 'any_name1' }),
   makeFakeConsultant({ name: 'any_name2' }),
 ];

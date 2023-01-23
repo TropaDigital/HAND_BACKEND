@@ -11,7 +11,7 @@ export default class AssociatedRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IAssociatedController) { }
+  private constructor(private readonly controller: IAssociatedController) {}
 
   public static getInstance(
     controller: IAssociatedController = createAssociatedController(),

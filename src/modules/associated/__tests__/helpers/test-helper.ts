@@ -1,3 +1,4 @@
+import { Associated } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
@@ -161,7 +162,7 @@ export const makeFakeApiHttpRequest = ({
   query,
 }: {
   body?: unknown;
-  params?: { [key: string]: any };
+  params?: { [key: string]: unknown };
   headers?: { [key: string]: string | string[] | undefined };
   query?: { [key: string]: string | string[] | undefined };
 }): jest.Mocked<IApiHttpRequest> => ({ body, params, headers, query });
@@ -175,7 +176,7 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAssociated = (
-  payload: Partial<IAssociated>,
+  payload?: Partial<IAssociated>,
 ): jest.Mocked<IAssociated> => ({
   id: 0,
   affiliations: [
@@ -258,7 +259,7 @@ export const makeFakeAssociated = (
   ...payload,
 });
 
-export const makeFakeAssociatedList = () => [
+export const makeFakeAssociatedList = (): Associated[] => [
   makeFakeAssociated({}),
   makeFakeAssociated({}),
 ];

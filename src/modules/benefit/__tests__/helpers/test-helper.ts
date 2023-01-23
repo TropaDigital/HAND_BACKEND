@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Benefit, BenefitType, PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
@@ -28,6 +29,7 @@ export const makeFakeCreateBenefitInput = (
   hasGratification: false,
   joinedTelemedicine: false,
   administrationFeeValue: 0,
+  createdBy: 'user',
   ...(payload as any),
 });
 
@@ -48,7 +50,7 @@ export const makeFakeApiHttpRequest = ({
   headers,
 }: {
   body?: unknown;
-  params?: { [key: string]: any };
+  params?: { [key: string]: unknown };
   headers?: { [key: string]: string | string[] | undefined };
 }): jest.Mocked<IApiHttpRequest> => ({ body, params, headers });
 
@@ -61,7 +63,7 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeBenefit = (
-  payload: Partial<ICreateBenefitParams>,
+  payload?: Partial<ICreateBenefitParams>,
 ): jest.Mocked<ICreateBenefitParams> => ({
   type: BenefitType.D,
   affiliation: 'any affiliation',
@@ -72,7 +74,7 @@ export const makeFakeBenefit = (
   ...(payload as any),
 });
 
-export const makeFakeBenefitList = () => [
+export const makeFakeBenefitList = (): ICreateBenefitParams[] => [
   makeFakeBenefit({}),
   makeFakeBenefit({}),
 ];
@@ -131,6 +133,7 @@ export const makePrismaClient = (): {
   const result: jest.Mocked<Partial<PrismaClient>> = {
     benefit: prismaBenefitRepository,
     installment: prismaInstallmentRepository,
+    $transaction: jest.fn().mockResolvedValue(null),
   };
   return {
     prismaClient: result as jest.Mocked<PrismaClient>,

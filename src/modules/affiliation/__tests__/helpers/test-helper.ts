@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Affiliation, Prisma } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
@@ -50,7 +51,7 @@ export const makeFakeAffiliation = (
   ...payload,
 });
 
-export const makeFakeAffiliationList = () => [
+export const makeFakeAffiliationList = (): Affiliation[] => [
   makeFakeAffiliation({}),
   makeFakeAffiliation({}),
 ];

@@ -7,7 +7,7 @@ export type PrismaUserRepository = Prisma.UserDelegate<
 >;
 
 export class UserRepository implements IUserRepository {
-  constructor(private readonly prismaRepository: PrismaUserRepository) { }
+  constructor(private readonly prismaRepository: PrismaUserRepository) {}
 
   public async findAll(): Promise<IUser[]> {
     const result = await this.prismaRepository.findMany({

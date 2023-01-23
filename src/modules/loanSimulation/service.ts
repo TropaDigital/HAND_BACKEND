@@ -25,7 +25,7 @@ import {
 } from './interfaces';
 
 export class LoanSimulationService implements ILoanSimulationService {
-  constructor(private readonly consultantService: IConsultantService) { }
+  constructor(private readonly consultantService: IConsultantService) {}
 
   private getNumberOfDaysOfTheMonth(date: number | Date): number {
     return getDaysInMonth(date);
@@ -75,7 +75,7 @@ export class LoanSimulationService implements ILoanSimulationService {
   ): number {
     return requestedValue < 1000
       ? loanConfig.aditionalValueWhenTheValueIsLowerThan1000 /
-      numberOfInstallments
+          numberOfInstallments
       : 0;
   }
 
@@ -347,7 +347,7 @@ export class LoanSimulationService implements ILoanSimulationService {
       monthOfPayment,
       hasGratification,
       administrationFeeValue,
-      paymentDay: getDate(salaryReceiptDate),
+      paymentDay: getDate(salaryReceiptDate || new Date()),
     });
 
     return this.formatLoanSimulationBasedOnRequestedValue({

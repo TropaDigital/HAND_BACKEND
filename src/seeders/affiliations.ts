@@ -36,12 +36,12 @@ export default async (client: PrismaClient): Promise<void> => {
         });
       }),
     );
-  } catch (error: any) {
+  } catch (error) {
     logger.error({
       msg: `error creating ${affiliations.length} affiliations in the database`,
       error: {
-        message: error.message,
-        stack: error.stack,
+        message: (error as Error).message,
+        stack: (error as Error).stack,
       },
     });
   }

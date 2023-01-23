@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Benefit,
   Installment,
@@ -23,7 +24,7 @@ export class BenefitController implements IBenefitController {
   constructor(
     private readonly benefitService: IBenefitService,
     private readonly validator: IValidator<typeof schemas>,
-  ) { }
+  ) {}
 
   public async getAll(
     httpRequest: IApiHttpRequest<
@@ -96,14 +97,14 @@ export class BenefitController implements IBenefitController {
 
     const result = single
       ? await this.benefitService.singlePostponementInstallment({
-        id,
-        reference: new Date(),
-        user: String(httpRequest.user?.sub) || '',
-      })
+          id,
+          reference: new Date(),
+          user: String(httpRequest.user?.sub) || '',
+        })
       : await this.benefitService.postponementInstallment({
-        id,
-        user: String(httpRequest.user?.sub) || '',
-      });
+          id,
+          user: String(httpRequest.user?.sub) || '',
+        });
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
   }
@@ -147,8 +148,8 @@ export class BenefitController implements IBenefitController {
   }
 
   public async getInstallmentBankInterfaceFile(
-    httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<any>> {
+    _httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<unknown>> {
     return {
       statusCodeAsString: 'OK',
       body: '',

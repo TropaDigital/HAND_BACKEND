@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Joi from 'joi';
 
 import ErrorCodes from '../../enums/ErrorCodes';
@@ -29,7 +31,6 @@ export default class JoiAdapter<S = { [key: string]: Joi.Schema }> {
         ]().validate(data, {
           abortEarly: false,
           stripUnknown: true,
-          //   messages: validationMessages,
         }),
       );
 

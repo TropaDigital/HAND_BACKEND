@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { User } from '@prisma/client';
 
 import { NotFoundError } from '../../../shared/errors';
@@ -118,6 +119,8 @@ describe(UserService.name, () => {
     it('should call repository with right params', async () => {
       const { sut, userRepository } = makeSut();
       const createSpy = userRepository.create;
+      userRepository.findByUserName.mockResolvedValueOnce(null);
+      userRepository.findByEmail.mockResolvedValueOnce(null);
 
       await sut.create(fakeUser);
 
@@ -128,7 +131,9 @@ describe(UserService.name, () => {
     });
 
     it('should return repository result', async () => {
-      const { sut } = makeSut();
+      const { sut, userRepository } = makeSut();
+      userRepository.findByUserName.mockResolvedValueOnce(null);
+      userRepository.findByEmail.mockResolvedValueOnce(null);
 
       const result = await sut.create(fakeUser);
 
@@ -137,8 +142,10 @@ describe(UserService.name, () => {
     });
 
     it('should return repository result when user has no commission', async () => {
-      const { sut } = makeSut();
+      const { sut, userRepository } = makeSut();
       const user: User = makeFakeUser({});
+      userRepository.findByUserName.mockResolvedValueOnce(null);
+      userRepository.findByEmail.mockResolvedValueOnce(null);
 
       const result = await sut.create(user);
 
@@ -154,7 +161,9 @@ describe(UserService.name, () => {
 
       const promise = sut.create(fakeUser);
 
-      await expect(promise).rejects.toThrow(new Error('any_create_error'));
+      await expect(promise).rejects.toThrow(
+        new Error('username already in use'),
+      );
     });
   });
 
@@ -165,6 +174,8 @@ describe(UserService.name, () => {
     it('should call repository with right params', async () => {
       const { sut, userRepository } = makeSut();
       const updateSpy = userRepository.updateById;
+      userRepository.findByUserName.mockResolvedValueOnce(null);
+      userRepository.findByEmail.mockResolvedValueOnce(null);
 
       await sut.updateById(fakeId, fakeUser);
 
@@ -190,7 +201,9 @@ describe(UserService.name, () => {
 
       const promise = sut.updateById(fakeId, fakeUser);
 
-      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+      await expect(promise).rejects.toThrow(
+        new Error('username already in use'),
+      );
     });
   });
 

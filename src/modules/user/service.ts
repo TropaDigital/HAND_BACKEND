@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { User, Prisma } from '@prisma/client';
 import { IMailerService } from 'src/shared/mailer/interfaces';
 
@@ -17,7 +18,7 @@ export class UserService implements IUserService {
     private readonly userRepository: IUserRepository,
     private readonly authService: IAuthenticationService,
     private readonly mailerService: IMailerService,
-  ) { }
+  ) {}
 
   public async getAll(): Promise<IResponseUser[]> {
     const users = await await this.userRepository.findAll();

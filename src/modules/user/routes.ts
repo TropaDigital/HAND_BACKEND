@@ -12,7 +12,7 @@ export default class UserRouter implements IRouter {
 
   private readonly router = express.Router();
 
-  private constructor(private readonly controller: IUserController) { }
+  private constructor(private readonly controller: IUserController) {}
 
   public static getInstance(
     controller: IUserController = createUserController(),

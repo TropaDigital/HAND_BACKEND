@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BenefitRepository } from '../repository';
 import {
   makeFakeBenefit,
@@ -27,6 +28,13 @@ describe(BenefitRepository.name, () => {
           affiliation: true,
           associated: true,
           consultant: true,
+          installments: {
+            where: {
+              status: {
+                notIn: ['CANCELED'],
+              },
+            },
+          },
         },
       });
     });
@@ -84,6 +92,16 @@ describe(BenefitRepository.name, () => {
           affiliation: true,
           associated: true,
           consultant: true,
+          installments: {
+            orderBy: {
+              referenceDate: 'asc',
+            },
+            where: {
+              status: {
+                not: 'CANCELED',
+              },
+            },
+          },
         },
       });
     });

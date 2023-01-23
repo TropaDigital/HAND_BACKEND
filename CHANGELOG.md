@@ -1,3 +1,16 @@
+## [1.18.0](https://github.com/haandsolutions/haand-bib/compare/v1.17.1...v1.18.0) (2023-01-23)
+
+
+### :sparkles: New Features
+
+* make father name and email fields optional in associated model ([c8660a4](https://github.com/haandsolutions/haand-bib/commit/c8660a464f3976f20d4f7e02495df398132edee3))
+
+
+### :white_check_mark: Tests
+
+* update test coverage ([fe93c4b](https://github.com/haandsolutions/haand-bib/commit/fe93c4bf50ced55893cc8827932163526637382d))
+* update unit tests ([8df106a](https://github.com/haandsolutions/haand-bib/commit/8df106ad92f654855efa8e6c5cb8ad3092acd6e9))
+
 ### [1.17.1](https://github.com/haandsolutions/haand-bib/compare/v1.17.0...v1.17.1) (2022-12-15)
 
 

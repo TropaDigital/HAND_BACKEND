@@ -13,10 +13,11 @@ import {
   PrismaClient,
 } from '@prisma/client';
 import { addMonths, differenceInMonths, endOfMonth } from 'date-fns';
-import { IPrismaTransactionClient } from 'src/interfaces/infra/IPrismaTranscationClient';
 
 import ErrorCodes from '../../enums/ErrorCodes';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
+import { IPrismaTransactionClient } from '../../interfaces/infra/IPrismaTranscationClient';
+import { generateInsertCode } from '../../shared/code';
 import { MissingInvalidParamsError, NotFoundError } from '../../shared/errors';
 import {
   IFindAllParams,
@@ -49,7 +50,7 @@ export class BenefitService implements IBenefitService {
   ) {}
 
   public async getAll(
-    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+    payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<Benefit[]>> {
     const result = await this.benefitRepository.findAll(payload);
 
@@ -200,6 +201,7 @@ export class BenefitService implements IBenefitService {
                 id: affiliationId,
               },
             },
+            code: generateInsertCode(),
             accountNumber: bankAccount.accountNumber,
             accountType: bankAccount.accountType,
             bank: bankAccount.bank,

@@ -1,10 +1,31 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, AssociatedStatus } from '@prisma/client';
 import Joi from 'joi';
+import { IFindAllParams } from 'src/shared/pagination/interfaces';
 
 import { ICreateAssociatedInput, IUpdateAssociatedInput } from './interfaces';
 
 export const GetAssociatedById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
+});
+
+export const GetAll = Joi.object<
+  IFindAllParams &
+    Prisma.AssociatedWhereInput & {
+      contractNumber?: string;
+      telemedicine?: boolean;
+      publicAgency?: string;
+      csv?: boolean;
+    }
+>({
+  name: Joi.string().allow(null, ''),
+  code: Joi.string().allow(null, ''),
+  page: Joi.number(),
+  resultsPerPage: Joi.number(),
+  taxId: Joi.string().allow(null, ''),
+  contractNumber: Joi.string().allow(null, ''),
+  publicAgency: Joi.string().allow(null, ''),
+  telemedicine: Joi.boolean(),
+  csv: Joi.boolean(),
 });
 
 export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
@@ -21,8 +42,8 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
   issuingAgency: Joi.string().required().label('orgao-emissor'),
   emissionDate: Joi.date().required().label('data-emissao'),
   cellPhone: Joi.string().required().label('celular'),
-  email: Joi.string().email().label('email'),
-  father: Joi.string().label('pai'),
+  email: Joi.string().email().allow(null, '').label('email'),
+  father: Joi.string().allow(null, '').label('pai'),
   mother: Joi.string().required().label('mãe'),
   partner: Joi.string().label('cônjuge'),
 
@@ -93,11 +114,11 @@ export const UpdateAssociatedById = Joi.object<
   issuingAgency: Joi.string().label('orgao-emissor'),
   emissionDate: Joi.date().label('data-emissao'),
   cellPhone: Joi.string().label('celular'),
-  email: Joi.string().email().label('email'),
-  father: Joi.string().label('pai'),
+  email: Joi.string().email().allow(null, '').label('email'),
+  father: Joi.string().allow(null, '').label('pai'),
   mother: Joi.string().label('mãe'),
   partner: Joi.string().label('cônjuge'),
-
+  status: Joi.string().valid(...Object.keys(AssociatedStatus)),
   affiliations: Joi.array()
     .items(
       Joi.object({

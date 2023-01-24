@@ -1,3 +1,4 @@
+import { AssociatedStatus } from '@prisma/client';
 import { ReferenceObject, SchemaObject } from 'openapi-comment-parser';
 
 export default {
@@ -40,6 +41,10 @@ export default {
       },
       emissionDate: {
         type: 'string',
+      },
+      status: {
+        type: 'string',
+        enum: [...Object.keys(AssociatedStatus)],
       },
       cellPhone: {
         type: 'string',
@@ -477,6 +482,10 @@ export default {
       },
       emissionState: {
         type: 'string',
+      },
+      status: {
+        type: 'string',
+        enum: [...Object.keys(AssociatedStatus)],
       },
       father: {
         type: 'string',
@@ -1024,6 +1033,10 @@ export default {
       },
       placeOfBirth: {
         type: 'string',
+      },
+      status: {
+        type: 'string',
+        enum: [...Object.keys(AssociatedStatus)],
       },
       taxId: {
         type: 'string',

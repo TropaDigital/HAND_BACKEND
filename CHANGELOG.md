@@ -1,3 +1,10 @@
+## [1.20.0](https://github.com/haandsolutions/haand-bib/compare/v1.19.0...v1.20.0) (2023-01-24)
+
+
+### :sparkles: New Features
+
+* add new associated filters ([66c38cb](https://github.com/haandsolutions/haand-bib/commit/66c38cbd5a74ff44ad391f849d8c1c5a2382eb58))
+
 ## [1.19.0](https://github.com/haandsolutions/haand-bib/compare/v1.18.0...v1.19.0) (2023-01-24)
 
 

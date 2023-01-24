@@ -1,3 +1,15 @@
+## [1.19.0](https://github.com/haandsolutions/haand-bib/compare/v1.18.0...v1.19.0) (2023-01-24)
+
+
+### :repeat: CI
+
+* update pipeline to remove functional tests from pr validation ([3eb6750](https://github.com/haandsolutions/haand-bib/commit/3eb67503abd747817689f4e35eb25985c247d857))
+
+
+### :sparkles: New Features
+
+* enrich find all filter params ([88ffe12](https://github.com/haandsolutions/haand-bib/commit/88ffe12ec516af7cfe1b38aefb7f1be3e755c2a3))
+
 ## [1.18.0](https://github.com/haandsolutions/haand-bib/compare/v1.17.1...v1.18.0) (2023-01-23)
 
 

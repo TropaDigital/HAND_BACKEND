@@ -39,7 +39,7 @@ export interface IBenefitRepository {
   deleteById(id: number): Promise<void>;
 
   findAll(
-    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+    payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<Benefit[]>>;
 
   findById(id: number): Promise<Benefit | null>;
@@ -106,7 +106,7 @@ export interface IBenefitService {
     status,
   }: IInstallmentFiltersPayload): Promise<Installment[]>;
   getAll(
-    payload?: IFindAllParams & Prisma.AssociatedWhereInput,
+    payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<Benefit[]>>;
 
   getById(id: number): Promise<Benefit | null>;

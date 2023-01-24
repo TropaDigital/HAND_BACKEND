@@ -70,29 +70,32 @@ model EmploymentRelationship {
 }
 
 model Associated {
-  id                      Int                      @id @default(autoincrement())
-  name                    String
-  lastName                String
-  gender                  String
-  birthDate               DateTime                 @map("birth_date")
-  maritalStatus           String                   @map("martial_status")
-  nationality             String
-  placeOfBirth            String                   @map("place_of_birth")
-  taxId                   String                   @unique
-  registerId              String                   @map("register_id")
-  emissionState           String                   @map("emission_state")
-  issuingAgency           String                   @map("issuing_agency")
-  emissionDate            DateTime                 @map("emission_date")
-  cellPhone               String                   @map("cell_phone")
-  email                   String?
-  father                  String?
-  mother                  String
-  partner                 String?
-  createdBy               String                   @map("created_by") @db.VarChar(75)
-  updatedBy               String?                  @map("updated_by") @db.VarChar(75)
-  createdAt               DateTime                 @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt               DateTime                 @updatedAt @map("updated_at")
-  deletedAt               DateTime?                @map("deleted_at") @db.DateTime(0)
+  id            Int       @id @default(autoincrement())
+  code          String    @unique
+  name          String
+  lastName      String
+  gender        String
+  birthDate     DateTime  @map("birth_date")
+  maritalStatus String    @map("martial_status")
+  nationality   String
+  placeOfBirth  String    @map("place_of_birth")
+  taxId         String    @unique
+  registerId    String    @map("register_id")
+  emissionState String    @map("emission_state")
+  issuingAgency String    @map("issuing_agency")
+  emissionDate  DateTime  @map("emission_date")
+  cellPhone     String    @map("cell_phone")
+  email         String?
+  father        String?
+  mother        String
+  partner       String?
+  createdBy     String    @map("created_by") @db.VarChar(75)
+  updatedBy     String?   @map("updated_by") @db.VarChar(75)
+  createdAt     DateTime  @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at") @db.DateTime(0)
+
+  status                  AssociatedStatus         @default(ACTIVE)
   addresses               Address[]
   bankAccounts            BankAccount[]
   benefits                Benefit[]
@@ -127,6 +130,7 @@ model Consultant {
 
 model Benefit {
   id                       Int              @id @default(autoincrement())
+  code                     String           @unique
   associatedId             Int?
   commission               Int              @default(0) @db.UnsignedInt
   administrationFeeValue   Int              @default(0) @db.UnsignedInt
@@ -243,6 +247,14 @@ model Role {
   updatedAt   DateTime  @updatedAt @map("updated_at")
   deletedAt   DateTime? @map("deleted_at") @db.DateTime(0)
   users       User[]
+}
+
+enum AssociatedStatus {
+  ACTIVE
+  INACTIVE
+  AMNESTIED
+  PROBLEM
+  SPC_PROBLEM
 }
 
 enum InstallmentStatus {

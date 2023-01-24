@@ -93,7 +93,7 @@ export class BenefitRepository implements IBenefitRepository {
         ? result.length
         : await this.prismaBenefitRepository.count();
 
-    return parsePaginatedResult<Benefit[], Prisma.AssociatedWhereInput>(
+    return parsePaginatedResult<Benefit[], Prisma.BenefitWhereInput>(
       result,
       totalResults,
       payload,

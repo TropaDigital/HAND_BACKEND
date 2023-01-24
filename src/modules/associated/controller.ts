@@ -58,8 +58,87 @@ export class AssociatedController implements IAssociatedController {
       unknown,
       IFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]>>> {
-    const result = await this.associatedService.getAll(httpRequest.query);
+  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]> | string>> {
+    const {
+      contractNumber,
+      telemedicine,
+      publicAgency,
+      csv,
+      page,
+      resultsPerPage,
+      ...query
+    } = this.validator.validateSchema<
+      IFindAllParams &
+        Prisma.AssociatedWhereInput & {
+          contractNumber?: string;
+          telemedicine?: boolean;
+          csv?: boolean;
+          publicAgency?: string;
+        }
+    >('GetAll', { ...httpRequest.query });
+    const formatedQuery = {
+      ...query,
+      ...(!(typeof publicAgency === 'undefined')
+        ? {
+            employmentRelationships: {
+              publicAgency,
+            },
+          }
+        : {}),
+      ...(!(typeof telemedicine === 'undefined') ||
+      !(typeof contractNumber === 'undefined')
+        ? {
+            benefits: {
+              joinedTelemedicine: telemedicine,
+              code: contractNumber
+                ? { contains: contractNumber }
+                : contractNumber,
+            },
+          }
+        : {}),
+    };
+
+    const result = await this.associatedService.getAll({
+      ...formatedQuery,
+      ...(!csv ? { page, resultsPerPage } : {}),
+    } as IFindAllParams & Prisma.AssociatedWhereInput);
+    if (csv) {
+      const titles = [
+        'codigo de inclusao',
+        'nome',
+        'cpf',
+        'data de nascimento',
+        'afilicao',
+        'status',
+        'telemedicina',
+      ].join(';');
+      const lines = result.data
+        .map(line => {
+          return [
+            line.code,
+            line.name,
+            line.taxId,
+            line.birthDate,
+            line.affiliations.map(affiliation => affiliation.name).join('|'),
+            line.status,
+            (line.benefits || []).filter(benefit => benefit.joinedTelemedicine)
+              .length
+              ? 'S'
+              : 'N',
+          ].join(';');
+        })
+        .join('\n');
+
+      return {
+        statusCodeAsString: 'OK',
+        body: '',
+        attachmentFileName: 'test.csv',
+        attachmentFileContent: `${titles}\n${lines}`,
+        headers: {
+          'content-type': 'text/csv',
+        },
+      };
+    }
 
     return { statusCodeAsString: 'OK', body: result };
   }
@@ -78,11 +157,13 @@ export class AssociatedController implements IAssociatedController {
 
   public async create(
     httpRequest: IApiHttpRequest,
-  ): Promise<IApiHttpResponse<IAssociated>> {
-    const associated = this.validator.validateSchema<IAssociated>(
-      'CreateAssociated',
-      { ...httpRequest.body, createdBy: httpRequest.user?.sub },
-    );
+  ): Promise<IApiHttpResponse<Omit<IAssociated, 'benefits'>>> {
+    const associated = this.validator.validateSchema<
+      Omit<IAssociated, 'benefits'>
+    >('CreateAssociated', {
+      ...httpRequest.body,
+      createdBy: httpRequest.user?.sub,
+    });
     const result = await this.associatedService.create(associated);
 
     return { statusCodeAsString: 'CREATED', body: result };
@@ -92,7 +173,7 @@ export class AssociatedController implements IAssociatedController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
     const { id, ...associated } = this.validator.validateSchema<
-      Partial<IAssociated> & { id: number }
+      Partial<Omit<IAssociated, 'benefits'>> & { id: number }
     >('UpdateAssociatedById', {
       ...httpRequest.body,
       ...httpRequest.params,

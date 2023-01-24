@@ -3,6 +3,7 @@ import {
   Affiliation,
   Associated,
   BankAccount,
+  Benefit,
   EmploymentRelationship,
   Prisma,
 } from '@prisma/client';
@@ -18,6 +19,7 @@ export type IAssociated = Associated & {
   addresses: Address[];
   employmentRelationships: EmploymentRelationship[];
   affiliations: Affiliation[];
+  benefits: Benefit[];
 };
 
 export type ICreateAssociatedInput = Omit<
@@ -47,7 +49,9 @@ export type IUpdateAssociatedInput = Omit<
 };
 
 export interface IAssociatedRepository {
-  create(payload: ICreateAssociatedInput): Promise<IAssociated>;
+  create(
+    payload: ICreateAssociatedInput,
+  ): Promise<Omit<IAssociated, 'benefits'>>;
 
   updateById(id: number, payload: IUpdateAssociatedInput): Promise<void>;
 
@@ -96,13 +100,15 @@ export interface IAssociatedController {
       unknown,
       IFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]>>>;
+  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]> | string>>;
 
   getById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<IAssociated | null>>;
 
-  create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<IAssociated>>;
+  create(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<Omit<IAssociated, 'benefits'>>>;
 
   updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
@@ -140,7 +146,9 @@ export interface IAssociatedService {
 
   getById(id: number): Promise<IAssociated | null>;
 
-  create(payload: ICreateAssociatedInput): Promise<IAssociated>;
+  create(
+    payload: ICreateAssociatedInput,
+  ): Promise<Omit<IAssociated, 'benefits'>>;
 
   updateById(id: number, payload: IUpdateAssociatedInput): Promise<void>;
 

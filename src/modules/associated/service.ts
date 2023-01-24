@@ -5,6 +5,7 @@ import {
   Prisma,
 } from '@prisma/client';
 
+import { generateInsertCode } from '../../shared/code';
 import { NotFoundError } from '../../shared/errors';
 import {
   IFindAllParams,
@@ -76,9 +77,12 @@ export class AssociatedService implements IAssociatedService {
     return result;
   }
 
-  public async create(payload: ICreateAssociatedInput): Promise<IAssociated> {
+  public async create(
+    payload: ICreateAssociatedInput,
+  ): Promise<Omit<IAssociated, 'benefits'>> {
     const result = await this.associatedRepository.create({
       ...payload,
+      code: generateInsertCode(),
       addresses: [
         {
           ...payload.addresses[0],

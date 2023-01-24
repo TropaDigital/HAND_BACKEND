@@ -148,7 +148,9 @@ export class AssociatedRepository implements IAssociatedRepository {
     return result;
   }
 
-  public async create(payload: ICreateAssociatedInput): Promise<IAssociated> {
+  public async create(
+    payload: ICreateAssociatedInput,
+  ): Promise<Omit<IAssociated, 'benefits'>> {
     const {
       addresses,
       employmentRelationships,

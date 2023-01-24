@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
+import { generateInsertCode } from '../../../../shared/code';
 import {
   IAssociated,
   IAssociatedRepository,
@@ -14,74 +15,75 @@ import { PrismaAssociatedRepository } from '../../repository';
 
 export const makeFakeCreateAssociatedInput = (
   payload?: Partial<ICreateAssociatedInput>,
-): jest.Mocked<ICreateAssociatedInput> => ({
-  addresses: [
-    {
-      addressType: 'any_type',
-      postalCode: 'any_postal_code',
-      street: 'any_street',
-      houseNumber: 'any_number',
-      complement: 'any_complements',
-      district: 'any_district',
-      city: 'any_city',
-      state: 'any_state',
-      isDefault: true,
-    },
-  ],
-  employmentRelationships: [
-    {
-      occupation: 'any_occupation',
-      salary: 'any_salary',
-      paymentDay: 5,
-      registerNumber: 'any_register_number',
-      contractType: 'contract_type',
-      publicAgency: 'any_agency',
-      finalDate: new Date(),
-      isDefault: true,
-    },
-  ],
-  bankAccounts: [
-    {
-      accountNumber: 'any_account',
-      accountType: 'any_type',
-      agency: '0000',
-      bank: '00 - Any Bank',
-      pixKey: 'any_pix_key',
-      pixType: 'any_type',
-      isDefault: true,
-    },
-  ],
-  affiliations: [
-    {
-      id: 1,
-      name: 'USER',
-      createdAt: new Date(),
-      deletedAt: null,
-      updatedAt: new Date(),
-    },
-  ],
+): jest.Mocked<ICreateAssociatedInput> =>
+  ({
+    addresses: [
+      {
+        addressType: 'any_type',
+        postalCode: 'any_postal_code',
+        street: 'any_street',
+        houseNumber: 'any_number',
+        complement: 'any_complements',
+        district: 'any_district',
+        city: 'any_city',
+        state: 'any_state',
+        isDefault: true,
+      },
+    ],
+    employmentRelationships: [
+      {
+        occupation: 'any_occupation',
+        salary: 'any_salary',
+        paymentDay: 5,
+        registerNumber: 'any_register_number',
+        contractType: 'contract_type',
+        publicAgency: 'any_agency',
+        finalDate: new Date(),
+        isDefault: true,
+      },
+    ],
+    bankAccounts: [
+      {
+        accountNumber: 'any_account',
+        accountType: 'any_type',
+        agency: '0000',
+        bank: '00 - Any Bank',
+        pixKey: 'any_pix_key',
+        pixType: 'any_type',
+        isDefault: true,
+      },
+    ],
+    affiliations: [
+      {
+        id: 1,
+        name: 'USER',
+        createdAt: new Date(),
+        deletedAt: null,
+        updatedAt: new Date(),
+      },
+    ],
 
-  birthDate: new Date(),
-  cellPhone: '00-0000000',
-  createdBy: 'any_data',
-  email: 'any@email.com',
-  emissionDate: new Date(),
-  emissionState: 'any_state',
-  father: 'any_father',
-  gender: 'any_gender',
-  issuingAgency: 'any_agency',
-  lastName: 'any_last_name',
-  maritalStatus: 'any_marital_status',
-  mother: 'any_mother',
-  name: 'any_name',
-  nationality: 'any_nationality',
+    birthDate: new Date(),
+    cellPhone: '00-0000000',
+    createdBy: 'any_data',
+    email: 'any@email.com',
+    emissionDate: new Date(),
+    emissionState: 'any_state',
+    father: 'any_father',
+    gender: 'any_gender',
+    issuingAgency: 'any_agency',
+    lastName: 'any_last_name',
+    maritalStatus: 'any_marital_status',
+    mother: 'any_mother',
+    name: 'any_name',
+    nationality: 'any_nationality',
 
-  placeOfBirth: 'any_place',
-  registerId: 'any_register_id',
-  taxId: '000.000.000-00',
-  partner: 'partner',
-  ...payload,
-});
+    placeOfBirth: 'any_place',
+    registerId: 'any_register_id',
+    taxId: '000.000.000-00',
+    partner: 'partner',
+    ...payload,
+  } as ICreateAssociatedInput);
 
 export const makeFakeUpdateAssociatedInput = (
   payload?: Partial<IUpdateAssociatedInput>,
@@ -176,88 +178,90 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAssociated = (
-  payload?: Partial<IAssociated>,
-): jest.Mocked<IAssociated> => ({
-  id: 0,
-  affiliations: [
-    {
-      id: 1,
-      name: 'USER',
-      createdAt: new Date(),
-      deletedAt: null,
-      updatedAt: new Date(),
-    },
-  ],
-  addresses: [
-    {
-      id: 2,
-      addressType: 'any_type',
-      postalCode: 'any_postal_code',
-      street: 'any_street',
-      houseNumber: 'any_number',
-      complement: 'any_complements',
-      district: 'any_district',
-      city: 'any_city',
-      state: 'any_state',
-      associatedId: 777,
-      isDefault: true,
-    },
-  ],
+  payload?: Partial<Omit<IAssociated, 'benefits'>>,
+): jest.Mocked<Omit<IAssociated, 'benefits'>> =>
+  ({
+    id: 0,
+    code: generateInsertCode(),
+    affiliations: [
+      {
+        id: 1,
+        name: 'USER',
+        createdAt: new Date(),
+        deletedAt: null,
+        updatedAt: new Date(),
+      },
+    ],
+    addresses: [
+      {
+        id: 2,
+        addressType: 'any_type',
+        postalCode: 'any_postal_code',
+        street: 'any_street',
+        houseNumber: 'any_number',
+        complement: 'any_complements',
+        district: 'any_district',
+        city: 'any_city',
+        state: 'any_state',
+        associatedId: 777,
+        isDefault: true,
+      },
+    ],
 
-  employmentRelationships: [
-    {
-      id: 2,
-      occupation: 'any_occupation',
-      salary: 'any_salary',
-      paymentDay: 5,
-      registerNumber: 'any_register_number',
-      contractType: 'contract_type',
-      publicAgency: 'any_agency',
-      finalDate: new Date(),
-      associatedId: 777,
-      isDefault: true,
-    },
-  ],
+    employmentRelationships: [
+      {
+        id: 2,
+        occupation: 'any_occupation',
+        salary: 'any_salary',
+        paymentDay: 5,
+        registerNumber: 'any_register_number',
+        contractType: 'contract_type',
+        publicAgency: 'any_agency',
+        finalDate: new Date(),
+        associatedId: 777,
+        isDefault: true,
+      },
+    ],
 
-  birthDate: new Date(),
-  cellPhone: '00-0000000',
-  email: 'any@email.com',
-  emissionDate: new Date(),
-  emissionState: 'any_state',
-  father: 'any_father',
-  gender: 'any_gender',
-  issuingAgency: 'any_agency',
-  lastName: 'any_last_name',
-  maritalStatus: 'any_marital_status',
-  mother: 'any_mother',
-  name: 'any_name',
-  nationality: 'any_nationality',
+    birthDate: new Date(),
+    cellPhone: '00-0000000',
+    email: 'any@email.com',
+    emissionDate: new Date(),
+    emissionState: 'any_state',
+    father: 'any_father',
+    gender: 'any_gender',
+    issuingAgency: 'any_agency',
+    lastName: 'any_last_name',
+    maritalStatus: 'any_marital_status',
+    mother: 'any_mother',
+    name: 'any_name',
+    nationality: 'any_nationality',
 
-  bankAccounts: [
-    {
-      bank: '00 - Any Bank',
-      agency: '0000',
-      pixKey: 'any_pix_key',
-      pixType: 'any_type',
-      accountNumber: 'any_account',
-      accountType: 'any_type',
-      id: 1,
-      associatedId: 1,
-      isDefault: true,
-    },
-  ],
+    bankAccounts: [
+      {
+        bank: '00 - Any Bank',
+        agency: '0000',
+        pixKey: 'any_pix_key',
+        pixType: 'any_type',
+        accountNumber: 'any_account',
+        accountType: 'any_type',
+        id: 1,
+        associatedId: 1,
+        isDefault: true,
+      },
+    ],
 
-  placeOfBirth: 'any_place',
-  registerId: 'any_register_id',
-  taxId: '000.000.000-00',
-  partner: 'partner',
-  createdBy: 'any_user',
-  updatedBy: 'any',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deletedAt: null,
-  ...payload,
-});
+    placeOfBirth: 'any_place',
+    registerId: 'any_register_id',
+    taxId: '000.000.000-00',
+    partner: 'partner',
+    createdBy: 'any_user',
+    updatedBy: 'any',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: null,
+    ...payload,
+  } as any);
 
 export const makeFakeAssociatedList = (): Associated[] => [
   makeFakeAssociated({}),

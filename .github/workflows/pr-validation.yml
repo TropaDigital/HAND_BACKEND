@@ -110,17 +110,17 @@ jobs:
       #     REDIS_PORT: ${{ job.services.redis.ports[6379] }}
       #   run: yarn test:functional:coverage
 
-      - name: Generate artifact of functional tests results
-        uses: actions/upload-artifact@v3
-        with:
-          name: functional-tests-artifact
-          path: |
-            coverage
-            html-report
-            !coverage/unit
-            !html-report/unit.html
-            !html-report/jest-html-reporters-attach/unit
+      # - name: Generate artifact of functional tests results
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: functional-tests-artifact
+      #     path: |
+      #       coverage
+      #       html-report
+      #       !coverage/unit
+      #       !html-report/unit.html
+      #       !html-report/jest-html-reporters-attach/unit
 
-      - name: Check functional tests failures
-        if: steps.functional-tests.outcome != 'success'
-        run: exit 1
+      # - name: Check functional tests failures
+      #   if: steps.functional-tests.outcome != 'success'
+      #   run: exit 1

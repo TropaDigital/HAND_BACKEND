@@ -2,12 +2,21 @@
 import { IFindAllParams, IPaginatedAResult } from './interfaces';
 
 export const parsePrismaFindManyContains = <T>(object: T): T => {
+  const parseObjectIfValid = (value: string) => {
+    try {
+      return JSON.parse(value);
+    } catch (error) {
+      return value;
+    }
+  };
+
   const entries = Object.entries(object || {});
 
   const result = entries.reduce((acc: any, [key, value]) => {
+    const paramValue = parseObjectIfValid(value as string);
     acc[key] =
-      typeof value === 'object'
-        ? (acc[key] = parsePrismaFindManyContains(value))
+      typeof paramValue === 'object'
+        ? (acc[key] = { some: { ...paramValue } })
         : (acc[key] = { contains: value });
 
     return acc;

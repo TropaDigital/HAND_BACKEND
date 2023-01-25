@@ -32,6 +32,12 @@ export const getFindManyParams = <T>(
   skip?: number;
   where: T;
 } => {
+  if (!payload) {
+    return {
+      where: {} as T,
+    };
+  }
+
   const { page = 0, resultsPerPage = 0, ...where } = payload as IFindAllParams;
 
   if (payload?.page && payload?.resultsPerPage) {

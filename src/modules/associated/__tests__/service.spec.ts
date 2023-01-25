@@ -9,6 +9,10 @@ import {
   makeFakeUpdateAssociatedInput,
 } from './helpers/test-helper';
 
+jest.mock('../../../shared/code', () => ({
+  generateInsertCode: jest.fn().mockReturnValue('2022217148'),
+}));
+
 const makeSut = () => {
   const associatedRepository = makeAssociatedRepositoryStub();
   const sut = new AssociatedService(associatedRepository);
@@ -102,7 +106,7 @@ describe(AssociatedService.name, () => {
       await sut.create(fakeAssociated);
 
       expect(createSpy).toBeCalledWith({
-        ...makeFakeCreateAssociatedInput(),
+        ...makeFakeCreateAssociatedInput({ code: '2022217148' }),
       });
     });
 

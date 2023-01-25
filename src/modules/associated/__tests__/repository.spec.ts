@@ -6,6 +6,10 @@ import {
   makePrismaAssociatedRepositoryStub,
 } from './helpers/test-helper';
 
+jest.mock('../../../shared/code', () => ({
+  generateInsertCode: jest.fn().mockReturnValue('2022217148'),
+}));
+
 const makeSut = () => {
   const prismaRepository = makePrismaAssociatedRepositoryStub();
   const sut = new AssociatedRepository(prismaRepository);

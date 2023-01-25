@@ -1,3 +1,10 @@
+### [1.20.1](https://github.com/haandsolutions/haand-bib/compare/v1.20.0...v1.20.1) (2023-01-25)
+
+
+### :bug: Fixes
+
+* update page filter result ([77b15c9](https://github.com/haandsolutions/haand-bib/commit/77b15c9b3b56ece7d2d3f5db5f5ba87b0d95f209))
+
 ## [1.20.0](https://github.com/haandsolutions/haand-bib/compare/v1.19.0...v1.20.0) (2023-01-24)
 
 

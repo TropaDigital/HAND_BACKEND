@@ -10,6 +10,10 @@ import {
   makeValidatorStub,
 } from './helpers/test-helper';
 
+jest.mock('../../../shared/code', () => ({
+  generateInsertCode: jest.fn().mockReturnValue('2022217148'),
+}));
+
 const makeSut = () => {
   const associatedServiceStub = makeAssociatedServiceStub();
   const validatorStub = makeValidatorStub();
@@ -27,7 +31,11 @@ describe(AssociatedController.name, () => {
 
       await sut.getAll(fakeApiHttpRequest);
 
-      expect(getAllSpy).toBeCalledWith({ id: '2' });
+      expect(getAllSpy).toBeCalledWith({
+        id: 777,
+        page: undefined,
+        resultsPerPage: undefined,
+      });
     });
 
     it('should return service response', async () => {

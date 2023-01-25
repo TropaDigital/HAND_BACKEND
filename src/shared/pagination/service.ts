@@ -32,8 +32,9 @@ export const getFindManyParams = <T>(
   skip?: number;
   where: T;
 } => {
+  const { page = 0, resultsPerPage = 0, ...where } = payload as IFindAllParams;
+
   if (payload?.page && payload?.resultsPerPage) {
-    const { page, resultsPerPage, ...where } = payload;
     const take = Number(resultsPerPage);
     const skip = (page - 1) * resultsPerPage;
 
@@ -46,7 +47,7 @@ export const getFindManyParams = <T>(
     };
   }
 
-  const params = parsePrismaFindManyContains(payload || {});
+  const params = parsePrismaFindManyContains(where || {});
   return {
     where: params as T,
   };

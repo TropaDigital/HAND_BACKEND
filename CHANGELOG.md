@@ -1,3 +1,15 @@
+### [1.20.2](https://github.com/haandsolutions/haand-bib/compare/v1.20.1...v1.20.2) (2023-01-25)
+
+
+### :bug: Fixes
+
+* add empty payload handling ([49ea641](https://github.com/haandsolutions/haand-bib/commit/49ea6415f742da5cd602a2e0cff6e15402af19e1))
+
+
+### :white_check_mark: Tests
+
+* update unit tests ([cbf39ba](https://github.com/haandsolutions/haand-bib/commit/cbf39bab74ad1261df0e77a19f9a4f78cf0c3674))
+
 ### [1.20.1](https://github.com/haandsolutions/haand-bib/compare/v1.20.0...v1.20.1) (2023-01-25)
 
 

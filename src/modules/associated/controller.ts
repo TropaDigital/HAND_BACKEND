@@ -51,6 +51,81 @@ export class AssociatedController implements IAssociatedController {
     return { statusCodeAsString: 'OK', body: result };
   }
 
+  private formatGetAllFilters({
+    telemedicine,
+    publicAgency,
+    csv,
+    page,
+    resultsPerPage,
+    registerNumber,
+    ...query
+  }: IFindAllParams &
+    Prisma.AssociatedWhereInput & {
+      registerNumber?: string;
+      telemedicine?: boolean;
+      csv?: boolean;
+      publicAgency?: string;
+    }): IFindAllParams & Prisma.AssociatedWhereInput {
+    const formatedQuery = {
+      ...query,
+      ...(!csv ? { page, resultsPerPage } : {}),
+      ...(!(typeof publicAgency === 'undefined') ||
+      !(typeof registerNumber === 'undefined')
+        ? {
+            employmentRelationships: {
+              publicAgency: {
+                contains: publicAgency,
+              },
+              registerNumber: registerNumber
+                ? { contains: registerNumber }
+                : registerNumber,
+            },
+          }
+        : {}),
+      ...(!(typeof telemedicine === 'undefined')
+        ? {
+            benefits: {
+              joinedTelemedicine: telemedicine,
+            },
+          }
+        : {}),
+    };
+
+    return formatedQuery as IFindAllParams & Prisma.AssociatedWhereInput;
+  }
+
+  private generateCsvContent(
+    payload: IPaginatedAResult<IAssociated[]>,
+  ): string {
+    const titles = [
+      'codigo de inclusao',
+      'nome',
+      'cpf',
+      'data de nascimento',
+      'afilicao',
+      'status',
+      'telemedicina',
+    ].join(';');
+    const lines = payload.data
+      .map(line => {
+        return [
+          line.code,
+          line.name,
+          line.taxId,
+          line.birthDate,
+          line.affiliations.map(affiliation => affiliation.name).join('|'),
+          line.status,
+          (line.benefits || []).filter(benefit => benefit.joinedTelemedicine)
+            .length
+            ? 'S'
+            : 'N',
+        ].join(';');
+      })
+      .join('\n');
+
+    return `${titles}\n${lines}`;
+  }
+
   public async getAll(
     httpRequest: IApiHttpRequest<
       unknown,
@@ -60,7 +135,7 @@ export class AssociatedController implements IAssociatedController {
     >,
   ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]> | string>> {
     const {
-      contractNumber,
+      registerNumber,
       telemedicine,
       publicAgency,
       csv,
@@ -70,70 +145,33 @@ export class AssociatedController implements IAssociatedController {
     } = this.validator.validateSchema<
       IFindAllParams &
         Prisma.AssociatedWhereInput & {
-          contractNumber?: string;
+          registerNumber?: string;
           telemedicine?: boolean;
           csv?: boolean;
           publicAgency?: string;
         }
     >('GetAll', { ...httpRequest.query });
-    const formatedQuery = {
+    const formatedQuery = this.formatGetAllFilters({
+      registerNumber,
+      telemedicine,
+      publicAgency,
+      csv,
+      page,
+      resultsPerPage,
       ...query,
-      ...(!(typeof publicAgency === 'undefined')
-        ? {
-            employmentRelationships: {
-              publicAgency,
-            },
-          }
-        : {}),
-      ...(!(typeof telemedicine === 'undefined') ||
-      !(typeof contractNumber === 'undefined')
-        ? {
-            benefits: {
-              joinedTelemedicine: telemedicine,
-              code: contractNumber
-                ? { contains: contractNumber }
-                : contractNumber,
-            },
-          }
-        : {}),
-    };
+    });
 
     const result = await this.associatedService.getAll({
       ...formatedQuery,
-      ...(!csv ? { page, resultsPerPage } : {}),
     } as IFindAllParams & Prisma.AssociatedWhereInput);
     if (csv) {
-      const titles = [
-        'codigo de inclusao',
-        'nome',
-        'cpf',
-        'data de nascimento',
-        'afilicao',
-        'status',
-        'telemedicina',
-      ].join(';');
-      const lines = result.data
-        .map(line => {
-          return [
-            line.code,
-            line.name,
-            line.taxId,
-            line.birthDate,
-            line.affiliations.map(affiliation => affiliation.name).join('|'),
-            line.status,
-            (line.benefits || []).filter(benefit => benefit.joinedTelemedicine)
-              .length
-              ? 'S'
-              : 'N',
-          ].join(';');
-        })
-        .join('\n');
+      const attachmentFileContent = this.generateCsvContent(result);
 
       return {
         statusCodeAsString: 'OK',
         body: '',
-        attachmentFileName: 'test.csv',
-        attachmentFileContent: `${titles}\n${lines}`,
+        attachmentFileName: 'associateds.csv',
+        attachmentFileContent,
         headers: {
           'content-type': 'text/csv',
         },

@@ -76,7 +76,7 @@ export class BenefitService implements IBenefitService {
 
     const overdueInstallments = benefit.installments.filter(installment => {
       const isPending = installment.status === InstallmentStatus.PENDING;
-      const isOverdue = isAfter(installment.dueDate, currentDate);
+      const isOverdue = isAfter(new Date(installment.dueDate), currentDate);
 
       return isPending && isOverdue;
     });
@@ -97,7 +97,10 @@ export class BenefitService implements IBenefitService {
         0,
       ) / 100;
 
-    const openAmount = totalInstallmentsValue - paidAmount;
+    const openAmount =
+      (Math.round(totalInstallmentsValue * 100) -
+        Math.round(paidAmount * 100)) /
+      100;
 
     return {
       overdueInstallmentsNumber: overdueInstallments.length,

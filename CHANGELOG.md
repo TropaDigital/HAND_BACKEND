@@ -1,3 +1,17 @@
+## [1.21.0](https://github.com/haandsolutions/haand-bib/compare/v1.20.2...v1.21.0) (2023-01-31)
+
+
+### :bug: Fixes
+
+* adjust the filters of associateds ([a3dc93c](https://github.com/haandsolutions/haand-bib/commit/a3dc93c3a33729b7a0ba0af2f656565978268287))
+* adjust the format of birthdate on export csv ([b9358a7](https://github.com/haandsolutions/haand-bib/commit/b9358a7cf40e5c55622d002cb0281bf790fd6195))
+* adjust the update by id of associateds ([bdef47d](https://github.com/haandsolutions/haand-bib/commit/bdef47d1b335a4c7c21b7880d225ade3f2a3de0e))
+
+
+### :sparkles: New Features
+
+* add overdue installments, paid and open value to benefits ([ee068cd](https://github.com/haandsolutions/haand-bib/commit/ee068cd1eb477cb35b4d0af54a86efd1fa0301ef))
+
 ### [1.20.2](https://github.com/haandsolutions/haand-bib/compare/v1.20.1...v1.20.2) (2023-01-25)
 
 

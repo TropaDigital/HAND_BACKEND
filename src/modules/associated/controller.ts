@@ -4,6 +4,7 @@ import {
   EmploymentRelationship,
   Prisma,
 } from '@prisma/client';
+import { format } from 'date-fns';
 
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
@@ -112,7 +113,7 @@ export class AssociatedController implements IAssociatedController {
           line.code,
           line.name,
           line.taxId,
-          line.birthDate,
+          format(line.birthDate, 'dd/MM/yyyy'),
           line.affiliations.map(affiliation => affiliation.name).join('|'),
           line.status,
           (line.benefits || []).filter(benefit => benefit.joinedTelemedicine)

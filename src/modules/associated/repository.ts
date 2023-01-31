@@ -205,14 +205,17 @@ export class AssociatedRepository implements IAssociatedRepository {
       ...associated
     } = payload;
 
-    await this.prismaRepository.update({
-      where: { id },
-      data: {
-        affiliations: {
-          set: [],
+    if (affiliations?.length) {
+      await this.prismaRepository.update({
+        where: { id },
+        data: {
+          affiliations: {
+            set: [],
+          },
         },
-      },
-    });
+      });
+    }
+
     await this.prismaRepository.update({
       where: { id },
       data: {

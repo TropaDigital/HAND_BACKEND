@@ -1,3 +1,17 @@
+### [1.21.1](https://github.com/haandsolutions/haand-bib/compare/v1.21.0...v1.21.1) (2023-01-31)
+
+
+### :white_check_mark: Tests
+
+* update tests units ([8c6e9c2](https://github.com/haandsolutions/haand-bib/commit/8c6e9c24a4660a2b9b751a9a2749f4d67b6c7e9a))
+
+
+### :bug: Fixes
+
+* adjust the filters of associateds ([24c64cb](https://github.com/haandsolutions/haand-bib/commit/24c64cb0ef57298f76e1eebbd05ec7c6fa1f18e3))
+* adjust the format of birthdate on export csv ([9f08c9d](https://github.com/haandsolutions/haand-bib/commit/9f08c9dc3bb1d20216e2a9d2eee232a7e7571eef))
+* adjust the update by id of associateds ([0fa1789](https://github.com/haandsolutions/haand-bib/commit/0fa1789e8582133fa6fc1987e7c8436b8675c723))
+
 ## [1.21.0](https://github.com/haandsolutions/haand-bib/compare/v1.20.2...v1.21.0) (2023-01-31)
 
 

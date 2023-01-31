@@ -9,10 +9,11 @@ import {
   BenefitStatus,
   EmploymentRelationship,
   Installment,
+  InstallmentStatus,
   Prisma,
   PrismaClient,
 } from '@prisma/client';
-import { addMonths, differenceInMonths, endOfMonth } from 'date-fns';
+import { addMonths, differenceInMonths, endOfMonth, isAfter } from 'date-fns';
 
 import ErrorCodes from '../../enums/ErrorCodes';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
@@ -35,10 +36,17 @@ import {
   ILoanSimulationService,
 } from '../loanSimulation/interfaces';
 import {
+  EnrichedBenefit,
   IBenefitRepository,
   IBenefitService,
   ICreateBenefitParams,
 } from './interfaces';
+
+export type ResponseBenefit = EnrichedBenefit & {
+  openAmount: number;
+  paidAmount: number;
+  overdueInstallmentsNumber: number;
+};
 
 export class BenefitService implements IBenefitService {
   constructor(
@@ -51,10 +59,51 @@ export class BenefitService implements IBenefitService {
 
   public async getAll(
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
-  ): Promise<IPaginatedAResult<Benefit[]>> {
-    const result = await this.benefitRepository.findAll(payload);
+  ): Promise<IPaginatedAResult<ResponseBenefit[]>> {
+    const response = await this.benefitRepository.findAll(payload);
+    const data: ResponseBenefit[] = response.data.map(benefit => ({
+      ...benefit,
+      ...this.getInstallmentInfo(benefit),
+    }));
+
+    const result = { ...response, data };
 
     return result;
+  }
+
+  private getInstallmentInfo(benefit: EnrichedBenefit) {
+    const currentDate = new Date();
+
+    const overdueInstallments = benefit.installments.filter(installment => {
+      const isPending = installment.status === InstallmentStatus.PENDING;
+      const isOverdue = isAfter(installment.dueDate, currentDate);
+
+      return isPending && isOverdue;
+    });
+
+    const paidInstallments = benefit.installments.filter(
+      installment => installment.status === InstallmentStatus.PAID,
+    );
+
+    const totalInstallmentsValue =
+      benefit.installments.reduce(
+        (acc, installment) => acc + Math.round(installment.finalValue * 100),
+        0,
+      ) / 100;
+
+    const paidAmount =
+      paidInstallments.reduce(
+        (acc, installment) => acc + Math.round(installment.finalValue * 100),
+        0,
+      ) / 100;
+
+    const openAmount = totalInstallmentsValue - paidAmount;
+
+    return {
+      overdueInstallmentsNumber: overdueInstallments.length,
+      openAmount,
+      paidAmount,
+    };
   }
 
   public async getById(id: number): Promise<Benefit | null> {

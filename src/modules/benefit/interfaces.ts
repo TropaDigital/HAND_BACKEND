@@ -28,6 +28,10 @@ export interface ICreateBenefitParams
   createdBy: string;
 }
 
+export type EnrichedBenefit = Benefit & {
+  installments: Installment[];
+};
+
 export interface IBenefitRepository {
   create(
     payload: Prisma.BenefitCreateInput,
@@ -40,7 +44,7 @@ export interface IBenefitRepository {
 
   findAll(
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
-  ): Promise<IPaginatedAResult<Benefit[]>>;
+  ): Promise<IPaginatedAResult<EnrichedBenefit[]>>;
 
   findById(id: number): Promise<Benefit | null>;
 

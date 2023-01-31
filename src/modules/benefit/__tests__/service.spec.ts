@@ -58,11 +58,14 @@ describe(BenefitService.name, () => {
 
       const result = await sut.getAll();
 
-      expect(result).toEqual(
-        makeFakeBenefitList().map(benefit => ({
+      expect(result).toEqual({
+        data: makeFakeBenefitList().map(benefit => ({
           ...benefit,
+          openAmount: 50.87,
+          overdueInstallmentsNumber: 1,
+          paidAmount: 25.87,
         })),
-      );
+      });
     });
 
     it('should throw when repository throws', async () => {

@@ -16,7 +16,11 @@ import {
   getFindManyParams,
   parsePaginatedResult,
 } from '../../shared/pagination/service';
-import { IBenefitFiltersPayload, IBenefitRepository } from './interfaces';
+import {
+  EnrichedBenefit,
+  IBenefitFiltersPayload,
+  IBenefitRepository,
+} from './interfaces';
 
 export type PrismaBenefitRepository = Prisma.BenefitDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
@@ -25,6 +29,7 @@ export type PrismaBenefitRepository = Prisma.BenefitDelegate<
 export type PrismaBenefitHistoryRepository = Prisma.BenefitHistoryDelegate<
   Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
 >;
+
 export class BenefitRepository implements IBenefitRepository {
   private readonly prismaBenefitRepository: PrismaBenefitRepository;
 
@@ -61,7 +66,7 @@ export class BenefitRepository implements IBenefitRepository {
 
   public async findAll(
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
-  ): Promise<IPaginatedAResult<Benefit[]>> {
+  ): Promise<IPaginatedAResult<EnrichedBenefit[]>> {
     const { page, resultsPerPage, ...filters } = payload || {};
     const params = {
       ...getFindManyParams<Prisma.BenefitWhereInput>({
@@ -93,7 +98,7 @@ export class BenefitRepository implements IBenefitRepository {
         ? result.length
         : await this.prismaBenefitRepository.count();
 
-    return parsePaginatedResult<Benefit[], Prisma.BenefitWhereInput>(
+    return parsePaginatedResult<EnrichedBenefit[], Prisma.BenefitWhereInput>(
       result,
       totalResults,
       payload,

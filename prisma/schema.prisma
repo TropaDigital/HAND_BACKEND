@@ -101,6 +101,35 @@ model Associated {
   benefits                Benefit[]
   employmentRelationships EmploymentRelationship[]
   affiliations            Affiliation[]
+  phoneNumbers            PhoneNumber[]
+  references              Reference[]
+}
+
+model Reference {
+  id               Int     @id @default(autoincrement())
+  name             String
+  phoneNumber      String
+  relationshipType String
+  note             String?
+
+  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  associatedId Int?
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at") @db.DateTime(0)
+}
+
+model PhoneNumber {
+  id           Int         @id @default(autoincrement())
+  number       String
+  type         PhoneType   @default(MAIN)
+  note         String?
+  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  associatedId Int?
+  createdAt    DateTime    @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+  deletedAt    DateTime?   @map("deleted_at") @db.DateTime(0)
 }
 
 model Affiliation {
@@ -247,6 +276,11 @@ model Role {
   updatedAt   DateTime  @updatedAt @map("updated_at")
   deletedAt   DateTime? @map("deleted_at") @db.DateTime(0)
   users       User[]
+}
+
+enum PhoneType {
+  MAIN
+  MESSAGE
 }
 
 enum AssociatedStatus {

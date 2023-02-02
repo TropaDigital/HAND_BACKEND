@@ -1,3 +1,21 @@
+### [1.21.2](https://github.com/haandsolutions/haand-bib/compare/v1.21.1...v1.21.2) (2023-02-02)
+
+
+### :bug: Fixes
+
+* adjust the search by full name ([05b94f5](https://github.com/haandsolutions/haand-bib/commit/05b94f5621095748127204d3003050dff550578f))
+
+
+### :zap: Refactor
+
+* adjust the fields to provide the correct data for front end ([172f6c1](https://github.com/haandsolutions/haand-bib/commit/172f6c185c0fe25d42ae5e0b6f4dc1fb30c1a448))
+
+
+### :white_check_mark: Tests
+
+* adjust the interfaces and mocks ([3d6928c](https://github.com/haandsolutions/haand-bib/commit/3d6928cdad2ef556bf8741f5743f3fcae1e561a2))
+* update unit tests ([4851b7f](https://github.com/haandsolutions/haand-bib/commit/4851b7faa8b6a4e044f5db49986c0fde4368b6a2))
+
 ### [1.21.1](https://github.com/haandsolutions/haand-bib/compare/v1.21.0...v1.21.1) (2023-01-31)
 
 

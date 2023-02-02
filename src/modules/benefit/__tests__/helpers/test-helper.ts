@@ -71,6 +71,10 @@ export const makeFakeBenefit = (
   bankAccountId: 1,
   employmentRelationshipId: 2,
   addressId: 2,
+  installments: [
+    { status: 'PAID', finalValue: 25.87, dueDate: '2022-10-10' },
+    { status: 'PENDING', finalValue: 50.87, dueDate: '2022-10-10' },
+  ],
   ...(payload as any),
 });
 
@@ -145,7 +149,7 @@ export const makePrismaClient = (): {
 
 export const makeBenefitRepositoryStub =
   (): jest.Mocked<IBenefitRepository> => ({
-    findAll: jest.fn().mockResolvedValue(makeFakeBenefitList()),
+    findAll: jest.fn().mockResolvedValue({ data: makeFakeBenefitList() }),
     findById: jest.fn().mockResolvedValue(makeFakeBenefit({})),
     create: jest.fn().mockResolvedValue(makeFakeBenefit({})),
     updateById: jest.fn(),

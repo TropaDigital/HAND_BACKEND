@@ -49,6 +49,8 @@ describe(AssociatedRepository.name, () => {
             },
           },
           affiliations: true,
+          phoneNumbers: true,
+          references: true,
         },
         where: {},
       });
@@ -84,6 +86,8 @@ describe(AssociatedRepository.name, () => {
             },
           },
           affiliations: true,
+          phoneNumbers: true,
+          references: true,
         },
         where: { id: { contains: 1 } },
       });
@@ -160,6 +164,8 @@ describe(AssociatedRepository.name, () => {
             },
           },
           affiliations: true,
+          phoneNumbers: true,
+          references: true,
         },
         where: { id: 777 },
       });
@@ -217,6 +223,8 @@ describe(AssociatedRepository.name, () => {
           employmentRelationships: true,
           bankAccounts: true,
           affiliations: true,
+          phoneNumbers: true,
+          references: true,
         },
       });
     });

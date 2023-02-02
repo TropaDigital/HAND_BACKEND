@@ -178,8 +178,10 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAssociated = (
-  payload?: Partial<Omit<IAssociated, 'benefits'>>,
-): jest.Mocked<Omit<IAssociated, 'benefits'>> =>
+  payload?: Partial<
+    Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>
+  >,
+): jest.Mocked<Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>> =>
   ({
     id: 0,
     code: generateInsertCode(),
@@ -261,7 +263,7 @@ export const makeFakeAssociated = (
     updatedAt: new Date(),
     deletedAt: null,
     ...payload,
-  } as any);
+  } as unknown as any);
 
 export const makeFakeAssociatedList = (): Associated[] => [
   makeFakeAssociated({}),

@@ -1,3 +1,5 @@
+import { makeBenefitServiceStub } from 'src/modules/benefit/__tests__/helpers/test-helper';
+
 import { makeFakeAddressesParams } from '../../../../__tests__/functionals/associations/helpers';
 import { NotFoundError } from '../../../shared/errors';
 import { AssociatedService } from '../service';
@@ -15,7 +17,8 @@ jest.mock('../../../shared/code', () => ({
 
 const makeSut = () => {
   const associatedRepository = makeAssociatedRepositoryStub();
-  const sut = new AssociatedService(associatedRepository);
+  const benefitService = makeBenefitServiceStub();
+  const sut = new AssociatedService(associatedRepository, benefitService);
 
   return { sut, associatedRepository };
 };

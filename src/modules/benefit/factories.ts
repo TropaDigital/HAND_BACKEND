@@ -1,22 +1,22 @@
 import JoiAdapter from '../../adapters/joi/JoiAdapter';
 import MySqlDBClient from '../../infra/mySql';
-import { AssociatedRepository } from '../associated/repository';
+import { createAssociatedRepository } from '../associated/factories';
+import { IAssociatedRepository } from '../associated/interfaces';
 import { ConsultantRepository } from '../consultant/repository';
 import { ConsultantService } from '../consultant/service';
 import { InstallmentRepository } from '../installment/repository';
 import { LoanSimulationService } from '../loanSimulation/service';
 import { BenefitController } from './controller';
-import { IBenefitController } from './interfaces';
+import { IBenefitController, IBenefitService } from './interfaces';
 import { BenefitRepository } from './repository';
 import * as schemas from './schemas';
 import { BenefitService } from './service';
 
-export const createBenefitController = (): IBenefitController => {
+export const createBenefitService = (
+  associatedRepository: IAssociatedRepository,
+): IBenefitService => {
   const mySql = MySqlDBClient.getInstance();
   const repository = new BenefitRepository(mySql.getPrismaClientInstance());
-  const associatedRepository = new AssociatedRepository(
-    mySql.getPrismaClientInstance().associated,
-  );
   const consultantRepository = new ConsultantRepository(
     mySql.getPrismaClientInstance().consultant,
   );
@@ -25,14 +25,18 @@ export const createBenefitController = (): IBenefitController => {
   const installmentRepository = new InstallmentRepository(
     mySql.getPrismaClientInstance(),
   );
-  const benefitService = new BenefitService(
+  return new BenefitService(
     repository,
     associatedRepository,
     loanSimulationService,
     installmentRepository,
     mySql.getPrismaClientInstance(),
   );
+};
+
+export const createBenefitController = (): IBenefitController => {
   const joiAdapter = new JoiAdapter(schemas);
+  const benefitService = createBenefitService(createAssociatedRepository());
   const result = new BenefitController(benefitService, joiAdapter);
 
   return result;

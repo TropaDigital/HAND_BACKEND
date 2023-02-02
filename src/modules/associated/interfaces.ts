@@ -5,7 +5,10 @@ import {
   BankAccount,
   Benefit,
   EmploymentRelationship,
+  Installment,
+  PhoneNumber,
   Prisma,
+  Reference,
 } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
@@ -13,13 +16,24 @@ import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
+import { EnrichedBenefit } from '../benefit/interfaces';
 
 export type IAssociated = Associated & {
   bankAccounts: BankAccount[];
   addresses: Address[];
   employmentRelationships: EmploymentRelationship[];
   affiliations: Affiliation[];
-  benefits: Benefit[];
+  benefits: Benefit[] & { installments?: Installment[] };
+  phoneNumbers?: PhoneNumber[];
+  references?: Reference[];
+};
+
+export type IEnrichedAssociated = Associated & {
+  bankAccounts: BankAccount[];
+  addresses: Address[];
+  employmentRelationships: EmploymentRelationship[];
+  affiliations: Affiliation[];
+  benefits: EnrichedBenefit[];
 };
 
 export type ICreateAssociatedInput = Omit<
@@ -100,7 +114,9 @@ export interface IAssociatedController {
       unknown,
       IFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]> | string>>;
+  ): Promise<
+    IApiHttpResponse<IPaginatedAResult<IEnrichedAssociated[]> | string>
+  >;
 
   getById(
     httpRequest: IApiHttpRequest,
@@ -142,7 +158,7 @@ export interface IAssociatedController {
 export interface IAssociatedService {
   getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAResult<IAssociated[]>>;
+  ): Promise<IPaginatedAResult<IEnrichedAssociated[]>>;
 
   getById(id: number): Promise<IAssociated | null>;
 

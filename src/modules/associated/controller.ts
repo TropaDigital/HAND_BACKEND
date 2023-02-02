@@ -17,6 +17,7 @@ import {
   IAssociated,
   IAssociatedController,
   IAssociatedService,
+  IEnrichedAssociated,
 } from './interfaces';
 import * as schemas from './schemas';
 
@@ -134,7 +135,9 @@ export class AssociatedController implements IAssociatedController {
       unknown,
       IFindAllParams & Prisma.AssociatedWhereInput
     >,
-  ): Promise<IApiHttpResponse<IPaginatedAResult<IAssociated[]> | string>> {
+  ): Promise<
+    IApiHttpResponse<IPaginatedAResult<IEnrichedAssociated[]> | string>
+  > {
     const {
       registerNumber,
       telemedicine,
@@ -198,7 +201,7 @@ export class AssociatedController implements IAssociatedController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Omit<IAssociated, 'benefits'>>> {
     const associated = this.validator.validateSchema<
-      Omit<IAssociated, 'benefits'>
+      Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>
     >('CreateAssociated', {
       ...httpRequest.body,
       createdBy: httpRequest.user?.sub,
@@ -212,7 +215,9 @@ export class AssociatedController implements IAssociatedController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
     const { id, ...associated } = this.validator.validateSchema<
-      Partial<Omit<IAssociated, 'benefits'>> & { id: number }
+      Partial<Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>> & {
+        id: number;
+      }
     >('UpdateAssociatedById', {
       ...httpRequest.body,
       ...httpRequest.params,

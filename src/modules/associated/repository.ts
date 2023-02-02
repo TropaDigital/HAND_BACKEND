@@ -101,6 +101,7 @@ export class AssociatedRepository implements IAssociatedRepository {
           include: {
             affiliation: true,
             consultant: true,
+            installments: true,
           },
         },
         affiliations: true,

@@ -46,7 +46,7 @@ export interface IBenefitRepository {
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<EnrichedBenefit[]>>;
 
-  findById(id: number): Promise<Benefit | null>;
+  findById(id: number): Promise<EnrichedBenefit | null>;
 
   countEditTimes(id: number): Promise<number>;
 
@@ -103,6 +103,11 @@ export interface IBenefitController {
 }
 
 export interface IBenefitService {
+  getInstallmentInfo(benefit: EnrichedBenefit): {
+    overdueInstallmentsNumber: number;
+    openAmount: number;
+    paidAmount: number;
+  };
   getInstallmentsByReferenceDates({
     from,
     to,

@@ -11,16 +11,21 @@ import {
   IFindAllParams,
   IPaginatedAResult,
 } from '../../shared/pagination/interfaces';
+import { EnrichedBenefit, IBenefitService } from '../benefit/interfaces';
 import {
   IAssociated,
   IAssociatedRepository,
   IAssociatedService,
   ICreateAssociatedInput,
+  IEnrichedAssociated,
   IUpdateAssociatedInput,
 } from './interfaces';
 
 export class AssociatedService implements IAssociatedService {
-  constructor(private readonly associatedRepository: IAssociatedRepository) {}
+  constructor(
+    private readonly associatedRepository: IAssociatedRepository,
+    private readonly benefitService: IBenefitService,
+  ) {}
 
   public async getBankAccountByAssociatedId(
     associatedId: number,
@@ -63,10 +68,19 @@ export class AssociatedService implements IAssociatedService {
 
   public async getAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
-  ): Promise<IPaginatedAResult<IAssociated[]>> {
+  ): Promise<IPaginatedAResult<IEnrichedAssociated[]>> {
     const result = await this.associatedRepository.findAll(payload);
 
-    return result;
+    return {
+      ...result,
+      data: result.data.map(associated => ({
+        ...associated,
+        benefits: associated.benefits.map(benefit => ({
+          ...benefit,
+          ...this.benefitService.getInstallmentInfo(benefit as EnrichedBenefit),
+        })) as unknown[] as EnrichedBenefit[],
+      })),
+    };
   }
 
   public async getById(id: number): Promise<IAssociated | null> {
@@ -116,6 +130,8 @@ export class AssociatedService implements IAssociatedService {
       bankAccounts,
       benefits,
       employmentRelationships,
+      phoneNumbers,
+      references,
       ...associated
     } = (await this.getById(id)) || {};
     const result = await this.associatedRepository.updateById(id, {

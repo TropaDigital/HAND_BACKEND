@@ -71,7 +71,11 @@ export class BenefitService implements IBenefitService {
     return result;
   }
 
-  private getInstallmentInfo(benefit: EnrichedBenefit) {
+  public getInstallmentInfo(benefit: EnrichedBenefit): {
+    overdueInstallmentsNumber: number;
+    openAmount: number;
+    paidAmount: number;
+  } {
     const currentDate = new Date();
 
     const overdueInstallments = benefit.installments.filter(installment => {
@@ -106,13 +110,13 @@ export class BenefitService implements IBenefitService {
     };
   }
 
-  public async getById(id: number): Promise<Benefit | null> {
+  public async getById(id: number): Promise<EnrichedBenefit | null> {
     const result = await this.benefitRepository.findById(id);
     if (!result) {
       throw new NotFoundError('benefit not found with provided id');
     }
 
-    return result;
+    return { ...result, ...this.getInstallmentInfo(result) };
   }
 
   private formatMonthOfPayment(
@@ -299,7 +303,7 @@ export class BenefitService implements IBenefitService {
             updatedAt,
             updatedBy,
             commission: consultantCommission,
-            financialAssistanceValue: totalValue,
+            financialAssistanceValue: requestedValue,
             installmentNumber: numberOfInstallments,
 
             publicAgency: employmentRelationship.publicAgency,

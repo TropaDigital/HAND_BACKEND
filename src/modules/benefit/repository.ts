@@ -105,7 +105,7 @@ export class BenefitRepository implements IBenefitRepository {
     );
   }
 
-  public async findById(id: number): Promise<Benefit | null> {
+  public async findById(id: number): Promise<EnrichedBenefit | null> {
     const result = await this.prismaBenefitRepository.findFirst({
       where: { id },
       include: {

@@ -17,7 +17,7 @@ export const GetAll = Joi.object<
       csv?: boolean;
     }
 >({
-  name: Joi.string().allow(null, ''),
+  fullName: Joi.string().allow(null, ''),
   code: Joi.string().allow(null, ''),
   page: Joi.number(),
   resultsPerPage: Joi.number(),

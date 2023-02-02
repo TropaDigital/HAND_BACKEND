@@ -9,6 +9,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Márcio',
     lastName: 'Das Neves',
+    fullName: 'Márcio Das Neves',
     code: generateInsertCode(),
     gender: 'Masculino',
     birthDate: new Date('1991-06-06'),
@@ -36,6 +37,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Eloá',
     lastName: 'Rodrigues',
+    fullName: 'Eloá Rodrigues',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -65,6 +67,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Jaqueline',
     lastName: 'Castro',
+    fullName: 'Jaqueline Castro',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -93,6 +96,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Ana',
     lastName: 'Santos',
+    fullName: 'Ana Santos',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -121,6 +125,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Camila',
     lastName: 'Souza',
+    fullName: 'Camila Souza',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -149,6 +154,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Alice',
     lastName: 'Soares',
+    fullName: 'Alice Soares',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -177,6 +183,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Silvia',
     lastName: 'Costa',
+    fullName: 'Silvia Costa',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -205,6 +212,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Amanda',
     lastName: 'Freitas',
+    fullName: 'Amanda Freitas',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -233,6 +241,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Maria',
     lastName: 'Silva',
+    fullName: 'Maria Silva',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),
@@ -261,6 +270,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
   {
     name: 'Joana',
     lastName: 'Ferreira',
+    fullName: 'Joana Ferreira',
     code: generateInsertCode(),
     gender: 'Feminino',
     birthDate: new Date('1993-05-25'),

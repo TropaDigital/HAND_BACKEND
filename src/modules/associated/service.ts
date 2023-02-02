@@ -110,8 +110,18 @@ export class AssociatedService implements IAssociatedService {
     id: number,
     payload: IUpdateAssociatedInput,
   ): Promise<void> {
-    await this.getById(id);
-    const result = await this.associatedRepository.updateById(id, payload);
+    const {
+      addresses,
+      affiliations,
+      bankAccounts,
+      benefits,
+      employmentRelationships,
+      ...associated
+    } = (await this.getById(id)) || {};
+    const result = await this.associatedRepository.updateById(id, {
+      ...associated,
+      ...payload,
+    });
     return result;
   }
 

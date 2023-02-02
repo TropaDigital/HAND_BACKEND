@@ -166,6 +166,7 @@ export class AssociatedRepository implements IAssociatedRepository {
     const result = await this.prismaRepository.create({
       data: {
         ...associated,
+        fullName: `${associated.name} ${associated.lastName}`,
         affiliations: {
           connect: [
             ...affiliations.map(association => ({
@@ -211,6 +212,23 @@ export class AssociatedRepository implements IAssociatedRepository {
         data: {
           affiliations: {
             set: [],
+          },
+        },
+      });
+    }
+
+    if (associated.name || associated.lastName) {
+      await this.prismaRepository.update({
+        where: { id },
+        data: {
+          ...associated,
+          fullName: `${associated.name} ${associated.lastName}`,
+          affiliations: {
+            connect: [
+              ...(affiliations || []).map(affiliation => ({
+                id: affiliation.id,
+              })),
+            ],
           },
         },
       });

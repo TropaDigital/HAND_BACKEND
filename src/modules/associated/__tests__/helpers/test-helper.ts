@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
 import { generateInsertCode } from '../../../../shared/code';
+import { makeFakeBenefit } from '../../../benefit/__tests__/helpers/test-helper';
 import {
   IAssociated,
   IAssociatedRepository,
@@ -177,10 +178,8 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAssociated = (
-  payload?: Partial<
-    Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>
-  >,
-): jest.Mocked<Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>> =>
+  payload?: Partial<Omit<IAssociated, 'phoneNumbers' | 'references'>>,
+): jest.Mocked<Omit<IAssociated, 'phoneNumbers' | 'references'>> =>
   ({
     id: 0,
     code: generateInsertCode(),
@@ -236,7 +235,7 @@ export const makeFakeAssociated = (
     mother: 'any_mother',
     name: 'any_name',
     nationality: 'any_nationality',
-
+    benefits: [makeFakeBenefit()],
     bankAccounts: [
       {
         bank: '00 - Any Bank',
@@ -304,7 +303,7 @@ export const makePrismaAssociatedRepositoryStub =
 
 export const makeAssociatedRepositoryStub =
   (): jest.Mocked<IAssociatedRepository> => ({
-    findAll: jest.fn().mockResolvedValue(makeFakeAssociatedList()),
+    findAll: jest.fn().mockResolvedValue({ data: makeFakeAssociatedList() }),
     findById: jest.fn().mockResolvedValue(makeFakeAssociated({})),
     create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
     updateById: jest.fn(),

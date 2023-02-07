@@ -1,7 +1,7 @@
-import { makeBenefitServiceStub } from 'src/modules/benefit/__tests__/helpers/test-helper';
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { makeFakeAddressesParams } from '../../../../__tests__/functionals/associations/helpers';
 import { NotFoundError } from '../../../shared/errors';
+import { makeBenefitServiceStub } from '../../benefit/__tests__/helpers/test-helper';
 import { AssociatedService } from '../service';
 import {
   makeAssociatedRepositoryStub,
@@ -39,11 +39,11 @@ describe(AssociatedService.name, () => {
 
       const result = await sut.getAll();
 
-      expect(result).toEqual(
-        makeFakeAssociatedList().map(associated => ({
+      expect(result).toEqual({
+        data: makeFakeAssociatedList().map(associated => ({
           ...associated,
         })),
-      );
+      });
     });
 
     it('should throw when repository throws', async () => {
@@ -123,7 +123,7 @@ describe(AssociatedService.name, () => {
 
     it('should return repository result when associated has no commission', async () => {
       const { sut } = makeSut();
-      const associated = makeFakeAssociated({});
+      const { benefits, ...associated } = makeFakeAssociated({});
 
       const result = await sut.create(associated as any);
 
@@ -154,6 +154,12 @@ describe(AssociatedService.name, () => {
 
       expect(updateSpy).toBeCalledWith(777, {
         ...makeFakeUpdateAssociatedInput(),
+        id: 0,
+        updatedAt: new Date('2022-04-15'),
+        createdAt: new Date('2022-04-15'),
+        code: '2022217148',
+        deletedAt: null,
+        updatedBy: 'any',
       });
     });
 

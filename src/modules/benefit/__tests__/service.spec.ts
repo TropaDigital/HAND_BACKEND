@@ -97,7 +97,12 @@ describe(BenefitService.name, () => {
 
       const result = await sut.getById(fakeId);
 
-      expect(result).toEqual({ ...makeFakeBenefit({}) });
+      expect(result).toEqual({
+        ...makeFakeBenefit({}),
+        openAmount: 50.87,
+        overdueInstallmentsNumber: 1,
+        paidAmount: 25.87,
+      });
     });
 
     it('should return null when repository result is null', async () => {

@@ -46,6 +46,7 @@ describe(AssociatedRepository.name, () => {
             include: {
               affiliation: true,
               consultant: true,
+              installments: true,
             },
           },
           affiliations: true,
@@ -83,6 +84,7 @@ describe(AssociatedRepository.name, () => {
             include: {
               affiliation: true,
               consultant: true,
+              installments: true,
             },
           },
           affiliations: true,
@@ -197,6 +199,7 @@ describe(AssociatedRepository.name, () => {
     it('should call prisma with right params', async () => {
       const { sut, prismaRepository } = makeSut();
       const createSpy = prismaRepository.create;
+      const { benefits, ...fakeUpdateAssociated } = fakeAssociated;
 
       await sut.create(fakeAssociated as any);
 
@@ -205,12 +208,14 @@ describe(AssociatedRepository.name, () => {
         employmentRelationships,
         bankAccounts,
         affiliations,
+        benefits: _benefits,
         ...associated
       } = makeFakeAssociated({});
 
       expect(createSpy).toBeCalledWith({
         data: {
           ...associated,
+          fullName: 'any_name any_last_name',
           affiliations: { connect: [{ id: affiliations[0].id }] },
           bankAccounts: { createMany: { data: bankAccounts } },
           addresses: { createMany: { data: addresses } },
@@ -231,6 +236,7 @@ describe(AssociatedRepository.name, () => {
 
     it('should return prisma result', async () => {
       const { sut } = makeSut();
+      const { benefits: _benefits, ...fakeUpdateAssociated } = fakeAssociated;
 
       const result = await sut.create(fakeAssociated as any);
 
@@ -242,6 +248,7 @@ describe(AssociatedRepository.name, () => {
       prismaRepository.create.mockRejectedValueOnce(
         new Error('any_create_error'),
       );
+      const { benefits: _benefits, ...fakeUpdateAssociated } = fakeAssociated;
 
       const promise = sut.create(fakeAssociated as any);
 
@@ -257,12 +264,15 @@ describe(AssociatedRepository.name, () => {
       const { sut, prismaRepository } = makeSut();
       const updateSpy = prismaRepository.update;
 
-      await sut.updateById(fakeId, fakeAssociated);
+      const { benefits, ...fakeUpdateAssociated } = fakeAssociated;
+
+      await sut.updateById(fakeId, fakeUpdateAssociated);
 
       const {
         addresses: _addresses,
         bankAccounts: _bankAccounts,
         employmentRelationships: _employmentRelationships,
+        benefits: _benefits,
         ...expectedAssociated
       } = {
         ...makeFakeAssociated({}),
@@ -280,7 +290,9 @@ describe(AssociatedRepository.name, () => {
         new Error('any_update_error'),
       );
 
-      const promise = sut.updateById(fakeId, fakeAssociated);
+      const { benefits: _benefits, ...fakeUpdateAssociated } = fakeAssociated;
+
+      const promise = sut.updateById(fakeId, fakeUpdateAssociated);
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
     });

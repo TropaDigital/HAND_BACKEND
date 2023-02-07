@@ -1,4 +1,4 @@
-import { Prisma, AssociatedStatus } from '@prisma/client';
+import { Prisma, AssociatedStatus, PhoneType } from '@prisma/client';
 import Joi from 'joi';
 import { IFindAllParams } from 'src/shared/pagination/interfaces';
 
@@ -41,11 +41,10 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
   emissionState: Joi.string().required().label('estado-emissor'),
   issuingAgency: Joi.string().required().label('orgao-emissor'),
   emissionDate: Joi.date().required().label('data-emissao'),
-  cellPhone: Joi.string().required().label('celular'),
   email: Joi.string().email().allow(null, '').label('email'),
   father: Joi.string().allow(null, '').label('pai'),
   mother: Joi.string().required().label('mãe'),
-  partner: Joi.string().label('cônjuge'),
+  partner: Joi.string().allow(null, '').label('cônjuge'),
 
   affiliations: Joi.array()
     .items(
@@ -94,6 +93,26 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
       pixType: Joi.string().label('tipo_pix'),
     }),
   ),
+  phoneNumbers: Joi.array()
+    .items(
+      Joi.object({
+        number: Joi.string().required(),
+        type: Joi.string()
+          .valid(...Object.values(PhoneType))
+          .required(),
+        note: Joi.string().optional(),
+      }),
+    )
+    .min(1)
+    .required(),
+  references: Joi.array().items(
+    Joi.object({
+      name: Joi.string().required(),
+      phoneNumber: Joi.string().required(),
+      relationshipType: Joi.string().required(),
+      note: Joi.string().optional(),
+    }),
+  ),
   createdBy: Joi.string().required().label('createdBy'),
 });
 
@@ -113,11 +132,11 @@ export const UpdateAssociatedById = Joi.object<
   emissionState: Joi.string().label('estado-emissor'),
   issuingAgency: Joi.string().label('orgao-emissor'),
   emissionDate: Joi.date().label('data-emissao'),
-  cellPhone: Joi.string().label('celular'),
+  // cellPhone: Joi.string().label('celular'),
   email: Joi.string().email().allow(null, '').label('email'),
   father: Joi.string().allow(null, '').label('pai'),
   mother: Joi.string().label('mãe'),
-  partner: Joi.string().label('cônjuge'),
+  partner: Joi.string().allow(null, '').label('cônjuge'),
   status: Joi.string().valid(...Object.keys(AssociatedStatus)),
   affiliations: Joi.array()
     .items(
@@ -204,4 +223,29 @@ export const updateAddressByAssociatedIdAndId = Joi.object<
   district: Joi.string().label('bairro'),
   city: Joi.string().label('cidade'),
   state: Joi.string().label('estado'),
+});
+
+export const updatePhoneNumbersByAssociatedId = Joi.object<{
+  associatedId: number;
+  phoneNumbers: Prisma.PhoneNumberUpdateInput[];
+}>({
+  associatedId: Joi.number().required().min(1),
+  phoneNumbers: Joi.array().items({
+    number: Joi.string().required(),
+    type: Joi.string().valid(...Object.values(PhoneType)),
+    note: Joi.string(),
+  }),
+});
+
+export const updateReferencesByAssociatedId = Joi.object<{
+  associatedId: number;
+  references: Prisma.ReferenceUpdateInput[];
+}>({
+  associatedId: Joi.number().required().min(1),
+  references: Joi.array().items({
+    name: Joi.string().required(),
+    phoneNumber: Joi.string().required(),
+    relationshipType: Joi.string().required(),
+    note: Joi.string(),
+  }),
 });

@@ -135,7 +135,7 @@ describe(BenefitService.name, () => {
 
     it('should return repository result', async () => {
       const { sut, prismaClient } = makeSut();
-      prismaClient.$transaction.mockResolvedValueOnce(makeFakeBenefit());
+      prismaClient.$transaction.mockResolvedValueOnce(makeFakeBenefit() as any);
 
       const result = await sut.create(fakeBenefit);
 
@@ -145,7 +145,7 @@ describe(BenefitService.name, () => {
     it('should return repository result when benefit has no commission', async () => {
       const { sut, prismaClient } = makeSut();
       const benefit = makeFakeBenefit({});
-      prismaClient.$transaction.mockResolvedValueOnce(makeFakeBenefit());
+      prismaClient.$transaction.mockResolvedValueOnce(makeFakeBenefit() as any);
 
       const result = await sut.create(benefit);
 

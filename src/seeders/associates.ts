@@ -21,7 +21,6 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Ceará',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 3768-4973',
     email: 'marcio.davi.dasneves@likaleal.com.br',
     father: 'Vicente Alexandre das Neves',
     mother: 'Allana Rafaela',
@@ -49,7 +48,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -79,7 +78,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -108,7 +107,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -137,7 +136,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -166,7 +165,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -195,7 +194,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -224,7 +223,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -253,7 +252,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',
@@ -282,7 +281,7 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     emissionState: 'Mato Grosso',
     issuingAgency: 'Secretaria de Segurança Pública',
     emissionDate: new Date('2022-10-10'),
-    cellPhone: '(88) 99211-8683',
+
     email: 'eloa_freitas@superigi.com.br',
     father: 'Tomás Caio Thomas Freitas',
     mother: 'Milena Louise',

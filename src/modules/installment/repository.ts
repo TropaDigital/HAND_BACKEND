@@ -212,7 +212,6 @@ export class InstallmentRepository implements IInstallmentRepository {
                 registerId: true,
                 birthDate: true,
                 maritalStatus: true,
-                cellPhone: true,
                 nationality: true,
                 gender: true,
                 placeOfBirth: true,

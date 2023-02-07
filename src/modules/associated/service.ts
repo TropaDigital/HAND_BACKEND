@@ -1,8 +1,12 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import {
   Address,
   BankAccount,
   EmploymentRelationship,
+  PhoneNumber,
   Prisma,
+  Reference,
 } from '@prisma/client';
 
 import { generateInsertCode } from '../../shared/code';
@@ -34,6 +38,54 @@ export class AssociatedService implements IAssociatedService {
     return this.associatedRepository.getBankAccountsByAssociatedId(
       associatedId,
     );
+  }
+
+  public async upsertPhoneNumbersByAssociatedId(
+    associatedId: number,
+    payload: (Prisma.PhoneNumberUpdateInput | Prisma.PhoneNumberCreateInput)[],
+  ): Promise<PhoneNumber[]> {
+    await this.getById(associatedId);
+    await this.associatedRepository.deletePhoneNumbersByAssociatedId(
+      associatedId,
+    );
+
+    const result = [];
+    for (const phoneNumber of payload) {
+      const phoneNumberItem =
+        await this.associatedRepository.upsertPhoneNumberByAssociatedId(
+          associatedId,
+          0,
+          phoneNumber,
+        );
+
+      result.push(phoneNumberItem);
+    }
+
+    return result;
+  }
+
+  public async upsertReferencesByAssociatedId(
+    associatedId: number,
+    payload: (Prisma.ReferenceUpdateInput | Prisma.ReferenceCreateInput)[],
+  ): Promise<Reference[]> {
+    await this.getById(associatedId);
+    await this.associatedRepository.deleteReferencesByAssociatedId(
+      associatedId,
+    );
+
+    const result = [];
+    for (const reference of payload) {
+      const referenceItem =
+        await this.associatedRepository.upsertReferenceByAssociatedId(
+          associatedId,
+          0,
+          reference,
+        );
+
+      result.push(referenceItem);
+    }
+
+    return result;
   }
 
   public async upsertBankAccountById(
@@ -115,6 +167,8 @@ export class AssociatedService implements IAssociatedService {
           isDefault: true,
         },
       ],
+      phoneNumbers: payload.phoneNumbers,
+      references: payload.references,
     });
 
     return result;

@@ -215,6 +215,72 @@ export default class AssociatedRouter implements IRouter {
       );
   }
 
+  private updatePhoneNumbersByAssociatedId(): void {
+    /**
+     * PATCH /associateds/{associatedId}/phonenumbers
+     * @tag Associateds
+     * @security apiKey
+     * @summary create a new associated.
+     * @description return the created associated object.
+     * @pathParam {int32} associatedId
+     * @bodyContent {UpsertEmploymentRelationshipByAssociatedIdAndIdPayload} application/json
+     * @bodyRequired
+     * @response 200 - an object of associated.
+     * @responseContent {UpsertEmploymentRelationshipByAssociatedIdAndIdResponse} 200.application/json
+     * @responseExample {UpsertEmploymentRelationshipByAssociatedIdAndIdResponse} 200.application/json.UpsertEmploymentRelationshipByAssociatedIdAndIdResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/:associatedId/phonenumbers')
+      .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'upsertPhoneNumbersByAssociatedId',
+        ),
+      );
+  }
+
+  private updateReferencesByAssociatedId(): void {
+    /**
+     * PATCH /associateds/{associatedId}/references
+     * @tag Associateds
+     * @security apiKey
+     * @summary create a new associated.
+     * @description return the created associated object.
+     * @pathParam {int32} associatedId
+     * @bodyContent {UpsertEmploymentRelationshipByAssociatedIdAndIdPayload} application/json
+     * @bodyRequired
+     * @response 200 - an object of associated.
+     * @responseContent {UpsertEmploymentRelationshipByAssociatedIdAndIdResponse} 200.application/json
+     * @responseExample {UpsertEmploymentRelationshipByAssociatedIdAndIdResponse} 200.application/json.UpsertEmploymentRelationshipByAssociatedIdAndIdResponse
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/associateds/:associatedId/references')
+      .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IAssociatedController>(
+          this.controller,
+          'upsertReferencesByAssociatedId',
+        ),
+      );
+  }
+
   private getAddressesByAssociatedId(): void {
     /**
      * GET /associateds/{id}/addresses
@@ -380,6 +446,8 @@ export default class AssociatedRouter implements IRouter {
     this.updateAddressByAssociatedIdAndId();
     this.getBankAccountsByAssociatedId();
     this.upsertBankAccountByAssociatedIdAndId();
+    this.updatePhoneNumbersByAssociatedId();
+    this.updateReferencesByAssociatedId();
 
     app.use(this.router);
   }

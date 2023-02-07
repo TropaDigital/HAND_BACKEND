@@ -2,7 +2,9 @@ import {
   Address,
   BankAccount,
   EmploymentRelationship,
+  PhoneNumber,
   Prisma,
+  Reference,
 } from '@prisma/client';
 import { format } from 'date-fns';
 
@@ -201,7 +203,10 @@ export class AssociatedController implements IAssociatedController {
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Omit<IAssociated, 'benefits'>>> {
     const associated = this.validator.validateSchema<
-      Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>
+      Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'> & {
+        phoneNumbers: PhoneNumber[];
+        references: Reference[];
+      }
     >('CreateAssociated', {
       ...httpRequest.body,
       createdBy: httpRequest.user?.sub,
@@ -329,5 +334,49 @@ export class AssociatedController implements IAssociatedController {
     );
 
     return { statusCodeAsString: 'OK', body: result };
+  }
+
+  public async upsertPhoneNumbersByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
+    const { associatedId, phoneNumbers } = this.validator.validateSchema<{
+      associatedId: number;
+      phoneNumbers: Prisma.PhoneNumberUpdateInput[];
+    }>('updatePhoneNumbersByAssociatedId', {
+      ...(httpRequest.params as { id: number; associatedId: number }),
+      ...httpRequest.body,
+    });
+
+    await this.associatedService.upsertPhoneNumbersByAssociatedId(
+      associatedId,
+      phoneNumbers,
+    );
+
+    return {
+      statusCodeAsString: 'NO_CONTENT',
+      body: undefined,
+    };
+  }
+
+  public async upsertReferencesByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
+    const { associatedId, references } = this.validator.validateSchema<{
+      associatedId: number;
+      references: Prisma.ReferenceUpdateInput[];
+    }>('updateReferencesByAssociatedId', {
+      ...(httpRequest.params as { id: number; associatedId: number }),
+      ...httpRequest.body,
+    });
+
+    await this.associatedService.upsertReferencesByAssociatedId(
+      associatedId,
+      references,
+    );
+
+    return {
+      statusCodeAsString: 'NO_CONTENT',
+      body: undefined,
+    };
   }
 }

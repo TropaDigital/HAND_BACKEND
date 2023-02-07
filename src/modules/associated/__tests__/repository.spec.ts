@@ -198,7 +198,7 @@ describe(AssociatedRepository.name, () => {
       const { sut, prismaRepository } = makeSut();
       const createSpy = prismaRepository.create;
 
-      await sut.create(fakeAssociated);
+      await sut.create(fakeAssociated as any);
 
       const {
         addresses,
@@ -232,7 +232,7 @@ describe(AssociatedRepository.name, () => {
     it('should return prisma result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.create(fakeAssociated);
+      const result = await sut.create(fakeAssociated as any);
 
       expect(result).toEqual(makeFakeAssociated({}));
     });
@@ -243,7 +243,7 @@ describe(AssociatedRepository.name, () => {
         new Error('any_create_error'),
       );
 
-      const promise = sut.create(fakeAssociated);
+      const promise = sut.create(fakeAssociated as any);
 
       await expect(promise).rejects.toThrow(new Error('any_create_error'));
     });

@@ -3,7 +3,9 @@ import {
   Address,
   BankAccount,
   EmploymentRelationship,
+  PhoneNumber,
   Prisma,
+  Reference,
 } from '@prisma/client';
 
 import MySqlDBClient from '../../infra/mySql';
@@ -29,6 +31,22 @@ export type PrismaAssociatedRepository = Prisma.AssociatedDelegate<
 
 export class AssociatedRepository implements IAssociatedRepository {
   constructor(private readonly prismaRepository: PrismaAssociatedRepository) {}
+
+  public async deletePhoneNumbersByAssociatedId(
+    associatedId: number,
+  ): Promise<void> {
+    await MySqlDBClient.getInstance()
+      .getPrismaClientInstance()
+      .phoneNumber.deleteMany({ where: { associatedId } });
+  }
+
+  public async deleteReferencesByAssociatedId(
+    associatedId: number,
+  ): Promise<void> {
+    await MySqlDBClient.getInstance()
+      .getPrismaClientInstance()
+      .reference.deleteMany({ where: { associatedId } });
+  }
 
   public async getBankAccountsByAssociatedId(
     associatedId: number,
@@ -80,8 +98,16 @@ export class AssociatedRepository implements IAssociatedRepository {
     const result = await this.prismaRepository.findMany({
       ...params,
       include: {
-        phoneNumbers: true,
-        references: true,
+        phoneNumbers: {
+          orderBy: {
+            createdAt: 'asc',
+          },
+        },
+        references: {
+          orderBy: {
+            createdAt: 'asc',
+          },
+        },
         addresses: {
           orderBy: {
             isDefault: 'desc',
@@ -123,8 +149,16 @@ export class AssociatedRepository implements IAssociatedRepository {
     const result = await this.prismaRepository.findFirst({
       where: { id },
       include: {
-        phoneNumbers: true,
-        references: true,
+        phoneNumbers: {
+          orderBy: {
+            createdAt: 'asc',
+          },
+        },
+        references: {
+          orderBy: {
+            createdAt: 'asc',
+          },
+        },
         addresses: {
           orderBy: {
             isDefault: 'desc',
@@ -161,6 +195,8 @@ export class AssociatedRepository implements IAssociatedRepository {
       employmentRelationships,
       bankAccounts,
       affiliations,
+      references,
+      phoneNumbers,
       ...associated
     } = payload;
 
@@ -175,6 +211,8 @@ export class AssociatedRepository implements IAssociatedRepository {
             })),
           ],
         },
+        phoneNumbers: { createMany: { data: phoneNumbers } },
+        references: { createMany: { data: references } },
         bankAccounts: { createMany: { data: bankAccounts } },
         addresses: { createMany: { data: addresses } },
         employmentRelationships: {
@@ -204,6 +242,8 @@ export class AssociatedRepository implements IAssociatedRepository {
       bankAccounts,
       benefits,
       affiliations,
+      phoneNumbers,
+      references,
       ...associated
     } = payload;
 
@@ -248,6 +288,102 @@ export class AssociatedRepository implements IAssociatedRepository {
         },
       },
     });
+  }
+
+  public async upsertPhoneNumberByAssociatedId(
+    associatedId: number,
+    phoneNumberId: number,
+    payload: Prisma.PhoneNumberUpdateInput | Prisma.PhoneNumberCreateInput,
+  ): Promise<PhoneNumber> {
+    try {
+      const phoneNumberAlreadyExists = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .phoneNumber.findFirst({
+          where: { id: phoneNumberId },
+        });
+
+      if (!phoneNumberAlreadyExists) {
+        const result = await MySqlDBClient.getInstance()
+          .getPrismaClientInstance()
+          .phoneNumber.create({
+            data: {
+              ...payload,
+              Associated: {
+                connect: {
+                  id: associatedId,
+                },
+              },
+            } as Prisma.PhoneNumberCreateInput,
+          });
+
+        return result;
+      }
+
+      const result = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .phoneNumber.update({
+          where: { id: phoneNumberId },
+          data: {
+            ...payload,
+          } as Prisma.PhoneNumberUpdateInput,
+        });
+
+      return result;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new NotFoundError('associated not found with provided id');
+      }
+
+      throw error;
+    }
+  }
+
+  public async upsertReferenceByAssociatedId(
+    associatedId: number,
+    referenceId: number,
+    payload: Prisma.ReferenceUpdateInput | Prisma.ReferenceCreateInput,
+  ): Promise<Reference> {
+    try {
+      const referenceAlreadyExists = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .reference.findFirst({
+          where: { id: referenceId },
+        });
+
+      if (!referenceAlreadyExists) {
+        const result = await MySqlDBClient.getInstance()
+          .getPrismaClientInstance()
+          .reference.create({
+            data: {
+              ...payload,
+              Associated: {
+                connect: {
+                  id: associatedId,
+                },
+              },
+            } as Prisma.ReferenceCreateInput,
+          });
+
+        return result;
+      }
+
+      const result = await MySqlDBClient.getInstance()
+        .getPrismaClientInstance()
+        .reference.update({
+          where: { id: referenceId },
+          data: {
+            ...payload,
+          } as Prisma.ReferenceUpdateInput,
+        });
+
+      return result;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new NotFoundError('associated not found with provided id');
+      }
+
+      throw error;
+    }
   }
 
   public async upsertEmploymentRelationshipById(

@@ -226,7 +226,6 @@ export class BenefitService implements IBenefitService {
 
     const {
       birthDate,
-      cellPhone,
       createdAt,
       deletedAt,
       email,
@@ -248,9 +247,11 @@ export class BenefitService implements IBenefitService {
       updatedBy,
     } = associated as Associated;
 
-    return this.prisma.$transaction(
-      async (prisma: IPrismaTransactionClient) => {
-        const result = await this.benefitRepository.create(
+    const result = await this.prisma.$transaction(
+      // @ts-ignore
+      // TODO: ajustar
+      async (prisma: IPrismaTransactionClient): Promise<Benefit> => {
+        const benefit = await this.benefitRepository.create(
           {
             affiliation: {
               connect: {
@@ -284,7 +285,6 @@ export class BenefitService implements IBenefitService {
             contractType: type,
             contractModel: '',
             birthDate,
-            cellPhone,
             createdAt,
             createdBy,
             deletedAt,
@@ -323,12 +323,12 @@ export class BenefitService implements IBenefitService {
             },
             ...(consultantId
               ? {
-                  consultant: {
-                    connect: {
-                      id: consultantId,
-                    },
+                consultant: {
+                  connect: {
+                    id: consultantId,
                   },
-                }
+                },
+              }
               : {}),
           },
           prisma,
@@ -336,15 +336,17 @@ export class BenefitService implements IBenefitService {
         await this.installmentRepository.createMany(
           [...installments].map(installment => ({
             ...installment,
-            benefitId: result.id,
+            benefitId: benefit.id,
             createdBy,
           })),
           prisma,
         );
 
-        return result;
+        return benefit;
       },
     );
+
+    return result as unknown as any;
   }
 
   private async getLoanSimulation(
@@ -387,30 +389,29 @@ export class BenefitService implements IBenefitService {
   private validateAssociated(
     associated:
       | {
-          id: number;
-          name: string;
-          lastName: string;
-          gender: string;
-          birthDate: Date;
-          maritalStatus: string;
-          nationality: string;
-          placeOfBirth: string;
-          taxId: string;
-          registerId: string;
-          emissionState: string;
-          issuingAgency: string;
-          emissionDate: Date;
-          cellPhone: string;
-          email: string;
-          father: string;
-          mother: string;
-          partner: string | null;
-          createdBy: string;
-          updatedBy: string | null;
-          createdAt: Date;
-          updatedAt: Date;
-          deletedAt: Date | null;
-        }
+        id: number;
+        name: string;
+        lastName: string;
+        gender: string;
+        birthDate: Date;
+        maritalStatus: string;
+        nationality: string;
+        placeOfBirth: string;
+        taxId: string;
+        registerId: string;
+        emissionState: string;
+        issuingAgency: string;
+        emissionDate: Date;
+        email: string;
+        father: string;
+        mother: string;
+        partner: string | null;
+        createdBy: string;
+        updatedBy: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
+      }
       | { [key: string]: any },
   ) {
     if (!associated) {

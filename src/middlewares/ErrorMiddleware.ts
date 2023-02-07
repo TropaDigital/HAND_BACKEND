@@ -32,13 +32,18 @@ export class ErrorMiddleware {
         code: err.code,
         msg: err.description || err.message,
         stack: err.stack,
+        validationErrors: err.validationErrors,
       });
 
       next(err);
       return;
     }
 
-    this.logger.error({ msg: err.message, stack: err.stack });
+    this.logger.error({
+      msg: err.message,
+      stack: err.stack,
+      validationErrors: err.validationErrors,
+    });
     return next(err);
   }
 

@@ -38,8 +38,15 @@ export type IEnrichedAssociated = Associated & {
 
 export type ICreateAssociatedInput = Omit<
   Prisma.AssociatedCreateInput,
-  'addresses' | 'employmentRelationships' | 'bankAccounts' | 'affiliations'
+  | 'addresses'
+  | 'employmentRelationships'
+  | 'bankAccounts'
+  | 'affiliations'
+  | 'references'
+  | 'phoneNumbers'
 > & {
+  references: Omit<Reference, 'associatedId'>[];
+  phoneNumbers: Omit<PhoneNumber, 'associatedId'>[];
   affiliations: Omit<Affiliation, 'associatedId'>[];
   addresses: Omit<Address, 'id' | 'associatedId'>[];
   bankAccounts: Omit<BankAccount, 'id' | 'associatedId'>[];
@@ -74,6 +81,22 @@ export interface IAssociatedRepository {
   getEmploymentRelationshipsByAssociatedId(
     associatedId: number,
   ): Promise<EmploymentRelationship[]>;
+
+  deletePhoneNumbersByAssociatedId(associatedId: number): Promise<void>;
+
+  deleteReferencesByAssociatedId(associatedId: number): Promise<void>;
+
+  upsertPhoneNumberByAssociatedId(
+    associatedId: number,
+    phoneNumberId: number,
+    payload: Prisma.PhoneNumberUpdateInput | Prisma.PhoneNumberCreateInput,
+  ): Promise<PhoneNumber>;
+
+  upsertReferenceByAssociatedId(
+    associatedId: number,
+    referenceId: number,
+    payload: Prisma.ReferenceUpdateInput | Prisma.ReferenceCreateInput,
+  ): Promise<Reference>;
 
   upsertEmploymentRelationshipById(
     associatedId: number,
@@ -153,6 +176,14 @@ export interface IAssociatedController {
   updateAddressByAssociatedIdAndId(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<unknown>>;
+
+  upsertPhoneNumbersByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>>;
+
+  upsertReferencesByAssociatedId(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>>;
 }
 
 export interface IAssociatedService {
@@ -199,4 +230,14 @@ export interface IAssociatedService {
     bankId: number,
     payload: Prisma.BankAccountUpdateInput | Prisma.BankAccountCreateInput,
   ): Promise<BankAccount>;
+
+  upsertPhoneNumbersByAssociatedId(
+    associatedId: number,
+    payload: (Prisma.PhoneNumberUpdateInput | Prisma.PhoneNumberCreateInput)[],
+  ): Promise<PhoneNumber[]>;
+
+  upsertReferencesByAssociatedId(
+    associatedId: number,
+    payload: (Prisma.ReferenceUpdateInput | Prisma.ReferenceCreateInput)[],
+  ): Promise<Reference[]>;
 }

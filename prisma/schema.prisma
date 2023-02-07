@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["interactiveTransactions"]
+  previewFeatures = []
 }
 
 datasource db {
@@ -85,7 +85,6 @@ model Associated {
   emissionState String    @map("emission_state")
   issuingAgency String    @map("issuing_agency")
   emissionDate  DateTime  @map("emission_date")
-  cellPhone     String    @map("cell_phone")
   email         String?
   father        String?
   mother        String
@@ -116,21 +115,21 @@ model Reference {
   Associated   Associated? @relation(fields: [associatedId], references: [id])
   associatedId Int?
 
-  createdAt DateTime  @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  deletedAt DateTime? @map("deleted_at") @db.DateTime(0)
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt DateTime @updatedAt @map("updated_at")
 }
 
 model PhoneNumber {
-  id           Int         @id @default(autoincrement())
-  number       String
-  type         PhoneType   @default(MAIN)
-  note         String?
+  id     Int       @id @default(autoincrement())
+  number String
+  type   PhoneType @default(MAIN)
+  note   String?
+
   Associated   Associated? @relation(fields: [associatedId], references: [id])
   associatedId Int?
-  createdAt    DateTime    @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt    DateTime    @updatedAt @map("updated_at")
-  deletedAt    DateTime?   @map("deleted_at") @db.DateTime(0)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt DateTime @updatedAt @map("updated_at")
 }
 
 model Affiliation {
@@ -185,7 +184,7 @@ model Benefit {
   emissionState            String           @map("emission_state")
   issuingAgency            String           @map("issuing_agency")
   emissionDate             DateTime         @map("emission_date")
-  cellPhone                String           @map("cell_phone")
+  cellPhone                String?          @map("cell_phone")
   email                    String?
   father                   String?
   mother                   String

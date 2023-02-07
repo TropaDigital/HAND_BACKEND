@@ -125,7 +125,7 @@ describe(AssociatedService.name, () => {
       const { sut } = makeSut();
       const associated = makeFakeAssociated({});
 
-      const result = await sut.create(associated);
+      const result = await sut.create(associated as any);
 
       expect(result).toEqual(makeFakeAssociated({}));
     });

@@ -136,7 +136,6 @@ export const makeFakeUpdateAssociatedInput = (
   ],
 
   birthDate: new Date(),
-  cellPhone: '00-0000000',
   createdBy: 'any_data',
   email: 'any@email.com',
   emissionDate: new Date(),
@@ -226,7 +225,6 @@ export const makeFakeAssociated = (
     ],
 
     birthDate: new Date(),
-    cellPhone: '00-0000000',
     email: 'any@email.com',
     emissionDate: new Date(),
     emissionState: 'any_state',
@@ -283,6 +281,8 @@ export const makeAssociatedServiceStub =
     upsertAddressById: jest.fn(),
     getBankAccountByAssociatedId: jest.fn(),
     upsertBankAccountById: jest.fn(),
+    upsertPhoneNumbersByAssociatedId: jest.fn(),
+    upsertReferencesByAssociatedId: jest.fn(),
   });
 
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
@@ -315,4 +315,8 @@ export const makeAssociatedRepositoryStub =
     upsertAddressById: jest.fn(),
     getBankAccountsByAssociatedId: jest.fn(),
     upsertBankAccountById: jest.fn(),
+    deletePhoneNumbersByAssociatedId: jest.fn(),
+    deleteReferencesByAssociatedId: jest.fn(),
+    upsertPhoneNumberByAssociatedId: jest.fn(),
+    upsertReferenceByAssociatedId: jest.fn(),
   });

@@ -15,7 +15,7 @@ export const makeFakeEmploymentRelationshipParams = (
   contractType: 'contract_type',
   publicAgency: 'any_agency',
   finalDate: new Date(),
-  isDefault: true,
+  isDefault: false,
   ...payload,
 });
 

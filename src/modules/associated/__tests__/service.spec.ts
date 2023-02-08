@@ -1,12 +1,16 @@
-import { makeBenefitServiceStub } from 'src/modules/benefit/__tests__/helpers/test-helper';
-
-import { makeFakeAddressesParams } from '../../../../__tests__/functionals/associations/helpers';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  makeFakeAddressesParams,
+  makeFakeEmploymentRelationshipParams,
+} from '../../../../__tests__/functionals/associations/helpers';
 import { NotFoundError } from '../../../shared/errors';
+import { makeBenefitServiceStub } from '../../benefit/__tests__/helpers/test-helper';
 import { AssociatedService } from '../service';
 import {
   makeAssociatedRepositoryStub,
   makeFakeAssociated,
   makeFakeAssociatedList,
+  makeFakeBankAccount,
   makeFakeCreateAssociatedInput,
   makeFakeUpdateAssociatedInput,
 } from './helpers/test-helper';
@@ -39,11 +43,11 @@ describe(AssociatedService.name, () => {
 
       const result = await sut.getAll();
 
-      expect(result).toEqual(
-        makeFakeAssociatedList().map(associated => ({
+      expect(result).toEqual({
+        data: makeFakeAssociatedList().map(associated => ({
           ...associated,
         })),
-      );
+      });
     });
 
     it('should throw when repository throws', async () => {
@@ -123,7 +127,7 @@ describe(AssociatedService.name, () => {
 
     it('should return repository result when associated has no commission', async () => {
       const { sut } = makeSut();
-      const associated = makeFakeAssociated({});
+      const { benefits, ...associated } = makeFakeAssociated({});
 
       const result = await sut.create(associated as any);
 
@@ -154,6 +158,12 @@ describe(AssociatedService.name, () => {
 
       expect(updateSpy).toBeCalledWith(777, {
         ...makeFakeUpdateAssociatedInput(),
+        id: 0,
+        updatedAt: new Date('2022-04-15'),
+        createdAt: new Date('2022-04-15'),
+        code: '2022217148',
+        deletedAt: null,
+        updatedBy: 'any',
       });
     });
 
@@ -181,7 +191,7 @@ describe(AssociatedService.name, () => {
   describe(`When ${AssociatedService.prototype.upsertEmploymentRelationshipById.name} is called`, () => {
     const fakeId = 777;
     const fakeAddressId = 888;
-    const fakeAddress = makeFakeAddressesParams();
+    const fakeEmployee = makeFakeEmploymentRelationshipParams();
 
     it('should call repository with right params', async () => {
       const { sut, associatedRepository } = makeSut();
@@ -190,11 +200,26 @@ describe(AssociatedService.name, () => {
       await sut.upsertEmploymentRelationshipById(
         fakeId,
         fakeAddressId,
-        fakeAddress,
+        fakeEmployee,
       );
 
       expect(updateSpy).toBeCalledWith(777, 888, {
-        ...makeFakeAddressesParams(),
+        ...makeFakeEmploymentRelationshipParams(),
+      });
+    });
+
+    it('should call repository with right params when receive default bank', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.upsertEmploymentRelationshipById;
+
+      await sut.upsertEmploymentRelationshipById(fakeId, fakeAddressId, {
+        ...fakeEmployee,
+        isDefault: true,
+      });
+
+      expect(updateSpy).toBeCalledWith(777, 888, {
+        ...makeFakeEmploymentRelationshipParams(),
+        isDefault: true,
       });
     });
 
@@ -207,7 +232,7 @@ describe(AssociatedService.name, () => {
       const promise = sut.upsertEmploymentRelationshipById(
         fakeId,
         fakeAddressId,
-        fakeAddress,
+        fakeEmployee,
       );
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
@@ -230,6 +255,21 @@ describe(AssociatedService.name, () => {
       });
     });
 
+    it('should call repository with right params when receive default bank', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.upsertAddressById;
+
+      await sut.upsertAddressById(fakeId, fakeAddressId, {
+        ...fakeAddress,
+        isDefault: true,
+      });
+
+      expect(updateSpy).toBeCalledWith(777, 888, {
+        ...makeFakeAddressesParams(),
+        isDefault: true,
+      });
+    });
+
     it('should throw when repository throws', async () => {
       const { sut, associatedRepository } = makeSut();
       associatedRepository.upsertAddressById.mockRejectedValueOnce(
@@ -237,6 +277,53 @@ describe(AssociatedService.name, () => {
       );
 
       const promise = sut.upsertAddressById(fakeId, fakeAddressId, fakeAddress);
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${AssociatedService.prototype.upsertBankAccountById.name} is called`, () => {
+    const fakeId = 777;
+    const fakeAddressId = 888;
+    const fakeBank = makeFakeBankAccount();
+
+    it('should call repository with right params', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.upsertBankAccountById;
+
+      await sut.upsertBankAccountById(fakeId, fakeAddressId, fakeBank);
+
+      expect(updateSpy).toBeCalledWith(777, 888, {
+        ...makeFakeBankAccount(),
+      });
+    });
+
+    it('should call repository with right params when receive default bank', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.upsertBankAccountById;
+
+      await sut.upsertBankAccountById(fakeId, fakeAddressId, {
+        ...fakeBank,
+        isDefault: true,
+      });
+
+      expect(updateSpy).toBeCalledWith(777, 888, {
+        ...makeFakeBankAccount(),
+        isDefault: true,
+      });
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.upsertBankAccountById.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.upsertBankAccountById(
+        fakeId,
+        fakeAddressId,
+        fakeBank,
+      );
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
     });
@@ -306,6 +393,41 @@ describe(AssociatedService.name, () => {
       );
 
       const promise = sut.getAddressesByAssociatedId(fakeId);
+
+      await expect(promise).rejects.toThrow(new Error('any_update_error'));
+    });
+  });
+
+  describe(`When ${AssociatedService.prototype.getBankAccountByAssociatedId.name} is called`, () => {
+    const fakeId = 777;
+
+    it('should call repository with right params', async () => {
+      const { sut, associatedRepository } = makeSut();
+      const updateSpy = associatedRepository.getBankAccountsByAssociatedId;
+
+      await sut.getBankAccountByAssociatedId(fakeId);
+
+      expect(updateSpy).toBeCalledWith(777);
+    });
+
+    it('should throw not found error when returns empty array', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.getBankAccountsByAssociatedId.mockResolvedValueOnce(
+        [],
+      );
+
+      const result = await sut.getBankAccountByAssociatedId(fakeId);
+
+      expect(result).toEqual([]);
+    });
+
+    it('should throw when repository throws', async () => {
+      const { sut, associatedRepository } = makeSut();
+      associatedRepository.getBankAccountsByAssociatedId.mockRejectedValueOnce(
+        new Error('any_update_error'),
+      );
+
+      const promise = sut.getBankAccountByAssociatedId(fakeId);
 
       await expect(promise).rejects.toThrow(new Error('any_update_error'));
     });

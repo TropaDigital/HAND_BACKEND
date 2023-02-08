@@ -1,9 +1,15 @@
-import { Associated } from '@prisma/client';
+import {
+  Address,
+  Associated,
+  BankAccount,
+  EmploymentRelationship,
+} from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../../../interfaces/http';
 import { IValidator } from '../../../../interfaces/validation/IValidator';
 import { generateInsertCode } from '../../../../shared/code';
+import { makeFakeBenefit } from '../../../benefit/__tests__/helpers/test-helper';
 import {
   IAssociated,
   IAssociatedRepository,
@@ -11,7 +17,12 @@ import {
   ICreateAssociatedInput,
   IUpdateAssociatedInput,
 } from '../../interfaces';
-import { PrismaAssociatedRepository } from '../../repository';
+import {
+  PrismaAddressRepository,
+  PrismaAssociatedRepository,
+  PrismaBankAccountRepository,
+  PrismaEmploymentRelationshipRepository,
+} from '../../repository';
 
 export const makeFakeCreateAssociatedInput = (
   payload?: Partial<ICreateAssociatedInput>,
@@ -177,10 +188,8 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAssociated = (
-  payload?: Partial<
-    Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>
-  >,
-): jest.Mocked<Omit<IAssociated, 'benefits' | 'phoneNumbers' | 'references'>> =>
+  payload?: Partial<Omit<IAssociated, 'phoneNumbers' | 'references'>>,
+): jest.Mocked<Omit<IAssociated, 'phoneNumbers' | 'references'>> =>
   ({
     id: 0,
     code: generateInsertCode(),
@@ -225,6 +234,7 @@ export const makeFakeAssociated = (
     ],
 
     birthDate: new Date(),
+    cellPhone: '00-0000000',
     email: 'any@email.com',
     emissionDate: new Date(),
     emissionState: 'any_state',
@@ -236,7 +246,7 @@ export const makeFakeAssociated = (
     mother: 'any_mother',
     name: 'any_name',
     nationality: 'any_nationality',
-
+    benefits: [makeFakeBenefit()],
     bankAccounts: [
       {
         bank: '00 - Any Bank',
@@ -268,23 +278,6 @@ export const makeFakeAssociatedList = (): Associated[] => [
   makeFakeAssociated({}),
 ];
 
-export const makeAssociatedServiceStub =
-  (): jest.Mocked<IAssociatedService> => ({
-    getAll: jest.fn().mockResolvedValue(makeFakeAssociatedList()),
-    getById: jest.fn().mockResolvedValue(makeFakeAssociated({})),
-    create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
-    updateById: jest.fn(),
-    deleteById: jest.fn(),
-    getEmploymentRelationshipsByAssociatedId: jest.fn(),
-    upsertEmploymentRelationshipById: jest.fn(),
-    getAddressesByAssociatedId: jest.fn(),
-    upsertAddressById: jest.fn(),
-    getBankAccountByAssociatedId: jest.fn(),
-    upsertBankAccountById: jest.fn(),
-    upsertPhoneNumbersByAssociatedId: jest.fn(),
-    upsertReferencesByAssociatedId: jest.fn(),
-  });
-
 export const makeValidatorStub = (): jest.Mocked<IValidator> => ({
   validateSchema: jest.fn().mockReturnValue({ id: 777 }),
 });
@@ -302,21 +295,126 @@ export const makePrismaAssociatedRepositoryStub =
     return result as jest.Mocked<PrismaAssociatedRepository>;
   };
 
+export const makeFakeBankAccount = (): BankAccount => ({
+  accountNumber: 'some account number',
+  accountType: 'some type',
+  agency: 'some agency',
+  associatedId: 1,
+  bank: 'some bank',
+  id: 2,
+  isDefault: false,
+  pixKey: 'some pix',
+  pixType: 'CNPJ',
+});
+
+export const makeFakeEmploymentRelationship = (): EmploymentRelationship => ({
+  associatedId: 1,
+  contractType: 'test',
+  finalDate: new Date('2022-10-10'),
+  id: 1,
+  isDefault: true,
+  occupation: 'some occupation',
+  paymentDay: 1,
+  publicAgency: 'some agency',
+  registerNumber: 'some register number',
+  salary: '3000',
+});
+
+export const makeFakeAddress = (): Address => ({
+  addressType: 'any_type',
+  postalCode: 'any_postal_code',
+  street: 'any_street',
+  houseNumber: 'any_number',
+  complement: 'any_complements',
+  district: 'any_district',
+  city: 'any_city',
+  state: 'any_state',
+  isDefault: true,
+  associatedId: 1,
+  id: 1,
+});
+
 export const makeAssociatedRepositoryStub =
   (): jest.Mocked<IAssociatedRepository> => ({
-    findAll: jest.fn().mockResolvedValue(makeFakeAssociatedList()),
+    findAll: jest.fn().mockResolvedValue({ data: makeFakeAssociatedList() }),
     findById: jest.fn().mockResolvedValue(makeFakeAssociated({})),
     create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
     updateById: jest.fn(),
     deleteById: jest.fn(),
-    getEmploymentRelationshipsByAssociatedId: jest.fn(),
+    getEmploymentRelationshipsByAssociatedId: jest
+      .fn()
+      .mockResolvedValue([makeFakeEmploymentRelationship()]),
     upsertEmploymentRelationshipById: jest.fn(),
-    getAddressesByAssociatedId: jest.fn(),
+    getAddressesByAssociatedId: jest
+      .fn()
+      .mockResolvedValue([makeFakeAddress()]),
     upsertAddressById: jest.fn(),
-    getBankAccountsByAssociatedId: jest.fn(),
+    getBankAccountsByAssociatedId: jest
+      .fn()
+      .mockResolvedValue([makeFakeBankAccount()]),
     upsertBankAccountById: jest.fn(),
     deletePhoneNumbersByAssociatedId: jest.fn(),
     deleteReferencesByAssociatedId: jest.fn(),
     upsertPhoneNumberByAssociatedId: jest.fn(),
     upsertReferenceByAssociatedId: jest.fn(),
+  });
+
+export const makeFakeBankAccountRepository =
+  (): jest.Mocked<PrismaBankAccountRepository> => {
+    const result: jest.Mocked<Partial<PrismaBankAccountRepository>> = {
+      findMany: jest.fn().mockResolvedValue(makeFakeBankAccount()),
+      findFirst: jest.fn(),
+      create: jest.fn().mockResolvedValue(makeFakeBankAccount()),
+      update: jest.fn().mockResolvedValue(makeFakeBankAccount()),
+    };
+
+    return result as jest.Mocked<PrismaBankAccountRepository>;
+  };
+
+export const makeFakeEmploymentRelationshipRepository =
+  (): jest.Mocked<PrismaEmploymentRelationshipRepository> => {
+    const result: jest.Mocked<Partial<PrismaEmploymentRelationshipRepository>> =
+      {
+        findMany: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
+        findFirst: jest.fn(),
+        create: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
+        update: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
+      };
+
+    return result as jest.Mocked<PrismaEmploymentRelationshipRepository>;
+  };
+
+export const makeFakeAddressRepository =
+  (): jest.Mocked<PrismaAddressRepository> => {
+    const result: jest.Mocked<Partial<PrismaAddressRepository>> = {
+      findMany: jest.fn().mockResolvedValue(makeFakeAddress()),
+      findFirst: jest.fn(),
+      create: jest.fn().mockResolvedValue(makeFakeAddress()),
+      update: jest.fn().mockResolvedValue(makeFakeAddress()),
+    };
+
+    return result as jest.Mocked<PrismaAddressRepository>;
+  };
+
+export const makeAssociatedServiceStub =
+  (): jest.Mocked<IAssociatedService> => ({
+    getAll: jest.fn().mockResolvedValue({ data: makeFakeAssociatedList() }),
+    getById: jest.fn().mockResolvedValue(makeFakeAssociated({})),
+    create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
+    updateById: jest.fn(),
+    deleteById: jest.fn(),
+    getEmploymentRelationshipsByAssociatedId: jest
+      .fn()
+      .mockResolvedValue(makeFakeEmploymentRelationship()),
+    upsertEmploymentRelationshipById: jest
+      .fn()
+      .mockResolvedValue(makeFakeEmploymentRelationship()),
+    getAddressesByAssociatedId: jest.fn().mockResolvedValue(makeFakeAddress()),
+    upsertAddressById: jest.fn().mockResolvedValue(makeFakeAddress()),
+    getBankAccountByAssociatedId: jest
+      .fn()
+      .mockResolvedValue(makeFakeBankAccount()),
+    upsertBankAccountById: jest.fn().mockResolvedValue(makeFakeBankAccount()),
+    upsertPhoneNumbersByAssociatedId: jest.fn(),
+    upsertReferencesByAssociatedId: jest.fn(),
   });

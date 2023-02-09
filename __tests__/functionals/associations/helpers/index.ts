@@ -199,6 +199,8 @@ const createAssociated = async (associated: ICreateAssociatedInput) => {
       affiliations: {
         create: affiliations,
       },
+      phoneNumbers: {},
+      references: {},
     },
   });
 };

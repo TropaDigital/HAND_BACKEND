@@ -1,8 +1,11 @@
+/* eslint-disable complexity */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Address,
   Associated,
   BankAccount,
   EmploymentRelationship,
+  PhoneType,
 } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
@@ -67,15 +70,24 @@ export const makeFakeCreateAssociatedInput = (
     affiliations: [
       {
         id: 1,
-        name: 'USER',
-        createdAt: new Date(),
-        deletedAt: null,
-        updatedAt: new Date(),
       },
     ],
-
+    phoneNumbers: [
+      {
+        number: '000-0000',
+        note: 'some note',
+        type: PhoneType.MAIN,
+      },
+    ],
+    references: [
+      {
+        name: 'some name',
+        note: 'some note',
+        phoneNumber: '000-0000',
+        relationshipType: PhoneType.MESSAGE,
+      },
+    ],
     birthDate: new Date(),
-    cellPhone: '00-0000000',
     createdBy: 'any_data',
     email: 'any@email.com',
     emissionDate: new Date(),
@@ -145,7 +157,25 @@ export const makeFakeUpdateAssociatedInput = (
       isDefault: true,
     },
   ],
-
+  phoneNumbers: [
+    {
+      number: '000-0000',
+      createdAt: new Date(),
+      note: 'some note',
+      type: PhoneType.MAIN,
+      updatedAt: new Date(),
+    },
+  ],
+  references: [
+    {
+      createdAt: new Date(),
+      name: 'some name',
+      note: 'some note',
+      phoneNumber: '000-0000',
+      relationshipType: PhoneType.MESSAGE,
+      updatedAt: new Date(),
+    },
+  ],
   birthDate: new Date(),
   createdBy: 'any_data',
   email: 'any@email.com',
@@ -164,6 +194,8 @@ export const makeFakeUpdateAssociatedInput = (
   registerId: 'any_register_id',
   taxId: '000.000.000-00',
   partner: 'partner',
+  updatedAt: new Date(),
+  updatedBy: 'any',
   ...payload,
 });
 
@@ -188,51 +220,13 @@ export const makeFakeApiHttpResponse = (
 });
 
 export const makeFakeAssociated = (
-  payload?: Partial<Omit<IAssociated, 'phoneNumbers' | 'references'>>,
-): jest.Mocked<Omit<IAssociated, 'phoneNumbers' | 'references'>> =>
+  payload?: Partial<IAssociated>,
+  isDefault = true,
+  id = true,
+): jest.Mocked<IAssociated> =>
   ({
-    id: 0,
+    ...(id && { id: 1 }),
     code: generateInsertCode(),
-    affiliations: [
-      {
-        id: 1,
-        name: 'USER',
-        createdAt: new Date(),
-        deletedAt: null,
-        updatedAt: new Date(),
-      },
-    ],
-    addresses: [
-      {
-        id: 2,
-        addressType: 'any_type',
-        postalCode: 'any_postal_code',
-        street: 'any_street',
-        houseNumber: 'any_number',
-        complement: 'any_complements',
-        district: 'any_district',
-        city: 'any_city',
-        state: 'any_state',
-        associatedId: 777,
-        isDefault: true,
-      },
-    ],
-
-    employmentRelationships: [
-      {
-        id: 2,
-        occupation: 'any_occupation',
-        salary: 'any_salary',
-        paymentDay: 5,
-        registerNumber: 'any_register_number',
-        contractType: 'contract_type',
-        publicAgency: 'any_agency',
-        finalDate: new Date(),
-        associatedId: 777,
-        isDefault: true,
-      },
-    ],
-
     birthDate: new Date(),
     cellPhone: '00-0000000',
     email: 'any@email.com',
@@ -247,20 +241,6 @@ export const makeFakeAssociated = (
     name: 'any_name',
     nationality: 'any_nationality',
     benefits: [makeFakeBenefit()],
-    bankAccounts: [
-      {
-        bank: '00 - Any Bank',
-        agency: '0000',
-        pixKey: 'any_pix_key',
-        pixType: 'any_type',
-        accountNumber: 'any_account',
-        accountType: 'any_type',
-        id: 1,
-        associatedId: 1,
-        isDefault: true,
-      },
-    ],
-
     placeOfBirth: 'any_place',
     registerId: 'any_register_id',
     taxId: '000.000.000-00',
@@ -270,6 +250,79 @@ export const makeFakeAssociated = (
     createdAt: new Date(),
     updatedAt: new Date(),
     deletedAt: null,
+    affiliations: [
+      {
+        ...(id && { id: 1 }),
+        name: 'USER',
+        createdAt: new Date(),
+        deletedAt: null,
+        updatedAt: new Date(),
+      },
+    ],
+    addresses: [
+      {
+        ...(id && { id: 2 }),
+        addressType: 'any_type',
+        postalCode: 'any_postal_code',
+        street: 'any_street',
+        houseNumber: 'any_number',
+        complement: 'any_complements',
+        district: 'any_district',
+        city: 'any_city',
+        state: 'any_state',
+        associatedId: 777,
+        ...(isDefault && { isDefault: true }),
+      },
+    ],
+    employmentRelationships: [
+      {
+        ...(id && { id: 2 }),
+        occupation: 'any_occupation',
+        salary: 'any_salary',
+        paymentDay: 5,
+        registerNumber: 'any_register_number',
+        contractType: 'contract_type',
+        publicAgency: 'any_agency',
+        finalDate: new Date(),
+        associatedId: 777,
+        ...(isDefault && { isDefault: true }),
+      },
+    ],
+    phoneNumbers: [
+      {
+        ...(id && { id: 3 }),
+        number: '000-0000',
+        createdAt: new Date(),
+        note: 'some note',
+        type: PhoneType.MAIN,
+        updatedAt: new Date(),
+      },
+    ],
+    references: [
+      {
+        ...(id && { id: 1 }),
+        createdAt: new Date(),
+        name: 'some name',
+        note: 'some note',
+        phoneNumber: '000-0000',
+        relationshipType: PhoneType.MESSAGE,
+        updatedAt: new Date(),
+      },
+    ],
+    bankAccounts: [
+      {
+        ...(id && { id: 1 }),
+        bank: '00 - Any Bank',
+        agency: '0000',
+        pixKey: 'any_pix_key',
+        pixType: 'any_type',
+        accountNumber: 'any_account',
+        accountType: 'any_type',
+        id: 1,
+        associatedId: 1,
+        ...(isDefault && { isDefault: true }),
+      },
+    ],
     ...payload,
   } as unknown as any);
 
@@ -337,8 +390,8 @@ export const makeFakeAddress = (): Address => ({
 export const makeAssociatedRepositoryStub =
   (): jest.Mocked<IAssociatedRepository> => ({
     findAll: jest.fn().mockResolvedValue({ data: makeFakeAssociatedList() }),
-    findById: jest.fn().mockResolvedValue(makeFakeAssociated({})),
-    create: jest.fn().mockResolvedValue(makeFakeAssociated({})),
+    findById: jest.fn().mockResolvedValue(makeFakeAssociated()),
+    create: jest.fn().mockResolvedValue(makeFakeAssociated()),
     updateById: jest.fn(),
     deleteById: jest.fn(),
     getEmploymentRelationshipsByAssociatedId: jest

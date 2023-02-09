@@ -276,8 +276,16 @@ describe(AssociatedRepository.name, () => {
             },
           },
           affiliations: true,
-          phoneNumbers: true,
-          references: true,
+          phoneNumbers: {
+            orderBy: {
+              createdAt: 'asc',
+            },
+          },
+          references: {
+            orderBy: {
+              createdAt: 'asc',
+            },
+          },
         },
         where: {},
       });
@@ -314,8 +322,16 @@ describe(AssociatedRepository.name, () => {
             },
           },
           affiliations: true,
-          phoneNumbers: true,
-          references: true,
+          phoneNumbers: {
+            orderBy: {
+              createdAt: 'asc',
+            },
+          },
+          references: {
+            orderBy: {
+              createdAt: 'asc',
+            },
+          },
         },
         where: { id: { contains: 1 } },
       });
@@ -392,8 +408,16 @@ describe(AssociatedRepository.name, () => {
             },
           },
           affiliations: true,
-          phoneNumbers: true,
-          references: true,
+          phoneNumbers: {
+            orderBy: {
+              createdAt: 'asc',
+            },
+          },
+          references: {
+            orderBy: {
+              createdAt: 'asc',
+            },
+          },
         },
         where: { id: 777 },
       });
@@ -434,7 +458,8 @@ describe(AssociatedRepository.name, () => {
         employmentRelationships,
         bankAccounts,
         affiliations,
-        benefits: _benefits,
+        phoneNumbers,
+        references,
         ...associated
       } = makeFakeAssociated({});
 
@@ -447,6 +472,12 @@ describe(AssociatedRepository.name, () => {
           addresses: { createMany: { data: addresses } },
           employmentRelationships: {
             createMany: { data: employmentRelationships },
+          },
+          references: {
+            createMany: { data: references },
+          },
+          phoneNumbers: {
+            createMany: { data: phoneNumbers },
           },
         },
         include: {
@@ -499,6 +530,8 @@ describe(AssociatedRepository.name, () => {
         bankAccounts: _bankAccounts,
         employmentRelationships: _employmentRelationships,
         benefits: _benefits,
+        phoneNumbers,
+        references,
         ...expectedAssociated
       } = {
         ...makeFakeAssociated({}),

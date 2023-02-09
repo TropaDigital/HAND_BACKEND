@@ -552,7 +552,7 @@ describe(AssociatedController.name, () => {
 
       expect(validateSchemaSpy).toBeCalledWith('UpdateAssociatedById', {
         id: 777,
-        ...makeFakeUpdateAssociatedInput(),
+        ...makeFakeCreateAssociatedInput(),
       });
     });
 
@@ -568,7 +568,7 @@ describe(AssociatedController.name, () => {
 
       expect(updateByIdSpy).toBeCalledWith(
         777,
-        makeFakeCreateAssociatedInput(),
+        makeFakeUpdateAssociatedInput(),
       );
     });
 

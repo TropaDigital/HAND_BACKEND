@@ -113,7 +113,8 @@ describe(AssociatedService.name, () => {
       await sut.create(fakeAssociated);
 
       expect(createSpy).toBeCalledWith({
-        ...makeFakeCreateAssociatedInput({ code: '2022217148' }),
+        ...makeFakeCreateAssociatedInput(),
+        code: '2022217148',
       });
     });
 
@@ -158,7 +159,8 @@ describe(AssociatedService.name, () => {
 
       expect(updateSpy).toBeCalledWith(777, {
         ...makeFakeUpdateAssociatedInput(),
-        id: 0,
+        id: 1,
+        cellPhone: '00-0000000',
         updatedAt: new Date('2022-04-15'),
         createdAt: new Date('2022-04-15'),
         code: '2022217148',

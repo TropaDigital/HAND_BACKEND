@@ -248,6 +248,7 @@ export class BenefitService implements IBenefitService {
     } = associated as Associated;
 
     const result = await this.prisma.$transaction(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // TODO: ajustar
       async (prisma: IPrismaTransactionClient): Promise<Benefit> => {
@@ -323,12 +324,12 @@ export class BenefitService implements IBenefitService {
             },
             ...(consultantId
               ? {
-                consultant: {
-                  connect: {
-                    id: consultantId,
+                  consultant: {
+                    connect: {
+                      id: consultantId,
+                    },
                   },
-                },
-              }
+                }
               : {}),
           },
           prisma,
@@ -389,29 +390,29 @@ export class BenefitService implements IBenefitService {
   private validateAssociated(
     associated:
       | {
-        id: number;
-        name: string;
-        lastName: string;
-        gender: string;
-        birthDate: Date;
-        maritalStatus: string;
-        nationality: string;
-        placeOfBirth: string;
-        taxId: string;
-        registerId: string;
-        emissionState: string;
-        issuingAgency: string;
-        emissionDate: Date;
-        email: string;
-        father: string;
-        mother: string;
-        partner: string | null;
-        createdBy: string;
-        updatedBy: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
-      }
+          id: number;
+          name: string;
+          lastName: string;
+          gender: string;
+          birthDate: Date;
+          maritalStatus: string;
+          nationality: string;
+          placeOfBirth: string;
+          taxId: string;
+          registerId: string;
+          emissionState: string;
+          issuingAgency: string;
+          emissionDate: Date;
+          email: string;
+          father: string;
+          mother: string;
+          partner: string | null;
+          createdBy: string;
+          updatedBy: string | null;
+          createdAt: Date;
+          updatedAt: Date;
+          deletedAt: Date | null;
+        }
       | { [key: string]: any },
   ) {
     if (!associated) {

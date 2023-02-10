@@ -65,6 +65,7 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
         district: Joi.string().required().label('bairro'),
         city: Joi.string().required().label('cidade'),
         state: Joi.string().required().label('estado'),
+        isDefault: Joi.boolean().label('principal'),
       }),
     )
     .required(),
@@ -91,6 +92,7 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
       accountNumber: Joi.string().required().label('número da conta'),
       pixKey: Joi.string().label('chave pix'),
       pixType: Joi.string().label('tipo_pix'),
+      isDefault: Joi.boolean().label('principal'),
     }),
   ),
   phoneNumbers: Joi.array()

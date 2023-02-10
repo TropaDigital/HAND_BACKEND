@@ -67,6 +67,8 @@ export type IUpdateAssociatedInput = Omit<
     EmploymentRelationship,
     'id' | 'associatedId'
   >[];
+  phoneNumbers?: Omit<PhoneNumber, 'id' | 'associatedId'>[];
+  references?: Omit<Reference, 'id' | 'associatedId'>[];
 };
 
 export interface IAssociatedRepository {

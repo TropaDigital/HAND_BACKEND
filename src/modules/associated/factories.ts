@@ -9,7 +9,7 @@ import { AssociatedService } from './service';
 
 export const createAssociatedRepository = (): IAssociatedRepository => {
   const mySql = MySqlDBClient.getInstance();
-  return new AssociatedRepository(mySql.getPrismaClientInstance().associated);
+  return new AssociatedRepository(mySql.getPrismaClientInstance());
 };
 
 export const createAssociatedController = (): IAssociatedController => {

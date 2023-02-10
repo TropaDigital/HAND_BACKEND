@@ -1,3 +1,10 @@
+## [1.22.0](https://github.com/haandsolutions/haand-bib/compare/v1.21.2...v1.22.0) (2023-02-07)
+
+
+### :sparkles: New Features
+
+* add crud of associated ([ed5b38e](https://github.com/haandsolutions/haand-bib/commit/ed5b38e0d1fcb1f08985dc7265afc2048966638e))
+
 ### [1.21.2](https://github.com/haandsolutions/haand-bib/compare/v1.21.1...v1.21.2) (2023-02-02)
 
 

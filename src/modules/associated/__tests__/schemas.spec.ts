@@ -39,65 +39,7 @@ describe('Schema', () => {
 
       const result = sut.validateSchema('CreateAssociated', param);
 
-      expect(result).toEqual({
-        addresses: [
-          {
-            addressType: 'any_type',
-            city: 'any_city',
-            complement: 'any_complements',
-            district: 'any_district',
-            houseNumber: 'any_number',
-            postalCode: 'any_postal_code',
-            state: 'any_state',
-            street: 'any_street',
-          },
-        ],
-        affiliations: [
-          {
-            id: 1,
-          },
-        ],
-        bankAccounts: [
-          {
-            accountNumber: 'any_account',
-            accountType: 'any_type',
-            agency: '0000',
-            bank: '00 - Any Bank',
-            pixKey: 'any_pix_key',
-            pixType: 'any_type',
-          },
-        ],
-        birthDate: new Date('2022-04-15T00:00:00.000Z'),
-        cellPhone: '00-0000000',
-        createdBy: 'any_data',
-        email: 'any@email.com',
-        emissionDate: new Date('2022-04-15T00:00:00.000Z'),
-        emissionState: 'any_state',
-        employmentRelationships: [
-          {
-            contractType: 'contract_type',
-            finalDate: new Date('2022-04-15T00:00:00.000Z'),
-            isDefault: true,
-            occupation: 'any_occupation',
-            paymentDay: 5,
-            publicAgency: 'any_agency',
-            registerNumber: 'any_register_number',
-            salary: 'any_salary',
-          },
-        ],
-        father: 'any_father',
-        gender: 'any_gender',
-        issuingAgency: 'any_agency',
-        lastName: 'any_last_name',
-        maritalStatus: 'any_marital_status',
-        mother: 'any_mother',
-        name: 'any_name',
-        nationality: 'any_nationality',
-        partner: 'partner',
-        placeOfBirth: 'any_place',
-        registerId: 'any_register_id',
-        taxId: '000.000.000-00',
-      });
+      expect(result).toEqual(makeFakeCreateAssociatedInput());
     });
 
     it('should throw when an invalid input is provided', () => {
@@ -132,7 +74,6 @@ describe('Schema', () => {
           },
         ],
         birthDate: new Date('2022-04-15T00:00:00.000Z'),
-        cellPhone: '00-0000000',
         email: 'any@email.com',
         emissionDate: new Date('2022-04-15T00:00:00.000Z'),
         emissionState: 'any_state',

@@ -184,7 +184,6 @@ model Benefit {
   emissionState            String           @map("emission_state")
   issuingAgency            String           @map("issuing_agency")
   emissionDate             DateTime         @map("emission_date")
-  cellPhone                String?          @map("cell_phone")
   email                    String?
   father                   String?
   mother                   String

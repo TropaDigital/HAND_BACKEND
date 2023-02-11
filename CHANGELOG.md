@@ -1,3 +1,10 @@
+### [1.22.2](https://github.com/haandsolutions/haand-bib/compare/v1.22.1...v1.22.2) (2023-02-11)
+
+
+### :bug: Fixes
+
+* adjust the fields of benefit ([195ee04](https://github.com/haandsolutions/haand-bib/commit/195ee04bd03991cac5396c275b4caff0164b82aa))
+
 ### [1.22.1](https://github.com/haandsolutions/haand-bib/compare/v1.22.0...v1.22.1) (2023-02-10)
 
 

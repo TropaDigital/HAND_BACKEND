@@ -1,3 +1,18 @@
+### [1.22.1](https://github.com/haandsolutions/haand-bib/compare/v1.22.0...v1.22.1) (2023-02-10)
+
+
+### :white_check_mark: Tests
+
+* update test coverage ([04cbc96](https://github.com/haandsolutions/haand-bib/commit/04cbc96aca9be4c93a52c5b49ebcd8f88124ab48))
+* update test coverage ([f0dff42](https://github.com/haandsolutions/haand-bib/commit/f0dff420839b1781f1f7e10a04f431eb3b574d35))
+* update unit test coverage ([d892801](https://github.com/haandsolutions/haand-bib/commit/d8928010f6a589e775e8fa37197ab85b5a1a98be))
+* update unit tests ([af7bb98](https://github.com/haandsolutions/haand-bib/commit/af7bb98e8f163d9623207dcd52c84789fe34fe90))
+
+
+### :bug: Fixes
+
+* adjust the flag preview of prisma ([0aed620](https://github.com/haandsolutions/haand-bib/commit/0aed6203d95bbc59799b45c55b6b33ba129c260b))
+
 ## [1.22.0](https://github.com/haandsolutions/haand-bib/compare/v1.21.2...v1.22.0) (2023-02-07)
 
 

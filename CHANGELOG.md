@@ -1,3 +1,10 @@
+## [1.23.0](https://github.com/haandsolutions/haand-bib/compare/v1.22.2...v1.23.0) (2023-03-14)
+
+
+### :sparkles: New Features
+
+* add flag to control benefit status ([5a240cb](https://github.com/haandsolutions/haand-bib/commit/5a240cb525d5f74abad85482282dc2f2c3101ecd))
+
 ### [1.22.2](https://github.com/haandsolutions/haand-bib/compare/v1.22.1...v1.22.2) (2023-02-11)
 
 

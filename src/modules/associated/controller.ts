@@ -86,7 +86,7 @@ export class AssociatedController implements IAssociatedController {
             },
           }
         : {}),
-      ...(!(typeof telemedicine === 'undefined' && telemedicine)
+      ...(!(typeof telemedicine === 'undefined')
         ? {
             benefits: {
               joinedTelemedicine: telemedicine,

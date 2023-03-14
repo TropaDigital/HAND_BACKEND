@@ -29,6 +29,10 @@ export interface ICreateBenefitParams
 }
 
 export type EnrichedBenefit = Benefit & {
+  overdueInstallmentsNumber: number;
+  openAmount: number;
+  paidAmount: number;
+  overdueStatus: 'overdue' | 'pending' | 'sent';
   installments: Installment[];
 };
 
@@ -107,6 +111,7 @@ export interface IBenefitService {
     overdueInstallmentsNumber: number;
     openAmount: number;
     paidAmount: number;
+    overdueStatus: 'overdue' | 'pending' | 'sent';
   };
   getInstallmentsByReferenceDates({
     from,

@@ -125,13 +125,23 @@ export class AssociatedService implements IAssociatedService {
 
     return {
       ...result,
-      data: result.data.map(associated => ({
-        ...associated,
-        benefits: associated.benefits.map(benefit => ({
-          ...benefit,
-          ...this.benefitService.getInstallmentInfo(benefit as EnrichedBenefit),
-        })) as unknown[] as EnrichedBenefit[],
-      })),
+      data: result.data.map(associated => {
+        const benefits: EnrichedBenefit[] =
+          (associated.benefits.map(benefit => ({
+            ...benefit,
+            ...this.benefitService.getInstallmentInfo(
+              benefit as EnrichedBenefit,
+            ),
+          })) as unknown[] as EnrichedBenefit[]) || [];
+
+        return {
+          ...associated,
+          hasOverdueInstallments: !!benefits.filter(
+            (benefit: EnrichedBenefit) => benefit.overdueInstallmentsNumber,
+          ).length,
+          benefits,
+        };
+      }),
     };
   }
 

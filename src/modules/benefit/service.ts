@@ -75,6 +75,7 @@ export class BenefitService implements IBenefitService {
     overdueInstallmentsNumber: number;
     openAmount: number;
     paidAmount: number;
+    overdueStatus: 'overdue' | 'pending' | 'sent';
   } {
     const currentDate = new Date();
 
@@ -106,7 +107,10 @@ export class BenefitService implements IBenefitService {
         Math.round(paidAmount * 100)) /
       100;
 
+    const overdueStatus = overdueInstallments.length ? 'overdue' : 'pending';
+
     return {
+      overdueStatus,
       overdueInstallmentsNumber: overdueInstallments.length,
       openAmount,
       paidAmount,
@@ -324,12 +328,12 @@ export class BenefitService implements IBenefitService {
             },
             ...(consultantId
               ? {
-                  consultant: {
-                    connect: {
-                      id: consultantId,
-                    },
+                consultant: {
+                  connect: {
+                    id: consultantId,
                   },
-                }
+                },
+              }
               : {}),
           },
           prisma,
@@ -390,29 +394,29 @@ export class BenefitService implements IBenefitService {
   private validateAssociated(
     associated:
       | {
-          id: number;
-          name: string;
-          lastName: string;
-          gender: string;
-          birthDate: Date;
-          maritalStatus: string;
-          nationality: string;
-          placeOfBirth: string;
-          taxId: string;
-          registerId: string;
-          emissionState: string;
-          issuingAgency: string;
-          emissionDate: Date;
-          email: string;
-          father: string;
-          mother: string;
-          partner: string | null;
-          createdBy: string;
-          updatedBy: string | null;
-          createdAt: Date;
-          updatedAt: Date;
-          deletedAt: Date | null;
-        }
+        id: number;
+        name: string;
+        lastName: string;
+        gender: string;
+        birthDate: Date;
+        maritalStatus: string;
+        nationality: string;
+        placeOfBirth: string;
+        taxId: string;
+        registerId: string;
+        emissionState: string;
+        issuingAgency: string;
+        emissionDate: Date;
+        email: string;
+        father: string;
+        mother: string;
+        partner: string | null;
+        createdBy: string;
+        updatedBy: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
+      }
       | { [key: string]: any },
   ) {
     if (!associated) {

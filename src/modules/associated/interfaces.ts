@@ -29,6 +29,7 @@ export type IAssociated = Associated & {
 };
 
 export type IEnrichedAssociated = Associated & {
+  hasOverdueInstallments: boolean;
   bankAccounts: BankAccount[];
   addresses: Address[];
   employmentRelationships: EmploymentRelationship[];

@@ -96,7 +96,7 @@ export class AssociatedRepository implements IAssociatedRepository {
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
   ): Promise<IPaginatedAResult<IAssociated[]>> {
     const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
-
+    console.log({ params, payload });
     const result = await this.prismaClient.associated.findMany({
       ...params,
       include: {

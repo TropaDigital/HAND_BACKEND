@@ -25,8 +25,8 @@ export const CreateBenefit = Joi.object<ICreateBenefitParams>({
     .min(1)
     .max(loanConfig.maximumNumberOfInstallments)
     .required(),
-  requestedValue: Joi.number().min(100).required(),
-  salary: Joi.number().min(100).required(),
+  requestedValue: Joi.number().required(),
+  salary: Joi.number().required(),
   monthOfPayment: Joi.string()
     .valid(...Object.values(MonthOfPayment))
     .required(),

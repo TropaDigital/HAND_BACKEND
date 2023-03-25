@@ -1,5 +1,3 @@
-import { BenefitType } from '@prisma/client';
-
 import { BenefitService } from '../../../src/modules/benefit/service';
 import { AuthenticationService } from '../../../src/shared/auth/auth';
 import { populateDatabase as populateAssociatedDatabase } from '../associations/helpers';
@@ -44,7 +42,6 @@ describe('POST /benefits - Create new benefit', () => {
         name: 'João',
         lastName: 'Any name',
         type: 'N',
-        contractType: BenefitType.D,
         birthDate: expect.any(String),
         createdAt: expect.any(String),
         emissionDate: expect.any(String),

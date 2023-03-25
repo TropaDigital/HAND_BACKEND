@@ -75,7 +75,7 @@ export class LoanSimulationService implements ILoanSimulationService {
   ): number {
     return requestedValue < 1000
       ? loanConfig.aditionalValueWhenTheValueIsLowerThan1000 /
-          numberOfInstallments
+      numberOfInstallments
       : 0;
   }
 
@@ -99,6 +99,16 @@ export class LoanSimulationService implements ILoanSimulationService {
     return this.getFeesOfMonth(currentDate);
   }
 
+  private roundUp(value: number) {
+    const intergerPart = Number.parseInt(String(value), 10);
+    const floatPart = value - intergerPart;
+    if (floatPart && floatPart < 0.5) {
+      return Number(parseInt(String(value), 10) + 1);
+    }
+
+    return Math.round(value);
+  }
+
   private formatInstallmentDetails({
     currentDate,
     requestedValue,
@@ -120,7 +130,6 @@ export class LoanSimulationService implements ILoanSimulationService {
         consultantCommission,
       ) / numberOfInstallments;
     const fees = this.getFeesByMonthOfPayment(currentDate, monthOfPayment);
-
     const getAditionalValueWhenTheRequestValueIsLowerThan1000 =
       this.getAditionalValueWhenTheRequestValueIsLowerThan1000(
         requestedValue,
@@ -143,20 +152,26 @@ export class LoanSimulationService implements ILoanSimulationService {
       gratificationFeeValue;
 
     return {
-      gratificationFeeValue,
-      admnistrationFeeValue: installmentAdministrationFeeValue,
+      gratificationFeeValue: this.roundUp(gratificationFeeValue),
+      admnistrationFeeValue: this.roundUp(installmentAdministrationFeeValue),
       reference: this.formatReferenceDate(currentDate),
       referenceDate: currentDate,
       dueDate: paymentDay ? setDate(currentDate, paymentDay) : currentDate,
-      cardFees: this.getCardFees(1),
-      telemedicineFees: this.getTelemedicineFees(joinedTelemedicine, 1),
-      bankProcessingFees: this.getbankProcessingFees(1),
+      cardFees: this.roundUp(this.getCardFees(1)),
+      telemedicineFees: this.roundUp(
+        this.getTelemedicineFees(joinedTelemedicine, 1),
+      ),
+      bankProcessingFees: this.roundUp(this.getbankProcessingFees(1)),
       installmentFactor,
       consultantCommission,
-      consultantCommissionValue: consultantCommissionValueByInstallment,
-      fees: parseFloat((fees * 100).toFixed(2)),
-      feesValue: parseFloat((fees * installmentFactor).toFixed(2)),
-      finalValue: parseFloat(installmentFinalValue.toFixed(2)),
+      consultantCommissionValue: this.roundUp(
+        consultantCommissionValueByInstallment,
+      ),
+      fees: this.roundUp(parseFloat((fees * 100).toFixed(2))),
+      feesValue: this.roundUp(
+        parseFloat((fees * installmentFactor).toFixed(2)),
+      ),
+      finalValue: this.roundUp(parseFloat(installmentFinalValue.toFixed(2))),
     };
   }
 

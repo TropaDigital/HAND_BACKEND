@@ -213,6 +213,37 @@ export default class BenefitRouter implements IRouter {
       );
   }
 
+  private updateById(): void {
+    /**
+     * PATCH /benefits/{benefitId}
+     * @tag Benefits
+     * @security apiKey
+     * @summary update the status of an installment.
+     * @description return the created benefit object.
+     * @bodyContent {UpdateInstallmentByBenefitIdAndInstallmentIdPayload} application/json
+     * @bodyRequired
+     * @pathParam {number} benefitId
+     * @response 204 - no content.
+     * @response 400 - An object with the error when the payload provided is invalid
+     * @responseContent {BadRequestResponse} 400.application/json
+     * @response 401 - an object with unauthorized error details.
+     * @responseContent {UnauthorizedResponse} 401.application/json
+     * @response 404 - An object with the error when the the resource is not found
+     * @responseContent {NotFoundResponse} 404.application/json
+     * @response 500 - an object with internal server error details.
+     * @responseContent {InternalServerErrorResponse} 500.application/json
+     */
+    this.router
+      .route('/benefits/:benefitId')
+      .patch(
+        AuthMiddleware.authenticationMiddleware.bind(AuthMiddleware),
+        ExpressRouteAdapter.adapt<IBenefitController>(
+          this.controller,
+          'updateById',
+        ),
+      );
+  }
+
   private getInstallmentsByReferenceDates(): void {
     /**
      * GET /installments
@@ -312,6 +343,7 @@ export default class BenefitRouter implements IRouter {
     this.getAll();
     this.getById();
     this.adjustment();
+    this.updateById();
     this.simulateAdjustment();
     this.updateInstallmentByBenefitIdAndInstallmentId();
     this.getInstallmentsByReferenceDates();

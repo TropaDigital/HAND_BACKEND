@@ -159,6 +159,7 @@ model Consultant {
 
 model Benefit {
   id                       Int              @id @default(autoincrement())
+  confirmationFileUrl      String?
   code                     String           @unique
   associatedId             Int?
   commission               Int              @default(0) @db.UnsignedInt
@@ -167,7 +168,6 @@ model Benefit {
   joinedTelemedicine       Boolean          @default(false)
   bank                     String
   publicAgency             String           @map("public_agency")
-  contractModel            String           @map("contract_model")
   installmentNumber        Int              @map("installment_number")
   initialDate              DateTime         @map("initial_date")
   financialAssistanceValue Float            @map("financial_assistance_value")
@@ -192,7 +192,6 @@ model Benefit {
   salary                   String
   paymentDay               Int              @map("payment_day")
   registerNumber           String           @map("register_number")
-  contractType             String           @map("contract_type")
   finalDate                DateTime?        @map("final_date")
   agency                   String
   accountType              String           @map("account_type")

@@ -54,6 +54,16 @@ export const DeleteBenefitById = Joi.object<{ id: number }>({
   id: Joi.number().min(1).required(),
 });
 
+export const UpdateBenefitById = Joi.object<{
+  id: number;
+  code: string;
+  confirmationFileUrl: string;
+}>({
+  id: Joi.number().min(1).required(),
+  code: Joi.string(),
+  confirmationFileUrl: Joi.string(),
+});
+
 export const DimississInstallmentByBenefitIdAndInstallmentId = Joi.object<
   {
     benefitId: number;

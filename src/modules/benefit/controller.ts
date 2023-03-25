@@ -97,14 +97,14 @@ export class BenefitController implements IBenefitController {
 
     const result = single
       ? await this.benefitService.singlePostponementInstallment({
-          id,
-          reference: new Date(),
-          user: String(httpRequest.user?.sub) || '',
-        })
+        id,
+        reference: new Date(),
+        user: String(httpRequest.user?.sub) || '',
+      })
       : await this.benefitService.postponementInstallment({
-          id,
-          user: String(httpRequest.user?.sub) || '',
-        });
+        id,
+        user: String(httpRequest.user?.sub) || '',
+      });
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
   }
@@ -119,6 +119,19 @@ export class BenefitController implements IBenefitController {
     const result = await this.benefitService.deleteById(id);
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };
+  }
+
+  public async updateById(
+    httpRequest: IApiHttpRequest,
+  ): Promise<IApiHttpResponse<void>> {
+    const { id, code, confirmationFileUrl } = this.validator.validateSchema<{
+      id: number;
+      code: string;
+      confirmationFileUrl: string;
+    }>('UpdateBenefitById', { ...httpRequest.params, ...httpRequest.body });
+    await this.benefitService.updateById(id, { code, confirmationFileUrl });
+
+    return { statusCodeAsString: 'NO_CONTENT', body: undefined };
   }
 
   public async dimissInstallMentByBenefitIdAndInstallmentId(

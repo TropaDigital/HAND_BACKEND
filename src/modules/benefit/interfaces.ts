@@ -29,6 +29,7 @@ export interface ICreateBenefitParams
 }
 
 export type EnrichedBenefit = Benefit & {
+  pendingInstallmentsNumber: number;
   overdueInstallmentsNumber: number;
   openAmount: number;
   paidAmount: number;
@@ -50,6 +51,7 @@ export interface IBenefitRepository {
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<EnrichedBenefit[]>>;
 
+  findByCode(code: string): Promise<Benefit | null>;
   findById(id: number): Promise<EnrichedBenefit | null>;
 
   countEditTimes(id: number): Promise<number>;
@@ -92,6 +94,7 @@ export interface IBenefitController {
   create(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<Benefit>>;
 
   deleteById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
+  updateById(httpRequest: IApiHttpRequest): Promise<IApiHttpResponse<void>>;
 
   adjustContractById(
     httpRequest: IApiHttpRequest,

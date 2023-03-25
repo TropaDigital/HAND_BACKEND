@@ -99,10 +99,20 @@ export class BenefitRepository implements IBenefitRepository {
         : await this.prismaBenefitRepository.count();
 
     return parsePaginatedResult<EnrichedBenefit[], Prisma.BenefitWhereInput>(
-      result,
+      result as unknown as EnrichedBenefit[],
       totalResults,
       payload,
     );
+  }
+
+  public async findByCode(code: string): Promise<Benefit | null> {
+    const result = await this.prismaBenefitRepository.findFirst({
+      where: {
+        code,
+      },
+    });
+
+    return result;
   }
 
   public async findById(id: number): Promise<EnrichedBenefit | null> {
@@ -125,7 +135,7 @@ export class BenefitRepository implements IBenefitRepository {
       },
     });
 
-    return result;
+    return result as unknown as EnrichedBenefit;
   }
 
   public async create(

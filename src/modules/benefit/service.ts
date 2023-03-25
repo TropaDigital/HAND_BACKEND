@@ -19,7 +19,11 @@ import ErrorCodes from '../../enums/ErrorCodes';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { IPrismaTransactionClient } from '../../interfaces/infra/IPrismaTranscationClient';
 import { generateInsertCode } from '../../shared/code';
-import { MissingInvalidParamsError, NotFoundError } from '../../shared/errors';
+import {
+  ConflictError,
+  MissingInvalidParamsError,
+  NotFoundError,
+} from '../../shared/errors';
 import {
   IFindAllParams,
   IPaginatedAResult,
@@ -72,6 +76,7 @@ export class BenefitService implements IBenefitService {
   }
 
   public getInstallmentInfo(benefit: EnrichedBenefit): {
+    pendingInstallmentsNumber: number;
     overdueInstallmentsNumber: number;
     openAmount: number;
     paidAmount: number;
@@ -81,9 +86,13 @@ export class BenefitService implements IBenefitService {
 
     const overdueInstallments = benefit.installments.filter(installment => {
       const isPending = installment.status === InstallmentStatus.PENDING;
-      const isOverdue = isAfter(new Date(installment.dueDate), currentDate);
+      const isOverdue = isAfter(currentDate, new Date(installment.dueDate));
 
       return isPending && isOverdue;
+    });
+
+    const pendingInstallments = benefit.installments.filter(installment => {
+      return installment.status === InstallmentStatus.PENDING;
     });
 
     const paidInstallments = benefit.installments.filter(
@@ -111,6 +120,7 @@ export class BenefitService implements IBenefitService {
 
     return {
       overdueStatus,
+      pendingInstallmentsNumber: pendingInstallments.length,
       overdueInstallmentsNumber: overdueInstallments.length,
       openAmount,
       paidAmount,
@@ -149,8 +159,8 @@ export class BenefitService implements IBenefitService {
       return;
     }
     const installmentDifferenceInMonths = differenceInMonths(
-      lastInstallmentReferenceDate,
       endOfMonth(employmentRelationshipFinalDate),
+      lastInstallmentReferenceDate,
     );
 
     if (installmentDifferenceInMonths < 2) {
@@ -203,22 +213,18 @@ export class BenefitService implements IBenefitService {
 
     this.validateAssociatedData(address, bankAccount, employmentRelationship);
 
-    const {
-      consultantCommission,
-      totalValue,
-      installments,
-      firstPaymentDates,
-    } = await this.getLoanSimulation({
-      hasGratification,
-      joinedTelemedicine,
-      monthOfPayment,
-      numberOfInstallments,
-      requestedValue,
-      salary,
-      employmentRelationship,
-      administrationFeeValue,
-      consultantId,
-    });
+    const { consultantCommission, installments, firstPaymentDates } =
+      await this.getLoanSimulation({
+        hasGratification,
+        joinedTelemedicine,
+        monthOfPayment,
+        numberOfInstallments,
+        requestedValue,
+        salary,
+        employmentRelationship,
+        administrationFeeValue,
+        consultantId,
+      });
 
     if (employmentRelationship.contractType === 'TEMPORARY') {
       const lastInstallment = [...installments].pop();
@@ -287,8 +293,7 @@ export class BenefitService implements IBenefitService {
               firstPaymentDates,
               monthOfPayment,
             ),
-            contractType: type,
-            contractModel: '',
+            type,
             birthDate,
             createdAt,
             createdBy,
@@ -328,12 +333,12 @@ export class BenefitService implements IBenefitService {
             },
             ...(consultantId
               ? {
-                consultant: {
-                  connect: {
-                    id: consultantId,
+                  consultant: {
+                    connect: {
+                      id: consultantId,
+                    },
                   },
-                },
-              }
+                }
               : {}),
           },
           prisma,
@@ -394,29 +399,29 @@ export class BenefitService implements IBenefitService {
   private validateAssociated(
     associated:
       | {
-        id: number;
-        name: string;
-        lastName: string;
-        gender: string;
-        birthDate: Date;
-        maritalStatus: string;
-        nationality: string;
-        placeOfBirth: string;
-        taxId: string;
-        registerId: string;
-        emissionState: string;
-        issuingAgency: string;
-        emissionDate: Date;
-        email: string;
-        father: string;
-        mother: string;
-        partner: string | null;
-        createdBy: string;
-        updatedBy: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
-      }
+          id: number;
+          name: string;
+          lastName: string;
+          gender: string;
+          birthDate: Date;
+          maritalStatus: string;
+          nationality: string;
+          placeOfBirth: string;
+          taxId: string;
+          registerId: string;
+          emissionState: string;
+          issuingAgency: string;
+          emissionDate: Date;
+          email: string;
+          father: string;
+          mother: string;
+          partner: string | null;
+          createdBy: string;
+          updatedBy: string | null;
+          createdAt: Date;
+          updatedAt: Date;
+          deletedAt: Date | null;
+        }
       | { [key: string]: any },
   ) {
     if (!associated) {
@@ -604,6 +609,16 @@ export class BenefitService implements IBenefitService {
     if (!benefitExists) {
       throw new NotFoundError('benefit not found with provided id');
     }
+    if (payload.code && benefitExists.code !== payload.code) {
+      const codeInUse = await this.benefitRepository.findByCode(payload.code);
+      if (codeInUse) {
+        throw new ConflictError(
+          'Benefit code already in use',
+          ErrorCodes.UPDATE_BENEFIT_ERROR_001,
+        );
+      }
+    }
+
     const result = await this.benefitRepository.updateById(id, payload);
 
     return result;

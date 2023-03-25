@@ -1,3 +1,10 @@
+### [1.23.1](https://github.com/haandsolutions/haand-bib/compare/v1.23.0...v1.23.1) (2023-03-25)
+
+
+### :bug: Fixes
+
+* adjust associated crud bugs ([d240e62](https://github.com/haandsolutions/haand-bib/commit/d240e6261d3c256e48f2412ec893f926c66c3542))
+
 ## [1.23.0](https://github.com/haandsolutions/haand-bib/compare/v1.22.2...v1.23.0) (2023-03-14)
 
 

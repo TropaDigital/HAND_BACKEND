@@ -298,6 +298,7 @@ export class AssociatedController implements IAssociatedController {
     >('updateEmploymentRelationshipsByAssociatedIdAndId', {
       ...(httpRequest.params as { id: number; associatedId: number }),
       ...httpRequest.body,
+      finalDate: httpRequest.body.finalDate ? httpRequest.body.finalDate : null,
     });
 
     const result =

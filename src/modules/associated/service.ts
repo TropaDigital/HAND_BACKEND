@@ -174,6 +174,9 @@ export class AssociatedService implements IAssociatedService {
       employmentRelationships: [
         {
           ...payload.employmentRelationships[0],
+          finalDate: payload.employmentRelationships[0].finalDate
+            ? payload.employmentRelationships[0].finalDate
+            : null,
           isDefault: true,
         },
       ],

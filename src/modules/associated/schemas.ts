@@ -78,7 +78,7 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
         paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
         registerNumber: Joi.string().label('matrícula'),
         contractType: Joi.string().label('tipo de contrato'),
-        finalDate: Joi.date().label('data final'),
+        finalDate: Joi.date().allow(null, '').label('data final').optional(),
         publicAgency: Joi.string().label('órgão público'),
         isDefault: Joi.boolean().label('principal'),
       }),
@@ -187,7 +187,7 @@ export const updateEmploymentRelationshipsByAssociatedIdAndId = Joi.object<
   paymentDay: Joi.number().min(1).max(31).label('dia de pagamento'),
   registerNumber: Joi.string().label('matrícula'),
   contractType: Joi.string().label('tipo de contrato'),
-  finalDate: Joi.date().label('data final'),
+  finalDate: Joi.date().allow(null, '').label('data final').optional(),
   publicAgency: Joi.string().label('órgão público'),
 });
 

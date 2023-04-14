@@ -74,24 +74,24 @@ export class AssociatedController implements IAssociatedController {
       ...query,
       ...(!csv ? { page, resultsPerPage } : {}),
       ...(!(typeof publicAgency === 'undefined') ||
-      !(typeof registerNumber === 'undefined')
+        !(typeof registerNumber === 'undefined')
         ? {
-            employmentRelationships: {
-              publicAgency: {
-                contains: publicAgency,
-              },
-              registerNumber: registerNumber
-                ? { contains: registerNumber }
-                : registerNumber,
+          employmentRelationships: {
+            publicAgency: {
+              contains: publicAgency,
             },
-          }
+            registerNumber: registerNumber
+              ? { contains: registerNumber }
+              : registerNumber,
+          },
+        }
         : {}),
       ...(!(typeof telemedicine === 'undefined')
         ? {
-            benefits: {
-              joinedTelemedicine: telemedicine,
-            },
-          }
+          benefits: {
+            joinedTelemedicine: telemedicine,
+          },
+        }
         : {}),
     };
 
@@ -150,12 +150,12 @@ export class AssociatedController implements IAssociatedController {
       ...query
     } = this.validator.validateSchema<
       IFindAllParams &
-        Prisma.AssociatedWhereInput & {
-          registerNumber?: string;
-          telemedicine?: boolean;
-          csv?: boolean;
-          publicAgency?: string;
-        }
+      Prisma.AssociatedWhereInput & {
+        registerNumber?: string;
+        telemedicine?: boolean;
+        csv?: boolean;
+        publicAgency?: string;
+      }
     >('GetAll', { ...httpRequest.query });
     const formatedQuery = this.formatGetAllFilters({
       registerNumber,
@@ -298,6 +298,7 @@ export class AssociatedController implements IAssociatedController {
     >('updateEmploymentRelationshipsByAssociatedIdAndId', {
       ...(httpRequest.params as { id: number; associatedId: number }),
       ...httpRequest.body,
+      finalDate: httpRequest.body.finalDate ? httpRequest.body.finalDate : null,
     });
 
     const result =

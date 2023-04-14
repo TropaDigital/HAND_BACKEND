@@ -1,3 +1,11 @@
+### [1.23.2](https://github.com/haandsolutions/haand-bib/compare/v1.23.1...v1.23.2) (2023-04-14)
+
+
+### :bug: Fixes
+
+* adjust the flow to create benefit ([56fd81c](https://github.com/haandsolutions/haand-bib/commit/56fd81c55434a59fe6e047664ec03da19e83d29f))
+* adjust the flow to create benefit ([7fa7806](https://github.com/haandsolutions/haand-bib/commit/7fa78062eefebd5ba7dc914b49303c3bb66c3824))
+
 ### [1.23.1](https://github.com/haandsolutions/haand-bib/compare/v1.23.0...v1.23.1) (2023-03-25)
 
 

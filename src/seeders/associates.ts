@@ -5,7 +5,7 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { LoggerFactory } from '../factories/LoggerFactory';
 import { generateInsertCode } from '../shared/code';
 
-const associateds: Prisma.AssociatedCreateInput[] = [
+const associateds: Prisma.AssociatedUncheckedCreateInput[] = [
   {
     name: 'Márcio',
     lastName: 'Das Neves',
@@ -29,6 +29,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     affiliations: {
       connect: {
         name: 'ASES Vitória',
+      },
+    },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
       },
     },
     createdBy: 'João',
@@ -61,6 +66,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         },
       ],
     },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
+      },
+    },
     createdBy: 'João',
   },
   {
@@ -87,6 +97,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     affiliations: {
       connect: {
         name: 'ASES Vitória',
+      },
+    },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
       },
     },
 
@@ -118,6 +133,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         name: 'ASES Vitória',
       },
     },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -145,6 +165,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     affiliations: {
       connect: {
         name: 'ASES Vitória',
+      },
+    },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
       },
     },
 
@@ -176,6 +201,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         name: 'ASES Vitória',
       },
     },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -203,6 +233,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     affiliations: {
       connect: {
         name: 'ASES Vitória',
+      },
+    },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
       },
     },
 
@@ -234,6 +269,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         name: 'ASES Vitória',
       },
     },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -263,6 +303,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
         name: 'ASES Vitória',
       },
     },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
+      },
+    },
 
     createdBy: 'Ferreira',
   },
@@ -290,6 +335,11 @@ const associateds: Prisma.AssociatedCreateInput[] = [
     affiliations: {
       connect: {
         name: 'ASES Vitória',
+      },
+    },
+    phoneNumbers: {
+      create: {
+        number: '12346579810',
       },
     },
 

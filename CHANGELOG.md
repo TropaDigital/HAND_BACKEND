@@ -1,3 +1,10 @@
+### [1.23.3](https://github.com/haandsolutions/haand-bib/compare/v1.23.2...v1.23.3) (2023-04-19)
+
+
+### :bug: Fixes
+
+* adjust the seeders of associateds ([ff3c0b5](https://github.com/haandsolutions/haand-bib/commit/ff3c0b5207fbbdbbb040a07f3a4c5a84b02ed895))
+
 ### [1.23.2](https://github.com/haandsolutions/haand-bib/compare/v1.23.1...v1.23.2) (2023-04-14)
 
 

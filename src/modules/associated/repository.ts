@@ -95,9 +95,26 @@ export class AssociatedRepository implements IAssociatedRepository {
   public async findAll(
     payload?: IFindAllParams & Prisma.AssociatedWhereInput,
   ): Promise<IPaginatedAResult<IAssociated[]>> {
-    const params = getFindManyParams<Prisma.AssociatedWhereInput>(payload);
+    const { benefits, ...formatedPayload } = payload || {};
+    const params =
+      getFindManyParams<Prisma.AssociatedWhereInput>(formatedPayload);
     const result = await this.prismaClient.associated.findMany({
       ...params,
+      where: {
+        ...params.where,
+        benefits: (benefits as any)?.joinedTelemedicine
+          ? { some: { joinedTelemedicine: true } }
+          : undefined,
+        ...(!(benefits as any)?.joinedTelemedicine &&
+        !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
+          ? {
+              OR: [
+                { benefits: undefined },
+                { benefits: { every: { joinedTelemedicine: false } } },
+              ],
+            }
+          : {}),
+      },
       include: {
         phoneNumbers: {
           orderBy: {

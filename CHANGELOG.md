@@ -1,3 +1,10 @@
+### [1.23.5](https://github.com/haandsolutions/haand-bib/compare/v1.23.4...v1.23.5) (2023-05-12)
+
+
+### :bug: Fixes
+
+* adjust the pagination of associateds list ([0ed622c](https://github.com/haandsolutions/haand-bib/commit/0ed622c8b49363d1c1826800c611f76482b99e9a))
+
 ### [1.23.4](https://github.com/haandsolutions/haand-bib/compare/v1.23.3...v1.23.4) (2023-05-03)
 
 

@@ -1,3 +1,10 @@
+### [1.23.4](https://github.com/haandsolutions/haand-bib/compare/v1.23.3...v1.23.4) (2023-05-03)
+
+
+### :bug: Fixes
+
+* adjust the query to filter associateds with telemedicine ([26de3be](https://github.com/haandsolutions/haand-bib/commit/26de3bec5bbe2e6b9a439b6fb2f17444dc277512))
+
 ### [1.23.3](https://github.com/haandsolutions/haand-bib/compare/v1.23.2...v1.23.3) (2023-04-19)
 
 

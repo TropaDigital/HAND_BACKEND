@@ -151,10 +151,27 @@ export class AssociatedRepository implements IAssociatedRepository {
         affiliations: true,
       },
     });
+
     const totalResults =
       JSON.stringify(params?.where) !== '{}'
         ? result.length
-        : await this.prismaClient.associated.count();
+        : await this.prismaClient.associated.count({
+            where: {
+              ...params.where,
+              benefits: (benefits as any)?.joinedTelemedicine
+                ? { some: { joinedTelemedicine: true } }
+                : undefined,
+              ...(!(benefits as any)?.joinedTelemedicine &&
+              !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
+                ? {
+                    OR: [
+                      { benefits: undefined },
+                      { benefits: { every: { joinedTelemedicine: false } } },
+                    ],
+                  }
+                : {}),
+            },
+          });
 
     return parsePaginatedResult<IAssociated[], Prisma.AssociatedWhereInput>(
       result,

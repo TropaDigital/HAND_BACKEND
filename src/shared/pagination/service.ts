@@ -68,6 +68,7 @@ export const parsePaginatedResult = <T, K>(
     payload?.resultsPerPage && totalResults
       ? Math.ceil(totalResults / payload.resultsPerPage)
       : 1;
+
   const currentPage = Number(payload?.page) || 1;
 
   return { totalResults, totalPages, currentPage, data: results };

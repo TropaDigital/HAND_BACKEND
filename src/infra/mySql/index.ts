@@ -1,23 +1,22 @@
-import { PrismaClient } from '@prisma/client';
-
 import { LoggerFactory } from '../../factories/LoggerFactory';
 import { IDatabaseConnection } from '../../interfaces/infra/IDatabaseConnection';
 import { ILogger } from '../../interfaces/logger/ILogger';
+import { prismaClientInstance } from './prismaClient';
 
 export default class MySqlDBClient implements IDatabaseConnection {
   private static instance: MySqlDBClient;
 
   private constructor(
     private readonly loggerManager: ILogger,
-    private prismaClient: PrismaClient,
+    private prismaClient: typeof prismaClientInstance,
   ) {}
 
   public static getInstance(
     loggerManager?: ILogger,
-    prismaClient?: PrismaClient,
+    prismaClient?: typeof prismaClientInstance,
   ): MySqlDBClient {
     if (!MySqlDBClient.instance) {
-      const prismaInstance = prismaClient || new PrismaClient();
+      const prismaInstance = prismaClient || prismaClientInstance;
       const loggerInstance = loggerManager || LoggerFactory.create();
       MySqlDBClient.instance = new MySqlDBClient(
         loggerInstance,
@@ -55,7 +54,7 @@ export default class MySqlDBClient implements IDatabaseConnection {
     }
   }
 
-  public getPrismaClientInstance(): PrismaClient {
+  public getPrismaClientInstance(): typeof prismaClientInstance {
     return this.prismaClient;
   }
 }

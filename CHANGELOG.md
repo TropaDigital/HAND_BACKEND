@@ -1,3 +1,10 @@
+### [1.23.6](https://github.com/haandsolutions/haand-bib/compare/v1.23.5...v1.23.6) (2023-05-12)
+
+
+### :bug: Fixes
+
+* adjust the filters of benefits ([200ac2d](https://github.com/haandsolutions/haand-bib/commit/200ac2d00a35f10c1e867ed5399801e4ac487f96))
+
 ### [1.23.5](https://github.com/haandsolutions/haand-bib/compare/v1.23.4...v1.23.5) (2023-05-12)
 
 

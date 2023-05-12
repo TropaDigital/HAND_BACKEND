@@ -4,6 +4,7 @@ import {
   PrismaClient,
   BenefitAdjustmentType,
   InstallmentStatus,
+  BenefitType,
 } from '@prisma/client';
 import { IPrismaTransactionClient } from 'src/interfaces/infra/IPrismaTranscationClient';
 import { JsonObject } from 'swagger-ui-express';
@@ -50,13 +51,17 @@ export class BenefitRepository implements IBenefitRepository {
     publicAgency,
   }: IBenefitFiltersPayload): Prisma.BenefitWhereInput {
     return {
-      ...(associated ? { associated: { name: { contains: associated } } } : {}),
+      ...(associated
+        ? { associated: { fullName: { contains: associated } } }
+        : {}),
       ...(affiliation
         ? { affiliation: { name: { contains: affiliation } } }
         : {}),
       ...(consultant ? { consultant: { name: { contains: consultant } } } : {}),
       ...(contractModel ? { contractModel: { equals: contractModel } } : {}),
-      ...(contractType ? { contractType: { equals: contractType } } : {}),
+      ...(contractType
+        ? { type: { equals: contractType as BenefitType } }
+        : {}),
       ...(installmentNumber
         ? { installmentNumber: { equals: Number(installmentNumber) } }
         : {}),

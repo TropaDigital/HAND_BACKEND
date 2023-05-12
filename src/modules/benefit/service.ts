@@ -377,7 +377,8 @@ export class BenefitService implements IBenefitService {
 
     if (!result.isRequestedValueValid) {
       throw new MissingInvalidParamsError(
-        'the conditions of the benefit does not match with the rules, plase check the parameters',
+        'the conditions of the benefit does not match with the rules, please check the parameters',
+        ErrorCodes.CREATE_BENEFIT_ERROR_002,
       );
     }
 

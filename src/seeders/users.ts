@@ -43,6 +43,30 @@ const users: Prisma.UserCreateInput[] = [
     status: Status.ACTIVE,
     userName: 'barbosama',
   },
+  {
+    name: 'Luciene Santos',
+    email: 'contato2@haand.com.br',
+    password: authConfig().DEFAULT_PASSWORD,
+    role: {
+      connect: {
+        name: 'admin',
+      },
+    },
+    status: Status.ACTIVE,
+    userName: 'santoslu',
+  },
+  {
+    name: 'Elayne Cavalcanti',
+    email: 'contato3@haand.com.br',
+    password: authConfig().DEFAULT_PASSWORD,
+    role: {
+      connect: {
+        name: 'admin',
+      },
+    },
+    status: Status.ACTIVE,
+    userName: 'cavalcantiel',
+  },
 ];
 
 export default async (client: PrismaClient): Promise<void> => {

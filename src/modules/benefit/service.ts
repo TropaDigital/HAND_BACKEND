@@ -18,7 +18,6 @@ import { addMonths, differenceInMonths, endOfMonth, isAfter } from 'date-fns';
 import ErrorCodes from '../../enums/ErrorCodes';
 import { MonthOfPayment } from '../../enums/MonthOfPayment';
 import { IPrismaTransactionClient } from '../../interfaces/infra/IPrismaTranscationClient';
-import { generateInsertCode } from '../../shared/code';
 import {
   ConflictError,
   MissingInvalidParamsError,
@@ -171,6 +170,19 @@ export class BenefitService implements IBenefitService {
     }
   }
 
+  private generateBenefitCode(
+    associatedId: number,
+    quantityOfBenefits: number,
+  ): string {
+    return `${String(associatedId).padStart(
+      5,
+      '0',
+    )}-${new Date().getFullYear()}-${String(quantityOfBenefits + 1).padStart(
+      3,
+      '0',
+    )}`;
+  }
+
   public async create(payload: ICreateBenefitParams): Promise<Benefit> {
     const {
       type,
@@ -269,7 +281,7 @@ export class BenefitService implements IBenefitService {
                 id: affiliationId,
               },
             },
-            code: generateInsertCode(),
+            code: this.generateBenefitCode(associatedId, 1),
             accountNumber: bankAccount.accountNumber,
             accountType: bankAccount.accountType,
             bank: bankAccount.bank,
@@ -333,12 +345,12 @@ export class BenefitService implements IBenefitService {
             },
             ...(consultantId
               ? {
-                consultant: {
-                  connect: {
-                    id: consultantId,
+                  consultant: {
+                    connect: {
+                      id: consultantId,
+                    },
                   },
-                },
-              }
+                }
               : {}),
           },
           prisma,
@@ -400,29 +412,29 @@ export class BenefitService implements IBenefitService {
   private validateAssociated(
     associated:
       | {
-        id: number;
-        name: string;
-        lastName: string;
-        gender: string;
-        birthDate: Date;
-        maritalStatus: string;
-        nationality: string;
-        placeOfBirth: string;
-        taxId: string;
-        registerId: string;
-        emissionState: string;
-        issuingAgency: string;
-        emissionDate: Date;
-        email: string;
-        father: string;
-        mother: string;
-        partner: string | null;
-        createdBy: string;
-        updatedBy: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
-      }
+          id: number;
+          name: string;
+          lastName: string;
+          gender: string;
+          birthDate: Date;
+          maritalStatus: string;
+          nationality: string;
+          placeOfBirth: string;
+          taxId: string;
+          registerId: string;
+          emissionState: string;
+          issuingAgency: string;
+          emissionDate: Date;
+          email: string;
+          father: string;
+          mother: string;
+          partner: string | null;
+          createdBy: string;
+          updatedBy: string | null;
+          createdAt: Date;
+          updatedAt: Date;
+          deletedAt: Date | null;
+        }
       | { [key: string]: any },
   ) {
     if (!associated) {

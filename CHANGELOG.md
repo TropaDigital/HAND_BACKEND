@@ -1,3 +1,10 @@
+### [1.23.7](https://github.com/haandsolutions/haand-bib/compare/v1.23.6...v1.23.7) (2023-05-17)
+
+
+### :zap: Refactor
+
+* add new users to seeders ([a860ba6](https://github.com/haandsolutions/haand-bib/commit/a860ba66613475abee6f1d1ca3e95b52d2c0ebc1))
+
 ### [1.23.6](https://github.com/haandsolutions/haand-bib/compare/v1.23.5...v1.23.6) (2023-05-12)
 
 

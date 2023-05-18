@@ -110,8 +110,13 @@ export class BenefitRepository implements IBenefitRepository {
     );
   }
 
-  public async findByCode(code: string): Promise<Benefit | null> {
-    const result = await this.prismaBenefitRepository.findFirst({
+  public async findByCode(
+    code: string,
+    prisma?: IPrismaTransactionClient,
+  ): Promise<Benefit | null> {
+    const result = await (
+      prisma?.benefit || this.prismaBenefitRepository
+    ).findFirst({
       where: {
         code,
       },
@@ -205,6 +210,22 @@ export class BenefitRepository implements IBenefitRepository {
   public async countEditTimes(benefitId: number): Promise<number> {
     const result = await this.prismaBenefitHistoryRepository.count({
       where: { benefitId, adjustmentType: BenefitAdjustmentType.POSTPONEMENT },
+    });
+
+    return result;
+  }
+
+  public async getBenefitsByAssociatedId(
+    associatedId: number,
+    prisma?: IPrismaTransactionClient,
+  ): Promise<Benefit[]> {
+    const result = await (
+      prisma?.benefit || this.prismaBenefitRepository
+    ).findMany({
+      where: { associatedId },
+      orderBy: {
+        code: 'desc',
+      },
     });
 
     return result;

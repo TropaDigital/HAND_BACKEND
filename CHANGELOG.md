@@ -1,3 +1,10 @@
+## [1.24.0](https://github.com/haandsolutions/haand-bib/compare/v1.23.7...v1.24.0) (2023-05-18)
+
+
+### :sparkles: New Features
+
+* add the mask and validations to benefit code ([94f3c0f](https://github.com/haandsolutions/haand-bib/commit/94f3c0f6fdacd5564489cf01bff1be02b75cd723))
+
 ### [1.23.7](https://github.com/haandsolutions/haand-bib/compare/v1.23.6...v1.23.7) (2023-05-17)
 
 

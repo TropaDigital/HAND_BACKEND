@@ -40,7 +40,7 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
   registerId: Joi.string().required().label('rg'),
   emissionState: Joi.string().required().label('estado-emissor'),
   issuingAgency: Joi.string().required().label('orgao-emissor'),
-  emissionDate: Joi.date().required().label('data-emissao'),
+  emissionDate: Joi.date().allow(null, '').label('data-emissao'),
   email: Joi.string().email().allow(null, '').label('email'),
   father: Joi.string().allow(null, '').label('pai'),
   mother: Joi.string().required().label('mãe'),

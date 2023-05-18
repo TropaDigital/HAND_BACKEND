@@ -84,7 +84,7 @@ model Associated {
   registerId    String    @map("register_id")
   emissionState String    @map("emission_state")
   issuingAgency String    @map("issuing_agency")
-  emissionDate  DateTime  @map("emission_date")
+  emissionDate  DateTime?  @map("emission_date")
   email         String?
   father        String?
   mother        String

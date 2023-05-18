@@ -10,12 +10,12 @@ export const GetAssociatedById = Joi.object<{ id: number }>({
 
 export const GetAll = Joi.object<
   IFindAllParams &
-    Prisma.AssociatedWhereInput & {
-      contractNumber?: string;
-      telemedicine?: boolean;
-      publicAgency?: string;
-      csv?: boolean;
-    }
+  Prisma.AssociatedWhereInput & {
+    contractNumber?: string;
+    telemedicine?: boolean;
+    publicAgency?: string;
+    csv?: boolean;
+  }
 >({
   fullName: Joi.string().allow(null, ''),
   code: Joi.string().allow(null, ''),
@@ -133,8 +133,7 @@ export const UpdateAssociatedById = Joi.object<
   registerId: Joi.string().label('rg'),
   emissionState: Joi.string().label('estado-emissor'),
   issuingAgency: Joi.string().label('orgao-emissor'),
-  emissionDate: Joi.date().label('data-emissao'),
-  // cellPhone: Joi.string().label('celular'),
+  emissionDate: Joi.date().allow(null, '').default(null).label('data-emissao'),
   email: Joi.string().email().allow(null, '').label('email'),
   father: Joi.string().allow(null, '').label('pai'),
   mother: Joi.string().label('mãe'),

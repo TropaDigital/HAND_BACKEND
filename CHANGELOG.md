@@ -1,3 +1,10 @@
+### [1.24.1](https://github.com/haandsolutions/haand-bib/compare/v1.24.0...v1.24.1) (2023-05-18)
+
+
+### :bug: Fixes
+
+* adjust the update associated schema to allow optional emission date ([6fdf279](https://github.com/haandsolutions/haand-bib/commit/6fdf279a0ab6d6571420b75b5e752cde02472c73))
+
 ## [1.24.0](https://github.com/haandsolutions/haand-bib/compare/v1.23.7...v1.24.0) (2023-05-18)
 
 

@@ -170,17 +170,34 @@ export class BenefitService implements IBenefitService {
     }
   }
 
-  private generateBenefitCode(
-    associatedId: number,
-    quantityOfBenefits: number,
-  ): string {
+  private generateBenefitCode({
+    associatedId,
+    benefitCode,
+    benefitCodeParam,
+  }: {
+    associatedId: number;
+    benefitCode?: string;
+    benefitCodeParam?: string;
+  }): string {
+    if (benefitCodeParam) {
+      const formatedBenefitId = String(
+        Number(benefitCodeParam.split('-').pop()),
+      ).padStart(3, '0');
+
+      return `${String(associatedId).padStart(
+        5,
+        '0',
+      )}-${new Date().getFullYear()}-${formatedBenefitId}`;
+    }
+
+    const benefitId = !benefitCode
+      ? String(1).padStart(3, '0')
+      : String(Number(benefitCode.split('-').pop()) + 1).padStart(3, '0');
+
     return `${String(associatedId).padStart(
       5,
       '0',
-    )}-${new Date().getFullYear()}-${String(quantityOfBenefits + 1).padStart(
-      3,
-      '0',
-    )}`;
+    )}-${new Date().getFullYear()}-${benefitId}`;
   }
 
   public async create(payload: ICreateBenefitParams): Promise<Benefit> {
@@ -200,6 +217,7 @@ export class BenefitService implements IBenefitService {
       administrationFeeValue,
       affiliationId,
       createdBy,
+      code,
     } = payload;
 
     const {
@@ -274,6 +292,27 @@ export class BenefitService implements IBenefitService {
       // @ts-ignore
       // TODO: ajustar
       async (prisma: IPrismaTransactionClient): Promise<Benefit> => {
+        const [lastBenefit] =
+          await this.benefitRepository.getBenefitsByAssociatedId(
+            associatedId,
+            prisma,
+          );
+
+        const benefitCode = this.generateBenefitCode({
+          associatedId,
+          benefitCode: lastBenefit?.code,
+          benefitCodeParam: code,
+        });
+        const alreadyExistsABenefitWithThisCode =
+          await this.benefitRepository.findByCode(benefitCode, prisma);
+
+        if (alreadyExistsABenefitWithThisCode) {
+          throw new ConflictError(
+            'already exists a benefit with the provided code',
+            ErrorCodes.CREATE_BENEFIT_ERROR_003,
+          );
+        }
+
         const benefit = await this.benefitRepository.create(
           {
             affiliation: {
@@ -281,7 +320,7 @@ export class BenefitService implements IBenefitService {
                 id: affiliationId,
               },
             },
-            code: this.generateBenefitCode(associatedId, 1),
+            code: benefitCode,
             accountNumber: bankAccount.accountNumber,
             accountType: bankAccount.accountType,
             bank: bankAccount.bank,

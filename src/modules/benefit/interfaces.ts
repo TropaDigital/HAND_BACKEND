@@ -19,6 +19,7 @@ import { ILoanSimulationBasedOnRequestedValueParams } from '../loanSimulation/in
 
 export interface ICreateBenefitParams
   extends ILoanSimulationBasedOnRequestedValueParams {
+  code?: string;
   type: BenefitType;
   affiliationId: number;
   associatedId: number;
@@ -51,7 +52,10 @@ export interface IBenefitRepository {
     payload?: IFindAllParams & Prisma.BenefitWhereInput,
   ): Promise<IPaginatedAResult<EnrichedBenefit[]>>;
 
-  findByCode(code: string): Promise<Benefit | null>;
+  findByCode(
+    code: string,
+    prisma?: IPrismaTransactionClient,
+  ): Promise<Benefit | null>;
   findById(id: number): Promise<EnrichedBenefit | null>;
 
   countEditTimes(id: number): Promise<number>;
@@ -67,6 +71,11 @@ export interface IBenefitRepository {
     adjustmentType: BenefitAdjustmentType;
     adjustment: JsonObject;
   }): Promise<void>;
+
+  getBenefitsByAssociatedId(
+    associatedId: number,
+    prisma?: IPrismaTransactionClient,
+  ): Promise<Benefit[]>;
 }
 
 export interface IBenefitController {

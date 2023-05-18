@@ -32,6 +32,9 @@ export const CreateBenefit = Joi.object<ICreateBenefitParams>({
     .required(),
   administrationFeeValue: Joi.number().default(0),
   hasGratification: Joi.boolean().default(false),
+  code: Joi.string()
+    .regex(/^\d{5}-\d{4}-\d{3}$/)
+    .optional(),
 });
 
 export const GetPostponementSimulation = Joi.object<{

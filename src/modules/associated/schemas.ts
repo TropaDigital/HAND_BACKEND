@@ -84,17 +84,19 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
       }),
     )
     .required(),
-  bankAccounts: Joi.array().items(
-    Joi.object({
-      bank: Joi.string().required().label('banco'),
-      agency: Joi.string().required().label('agencia'),
-      accountType: Joi.string().required().label('tipo de conta'),
-      accountNumber: Joi.string().required().label('número da conta'),
-      pixKey: Joi.string().label('chave pix'),
-      pixType: Joi.string().label('tipo_pix'),
-      isDefault: Joi.boolean().label('principal'),
-    }),
-  ),
+  bankAccounts: Joi.array()
+    .items(
+      Joi.object({
+        bank: Joi.string().required().label('banco'),
+        agency: Joi.string().required().label('agencia'),
+        accountType: Joi.string().required().label('tipo de conta'),
+        accountNumber: Joi.string().required().label('número da conta'),
+        pixKey: Joi.string().label('chave pix'),
+        pixType: Joi.string().label('tipo_pix'),
+        isDefault: Joi.boolean().label('principal'),
+      }),
+    )
+    .required(),
   phoneNumbers: Joi.array()
     .items(
       Joi.object({
@@ -107,14 +109,16 @@ export const CreateAssociated = Joi.object<ICreateAssociatedInput>({
     )
     .min(1)
     .required(),
-  references: Joi.array().items(
-    Joi.object({
-      name: Joi.string().required(),
-      phoneNumber: Joi.string().required(),
-      relationshipType: Joi.string().required(),
-      note: Joi.string().optional(),
-    }),
-  ),
+  references: Joi.array()
+    .items(
+      Joi.object({
+        name: Joi.string().required(),
+        phoneNumber: Joi.string().required(),
+        relationshipType: Joi.string().required(),
+        note: Joi.string().optional(),
+      }),
+    )
+    .required(),
   createdBy: Joi.string().required().label('createdBy'),
 });
 

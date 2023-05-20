@@ -9,7 +9,11 @@ import {
   PrismaClient,
 } from '@prisma/client';
 
-import { NotFoundError } from '../../shared/errors';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+
+import { ConflictError, NotFoundError } from '../../shared/errors';
+import ErrorCodes from '../../enums/ErrorCodes';
+
 import {
   IFindAllParams,
   IPaginatedAResult,
@@ -225,46 +229,59 @@ export class AssociatedRepository implements IAssociatedRepository {
   public async create(
     payload: ICreateAssociatedInput,
   ): Promise<Omit<IAssociated, 'benefits'>> {
-    const {
-      addresses,
-      employmentRelationships,
-      bankAccounts,
-      affiliations,
-      references,
-      phoneNumbers,
-      ...associated
-    } = payload;
+    try {
+      const {
+        addresses,
+        employmentRelationships,
+        bankAccounts,
+        affiliations,
+        references,
+        phoneNumbers,
+        ...associated
+      } = payload;
 
-    const result = await this.prismaClient.associated.create({
-      data: {
-        ...associated,
-        fullName: `${associated.name} ${associated.lastName}`,
-        affiliations: {
-          connect: [
-            ...affiliations.map(association => ({
-              id: association.id,
-            })),
-          ],
+      const result = await this.prismaClient.associated.create({
+        data: {
+          ...associated,
+          fullName: `${associated.name} ${associated.lastName}`,
+          affiliations: {
+            connect: [
+              ...affiliations.map(association => ({
+                id: association.id,
+              })),
+            ],
+          },
+          phoneNumbers: { createMany: { data: phoneNumbers } },
+          references: { createMany: { data: references } },
+          bankAccounts: { createMany: { data: bankAccounts } },
+          addresses: { createMany: { data: addresses } },
+          employmentRelationships: {
+            createMany: { data: employmentRelationships },
+          },
         },
-        phoneNumbers: { createMany: { data: phoneNumbers } },
-        references: { createMany: { data: references } },
-        bankAccounts: { createMany: { data: bankAccounts } },
-        addresses: { createMany: { data: addresses } },
-        employmentRelationships: {
-          createMany: { data: employmentRelationships },
+        include: {
+          addresses: true,
+          employmentRelationships: true,
+          bankAccounts: true,
+          affiliations: true,
+          phoneNumbers: true,
+          references: true,
         },
-      },
-      include: {
-        addresses: true,
-        employmentRelationships: true,
-        bankAccounts: true,
-        affiliations: true,
-        phoneNumbers: true,
-        references: true,
-      },
-    });
+      });
 
-    return result;
+      return result;
+    } catch (error) {
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictError(
+          `already exists a ${error.meta?.target} with the provide code`,
+          ErrorCodes.CREATE_ASSOCIATED_ERROR_001,
+        );
+      }
+      throw error;
+    }
   }
 
   public async updateById(

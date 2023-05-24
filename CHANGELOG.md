@@ -1,3 +1,15 @@
+### [1.24.2](https://github.com/haandsolutions/haand-bib/compare/v1.24.1...v1.24.2) (2023-05-24)
+
+
+### :zap: Refactor
+
+* remove unecessary connect function invocation ([2b23dd8](https://github.com/haandsolutions/haand-bib/commit/2b23dd8fa1978453a4fdf90e78f3d233a381f09d))
+
+
+### :bug: Fixes
+
+* adjust the field emission date to be optional ([9d4f612](https://github.com/haandsolutions/haand-bib/commit/9d4f61203b60ee2959f4e2dfe05f55851d2f68e2))
+
 ### [1.24.1](https://github.com/haandsolutions/haand-bib/compare/v1.24.0...v1.24.1) (2023-05-18)
 
 

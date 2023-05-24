@@ -42,7 +42,6 @@ export default class MySqlDBClient implements IDatabaseConnection {
   public async startConnection(): Promise<void> {
     try {
       if ((await this.getConnectionStatus()) === 'connected') return;
-      await this.prismaClient.$connect();
     } catch (error) {
       this.loggerManager.error({
         msg: 'Unable to connect to the database: ',

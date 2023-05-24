@@ -157,4 +157,5 @@ export const makeBenefitRepositoryStub =
     countEditTimes: jest.fn(),
     addItemToBenefitHistory: jest.fn(),
     findByCode: jest.fn(),
+    getBenefitsByAssociatedId: jest.fn(),
   });

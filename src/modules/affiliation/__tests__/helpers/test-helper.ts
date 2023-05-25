@@ -48,6 +48,7 @@ export const makeFakeAffiliation = (
   createdAt: new Date(),
   updatedAt: new Date(),
   deletedAt: new Date(),
+  corporateTaxId: '35.882.309/0001-37',
   ...payload,
 });
 

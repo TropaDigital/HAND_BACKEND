@@ -121,6 +121,7 @@ describe(AffiliationService.name, () => {
         city: 'any_city',
         state: 'any_state',
         createdBy: 'any_affiliation',
+        corporateTaxId: '35.882.309/0001-37',
       };
 
       const result = await sut.create(affiliation);

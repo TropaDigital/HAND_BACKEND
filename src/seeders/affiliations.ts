@@ -5,12 +5,15 @@ import { LoggerFactory } from '../factories/LoggerFactory';
 const affiliations: Prisma.AffiliationCreateInput[] = [
   {
     name: 'ASES Vitória',
+    corporateTaxId: '35.882.309/0001-37',
   },
   {
     name: 'ASES Cachoeiro',
+    corporateTaxId: '35.882.309/0002-37',
   },
   {
     name: 'ASES Colatina',
+    corporateTaxId: '35.882.309/0003-37',
   },
 ];
 

@@ -8,12 +8,10 @@ import {
   Reference,
   PrismaClient,
 } from '@prisma/client';
-
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
-import { ConflictError, NotFoundError } from '../../shared/errors';
 import ErrorCodes from '../../enums/ErrorCodes';
-
+import { ConflictError, NotFoundError } from '../../shared/errors';
 import {
   IFindAllParams,
   IPaginatedAResult,
@@ -110,13 +108,13 @@ export class AssociatedRepository implements IAssociatedRepository {
           ? { some: { joinedTelemedicine: true } }
           : undefined,
         ...(!(benefits as any)?.joinedTelemedicine &&
-        !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
+          !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
           ? {
-              OR: [
-                { benefits: undefined },
-                { benefits: { every: { joinedTelemedicine: false } } },
-              ],
-            }
+            OR: [
+              { benefits: undefined },
+              { benefits: { every: { joinedTelemedicine: false } } },
+            ],
+          }
           : {}),
       },
       include: {
@@ -160,22 +158,22 @@ export class AssociatedRepository implements IAssociatedRepository {
       JSON.stringify(params?.where) !== '{}'
         ? result.length
         : await this.prismaClient.associated.count({
-            where: {
-              ...params.where,
-              benefits: (benefits as any)?.joinedTelemedicine
-                ? { some: { joinedTelemedicine: true } }
-                : undefined,
-              ...(!(benefits as any)?.joinedTelemedicine &&
+          where: {
+            ...params.where,
+            benefits: (benefits as any)?.joinedTelemedicine
+              ? { some: { joinedTelemedicine: true } }
+              : undefined,
+            ...(!(benefits as any)?.joinedTelemedicine &&
               !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
-                ? {
-                    OR: [
-                      { benefits: undefined },
-                      { benefits: { every: { joinedTelemedicine: false } } },
-                    ],
-                  }
-                : {}),
-            },
-          });
+              ? {
+                OR: [
+                  { benefits: undefined },
+                  { benefits: { every: { joinedTelemedicine: false } } },
+                ],
+              }
+              : {}),
+          },
+        });
 
     return parsePaginatedResult<IAssociated[], Prisma.AssociatedWhereInput>(
       result,

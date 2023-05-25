@@ -37,18 +37,20 @@ model BankAccount {
 }
 
 model Address {
-  id           Int         @id @default(autoincrement())
-  isDefault    Boolean     @default(false)
-  addressType  String      @map("address_type")
-  postalCode   String      @map("postal_code")
-  street       String
-  houseNumber  String      @map("house_number")
-  complement   String?
-  district     String
-  city         String
-  state        String
-  associatedId Int?
-  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  id            Int          @id @default(autoincrement())
+  isDefault     Boolean      @default(false)
+  addressType   String       @map("address_type")
+  postalCode    String       @map("postal_code")
+  street        String
+  houseNumber   String       @map("house_number")
+  complement    String?
+  district      String
+  city          String
+  state         String
+  associatedId  Int?
+  Associated    Associated?  @relation(fields: [associatedId], references: [id])
+  Affiliation   Affiliation? @relation(fields: [affiliationId], references: [id])
+  affiliationId Int?
 
   @@index([associatedId], map: "Address_associatedId_fkey")
 }
@@ -84,7 +86,7 @@ model Associated {
   registerId    String    @map("register_id")
   emissionState String    @map("emission_state")
   issuingAgency String    @map("issuing_agency")
-  emissionDate  DateTime?
+  emissionDate  DateTime? @map("emission_date")
   email         String?
   father        String?
   mother        String
@@ -133,13 +135,15 @@ model PhoneNumber {
 }
 
 model Affiliation {
-  id          Int          @id @default(autoincrement())
-  name        String       @unique
-  createdAt   DateTime     @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt   DateTime     @updatedAt @map("updated_at")
-  deletedAt   DateTime?    @map("deleted_at") @db.DateTime(0)
-  benefits    Benefit[]
-  associateds Associated[]
+  id             Int          @id @default(autoincrement())
+  name           String       @unique
+  corporateTaxId String
+  address        Address[]
+  createdAt      DateTime     @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  deletedAt      DateTime?    @map("deleted_at") @db.DateTime(0)
+  benefits       Benefit[]
+  associateds    Associated[]
 }
 
 model Consultant {
@@ -183,7 +187,7 @@ model Benefit {
   registerId               String           @map("register_id")
   emissionState            String           @map("emission_state")
   issuingAgency            String           @map("issuing_agency")
-  emissionDate             DateTime?        @map("emission_date")
+  emissionDate             DateTime         @map("emission_date")
   email                    String?
   father                   String?
   mother                   String

@@ -136,7 +136,7 @@ describe(AssociatedRepository.name, () => {
       });
       expect(createSpy).toBeCalledWith({
         data: {
-          Associated: {
+          associated: {
             connect: {
               id: 777,
             },

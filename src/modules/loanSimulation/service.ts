@@ -75,7 +75,7 @@ export class LoanSimulationService implements ILoanSimulationService {
   ): number {
     return requestedValue < 1000
       ? loanConfig.aditionalValueWhenTheValueIsLowerThan1000 /
-      numberOfInstallments
+          numberOfInstallments
       : 0;
   }
 

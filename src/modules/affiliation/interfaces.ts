@@ -1,11 +1,20 @@
-import { Affiliation, Prisma } from '@prisma/client';
+import { Address, Affiliation, Prisma } from '@prisma/client';
 
 import { IApiHttpRequest, IApiHttpResponse } from '../../interfaces/http';
+
+export type IAffiliation = Omit<Affiliation, 'addressId'> & {
+  address?: Partial<Address>;
+};
 
 export interface IAffiliationRepository {
   create(payload: Prisma.AffiliationCreateInput): Promise<Affiliation>;
 
-  updateById(id: number, payload: Prisma.AffiliationUpdateInput): Promise<void>;
+  updateById(
+    id: number,
+    payload: Prisma.AffiliationUpdateInput & {
+      address?: Partial<Address>;
+    },
+  ): Promise<void>;
 
   deleteById(id: number): Promise<void>;
 
@@ -37,9 +46,12 @@ export interface IAffiliationService {
 
   getById(id: number): Promise<Affiliation | null>;
 
-  create(payload: Prisma.AffiliationCreateInput): Promise<Affiliation>;
+  create(payload: Affiliation & { address: Address }): Promise<Affiliation>;
 
-  updateById(id: number, payload: Prisma.AffiliationUpdateInput): Promise<void>;
+  updateById(
+    id: number,
+    payload: Partial<Omit<IAffiliation, 'id'>>,
+  ): Promise<void>;
 
   deleteById(id: number): Promise<void>;
 }

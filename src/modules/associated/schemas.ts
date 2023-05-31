@@ -10,12 +10,12 @@ export const GetAssociatedById = Joi.object<{ id: number }>({
 
 export const GetAll = Joi.object<
   IFindAllParams &
-  Prisma.AssociatedWhereInput & {
-    contractNumber?: string;
-    telemedicine?: boolean;
-    publicAgency?: string;
-    csv?: boolean;
-  }
+    Prisma.AssociatedWhereInput & {
+      contractNumber?: string;
+      telemedicine?: boolean;
+      publicAgency?: string;
+      csv?: boolean;
+    }
 >({
   fullName: Joi.string().allow(null, ''),
   code: Joi.string().allow(null, ''),

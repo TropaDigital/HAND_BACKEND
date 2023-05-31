@@ -1,9 +1,9 @@
 {
   "name": "haand-bid",
-  "version": "1.25.0",
+  "version": "1.25.1",
   "main": "dist/src/index.js",
   "scripts": {
-    "prepare": "husky install && prisma generate",
+    "prepare": "prisma generate",
     "build": "tsc",
     "start": "node dist/src/index.js",
     "start:dev": "dotenv -e .env.development -- ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",

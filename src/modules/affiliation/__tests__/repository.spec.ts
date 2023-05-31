@@ -82,7 +82,7 @@ describe(AffiliationRepository.name, () => {
       const { sut, prismaRepository } = makeSut();
       const createSpy = prismaRepository.create;
 
-      await sut.create(fakeAffiliation);
+      await sut.create(fakeAffiliation as any);
 
       expect(createSpy).toBeCalledWith({ data: makeFakeAffiliation({}) });
     });
@@ -90,7 +90,7 @@ describe(AffiliationRepository.name, () => {
     it('should return prisma result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.create(fakeAffiliation);
+      const result = await sut.create(fakeAffiliation as any);
 
       expect(result).toEqual(makeFakeAffiliation({}));
     });
@@ -101,7 +101,7 @@ describe(AffiliationRepository.name, () => {
         new Error('any_create_error'),
       );
 
-      const promise = sut.create(fakeAffiliation);
+      const promise = sut.create(fakeAffiliation as any);
 
       await expect(promise).rejects.toThrow(new Error('any_create_error'));
     });

@@ -98,7 +98,7 @@ describe(AffiliationService.name, () => {
       const { sut, affiliationRepository } = makeSut();
       const createSpy = affiliationRepository.create;
 
-      await sut.create(fakeAffiliation);
+      await sut.create(fakeAffiliation as any);
 
       expect(createSpy).toBeCalledWith({
         ...makeFakeCreateAffiliationInput(),
@@ -108,7 +108,7 @@ describe(AffiliationService.name, () => {
     it('should return repository result', async () => {
       const { sut } = makeSut();
 
-      const result = await sut.create(fakeAffiliation);
+      const result = await sut.create(fakeAffiliation as any);
 
       expect(result).toEqual(makeFakeAffiliation({}));
     });
@@ -124,7 +124,7 @@ describe(AffiliationService.name, () => {
         corporateTaxId: '35.882.309/0001-37',
       };
 
-      const result = await sut.create(affiliation);
+      const result = await sut.create(affiliation as any);
 
       expect(result).toEqual(makeFakeAffiliation({}));
     });
@@ -135,7 +135,7 @@ describe(AffiliationService.name, () => {
         new Error('any_create_error'),
       );
 
-      const promise = sut.create(fakeAffiliation);
+      const promise = sut.create(fakeAffiliation as any);
 
       await expect(promise).rejects.toThrow(new Error('any_create_error'));
     });

@@ -15,7 +15,7 @@ export class AffiliationRepository implements IAffiliationRepository {
         name,
       },
       include: {
-        address: {},
+        address: true,
       },
     });
     return result;
@@ -24,7 +24,7 @@ export class AffiliationRepository implements IAffiliationRepository {
   public async findAll(): Promise<Affiliation[]> {
     const result = await this.prismaRepository.findMany({
       include: {
-        address: {},
+        address: true,
       },
     });
     return result;
@@ -34,7 +34,7 @@ export class AffiliationRepository implements IAffiliationRepository {
     const result = await this.prismaRepository.findFirst({
       where: { id },
       include: {
-        address: {},
+        address: true,
       },
     });
 

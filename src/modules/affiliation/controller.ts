@@ -1,9 +1,13 @@
-import { Affiliation, Prisma } from '@prisma/client';
+import { Address, Affiliation } from '@prisma/client';
 
 import { IApiHttpRequest } from '../../interfaces/http';
 import { IApiHttpResponse } from '../../interfaces/http/IApiHttpResponse';
 import { IValidator } from '../../interfaces/validation/IValidator';
-import { IAffiliationController, IAffiliationService } from './interfaces';
+import {
+  IAffiliation,
+  IAffiliationController,
+  IAffiliationService,
+} from './interfaces';
 import * as schemas from './schemas';
 
 export class AffiliationController implements IAffiliationController {
@@ -33,12 +37,13 @@ export class AffiliationController implements IAffiliationController {
   public async create(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<Affiliation>> {
-    const affiliation =
-      this.validator.validateSchema<Prisma.AffiliationCreateInput>(
-        'CreateAffiliation',
-        httpRequest.body,
-      );
-    const result = await this.affiliationService.create(affiliation);
+    const { address, ...affiliation } = this.validator.validateSchema<
+      Affiliation & { address: Address }
+    >('CreateAffiliation', httpRequest.body);
+    const result = await this.affiliationService.create({
+      address,
+      ...affiliation,
+    });
 
     return { statusCodeAsString: 'CREATED', body: result };
   }
@@ -46,12 +51,13 @@ export class AffiliationController implements IAffiliationController {
   public async updateById(
     httpRequest: IApiHttpRequest,
   ): Promise<IApiHttpResponse<void>> {
-    const { id, ...affiliation } = this.validator.validateSchema<
-      Prisma.AffiliationUpdateInput & { id: number }
-    >('UpdateAffiliationById', {
-      ...httpRequest.body,
-      ...httpRequest.params,
-    });
+    const { id, ...affiliation } = this.validator.validateSchema<IAffiliation>(
+      'UpdateAffiliationById',
+      {
+        ...httpRequest.body,
+        ...httpRequest.params,
+      },
+    );
     const result = await this.affiliationService.updateById(id, affiliation);
 
     return { statusCodeAsString: 'NO_CONTENT', body: result };

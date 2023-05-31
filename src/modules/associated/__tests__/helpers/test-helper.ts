@@ -30,83 +30,83 @@ import {
 export const makeFakeCreateAssociatedInput = (
   payload?: Partial<ICreateAssociatedInput>,
 ): jest.Mocked<ICreateAssociatedInput> =>
-({
-  addresses: [
-    {
-      addressType: 'any_type',
-      postalCode: 'any_postal_code',
-      street: 'any_street',
-      houseNumber: 'any_number',
-      complement: 'any_complements',
-      district: 'any_district',
-      city: 'any_city',
-      state: 'any_state',
-      isDefault: true,
-    },
-  ],
-  employmentRelationships: [
-    {
-      occupation: 'any_occupation',
-      salary: 'any_salary',
-      paymentDay: 5,
-      registerNumber: 'any_register_number',
-      contractType: 'contract_type',
-      publicAgency: 'any_agency',
-      finalDate: new Date(),
-      isDefault: true,
-    },
-  ],
-  bankAccounts: [
-    {
-      accountNumber: 'any_account',
-      accountType: 'any_type',
-      agency: '0000',
-      bank: '00 - Any Bank',
-      pixKey: 'any_pix_key',
-      pixType: 'any_type',
-      isDefault: true,
-    },
-  ],
-  affiliations: [
-    {
-      id: 1,
-    },
-  ],
-  phoneNumbers: [
-    {
-      number: '000-0000',
-      note: 'some note',
-      type: PhoneType.MAIN,
-    },
-  ],
-  references: [
-    {
-      name: 'some name',
-      note: 'some note',
-      phoneNumber: '000-0000',
-      relationshipType: PhoneType.MESSAGE,
-    },
-  ],
-  birthDate: new Date(),
-  createdBy: 'any_data',
-  email: 'any@email.com',
-  emissionDate: new Date(),
-  emissionState: 'any_state',
-  father: 'any_father',
-  gender: 'any_gender',
-  issuingAgency: 'any_agency',
-  lastName: 'any_last_name',
-  maritalStatus: 'any_marital_status',
-  mother: 'any_mother',
-  name: 'any_name',
-  nationality: 'any_nationality',
+  ({
+    addresses: [
+      {
+        addressType: 'any_type',
+        postalCode: 'any_postal_code',
+        street: 'any_street',
+        houseNumber: 'any_number',
+        complement: 'any_complements',
+        district: 'any_district',
+        city: 'any_city',
+        state: 'any_state',
+        isDefault: true,
+      },
+    ],
+    employmentRelationships: [
+      {
+        occupation: 'any_occupation',
+        salary: 'any_salary',
+        paymentDay: 5,
+        registerNumber: 'any_register_number',
+        contractType: 'contract_type',
+        publicAgency: 'any_agency',
+        finalDate: new Date(),
+        isDefault: true,
+      },
+    ],
+    bankAccounts: [
+      {
+        accountNumber: 'any_account',
+        accountType: 'any_type',
+        agency: '0000',
+        bank: '00 - Any Bank',
+        pixKey: 'any_pix_key',
+        pixType: 'any_type',
+        isDefault: true,
+      },
+    ],
+    affiliations: [
+      {
+        id: 1,
+      },
+    ],
+    phoneNumbers: [
+      {
+        number: '000-0000',
+        note: 'some note',
+        type: PhoneType.MAIN,
+      },
+    ],
+    references: [
+      {
+        name: 'some name',
+        note: 'some note',
+        phoneNumber: '000-0000',
+        relationshipType: PhoneType.MESSAGE,
+      },
+    ],
+    birthDate: new Date(),
+    createdBy: 'any_data',
+    email: 'any@email.com',
+    emissionDate: new Date(),
+    emissionState: 'any_state',
+    father: 'any_father',
+    gender: 'any_gender',
+    issuingAgency: 'any_agency',
+    lastName: 'any_last_name',
+    maritalStatus: 'any_marital_status',
+    mother: 'any_mother',
+    name: 'any_name',
+    nationality: 'any_nationality',
 
-  placeOfBirth: 'any_place',
-  registerId: 'any_register_id',
-  taxId: '000.000.000-00',
-  partner: 'partner',
-  ...payload,
-} as ICreateAssociatedInput);
+    placeOfBirth: 'any_place',
+    registerId: 'any_register_id',
+    taxId: '000.000.000-00',
+    partner: 'partner',
+    ...payload,
+  } as ICreateAssociatedInput);
 
 export const makeFakeUpdateAssociatedInput = (
   payload?: Partial<IUpdateAssociatedInput>,
@@ -226,107 +226,107 @@ export const makeFakeAssociated = (
   isDefault = true,
   id = true,
 ): jest.Mocked<IAssociated> =>
-({
-  ...(id && { id: 1 }),
-  code: generateInsertCode(),
-  birthDate: new Date(),
-  cellPhone: '00-0000000',
-  email: 'any@email.com',
-  emissionDate: new Date(),
-  emissionState: 'any_state',
-  father: 'any_father',
-  gender: 'any_gender',
-  issuingAgency: 'any_agency',
-  lastName: 'any_last_name',
-  maritalStatus: 'any_marital_status',
-  mother: 'any_mother',
-  name: 'any_name',
-  nationality: 'any_nationality',
-  benefits: [makeFakeBenefit()],
-  placeOfBirth: 'any_place',
-  registerId: 'any_register_id',
-  taxId: '000.000.000-00',
-  partner: 'partner',
-  createdBy: 'any_user',
-  updatedBy: 'any',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deletedAt: null,
-  affiliations: [
-    {
-      ...(id && { id: 1 }),
-      name: 'USER',
-      createdAt: new Date(),
-      deletedAt: null,
-      updatedAt: new Date(),
-    },
-  ],
-  addresses: [
-    {
-      ...(id && { id: 2 }),
-      addressType: 'any_type',
-      postalCode: 'any_postal_code',
-      street: 'any_street',
-      houseNumber: 'any_number',
-      complement: 'any_complements',
-      district: 'any_district',
-      city: 'any_city',
-      state: 'any_state',
-      associatedId: 777,
-      ...(isDefault && { isDefault: true }),
-    },
-  ],
-  employmentRelationships: [
-    {
-      ...(id && { id: 2 }),
-      occupation: 'any_occupation',
-      salary: 'any_salary',
-      paymentDay: 5,
-      registerNumber: 'any_register_number',
-      contractType: 'contract_type',
-      publicAgency: 'any_agency',
-      finalDate: new Date(),
-      associatedId: 777,
-      ...(isDefault && { isDefault: true }),
-    },
-  ],
-  phoneNumbers: [
-    {
-      ...(id && { id: 3 }),
-      number: '000-0000',
-      createdAt: new Date(),
-      note: 'some note',
-      type: PhoneType.MAIN,
-      updatedAt: new Date(),
-    },
-  ],
-  references: [
-    {
-      ...(id && { id: 1 }),
-      createdAt: new Date(),
-      name: 'some name',
-      note: 'some note',
-      phoneNumber: '000-0000',
-      relationshipType: PhoneType.MESSAGE,
-      updatedAt: new Date(),
-    },
-  ],
-  bankAccounts: [
-    {
-      ...(id && { id: 1 }),
-      bank: '00 - Any Bank',
-      agency: '0000',
-      pixKey: 'any_pix_key',
-      pixType: 'any_type',
-      accountNumber: 'any_account',
-      accountType: 'any_type',
-      id: 1,
-      associatedId: 1,
-      ...(isDefault && { isDefault: true }),
-    },
-  ],
-  ...payload,
-} as unknown as any);
+  ({
+    ...(id && { id: 1 }),
+    code: generateInsertCode(),
+    birthDate: new Date(),
+    cellPhone: '00-0000000',
+    email: 'any@email.com',
+    emissionDate: new Date(),
+    emissionState: 'any_state',
+    father: 'any_father',
+    gender: 'any_gender',
+    issuingAgency: 'any_agency',
+    lastName: 'any_last_name',
+    maritalStatus: 'any_marital_status',
+    mother: 'any_mother',
+    name: 'any_name',
+    nationality: 'any_nationality',
+    benefits: [makeFakeBenefit()],
+    placeOfBirth: 'any_place',
+    registerId: 'any_register_id',
+    taxId: '000.000.000-00',
+    partner: 'partner',
+    createdBy: 'any_user',
+    updatedBy: 'any',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: null,
+    affiliations: [
+      {
+        ...(id && { id: 1 }),
+        name: 'USER',
+        createdAt: new Date(),
+        deletedAt: null,
+        updatedAt: new Date(),
+      },
+    ],
+    addresses: [
+      {
+        ...(id && { id: 2 }),
+        addressType: 'any_type',
+        postalCode: 'any_postal_code',
+        street: 'any_street',
+        houseNumber: 'any_number',
+        complement: 'any_complements',
+        district: 'any_district',
+        city: 'any_city',
+        state: 'any_state',
+        associatedId: 777,
+        ...(isDefault && { isDefault: true }),
+      },
+    ],
+    employmentRelationships: [
+      {
+        ...(id && { id: 2 }),
+        occupation: 'any_occupation',
+        salary: 'any_salary',
+        paymentDay: 5,
+        registerNumber: 'any_register_number',
+        contractType: 'contract_type',
+        publicAgency: 'any_agency',
+        finalDate: new Date(),
+        associatedId: 777,
+        ...(isDefault && { isDefault: true }),
+      },
+    ],
+    phoneNumbers: [
+      {
+        ...(id && { id: 3 }),
+        number: '000-0000',
+        createdAt: new Date(),
+        note: 'some note',
+        type: PhoneType.MAIN,
+        updatedAt: new Date(),
+      },
+    ],
+    references: [
+      {
+        ...(id && { id: 1 }),
+        createdAt: new Date(),
+        name: 'some name',
+        note: 'some note',
+        phoneNumber: '000-0000',
+        relationshipType: PhoneType.MESSAGE,
+        updatedAt: new Date(),
+      },
+    ],
+    bankAccounts: [
+      {
+        ...(id && { id: 1 }),
+        bank: '00 - Any Bank',
+        agency: '0000',
+        pixKey: 'any_pix_key',
+        pixType: 'any_type',
+        accountNumber: 'any_account',
+        accountType: 'any_type',
+        id: 1,
+        associatedId: 1,
+        ...(isDefault && { isDefault: true }),
+      },
+    ],
+    ...payload,
+  } as unknown as any);
 
 export const makeFakeAssociatedList = (): Associated[] => [
   makeFakeAssociated({}),
@@ -430,12 +430,12 @@ export const makeFakeBankAccountRepository =
 export const makeFakeEmploymentRelationshipRepository =
   (): jest.Mocked<PrismaEmploymentRelationshipRepository> => {
     const result: jest.Mocked<Partial<PrismaEmploymentRelationshipRepository>> =
-    {
-      findMany: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
-      findFirst: jest.fn(),
-      create: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
-      update: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
-    };
+      {
+        findMany: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
+        findFirst: jest.fn(),
+        create: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
+        update: jest.fn().mockResolvedValue(makeFakeEmploymentRelationship()),
+      };
 
     return result as jest.Mocked<PrismaEmploymentRelationshipRepository>;
   };

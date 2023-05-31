@@ -108,13 +108,13 @@ export class AssociatedRepository implements IAssociatedRepository {
           ? { some: { joinedTelemedicine: true } }
           : undefined,
         ...(!(benefits as any)?.joinedTelemedicine &&
-          !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
+        !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
           ? {
-            OR: [
-              { benefits: undefined },
-              { benefits: { every: { joinedTelemedicine: false } } },
-            ],
-          }
+              OR: [
+                { benefits: undefined },
+                { benefits: { every: { joinedTelemedicine: false } } },
+              ],
+            }
           : {}),
       },
       include: {
@@ -158,22 +158,22 @@ export class AssociatedRepository implements IAssociatedRepository {
       JSON.stringify(params?.where) !== '{}'
         ? result.length
         : await this.prismaClient.associated.count({
-          where: {
-            ...params.where,
-            benefits: (benefits as any)?.joinedTelemedicine
-              ? { some: { joinedTelemedicine: true } }
-              : undefined,
-            ...(!(benefits as any)?.joinedTelemedicine &&
+            where: {
+              ...params.where,
+              benefits: (benefits as any)?.joinedTelemedicine
+                ? { some: { joinedTelemedicine: true } }
+                : undefined,
+              ...(!(benefits as any)?.joinedTelemedicine &&
               !(typeof (benefits as any)?.joinedTelemedicine === 'undefined')
-              ? {
-                OR: [
-                  { benefits: undefined },
-                  { benefits: { every: { joinedTelemedicine: false } } },
-                ],
-              }
-              : {}),
-          },
-        });
+                ? {
+                    OR: [
+                      { benefits: undefined },
+                      { benefits: { every: { joinedTelemedicine: false } } },
+                    ],
+                  }
+                : {}),
+            },
+          });
 
     return parsePaginatedResult<IAssociated[], Prisma.AssociatedWhereInput>(
       result,

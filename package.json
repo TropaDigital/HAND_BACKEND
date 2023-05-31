@@ -22,7 +22,8 @@
     "lint:fix": "eslint ./src --ext .ts --fix",
     "lint:deadcode": "ts-prune -e",
     "commit": "git-cz",
-    "generate": "yarn plop --plopfile ./generators/plopfile.js && yarn lint:fix"
+    "generate": "yarn plop --plopfile ./generators/plopfile.js && yarn lint:fix",
+    "db:push": "dotenv -e .env.development -- yarn prisma db push"
   },
   "contributors": [
     {

@@ -37,19 +37,19 @@ model BankAccount {
 }
 
 model Address {
-  id           Int           @id @default(autoincrement())
-  isDefault    Boolean       @default(false)
-  addressType  String        @map("address_type")
-  postalCode   String        @map("postal_code")
+  id           Int          @id @default(autoincrement())
+  isDefault    Boolean      @default(false)
+  addressType  String       @map("address_type")
+  postalCode   String       @map("postal_code")
   street       String
-  houseNumber  String        @map("house_number")
+  houseNumber  String       @map("house_number")
   complement   String?
   district     String
   city         String
   state        String
   associatedId Int?
-  Associated   Associated?   @relation(fields: [associatedId], references: [id])
-  Affiliation  Affiliation[]
+  associated   Associated?  @relation(fields: [associatedId], references: [id])
+  affiliation  Affiliation?
 
   @@index([associatedId], map: "Address_associatedId_fkey")
 }
@@ -143,7 +143,7 @@ model Affiliation {
   benefits       Benefit[]
   associateds    Associated[]
   address        Address      @relation(fields: [addressId], references: [id])
-  addressId      Int
+  addressId      Int          @unique
 }
 
 model Consultant {

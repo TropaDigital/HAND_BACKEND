@@ -1,4 +1,4 @@
-import { Prisma, Affiliation } from '@prisma/client';
+import { Prisma, Affiliation, Address } from '@prisma/client';
 
 import { IAffiliationRepository } from './interfaces';
 
@@ -14,18 +14,28 @@ export class AffiliationRepository implements IAffiliationRepository {
       where: {
         name,
       },
+      include: {
+        address: true,
+      },
     });
     return result;
   }
 
   public async findAll(): Promise<Affiliation[]> {
-    const result = await this.prismaRepository.findMany();
+    const result = await this.prismaRepository.findMany({
+      include: {
+        address: true,
+      },
+    });
     return result;
   }
 
   public async findById(id: number): Promise<Affiliation | null> {
     const result = await this.prismaRepository.findFirst({
       where: { id },
+      include: {
+        address: true,
+      },
     });
 
     return result;
@@ -35,7 +45,9 @@ export class AffiliationRepository implements IAffiliationRepository {
     payload: Prisma.AffiliationCreateInput,
   ): Promise<Affiliation> {
     const result = await this.prismaRepository.create({
-      data: payload,
+      data: {
+        ...payload,
+      },
     });
 
     return result;
@@ -43,11 +55,16 @@ export class AffiliationRepository implements IAffiliationRepository {
 
   public async updateById(
     id: number,
-    payload: Prisma.AffiliationUpdateInput,
+    payload: Prisma.AffiliationUpdateInput & {
+      address?: Address;
+    },
   ): Promise<void> {
     await this.prismaRepository.update({
       where: { id },
-      data: payload,
+      data: {
+        ...payload,
+        ...(payload.address ? { address: { update: payload.address } } : {}),
+      },
     });
   }
 

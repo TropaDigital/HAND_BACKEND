@@ -1,7 +1,11 @@
-import { Affiliation, Prisma } from '@prisma/client';
+import { Address, Affiliation } from '@prisma/client';
 
 import { ConflictError, NotFoundError } from '../../shared/errors';
-import { IAffiliationRepository, IAffiliationService } from './interfaces';
+import {
+  IAffiliation,
+  IAffiliationRepository,
+  IAffiliationService,
+} from './interfaces';
 
 export class AffiliationService implements IAffiliationService {
   constructor(private readonly affiliationRepository: IAffiliationRepository) {}
@@ -19,23 +23,27 @@ export class AffiliationService implements IAffiliationService {
     return result;
   }
 
-  public async create(
-    payload: Prisma.AffiliationCreateInput,
-  ): Promise<Affiliation> {
+  public async create({
+    address,
+    ...affiliation
+  }: Affiliation & { address: Address }): Promise<Affiliation> {
     const affiliationNameAlreadyInUse =
-      await this.affiliationRepository.findByName(payload.name);
+      await this.affiliationRepository.findByName(affiliation.name);
 
     if (affiliationNameAlreadyInUse) {
       throw new ConflictError('affiliation name already in use');
     }
 
-    const result = await this.affiliationRepository.create(payload);
+    const result = await this.affiliationRepository.create({
+      address: { create: { ...address } },
+      ...affiliation,
+    });
     return result;
   }
 
   public async updateById(
     id: number,
-    payload: Partial<Omit<Affiliation, 'id'>>,
+    payload: Partial<Omit<IAffiliation, 'id'>>,
   ): Promise<void> {
     if (payload.name) {
       const affiliationNameAlreadyInUse =

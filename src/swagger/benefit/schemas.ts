@@ -754,7 +754,7 @@ export default {
     },
     required: ['id', 'name', 'createdAt', 'updatedAt', 'deletedAt'],
   },
-  Associated: {
+  associated: {
     type: 'object',
     properties: {
       id: {

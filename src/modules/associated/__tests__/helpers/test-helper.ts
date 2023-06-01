@@ -119,6 +119,7 @@ export const makeFakeUpdateAssociatedInput = (
       name: 'USER',
       updatedAt: new Date('2022-04-15T00:00:00.000Z'),
       corporateTaxId: '35.882.309/0001-37',
+      addressId: 1,
     },
   ],
   addresses: [
@@ -132,7 +133,6 @@ export const makeFakeUpdateAssociatedInput = (
       city: 'any_city',
       state: 'any_state',
       isDefault: true,
-      affiliationId: 1,
     },
   ],
 
@@ -386,7 +386,6 @@ export const makeFakeAddress = (): Address => ({
   state: 'any_state',
   isDefault: true,
   associatedId: 1,
-  affiliationId: 1,
   id: 1,
 });
 

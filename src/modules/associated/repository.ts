@@ -355,7 +355,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         const result = await this.prismaClient.phoneNumber.create({
           data: {
             ...payload,
-            Associated: {
+            associated: {
               connect: {
                 id: associatedId,
               },
@@ -398,7 +398,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         const result = await this.prismaClient.reference.create({
           data: {
             ...payload,
-            Associated: {
+            associated: {
               connect: {
                 id: associatedId,
               },
@@ -443,7 +443,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         const result = await this.prismaClient.employmentRelationship.create({
           data: {
             ...payload,
-            Associated: {
+            associated: {
               connect: {
                 id: associatedId,
               },
@@ -484,7 +484,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         const result = await this.prismaClient.bankAccount.create({
           data: {
             ...payload,
-            Associated: {
+            associated: {
               connect: {
                 id: associatedId,
               },
@@ -524,7 +524,7 @@ export class AssociatedRepository implements IAssociatedRepository {
         const result = await this.prismaClient.address.create({
           data: {
             ...payload,
-            Associated: {
+            associated: {
               connect: {
                 id: associatedId,
               },

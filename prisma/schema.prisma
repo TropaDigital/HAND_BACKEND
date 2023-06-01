@@ -31,26 +31,25 @@ model BankAccount {
   pixType       String?     @map("pix_type")
   isDefault     Boolean     @default(false)
   associatedId  Int?
-  Associated    Associated? @relation(fields: [associatedId], references: [id])
+  associated    Associated? @relation(fields: [associatedId], references: [id])
 
   @@index([associatedId], map: "BankAccount_associatedId_fkey")
 }
 
 model Address {
-  id            Int          @id @default(autoincrement())
-  isDefault     Boolean      @default(false)
-  addressType   String       @map("address_type")
-  postalCode    String       @map("postal_code")
-  street        String
-  houseNumber   String       @map("house_number")
-  complement    String?
-  district      String
-  city          String
-  state         String
-  associatedId  Int?
-  Associated    Associated?  @relation(fields: [associatedId], references: [id])
-  Affiliation   Affiliation? @relation(fields: [affiliationId], references: [id])
-  affiliationId Int?
+  id           Int          @id @default(autoincrement())
+  isDefault    Boolean      @default(false)
+  addressType  String       @map("address_type")
+  postalCode   String       @map("postal_code")
+  street       String
+  houseNumber  String       @map("house_number")
+  complement   String?
+  district     String
+  city         String
+  state        String
+  associatedId Int?
+  associated   Associated?  @relation(fields: [associatedId], references: [id])
+  affiliation  Affiliation?
 
   @@index([associatedId], map: "Address_associatedId_fkey")
 }
@@ -66,7 +65,7 @@ model EmploymentRelationship {
   finalDate      DateTime?   @map("final_date")
   publicAgency   String      @map("public_agency")
   associatedId   Int?
-  Associated     Associated? @relation(fields: [associatedId], references: [id])
+  associated     Associated? @relation(fields: [associatedId], references: [id])
 
   @@index([associatedId], map: "EmploymentRelationship_associatedId_fkey")
 }
@@ -114,7 +113,7 @@ model Reference {
   relationshipType String
   note             String?
 
-  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  associated   Associated? @relation(fields: [associatedId], references: [id])
   associatedId Int?
 
   createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
@@ -127,7 +126,7 @@ model PhoneNumber {
   type   PhoneType @default(MAIN)
   note   String?
 
-  Associated   Associated? @relation(fields: [associatedId], references: [id])
+  associated   Associated? @relation(fields: [associatedId], references: [id])
   associatedId Int?
 
   createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
@@ -138,12 +137,13 @@ model Affiliation {
   id             Int          @id @default(autoincrement())
   name           String       @unique
   corporateTaxId String
-  address        Address[]
   createdAt      DateTime     @default(now()) @map("created_at") @db.DateTime(0)
   updatedAt      DateTime     @updatedAt @map("updated_at")
   deletedAt      DateTime?    @map("deleted_at") @db.DateTime(0)
   benefits       Benefit[]
   associateds    Associated[]
+  address        Address      @relation(fields: [addressId], references: [id])
+  addressId      Int          @unique
 }
 
 model Consultant {

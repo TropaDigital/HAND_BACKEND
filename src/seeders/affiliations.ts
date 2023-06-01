@@ -4,6 +4,23 @@ import { LoggerFactory } from '../factories/LoggerFactory';
 
 const affiliations: Prisma.AffiliationCreateInput[] = [
   {
+    name: 'ASES São Paulo',
+    corporateTaxId: '12345678910',
+    address: {
+      create: {
+        addressType: 'HOUSE',
+        postalCode: '78595-970',
+        street: 'Avenida Governador Dante Martins de Oliveira 115',
+        houseNumber: '123',
+        complement: '',
+        district: 'Centro',
+        state: 'Mato Grosso',
+        city: 'Apiacás',
+        isDefault: true,
+      },
+    },
+  },
+  {
     name: 'ASES Vitória',
     corporateTaxId: '123456',
     address: {

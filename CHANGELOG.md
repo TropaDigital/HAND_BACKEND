@@ -1,3 +1,20 @@
+### [1.25.1](https://github.com/haandsolutions/haand-bib/compare/v1.25.0...v1.25.1) (2023-06-01)
+
+
+### :white_check_mark: Tests
+
+* add bypass to broken unit tests ([e7da99f](https://github.com/haandsolutions/haand-bib/commit/e7da99f8f1f00b0074460ee5480727a9549742ac))
+
+
+### :zap: Refactor
+
+* adjust the associated relationship name ([e0d9052](https://github.com/haandsolutions/haand-bib/commit/e0d90526647b8048df5772fc865ceb8f9b1bdc62))
+
+
+### :bug: Fixes
+
+* adjust the changelog file ([4047507](https://github.com/haandsolutions/haand-bib/commit/4047507124751ea507fcdc7de39e84127932793f))
+
 ### [1.25.1](https://github.com/haandsolutions/haand-bib/compare/v1.25.0...v1.25.1) (2023-05-31)
 
 

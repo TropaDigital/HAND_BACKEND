@@ -86,7 +86,11 @@ export class BenefitRepository implements IBenefitRepository {
     const result = await this.prismaBenefitRepository.findMany({
       ...params,
       include: {
-        affiliation: true,
+        affiliation: {
+          include: {
+            address: true,
+          },
+        },
         associated: true,
         consultant: true,
         installments: {
@@ -129,7 +133,11 @@ export class BenefitRepository implements IBenefitRepository {
     const result = await this.prismaBenefitRepository.findFirst({
       where: { id },
       include: {
-        affiliation: true,
+        affiliation: {
+          include: {
+            address: true,
+          },
+        },
         associated: true,
         consultant: true,
         installments: {

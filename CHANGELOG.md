@@ -1,10 +1,3 @@
-### [1.24.3](https://github.com/haandsolutions/haand-bib/compare/v1.24.2...v1.24.3) (2023-05-25)
-
-
-### :zap: Refactor
-
-* update the database schema ([35b50f5](https://github.com/haandsolutions/haand-bib/commit/35b50f53fb570c1af911759a50958419aba7b3d5))
-
 ### [1.24.2](https://github.com/haandsolutions/haand-bib/compare/v1.24.1...v1.24.2) (2023-05-24)
 
 

@@ -1,3 +1,22 @@
+### [1.25.2](https://github.com/haandsolutions/haand-bib/compare/v1.25.1...v1.25.2) (2023-06-06)
+
+
+### :zap: Refactor
+
+* add new affiliation ([f662093](https://github.com/haandsolutions/haand-bib/commit/f662093fe93e7054b0770ee74b27427d61d6c025))
+
+
+### :repeat: CI
+
+* adjust the local ci to validate commit messages correctly ([d9e5738](https://github.com/haandsolutions/haand-bib/commit/d9e57384425d0fcfb325e9543b1a04889af9f954))
+
+
+### :bug: Fixes
+
+* :bug: adjust the calc of loan simulation ([1202935](https://github.com/haandsolutions/haand-bib/commit/1202935eb83aa952a3a15a14091ac88a1d521d0e))
+* add address to affiliation data on queries ([41ff1e9](https://github.com/haandsolutions/haand-bib/commit/41ff1e9c45deb7f801357be1d1621abc8a6eeede))
+* bugfix field-emissionDate ([07ac28f](https://github.com/haandsolutions/haand-bib/commit/07ac28f8e9a5d5f421cdffa129e43b8c62571e54))
+
 ### [1.25.2](https://github.com/haandsolutions/haand-bib/compare/v1.25.1...v1.25.2) (2023-06-01)
 
 

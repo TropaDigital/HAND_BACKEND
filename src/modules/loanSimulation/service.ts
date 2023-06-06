@@ -43,7 +43,10 @@ export class LoanSimulationService implements ILoanSimulationService {
   }
 
   private getFeesOfMonth(date: number | Date): number {
-    return (this.getRemainingDaysOfMonth(date) * loanConfig.fees) / 100 / 100;
+    // const remainingDaysOfMonth = this.getRemainingDaysOfMonth(date);
+    // const result = (remainingDaysOfMonth * loanConfig.fees) / 100 / 100;
+    const result = (8 * loanConfig.fees) / 100 / 100;
+    return result;
   }
 
   private getInstallmentsFactorValueByRequestedValue(
@@ -129,13 +132,15 @@ export class LoanSimulationService implements ILoanSimulationService {
         requestedValue,
         consultantCommission,
       ) / numberOfInstallments;
+
     const fees = this.getFeesByMonthOfPayment(currentDate, monthOfPayment);
     const getAditionalValueWhenTheRequestValueIsLowerThan1000 =
       this.getAditionalValueWhenTheRequestValueIsLowerThan1000(
         requestedValue,
         numberOfInstallments,
       );
-    const installmentValueWithFees = installmentFactor * (fees + 1);
+    const installmentValueWithFees =
+      (requestedValue * fees) / numberOfInstallments + installmentFactor;
     const installmentAdministrationFeeValue =
       administrationFeeValue / numberOfInstallments;
     const gratificationFeeValue =
@@ -152,25 +157,19 @@ export class LoanSimulationService implements ILoanSimulationService {
       gratificationFeeValue;
 
     return {
-      gratificationFeeValue: this.roundUp(gratificationFeeValue),
-      admnistrationFeeValue: this.roundUp(installmentAdministrationFeeValue),
+      gratificationFeeValue,
+      admnistrationFeeValue: installmentAdministrationFeeValue,
       reference: this.formatReferenceDate(currentDate),
       referenceDate: currentDate,
       dueDate: paymentDay ? setDate(currentDate, paymentDay) : currentDate,
-      cardFees: this.roundUp(this.getCardFees(1)),
-      telemedicineFees: this.roundUp(
-        this.getTelemedicineFees(joinedTelemedicine, 1),
-      ),
-      bankProcessingFees: this.roundUp(this.getbankProcessingFees(1)),
+      cardFees: this.getCardFees(1),
+      telemedicineFees: this.getTelemedicineFees(joinedTelemedicine, 1),
+      bankProcessingFees: this.getbankProcessingFees(1),
       installmentFactor,
       consultantCommission,
-      consultantCommissionValue: this.roundUp(
-        consultantCommissionValueByInstallment,
-      ),
-      fees: this.roundUp(parseFloat((fees * 100).toFixed(2))),
-      feesValue: this.roundUp(
-        parseFloat((fees * installmentFactor).toFixed(2)),
-      ),
+      consultantCommissionValue: consultantCommissionValueByInstallment,
+      fees: parseFloat((fees * 100).toFixed(2)),
+      feesValue: parseFloat((fees * requestedValue).toFixed(2)),
       finalValue: this.roundUp(parseFloat(installmentFinalValue.toFixed(2))),
     };
   }

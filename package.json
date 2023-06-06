@@ -19,7 +19,7 @@
     "test:functional:coverage": "dotenv -e .env.test -- yarn prisma db push --skip-generate && yarn test --coverage -c jest.functional.config.js --force-exit",
     "test:all": "yarn test && yarn test:functional",
     "lint": "eslint ./src --ext .ts",
-    "lint:fix": "eslint ./src --ext .ts --fix",
+    "lint:fix": "eslint --ext .ts --fix",
     "lint:deadcode": "ts-prune -e",
     "commit": "git-cz",
     "generate": "yarn plop --plopfile ./generators/plopfile.js && yarn lint:fix",
